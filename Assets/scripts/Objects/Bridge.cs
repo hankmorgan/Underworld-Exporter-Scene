@@ -50,7 +50,8 @@ public class Bridge : map_object {
 	{
 		if(invis==0)	
 		{
-			if ( ( (enchantment<<3) | flags)<2)
+			int v =((int)enchantment << 3) | (int)flags;
+			if ( v < 2 )
 			{
 					return base.LookAt ();
 			}

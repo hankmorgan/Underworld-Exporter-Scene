@@ -1509,7 +1509,7 @@ public class AutoMap : Loader
                         //The automap contains one byte per tile, in the same order as the
                         //level tilemap. A valid value in the low nybble means the tile is displayed
                         //on the map. Valid values are the same as tile types:
-                val = Tiles[x, y].DisplayType << 4 | Tiles[x, y].tileType;
+                val = (int)Tiles[x, y].DisplayType << 4 | (int)Tiles[x, y].tileType;
                 AutoMapData[add_ptr] = (char)val;
                 add_ptr++;
             }

@@ -15,7 +15,7 @@ public class an_inventory_trap : trap_base {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		//Debug.Log (this.name);
-		int itemToFind = quality <<5 | owner;
+		int itemToFind = (int)quality <<5 | (int)owner;
 		ObjectFound=false;
 		ObjectInteraction foundObjInt = UWCharacter.Instance.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)

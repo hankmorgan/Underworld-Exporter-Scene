@@ -132,7 +132,7 @@ public class KeyBindings : GuiBase {
 		};
 
 
-	public static KeyBindings instance;
+	//public static KeyBindings instance;
 
 	//Keycodes and their defaults
 	[SerializeField]
@@ -158,17 +158,17 @@ public class KeyBindings : GuiBase {
     public void ApplyBindings()
 	{
 		return;
-		UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey=InteractionOptions;
-		UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey=InteractionTalk;
-		UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey=InteractionPickup;
-		UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey=InteractionLook;
-		UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey=InteractionAttack;
-		UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey=InteractionUse;
-		UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey=InteractionOptions;
-		UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey=InteractionTalk;
-		UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey=InteractionPickup;
-		UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey=InteractionLook;
-		UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey=InteractionAttack;
-		UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey=InteractionUse;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey=InteractionOptions;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey=InteractionTalk;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey=InteractionPickup;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey=InteractionLook;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey=InteractionAttack;
+		//UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey=InteractionUse;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey=InteractionOptions;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey=InteractionTalk;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey=InteractionPickup;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey=InteractionLook;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey=InteractionAttack;
+		//UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey=InteractionUse;
 	}
 }

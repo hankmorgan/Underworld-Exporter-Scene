@@ -27,9 +27,9 @@ public class a_change_from_trap : trap_base
             return;
         }
 
-        short NewTileFloorTexture = (short)(ChangeTo.heading | (((ChangeTo.zpos >> 4) & 0x1) << 3));
+        short NewTileFloorTexture = (short)((int)ChangeTo.heading | ((((int)ChangeTo.zpos >> 4) & 0x1) << 3));
 
-        short tileFloorCriteria = (short)(heading | (((zpos >> 4) & 0x1) << 3));
+        short tileFloorCriteria = (short)((int)heading | (((zpos >> 4) & 0x1) << 3));
 
         for (int x = 0; x <= 63; x++)
         {

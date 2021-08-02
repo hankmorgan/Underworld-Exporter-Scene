@@ -39,7 +39,7 @@ public class a_hack_trap_floorcollapse : a_hack_trap {
                     TileInfo tileToChange = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY];
                     if (tileToChange.floorHeight>=2)
                     {
-                        tileToChange.floorTexture = (short)((ypos << 3) | xpos);
+                        tileToChange.floorTexture = (short)(((int)ypos << 3) | (int)xpos);
                         tileToChange.floorHeight -= 2;
                         tileToChange.Render = true;
                         for (int v = 0; v < 6; v++)

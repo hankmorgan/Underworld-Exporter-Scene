@@ -780,86 +780,59 @@ public class ObjectLoader : DataLoader
     /// <param name="objectsAddress">Objects address.</param>
     void BuildFreeObjectLists(ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
     {
+        Debug.Log("BuildFreeObjectLists");
         return;
-        //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
-       // NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
-        //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
-        for (int i = 0; i <= objList.GetUpperBound(0); i++)
-        {
-            if (i > 2)
-            {
-                objList[i].InUseFlag = 1;
-                //Assume in use unless informed otherwise in the next loop.			
-            }
-        }
-        objectsAddress = 0x7300;
-        //location of the mobile object free list
-        address_pointer = 0;
-        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
-        string output = "Mobile List\n";
-        for (int i = 0; i <= NoOfFreeMobile; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            objList[freed].InUseFlag = 0;
-            output = output + "Mobile Free:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Count:" + NoOfFreeMobile + "\n";
-        for (int i = NoOfFreeMobile + 1; i < 254; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            output = output + "Mobile Junk:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Static List\n";
-        objectsAddress = 0x74fc;
-        //location of the static object free list
-        address_pointer = 0;
-        for (int i = 0; i <= NoOfFreeStatic; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            objList[freed].InUseFlag = 0;
-            output = output + "Static Free:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Count (static):" + NoOfFreeStatic + "\n";
-        for (int i = NoOfFreeStatic + 1; i < 768; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            output = output + "Static Junk:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        writer.Write(output);
-        writer.Close();
-        /*	for (int i=2; i<254+768;i++)//Skip over objects 0 and 1
-				{
-					int freed =	(int)getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
-					bool valid = ( ( (i<256) && ( i<NoOfFreeMobile) ) ||  ( (i>=256) && ( i-256<NoOfFreeStatic) ) );
-
-					if (valid)
-					{
-						if ((freed<objList.GetUpperBound(0)) && (freed>=0))
-						{
-							objList[freed].InUseFlag = 0;				
-						}
-						else
-						{
-							Debug.Log("Object index out of range in free list " + freed + " at offset " + (objectsAddress+address_pointer) );
-						}
-					}									
-
-					address_pointer+=2;
-				}
-				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);	
-				string output="";
-				for (int i=0; i<=objList.GetUpperBound(0);i++)//Skip over objects 0 and 1
-				{
-						output = output +  i + "=" + objList[i].InUseFlag + "\n";
-				}
-				writer.Write(output);
-				writer.Close();*/
+       //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
+       ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
+       //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
+       //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
+       //////////////// {
+       ////////////////     if (i > 2)
+       ////////////////     {
+       ////////////////         objList[i].InUseFlag = 1;
+       ////////////////         //Assume in use unless informed otherwise in the next loop.			
+       ////////////////     }
+       //////////////// }
+       //////////////// objectsAddress = 0x7300;
+       //////////////// //location of the mobile object free list
+       //////////////// address_pointer = 0;
+       //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
+       //////////////// string output = "Mobile List\n";
+       //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
+       //////////////// {
+       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+       ////////////////     objList[freed].InUseFlag = 0;
+       ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
+       ////////////////     address_pointer += 2;
+       //////////////// }
+       //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
+       //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
+       //////////////// {
+       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+       ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
+       ////////////////     address_pointer += 2;
+       //////////////// }
+       //////////////// output = output + "Static List\n";
+       //////////////// objectsAddress = 0x74fc;
+       //////////////// //location of the static object free list
+       //////////////// address_pointer = 0;
+       //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
+       //////////////// {
+       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+       ////////////////     objList[freed].InUseFlag = 0;
+       ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
+       ////////////////     address_pointer += 2;
+       //////////////// }
+       //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
+       //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
+       //////////////// {
+       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+       ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
+       ////////////////     address_pointer += 2;
+       //////////////// }
+       //////////////// writer.Write(output);
+       //////////////// writer.Close();
     }
-
 
     static void HandleMovingDoors(ObjectLoaderInfo[] objList, int x)
     {
@@ -1890,143 +1863,143 @@ public class ObjectLoader : DataLoader
 
         Debug.Log("RebuildObjectListUW() This needs to be rewritten or made obsolete");
 
-        return;
-        if (currObjList == null) { return; }
-        //int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
+        //////////////////return;
+        //////////////////if (currObjList == null) { return; }
+        ////////////////////int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
 
-        //Update indices to match the array.
-        for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
-        {
-            if ((_RES == GAME_UW2) && (i > 2))
-            {
-                ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
-            }
-            //bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
-            //if ((OnMap))
-            //{//Only clear nexts if the object is onmap. Items destroyed will have their nexts cleared at that time.
-            //    currObjList.objInfo[i].next = 0;
-            //    if (currObjList.objInfo[i].instance != null)
-            //    {
-            //        currObjList.objInfo[i].instance.next = 0;
-            //    }
-            //}
-        }
+        ////////////////////Update indices to match the array.
+        //////////////////for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
+        //////////////////{
+        //////////////////    if ((_RES == GAME_UW2) && (i > 2))
+        //////////////////    {
+        //////////////////        ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
+        //////////////////    }
+        //////////////////    //bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
+        //////////////////    //if ((OnMap))
+        //////////////////    //{//Only clear nexts if the object is onmap. Items destroyed will have their nexts cleared at that time.
+        //////////////////    //    currObjList.objInfo[i].next = 0;
+        //////////////////    //    if (currObjList.objInfo[i].instance != null)
+        //////////////////    //    {
+        //////////////////    //        currObjList.objInfo[i].instance.next = 0;
+        //////////////////    //    }
+        //////////////////    //}
+        //////////////////}
 
-        //if (currTileMap != null)
-        //{
-        //    //Clear the tilemaps indexobjectlist
-        //    for (int x = 0; x <= TileMap.TileMapSizeX; x++)
-        //    {
-        //        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
-        //        {
-        //            currTileMap.Tiles[x, y].indexObjectList = 0;
-        //        }
-        //    }
-        //}
+        ////////////////////if (currTileMap != null)
+        ////////////////////{
+        ////////////////////    //Clear the tilemaps indexobjectlist
+        ////////////////////    for (int x = 0; x <= TileMap.TileMapSizeX; x++)
+        ////////////////////    {
+        ////////////////////        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
+        ////////////////////        {
+        ////////////////////            currTileMap.Tiles[x, y].indexObjectList = 0;
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
-        {
-            if (t.gameObject.GetComponent<ObjectInteraction>() != null)
-            {
-                t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
-            }
-        }
+        //////////////////foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
+        //////////////////{
+        //////////////////    if (t.gameObject.GetComponent<ObjectInteraction>() != null)
+        //////////////////    {
+        //////////////////        t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
+        //////////////////    }
+        //////////////////}
         
-        //foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
-        //{
-        //    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
-        //    if (objInt != null)
-        //    {                
-        //        if (objInt.BaseObjectData == null)
-        //        {//Fill in missing object loader instances to avoid null errors
-        //            objInt.BaseObjectData = new ObjectLoaderInfo(objInt.BaseObjectData.index,GameWorldController.CurrentTileMap(),true);
-        //            objInt.BaseObjectData.InUseFlag = 0;
-        //            objInt.BaseObjectData.ObjectTileX = TileMap.ObjectStorageTile;
-        //            objInt.BaseObjectData.ObjectTileY = TileMap.ObjectStorageTile;
-        //        }
-        //        objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
-        //        if ((t.gameObject.GetComponent<Container>() != null))
-        //        {//Clear container link index. Will repoint later.
-        //            t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
+        ////////////////////foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
+        ////////////////////{
+        ////////////////////    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
+        ////////////////////    if (objInt != null)
+        ////////////////////    {                
+        ////////////////////        if (objInt.BaseObjectData == null)
+        ////////////////////        {//Fill in missing object loader instances to avoid null errors
+        ////////////////////            objInt.BaseObjectData = new ObjectLoaderInfo(objInt.BaseObjectData.index,GameWorldController.CurrentTileMap(),true);
+        ////////////////////            objInt.BaseObjectData.InUseFlag = 0;
+        ////////////////////            objInt.BaseObjectData.ObjectTileX = TileMap.ObjectStorageTile;
+        ////////////////////            objInt.BaseObjectData.ObjectTileY = TileMap.ObjectStorageTile;
+        ////////////////////        }
+        ////////////////////        objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
+        ////////////////////        if ((t.gameObject.GetComponent<Container>() != null))
+        ////////////////////        {//Clear container link index. Will repoint later.
+        ////////////////////            t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
 
-        //        }
-        //    }
-        //}
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        ////rebuild the linked list
-        //for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
-        //{
-        //    int x = currObjList.objInfo[i].ObjectTileX;
-        //    int y = currObjList.objInfo[i].ObjectTileY;
-        //    if (currObjList.objInfo[i].InUseFlag == 1)
-        //    {
-        //        if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
-        //        {
-        //            if (nexts[x, y] == 0)
-        //            {//This object is the first in the chain at this tile
-        //                currTileMap.Tiles[x, y].indexObjectList = i;
-        //                nexts[x, y] = i;
-        //            }
-        //            else
-        //            {
-        //                currObjList.objInfo[nexts[x, y]].next = i;
-        //                currObjList.objInfo[nexts[x, y]].instance.next = i;
-        //                nexts[x, y] = i;
-        //            }
-        //        }
-        //    }
-        //}
+        //////////////////////rebuild the linked list
+        ////////////////////for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
+        ////////////////////{
+        ////////////////////    int x = currObjList.objInfo[i].ObjectTileX;
+        ////////////////////    int y = currObjList.objInfo[i].ObjectTileY;
+        ////////////////////    if (currObjList.objInfo[i].InUseFlag == 1)
+        ////////////////////    {
+        ////////////////////        if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
+        ////////////////////        {
+        ////////////////////            if (nexts[x, y] == 0)
+        ////////////////////            {//This object is the first in the chain at this tile
+        ////////////////////                currTileMap.Tiles[x, y].indexObjectList = i;
+        ////////////////////                nexts[x, y] = i;
+        ////////////////////            }
+        ////////////////////            else
+        ////////////////////            {
+        ////////////////////                currObjList.objInfo[nexts[x, y]].next = i;
+        ////////////////////                currObjList.objInfo[nexts[x, y]].instance.next = i;
+        ////////////////////                nexts[x, y] = i;
+        ////////////////////            }
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        //Rebuild container chains only!
+        ////////////////////Rebuild container chains only!
 
-        //TODO:
+        ////////////////////TODO:
 
-        ////return;
+        //////////////////////return;
 
-        //////Count the number of freeobjects in the mobile and static lists and update these lists as needed			
-        ////currObjList.FreeMobileList = new int[254];
-        ////currObjList.FreeStaticList = new int[768];
-        ////int newFreeMobileObjectCount = 0;
-        ////int newFreeStaticObjectCount = 0;
-        ////for (int o = 2; o < 256; o++)
-        ////{
-        ////    if (currObjList.objInfo[o].InUseFlag == 0)
-        ////    {//Store that the object slot is free in the array.			
-        ////        currObjList.objInfo[o].instance = null;
-        ////        currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
-        ////    }
-        ////}
-        ////for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
-        ////{
-        ////    if (currObjList.objInfo[o].InUseFlag == 0)
-        ////    {//Store that the object slot is free in the array.	
-        ////        currObjList.objInfo[o].instance = null;
-        ////        currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
-        ////    }
-        ////}
+        ////////////////////////Count the number of freeobjects in the mobile and static lists and update these lists as needed			
+        //////////////////////currObjList.FreeMobileList = new int[254];
+        //////////////////////currObjList.FreeStaticList = new int[768];
+        //////////////////////int newFreeMobileObjectCount = 0;
+        //////////////////////int newFreeStaticObjectCount = 0;
+        //////////////////////for (int o = 2; o < 256; o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].InUseFlag == 0)
+        //////////////////////    {//Store that the object slot is free in the array.			
+        //////////////////////        currObjList.objInfo[o].instance = null;
+        //////////////////////        currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
+        //////////////////////    }
+        //////////////////////}
+        //////////////////////for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].InUseFlag == 0)
+        //////////////////////    {//Store that the object slot is free in the array.	
+        //////////////////////        currObjList.objInfo[o].instance = null;
+        //////////////////////        currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
+        //////////////////////    }
+        //////////////////////}
 
-        ////for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
-        ////{
-        ////    if (currObjList.objInfo[o].instance != null)
-        ////    {
-        ////        currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
-        ////    }
-        ////}
+        //////////////////////for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].instance != null)
+        //////////////////////    {
+        //////////////////////        currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
+        //////////////////////    }
+        //////////////////////}
 
-        ////if (newFreeMobileObjectCount > 0)
-        ////{
-        ////    newFreeMobileObjectCount--;
-        ////}
-        ////if (newFreeStaticObjectCount > 0)
-        ////{
-        ////    newFreeStaticObjectCount--;
-        ////}
-        //////Debug.Log(
-        //////		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
-        //////		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
-        //////);
-        ////currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
-        ////currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
+        //////////////////////if (newFreeMobileObjectCount > 0)
+        //////////////////////{
+        //////////////////////    newFreeMobileObjectCount--;
+        //////////////////////}
+        //////////////////////if (newFreeStaticObjectCount > 0)
+        //////////////////////{
+        //////////////////////    newFreeStaticObjectCount--;
+        //////////////////////}
+        ////////////////////////Debug.Log(
+        ////////////////////////		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
+        ////////////////////////		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
+        ////////////////////////);
+        //////////////////////currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
+        //////////////////////currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
 
 
 
@@ -2334,70 +2307,70 @@ public class ObjectLoader : DataLoader
     void CopyDataToList(ObjectInteraction objInt, ref ObjectLoaderInfo info)
     {
         Debug.Log("copy data to list");
-        return;
-        info.item_id = objInt.item_id;
-        info.flags = objInt.flags;  //9-12
-        info.enchantment = objInt.enchantment;  //12
-        info.doordir = objInt.doordir;  //13
-        info.invis = objInt.invis;      //14
-        info.is_quant = objInt.isquant; //15						
-        info.zpos = objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-        info.heading = objInt.heading;  //        7- 9   3   "heading"   Heading (*45 deg)
-        info.xpos = objInt.xpos; //   10-12   3   "ypos"      Object Y position (0-7)
-        info.ypos = objInt.ypos; //  13-15   3   "xpos"      Object X position (0-7)
-        info.quality = objInt.quality;  //;     0- 5   6   "quality"   Quality
-        info.next = objInt.next; //    6-15   10  "next"      Index of next object in chain
-        info.owner = objInt.owner;  //Also special
-        info.link = objInt.link;    //also quantity	
+        //////////return;
+        //////////info.item_id = objInt.item_id;
+        //////////info.flags = objInt.flags;  //9-12
+        //////////info.enchantment = objInt.enchantment;  //12
+        //////////info.doordir = objInt.doordir;  //13
+        //////////info.invis = objInt.invis;      //14
+        //////////info.is_quant = objInt.isquant; //15						
+        //////////info.zpos = objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+        //////////info.heading = objInt.heading;  //        7- 9   3   "heading"   Heading (*45 deg)
+        //////////info.xpos = objInt.xpos; //   10-12   3   "ypos"      Object Y position (0-7)
+        //////////info.ypos = objInt.ypos; //  13-15   3   "xpos"      Object X position (0-7)
+        //////////info.quality = objInt.quality;  //;     0- 5   6   "quality"   Quality
+        //////////info.next = objInt.next; //    6-15   10  "next"      Index of next object in chain
+        //////////info.owner = objInt.owner;  //Also special
+        //////////info.link = objInt.link;    //also quantity	
 
-        info.ObjectTileX = objInt.ObjectTileX;
-        info.ObjectTileY = objInt.ObjectTileY;
+        //////////info.ObjectTileX = objInt.ObjectTileX;
+        //////////info.ObjectTileY = objInt.ObjectTileY;
 
-        //mobile object specific
-        if (info.index < 256)
-        {
-            info.npc_hp = objInt.npc_hp;
-            info.npc_goal = objInt.npc_goal;
-            info.npc_gtarg = objInt.npc_gtarg;
-            info.npc_level = (short)objInt.npc_level;
-            info.npc_talkedto = objInt.npc_talkedto;
-            info.npc_attitude = objInt.npc_attitude;
-            info.npc_voidanim = objInt.npc_voidanim;
-            info.npc_yhome = objInt.npc_yhome;
-            info.npc_xhome = objInt.npc_xhome;
-            info.npc_heading = objInt.npc_heading;
-            info.npc_hunger = objInt.npc_hunger;
-            info.npc_whoami = objInt.npc_whoami;
-            info.npc_health = objInt.npc_health;
-            info.npc_arms = objInt.npc_arms;
-            info.npc_power = objInt.npc_power;
-            info.npc_name = objInt.npc_name;
-            info.npc_health = objInt.npc_height;
-            info.Projectile_Pitch = objInt.Projectile_Pitch;
-            info.Projectile_Speed = objInt.Projectile_Speed;
-            //info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
+        ////////////mobile object specific
+        //////////if (info.index < 256)
+        //////////{
+        //////////    info.npc_hp = objInt.npc_hp;
+        //////////    info.npc_goal = objInt.npc_goal;
+        //////////    info.npc_gtarg = objInt.npc_gtarg;
+        //////////    info.npc_level = (short)objInt.npc_level;
+        //////////    info.npc_talkedto = objInt.npc_talkedto;
+        //////////    info.npc_attitude = objInt.npc_attitude;
+        //////////    info.npc_voidanim = objInt.npc_voidanim;
+        //////////    info.npc_yhome = objInt.npc_yhome;
+        //////////    info.npc_xhome = objInt.npc_xhome;
+        //////////    info.npc_heading = objInt.npc_heading;
+        //////////    info.npc_hunger = objInt.npc_hunger;
+        //////////    info.npc_whoami = objInt.npc_whoami;
+        //////////    info.npc_health = objInt.npc_health;
+        //////////    info.npc_arms = objInt.npc_arms;
+        //////////    info.npc_power = objInt.npc_power;
+        //////////    info.npc_name = objInt.npc_name;
+        //////////    info.npc_health = objInt.npc_height;
+        //////////    info.Projectile_Pitch = objInt.Projectile_Pitch;
+        //////////    info.Projectile_Speed = objInt.Projectile_Speed;
+        //////////    //info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
 
-            //info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
-            info.MobileUnk_0xA = objInt.MobileUnk_0xA;
-            info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
-            info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
-            info.MobileUnk_0xD_12_1 = objInt.MobileUnk_0xD_12_1;
-            info.MobileUnk_0xF_0_3F = objInt.MobileUnk_0xF_0_3F;
-            info.MobileUnk_0xF_C_F = objInt.MobileUnk_0xF_C_F;
-            info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
-            info.ProjectileSourceID = objInt.ProjectileSourceID;
-            info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
-            //info.Projectile_Sign = objInt.Projectile_Sign;
-            info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
-            info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
-            info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
-            info.MobileUnk_0x19_6_3 = objInt.MobileUnk_0x19_6_3;
-        }
+        //////////    //info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
+        //////////    info.MobileUnk_0xA = objInt.MobileUnk_0xA;
+        //////////    info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
+        //////////    info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
+        //////////    info.MobileUnk_0xD_12_1 = objInt.MobileUnk_0xD_12_1;
+        //////////    info.MobileUnk_0xF_0_3F = objInt.MobileUnk_0xF_0_3F;
+        //////////    info.MobileUnk_0xF_C_F = objInt.MobileUnk_0xF_C_F;
+        //////////    info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
+        //////////    info.ProjectileSourceID = objInt.ProjectileSourceID;
+        //////////    info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
+        //////////    //info.Projectile_Sign = objInt.Projectile_Sign;
+        //////////    info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
+        //////////    info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
+        //////////    info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
+        //////////    info.MobileUnk_0x19_6_3 = objInt.MobileUnk_0x19_6_3;
+        //////////}
 
 
-        //Match the two instances
-        info.instance = objInt;
-        objInt.BaseObjectData = info;
+        ////////////Match the two instances
+        //////////info.instance = objInt;
+        //////////objInt.BaseObjectData = info;
     }
 
 

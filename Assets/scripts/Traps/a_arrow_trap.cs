@@ -16,7 +16,7 @@ public class a_arrow_trap : trap_base {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		int item_index=  (quality << 5) | owner;
+		int item_index=  (quality << 5) | (int)owner;
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newWorldObject(item_index,0,0,0,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
