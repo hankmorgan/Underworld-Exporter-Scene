@@ -1,0 +1,49 @@
+{
+    "mouse": {
+        "mouseX": 15.0,
+        "mouseY": 15.0
+    },
+    "paths": {
+        "PATH_UW1": "C:\\Games\\UW1\\game\\UW\\",
+        "PATH_UW2": "C:\\Games\\UW2\\game\\UW2\\",
+        "PATH_UWDEMO": "c:\\games\\uwdemo\\",
+        "PATH_SHOCK": "C:\\Games\\SystemShock\\",
+        "PATH_TNOVA": "C:\\Games\\Terra Nova\\CD\\Terra_Nova\\"
+    },
+    "camera": {
+        "DefaultLightLevel": 8.0,
+        "FOV": 75.0
+    },
+    "cheats": {
+        "GodMode": false,
+        "InfiniteMana": false,
+        "BashAllDoors": false
+    },
+    "ui": {
+        "ContextUIEnabled": true,
+        "AutoKey": true,
+        "AutoEat": false
+    },
+    "dev": {
+        "GenerateReports": true,
+        "ShowOnlyInUse": true
+    },
+    "audio": {
+        "UW1_SOUNDBANK": "C:\\Games\\UWSoundPack\\UW1_SB16\\",
+        "UW2_SOUNDBANK": "C:\\Games\\UWSoundPack\\UW2_Midi\\"
+    },
+    "keybindings": {
+        "flyup": "R",
+        "flydown": "v",
+        "togglemouselook": "e",
+        "togglefullscreen": "f",
+        "interactionoptions": "f1",
+        "interactiontalk": "f2",
+        "interactionpickup": "f3",
+        "interactionlook": "f4",
+        "interactionattack": "f5",
+        "interactionuse": "f6",
+        "castspell": "q",
+        "trackskill": "t"
+    }
+}

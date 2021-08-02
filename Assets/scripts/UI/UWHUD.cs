@@ -252,6 +252,23 @@ public class UWHUD : HUD
             Conversation_tl.LineWidth = 48;
         }
 
+
+        //Set Keycodes for interaction mode controls
+
+        //Apply to UI
+        UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+
         switch (_RES)
         {
             case GAME_UW2:

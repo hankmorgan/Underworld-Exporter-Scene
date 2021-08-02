@@ -614,13 +614,13 @@ public class UWCharacter : Character
         playerMotor.movement.maxSidewaysSpeed = playerMotor.movement.maxForwardSpeed * 2 / 3;
         playerMotor.movement.maxBackwardsSpeed = playerMotor.movement.maxForwardSpeed / 3;
 
-        if (((Input.GetKeyDown(KeyBindings.instance.FlyUp)) || (Input.GetKey(KeyBindings.instance.FlyUp))) && (WindowDetectUW.WaitingForInput == false))
+        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyUp)) || (Input.GetKey(GameWorldController.instance.config.FlyUp))) && (WindowDetectUW.WaitingForInput == false))
         {
             //Fly up
             this.GetComponent<CharacterController>().Move(new Vector3(0, 0.2f * Time.deltaTime * speedMultiplier, 0));
         }
         else
-        if (((Input.GetKeyDown(KeyBindings.instance.FlyDown)) || (Input.GetKey(KeyBindings.instance.FlyDown))) && (WindowDetectUW.WaitingForInput == false))
+        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyDown)) || (Input.GetKey(GameWorldController.instance.config.FlyDown))) && (WindowDetectUW.WaitingForInput == false))
         {
             //Fly down
             this.GetComponent<CharacterController>().Move(new Vector3(0, -0.2f * Time.deltaTime * speedMultiplier, 0));

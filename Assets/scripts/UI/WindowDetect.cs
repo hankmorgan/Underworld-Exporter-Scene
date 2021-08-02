@@ -81,7 +81,11 @@ public class WindowDetect : GuiBase {
 		/// Is the UI set to be context sensitive
 		/// </summary>
 		/// 
-	public static bool ContextUIEnabled=true;
+	public static bool ContextUIEnabled
+    {
+        get { return GameWorldController.instance.config.ui.ContextUIEnabled; }
+    }
+
 
 	public static bool ContextUIUse=true;
 			

@@ -800,9 +800,12 @@ public class DoorControl : object_base {
 				damage= (short) (damage/DR());
 			}
 		quality=(short)(quality-damage);
+		if (GameWorldController.instance.config.cheats.BashAllDoors)
+        {
+			quality = 0;
+        }
 		if ((quality<=0))
 			{
-				//locked=false;
 				UnlockDoor(true);
 				OpenDoor(DoorControl.DefaultDoorTravelTime);
 			}

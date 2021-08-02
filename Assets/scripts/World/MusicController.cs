@@ -8,8 +8,14 @@ using System.IO;
 [RequireComponent(typeof(AudioSource))]
 public class MusicController : UWEBase
 {
-    public static string UW1Path;
-    public static string UW2Path;
+    public static string UW1Path
+    { 
+        get { return GameWorldController.instance.config.audio.UW1_SOUNDBANK; }
+    }
+    public static string UW2Path
+    {
+        get { return GameWorldController.instance.config.audio.UW2_SOUNDBANK; }
+    }
 
     public enum UWMusicTracks
     {

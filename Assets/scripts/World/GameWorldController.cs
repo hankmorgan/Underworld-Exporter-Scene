@@ -16,6 +16,7 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase
 {
+    public Configuration config;
     public bool EnableUnderworldGenerator = false;
     public bool DoCleanUp = true;
     public GameObject ceiling;
@@ -202,8 +203,10 @@ public class GameWorldController : UWEBase
     /// <summary>
     /// Create object reports
     /// </summary>
-    public bool CreateReports;
-    public bool ShowOnlyInUse;
+    public bool CreateReports
+    { get { return config.dev.GenerateReports; } }
+    public bool ShowOnlyInUse
+    { get { return config.dev.ShowOnlyInUse; } }
 
     [Header("Palettes")]
     /// <summary>
@@ -290,11 +293,26 @@ public class GameWorldController : UWEBase
     public string Lev_Ark_File_Selected = "";//"DATA\\Lev.ark";
     public string SCD_Ark_File_Selected = "";//"DATA\\SCD.ark";
                                              //Game paths
-    public string path_uw0;
-    public string path_uw1;
-    public string path_uw2;
-    public string path_shock;
-    public string path_tnova;
+    public string path_uw0
+    {
+        get { return config.paths.PATH_UWDEMO; }
+    }
+    public string path_uw1
+    {
+        get { return config.paths.PATH_UW1; }
+    }
+    public string path_uw2
+    {
+        get { return config.paths.PATH_UW2; }
+    }
+    public string path_shock
+    {
+        get { return config.paths.PATH_SHOCK; }
+    }
+    public string path_tnova
+    {
+        get { return config.paths.PATH_TNOVA; }
+    }
 
     [Header("Material Lists")]
     /// <summary>
@@ -458,7 +476,13 @@ public class GameWorldController : UWEBase
     /// <summary>
     /// Key bindings for the game.
     /// </summary>
-    public KeyBindings keybinds;
+    //public KeyBindings keybinds
+    //{
+    //    get
+    //    {
+    //        return config.keys;
+    //    }
+    //}
 
     /// <summary>
     /// Event engine for running scd.ark events.
@@ -508,7 +532,7 @@ public class GameWorldController : UWEBase
     {
         instance = this;
         //Set the seperator in file paths.
-        UWClass.sep = Path.AltDirectorySeparatorChar;
+        UWClass.sep = Path.DirectorySeparatorChar;
         Lev_Ark_File_Selected = "DATA" + sep + "LEV.ARK";
         SCD_Ark_File_Selected = "DATA" + sep + "SCD.ARK";
 
@@ -522,6 +546,8 @@ public class GameWorldController : UWEBase
     {
         instance = this;
         AtMainMenu = true;
+        //var config = new Configuration();
+        //Configuration.Save();
     }
 
     void Update()
@@ -631,7 +657,7 @@ public class GameWorldController : UWEBase
         LoadPath(res);
         UWEBase._RES = res;//game;
         UWClass._RES = res;//game;
-        keybinds.ApplyBindings();//Applies keybinds to certain controls
+        //keybinds.ApplyBindings();//Applies keybinds to certain controls
 
         //Set some layers for the AI to use to detect walls and doors.
         MapMeshLayerMask = 1 << LevelModel.layer;
@@ -1793,6 +1819,10 @@ public class GameWorldController : UWEBase
     /// <returns><c>true</c>, if config file was loaded, <c>false</c> otherwise.</returns>
     bool LoadConfigFile()
     {
+        config =Configuration.Read();
+
+       // Configuration.Save(config);
+        return true;
         string fileName = Application.dataPath + sep + ".." + sep + "config.ini";
         if (File.Exists(fileName))
         {
@@ -1816,8 +1846,8 @@ public class GameWorldController : UWEBase
                                 //int val = 0;
                                 //string pathfound="";
                                 KeyCode keyCodeToUse;
-                                KeyBindings.instance.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
-
+                                config.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
+                                
                                 switch (entries[0].ToUpper())
                                 {
                                     case "MOUSEX"://Mouse sensitivity X
@@ -1827,6 +1857,7 @@ public class GameWorldController : UWEBase
                                             {
                                                 MouseX.sensitivityX = val;
                                             }
+                                            config.mouse.mouseX = val;
                                             break;
                                         }
                                     case "MOUSEY"://Mouse sensitivity Y
@@ -1836,58 +1867,64 @@ public class GameWorldController : UWEBase
                                             {
                                                 MouseY.sensitivityY = val;
                                             }
+                                            config.mouse.mouseY = val;
                                             break;
                                         }
                                     case "PATH_UW0":
                                         {
-                                            path_uw0 = UWClass.CleanPath(entries[1]);
+                                            //path_uw0 = UWClass.CleanPath(entries[1]);
+                                            config.paths.PATH_UWDEMO = path_uw0;
                                             break;
                                         }
                                     case "PATH_UW1":
                                         {
-                                            path_uw1 = UWClass.CleanPath(entries[1]);
+                                            //path_uw1 = UWClass.CleanPath(entries[1]);
+                                            config.paths.PATH_UW1 = path_uw1;
                                             break;
                                         }
                                     case "PATH_UW2":
                                         {
-                                            path_uw2 = UWClass.CleanPath(entries[1]);
+                                            //path_uw2 = UWClass.CleanPath(entries[1]);
+                                            config.paths.PATH_UW2 = path_uw2;
                                             break;
                                         }
                                     case "PATH_SHOCK":
                                         {
-                                            path_shock = UWClass.CleanPath(entries[1]);
+                                           // path_shock = UWClass.CleanPath(entries[1]);
+                                            config.paths.PATH_SHOCK = path_shock;
                                             break;
                                         }
                                     case "PATH_TNOVA":
                                         {
-                                            path_tnova = UWClass.CleanPath(entries[1]);
+                                            //path_tnova = UWClass.CleanPath(entries[1]);
+                                            config.paths.PATH_TNOVA = path_tnova;
                                             break;
                                         }
 
                                     case "FLYUP":
-                                        KeyBindings.instance.FlyUp = keyCodeToUse; break;
+                                        GameWorldController.instance.config.FlyUp = keyCodeToUse; break;
                                     case "FLYDOWN":
-                                        KeyBindings.instance.FlyDown = keyCodeToUse; break;
+                                        GameWorldController.instance.config.FlyDown = keyCodeToUse; break;
                                     case "TOGGLEMOUSELOOK":
-                                        KeyBindings.instance.ToggleMouseLook = keyCodeToUse; break;
+                                        GameWorldController.instance.config.ToggleMouseLook = keyCodeToUse; break;
                                     case "TOGGLEFULLSCREEN":
-                                        KeyBindings.instance.ToggleFullScreen = keyCodeToUse; break;
+                                        GameWorldController.instance.config.ToggleFullScreen = keyCodeToUse; break;
                                     case "INTERACTIONOPTIONS":
-                                        KeyBindings.instance.InteractionOptions = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionOptions = keyCodeToUse; break;
                                     case "INTERACTIONTALK":
-                                        KeyBindings.instance.InteractionTalk = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionTalk = keyCodeToUse; break;
                                     case "INTERACTIONPICKUP":
-                                        KeyBindings.instance.InteractionPickup = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionPickup = keyCodeToUse; break;
                                     case "INTERACTIONLOOK":
-                                        KeyBindings.instance.InteractionLook = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionLook = keyCodeToUse; break;
                                     case "INTERACTIONATTACK":
-                                        KeyBindings.instance.InteractionAttack = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionAttack = keyCodeToUse; break;
                                     case "INTERACTIONUSE":
-                                        KeyBindings.instance.InteractionUse = keyCodeToUse; break;
+                                        GameWorldController.instance.config.InteractionUse = keyCodeToUse; break;
                                     case "CASTSPELL":
-                                        KeyBindings.instance.CastSpell = keyCodeToUse; break;
+                                        GameWorldController.instance.config.CastSpell = keyCodeToUse; break;
                                     case "TRACKSKILL":
-                                        KeyBindings.instance.TrackSkill = keyCodeToUse; break;
+                                        GameWorldController.instance.config.TrackSkill = keyCodeToUse; break;
 
 
                                     case "DEFAULTLIGHTLEVEL":
@@ -1895,8 +1932,9 @@ public class GameWorldController : UWEBase
                                             float lightlevel = 16f;
                                             if (float.TryParse(entries[1], out lightlevel))
                                             {
-                                                LightSource.BaseBrightness = lightlevel;
+                                               // LightSource.BaseBrightness = lightlevel;
                                             }
+                                            config.camera.DefaultLightLevel = lightlevel;
                                             break;
                                         }
 
@@ -1907,54 +1945,64 @@ public class GameWorldController : UWEBase
                                             {
                                                 Camera.main.fieldOfView = fov;
                                             }
+                                            config.camera.FOV = fov;
                                             break;
+
                                         }
                                     case "INFINITEMANA":
                                         {
-                                            Magic.InfiniteMana = (entries[1] == "1");
+                                           // Magic.InfiniteMana = (entries[1] == "1");
+                                            config.cheats.InfiniteMana = Magic.InfiniteMana;
                                             break;
                                         }
 
                                     case "GODMODE":
                                         {
-                                            UWCharacter.Invincible = (entries[1] == "1");
+                                            //UWCharacter.Invincible = (entries[1] == "1");
+                                            config.cheats.GodMode = UWCharacter.Invincible;
                                             break;
                                         }
 
                                     case "CONTEXTUIENABLED":
                                         {
-                                            WindowDetectUW.ContextUIEnabled = (entries[1] == "1");
+                                            //WindowDetectUW.ContextUIEnabled = (entries[1] == "1");
+                                            config.ui.ContextUIEnabled = WindowDetectUW.ContextUIEnabled;
                                             break;
                                         }
 
                                     case "UW1_SOUNDBANK":
                                         {
-                                            MusicController.UW1Path = UWClass.CleanPath(entries[1]);
+                                            //MusicController.UW1Path = UWClass.CleanPath(entries[1]);
+                                            config.audio.UW1_SOUNDBANK = MusicController.UW1Path;
                                             break;
                                         }
                                     case "UW2_SOUNDBANK":
                                         {
-                                            MusicController.UW2Path = UWClass.CleanPath(entries[1]);
+                                            //MusicController.UW2Path = UWClass.CleanPath(entries[1]);
+                                            config.audio.UW2_SOUNDBANK = MusicController.UW2Path;
                                             break;
                                         }
                                     case "GENREPORT":
                                         {
-                                            CreateReports = (entries[1] == "1");
+                                            //CreateReports = (entries[1] == "1");
+                                            config.dev.GenerateReports = CreateReports;
                                             break;
                                         }
                                     case "SHOWINUSE"://only show inuse objects in reports
                                         {
-                                            ShowOnlyInUse = (entries[1] == "1");
+                                            //ShowOnlyInUse = (entries[1] == "1");
+                                            config.dev.ShowOnlyInUse = ShowOnlyInUse;
                                             break;
                                         }
                                     case "AUTOKEYUSE":
                                         {
-                                            UWCharacter.AutoKeyUse = (entries[1] == "1");
+                                           // UWCharacter.AutoKeyUse = (entries[1] == "1");
+                                            config.ui.AutoKey = UWCharacter.AutoKeyUse;
                                             break;
                                         }
                                     case "AUTOEAT":
                                         {
-                                            UWCharacter.AutoEat = (entries[1] == "1");
+                                            //UWCharacter.AutoEat = (entries[1] == "1");
                                             break;
                                         }
                                 }
@@ -1965,6 +2013,7 @@ public class GameWorldController : UWEBase
                 }
                 while (line != null);
                 fileReader.Close();
+                Configuration.Save(config);
                 return true;
             }
         }

@@ -33,7 +33,14 @@ public class LightSource : object_base {
 		}
 
 		/// Basic brightness around the player.
-	public static float BaseBrightness = 16f;
+	public static float BaseBrightness
+    {
+        get
+		{//= 16f;
+			return GameWorldController.instance.config.camera.DefaultLightLevel;
+        }	
+		
+	}
 
 		/// The light level obtained from magic spells
 	public static float MagicBrightness=0;
