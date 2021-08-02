@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class TerrainDatLoader : Loader
 {
@@ -71,7 +72,7 @@ public class TerrainDatLoader : Loader
         Terrain = new int[256 + 256];//wall and floor
         char[] terrain_dat;
         int add_ptr = 0;
-        if (DataLoader.ReadStreamFile(BasePath + sep + "DATA" + sep + filename, out terrain_dat))
+        if (DataLoader.ReadStreamFile( Path.Combine(BasePath, "DATA", filename), out terrain_dat))
         {
             switch (Loader._RES)
             {

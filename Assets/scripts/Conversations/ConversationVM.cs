@@ -174,9 +174,9 @@ public class ConversationVM : UWEBase
         switch (_RES)
         {
             case GAME_UW2:
-                LoadCnvArkUW2(Loader.BasePath + "DATA" + sep + "CNV.ARK"); break;
+                LoadCnvArkUW2(Path.Combine(Loader.BasePath, "DATA", "CNV.ARK")); break;
             default:
-                LoadCnvArk(Loader.BasePath + "DATA" + sep + "CNV.ARK"); break;
+                LoadCnvArk(Path.Combine(Loader.BasePath, "DATA","CNV.ARK")); break;
         }
         VMLoaded = true;
     }
@@ -451,7 +451,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         //}
         //Write the result to file
 
-        TextWriter tw = new StreamWriter(Loader.BasePath + sep + "conversation_debug.txt");
+        TextWriter tw = new StreamWriter(Path.Combine(Loader.BasePath, "conversation_debug.txt"));
         tw.Write(result);
         tw.Close();
     }

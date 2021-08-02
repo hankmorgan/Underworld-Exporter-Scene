@@ -192,7 +192,7 @@ public class LevArk : Loader {
 
 
         //Data is copied. now begin writing the output file
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK", FileMode.Create);
+        FileStream file = File.Open( Path.Combine(Loader.BasePath,"SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         long add_ptr = 0;
 
@@ -380,7 +380,7 @@ public class LevArk : Loader {
         }
 
 
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK", FileMode.Create);
+        FileStream file = File.Open(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         long add_ptr = 0;
         add_ptr += DataLoader.WriteInt8(writer, 0x87);

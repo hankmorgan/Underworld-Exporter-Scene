@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Cutscene_GuardianTaunts : Cuts {
 
@@ -22,7 +23,7 @@ public class Cutscene_GuardianTaunts : Cuts {
         noOfAudioClips = 1;
         AudioTimes[0] = 0.5f;
         // AudioClipName[0] = _RES + sfx;
-        AudioClipName[0] = Loader.BasePath + "SOUND" + sep + sfx;
+        AudioClipName[0] = Path.Combine(Loader.BasePath, "SOUND" ,sfx);
 
         SyncSubtitles();
     }

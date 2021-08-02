@@ -184,7 +184,14 @@ public class object_base : UWEBase
         }
         set
         {
-            objInt().quality = value;
+            if (value<0)
+            {
+                objInt().quality =0;
+            }
+            else
+            {
+                objInt().quality = value;
+            }           
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class XFerLoader : Loader {
     public char[] auxPalVal; //= //new char[5,32];
@@ -20,9 +21,8 @@ public class XFerLoader : Loader {
     public XFerLoader()
     {
        // char[] pal_file;
-        Path = Loader.BasePath + "\\data\\xfer.dat";
-
-        if (DataLoader.ReadStreamFile(Path, out auxPalVal))
+        filePath = Path.Combine(Loader.BasePath, "data\\xfer.dat");
+        if (DataLoader.ReadStreamFile(filePath, out auxPalVal))
         {
             /*for (int a = 0; a <= auxPalVal.GetUpperBound(0); a++)
             {

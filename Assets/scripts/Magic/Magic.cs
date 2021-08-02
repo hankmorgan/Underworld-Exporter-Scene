@@ -38,7 +38,10 @@ public class Magic : UWEBase
     public int[] ActiveRunes = new int[3];
 
     ///The player has unlimited mana
-    public static bool InfiniteMana;
+    public static bool InfiniteMana
+    {
+        get { return GameWorldController.instance.config.cheats.InfiniteMana; }
+    }
 
     ///How much mana the player can have
    [SerializeField]
@@ -3921,7 +3924,7 @@ public class Magic : UWEBase
     {
         if ((WindowDetectUW.InMap == true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) { return; }
         if (
-                (Event.current.keyCode == KeyBindings.instance.CastSpell)
+                (Event.current.keyCode == GameWorldController.instance.config.CastSpell)
                 &&
                 (Event.current.type == EventType.KeyDown)
                 &&

@@ -21,7 +21,7 @@ public class KeyBindings : GuiBase {
 		//NOTE: not ALL characters are bound to a keycode due to Unity"s Limitations
 
 
-		public Dictionary<string, KeyCode> chartoKeycode = new Dictionary<string, KeyCode>()
+	public Dictionary<string, KeyCode> chartoKeycode = new Dictionary<string, KeyCode>()
 		{	
 				
 				  {".", KeyCode.KeypadPeriod},
@@ -132,18 +132,12 @@ public class KeyBindings : GuiBase {
 		};
 
 
-
-
-
-
-
-
-
 	public static KeyBindings instance;
 
-		//Keycodes and their defaults
-	public KeyCode FlyUp = KeyCode.R;
-	public KeyCode FlyDown = KeyCode.V;
+	//Keycodes and their defaults
+	[SerializeField]
+	public KeyCode XFlyUp = KeyCode.R;
+	public KeyCode XFlyDown = KeyCode.V;
 	public KeyCode ToggleMouseLook = KeyCode.E;
 	public KeyCode ToggleFullScreen = KeyCode.F;
 	public KeyCode InteractionOptions = KeyCode.F1;
@@ -151,73 +145,25 @@ public class KeyBindings : GuiBase {
 	public KeyCode InteractionPickup = KeyCode.F3;
 	public KeyCode InteractionLook = KeyCode.F4;
 	public KeyCode InteractionAttack = KeyCode.F5;
-	public KeyCode InteractionUse = KeyCode.F6;
+	public KeyCode InteractionUse = KeyCode.F6; 
 	public KeyCode CastSpell = KeyCode.Q;
 	public KeyCode TrackSkill = KeyCode.T;
 
-	/*public override void Start ()
+    //void Awake()
+    //{//Should execute before game world controller
+    //	//instance=this;
+    //}
+
+
+    public void ApplyBindings()
 	{
-		base.Start ();
-		
-	}*/
-
-	void Awake()
-	{//Should execute before game world controller
-		instance=this;
-	}
-
-
-	public void ApplyBindings()
-	{
-		/*string fileName = Application.dataPath + "//..//bindings.txt";
-		if (File.Exists(fileName))
-		{
-			string line;
-			StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-			do
-			{
-					line = fileReader.ReadLine();
-					if (line != null)
-					{
-						string[] entries = line.Split('=');
-						if(entries.GetUpperBound(0)==1)
-						{
-								KeyCode keyCodeToUse;
-								if (chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse))
-								{
-										switch(entries[0].ToLower())
-										{
-										case "flyup": FlyUp=keyCodeToUse;break;
-										case "flydown": FlyDown=keyCodeToUse;break;
-										case "togglemouselook": ToggleMouseLook=keyCodeToUse;break;
-										case "togglefullscreen": ToggleFullScreen=keyCodeToUse;break;
-										case "interactionoptions": InteractionOptions=keyCodeToUse;break;
-										case "interactiontalk": InteractionTalk=keyCodeToUse;break;
-										case "interactionpickup": InteractionPickup=keyCodeToUse;break;
-										case "interactionlook": InteractionLook=keyCodeToUse;break;
-										case "interactionattack": InteractionAttack=keyCodeToUse;break;
-										case "interactionuse": InteractionUse=keyCodeToUse;break;
-										case "castspell": CastSpell=keyCodeToUse;break;
-										case "trackskill": TrackSkill=keyCodeToUse;break;
-										}	
-								}	
-						}
-
-					}
-			}while (line != null);
-			fileReader.Close();		
-		}*/
-
-
-
-
+		return;
 		UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey=InteractionOptions;
 		UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey=InteractionTalk;
 		UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey=InteractionPickup;
 		UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey=InteractionLook;
 		UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey=InteractionAttack;
 		UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey=InteractionUse;
-
 		UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey=InteractionOptions;
 		UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey=InteractionTalk;
 		UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey=InteractionPickup;

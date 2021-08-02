@@ -96,12 +96,17 @@ public class Character : UWEBase {
 	/// </summary>
 	public float BaseEngagementRange = 8;
 
-	public static bool Invincible;
-    public static bool AutoKeyUse;
-    public static bool AutoEat;
+	public static bool Invincible
+    {
+        get { return GameWorldController.instance.config.cheats.GodMode; }
+    }
+    public static bool AutoKeyUse
+	{ get { return GameWorldController.instance.config.ui.AutoKey; } }
+    public static bool AutoEat
+	{ get { return GameWorldController.instance.config.ui.AutoEat; } }
 
-    //For controlling switching between mouse look and interaction
-    [Header("Mouselook")]	
+	//For controlling switching between mouse look and interaction
+	[Header("Mouselook")]	
 	public MouseLook XAxis;
 	public MouseLook YAxis;
 	public bool MouseLookEnabled;

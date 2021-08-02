@@ -452,7 +452,7 @@ public class WindowDetectUW : WindowDetect
             if (WindowDetect.InMap == false)
             {
                 //if ((Event.current.Equals(Event.KeyboardEvent("f")) && (WaitingForInput==false)))
-                if ((Event.current.keyCode == KeyBindings.instance.ToggleFullScreen) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
+                if ((Event.current.keyCode == GameWorldController.instance.config.ToggleFullScreen) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
                 {//Toggle full screen.
                     if (FullScreen == true)
                     {
@@ -464,7 +464,7 @@ public class WindowDetectUW : WindowDetect
                     }
                 }
                 //if ((Event.current.Equals(Event.KeyboardEvent("t"))) && (WaitingForInput==false))
-                if ((Event.current.keyCode == KeyBindings.instance.TrackSkill) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
+                if ((Event.current.keyCode == GameWorldController.instance.config.TrackSkill) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
                 //if ( ( Input.GetKey(KeyCode.T) ) && (WaitingForInput==false))
                 {//Tracking skill
                     TryTracking();
@@ -472,7 +472,7 @@ public class WindowDetectUW : WindowDetect
 
 
                 //if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
-                if ((Event.current.keyCode == KeyBindings.instance.ToggleMouseLook) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
+                if ((Event.current.keyCode == GameWorldController.instance.config.ToggleMouseLook) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
                 {
                     if (UWCharacter.InteractionMode != UWCharacter.InteractionModeOptions)
                     {

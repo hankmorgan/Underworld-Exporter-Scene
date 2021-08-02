@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Loader: UWClass  {
 
 	public static string BasePath = "C:\\GAMES\\UW1\\";
-	public string Path;//To the file relative to the root of the game folder
+	public string filePath;//To the file relative to the root of the game folder
 	public bool DataLoaded;
 
 
@@ -20,10 +20,9 @@ public class Loader: UWClass  {
     /// <param name="buffer">Buffer.</param>
     public static bool ReadStreamFile(String Path, out char[] buffer)
     {
-        Path = Path.Replace("--", sep.ToString());
+        //Path = Path.Replace("--", sep.ToString());
         if (!File.Exists(Path))
         {
-           // UWHUD.instance.ErrorText.text = "File not found " + Path + "\nCheck your paths in config.ini and ensure game files have been extracted. See readme.txt";
             Debug.Log("DataLoader.ReadStreamFile : File not found : " + Path);
             buffer = null;
             return false;

@@ -63,7 +63,7 @@ public class UWHUD : HUD
     public GameObject gameUi;
     public GameObject gameSelectUi;
     public MainMenuHud mainmenu;
-
+   
 
     //Conversation Controls
     [Header("Conversation")]
@@ -176,8 +176,6 @@ public class UWHUD : HUD
     public GameObject editorPanel;
 
 
-
-
     [Header("Indicators")]
     public HealthFlask FlaskHealth;
     public HealthFlask FlaskMana;
@@ -194,6 +192,16 @@ public class UWHUD : HUD
     public InteractionModeControl InteractionControlUW1;
     public InteractionModeControl InteractionControlUW2;
     public RawImage InteractionControlUW2BG;
+
+    [Header("PathSelection")]
+    public GameSelect StatusUW1;
+    public InputField InputPathUW1;
+
+    public GameSelect StatusUW2;
+    public InputField InputPathUW2;
+
+    public GameSelect StatusUWDemo;
+    public InputField InputPathUWDemo;
 
 
     public RawImage test;
@@ -251,6 +259,23 @@ public class UWHUD : HUD
             MessageScroll.LineWidth = 54;
             Conversation_tl.LineWidth = 48;
         }
+
+
+        //Set Keycodes for interaction mode controls
+
+        //Apply to UI
+        UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
 
         switch (_RES)
         {

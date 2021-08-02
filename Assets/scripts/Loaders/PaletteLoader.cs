@@ -12,7 +12,7 @@ public class PaletteLoader : ArtLoader {
 
 	public PaletteLoader(string PathToResource , short chunkID)
 	{
-		Path = Loader.BasePath+ PathToResource;
+		filePath = PathToResource;  //Loader.BasePath+ PathToResource;
 		if (_RES==GAME_UW2)
 		{
 			PaletteNo=chunkID;
@@ -38,7 +38,7 @@ public class PaletteLoader : ArtLoader {
 					Palettes[0]=new Palette();
 					char[] pal_file;
 					DataLoader.Chunk pal_ark;
-					if(DataLoader.ReadStreamFile(Path,out pal_file))
+					if(DataLoader.ReadStreamFile(filePath,out pal_file))
 					{
 						if (DataLoader.LoadChunk(pal_file,PaletteNo, out pal_ark))
 							{
@@ -61,7 +61,7 @@ public class PaletteLoader : ArtLoader {
 			{
 				char[] pals_dat;
 				Palettes=new Palette[NoOfPals];
-				if(DataLoader.ReadStreamFile(Path,out pals_dat))
+				if(DataLoader.ReadStreamFile(filePath,out pals_dat))
 				{
 					for (int palNo =0; palNo<=Palettes.GetUpperBound(0); palNo++ )
 					{

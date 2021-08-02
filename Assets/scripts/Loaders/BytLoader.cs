@@ -25,16 +25,16 @@ public class BytLoader : ArtLoader {
 
 
 		private string[] FilePaths={
-			"DATA--BLNKMAP.BYT",
-			"DATA--CHARGEN.BYT",
-			"DATA--CONV.BYT",
-			"DATA--MAIN.BYT",
-			"DATA--OPSCR.BYT",
-		 	"DATA--PRES1.BYT",
-			"DATA--PRES2.BYT",
-			"DATA--WIN1.BYT",
-			"DATA--WIN2.BYT",
-			"DATA--PRESD.BYT"
+			"BLNKMAP.BYT",
+			"CHARGEN.BYT",
+			"CONV.BYT",
+			"MAIN.BYT",
+			"OPSCR.BYT",
+		 	"PRES1.BYT",
+			"PRES2.BYT",
+			"WIN1.BYT",
+			"WIN2.BYT",
+			"PRESD.BYT"
 		};
 
 		private int[] PaletteIndices=
@@ -88,20 +88,21 @@ public class BytLoader : ArtLoader {
 		switch (_RES)
 		{
 		case GAME_UW2:
-			{
-								
-				return  extractUW2Bitmap("DATA" + sep + "BYT.ARK", index, Alpha);
-			}
+			{								
+				return extractUW2Bitmap(Path.Combine(BasePath,"DATA","BYT.ARK"), index, Alpha);      //    "DATA" + sep + "BYT.ARK", index, Alpha);
+				}
 		default:
 			{
-				if (File.Exists(BasePath +FilePaths[index].Replace("--", sep.ToString()).Replace(".","_") + sep + "001.tga"))
+				var toLoad = Path.Combine(BasePath, "DATA", FilePaths[index]);
+				var toLoadMod = Path.Combine(toLoad, "001.tga");
+				if (File.Exists(toLoadMod))
 				{
-					return TGALoader.LoadTGA(BasePath + FilePaths[index].Replace("--", sep.ToString()).Replace(".","_") + sep + "001.tga")	;
+					return TGALoader.LoadTGA(toLoadMod)	;
 				}
 			if (currentIndex!=index)
 				{//Only load from disk if the image to bring back has changed.
 					DataLoaded=false;
-					Path=FilePaths[index];
+					filePath = toLoad;   //FilePaths[index];
 					LoadImageFile();		
 				}
 				return Image(ImageFileData,0,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
@@ -109,18 +110,18 @@ public class BytLoader : ArtLoader {
 		}
 	}
 
-		public Texture2D extractUW2Bitmap(string path, int index, bool Alpha)
+		public Texture2D extractUW2Bitmap(string toLoad, int index, bool Alpha)
 		{
 			char[] textureFile;          // Pointer to our buffered data (little endian format)
 			//int i;
 			long NoOfTextures;
+			var toLoadMod = Path.Combine(toLoad, index.ToString("d3") + ".tga");
+			if (File.Exists(toLoadMod))
+			{
+				return TGALoader.LoadTGA(toLoadMod)	;
+			}
 
-				if (File.Exists(BasePath +path.Replace(".","_") + sep + index.ToString("d3") + ".tga"))
-				{
-					return TGALoader.LoadTGA(BasePath +path.Replace(".","_") + sep + index.ToString("d3") + ".tga")	;
-				}
-
-			if (!DataLoader.ReadStreamFile(BasePath + path, out textureFile))
+			if (!DataLoader.ReadStreamFile(toLoad, out textureFile))
 			{return null;}
 			// Get the size of the file in bytes
 
