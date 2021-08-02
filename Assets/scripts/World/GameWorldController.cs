@@ -653,6 +653,8 @@ public class GameWorldController : UWEBase
     /// <param name="res">Res.</param>
     public void Begin(string res)
     {
+        //Save config file as paths may have been changed.
+        Configuration.Save(config);
         UWHUD.instance.gameSelectUi.SetActive(false);
         LoadPath(res);
         UWEBase._RES = res;//game;

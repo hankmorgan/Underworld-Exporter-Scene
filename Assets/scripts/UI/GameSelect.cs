@@ -10,14 +10,30 @@ public class GameSelect : GuiBase {
 	public bool Game_Found;
 	public Text PathStatus;
 	public string exe;
+	public bool FolderTestPassed = false;
+
+	string[] UW1RequiredFiles = { "uw.exe", "data\\lev.ark" };
+	string[] UW2RequiredFiles = { "uw2.exe", "data\\lev.ark" };
 
 	public override void Start ()
 	{
 		base.Start ();
 		CheckPath();
+		switch(RES)
+        {
+			case GAME_UW1:
+				UWHUD.instance.InputPathUW1.text = GameWorldController.instance.config.paths.PATH_UW1;
+				break;
+			case GAME_UW2:
+				UWHUD.instance.InputPathUW2.text = GameWorldController.instance.config.paths.PATH_UW2;
+				break;
+			case GAME_UWDEMO:
+				UWHUD.instance.InputPathUWDemo.text = GameWorldController.instance.config.paths.PATH_UWDEMO;
+				break;
+		}
 	}
 
-	void CheckPath()
+	public void CheckPath()
 	{
 		string Path="";
 		switch(RES)
@@ -29,23 +45,56 @@ public class GameSelect : GuiBase {
 		case GAME_TNOVA:Path=GameWorldController.instance.path_tnova;break;
 		}
 
-		//string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
-		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		//string Path= fileReader.ReadLine().TrimEnd();
-		//Game_Found=(File.Exists(Path + exe)) ;
 		Game_Found = (Directory.Exists(Path));
 		if (Game_Found)
-		{
-			PathStatus.text=RES + " found at " + Path ;//+ exe; 
+		{			
+			PathStatus.text="Folder found at " + Path ;//+ exe; 
+			FolderTestPassed = FolderTest();
 		}
 		else
 		{
-			PathStatus.text=RES + " not found at " + Path ;//+ exe; 	
+			PathStatus.text= "Folder not found at " + Path ;//+ exe;
+			FolderTestPassed = false;	
 		}
 	}
 
-	public void OnClick()
+
+	bool FolderTest()
+    {
+		switch(RES)
+        {
+			case GAME_UW1:
+                {
+                    return CheckRequiredFiles(GameWorldController.instance.path_uw1, UW1RequiredFiles);
+                }
+			case GAME_UW2:
+				{
+					return CheckRequiredFiles(GameWorldController.instance.path_uw2, UW2RequiredFiles);
+				}
+			default:
+				return true;
+        }
+    }
+
+    private bool CheckRequiredFiles(string path, string[] requiredfiles)
+    {
+        foreach (var item in requiredfiles)
+        {
+            var test = Path.Combine(path, item);
+            if (!File.Exists(test))
+            {
+                PathStatus.text += "\n" + test + " not found!";
+                return false;
+            }
+        }
+        PathStatus.text += "\nKnown required files found";
+		PathStatus.text += "\nOnly testing .exe and lev.ark";
+		return true;
+    }
+
+    public void OnClick()
 	{
+		if (!FolderTestPassed) { return; }
 		if (!Game_Found){return;}
 		switch (RES)
 		{
