@@ -462,7 +462,7 @@ public class OptionsMenuControl : GuiBase_Draggable
         for (int i = 1; i <= 4; i++)
         {
             char[] fileDesc;
-            if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + i + sep + "DESC", out fileDesc))
+            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
             {
                 saveNames[i - 1] = new string(fileDesc);
             }
@@ -584,11 +584,10 @@ public class OptionsMenuControl : GuiBase_Draggable
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_impossible_you_are_between_worlds_));
             return;
         }
-        if (!Directory.Exists(Loader.BasePath + "SAVE" + (SlotNo + 1)))
+        if (!Directory.Exists(Path.Combine(Loader.BasePath , "SAVE" + (SlotNo + 1))))
         {
-            Directory.CreateDirectory(Loader.BasePath + "SAVE" + (SlotNo + 1));
+            Directory.CreateDirectory(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1)));
         }
-
 
         //Write a player.dat file
         if (_RES == GAME_UW2)
@@ -598,7 +597,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Write bglobals.dat
             GameWorldController.instance.WriteBGlobals(SlotNo + 1);
             //Write a desc file
-            File.WriteAllText(Loader.BasePath + "SAVE" + (SlotNo + 1) + sep + "DESC", SaveGame.SaveGameName(SlotNo + 1));
+            File.WriteAllText( Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1) , "DESC"), SaveGame.SaveGameName(SlotNo + 1));
             //Write player.dat
             SaveGame.WritePlayerDatUW2(SlotNo + 1);
             //TODO:Write scd.ark
@@ -610,7 +609,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Write bglobals.dat
             GameWorldController.instance.WriteBGlobals(SlotNo + 1);
             //Write a desc file
-            File.WriteAllText(Loader.BasePath + "SAVE" + (SlotNo + 1) + sep + "DESC", SaveGame.SaveGameName(SlotNo + 1));
+            File.WriteAllText( Path.Combine( Loader.BasePath, "SAVE" + (SlotNo + 1), "DESC"), SaveGame.SaveGameName(SlotNo + 1));
             //Write player.dat
             SaveGame.WritePlayerDatUW1(SlotNo + 1);
             //	SaveGame.WritePlayerDatOriginal(SlotNo+1);	
@@ -636,8 +635,8 @@ public class OptionsMenuControl : GuiBase_Draggable
             GameWorldController.LoadingGame = true;
             GameWorldController.instance.LevelNo = -1;
             GameWorldController.instance.AtMainMenu = true;
-            GameWorldController.instance.Lev_Ark_File_Selected = "SAVE" + (SlotNo + 1) + sep + "LEV.ARK";
-            GameWorldController.instance.SCD_Ark_File_Selected = "SAVE" + (SlotNo + 1) + sep + "SCD.ARK";
+            GameWorldController.instance.Lev_Ark_File_Selected = Path.Combine("SAVE" + (SlotNo + 1), "LEV.ARK");
+            GameWorldController.instance.SCD_Ark_File_Selected = Path.Combine("SAVE" + (SlotNo + 1), "SCD.ARK");
             //Read in the character data
             //SaveGame.LoadPlayerDat(SlotNo+1);
 

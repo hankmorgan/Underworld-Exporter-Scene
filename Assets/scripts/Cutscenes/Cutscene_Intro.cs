@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 /// <summary>
 /// Sample Cutscene
@@ -288,172 +289,172 @@ public class Cutscene_Intro : Cuts {
         //At last you are asleep=26
         AudioTimes[0] = 0.0f;
         //AudioClipName[0] = _RES + "/sfx/voice/26";//1.8s
-        AudioClipName[0] = Loader.BasePath + "SOUND" + sep + "/26.voc";//1.8s
+        AudioClipName[0] = Path.Combine(Loader.BasePath,"SOUND", "26.voc");//1.8s
 
 
         //for 3 nights each attem=27
         AudioTimes[1] = AudioTimes[0] + 1.8f;
-        AudioClipName[1] = Loader.BasePath + "SOUND" + sep + "27.voc"; //7.3s
+        AudioClipName[1] = Path.Combine(Loader.BasePath, "SOUND", "27.voc"); //7.3s
 
         //deja vu.=28
         AudioTimes[2] = AudioTimes[1] + 7.4f;//9.1f;
-        AudioClipName[2] = Loader.BasePath + "SOUND" + sep + "28.voc";//3.5s
+        AudioClipName[2] = Path.Combine(Loader.BasePath, "SOUND", "28.voc");//3.5s
 
         //Treachery & doom=23
         //AudioTimes[3]=18.0f;
         AudioTimes[3] = ImageTimes[2];
-        AudioClipName[3] = Loader.BasePath + "SOUND" + sep + "23.voc";//2.6s
+        AudioClipName[3] = Path.Combine(Loader.BasePath, "SOUND", "23.voc");//2.6s
 
         //My brother=24
         //AudioTimes[4]=21.0f;
         AudioTimes[4] = ImageTimes[3] + 1f;
-        AudioClipName[4] = Loader.BasePath + "SOUND" + sep + "24.voc";//3.6s
+        AudioClipName[4] = Path.Combine(Loader.BasePath, "SOUND", "24.voc");//3.6s
 
         //Brit in peril=25
         //AudioTimes[5]=27.0f;
         AudioTimes[5] = ImageTimes[5];
-        AudioClipName[5] = Loader.BasePath + "SOUND" + sep + "25.voc";//2.7s
+        AudioClipName[5] = Path.Combine(Loader.BasePath, "SOUND", "25.voc");//2.7s
 
         //sure that the ghost=30
         //AudioTimes[6]=30.0f;
         AudioTimes[6] = ImageTimes[6];
-        AudioClipName[6] = Loader.BasePath + "SOUND" + sep + "30.voc";//4.4s
+        AudioClipName[6] = Path.Combine(Loader.BasePath, "SOUND", "30.voc");//4.4s
 
         //scream=31
         AudioTimes[7] = ImageTimes[6] + 4.5f;
-        AudioClipName[7] = Loader.BasePath + "SOUND" + sep + "31.voc";//1.2s
+        AudioClipName[7] = Path.Combine(Loader.BasePath, "SOUND", "31.voc");//1.2s
 
         //a visitor=37
         AudioTimes[8] = ImageTimes[7];//42.0f;
-        AudioClipName[8] = Loader.BasePath + "SOUND" + sep + "37.voc";//2.9
+        AudioClipName[8] = Path.Combine(Loader.BasePath, "SOUND", "37.voc");//2.9
 
         //were he not dead=38
         AudioTimes[9] = AudioTimes[8] + 2.9f;
-        AudioClipName[9] = Loader.BasePath + "SOUND" + sep + "38.voc";//3.2s
+        AudioClipName[9] = Path.Combine(Loader.BasePath, "SOUND", "38.voc");//3.2s
 
         //no matter hounds from the scent=39
         AudioTimes[10] = AudioTimes[9] + 3.2f;//48.1f;
-        AudioClipName[10] = Loader.BasePath + "SOUND" + sep + "39.voc";//3.5s
+        AudioClipName[10] = Path.Combine(Loader.BasePath, "SOUND", "39.voc");//3.5s
 
         //below a creature=32
         AudioTimes[11] = AudioTimes[10] + 4.0f;
-        AudioClipName[11] = Loader.BasePath + "SOUND" + sep + "32.voc";//5.3s
+        AudioClipName[11] = Path.Combine(Loader.BasePath, "SOUND", "32.voc");//5.3s
 
         //what has thou done=12
         AudioTimes[12] = ImageTimes[8];//66.0f;
-        AudioClipName[12] = Loader.BasePath + "SOUND" + sep + "12.voc";//2.5s
+        AudioClipName[12] = Path.Combine(Loader.BasePath, "SOUND", "12.voc");//2.5s
 
         //dropped to below=13
         AudioTimes[13] = AudioTimes[12] + 2.5f;//72.0f;
-        AudioClipName[13] = Loader.BasePath + "SOUND" + sep + "13.voc";//2.2s
+        AudioClipName[13] = Path.Combine(Loader.BasePath, "SOUND", "13.voc");//2.2s
 
         //he'll nay escape=14
         AudioTimes[14] = AudioTimes[13] + 2.2f;//78.0f;
-        AudioClipName[14] = Loader.BasePath + "SOUND" + sep + "14.voc";//3.5s
+        AudioClipName[14] = Path.Combine(Loader.BasePath, "SOUND", "14.voc");//3.5s
 
         //several tense hours=33
         AudioTimes[15] = ImageTimes[9];//84.0f;
-        AudioClipName[15] = Loader.BasePath + "SOUND" + sep + "33.voc";//3.135
+        AudioClipName[15] = Path.Combine(Loader.BasePath, "SOUND", "33.voc");//3.135
 
         //ignoring you=34
         AudioTimes[16] = ImageTimes[10];//AudioTimes[15] + 3.2f;//AudioTimes[15]90.0f;
-        AudioClipName[16] = Loader.BasePath + "SOUND" + sep + "34.voc";//2.4s
+        AudioClipName[16] = Path.Combine(Loader.BasePath, "SOUND", "34.voc");//2.4s
 
         //what news colwyn	=00
         AudioTimes[17] = ImageTimes[11];// AudioTimes[16] + 2.5f;//96.0f;
-        AudioClipName[17] = Loader.BasePath + "SOUND" + sep + "00.voc";//1.7s
+        AudioClipName[17] = Path.Combine(Loader.BasePath, "SOUND", "00.voc");//1.7s
 
         //forgive us=15
         AudioTimes[18] = ImageTimes[12];//102.0f;
-        AudioClipName[18] = Loader.BasePath + "SOUND" + sep + "15.voc";//1.1s
+        AudioClipName[18] = Path.Combine(Loader.BasePath, "SOUND", "15.voc");//1.1s
 
         //the foul creature escaped=65
         AudioTimes[19] = AudioTimes[18] + 1.3f;//108.0f;
-        AudioClipName[19] = Loader.BasePath + "SOUND" + sep + "65.voc";//1.4s
+        AudioClipName[19] = Path.Combine(Loader.BasePath, "SOUND", "65.voc");//1.4s
 
         //a score gave chase=16
         AudioTimes[20] = AudioTimes[19] + 1.4f;//114.0f;
-        AudioClipName[20] = Loader.BasePath + "SOUND" + sep + "16.voc";//4s
+        AudioClipName[20] = Path.Combine(Loader.BasePath, "SOUND", "16.voc");//4s
 
         //we were attacked=17
         AudioTimes[21] = AudioTimes[20] + 4f; ;//120.0f;
-        AudioClipName[21] = Loader.BasePath + "SOUND" + sep + "17.voc";//2.4s
+        AudioClipName[21] = Path.Combine(Loader.BasePath, "SOUND", "17.voc");//2.4s
 
         //only 3 survied=18
         AudioTimes[22] = AudioTimes[21] + 2.4f; ;//126.0f;
-        AudioClipName[22] = Loader.BasePath + "SOUND" + sep + "18.voc";//1.4s
+        AudioClipName[22] = Path.Combine(Loader.BasePath, "SOUND", "18.voc");//1.4s
 
         //I see=50
         AudioTimes[23] = ImageTimes[13] + 1.0f;//132.0f;
-        AudioClipName[23] = Loader.BasePath + "SOUND" + sep + "50.voc";//1s
+        AudioClipName[23] = Path.Combine(Loader.BasePath, "SOUND", "50.voc");//1s
 
         //baron throws his eyes upon=35
         AudioTimes[24] = ImageTimes[14];//138.0f;
-        AudioClipName[24] = Loader.BasePath + "SOUND" + sep + "35.voc";//2.3s
+        AudioClipName[24] = Path.Combine(Loader.BasePath, "SOUND", "35.voc");//2.3s
 
         //i was warned.=01
         AudioTimes[25] = ImageTimes[15];//144.0f;
-        AudioClipName[25] = Loader.BasePath + "SOUND" + sep + "01.voc";//2.1s
+        AudioClipName[25] = Path.Combine(Loader.BasePath, "SOUND", "01.voc");//2.1s
 
         //last fortnight=02
         AudioTimes[26] = AudioTimes[25] + 2.1f;//150.0f;
-        AudioClipName[26] = Loader.BasePath + "SOUND" + sep + "02.voc";//5.3s
+        AudioClipName[26] = Path.Combine(Loader.BasePath, "SOUND", "02.voc");//5.3s
 
         //guard thy daughter=03
         AudioTimes[27] = AudioTimes[26] + 5.3f;//156.0f;
-        AudioClipName[27] = Loader.BasePath + "SOUND" + sep + "03.voc";//6.2s
+        AudioClipName[27] = Path.Combine(Loader.BasePath, "SOUND", "03.voc");//6.2s
 
         //I posted guards=04
         AudioTimes[28] = AudioTimes[27] + 6.4f;//162.0f;
-        AudioClipName[28] = Loader.BasePath + "SOUND" + sep + "04.voc";//4.2s		
+        AudioClipName[28] = Path.Combine(Loader.BasePath, "SOUND", "04.voc");//4.2s		
 
         //they say=05
         AudioTimes[29] = AudioTimes[28] + 4.3f;//168.0f;
-        AudioClipName[29] = Loader.BasePath + "SOUND" + sep + "05.voc";//4.5s
+        AudioClipName[29] = Path.Combine(Loader.BasePath, "SOUND", "05.voc");//4.5s
 
         //you explain=36
         AudioTimes[30] = ImageTimes[16];//174.0f;
-        AudioClipName[30] = Loader.BasePath + "SOUND" + sep + "36.voc";//2.9s
+        AudioClipName[30] = Path.Combine(Loader.BasePath, "SOUND", "36.voc");//2.9s
 
         //whether you speak truth or falsehood=06
         AudioTimes[31] = ImageTimes[17];//180.0f;
-        AudioClipName[31] = Loader.BasePath + "SOUND" + sep + "06.voc";//3.9s
+        AudioClipName[31] = Path.Combine(Loader.BasePath, "SOUND", "06.voc");//3.9s
 
         //stories tell=07
         AudioTimes[32] = AudioTimes[31] + 4f;//186.0f;
-        AudioClipName[32] = Loader.BasePath + "SOUND" + sep + "07.voc";//5.4s
+        AudioClipName[32] = Path.Combine(Loader.BasePath, "SOUND", "07.voc");//5.4s
 
         //if thou art truely the avatar=08
         AudioTimes[33] = AudioTimes[32] + 5.5f; ;//192.0f;
-        AudioClipName[33] = Loader.BasePath + "SOUND" + sep + "08.voc";//4.3s
+        AudioClipName[33] = Path.Combine(Loader.BasePath, "SOUND", "08.voc");//4.3s
 
         //none here can survive=58
         AudioTimes[34] = AudioTimes[33] + 4.3f;//198.0f;
-        AudioClipName[34] = Loader.BasePath + "SOUND" + sep + "58.voc";//3.8s
+        AudioClipName[34] = Path.Combine(Loader.BasePath, "SOUND", "58.voc");//3.8s
 
         //my mind is set=09
         AudioTimes[35] = AudioTimes[34] + 4f;//204.0f;
-        AudioClipName[35] = Loader.BasePath + "SOUND" + sep + "09.voc";//3.9s
+        AudioClipName[35] = Path.Combine(Loader.BasePath, "SOUND", "09.voc");//3.9s
 
         //return here with my daughter=10
         AudioTimes[36] = AudioTimes[35] + 4f;//210.0f;
-        AudioClipName[36] = Loader.BasePath + "SOUND" + sep + "10.voc";//3.9s
+        AudioClipName[36] = Path.Combine(Loader.BasePath, "SOUND", "10.voc");//3.9s
 
         //if thou dost not return=11
         AudioTimes[37] = AudioTimes[36] + 5.8f;//216.0f;
-        AudioClipName[37] = Loader.BasePath + "SOUND" + sep + "11.voc";//5.6s
+        AudioClipName[37] = Path.Combine(Loader.BasePath, "SOUND", "11.voc");//5.6s
 
         //this be the foul pits=19
         AudioTimes[38] = ImageTimes[21];
-        AudioClipName[38] = Loader.BasePath + "SOUND" + sep + "19.voc";//4.9s
+        AudioClipName[38] = Path.Combine(Loader.BasePath, "SOUND", "19.voc");//4.9s
 
         //i will shut they in.=20
         AudioTimes[39] = AudioTimes[38] + 4.8f;//228.0f;
-        AudioClipName[39] = Loader.BasePath + "SOUND" + sep + "20.voc";//4.6s
+        AudioClipName[39] = Path.Combine(Loader.BasePath, "SOUND", "20.voc");//4.6s
 
         //other wise shut forever=22
         AudioTimes[40] = AudioTimes[39] + 3f;//234.0f;
-        AudioClipName[40] = Loader.BasePath + "SOUND" + sep + "22.voc";//2.7s
+        AudioClipName[40] = Path.Combine(Loader.BasePath, "SOUND", "22.voc");//2.7s
 
         SyncSubtitles();
     }

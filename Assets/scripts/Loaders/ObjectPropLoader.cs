@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 public class ObjectPropLoader : Loader {
 		//Object Prop Loader for Shock
 
@@ -33,7 +33,7 @@ public class ObjectPropLoader : Loader {
 
 				char[] objprop_dat;
 				int add_ptr=5099;
-				if (DataLoader.ReadStreamFile(BasePath+ sep + "RES"+sep+"DATA"+sep+"OBJPROP.DAT",out objprop_dat))
+				if (DataLoader.ReadStreamFile( Path.Combine(BasePath,"RES","DATA","OBJPROP.DAT"),out objprop_dat))
 				{
 					properties = new ShockCommonObjectProperties[476];
 					for (int i=0; i<=properties.GetUpperBound(0);i++)

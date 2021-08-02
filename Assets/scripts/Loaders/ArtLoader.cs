@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 
 /// <summary>
 /// Base class for loading artwork
@@ -30,23 +30,14 @@ public class ArtLoader : Loader
     /// </summary>
     public short PaletteNo = 0;
 
-    ///// <summary>
-    ///// A raw cached greyscale image that is awaiting a palette operation.
-    ///// </summary>
-    //public struct RawImageData
-    //{
-    //    public char[] Data;
-    //    public int Width;
-    //    public int Height;
-    //}
-
-    /// <summary>
+     /// <summary>
     /// Loads the image file into the buffer
     /// </summary>
     /// <returns><c>true</c>, if image file was loaded, <c>false</c> otherwise.</returns>
     public virtual bool LoadImageFile()
     {
-        if (DataLoader.ReadStreamFile(BasePath + Path.Replace("--", sep.ToString()), out ImageFileData))
+        //var toLoad = Path.Combine(BasePath, filePath);
+        if (DataLoader.ReadStreamFile(filePath, out ImageFileData))
         {//data read
             DataLoaded = true;
         }

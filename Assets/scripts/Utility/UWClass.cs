@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 
 public class UWClass  {
-    public static char sep;//File name seperator for linux/windows support
+    //public static char sep;//File name seperator for linux/windows support
 
     public const string GAME_UWDEMO = "UW0";
 	public const string GAME_UW1 = "UW1";

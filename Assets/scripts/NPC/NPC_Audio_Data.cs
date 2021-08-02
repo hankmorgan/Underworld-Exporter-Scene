@@ -42,7 +42,7 @@ public class NPC_Audio_Data : Loader {
         if (loaded[who_ami] != true)
         {//Load data into my sound bank if not already loaded
             //If exists [uw path]\sound\npc\[item_id]\[who_ami] 
-            string dir = BasePath + "sound\\npc\\" + ThisItemId + "\\" + who_ami + "\\";
+            string dir = Path.Combine(new string[]{ BasePath, "sound", "npc", ThisItemId.ToString(), who_ami.ToString()});
             if (Directory.Exists(dir))
             {
                 string[] files = Directory.GetFiles(dir, "*.ogg"); //ogg files only at the moment.
@@ -74,9 +74,9 @@ public class NPC_Audio_Data : Loader {
     /// <returns></returns>
     IEnumerator LoadIdleClip(string file, int whoami, int index)
     {
-        if (File.Exists(Path))
+        if (File.Exists(filePath))
         {
-            using (WWW download = new WWW("file://" + Path))
+            using (WWW download = new WWW("file://" + filePath))
             {
                 yield return download;                
                 IdleSounds[whoami,index] = download.GetAudioClip(false);

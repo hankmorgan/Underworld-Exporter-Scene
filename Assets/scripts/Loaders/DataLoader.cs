@@ -220,7 +220,8 @@ public class DataLoader :Loader {
 			}
 
 			//Write the data to a file.
-			WriteListToBytes(Output,Loader.BasePath + "DATA" + sep + "recodetest.dat" );
+			
+			WriteListToBytes(Output, Path.Combine(Loader.BasePath, "DATA", "recodetest.dat"));
 			char[] outchar = new char[Output.Count];
 			for (int i=0; i<Output.Count;i++)
 			{

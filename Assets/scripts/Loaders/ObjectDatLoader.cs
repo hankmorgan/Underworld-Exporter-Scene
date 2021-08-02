@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class ObjectDatLoader : Loader
 {
@@ -152,7 +153,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
     {
         char[] obj_dat;
         int add_ptr;
-        if (DataLoader.ReadStreamFile(BasePath + sep + "DATA" + sep + "OBJECTS.DAT", out obj_dat))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath,"DATA" , "OBJECTS.DAT"), out obj_dat))
         {
             add_ptr = 2;
             int j = 0;

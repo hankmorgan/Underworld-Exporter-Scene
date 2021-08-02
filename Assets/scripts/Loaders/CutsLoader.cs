@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 public class CutsLoader : ArtLoader
 {
 
@@ -30,7 +30,7 @@ public class CutsLoader : ArtLoader
 
     public CutsLoader(string File)
     {
-        Path = "CUTS" + sep + File.ToUpper();
+        filePath =Path.Combine(BasePath, "CUTS", File.ToUpper());
         if (LoadImageFile())
         {
             ReadCutsFile(ref ImageFileData, UseAlpha(File), UseErrorHandling(File));

@@ -48,43 +48,43 @@ public class GRLoader : ArtLoader
     public const int GHED_GR = 33;
 
     private string[] pathGR ={
-                "DATA--3DWIN.GR",
-                "DATA--ANIMO.GR",
-                "DATA--ARMOR_F.GR",
-                "DATA--ARMOR_M.GR",
-                "DATA--BODIES.GR",
-                "DATA--BUTTONS.GR",
-                "DATA--CHAINS.GR",
-                "DATA--CHARHEAD.GR",
-                "DATA--CHRBTNS.GR",
-                "DATA--COMPASS.GR",
-                "DATA--CONVERSE.GR",
-                "DATA--CURSORS.GR",
-                "DATA--DOORS.GR",
-                "DATA--DRAGONS.GR",
-                "DATA--EYES.GR",
-                "DATA--FLASKS.GR",
-                "DATA--GENHEAD.GR",
-                "DATA--HEADS.GR",
-                "DATA--INV.GR",
-                "DATA--LFTI.GR",
-                "DATA--OBJECTS.GR",
-                "DATA--OPBTN.GR",
-                "DATA--OPTB.GR",
-                "DATA--OPTBTNS.GR",
-                "DATA--PANELS.GR",
-                "DATA--POWER.GR",
-                "DATA--QUEST.GR",
-                "DATA--SCRLEDGE.GR",
-                "DATA--SPELLS.GR",
-                "DATA--TMFLAT.GR",
-                "DATA--TMOBJ.GR",
-                "DATA--WEAPONS.GR",
-                "DATA--GEMPT.GR",
-                "DATA--GHED.GR"
+                "3DWIN.GR",
+                "ANIMO.GR",
+                "ARMOR_F.GR",
+                "ARMOR_M.GR",
+                "BODIES.GR",
+                "BUTTONS.GR",
+                "CHAINS.GR",
+                "CHARHEAD.GR",
+                "CHRBTNS.GR",
+                "COMPASS.GR",
+                "CONVERSE.GR",
+                "CURSORS.GR",
+                "DOORS.GR",
+                "DRAGONS.GR",
+                "EYES.GR",
+                "FLASKS.GR",
+                "GENHEAD.GR",
+                "HEADS.GR",
+                "INV.GR",
+                "LFTI.GR",
+                "OBJECTS.GR",
+                "OPBTN.GR",
+                "OPTB.GR",
+                "OPTBTNS.GR",
+                "PANELS.GR",
+                "POWER.GR",
+                "QUEST.GR",
+                "SCRLEDGE.GR",
+                "SPELLS.GR",
+                "TMFLAT.GR",
+                "TMOBJ.GR",
+                "WEAPONS.GR",
+                "GEMPT.GR",
+                "GHED.GR"
         };
 
-    private string AuxPalPath = "DATA--ALLPALS.DAT";
+    private string AuxPalPath = "ALLPALS.DAT";
     bool useOverrideAuxPalIndex = false;
     int OverrideAuxPalIndex = 0;
 
@@ -96,7 +96,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File, int PalToUse)
     {
-        AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -107,7 +107,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File)
     {
-        AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -119,10 +119,10 @@ public class GRLoader : ArtLoader
     {
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
-
-        if (!DataLoader.ReadStreamFile(BasePath + FileName, out ImageFileData))
+        var toLoad = Path.Combine(BasePath, FileName);
+        if (!DataLoader.ReadStreamFile(toLoad, out ImageFileData))
         {
-            Debug.Log("Unable to load " + BasePath + pathGR[FileToLoad]);
+            Debug.Log("Unable to load " + toLoad);
             return;
         }
         else
@@ -182,14 +182,15 @@ public class GRLoader : ArtLoader
 
     public override bool LoadImageFile()
     {
-        string ModPath = BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
+        string ModPath = Path.Combine(BasePath, pathGR[FileToLoad].Replace(".","_"));// BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
         if (Directory.Exists(ModPath))
         {
             LoadMod = true;
         }
-        if (!DataLoader.ReadStreamFile(BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()), out ImageFileData))
+        var toLoad = Path.Combine(BasePath, "DATA", pathGR[FileToLoad]);
+        if (!DataLoader.ReadStreamFile(toLoad, out ImageFileData))
         {
-            Debug.Log("Unable to load " + BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()));
+            Debug.Log("Unable to LoadImageFile() " + toLoad);
             return false;
         }
         else
@@ -200,9 +201,10 @@ public class GRLoader : ArtLoader
             {//Load up modded image data at the path
                 for (int i = 0; i <= ImageCache.GetUpperBound(0); i++)
                 {
-                    if (File.Exists(ModPath + sep + i.ToString("d3") + ".tga"))
+                    var toLoadMod = Path.Combine(ModPath, i.ToString("d3") + ".tga");
+                    if (File.Exists(toLoadMod))
                     {
-                        ImageCache[i] = TGALoader.LoadTGA(ModPath + sep + i.ToString("d3") + ".tga");
+                        ImageCache[i] = TGALoader.LoadTGA(toLoadMod);
                     }
                 }
             }
@@ -272,7 +274,7 @@ public class GRLoader : ArtLoader
                     imageOffset = imageOffset + 6;  //Start of raw data.
                     copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
                     //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-                    int[] aux = PaletteLoader.LoadAuxilaryPalIndices(Loader.BasePath + AuxPalPath, auxPalIndex);
+                    int[] aux = PaletteLoader.LoadAuxilaryPalIndices(Path.Combine(Loader.BasePath,"DATA", AuxPalPath), auxPalIndex);
                     outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4, aux);
                     ImageCache[index] = Image(outputImg, 0, BitMapWidth, BitMapHeight, "name_goes_here", GameWorldController.instance.palLoader.Palettes[PaletteNo], Alpha, xfer);
                     return ImageCache[index];
@@ -291,7 +293,7 @@ public class GRLoader : ArtLoader
                     imgNibbles = new char[Mathf.Max(BitMapWidth * BitMapHeight * 2, (5 + datalen) * 2)];
                     imageOffset = imageOffset + 6;  //Start of raw data.
                     copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-                    auxpal = PaletteLoader.LoadAuxilaryPal(BasePath + AuxPalPath, GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
+                    auxpal = PaletteLoader.LoadAuxilaryPal(Path.Combine(BasePath,"DATA",AuxPalPath), GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
                     ImageCache[index] = Image(imgNibbles, 0, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha, xfer);
                     return ImageCache[index];
                 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 
 /// <summary>
@@ -24,10 +25,10 @@ public class CritLoader : ArtLoader {
                 ReadUW2AssocFile(CritterToLoad);
                 return;
             case GAME_UWDEMO:
-                ReadUw1AssocFile(CritterToLoad, "CRIT" + sep + "DASSOC.ANM");
+                ReadUw1AssocFile(CritterToLoad,  Path.Combine(BasePath, "CRIT", "DASSOC.ANM"));
                 return;
             default:
-                ReadUw1AssocFile(CritterToLoad, "CRIT" + sep + "ASSOC.ANM");
+                ReadUw1AssocFile(CritterToLoad, Path.Combine(BasePath, "CRIT", "ASSOC.ANM"));
                 return;
         }        
     }
@@ -36,7 +37,7 @@ public class CritLoader : ArtLoader {
     {
         char[] assoc;
         long AssocAddressPtr = 256;
-        if (DataLoader.ReadStreamFile(BasePath + assocpath, out assoc))
+        if (DataLoader.ReadStreamFile(assocpath, out assoc))
         {
             for (int ass = 0; ass <= 63; ass++)
             {
@@ -92,9 +93,9 @@ public class CritLoader : ArtLoader {
 				//Load the assoc file
 				long AssocAddressPtr=0;
 				if  ( 
-						( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "AS.AN", out assoc) ) 
-						&& ( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "PG.MP", out pgmp) ) 
-						&& ( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "CR.AN", out cran) )  
+						( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "AS.AN"), out assoc) ) 
+						&& ( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "PG.MP"), out pgmp) ) 
+						&& ( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "CR.AN"), out cran) )  
 				)
 				{
 						for (int ass = 0 ; ass <=63 ; ass++)

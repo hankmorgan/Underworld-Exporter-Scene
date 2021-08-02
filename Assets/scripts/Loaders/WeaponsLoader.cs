@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class WeaponsLoader : ArtLoader {
 		const int  repeat_record_start =0;
@@ -33,14 +34,14 @@ public class WeaponsLoader : ArtLoader {
 	int[] UW2_Y = { 66, 67, 68, -1, 70, 71, 72, 73, -1, 75, 76, 77, -1, 79, 80, 81, 82, -1, -1, -1, -1, -1, 88, 89, 90, -1, -1, 93, 94, 95, -1, 163, 164, 165, -1, 167, 168, 169, 170, -1, 172, 173, 174, -1, 176, 177, 178, 179, -1, -1, -1, -1, -1, 185, 186, 187, -1, -1, 190, 191, 192, -1, 260, 261, 262, -1, 264, 265, 266, 267, -1, 269, 270, 271, -1, 273, 274, 275, 276, -1, -1, -1, -1, -1, 282, 283, 284, -1, -1, 287, 288, 289, -1, -1, -1, -1, -1, 361, 362, 363, -1, -1, 366, -1, 368, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 454, 455, 456, -1, 458, 459, 460, 461, -1, 463, 464, 465, -1, 467, 468, 469, 470, -1, -1, -1, -1, -1, 476, 477, 478, -1, -1, -1, 482, 482, 483, 551, 552, 553, -1, 555, 556, 557, 558, -1, 560, 561, 562, -1, 564, 565, 566, 567, -1, -1, -1, -1, -1, 573, 574, 575, -1, -1, 578, 579, 580, -1, 648, 649, 650, -1, 652, 653, 654, 655, -1, 657, 658, 659, -1, 661, 662, 663, 664, -1, -1, -1, -1, -1, 670, 671, 672, -1, -1, 675, 676, 677, -1, -1, -1, -1, -1, 749, 750, 751, -1, 754, -1, 756, -1, -1 };
 
 
-		string datfile="DATA"+ sep + "WEAPONS.DAT";
-		string cmfile="DATA" + sep + "WEAPONS.CM";
-		string grfile="DATA" + sep + "WEAPONS.GR";
+		string datfile= Path.Combine(BasePath,"DATA","WEAPONS.DAT");
+		string cmfile= Path.Combine(BasePath, "DATA", "WEAPONS.CM");
+		string grfile= Path.Combine(BasePath, "DATA", "WEAPONS.GR");
 		if (_RES==GAME_UW2)
 		{
-			datfile="DATA" + sep + "WEAP.DAT";
-			cmfile="DATA" + sep + "WEAP.CM";
-			grfile="DATA" + sep + "WEAP.GR";	
+			datfile= Path.Combine(BasePath, "DATA", "WEAP.DAT");
+			cmfile= Path.Combine(BasePath, "DATA", "WEAP.CM");
+			grfile= Path.Combine(BasePath, "DATA", "WEAP.GR");	
 		}
 		char[] AnimData;
 		char[] textureFile;
@@ -56,8 +57,8 @@ public class WeaponsLoader : ArtLoader {
 		}
 		int add_ptr=0;
 		int alpha=0;
-		DataLoader.ReadStreamFile(BasePath+datfile, out AnimData);
-		DataLoader.ReadStreamFile(BasePath+grfile, out textureFile);
+		DataLoader.ReadStreamFile(datfile, out AnimData);
+		DataLoader.ReadStreamFile(grfile, out textureFile);
 		if (_RES != GAME_UW2)
 		{
 			GroupSize = 28;
@@ -99,7 +100,7 @@ public class WeaponsLoader : ArtLoader {
 			int BitMapWidth = (int)DataLoader.getValAtAddress(textureFile, textureOffset + 1, 8);
 			int BitMapHeight = (int)DataLoader.getValAtAddress(textureFile, textureOffset + 2, 8);
 			int datalen;
-			Palette auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath + cmfile,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
+			Palette auxpal =PaletteLoader.LoadAuxilaryPal(cmfile,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
 			char[] imgNibbles;
 			char[] outputImg;
 			char[] srcImg;

@@ -79,7 +79,7 @@ public class SaveGame : Loader
 
         ResetUI();
 
-        if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out buffer))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
@@ -278,7 +278,7 @@ public class SaveGame : Loader
 
             if (UWCharacter.Instance.decode)
             {
-                StreamWriter output = new StreamWriter(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".csv");
+                StreamWriter output = new StreamWriter(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".csv"));
 
                 //write out decrypted file for analysis
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
@@ -288,7 +288,7 @@ public class SaveGame : Loader
                     output.WriteLine((byte)buffer[i]);
                 }
                 output.Close();
-                File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
+                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo , "decode_" + slotNo + ".dat"), dataToWrite);
             }
 
             /*	if (recode)//Rewrite the file with test value changes.
@@ -373,7 +373,7 @@ public class SaveGame : Loader
         //float VertAdjust = 0.3543672f;
 
         //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         //int runeOffset=0;
@@ -716,7 +716,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", out buffer))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath ,"SAVE" + slotNo, "playertmp.dat"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;
@@ -735,7 +735,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)buffer[i];
             }
-            File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", dataToWrite);
+            File.WriteAllBytes(Path.Combine(Loader.BasePath , "SAVE" + slotNo , "PLAYER.DAT"), dataToWrite);
         }
 
     }
@@ -747,7 +747,7 @@ public class SaveGame : Loader
     public static void WritePlayerDatUW2(int slotNo)
     {
         //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", FileMode.Create);
+        FileStream file = File.Open(Path.Combine(Loader.BasePath, "SAVE" + slotNo , "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         //int runeOffset=0;
@@ -1487,7 +1487,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", out buffer))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), out buffer))
         {
             char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
 
@@ -1496,7 +1496,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)recodetest[i];
             }
-            File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", dataToWrite);
+            File.WriteAllBytes(Path.Combine(BasePath,"SAVE" + slotNo,"PLAYER.DAT"), dataToWrite);
         }
     }
 
@@ -1608,7 +1608,7 @@ public class SaveGame : Loader
         UWCharacter.Instance.JustTeleported = true;
         UWCharacter.Instance.teleportedTimer = 0f;
 
-        if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out pDat))
+        if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out pDat))
         {
             byte MS = (byte)DataLoader.getValAtAddress(pDat, 0, 8);
             UWCharacter.Instance.XorKey = (int)MS;
@@ -1616,7 +1616,7 @@ public class SaveGame : Loader
             if (UWCharacter.Instance.decode)
             {
                 //write out decrypted file for analysis
-                StreamWriter output = new StreamWriter(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".csv");
+                StreamWriter output = new StreamWriter(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".csv"));
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
@@ -1624,7 +1624,7 @@ public class SaveGame : Loader
                     output.WriteLine((byte)buffer[i]);
                 }
                 output.Close();
-                File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
+                File.WriteAllBytes(Path.Combine(Loader.BasePath,"SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
             /*for (int c=0; c<=pDat.GetUpperBound(0);c++)
             {
@@ -1657,7 +1657,7 @@ public class SaveGame : Loader
                     {
                             dataToWrite[i] = (byte)recodetest[i];
                     }
-                    File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "playerrecoded.dat", dataToWrite);
+                    File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
             }
 
 
@@ -3133,7 +3133,7 @@ public class SaveGame : Loader
         //};
 
 
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", FileMode.Create);
+        FileStream file = File.Open(Path.Combine(Loader.BasePath,"SAVE" + slotNo ,"playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         int runeOffset = 0;
@@ -3754,7 +3754,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", out buffer))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath , "SAVE" + slotNo , "playertmp.dat"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;
@@ -3773,7 +3773,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)buffer[i];
             }
-            File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", dataToWrite);
+            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
 
         }
     }

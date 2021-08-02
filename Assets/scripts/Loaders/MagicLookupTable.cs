@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 
 public class MagicLookupTable : Loader
 {
@@ -49,7 +50,7 @@ public class MagicLookupTable : Loader
                 }
         }
 
-        if (DataLoader.ReadStreamFile(BasePath + sep + Exe, out uw_exe))
+        if (DataLoader.ReadStreamFile(Path.Combine(BasePath, Exe), out uw_exe))
         {
             for (int i = 0; i <= NoOfEntries; i++)
             {

@@ -532,12 +532,11 @@ public class GameWorldController : UWEBase
     {
         instance = this;
         //Set the seperator in file paths.
-        UWClass.sep = Path.DirectorySeparatorChar;
-        Lev_Ark_File_Selected = "DATA" + sep + "LEV.ARK";
-        SCD_Ark_File_Selected = "DATA" + sep + "SCD.ARK";
+       // UWClass.sep = Path.DirectorySeparatorChar;
+        Lev_Ark_File_Selected = Path.Combine("DATA", "LEV.ARK");
+        SCD_Ark_File_Selected = Path.Combine("DATA", "SCD.ARK");
 
         LoadConfigFile();
-        //LoadPath();
         return;
     }
 
@@ -674,10 +673,10 @@ public class GameWorldController : UWEBase
                 UWCharacter.Instance.speedMultiplier = 20;
                 break;
             case GAME_SHOCK:
-                palLoader = new PaletteLoader("res" + sep + "DATA" + sep + "GAMEPAL.RES", 700);
+                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath, "res" , "DATA" , "GAMEPAL.RES"), 700);
                 texLoader = new TextureLoader();
                 objectMaster = new ObjectMasters();
-                ObjectArt = new GRLoader("res" + sep + "DATA" + sep + "OBJART.RES", 1350);
+                ObjectArt = new GRLoader( Path.Combine(Loader.BasePath,"res" , "DATA" , "OBJART.RES"), 1350);
                 ShockObjProp = new ObjectPropLoader();
                 UWCharacter.Instance.XAxis.enabled = true;
                 UWCharacter.Instance.YAxis.enabled = true;
@@ -689,10 +688,10 @@ public class GameWorldController : UWEBase
                 objectMaster = new ObjectMasters();
                 objDat = new ObjectDatLoader();
                 commonObject = new CommonObjectDatLoader();
-                palLoader = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
+                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath,"DATA", "PALS.DAT"), -1);
                 magiclookup = new MagicLookupTable();
                 //Create palette cycles and store them in the palette array
-                PaletteLoader palCycler = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
+                PaletteLoader palCycler = new PaletteLoader(Path.Combine(Loader.BasePath,"DATA" , "PALS.DAT"), -1);
 
                 for (int c = 0; c <= 27; c++)
                 {//Create palette cycles
@@ -789,20 +788,20 @@ public class GameWorldController : UWEBase
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
-                StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
+                StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath , "DATA" ,"STRINGS.PAK"));
                 break;
             case GAME_UW2:
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
                 Quest.instance.QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
-                StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
+                StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath, "DATA", "STRINGS.PAK"));
                 break;
             default:
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
-                StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
+                StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath, "DATA", "STRINGS.PAK"));
                 break;
         }
 
@@ -1186,7 +1185,7 @@ public class GameWorldController : UWEBase
         switch (_RES)
         {
             case GAME_UWDEMO:
-                DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "LEVEL13.TXM", out tex_ark_block.Data);
+                DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA" ,"LEVEL13.TXM"), out tex_ark_block.Data);
                 tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
                 break;
             case GAME_UW2:
@@ -1621,10 +1620,10 @@ public class GameWorldController : UWEBase
         switch (UWEBase._RES)
         {
             case GAME_SHOCK:
-                Lev_Ark_File = "RES" + sep + "DATA" + sep + "ARCHIVE.DAT";
+                Lev_Ark_File = Path.Combine("RES" , "DATA" , "ARCHIVE.DAT");
                 break;
             case UWEBase.GAME_UWDEMO:
-                Lev_Ark_File = "DATA" + sep + "LEVEL13.ST";
+                Lev_Ark_File = Path.Combine( "DATA", "LEVEL13.ST");
                 break;
             case UWEBase.GAME_UW2:
             case UWEBase.GAME_UW1:
@@ -1632,10 +1631,10 @@ public class GameWorldController : UWEBase
                 Lev_Ark_File = Lev_Ark_File_Selected; //"DATA\\lev.ark";//Eventually this will be a save game.
                 break;
         }
-
-        if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out LevArk.lev_ark_file_data))
+        var toLoad = Path.Combine(Loader.BasePath, Lev_Ark_File);
+        if (!DataLoader.ReadStreamFile(toLoad, out LevArk.lev_ark_file_data))
         {
-            Debug.Log(Loader.BasePath + Lev_Ark_File + "File not loaded");
+            Debug.Log(toLoad + "File not loaded");
             Application.Quit();
         }
 
@@ -1684,7 +1683,7 @@ public class GameWorldController : UWEBase
         char[] bglob_data;
         if (SlotNo == 0)
         {//Init from BABGLOBS.DAT. Initialise the data.
-            if (DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "BABGLOBS.DAT", out bglob_data))
+            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "BABGLOBS.DAT"), out bglob_data))
             {
                 int NoOfSlots = bglob_data.GetUpperBound(0) / 4;
                 int add_ptr = 0;
@@ -1701,12 +1700,12 @@ public class GameWorldController : UWEBase
         else
         {
             int NoOfSlots = 0;//Assumes the same no of slots that is in the babglobs is in bglobals.
-            if (DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "BABGLOBS.DAT", out bglob_data))
+            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "BABGLOBS.DAT"), out bglob_data))
             {
                 NoOfSlots = bglob_data.GetUpperBound(0) / 4;
                 NoOfSlots++;
             }
-            if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + SlotNo + sep + "BGLOBALS.DAT", out bglob_data))
+            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + SlotNo, "BGLOBALS.DAT"), out bglob_data))
             {
                 //int NoOfSlots = bglob_data.GetUpperBound(0)/4;
                 int add_ptr = 0;
@@ -1763,7 +1762,7 @@ public class GameWorldController : UWEBase
                 add_ptr += 2;
             }
         }
-        File.WriteAllBytes(Loader.BasePath + "SAVE" + SlotNo + sep + "BGLOBALS.DAT", output);
+        File.WriteAllBytes(Path.Combine(Loader.BasePath, "SAVE" + SlotNo ,"BGLOBALS.DAT"), output);
 
     }
     
@@ -1825,204 +1824,204 @@ public class GameWorldController : UWEBase
 
        // Configuration.Save(config);
         return true;
-        string fileName = Application.dataPath + sep + ".." + sep + "config.ini";
-        if (File.Exists(fileName))
-        {
-            string line;
-            StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-            //string PreviousKey="";
-            //string PreviousValue="";
-            using (fileReader)
-            {
-                // While there's lines left in the text file, do this:
-                do
-                {
-                    line = fileReader.ReadLine();
-                    if (line != null)
-                    {
-                        if (line.Length > 1)
-                        {
-                            if ((line.Substring(1, 1) != ";") && (line.Contains("=")))//Is not a commment and contains a param
-                            {
-                                string[] entries = line.Split('=');
-                                //int val = 0;
-                                //string pathfound="";
-                                KeyCode keyCodeToUse;
-                                config.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
+        //string fileName = Application.dataPath + sep + ".." + sep + "config.ini";
+        //if (File.Exists(fileName))
+        //{
+        //    string line;
+        //    StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+        //    //string PreviousKey="";
+        //    //string PreviousValue="";
+        //    using (fileReader)
+        //    {
+        //        // While there's lines left in the text file, do this:
+        //        do
+        //        {
+        //            line = fileReader.ReadLine();
+        //            if (line != null)
+        //            {
+        //                if (line.Length > 1)
+        //                {
+        //                    if ((line.Substring(1, 1) != ";") && (line.Contains("=")))//Is not a commment and contains a param
+        //                    {
+        //                        string[] entries = line.Split('=');
+        //                        //int val = 0;
+        //                        //string pathfound="";
+        //                        KeyCode keyCodeToUse;
+        //                        config.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
                                 
-                                switch (entries[0].ToUpper())
-                                {
-                                    case "MOUSEX"://Mouse sensitivity X
-                                        {
-                                            float val = 15f;
-                                            if (float.TryParse(entries[1], out val))
-                                            {
-                                                MouseX.sensitivityX = val;
-                                            }
-                                            config.mouse.mouseX = val;
-                                            break;
-                                        }
-                                    case "MOUSEY"://Mouse sensitivity Y
-                                        {
-                                            float val = 15f;
-                                            if (float.TryParse(entries[1], out val))
-                                            {
-                                                MouseY.sensitivityY = val;
-                                            }
-                                            config.mouse.mouseY = val;
-                                            break;
-                                        }
-                                    case "PATH_UW0":
-                                        {
-                                            //path_uw0 = UWClass.CleanPath(entries[1]);
-                                            config.paths.PATH_UWDEMO = path_uw0;
-                                            break;
-                                        }
-                                    case "PATH_UW1":
-                                        {
-                                            //path_uw1 = UWClass.CleanPath(entries[1]);
-                                            config.paths.PATH_UW1 = path_uw1;
-                                            break;
-                                        }
-                                    case "PATH_UW2":
-                                        {
-                                            //path_uw2 = UWClass.CleanPath(entries[1]);
-                                            config.paths.PATH_UW2 = path_uw2;
-                                            break;
-                                        }
-                                    case "PATH_SHOCK":
-                                        {
-                                           // path_shock = UWClass.CleanPath(entries[1]);
-                                            config.paths.PATH_SHOCK = path_shock;
-                                            break;
-                                        }
-                                    case "PATH_TNOVA":
-                                        {
-                                            //path_tnova = UWClass.CleanPath(entries[1]);
-                                            config.paths.PATH_TNOVA = path_tnova;
-                                            break;
-                                        }
+        //                        switch (entries[0].ToUpper())
+        //                        {
+        //                            case "MOUSEX"://Mouse sensitivity X
+        //                                {
+        //                                    float val = 15f;
+        //                                    if (float.TryParse(entries[1], out val))
+        //                                    {
+        //                                        MouseX.sensitivityX = val;
+        //                                    }
+        //                                    config.mouse.mouseX = val;
+        //                                    break;
+        //                                }
+        //                            case "MOUSEY"://Mouse sensitivity Y
+        //                                {
+        //                                    float val = 15f;
+        //                                    if (float.TryParse(entries[1], out val))
+        //                                    {
+        //                                        MouseY.sensitivityY = val;
+        //                                    }
+        //                                    config.mouse.mouseY = val;
+        //                                    break;
+        //                                }
+        //                            case "PATH_UW0":
+        //                                {
+        //                                    //path_uw0 = UWClass.CleanPath(entries[1]);
+        //                                    config.paths.PATH_UWDEMO = path_uw0;
+        //                                    break;
+        //                                }
+        //                            case "PATH_UW1":
+        //                                {
+        //                                    //path_uw1 = UWClass.CleanPath(entries[1]);
+        //                                    config.paths.PATH_UW1 = path_uw1;
+        //                                    break;
+        //                                }
+        //                            case "PATH_UW2":
+        //                                {
+        //                                    //path_uw2 = UWClass.CleanPath(entries[1]);
+        //                                    config.paths.PATH_UW2 = path_uw2;
+        //                                    break;
+        //                                }
+        //                            case "PATH_SHOCK":
+        //                                {
+        //                                   // path_shock = UWClass.CleanPath(entries[1]);
+        //                                    config.paths.PATH_SHOCK = path_shock;
+        //                                    break;
+        //                                }
+        //                            case "PATH_TNOVA":
+        //                                {
+        //                                    //path_tnova = UWClass.CleanPath(entries[1]);
+        //                                    config.paths.PATH_TNOVA = path_tnova;
+        //                                    break;
+        //                                }
 
-                                    case "FLYUP":
-                                        GameWorldController.instance.config.FlyUp = keyCodeToUse; break;
-                                    case "FLYDOWN":
-                                        GameWorldController.instance.config.FlyDown = keyCodeToUse; break;
-                                    case "TOGGLEMOUSELOOK":
-                                        GameWorldController.instance.config.ToggleMouseLook = keyCodeToUse; break;
-                                    case "TOGGLEFULLSCREEN":
-                                        GameWorldController.instance.config.ToggleFullScreen = keyCodeToUse; break;
-                                    case "INTERACTIONOPTIONS":
-                                        GameWorldController.instance.config.InteractionOptions = keyCodeToUse; break;
-                                    case "INTERACTIONTALK":
-                                        GameWorldController.instance.config.InteractionTalk = keyCodeToUse; break;
-                                    case "INTERACTIONPICKUP":
-                                        GameWorldController.instance.config.InteractionPickup = keyCodeToUse; break;
-                                    case "INTERACTIONLOOK":
-                                        GameWorldController.instance.config.InteractionLook = keyCodeToUse; break;
-                                    case "INTERACTIONATTACK":
-                                        GameWorldController.instance.config.InteractionAttack = keyCodeToUse; break;
-                                    case "INTERACTIONUSE":
-                                        GameWorldController.instance.config.InteractionUse = keyCodeToUse; break;
-                                    case "CASTSPELL":
-                                        GameWorldController.instance.config.CastSpell = keyCodeToUse; break;
-                                    case "TRACKSKILL":
-                                        GameWorldController.instance.config.TrackSkill = keyCodeToUse; break;
+        //                            case "FLYUP":
+        //                                GameWorldController.instance.config.FlyUp = keyCodeToUse; break;
+        //                            case "FLYDOWN":
+        //                                GameWorldController.instance.config.FlyDown = keyCodeToUse; break;
+        //                            case "TOGGLEMOUSELOOK":
+        //                                GameWorldController.instance.config.ToggleMouseLook = keyCodeToUse; break;
+        //                            case "TOGGLEFULLSCREEN":
+        //                                GameWorldController.instance.config.ToggleFullScreen = keyCodeToUse; break;
+        //                            case "INTERACTIONOPTIONS":
+        //                                GameWorldController.instance.config.InteractionOptions = keyCodeToUse; break;
+        //                            case "INTERACTIONTALK":
+        //                                GameWorldController.instance.config.InteractionTalk = keyCodeToUse; break;
+        //                            case "INTERACTIONPICKUP":
+        //                                GameWorldController.instance.config.InteractionPickup = keyCodeToUse; break;
+        //                            case "INTERACTIONLOOK":
+        //                                GameWorldController.instance.config.InteractionLook = keyCodeToUse; break;
+        //                            case "INTERACTIONATTACK":
+        //                                GameWorldController.instance.config.InteractionAttack = keyCodeToUse; break;
+        //                            case "INTERACTIONUSE":
+        //                                GameWorldController.instance.config.InteractionUse = keyCodeToUse; break;
+        //                            case "CASTSPELL":
+        //                                GameWorldController.instance.config.CastSpell = keyCodeToUse; break;
+        //                            case "TRACKSKILL":
+        //                                GameWorldController.instance.config.TrackSkill = keyCodeToUse; break;
 
 
-                                    case "DEFAULTLIGHTLEVEL":
-                                        {
-                                            float lightlevel = 16f;
-                                            if (float.TryParse(entries[1], out lightlevel))
-                                            {
-                                               // LightSource.BaseBrightness = lightlevel;
-                                            }
-                                            config.camera.DefaultLightLevel = lightlevel;
-                                            break;
-                                        }
+        //                            case "DEFAULTLIGHTLEVEL":
+        //                                {
+        //                                    float lightlevel = 16f;
+        //                                    if (float.TryParse(entries[1], out lightlevel))
+        //                                    {
+        //                                       // LightSource.BaseBrightness = lightlevel;
+        //                                    }
+        //                                    config.camera.DefaultLightLevel = lightlevel;
+        //                                    break;
+        //                                }
 
-                                    case "FOV":
-                                        {
-                                            float fov = 75f;
-                                            if (float.TryParse(entries[1], out fov))
-                                            {
-                                                Camera.main.fieldOfView = fov;
-                                            }
-                                            config.camera.FOV = fov;
-                                            break;
+        //                            case "FOV":
+        //                                {
+        //                                    float fov = 75f;
+        //                                    if (float.TryParse(entries[1], out fov))
+        //                                    {
+        //                                        Camera.main.fieldOfView = fov;
+        //                                    }
+        //                                    config.camera.FOV = fov;
+        //                                    break;
 
-                                        }
-                                    case "INFINITEMANA":
-                                        {
-                                           // Magic.InfiniteMana = (entries[1] == "1");
-                                            config.cheats.InfiniteMana = Magic.InfiniteMana;
-                                            break;
-                                        }
+        //                                }
+        //                            case "INFINITEMANA":
+        //                                {
+        //                                   // Magic.InfiniteMana = (entries[1] == "1");
+        //                                    config.cheats.InfiniteMana = Magic.InfiniteMana;
+        //                                    break;
+        //                                }
 
-                                    case "GODMODE":
-                                        {
-                                            //UWCharacter.Invincible = (entries[1] == "1");
-                                            config.cheats.GodMode = UWCharacter.Invincible;
-                                            break;
-                                        }
+        //                            case "GODMODE":
+        //                                {
+        //                                    //UWCharacter.Invincible = (entries[1] == "1");
+        //                                    config.cheats.GodMode = UWCharacter.Invincible;
+        //                                    break;
+        //                                }
 
-                                    case "CONTEXTUIENABLED":
-                                        {
-                                            //WindowDetectUW.ContextUIEnabled = (entries[1] == "1");
-                                            config.ui.ContextUIEnabled = WindowDetectUW.ContextUIEnabled;
-                                            break;
-                                        }
+        //                            case "CONTEXTUIENABLED":
+        //                                {
+        //                                    //WindowDetectUW.ContextUIEnabled = (entries[1] == "1");
+        //                                    config.ui.ContextUIEnabled = WindowDetectUW.ContextUIEnabled;
+        //                                    break;
+        //                                }
 
-                                    case "UW1_SOUNDBANK":
-                                        {
-                                            //MusicController.UW1Path = UWClass.CleanPath(entries[1]);
-                                            config.audio.UW1_SOUNDBANK = MusicController.UW1Path;
-                                            break;
-                                        }
-                                    case "UW2_SOUNDBANK":
-                                        {
-                                            //MusicController.UW2Path = UWClass.CleanPath(entries[1]);
-                                            config.audio.UW2_SOUNDBANK = MusicController.UW2Path;
-                                            break;
-                                        }
-                                    case "GENREPORT":
-                                        {
-                                            //CreateReports = (entries[1] == "1");
-                                            config.dev.GenerateReports = CreateReports;
-                                            break;
-                                        }
-                                    case "SHOWINUSE"://only show inuse objects in reports
-                                        {
-                                            //ShowOnlyInUse = (entries[1] == "1");
-                                            config.dev.ShowOnlyInUse = ShowOnlyInUse;
-                                            break;
-                                        }
-                                    case "AUTOKEYUSE":
-                                        {
-                                           // UWCharacter.AutoKeyUse = (entries[1] == "1");
-                                            config.ui.AutoKey = UWCharacter.AutoKeyUse;
-                                            break;
-                                        }
-                                    case "AUTOEAT":
-                                        {
-                                            //UWCharacter.AutoEat = (entries[1] == "1");
-                                            break;
-                                        }
-                                }
-                            }
-                        }
+        //                            case "UW1_SOUNDBANK":
+        //                                {
+        //                                    //MusicController.UW1Path = UWClass.CleanPath(entries[1]);
+        //                                    config.audio.UW1_SOUNDBANK = MusicController.UW1Path;
+        //                                    break;
+        //                                }
+        //                            case "UW2_SOUNDBANK":
+        //                                {
+        //                                    //MusicController.UW2Path = UWClass.CleanPath(entries[1]);
+        //                                    config.audio.UW2_SOUNDBANK = MusicController.UW2Path;
+        //                                    break;
+        //                                }
+        //                            case "GENREPORT":
+        //                                {
+        //                                    //CreateReports = (entries[1] == "1");
+        //                                    config.dev.GenerateReports = CreateReports;
+        //                                    break;
+        //                                }
+        //                            case "SHOWINUSE"://only show inuse objects in reports
+        //                                {
+        //                                    //ShowOnlyInUse = (entries[1] == "1");
+        //                                    config.dev.ShowOnlyInUse = ShowOnlyInUse;
+        //                                    break;
+        //                                }
+        //                            case "AUTOKEYUSE":
+        //                                {
+        //                                   // UWCharacter.AutoKeyUse = (entries[1] == "1");
+        //                                    config.ui.AutoKey = UWCharacter.AutoKeyUse;
+        //                                    break;
+        //                                }
+        //                            case "AUTOEAT":
+        //                                {
+        //                                    //UWCharacter.AutoEat = (entries[1] == "1");
+        //                                    break;
+        //                                }
+        //                        }
+        //                    }
+        //                }
 
-                    }
-                }
-                while (line != null);
-                fileReader.Close();
-                Configuration.Save(config);
-                return true;
-            }
-        }
-        else
-        {
-            return false;
-        }
+        //            }
+        //        }
+        //        while (line != null);
+        //        fileReader.Close();
+        //        Configuration.Save(config);
+        //        return true;
+        //    }
+        //}
+        //else
+        //{
+        //    return false;
+        //}
     }
 
 
