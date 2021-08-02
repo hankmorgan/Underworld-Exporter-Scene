@@ -1,0 +1,1253 @@
+
+Block 0 Row 0
+	Event Type = 10 Conditional
+		LevelNo=56
+		Xclock=0
+		IsQuest=1,Variable=23,TargetValue=1
+		57,0,10,23,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 1
+	Event Type = 249 set_npc_props
+		LevelNo=56
+		Xclock=0
+		WhoAmI=28,Goal=2,HomeX=12,HomeY=30
+		57,1,249,2,0,0,1,28,12,30,55,32,0,0,0,0,
+Block 0 Row 2
+	Event Type = 10 Conditional
+		LevelNo=2
+		Xclock=0
+		IsQuest=1,Variable=119,TargetValue=1
+		3,0,10,119,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 3
+	Event Type = 251 event_scheduled
+		LevelNo=2
+		Xclock=0
+		TileX=28,TileY=47
+		3,1,251,28,47,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 4
+	Event Type = 10 Conditional
+		LevelNo=16
+		Xclock=0
+		IsQuest=1,Variable=55,TargetValue=1
+		17,0,10,55,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 5
+	Event Type = 251 event_scheduled
+		LevelNo=16
+		Xclock=0
+		TileX=31,TileY=44
+		17,1,251,31,44,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 6
+	Event Type = 9 Base
+		LevelNo=25
+		Xclock=0
+		26,0,9,200,0,2,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 7
+	Event Type = 5 Fire_Trigger
+		LevelNo=49
+		Xclock=0
+		TileX=38,TileY=32
+		50,0,5,38,32,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 8
+	Event Type = 10 Conditional
+		LevelNo=56
+		Xclock=0
+		IsQuest=1,Variable=117,TargetValue=1
+		57,0,10,117,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 9
+	Event Type = 251 event_scheduled
+		LevelNo=56
+		Xclock=0
+		TileX=23,TileY=29
+		57,0,251,23,29,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 10
+	Event Type = 10 Conditional
+		LevelNo=25
+		Xclock=0
+		IsQuest=1,Variable=117,TargetValue=1
+		26,0,10,117,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 11
+	Event Type = 251 event_scheduled
+		LevelNo=25
+		Xclock=0
+		TileX=31,TileY=26
+		26,0,251,31,26,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 12
+	Event Type = 7 Base
+		LevelNo=25
+		Xclock=0
+		26,0,7,3,12,3,1,0,0,0,0,0,0,0,0,0,
+Block 0 Row 13
+	Event Type = 7 Base
+		LevelNo=24
+		Xclock=0
+		25,0,7,3,10,6,1,0,0,0,0,0,0,0,0,0,
+Block 0 Row 14
+	Event Type = 10 Conditional
+		LevelNo=249
+		Xclock=0
+		IsQuest=1,Variable=35,TargetValue=1
+		250,0,10,35,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 0 Row 15
+	Event Type = 246 Base
+		LevelNo=249
+		Xclock=0
+		250,0,246,59,1,1,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 16
+	Event Type = 251 event_scheduled
+		LevelNo=249
+		Xclock=0
+		TileX=5,TileY=25
+		250,0,251,5,25,0,0,0,0,0,0,0,0,0,0,0,
+Block 0 Row 17
+	Event Type = 248 set_race_attitude
+		LevelNo=249
+		Xclock=3
+		Race=26,Attitude=0
+		250,0,248,1,26,0,0,0,0,0,0,0,0,0,3,0,
+Block 0 Row 18
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=3
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,3,0,
+Block 0 Row 19
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=9
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,9,0,
+Block 0 Row 20
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=9
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,9,0,
+Block 0 Row 21
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=15
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,15,0,
+Block 0 Row 22
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=15
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,15,0,
+Block 0 Row 23
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=21
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,21,0,
+Block 0 Row 24
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=21
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,21,0,
+Block 0 Row 25
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=24
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,24,0,
+Block 0 Row 26
+	Event Type = 10 Conditional
+		LevelNo=249
+		Xclock=24
+		IsQuest=1,Variable=35,TargetValue=1
+		250,0,10,35,1,1,0,0,1,0,0,0,0,0,24,0,
+Block 0 Row 27
+	Event Type = 246 Base
+		LevelNo=249
+		Xclock=24
+		250,0,246,59,1,1,0,0,0,0,0,0,0,0,24,0,
+Block 0 Row 28
+	Event Type = 251 event_scheduled
+		LevelNo=249
+		Xclock=24
+		TileX=5,TileY=25
+		250,0,251,5,25,0,0,0,0,0,0,0,0,0,24,0,
+Block 0 Row 29
+	Event Type = 248 set_race_attitude
+		LevelNo=249
+		Xclock=27
+		Race=26,Attitude=0
+		250,0,248,1,26,0,0,0,0,0,0,0,0,0,27,0,
+Block 0 Row 30
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=27
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,27,0,
+Block 0 Row 31
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=33
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,33,0,
+Block 0 Row 32
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=33
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,33,0,
+Block 0 Row 33
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=39
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,39,0,
+Block 0 Row 34
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=39
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,39,0,
+Block 0 Row 35
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=45
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,45,0,
+Block 0 Row 36
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=45
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,45,0,
+Block 0 Row 37
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=48
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,48,0,
+Block 0 Row 38
+	Event Type = 10 Conditional
+		LevelNo=249
+		Xclock=48
+		IsQuest=1,Variable=35,TargetValue=1
+		250,0,10,35,1,1,0,0,1,0,0,0,0,0,48,0,
+Block 0 Row 39
+	Event Type = 246 Base
+		LevelNo=249
+		Xclock=48
+		250,0,246,59,1,1,0,0,0,0,0,0,0,0,48,0,
+Block 0 Row 40
+	Event Type = 251 event_scheduled
+		LevelNo=249
+		Xclock=48
+		TileX=5,TileY=25
+		250,0,251,5,25,0,0,0,0,0,0,0,0,0,48,0,
+Block 0 Row 41
+	Event Type = 248 set_race_attitude
+		LevelNo=249
+		Xclock=51
+		Race=26,Attitude=0
+		250,0,248,1,26,0,0,0,0,0,0,0,0,0,51,0,
+Block 0 Row 42
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=51
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,51,0,
+Block 0 Row 43
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=57
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,57,0,
+Block 0 Row 44
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=57
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,57,0,
+Block 0 Row 45
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=63
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,63,0,
+Block 0 Row 46
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=63
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,63,0,
+Block 0 Row 47
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=69
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,69,0,
+Block 0 Row 48
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=69
+		TileX=30,TileY=44
+		1,0,5,30,44,0,0,0,0,0,0,0,0,0,69,0,
+Block 0 Row 49
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=255
+		1,0,7,4,0,0,0,0,0,0,0,0,0,0,255,255,
+Block 1 Row 0
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=3
+		IsQuest=0,Variable=52,TargetValue=1
+		1,1,10,52,0,1,0,0,1,0,0,0,0,0,3,0,
+Block 1 Row 1
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=3
+		TileX=19,TileY=48WhoAmI=136
+		1,1,254,19,48,0,136,1,1,0,0,0,0,0,3,0,
+Block 1 Row 2
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=3
+		IsQuest=0,Variable=52,TargetValue=2
+		1,1,10,52,0,1,0,0,2,0,0,0,0,0,3,0,
+Block 1 Row 3
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=3
+		TileX=31,TileY=31WhoAmI=136
+		1,1,254,31,31,0,136,1,1,0,0,0,0,0,3,0,
+Block 1 Row 4
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=3
+		IsQuest=0,Variable=52,TargetValue=3
+		1,1,10,52,0,1,0,0,3,0,0,0,0,0,3,0,
+Block 1 Row 5
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=3
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,3,0,
+Block 1 Row 6
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=3
+		IsQuest=0,Variable=52,TargetValue=4
+		1,1,10,52,0,1,0,0,4,0,0,0,0,0,3,0,
+Block 1 Row 7
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=3
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,3,0,
+Block 1 Row 8
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=3
+		WhoAmI=136,Goal=10,GTarg=0
+		1,1,1,0,136,10,0,0,0,0,0,0,0,0,3,0,
+Block 1 Row 9
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=6
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,6,0,
+Block 1 Row 10
+	Event Type = 10 Conditional
+		LevelNo=254
+		Xclock=6
+		IsQuest=1,Variable=145,TargetValue=6
+		255,0,10,145,1,1,0,0,6,0,0,0,0,0,6,0,
+Block 1 Row 11
+	Event Type = 247 Base
+		LevelNo=254
+		Xclock=7
+		255,1,247,145,1,2,7,0,0,0,0,0,0,0,7,0,
+Block 1 Row 12
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=7
+		IsQuest=0,Variable=52,TargetValue=1
+		1,1,10,52,0,1,0,0,1,0,0,0,0,0,7,0,
+Block 1 Row 13
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=7
+		TileX=19,TileY=48WhoAmI=136
+		1,1,254,19,48,0,136,1,1,0,0,0,0,0,7,0,
+Block 1 Row 14
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=7
+		IsQuest=0,Variable=52,TargetValue=2
+		1,1,10,52,0,1,0,0,2,0,0,0,0,0,7,0,
+Block 1 Row 15
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=7
+		TileX=31,TileY=31WhoAmI=136
+		1,1,254,31,31,0,136,1,1,0,0,0,0,0,7,0,
+Block 1 Row 16
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=7
+		IsQuest=0,Variable=52,TargetValue=3
+		1,1,10,52,0,1,0,0,3,0,0,0,0,0,7,0,
+Block 1 Row 17
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=7
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,7,0,
+Block 1 Row 18
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=7
+		IsQuest=0,Variable=52,TargetValue=4
+		1,1,10,52,0,1,0,0,4,0,0,0,0,0,7,0,
+Block 1 Row 19
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=7
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,7,0,
+Block 1 Row 20
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=7
+		WhoAmI=136,Goal=10,GTarg=0
+		1,1,1,0,136,10,0,0,0,0,0,0,0,0,7,0,
+Block 1 Row 21
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=8
+		1,1,7,7,0,141,24,37,25,39,0,0,0,0,8,0,
+Block 1 Row 22
+	Event Type = 3 Kill_NPC
+		LevelNo=0
+		Xclock=8
+		WhoAmI=141
+		1,1,3,0,141,1,0,0,0,0,0,0,0,0,8,0,
+Block 1 Row 23
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=8
+		TileX=25,TileY=40
+		1,1,5,25,40,0,0,0,0,0,0,0,0,0,8,0,
+Block 1 Row 24
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=10
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,10,0,
+Block 1 Row 25
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=11
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,11,0,
+Block 1 Row 26
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=11
+		IsQuest=0,Variable=52,TargetValue=1
+		1,1,10,52,0,1,0,0,1,0,0,0,0,0,11,0,
+Block 1 Row 27
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=11
+		TileX=19,TileY=48WhoAmI=136
+		1,1,254,19,48,0,136,1,1,0,0,0,0,0,11,0,
+Block 1 Row 28
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=11
+		IsQuest=0,Variable=52,TargetValue=2
+		1,1,10,52,0,1,0,0,2,0,0,0,0,0,11,0,
+Block 1 Row 29
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=11
+		TileX=31,TileY=31WhoAmI=136
+		1,1,254,31,31,0,136,1,1,0,0,0,0,0,11,0,
+Block 1 Row 30
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=11
+		IsQuest=0,Variable=52,TargetValue=3
+		1,1,10,52,0,1,0,0,3,0,0,0,0,0,11,0,
+Block 1 Row 31
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=11
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,11,0,
+Block 1 Row 32
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=11
+		IsQuest=0,Variable=52,TargetValue=4
+		1,1,10,52,0,1,0,0,4,0,0,0,0,0,11,0,
+Block 1 Row 33
+	Event Type = 254 place_npc
+		LevelNo=0
+		Xclock=11
+		TileX=42,TileY=32WhoAmI=136
+		1,1,254,42,32,0,136,1,1,0,0,0,0,0,11,0,
+Block 1 Row 34
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=11
+		WhoAmI=136,Goal=10,GTarg=0
+		1,1,1,0,136,10,0,0,0,0,0,0,0,0,11,0,
+Block 1 Row 35
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=11
+		TileX=21,TileY=37WhoAmI=140
+		1,1,2,21,37,0,140,1,1,1,0,0,0,0,11,0,
+Block 1 Row 36
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=11
+		TileX=22,TileY=37WhoAmI=139
+		1,1,2,22,37,0,139,1,1,1,0,0,0,0,11,0,
+Block 1 Row 37
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=11
+		WhoAmI=140,Goal=12,GTarg=0
+		1,1,1,0,140,12,0,0,0,0,0,0,0,0,11,0,
+Block 1 Row 38
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=12
+		WhoAmI=139,Goal=12,GTarg=0
+		1,1,1,0,139,12,0,0,0,0,0,0,0,0,12,0,
+Block 1 Row 39
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=12
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,12,0,
+Block 1 Row 40
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=13
+		TileX=38,TileY=42WhoAmI=130
+		1,1,2,38,42,0,130,1,1,1,0,0,0,0,13,0,
+Block 1 Row 41
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=13
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,13,0,
+Block 1 Row 42
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=14
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 43
+	Event Type = 4 Base
+		LevelNo=4
+		Xclock=14
+		5,1,4,56,1,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 44
+	Event Type = 5 Fire_Trigger
+		LevelNo=4
+		Xclock=14
+		TileX=27,TileY=50
+		5,1,5,27,50,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 45
+	Event Type = 5 Fire_Trigger
+		LevelNo=16
+		Xclock=14
+		TileX=27,TileY=50
+		17,1,5,27,50,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 46
+	Event Type = 11 Base
+		LevelNo=16
+		Xclock=14
+		17,1,11,0,45,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 47
+	Event Type = 10 Conditional
+		LevelNo=16
+		Xclock=14
+		IsQuest=1,Variable=69,TargetValue=0
+		17,1,10,69,1,1,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 48
+	Event Type = 251 event_scheduled
+		LevelNo=16
+		Xclock=14
+		TileX=1,TileY=61
+		17,1,251,1,61,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 49
+	Event Type = 11 Base
+		LevelNo=16
+		Xclock=14
+		17,1,11,0,42,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 50
+	Event Type = 5 Fire_Trigger
+		LevelNo=16
+		Xclock=14
+		TileX=16,TileY=43
+		17,1,5,16,43,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 51
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=14
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,14,0,
+Block 1 Row 52
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=15
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,15,0,
+Block 1 Row 53
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=15
+		1,1,7,2,0,0,0,130,37,41,39,43,0,0,15,0,
+Block 1 Row 54
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=15
+		WhoAmI=130,Goal=12,GTarg=0
+		1,1,1,0,130,12,0,0,0,0,0,0,0,0,15,0,
+Block 1 Row 55
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=16
+		TileX=28,TileY=39
+		1,1,5,28,39,0,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 56
+	Event Type = 11 Base
+		LevelNo=16
+		Xclock=16
+		17,1,11,0,47,0,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 57
+	Event Type = 11 Base
+		LevelNo=0
+		Xclock=16
+		1,1,11,2,231,0,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 58
+	Event Type = 11 Base
+		LevelNo=0
+		Xclock=16
+		1,1,11,2,248,0,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 59
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=30,TileY=52WhoAmI=130
+		1,1,2,30,52,0,130,1,1,1,0,0,0,0,16,0,
+Block 1 Row 60
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=16
+		1,1,7,1,0,130,30,52,68,1,2,1,0,0,16,0,
+Block 1 Row 61
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=16
+		IsQuest=1,Variable=68,TargetValue=0
+		1,1,10,68,1,1,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 62
+	Event Type = 249 set_npc_props
+		LevelNo=0
+		Xclock=16
+		WhoAmI=130,Goal=2,HomeX=29,HomeY=51
+		1,1,249,2,0,0,0,130,29,51,31,52,0,0,16,0,
+Block 1 Row 63
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=32,TileY=52WhoAmI=136
+		1,1,2,32,52,0,136,1,1,1,0,0,0,0,16,0,
+Block 1 Row 64
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=31,TileY=52WhoAmI=142
+		1,1,2,31,52,0,142,1,1,1,0,0,0,0,16,0,
+Block 1 Row 65
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=29,TileY=51WhoAmI=135
+		1,1,2,29,51,0,135,1,1,1,0,0,0,0,16,0,
+Block 1 Row 66
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=29,TileY=49WhoAmI=131
+		1,1,2,29,49,0,131,1,1,1,0,0,0,0,16,0,
+Block 1 Row 67
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=33,TileY=50WhoAmI=132
+		1,1,2,33,50,0,132,1,1,1,0,0,0,0,16,0,
+Block 1 Row 68
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=29,TileY=50WhoAmI=133
+		1,1,2,29,50,0,133,1,1,1,0,0,0,0,16,0,
+Block 1 Row 69
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=33,TileY=51WhoAmI=134
+		1,1,2,33,51,0,134,1,1,1,0,0,0,0,16,0,
+Block 1 Row 70
+	Event Type = 2 Move_NPC
+		LevelNo=0
+		Xclock=16
+		TileX=33,TileY=49WhoAmI=137
+		1,1,2,33,49,0,137,1,1,1,0,0,0,0,16,0,
+Block 1 Row 71
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=16
+		Race=28,Goal=12,GTarg=0
+		1,1,1,1,28,12,0,0,0,0,0,0,0,0,16,0,
+Block 1 Row 72
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=16
+		1,1,7,6,0,130,3,0,0,0,0,0,0,0,16,0,
+Block 1 Row 73
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=16
+		1,1,7,6,0,142,4,0,0,0,0,0,0,0,16,0,
+Block 1 Row 74
+	Event Type = 7 Base
+		LevelNo=0
+		Xclock=16
+		1,1,7,6,0,136,4,0,0,0,0,0,0,0,16,0,
+Block 1 Row 75
+	Event Type = 1 Set_Goal
+		LevelNo=0
+		Xclock=16
+		WhoAmI=130,Goal=10,GTarg=1
+		1,1,1,0,130,10,1,0,0,0,0,0,0,0,16,0,
+Block 1 Row 76
+	Event Type = 5 Fire_Trigger
+		LevelNo=0
+		Xclock=16
+		TileX=47,TileY=45
+		1,1,5,47,45,0,0,0,0,0,0,0,0,0,16,0,
+Block 14 Row 0
+	Event Type = 5 Fire_Trigger
+		LevelNo=56
+		Xclock=4
+		TileX=30,TileY=30
+		57,1,5,30,30,0,0,0,0,0,0,0,0,0,4,0,
+Block 14 Row 1
+	Event Type = 5 Fire_Trigger
+		LevelNo=56
+		Xclock=5
+		TileX=30,TileY=30
+		57,1,5,30,30,0,0,0,0,0,0,0,0,0,5,0,
+Block 14 Row 2
+	Event Type = 5 Fire_Trigger
+		LevelNo=56
+		Xclock=6
+		TileX=30,TileY=30
+		57,1,5,30,30,0,0,0,0,0,0,0,0,0,6,0,
+Block 14 Row 3
+	Event Type = 5 Fire_Trigger
+		LevelNo=56
+		Xclock=7
+		TileX=30,TileY=30
+		57,1,5,30,30,0,0,0,0,0,0,0,0,0,7,0,
+Block 14 Row 4
+	Event Type = 5 Fire_Trigger
+		LevelNo=56
+		Xclock=255
+		TileX=30,TileY=30
+		57,1,5,30,30,0,0,0,0,0,0,0,0,0,255,255,
+Block 15 Row 0
+	Event Type = 10 Conditional
+		LevelNo=246
+		Xclock=0
+		IsQuest=1,Variable=60,TargetValue=1
+		247,0,10,60,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 1
+	Event Type = 248 set_race_attitude
+		LevelNo=246
+		Xclock=0
+		Race=6,Attitude=0
+		247,0,248,1,6,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 2
+	Event Type = 255 set_goal_alt
+		LevelNo=246
+		Xclock=0
+		Race=6,Goal=5,GTarg=1
+		247,0,255,1,6,5,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 3
+	Event Type = 10 Conditional
+		LevelNo=32
+		Xclock=0
+		IsQuest=1,Variable=35,TargetValue=1
+		33,0,10,35,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 4
+	Event Type = 246 Base
+		LevelNo=32
+		Xclock=0
+		33,0,246,59,1,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 5
+	Event Type = 248 set_race_attitude
+		LevelNo=32
+		Xclock=0
+		Race=26,Attitude=0
+		33,1,248,1,26,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 6
+	Event Type = 10 Conditional
+		LevelNo=33
+		Xclock=0
+		IsQuest=1,Variable=35,TargetValue=1
+		34,0,10,35,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 7
+	Event Type = 246 Base
+		LevelNo=33
+		Xclock=0
+		34,0,246,59,1,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 8
+	Event Type = 251 event_scheduled
+		LevelNo=33
+		Xclock=0
+		TileX=5,TileY=25
+		34,1,251,5,25,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 9
+	Event Type = 248 set_race_attitude
+		LevelNo=33
+		Xclock=0
+		Race=26,Attitude=0
+		34,1,248,1,26,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 10
+	Event Type = 10 Conditional
+		LevelNo=16
+		Xclock=0
+		IsQuest=1,Variable=54,TargetValue=1
+		17,0,10,54,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 11
+	Event Type = 251 event_scheduled
+		LevelNo=16
+		Xclock=0
+		TileX=31,TileY=27
+		17,1,251,31,27,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 12
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=16
+		Xclock=0
+		IsNPC=1,WhoAmI=0
+		17,1,253,3,0,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 13
+	Event Type = 251 event_scheduled
+		LevelNo=16
+		Xclock=0
+		TileX=31,TileY=53
+		17,1,251,31,53,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 14
+	Event Type = 251 event_scheduled
+		LevelNo=16
+		Xclock=0
+		TileX=31,TileY=30
+		17,1,251,31,30,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 15
+	Event Type = 10 Conditional
+		LevelNo=17
+		Xclock=0
+		IsQuest=1,Variable=54,TargetValue=1
+		18,0,10,54,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 16
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=17
+		Xclock=0
+		IsNPC=1,WhoAmI=0
+		18,1,253,3,0,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 17
+	Event Type = 251 event_scheduled
+		LevelNo=17
+		Xclock=0
+		TileX=31,TileY=31
+		18,1,251,31,31,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 18
+	Event Type = 10 Conditional
+		LevelNo=16
+		Xclock=0
+		IsQuest=1,Variable=64,TargetValue=1
+		17,0,10,64,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 19
+	Event Type = 245 Remove_NPC
+		LevelNo=16
+		Xclock=0
+		WhoAmI=47
+		17,1,245,0,47,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 20
+	Event Type = 10 Conditional
+		LevelNo=67
+		Xclock=0
+		IsQuest=1,Variable=66,TargetValue=1
+		68,0,10,66,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 21
+	Event Type = 245 Remove_NPC
+		LevelNo=67
+		Xclock=0
+		WhoAmI=82
+		68,1,245,0,82,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 22
+	Event Type = 10 Conditional
+		LevelNo=4
+		Xclock=0
+		IsQuest=1,Variable=62,TargetValue=1
+		5,0,10,62,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 23
+	Event Type = 255 set_goal_alt
+		LevelNo=4
+		Xclock=0
+		WhoAmI=51,Goal=5,GTarg=1
+		5,1,255,0,51,5,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 24
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=0
+		IsQuest=1,Variable=109,TargetValue=1
+		1,0,10,109,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 25
+	Event Type = 251 event_scheduled
+		LevelNo=0
+		Xclock=0
+		TileX=30,TileY=44
+		1,1,251,30,44,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 26
+	Event Type = 10 Conditional
+		LevelNo=68
+		Xclock=0
+		IsQuest=1,Variable=53,TargetValue=1
+		69,0,10,53,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 27
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=68
+		Xclock=0
+		IsNPC=0,Race=80
+		69,1,253,0,80,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 28
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=0
+		IsQuest=1,Variable=43,TargetValue=1
+		1,0,10,43,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 29
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=0
+		Xclock=0
+		IsNPC=1,WhoAmI=139
+		1,1,253,0,139,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 30
+	Event Type = 10 Conditional
+		LevelNo=0
+		Xclock=0
+		IsQuest=1,Variable=119,TargetValue=1
+		1,0,10,119,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 31
+	Event Type = 251 event_scheduled
+		LevelNo=0
+		Xclock=0
+		TileX=37,TileY=38
+		1,1,251,37,38,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 32
+	Event Type = 10 Conditional
+		LevelNo=4
+		Xclock=0
+		IsQuest=1,Variable=51,TargetValue=1
+		5,0,10,51,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 33
+	Event Type = 251 event_scheduled
+		LevelNo=4
+		Xclock=0
+		TileX=18,TileY=34
+		5,1,251,18,34,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 34
+	Event Type = 10 Conditional
+		LevelNo=4
+		Xclock=0
+		IsQuest=1,Variable=52,TargetValue=1
+		5,0,10,52,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 35
+	Event Type = 251 event_scheduled
+		LevelNo=4
+		Xclock=0
+		TileX=17,TileY=40
+		5,1,251,17,40,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 36
+	Event Type = 10 Conditional
+		LevelNo=51
+		Xclock=0
+		IsQuest=1,Variable=46,TargetValue=1
+		52,0,10,46,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 37
+	Event Type = 248 set_race_attitude
+		LevelNo=51
+		Xclock=0
+		Race=21,Attitude=0
+		52,1,248,1,21,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 38
+	Event Type = 10 Conditional
+		LevelNo=246
+		Xclock=0
+		IsQuest=1,Variable=5,TargetValue=1
+		247,0,10,5,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 39
+	Event Type = 248 set_race_attitude
+		LevelNo=246
+		Xclock=0
+		Race=6,Attitude=0
+		247,0,248,1,6,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 40
+	Event Type = 10 Conditional
+		LevelNo=11
+		Xclock=0
+		IsQuest=1,Variable=57,TargetValue=1
+		12,0,10,57,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 41
+	Event Type = 245 Remove_NPC
+		LevelNo=11
+		Xclock=0
+		WhoAmI=7
+		12,1,245,0,7,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 42
+	Event Type = 10 Conditional
+		LevelNo=12
+		Xclock=0
+		IsQuest=1,Variable=2,TargetValue=1
+		13,0,10,2,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 43
+	Event Type = 247 Base
+		LevelNo=12
+		Xclock=0
+		13,1,247,3,1,2,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 44
+	Event Type = 10 Conditional
+		LevelNo=246
+		Xclock=0
+		IsQuest=1,Variable=3,TargetValue=1
+		247,0,10,3,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 45
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=246
+		Xclock=0
+		IsNPC=0,Race=6
+		247,1,253,0,6,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 46
+	Event Type = 10 Conditional
+		LevelNo=246
+		Xclock=0
+		IsQuest=1,Variable=0,TargetValue=1
+		247,0,10,0,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 47
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=246
+		Xclock=0
+		IsNPC=0,Race=6
+		247,0,253,1,6,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 48
+	Event Type = 10 Conditional
+		LevelNo=9
+		Xclock=0
+		IsQuest=1,Variable=0,TargetValue=1
+		10,0,10,0,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 49
+	Event Type = 251 event_scheduled
+		LevelNo=9
+		Xclock=0
+		TileX=62,TileY=35
+		10,1,251,62,35,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 50
+	Event Type = 10 Conditional
+		LevelNo=13
+		Xclock=0
+		IsQuest=0,Variable=42,TargetValue=1
+		14,0,10,42,0,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 51
+	Event Type = 247 Base
+		LevelNo=13
+		Xclock=0
+		14,1,247,159,1,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 52
+	Event Type = 254 place_npc
+		LevelNo=13
+		Xclock=0
+		TileX=35,TileY=33WhoAmI=4
+		14,0,254,35,33,0,4,14,1,1,0,0,0,0,0,0,
+Block 15 Row 53
+	Event Type = 249 set_npc_props
+		LevelNo=13
+		Xclock=0
+		WhoAmI=4,Goal=1,HomeX=35,HomeY=33
+		14,0,249,1,0,4,35,33,0,1,2,1,0,0,0,0,
+Block 15 Row 54
+	Event Type = 246 Base
+		LevelNo=13
+		Xclock=0
+		14,0,246,0,1,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 55
+	Event Type = 247 Base
+		LevelNo=13
+		Xclock=0
+		14,0,247,159,1,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 56
+	Event Type = 10 Conditional
+		LevelNo=13
+		Xclock=0
+		IsQuest=1,Variable=0,TargetValue=1
+		14,0,10,0,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 57
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=13
+		Xclock=0
+		IsNPC=0,Race=3
+		14,1,253,0,3,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 58
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=13
+		Xclock=0
+		IsNPC=0,Race=9
+		14,1,253,0,9,0,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 59
+	Event Type = 251 event_scheduled
+		LevelNo=13
+		Xclock=0
+		TileX=31,TileY=20
+		14,1,251,31,20,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 60
+	Event Type = 10 Conditional
+		LevelNo=40
+		Xclock=0
+		IsQuest=1,Variable=104,TargetValue=1
+		41,0,10,104,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 61
+	Event Type = 254 place_npc
+		LevelNo=40
+		Xclock=0
+		TileX=22,TileY=34WhoAmI=88
+		41,1,254,22,34,0,88,41,1,1,0,0,0,0,0,0,
+Block 15 Row 62
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=40
+		Xclock=0
+		IsNPC=1,WhoAmI=88
+		41,1,253,0,88,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 63
+	Event Type = 10 Conditional
+		LevelNo=25
+		Xclock=0
+		IsQuest=1,Variable=44,TargetValue=1
+		26,0,10,44,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 64
+	Event Type = 251 event_scheduled
+		LevelNo=25
+		Xclock=0
+		TileX=33,TileY=33
+		26,1,251,33,33,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 65
+	Event Type = 10 Conditional
+		LevelNo=13
+		Xclock=0
+		IsQuest=1,Variable=67,TargetValue=1
+		14,0,10,67,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 66
+	Event Type = 247 Base
+		LevelNo=13
+		Xclock=0
+		14,0,247,0,1,2,1,0,0,0,0,0,0,0,0,0,
+Block 15 Row 67
+	Event Type = 10 Conditional
+		LevelNo=51
+		Xclock=0
+		IsQuest=1,Variable=7,TargetValue=1
+		52,0,10,7,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 68
+	Event Type = 253 Kill_NPC_Or_Race
+		LevelNo=51
+		Xclock=0
+		IsNPC=1,WhoAmI=32
+		52,0,253,0,32,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 69
+	Event Type = 10 Conditional
+		LevelNo=254
+		Xclock=0
+		IsQuest=1,Variable=117,TargetValue=1
+		255,0,10,117,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 70
+	Event Type = 251 event_scheduled
+		LevelNo=56
+		Xclock=0
+		TileX=23,TileY=29
+		57,0,251,23,29,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 71
+	Event Type = 10 Conditional
+		LevelNo=56
+		Xclock=0
+		IsQuest=1,Variable=121,TargetValue=1
+		57,0,10,121,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 72
+	Event Type = 251 event_scheduled
+		LevelNo=56
+		Xclock=0
+		TileX=34,TileY=34
+		57,1,251,34,34,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 73
+	Event Type = 10 Conditional
+		LevelNo=56
+		Xclock=0
+		IsQuest=1,Variable=23,TargetValue=1
+		57,0,10,23,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 74
+	Event Type = 255 set_goal_alt
+		LevelNo=56
+		Xclock=0
+		Race=28,Goal=6,GTarg=0
+		57,1,255,1,28,6,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 75
+	Event Type = 248 set_race_attitude
+		LevelNo=56
+		Xclock=0
+		Race=28,Attitude=1
+		57,1,248,1,28,1,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 76
+	Event Type = 251 event_scheduled
+		LevelNo=56
+		Xclock=0
+		TileX=1,TileY=56
+		57,1,251,1,56,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 77
+	Event Type = 249 set_npc_props
+		LevelNo=56
+		Xclock=0
+		WhoAmI=101,Goal=7,HomeX=1,HomeY=51
+		57,1,249,7,0,101,1,51,5,55,0,0,0,0,0,0,
+Block 15 Row 78
+	Event Type = 251 event_scheduled
+		LevelNo=56
+		Xclock=0
+		TileX=33,TileY=33
+		57,1,251,33,33,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 79
+	Event Type = 10 Conditional
+		LevelNo=58
+		Xclock=0
+		IsQuest=1,Variable=23,TargetValue=1
+		59,0,10,23,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 80
+	Event Type = 245 Remove_NPC
+		LevelNo=58
+		Xclock=0
+		WhoAmI=101
+		59,1,245,0,101,0,0,0,0,0,0,0,0,0,0,0,
+Block 15 Row 81
+	Event Type = 10 Conditional
+		LevelNo=64
+		Xclock=0
+		IsQuest=1,Variable=65,TargetValue=1
+		65,0,10,65,1,1,0,0,1,0,0,0,0,0,0,0,
+Block 15 Row 82
+	Event Type = 245 Remove_NPC
+		LevelNo=64
+		Xclock=0
+		WhoAmI=85
+		65,1,245,0,85,0,0,0,0,0,0,0,0,0,0,0,

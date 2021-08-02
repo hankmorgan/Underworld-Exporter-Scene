@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - MessageLog
+  - TileType:0
+  - TileType:1
+  - TileType:2
+  - TileType:3
+  - TileType:4
+  - TileType:5
+  - TileType:6
+  - TileType:7
+  - TileType:8
+  - TileType:9
+  - TileType:10
+  - TileType:11
+  - TileType:12
+  - WATER
+  - LAVA
+  - CEILING
+  - CORNERWALL
+  - WATER_1
+  - WATER_2
+  - WATER_3
+  - WATER_4
+  - WATER_5
+  - WATER_6
+  - WATER_7
+  - WATER_8
+  - WATER_9
+  - WATER_10
+  - WATER_11
+  - WATER_12
+  - WATER_13
+  - WATER_14
+  - WATER_15
+  - WATER_16
+  - WATER_17
+  - WATER_18
+  - WATER_19
+  - WATER_20
+  - ROOM_1
+  - ROOM_2
+  - ROOM_3
+  - ROOM_4
+  - ROOM_5
+  - ROOM_6
+  - ROOM_7
+  - ROOM_8
+  - ROOM_9
+  - ROOM_10
+  - ROOM_11
+  - ROOM_12
+  - ROOM_13
+  - ROOM_14
+  - ROOM_15
+  - ROOM_16
+  - ROOM_17
+  - ROOM_18
+  - ROOM_19
+  - ROOM_20
+  - BRIDGE
+  - LAND
+  - LAND_1
+  - LAND_2
+  - LAND_3
+  - LAND_4
+  - LAND_5
+  - LAND_6
+  - LAND_7
+  - LAND_8
+  - LAND_9
+  - LAND_10
+  - LAND_11
+  - LAND_12
+  - LAND_13
+  - LAND_14
+  - LAND_15
+  - LAND_16
+  - LAND_17
+  - LAND_18
+  - LAND_19
+  - LAND_20
+  - SOLIDWALL
+  - LAVA_1
+  - LAVA_2
+  - LAVA_3
+  - LAVA_4
+  - LAVA_5
+  - LAVA_6
+  - LAVA_7
+  - LAVA_8
+  - LAVA_0
+  - LAVA_9
+  - LAND_21
+  - LAND_22
+  - LAND_23
+  - LAVA_10
+  - LAVA_11
+  - LAVA_12
+  - LAVA_13
+  - LAVA_14
+  - LAVA_15
+  - NPCs
+  - LAVA_16
+  - LAVA_17
+  - LAVA_18
+  - LAVA_19
+  - LAVA_20
+  - LAVA_21
+  - LAVA_22
+  - LAVA_23
+  - LAVA_24
+  - LAVA_25
+  - LAVA_26
+  - LAVA_27
+  - LAVA_28
+  - LAVA_29
+  - LAVA_30
+  - LAND_24
+  - LAND_25
+  - LAND_26
+  - LAND_27
+  - LAND_28
+  - LAND_29
+  - LAND_30
+  - LAND_31
+  - LAND_32
+  - LAND_33
+  - LAND_34
+  - LAND_35
+  - LAND_36
+  - LAND_37
+  - LAND_38
+  - LAND_39
+  - LAND_40
+  - LAND_41
+  - LAND_42
+  - LAND_43
+  - LAND_44
+  - LAND_45
+  - LAND_46
+  - LAND_47
+  - LAND_48
+  - LAND_49
+  - LAND_50
+  - LAND_51
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - MapMesh
+  - UWObjects
+  - NPCs
+  - Gronk
+  - Doors
+  - NPC_PlayerCollision
+  - Feet
+  - Zanium
+  - MagicProjectile
+  - Lava
+  - Ward
+  - Nothing
+  - Ice
+  - IceCollision
+  - Animation
+  - NPCTraps
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

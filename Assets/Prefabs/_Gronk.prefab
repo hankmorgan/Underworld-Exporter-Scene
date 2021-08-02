@@ -1,0 +1,642 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000013723062240}
+  m_IsPrefabParent: 1
+--- !u!1 &1000010075438938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012793762852}
+  - 114: {fileID: 114000010812828660}
+  - 65: {fileID: 65000012599302126}
+  - 54: {fileID: 54000012927808440}
+  m_Layer: 14
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000011851162204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012992826840}
+  m_Layer: 11
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012335183160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013159018688}
+  - 20: {fileID: 20000012679203454}
+  - 92: {fileID: 92000012231115466}
+  - 124: {fileID: 124000013044081642}
+  - 81: {fileID: 81000014047253410}
+  - 114: {fileID: 114000010464315862}
+  - 108: {fileID: 108000013674491894}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013723062240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012332531628}
+  - 143: {fileID: 143000013864276298}
+  - 114: {fileID: 114000013319433968}
+  - 114: {fileID: 114000012072943672}
+  - 114: {fileID: 114000013507067076}
+  - 114: {fileID: 114000010622460736}
+  - 114: {fileID: 114000013507814760}
+  - 114: {fileID: 114000012597833418}
+  - 114: {fileID: 114000012282812918}
+  - 114: {fileID: 114000010270085738}
+  - 114: {fileID: 114000012842696172}
+  - 114: {fileID: 114000010499836698}
+  m_Layer: 11
+  m_Name: _Gronk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000012332531628
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.89, y: 4.046, z: 4.72}
+  m_LocalScale: {x: 0.3, y: 0.35, z: 0.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4000013159018688}
+  - {fileID: 4000012793762852}
+  - {fileID: 4000012992826840}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &4000012793762852
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010075438938}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012332531628}
+  m_RootOrder: 1
+--- !u!4 &4000012992826840
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011851162204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012332531628}
+  m_RootOrder: 2
+--- !u!4 &4000013159018688
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.000028904344, y: 0.9198418, z: 0.38002455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012332531628}
+  m_RootOrder: 0
+--- !u!20 &20000012679203454
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0.163
+    y: 0.335
+    width: 0.54
+    height: 0.572
+  near clip plane: 0.01
+  far clip plane: 20
+  field of view: 60
+  orthographic: 0
+  orthographic size: 100
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967263
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!54 &54000012927808440
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010075438938}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 2
+--- !u!65 &65000012599302126
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010075438938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.22830129, z: 0.5}
+  m_Center: {x: -0.00013192493, y: -1.4603518, z: 0.0003035863}
+--- !u!81 &81000014047253410
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+--- !u!92 &92000012231115466
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+--- !u!108 &108000013674491894
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 2
+  m_Range: 5
+  m_SpotAngle: 179
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &114000010270085738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247bcd8901400da4ebb1eab085e96361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReadiedSpell: 
+  PlayerRunes: 010101010101010101010101010101010101010101010101
+  ActiveRunes: ffffffffffffffffffffffff
+  InfiniteMana: 1
+  MaxMana: 255
+  CurMana: 255
+  SpellCost: 0
+  ObjectInSlot: {fileID: 0}
+  InventorySpell: 0
+  SummonCount: 0
+--- !u!114 &114000010464315862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -55
+  maximumY: 60
+--- !u!114 &114000010499836698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac7458e92453d5479f11d122b523683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000010622460736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44be630e85164034f97d55a2fd126dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInHand: 
+  JustPickedup: 0
+  sHelm: 
+  sChest: 
+  sLegs: 
+  sBoots: 
+  sGloves: 
+  sLeftHand: 
+  sRightHand: 
+  sLeftRing: 
+  sRightRing: 
+  sLeftShoulder: 
+  sRightShoulder: 
+  sBackPack:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  bHelm: 1
+  bChest: 1
+  bLegs: 1
+  bBoots: 1
+  bGloves: 1
+  bLeftHand: 1
+  bRightHand: 1
+  bLeftRing: 1
+  bRightRing: 1
+  bLeftShoulder: 1
+  bRightShoulder: 1
+  bBackPack: 0000000000000000
+  InventoryMarker: {fileID: 0}
+  atTopLevel: 0
+  currentContainer: _Gronk
+  Blank: {fileID: 0}
+  lt: {fileID: 0}
+  playerContainer: {fileID: 114000013507814760}
+  ContainerOffset: 0
+--- !u!114 &114000010812828660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010075438938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e993f443a8413e49b3228fbd4360332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currY: 0
+  fallSpeed: 0
+--- !u!114 &114000012072943672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e486461ee50c03d40ac0af668c593c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMotor: {fileID: 114000013319433968}
+  playerController: {fileID: 143000013864276298}
+  MaxVIT: 255
+  CurVIT: 255
+  DetectionRange: 6
+  XAxis: {fileID: 114000012282812918}
+  YAxis: {fileID: 114000010464315862}
+  MouseLookEnabled: 0
+  CharName: Desdemona
+  currentHeading: 0
+  dir: {x: 0, y: 0, z: 0}
+  playerCam: {fileID: 20000012679203454}
+  CameraPos: {x: 0, y: 0, z: 0}
+  LastEnemyToHitMe: {fileID: 0}
+  HelpMeMyFriends: 0
+  LightActive: 0
+  TargetPoint: {fileID: 1000011851162204}
+  ActiveSpell:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  PassiveSpell:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Body: 0
+  CharClass: Mage
+  CharLevel: 16
+  EXP: 9600
+  TrainingPoints: 0
+  isFemale: 1
+  isLefty: 0
+  isSwimming: 0
+  isFlying: 0
+  isRoaming: 0
+  flySpeed: 1.5
+  walkSpeed: 3
+  speedMultiplier: 1
+  swimSpeedMultiplier: 1
+  SwimTimer: 0
+  SwimDamageTimer: 0
+  isFloating: 0
+  isWaterWalking: 0
+  isTelekinetic: 0
+  isLeaping: 0
+  StealthLevel: 0
+  Resistance: 0
+  FireProof: 0
+  FoodLevel: 20
+  Fatigue: 20
+  Poisoned: 0
+  Paralyzed: 0
+  PlayerSkills: {fileID: 114000013507067076}
+  PlayerMagic: {fileID: 114000010270085738}
+  playerInventory: {fileID: 114000010622460736}
+  PlayerCombat: {fileID: 114000012597833418}
+  summonCount: 0
+  ResurrectLevel: 0
+  ResurrectPosition: {x: 0, y: 0, z: 0}
+  MoonGatePosition: {x: 0, y: 0, z: 0}
+  MoonGateLevel: 2
+  lavaDamageTimer: 0
+  currRegion: 
+--- !u!114 &114000012282812918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 1
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -85
+  maximumY: 85
+--- !u!114 &114000012597833418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6336695aee8f9940a1d8a1b782485e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackCharging: 0
+  AttackExecuting: 0
+  Charge: 0
+  currWeapon: {fileID: 0}
+  currWeaponRanged: {fileID: 0}
+--- !u!114 &114000012842696172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b06f13bb004e1945b240011d13911ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestVariables: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  TalismansCastIntoAbyss: 0000000000000000
+  GaramonDream: 0
+  IncenseDream: 0
+  DayGaramonDream: -1
+  isTybalDead: 0
+--- !u!114 &114000013319433968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13adcbcbc5232b9489703cba27edd189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canControl: 1
+  useFixedUpdate: 1
+  movement:
+    maxForwardSpeed: 3
+    maxSidewaysSpeed: 2
+    maxBackwardsSpeed: 1
+    slopeSpeedMultiplier:
+      serializedVersion: 2
+      m_Curve:
+      - time: -90
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 90
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    maxGroundAcceleration: 20
+    maxAirAcceleration: 15
+    gravity: 8
+    maxFallSpeed: 20
+  jumping:
+    enabled: 1
+    baseHeight: 0.6
+    extraHeight: 0.3
+    perpAmount: 0.3
+    steepPerpAmount: 0.5
+  movingPlatform:
+    enabled: 0
+    movementTransfer: 2
+  sliding:
+    enabled: 1
+    slidingSpeed: 10
+    sidewaysControl: 1
+    speedControl: 0.4
+--- !u!114 &114000013507067076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9d764fff02ece4793ed3f9f97952c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  STR: 30
+  DEX: 30
+  INT: 30
+  Attack: 30
+  Defense: 30
+  Unarmed: 30
+  Sword: 30
+  Axe: 30
+  Mace: 30
+  Missile: 30
+  ManaSkill: 30
+  Lore: 30
+  Casting: 30
+  Traps: 30
+  Search: 30
+  Track: 30
+  Sneak: 10
+  Repair: 30
+  Charm: 30
+  PickLock: 30
+  Acrobat: 30
+  Appraise: 30
+  Swimming: 30
+--- !u!114 &114000013507814760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a78e3fb1780f24cb67d99dbb6b8ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  Capacity: 0
+  ObjectsAccepted: 255
+  isOpenOnPanel: 0
+  ContainerParent: 
+--- !u!124 &124000013044081642
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335183160}
+  m_Enabled: 1
+--- !u!143 &143000013864276298
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013723062240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.6
+  m_SlopeLimit: 80
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
