@@ -310,22 +310,7 @@ public class MusicController : UWEBase
             InIntro = false;
             Combat = true;
         }
-        //if ((UWCharacter.Instance.CurVIT <= 10) && (Combat == true))
-        //{
-        //    UWCharacter.Instance.Injured = true;
-        //}
-        //else
-        //{
-        //    UWCharacter.Instance.Injured = false;
-        //}
-        //if ((Combat == true) && (UWCharacter.Instance.WeaponDrawn == false))
-        //{
-        //    UWCharacter.Instance.Fleeing = true;
-        //}
-        //else
-        //{
-        //    UWCharacter.Instance.Fleeing = false;
-        //}
+
         if (SpecialClip == true)
         {
             if (Aud.isPlaying == false)
@@ -391,14 +376,14 @@ public class MusicController : UWEBase
         if (PlayMusic)
         {
             int rnd = Random.Range(0, tracklist.GetUpperBound(0) + 1);
-            if ((int)tracklist[rnd] != currenttrack)
-            {
+           // if ((int)tracklist[rnd] != currenttrack)
+           // {
                 Aud.clip = MainTrackList[(int)tracklist[rnd]];
                 if (Stopped == false)
                 {
                     Aud.Play();
                 }
-            }
+           // }
             currenttrack = (int)tracklist[rnd];
         }
         else
