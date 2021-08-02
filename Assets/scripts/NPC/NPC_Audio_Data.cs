@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 
 /// <summary>
@@ -76,10 +77,11 @@ public class NPC_Audio_Data : Loader {
     {
         if (File.Exists(filePath))
         {
-            using (WWW download = new WWW("file://" + filePath))
+            using (var download = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.OGGVORBIS))
             {
-                yield return download;                
-                IdleSounds[whoami,index] = download.GetAudioClip(false);
+                ((DownloadHandlerAudioClip)download.downloadHandler).streamAudio = true;
+                yield return download.SendWebRequest();
+                IdleSounds[whoami, index] = DownloadHandlerAudioClip.GetContent(download);
             }
         }
     }

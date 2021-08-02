@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using UnityEngine.Networking;
 
 /// <summary>
 /// The music controller. Updates music tracks to play based on the state of the game world and player.
@@ -211,13 +212,6 @@ public class MusicController : UWEBase
     void Start()
     {
         Aud = this.GetComponent<AudioSource>();
-        //LoadAudioFileFromWWW();
-        //StartCoroutine(LoadAudioFileFromWWW("PSXUW1", 1));
-
-        //VocLoader test = new VocLoader("c:\\games\\uw1\\sound\\01.voc", "00_voc");
-        //Aud.clip = test.Audio;
-        //Aud.Play();
-
     }
 
     public IEnumerator Begin()
@@ -249,24 +243,17 @@ public class MusicController : UWEBase
         yield return 0;
     }
 
-
     IEnumerator LoadAudioFileFromWWW(string AudioBank, int FileTrackNumber)
     {
-        string Path = AudioBank + FileTrackNumber.ToString("d2") + ".ogg";
+        string toLoad = Path.Combine(AudioBank, FileTrackNumber.ToString("d2") + ".ogg");
 
-
-        if (File.Exists(Path))
+        if (File.Exists(toLoad))
         {
-            using (WWW download = new WWW("file://" + Path))
+            using (var download = UnityWebRequestMultimedia.GetAudioClip("file://" + toLoad, AudioType.OGGVORBIS))
             {
-                yield return download;
-
-                AudioClip clip = download.GetAudioClip(false);
-
-                if (clip != null)
-                {
-                    MainTrackList[FileTrackNumber] = clip;
-                }
+                ((DownloadHandlerAudioClip)download.downloadHandler).streamAudio = true;
+                yield return download.SendWebRequest();
+                 MainTrackList[FileTrackNumber] = DownloadHandlerAudioClip.GetContent(download);
             }
         }
     }
