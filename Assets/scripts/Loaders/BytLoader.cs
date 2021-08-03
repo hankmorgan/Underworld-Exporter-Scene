@@ -143,7 +143,4 @@ public class BytLoader : ArtLoader {
 			}
 				return null;
 		}
-
-
-
 }

@@ -213,7 +213,6 @@ public class UWHUD : HUD
         EnableDisableControl(EditorButton, Application.isEditor);
     }
 
-
     public void Begin()
     {
         gameUi.SetActive(true);
