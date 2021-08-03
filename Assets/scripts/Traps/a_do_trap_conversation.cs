@@ -20,7 +20,7 @@ public class a_do_trap_conversation : a_hack_trap {
 			NPC_Door np =  this.GetComponent<NPC_Door>();
 			if (np!=null)
 			{
-				UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+                Character.InteractionMode = Character.InteractionModeTalk;
 				InteractionModeControl.UpdateNow=true;
 				return np.TalkTo();
 			}

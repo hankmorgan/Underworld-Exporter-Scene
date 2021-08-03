@@ -231,7 +231,7 @@ public class Container : UWEBase
             return;
         }
         //Sort the container
-        Container.SortContainer(this);
+        SortContainer(this);
         UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture = GetContainerEquipDisplay().texture; //currObjInt.GetEquipDisplay().texture;
         if (this.isOpenOnPanel == false)
         {
@@ -387,7 +387,7 @@ public class Container : UWEBase
                 }
                 else if (item.GetComponent<Container>() != null)
                 {
-                    Container.SetPickedUpFlag(item.GetComponent<Container>(), NewValue);
+                    SetPickedUpFlag(item.GetComponent<Container>(), NewValue);
                 }
             }
         }
@@ -406,7 +406,7 @@ public class Container : UWEBase
                     item.transform.position = Position;
                     if (item.GetComponent<Container>() != null)
                     {
-                        Container.SetItemsPosition(item.GetComponent<Container>(), Position);
+                    SetItemsPosition(item.GetComponent<Container>(), Position);
                     }
                 }
             //}
@@ -434,7 +434,7 @@ public class Container : UWEBase
                     }
                     if (item.GetComponent<Container>() != null)
                     {
-                        Container.SetItemsParent(item.GetComponent<Container>(), Parent);
+                    SetItemsParent(item.GetComponent<Container>(), Parent);
                     }
                 }
            // }
@@ -524,7 +524,7 @@ public class Container : UWEBase
                     return true;
             }
 
-            if (Container.TestContainerRules(this, 11, false) == false)
+            if (TestContainerRules(this, 11, false) == false)
             {
                 Valid = false;
                 return true;

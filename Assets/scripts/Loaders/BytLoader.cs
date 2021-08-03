@@ -121,15 +121,15 @@ public class BytLoader : ArtLoader {
 				return TGALoader.LoadTGA(toLoadMod)	;
 			}
 
-			if (!DataLoader.ReadStreamFile(toLoad, out textureFile))
+			if (!ReadStreamFile(toLoad, out textureFile))
 			{return null;}
 			// Get the size of the file in bytes
 
-			NoOfTextures = DataLoader.getValAtAddress(textureFile,0,8);
-			long textureOffset = (int)DataLoader.getValAtAddress(textureFile, (index * 4) + 6, 32);
+			NoOfTextures = getValAtAddress(textureFile,0,8);
+			long textureOffset = (int)getValAtAddress(textureFile, (index * 4) + 6, 32);
 			if (textureOffset !=0)
 			{
-					int compressionFlag=(int)DataLoader.getValAtAddress(textureFile,((index * 4) + 6)+(NoOfTextures*4),32);
+					int compressionFlag=(int)getValAtAddress(textureFile,((index * 4) + 6)+(NoOfTextures*4),32);
 					int isCompressed =(compressionFlag>>1) & 0x01;
 					if (isCompressed==1)	
 					{

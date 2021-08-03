@@ -117,7 +117,7 @@ public class TextureLoader : ArtLoader {
                 {
                     if (texturesFLoaded == false)
                     {
-                        if (!DataLoader.ReadStreamFile(Path.Combine(BasePath,"RES", "DATA", pathTex_SS1), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath,"RES", "DATA", pathTex_SS1), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -136,10 +136,10 @@ public class TextureLoader : ArtLoader {
                             case 2:
                             case 17:
                                 {
-                                    long textureOffset = (int)DataLoader.getValAtAddress(art_ark.data, 2 + (0 * 4), 32);
-                                    int CompressionType = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 4, 16);
-                                    int Width = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 8, 16);
-                                    int Height = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 10, 16);
+                                    long textureOffset = (int)getValAtAddress(art_ark.data, 2 + (0 * 4), 32);
+                                    int CompressionType = (int)getValAtAddress(art_ark.data, textureOffset + 4, 16);
+                                    int Width = (int)getValAtAddress(art_ark.data, textureOffset + 8, 16);
+                                    int Height = (int)getValAtAddress(art_ark.data, textureOffset + 10, 16);
                                     if ((Width > 0) && (Height > 0))
                                     {
 
@@ -179,7 +179,7 @@ public class TextureLoader : ArtLoader {
                     }
                     if (texturesFLoaded == false)
                     {
-                        if (!DataLoader.ReadStreamFile(Path.Combine(BasePath,"DATA", pathTex_UW2), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath,"DATA", pathTex_UW2), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -188,7 +188,7 @@ public class TextureLoader : ArtLoader {
                             texturesFLoaded = true;
                         }
                     }
-                    long textureOffset = DataLoader.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
+                    long textureOffset = getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
                     return Image(texturebufferT, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
                 }
 
@@ -201,7 +201,7 @@ public class TextureLoader : ArtLoader {
                     {//Wall textures
                         if (texturesWLoaded == false)
                         {
-                            if (!DataLoader.ReadStreamFile(Path.Combine(BasePath ,"DATA", pathTexW_UW1), out texturebufferW))
+                            if (!ReadStreamFile(Path.Combine(BasePath ,"DATA", pathTexW_UW1), out texturebufferW))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -218,14 +218,14 @@ public class TextureLoader : ArtLoader {
                                 return TGALoader.LoadTGA(toLoadMod);
                             }
                         }
-                        long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
+                        long textureOffset = getValAtAddress(texturebufferW, (index * 4) + 4, 32);
                         return Image(texturebufferW, textureOffset, 64, 64, "name_goes_here", palToUse, false);
                     }
                     else
                     {//Floor textures (to match my list of textures)
                         if (texturesFLoaded == false)
                         {
-                            if (!DataLoader.ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexF_UW1), out texturebufferF))
+                            if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexF_UW1), out texturebufferF))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -242,7 +242,7 @@ public class TextureLoader : ArtLoader {
                                 return TGALoader.LoadTGA(toLoadMod);
                             }
                         }
-                        long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
+                        long textureOffset = getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                         return Image(texturebufferF, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
                     }
                 }//end switch	

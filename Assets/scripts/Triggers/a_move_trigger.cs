@@ -75,7 +75,7 @@ A trigger that fires when the player character enters it
 	{
 		if (playerStartedInTrigger!=true)
 		{
-			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
+			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld==false))
 			{	
 				Activate (other.gameObject);
 			}	
@@ -84,7 +84,7 @@ A trigger that fires when the player character enters it
 
 	protected virtual void OnTriggerExit(Collider other)
 	{
-		if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
+		if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld==false))
 		{
 			playerStartedInTrigger=false;		
 		}

@@ -18,20 +18,20 @@ public class InteractionModeControlItem : GuiBase {
 		{
 			return;
 		}
-		if ((isOn==true) && (InteractionMode!=UWCharacter.InteractionModeOptions))
+		if ((isOn==true) && (InteractionMode!= Character.InteractionModeOptions))
 		{
 			isOn=false;
 			InteractionModeControl.UpdateNow=true;
-			UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;			
+            Character.InteractionMode = Character.DefaultInteractionMode;			
 		}
 		else
 		{
 			isOn=true;
 			imc.TurnOffOthers(InteractionMode);
 			InteractionModeControl.UpdateNow=true;
-			UWCharacter.InteractionMode=InteractionMode;			
+            Character.InteractionMode = InteractionMode;			
 		}
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject, _RES == GAME_UW2 && UWCharacter.InteractionMode == UWCharacter.InteractionModeOptions);
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject, _RES == GAME_UW2 && Character.InteractionMode == Character.InteractionModeOptions);
     }
 
 

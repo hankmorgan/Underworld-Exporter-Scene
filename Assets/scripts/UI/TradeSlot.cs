@@ -76,12 +76,12 @@ public class TradeSlot : GuiBase {
 		//Selected = !Selected;
 		if (LookingAt==true)
 		{return;}//Only look at one thing at a time.
-		if (TradeSlot.Locked){return;}
+		if (Locked) {return;}
 		ObjectInteraction objInt= GetGameObjectInteraction();
 		if (objInt!=null)
 		{
-			TradeSlot.LookingAt=true;
-			TradeSlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
+            LookingAt = true;
+            TempLookAt = UWHUD.instance.MessageScroll.NewUIOUt.text;
 			StartCoroutine(ClearTempLookAt());
 		}
 	}
@@ -90,7 +90,7 @@ public class TradeSlot : GuiBase {
 	{
 		Time.timeScale=0.1f;
 		yield return new WaitForSeconds(0.1f);
-		TradeSlot.LookingAt=false;
+        LookingAt = false;
 		if (ConversationVM.InConversation==true)
 		{
 			Time.timeScale=0.00f;
@@ -99,12 +99,12 @@ public class TradeSlot : GuiBase {
 		{
 			Time.timeScale=1.0f;//just in case a conversations is ended while looking.
 		}
-				UWHUD.instance.MessageScroll.NewUIOUt.text=TradeSlot.TempLookAt;
+				UWHUD.instance.MessageScroll.NewUIOUt.text= TempLookAt;
 	}
 
 	public void PlayerSlotLeftClick()
 	{
-		if (TradeSlot.Locked){return;}
+		if (Locked) {return;}
         ObjectInteraction objIntAtSlot = GetGameObjectInteraction();
         if (CurrentObjectInHand != null)
 		{
@@ -200,7 +200,7 @@ public class TradeSlot : GuiBase {
 		//Left click pickup
 		//right click toggle.
 		//On hover identify?
-		if (TradeSlot.Locked){return;}
+		if (Locked) {return;}
 		if (PlayerSlot==true)
 		{
 			if (ptrID == -2)//right click

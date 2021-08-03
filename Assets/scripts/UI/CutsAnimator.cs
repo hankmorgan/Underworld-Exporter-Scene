@@ -107,15 +107,15 @@ public class CutsAnimator : GuiBase
                 //Clear out game objects
                 foreach (Transform child in GameWorldController.instance.LevelModel.transform)
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 foreach (Transform child in GameWorldController.instance.DynamicObjectMarker())
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 foreach (Transform child in GameWorldController.instance.SceneryModel.transform)
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 for (int x = 0; x <= GameWorldController.instance.Tilemaps.GetUpperBound(0); x++)
                 {

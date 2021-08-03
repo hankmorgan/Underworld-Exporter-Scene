@@ -57,7 +57,7 @@ public class UWCombat : Combat
 
         if ((AttackCharging == false) && (AttackExecuting == false))
         { ///If not charging an attack and not executing an attack it will check interaction mode.
-			if ((UWCharacter.InteractionMode == UWCharacter.InteractionModeAttack))
+			if ((Character.InteractionMode == Character.InteractionModeAttack))
             {///Sets the weapon, race and handedness of the weapon animation.
                 if (IsMelee())
                 {

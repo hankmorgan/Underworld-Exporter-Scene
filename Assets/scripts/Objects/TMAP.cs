@@ -72,7 +72,7 @@ public class TMAP : object_base
 
     public override bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
-        if ((UWEBase._RES == UWEBase.GAME_UW1) && (TextureIndex == 47))//The door to the base of the abyss.
+        if ((_RES == GAME_UW1) && (TextureIndex == 47))//The door to the base of the abyss.
         {
             if (ObjectUsed.item_id == 231)//The key of infinity.
             {

@@ -126,7 +126,7 @@ public class Potion : enchantment_base
     {
         if (linked != null)
         {
-            GameObject clonelinkedspell = Object.Instantiate(linked.gameObject);
+            GameObject clonelinkedspell = Instantiate(linked.gameObject);
             clonelinkedspell.name = ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
             clonelinkedspell.gameObject.transform.parent = GameWorldController.instance.InventoryMarker.transform;
             linked = clonelinkedspell.GetComponent<ObjectInteraction>();

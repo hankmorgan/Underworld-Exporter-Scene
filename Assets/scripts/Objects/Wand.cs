@@ -213,7 +213,7 @@ public class Wand : enchantment_base {
 		{//Object links to a spell object
 			if (linkedspell !=null)
 			{
-				GameObject clonelinkedspell = Object.Instantiate(linkedspell.gameObject);
+				GameObject clonelinkedspell = Instantiate(linkedspell.gameObject);
 				clonelinkedspell.name = ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
 				clonelinkedspell.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 				linkedspell = clonelinkedspell.GetComponent<a_spell>();

@@ -97,7 +97,7 @@ public class Shrine : Model3D {
 		WaitingForInput=false;
 		Time.timeScale=1.0f;
 		inputctrl.text="";
-		WindowDetectUW.WaitingForInput=false;
+        WindowDetect.WaitingForInput = false;
 		inputctrl.gameObject.SetActive(false);
 	}
 
@@ -251,8 +251,8 @@ public class Shrine : Model3D {
 			//Code to spawn key of truth in player hand
 			//Debug.Log ("You get the key of truth");
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_none_of_your_skills_improved_));//No skills appear
-			//inputctrl.text=UWHUD.instance.MessageScroll.text;
-			Shrine.HasGivenKey=true;
+                                                                                                                                         //inputctrl.text=UWHUD.instance.MessageScroll.text;
+            HasGivenKey = true;
 			//create the key of truth.
 			ObjectLoaderInfo newobjt= ObjectLoader.newWorldObject(225,0,0,0,256);
             ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
@@ -263,8 +263,8 @@ public class Shrine : Model3D {
 			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 			GameWorldController.MoveToInventory(myObjInt.gameObject);*/
 			CurrentObjectInHand=myObjInt;
-			//UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
-			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+            //UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+            Character.InteractionMode = Character.InteractionModePickup;
 			InteractionModeControl.UpdateNow=true;
 		}
 	}

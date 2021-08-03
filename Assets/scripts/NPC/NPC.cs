@@ -748,8 +748,8 @@ public class NPC : MobileObject
                             {
                                 Quest.instance.QuestVariables[117] = 1;
                                 npc_hp = 50;//restore health.
-                                npc_goal = (short)NPC.npc_goals.npc_goal_stand_still_0;
-                                npc_attitude = NPC.AI_ATTITUDE_UPSET;
+                                npc_goal = (short)npc_goals.npc_goal_stand_still_0;
+                                npc_attitude = AI_ATTITUDE_UPSET;
                                 TalkTo();
                                 return true;
                             }
@@ -983,7 +983,7 @@ public class NPC : MobileObject
                 {
                     //I just want to talk to you
                     //ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
-                    AnimRange = NPC.AI_RANGE_IDLE;
+                    AnimRange = AI_RANGE_IDLE;
                     if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false))
                     {
                         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5)
@@ -1044,7 +1044,7 @@ public class NPC : MobileObject
             case npc_goals.npc_goal_want_to_talk:
                 {
                     //I just want to talk to you
-                    AnimRange = NPC.AI_RANGE_IDLE;
+                    AnimRange = AI_RANGE_IDLE;
                     if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false))
                     {
                         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5)
@@ -1065,12 +1065,12 @@ public class NPC : MobileObject
                     DestTileX = npc_xhome; DestTileY = npc_yhome;
                     if ((CurTileX != npc_xhome) || (CurTileY != npc_yhome))
                     {
-                        AnimRange = NPC.AI_RANGE_MOVE;
+                        AnimRange = AI_RANGE_MOVE;
                         AgentGotoDestTileXY(ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
                     }
                     else
                     {
-                        AnimRange = NPC.AI_RANGE_IDLE;
+                        AnimRange = AI_RANGE_IDLE;
                         AgentStand();
                     }
                     break;
@@ -1217,7 +1217,7 @@ public class NPC : MobileObject
         if (!AtDestination)
         {
             //I need to move to this tile.
-            AnimRange = NPC.AI_RANGE_MOVE;
+            AnimRange = AI_RANGE_MOVE;
             AgentGotoDestTileXY(ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
             ArrivedAtDestination = false;
         }
@@ -1229,7 +1229,7 @@ public class NPC : MobileObject
             }
             else
             {
-                AnimRange = NPC.AI_RANGE_IDLE;
+                AnimRange = AI_RANGE_IDLE;
                 if (ArrivedAtDestination == false)
                 {
                     ArrivedAtDestination = true;
@@ -1248,7 +1248,7 @@ public class NPC : MobileObject
                 (AtDestination)//I am at my destination already.
             )
         {
-            if (AnimRange == NPC.AI_RANGE_IDLE)
+            if (AnimRange == AI_RANGE_IDLE)
             {//and I am idling.
                 SetRandomDestination();
                 ArrivedAtDestination = false;
@@ -1276,7 +1276,7 @@ public class NPC : MobileObject
                                 transform.LookAt(gtarg.transform.position);
                                 if (AgentCanAttack(NPC_Launcher.transform.position, gtarg.GetComponent<UWEBase>().GetImpactPoint(), gtarg, AB.magnitude))
                                 {
-                                    AnimRange = NPC.AI_ANIM_ATTACK_SECONDARY;
+                                    AnimRange = AI_ANIM_ATTACK_SECONDARY;
                                     AttackState = AttackStages.AttackAnimateRanged;
                                     WaitTimer = 0.8f;
                                 }
@@ -1363,7 +1363,7 @@ public class NPC : MobileObject
                 }
                 break;
             case AttackStages.AttackWaitCycle:
-                AnimRange = NPC.AI_ANIM_COMBAT_IDLE;
+                AnimRange = AI_ANIM_COMBAT_IDLE;
                 if (WaitTimer <= 0.2f)
                 {
                     AttackState = AttackStages.AttackPosition;
@@ -1376,7 +1376,7 @@ public class NPC : MobileObject
     {
         //Move to position
         AgentMoveToPosition(gtarg.transform.position);
-        AnimRange = NPC.AI_RANGE_MOVE;
+        AnimRange = AI_RANGE_MOVE;
     }
 
     void AgentGotoDestTileXY(ref int DestinationX, ref int DestinationY, ref int tileX, ref int tileY)
@@ -2352,12 +2352,12 @@ public class NPC : MobileObject
         switch (AnimSelected)
         {
             case 1:
-                AnimRange = NPC.AI_ANIM_ATTACK_SLASH; break;
+                AnimRange = AI_ANIM_ATTACK_SLASH; break;
             case 2:
-                AnimRange = NPC.AI_ANIM_ATTACK_THRUST; break;
+                AnimRange = AI_ANIM_ATTACK_THRUST; break;
             case 0:
             default:
-                AnimRange = NPC.AI_ANIM_ATTACK_BASH; break;
+                AnimRange = AI_ANIM_ATTACK_BASH; break;
         }
 
 
@@ -2420,7 +2420,7 @@ public class NPC : MobileObject
     /// </summary>
     void PerformDeathAnim()
     {
-        AnimRange = NPC.AI_ANIM_DEATH;
+        AnimRange = AI_ANIM_DEATH;
         MusicController.LastAttackCounter = 0.0f;//Stops combat music unil the next time the player is hit
         MusicController.instance.PlaySpecialClip(MusicController.instance.VictoryTracks); //plays the fanfare
         WaitTimer = 0.8f;

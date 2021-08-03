@@ -64,14 +64,14 @@ public class CritterInfo : Loader
             if (pass == 0)
             {//CR{CRITTER file ID in octal}PAGE.N{Page}
                 var toLoad = Path.Combine(BasePath, "CRIT", "CR" + critterIDO + "PAGE.N0" + pass);
-                DataLoader.ReadStreamFile(toLoad, out FilePage0);
+                ReadStreamFile(toLoad, out FilePage0);
                 bool LoadMod = Directory.Exists(toLoad);  //TODO: Does this load mods here.
                 spriteIndex = ReadPageFile(FilePage0, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
             }
             else
             {
                 var toLoad = Path.Combine(BasePath, "CRIT", "CR" + critterIDO + "PAGE.N0" + pass);
-                DataLoader.ReadStreamFile(toLoad, out FilePage1);
+                ReadStreamFile(toLoad, out FilePage1);
                 bool LoadMod = Directory.Exists(toLoad);
                 ReadPageFile(FilePage1, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
             }
@@ -87,7 +87,7 @@ public class CritterInfo : Loader
         int spriteIndex = 0;
         for (int i = 0; i < 8; i++)
         {
-            if ((int)DataLoader.getValAtAddress(PGMP, critter_id * 8 + i, 8) != 255)//Checks if a critter exists at this index in the page file.
+            if ((int)getValAtAddress(PGMP, critter_id * 8 + i, 8) != 255)//Checks if a critter exists at this index in the page file.
             {
                 string ExtractPageNoO = DecimalToOct(ExtractPageNo.ToString());
                 string fileCrit = Path.Combine(BasePath, "CRIT", "CR" + critterIDO + "." + ExtractPageNoO);  // BasePath + sep + "CRIT" + sep + "CR" + critterIDO + "." + ExtractPageNoO;
@@ -108,10 +108,10 @@ public class CritterInfo : Loader
                     int UW2animIndex = GetUW2Anim(Animation, Angle);
                     int animIndex = TranslateAnimToIndex(UW2animIndex);
                     AnimInfo.animName[animIndex] = PrintAnimName(UW2animIndex);
-                    int ValidEntries = (int)DataLoader.getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
+                    int ValidEntries = (int)getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
                     for (int FrameNo = 0; FrameNo < 8; FrameNo++)
                     {
-                        int currFrame = (int)DataLoader.getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (FrameNo), 8);
+                        int currFrame = (int)getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (FrameNo), 8);
                         if (FrameNo < ValidEntries)
                         {
                             AnimInfo.animIndices[animIndex, FrameNo] = currFrame;
@@ -131,8 +131,8 @@ public class CritterInfo : Loader
     private int ReadPageFile(char[] PageFile, int XX, int YY, int spriteIndex, int AuxPalNo, bool LoadMod, string ModPath)
     {
         int addptr = 0;
-        int slotbase = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
-        int NoOfSlots = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
+        int slotbase = (int)getValAtAddress(PageFile, addptr++, 8);
+        int NoOfSlots = (int)getValAtAddress(PageFile, addptr++, 8);
         int[] SlotIndices = new int[NoOfSlots];
         int spriteCounter = 0;
         int k = 0;
@@ -140,13 +140,13 @@ public class CritterInfo : Loader
         string YYo = DecimalToOct(YY.ToString());
         for (int i = 0; i < NoOfSlots; i++)
         {
-            int val = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
+            int val = (int)getValAtAddress(PageFile, addptr++, 8);
             if (val != 255)
             {
                 SlotIndices[k++] = i;
             }
         }
-        int NoOfSegs = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
+        int NoOfSegs = (int)getValAtAddress(PageFile, addptr++, 8);
         for (int i = 0; i < NoOfSegs; i++)
         {
             //string[] AnimFiles = new string[8];
@@ -157,7 +157,7 @@ public class CritterInfo : Loader
             int ValidCount = 0;
             for (int j = 0; j < 8; j++)
             {
-                int val = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
+                int val = (int)getValAtAddress(PageFile, addptr++, 8);
                 if (val != 255)
                 {                   //AnimFiles[j] = "CR" + XX.ToString("d2") + "PAGE_N" + YY.ToString("d2") + "_" + AuxPalNo + "_" + val;
 
@@ -173,17 +173,17 @@ public class CritterInfo : Loader
         }
 
         //Read in the palette
-        int NoOfPals = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);//Will skip ahead this far.
+        int NoOfPals = (int)getValAtAddress(PageFile, addptr, 8);//Will skip ahead this far.
         addptr++;
         char[] auxPalVal = new char[32];
         for (int i = 0; i < 32; i++)
         {
-            auxPalVal[i] = (char)DataLoader.getValAtAddress(PageFile, (addptr) + (AuxPalNo * 32) + i, 8);
+            auxPalVal[i] = (char)getValAtAddress(PageFile, (addptr) + (AuxPalNo * 32) + i, 8);
         }
 
         //Skip past the palettes
         addptr = addptr + NoOfPals * 32;
-        int NoOfFrames = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);
+        int NoOfFrames = (int)getValAtAddress(PageFile, addptr, 8);
         //AnimInfo.animSprites=new Sprite[NoOfFrames];
         addptr = addptr + 2;
         int addptr_start = addptr;//Bookmark my positiohn
@@ -198,11 +198,11 @@ public class CritterInfo : Loader
             {//get the max width and height
                 for (int i = 0; i < NoOfFrames; i++)
                 {
-                    int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
-                    int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
-                    int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
-                    int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
-                    int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
+                    int frameOffset = (int)getValAtAddress(PageFile, addptr + (i * 2), 16);
+                    int BitMapWidth = (int)getValAtAddress(PageFile, frameOffset + 0, 8);
+                    int BitMapHeight = (int)getValAtAddress(PageFile, frameOffset + 1, 8);
+                    int hotspotx = (int)getValAtAddress(PageFile, frameOffset + 2, 8);
+                    int hotspoty = (int)getValAtAddress(PageFile, frameOffset + 3, 8);
                     if (hotspotx > BitMapWidth)
                     {
                         hotspotx = BitMapWidth;
@@ -241,13 +241,13 @@ public class CritterInfo : Loader
                 outputImg = new char[MaxWidth * MaxHeight * 2];
                 for (int i = 0; i < NoOfFrames; i++)
                 {
-                    int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
-                    int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
-                    int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
-                    int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
-                    int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
-                    int compression = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 4, 8);
-                    int datalen = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 5, 16);
+                    int frameOffset = (int)getValAtAddress(PageFile, addptr + (i * 2), 16);
+                    int BitMapWidth = (int)getValAtAddress(PageFile, frameOffset + 0, 8);
+                    int BitMapHeight = (int)getValAtAddress(PageFile, frameOffset + 1, 8);
+                    int hotspotx = (int)getValAtAddress(PageFile, frameOffset + 2, 8);
+                    int hotspoty = (int)getValAtAddress(PageFile, frameOffset + 3, 8);
+                    int compression = (int)getValAtAddress(PageFile, frameOffset + 4, 8);
+                    int datalen = (int)getValAtAddress(PageFile, frameOffset + 5, 16);
 
                     //Adjust the hotspots from the biggest point back to the image corners
                     int cornerX; int cornerY;
@@ -708,7 +708,7 @@ public class CritterInfo : Loader
         //pal = new palette[256];
         //getPalette(PaletteFile, pal, 0);//always palette 0?
 
-        DataLoader.ReadStreamFile(fileCrit, out critterFile);
+        ReadStreamFile(fileCrit, out critterFile);
 
 
         //UW2 uses a different method
@@ -720,7 +720,7 @@ public class CritterInfo : Loader
         char[] auxPalVal = new char[32];
         for (int j = 0; j < 32; j++)
         {
-            auxPalVal[j] = (char)DataLoader.getValAtAddress(critterFile, (AddressPointer) + (AuxPalNo * 32) + j, 8);
+            auxPalVal[j] = (char)getValAtAddress(critterFile, (AddressPointer) + (AuxPalNo * 32) + j, 8);
         }
 
         //int i = 0;
@@ -735,13 +735,13 @@ public class CritterInfo : Loader
             {//First pass is getting max image sizes
                 for (int index = 128; index < 640; index = index + 2)
                 {
-                    int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
+                    int frameOffset = (int)getValAtAddress(critterFile, index, 16);
                     if (frameOffset != 0)
                     {
-                        int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
-                        int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
-                        int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
-                        int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
+                        int BitMapWidth = (int)getValAtAddress(critterFile, frameOffset + 0, 8);
+                        int BitMapHeight = (int)getValAtAddress(critterFile, frameOffset + 1, 8);
+                        int hotspotx = (int)getValAtAddress(critterFile, frameOffset + 2, 8);
+                        int hotspoty = (int)getValAtAddress(critterFile, frameOffset + 3, 8);
                         if (hotspotx > BitMapWidth) { hotspotx = BitMapWidth; }
                         if (hotspoty > BitMapHeight) { hotspoty = BitMapHeight; }
                         if (BitMapWidth > MaxWidth) { MaxWidth = BitMapWidth; }
@@ -768,15 +768,15 @@ public class CritterInfo : Loader
                 outputImg = new char[MaxWidth * MaxHeight * 2];
                 for (int index = 128; index < 640; index = index + 2)
                 {
-                    int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
+                    int frameOffset = (int)getValAtAddress(critterFile, index, 16);
                     if (frameOffset != 0)
                     {
-                        int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
-                        int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
-                        int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
-                        int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
-                        int compression = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 4, 8);
-                        int datalen = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 5, 16);
+                        int BitMapWidth = (int)getValAtAddress(critterFile, frameOffset + 0, 8);
+                        int BitMapHeight = (int)getValAtAddress(critterFile, frameOffset + 1, 8);
+                        int hotspotx = (int)getValAtAddress(critterFile, frameOffset + 2, 8);
+                        int hotspoty = (int)getValAtAddress(critterFile, frameOffset + 3, 8);
+                        int compression = (int)getValAtAddress(critterFile, frameOffset + 4, 8);
+                        int datalen = (int)getValAtAddress(critterFile, frameOffset + 5, 16);
                         //Adjust the hotspots from the biggest point back to the image corners
                         int cornerX; int cornerY;
                         cornerX = MaxHotSpotX - hotspotx;

@@ -39,7 +39,7 @@ public class Readable : object_base
                 {
                     if (objInt().PickedUp == true)
                     {
-                        if ((UWEBase._RES == UWEBase.GAME_UW1) && (link == 520))
+                        if ((_RES == GAME_UW1) && (link == 520))
                         {//Special case. Chasm of fire map.
                             UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs410.n01";
                             UWHUD.instance.CutScenesSmall.anim.looping = true;

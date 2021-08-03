@@ -131,7 +131,7 @@ public class Equipment : object_base
     {
         Time.timeScale = 1.0f;
         UWHUD.instance.InputControl.gameObject.SetActive(false);
-        WindowDetectUW.WaitingForInput = false;
+        WindowDetect.WaitingForInput = false;
         UWHUD.instance.MessageScroll.Clear();//="";
         if (ans.Substring(0, 1).ToUpper() == "Y")
         {

@@ -111,7 +111,7 @@ public class ContainerOpened : GuiBase_Draggable
         }
         else
         {
-            if (UWCharacter.InteractionMode != UWCharacter.InteractionModePickup)
+            if (Character.InteractionMode != Character.InteractionModePickup)
             {//Only allow this to happen when in pickup mode.
                 return;
             }

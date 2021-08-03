@@ -407,7 +407,7 @@ public class OptionsMenuControl : GuiBase_Draggable
     private void ReturnToGame()
     {
         InteractionMenu.gameObject.SetActive(true);
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
+        Character.InteractionMode = Character.InteractionModeUse;
         InteractionModeControl.UpdateNow = true;
         UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject,false);
         this.gameObject.SetActive(false);
@@ -462,7 +462,7 @@ public class OptionsMenuControl : GuiBase_Draggable
         for (int i = 1; i <= 4; i++)
         {
             char[] fileDesc;
-            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
+            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
             {
                 saveNames[i - 1] = new string(fileDesc);
             }

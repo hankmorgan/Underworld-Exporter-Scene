@@ -139,7 +139,6 @@ public class MainMenuHud : GuiBase
         }
     }
 
-
     public void ButtonClickMainMenu(int option)
     {//Button clicks on front menu.
 
@@ -193,9 +192,7 @@ public class MainMenuHud : GuiBase
         {//Chargen
             ChargenClick(option);
         }
-
     }
-
 
     void DisplaySaveGames()
     {
@@ -204,31 +201,23 @@ public class MainMenuHud : GuiBase
         CreditsButton.SetActive(false);
         JourneyOnButton.SetActive(false);
 
-
         //List the save names
         UWHUD.instance.MessageScroll.Clear();
 
         for (int i = 1; i <= 4; i++)
         {
             char[] fileDesc;
-            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
+            var toLoad = Path.Combine(Loader.BasePath, "SAVE" + i, "DESC");
+            saveNames[i - 1] = "";
+            if (File.Exists(toLoad))
             {
-                saveNames[i - 1] = new string(fileDesc);
-            }
-            else
-            {
-                saveNames[i - 1] = "";
+                if (Loader.ReadStreamFile(toLoad, out fileDesc))
+                {
+                    saveNames[i - 1] = new string(fileDesc);
+                }
             }
         }
 
-
-
-        /*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
-        {
-                int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
-                saveNames[SaveIndex] = sg.Name;
-        }
-*/
         for (int i = 0; i <= saveNames.GetUpperBound(0); i++)
         {
             if (saveNames[i] != "")
@@ -239,10 +228,8 @@ public class MainMenuHud : GuiBase
             else
             {
                 SaveGameButtons[i].SetActive(false);
-                //UWHUD.instance.MessageScroll.Add ((i+1) + " No Save Data");	
             }
         }
-
     }
 
     /// <summary>
@@ -252,23 +239,17 @@ public class MainMenuHud : GuiBase
     public void LoadSave(int SlotNo)
     {
         if (SlotNo == -2)
-        {//Speedstart to editor
-         //GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
-         //GameWorldController.instance.InitBGlobals(0);
-         //GameClock.instance._day=0;
-         //GameClock.instance._minute=51;
-         //GameClock.instance._second=15;
-            if (UWEBase.EditorMode == true)
+        {
+            if (EditorMode == true)
             {
                 UWHUD.instance.editorButtonLabel.text = "Enable Editor";
-                UWEBase.EditorMode = false;
+                EditorMode = false;
             }
             else
             {
                 UWHUD.instance.editorButtonLabel.text = "Editor Enabled";
-                UWEBase.EditorMode = true;
+                EditorMode = true;
             }
-            //JourneyOnwards();
             return;
         }
 
@@ -310,24 +291,12 @@ public class MainMenuHud : GuiBase
         //000~001~162~Restore Game Complete. \n
         UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1, StringController.str_restore_game_complete_));
         return;
-
-        /*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
-            {
-                if (sg.Name=="save_"+SlotNo)
-                {					
-                    LevelSerializer.LoadSavedLevel(sg.Data,false);
-                    UWHUD.instance.LoadingProgress.text="";
-                    UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);	
-                    Destroy (this.gameObject);
-                }
-            }*/
     }
 
 
 
     public void ChargenClick(int option)
     {
-
         //0 = Gender
         //1 = Handeness
         //2 = Class
@@ -336,7 +305,6 @@ public class MainMenuHud : GuiBase
         //9 is difficulty.
         //10 is name
         //11 is confirm.
-
 
         switch (chargenStage)
         {
@@ -718,7 +686,7 @@ public class MainMenuHud : GuiBase
         UWCharacter.Instance.playerInventory.Refresh();
         UWCharacter.Instance.playerInventory.UpdateLightSources();
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-        MainMenuHud.instance.gameObject.SetActive(false);
+        instance.gameObject.SetActive(false);
         if (EditorMode)
         {
             //GameWorldController.instance.PositionDetect();

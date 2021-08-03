@@ -9,13 +9,13 @@ public class Weapon : Equipment {
 		{
 			if (((this.objInt().inventorySlot==7) && (UWCharacter.Instance.isLefty==false)) || ((this.objInt().inventorySlot==8) && (UWCharacter.Instance.isLefty==true)))
 			{
-				if(UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
+				if(Character.InteractionMode == Character.InteractionModeAttack)
 				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;		
+                    Character.InteractionMode = Character.InteractionModeUse;		
 				}
 				else
 				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeAttack;				
+                    Character.InteractionMode = Character.InteractionModeAttack;				
 				}
 			}
 			InteractionModeControl.UpdateNow=true;

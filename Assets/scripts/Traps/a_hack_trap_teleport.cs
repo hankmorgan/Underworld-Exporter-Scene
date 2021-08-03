@@ -220,7 +220,7 @@ public class a_hack_trap_teleport : a_hack_trap {
             UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject,
                 UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CONV
                 && UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CUTS_FULL
-                && UWCharacter.InteractionMode != UWCharacter.InteractionModeOptions
+                && Character.InteractionMode != Character.InteractionModeOptions
                 );
         }
         else

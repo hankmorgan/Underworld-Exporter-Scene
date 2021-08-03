@@ -32,10 +32,10 @@ public class InteractionModeControl : GuiBase_Draggable {
 		if (UpdateNow==true)
 		{
 			UpdateNow=false;
-			WindowDetect.ContextUIUse =((UWCharacter.InteractionModeTalk==UWCharacter.InteractionMode) ||(UWCharacter.InteractionModePickup==UWCharacter.InteractionMode) || (UWCharacter.InteractionModeUse==UWCharacter.InteractionMode));//Only context in use or pickup
+			WindowDetect.ContextUIUse =((Character.InteractionModeTalk == Character.InteractionMode) ||(Character.InteractionModePickup == Character.InteractionMode) || (Character.InteractionModeUse == Character.InteractionMode));//Only context in use or pickup
 			for (int i = 1; i<=5;i++)
 			{
-				if (i != UWCharacter.InteractionMode)
+				if (i != Character.InteractionMode)
 				{//Off version
 					//Controls[i].texture= lfti.LoadImageAt((i*2));
 					SetImage(ref Controls[i], i*2);
@@ -46,7 +46,7 @@ public class InteractionModeControl : GuiBase_Draggable {
 					SetImage(ref Controls[i], (i*2)+1);
 				}
 			}
-			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeOptions)
+			if (Character.InteractionMode == Character.InteractionModeOptions)
 			{
 								if (UWCharacter.Instance.MouseLookEnabled)
 								{

@@ -186,7 +186,7 @@ public class Character : UWEBase {
 	public virtual void Begin () {
 		if (_RES==GAME_SHOCK)
 		{
-			InteractionMode=UWCharacter.InteractionModePickup;
+			InteractionMode= InteractionModePickup;
 			UWCharacter.Instance.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		}
 	}
@@ -337,7 +337,7 @@ public class Character : UWEBase {
 		GameWorldController.MoveToInventory(objPicked);
 		pInv.ObjectInHand=objPicked;
 		objPicked.Pickup();
-        if (WindowDetectUW.ContextUIEnabled)
+        if (WindowDetect.ContextUIEnabled)
         {
             if(MouseLookEnabled)
             {

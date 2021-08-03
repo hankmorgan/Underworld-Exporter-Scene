@@ -1532,7 +1532,7 @@ public class SpellEffect : UWEBase {
 	public virtual void CancelEffect()
 	{
 		Active=false;
-		Component.DestroyImmediate (this);
+        DestroyImmediate(this);
 	}
 
 	/// <summary>

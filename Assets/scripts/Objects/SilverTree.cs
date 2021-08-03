@@ -56,7 +56,7 @@ public class SilverTree : object_base {
         CurrentObjectInHand = newseedobj;
         //newseedobj.UpdateAnimation();
         //UWHUD.instance.CursorIcon = newseedobj.GetWorldDisplay().texture;
-        UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+        Character.InteractionMode = Character.InteractionModePickup;
 		InteractionModeControl.UpdateNow=true;
 
         objInt().consumeObject();

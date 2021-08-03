@@ -136,7 +136,7 @@ public class Chargen : Props {
 						return PortraitsChoice;
 				case STAGE_DIFFICULTY:
 						return DifficultyChoice;
-				case Chargen.STAGE_NAME:
+				case STAGE_NAME:
 						return YesNoChoice;
 				case STAGE_CONFIRM:
 						return YesNoChoice;

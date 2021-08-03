@@ -40,9 +40,9 @@ public class LevArk : Loader {
         //Read in the data for the 80 tile/object maps
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
         {
-            blockData[l].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 4), 32);
-            blockData[l].DataLen = DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 8), 32);
-            blockData[l].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 12), 32);
+            blockData[l].CompressionFlag = (int)getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 4), 32);
+            blockData[l].DataLen = getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 8), 32);
+            blockData[l].ReservedSpace = getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 12), 32);
             if (GameWorldController.instance.Tilemaps[l] != null)
             {
                 long UnPackDatalen = 0;
@@ -58,7 +58,7 @@ public class LevArk : Loader {
             }///31752
             else
             {//Copy data from file.
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6, 32);
+                AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 6, 32);
                 if (AddressToCopyFrom != 0)
                 {//Only copy a block with data										
                     blockData[l].Data = CopyData(AddressToCopyFrom, blockData[l].ReservedSpace);//31752
@@ -74,10 +74,10 @@ public class LevArk : Loader {
         //TODO: At the moment this is just a straight copy of this information
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
         {
-            AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4), 32);
-            blockData[l + 80].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 4), 32);
-            blockData[l + 80].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 12), 32);
-            ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)				
+            AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4), 32);
+            blockData[l + 80].CompressionFlag = (int)getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 4), 32);
+            blockData[l + 80].ReservedSpace = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 12), 32);
+            ReadDataLen = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)				
 
             if (AddressToCopyFrom != 0)
             {
@@ -102,10 +102,10 @@ public class LevArk : Loader {
             }
             else
             {//Just copy the data from the old ark to the new ark
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4), 32);
-                blockData[l + 160].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
-                ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                blockData[l + 160].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 12), 32);
+                AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4), 32);
+                blockData[l + 160].CompressionFlag = (int)getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
+                ReadDataLen = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
+                blockData[l + 160].ReservedSpace = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 12), 32);
 
                 if (AddressToCopyFrom != 0)
                 {
@@ -135,10 +135,10 @@ public class LevArk : Loader {
                 }
                 else
                 {//just copy
-                    AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
-                    blockData[l + 240].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
-                    ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                    blockData[l + 240].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
+                    AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
+                    blockData[l + 240].CompressionFlag = (int)getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
+                    ReadDataLen = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
+                    blockData[l + 240].ReservedSpace = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
                     if (AddressToCopyFrom != 0)
                     {
                         blockData[l + 240].Data = CopyData(AddressToCopyFrom, ReadDataLen);
@@ -153,10 +153,10 @@ public class LevArk : Loader {
             }
             else
             {//just copy.
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
-                blockData[l + 240].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
-                ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                blockData[l + 240].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
+                AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
+                blockData[l + 240].CompressionFlag = (int)getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
+                ReadDataLen = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
+                blockData[l + 240].ReservedSpace = getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
                 if (AddressToCopyFrom != 0)
                 {
                     blockData[l + 240].Data = CopyData(AddressToCopyFrom, ReadDataLen);
@@ -192,7 +192,7 @@ public class LevArk : Loader {
 
 
         //Data is copied. now begin writing the output file
-        FileStream file = File.Open( Path.Combine(Loader.BasePath,"SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
+        FileStream file = File.Open( Path.Combine(BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         long add_ptr = 0;
 
@@ -304,7 +304,7 @@ public class LevArk : Loader {
             }///31752
             else
             {
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 2, 32);
+                AddressToCopyFrom = getValAtAddress(lev_ark_file_data, (l * 4) + 2, 32);
                 blockData[l].Data = CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
                 blockData[l].DataLen = blockData[l].Data.GetUpperBound(0) + 1;
             }
@@ -313,7 +313,7 @@ public class LevArk : Loader {
         //Read in the data for the animation overlays
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
         {
-            AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, ((l + 9) * 4) + 2, 32);
+            AddressToCopyFrom = getValAtAddress(lev_ark_file_data, ((l + 9) * 4) + 2, 32);
             blockData[l + 9].Data = CopyData(AddressToCopyFrom, 64 * 6);
             blockData[l + 9].DataLen = blockData[l + 9].Data.GetUpperBound(0) + 1;
         }
@@ -328,7 +328,7 @@ public class LevArk : Loader {
             }
             else
             {
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, ((l + 18) * 4) + 2, 32);
+                AddressToCopyFrom = getValAtAddress(lev_ark_file_data, ((l + 18) * 4) + 2, 32);
                 blockData[l + 18].Data = CopyData(AddressToCopyFrom, 0x7a);
                 blockData[l + 18].DataLen = blockData[l + 18].Data.GetUpperBound(0) + 1;
             }
@@ -380,7 +380,7 @@ public class LevArk : Loader {
         }
 
 
-        FileStream file = File.Open(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         long add_ptr = 0;
         add_ptr += DataLoader.WriteInt8(writer, 0x87);

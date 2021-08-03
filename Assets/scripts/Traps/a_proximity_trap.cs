@@ -66,7 +66,7 @@ public class a_proximity_trap : trap_base
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld == false))
+        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld == false))
         {
             //Activate(other.gameObject);
             ExecuteTrap(this, owner, quality, flags);

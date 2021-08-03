@@ -79,7 +79,7 @@ public class SaveGame : Loader
 
         ResetUI();
 
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
@@ -115,7 +115,7 @@ public class SaveGame : Loader
                         //Or STR * 2; safe to ignore?
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)DataLoader.getValAtAddress(buffer, i, 32); break;
+                        UWCharacter.Instance.EXP = (int)getValAtAddress(buffer, i, 32); break;
                     case 0x53: // skillpoints available to spend
                         UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
                     case 0x55:
@@ -133,13 +133,13 @@ public class SaveGame : Loader
                         break;
                     case 0x61:
                         {
-                            Quest.instance.isOrbDestroyed = ((((int)DataLoader.getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
-                            Quest.instance.isCupFound = ((((int)DataLoader.getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
+                            Quest.instance.isOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
+                            Quest.instance.isCupFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
                             break;
                         }
                     case 0x62://intoxication and is garamon buried.
                         {
-                            int val = ((int)DataLoader.getValAtAddress(buffer, i, 16));
+                            int val = ((int)getValAtAddress(buffer, i, 16));
                             UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
                             Quest.instance.isGaramonBuried = ((val >> 10) & 0x3) == 3;
                             break;
@@ -153,7 +153,7 @@ public class SaveGame : Loader
                         break;
                     case 0x66://Quest flags
                         {
-                            int val = (int)DataLoader.getValAtAddress(buffer, i, 32);
+                            int val = (int)getValAtAddress(buffer, i, 32);
                             for (int b = 0; b <= 31; b++)
                             {//Check order here
                                 if (((val >> (b)) & 0x1) == 1)
@@ -168,19 +168,19 @@ public class SaveGame : Loader
                             break;
                         }
                     case 0x6A:
-                        Quest.instance.QuestVariables[32] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.QuestVariables[32] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6B:
-                        Quest.instance.QuestVariables[33] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.QuestVariables[33] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6C:
-                        Quest.instance.QuestVariables[34] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.QuestVariables[34] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6D:
-                        Quest.instance.QuestVariables[35] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.QuestVariables[35] = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0x6E://No of talismans still to destory
-                        Quest.instance.TalismansRemaining = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.TalismansRemaining = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0x6F://Garamon dream related?
-                        Quest.instance.GaramonDream = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        Quest.instance.GaramonDream = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x71://Game variables
                     case 0x72:
                     case 0x73:
@@ -246,21 +246,21 @@ public class SaveGame : Loader
                     case 0xAF:
                     case 0xB0:  //quest vars											
                         {
-                            Quest.instance.variables[i - 0x71] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                            Quest.instance.variables[i - 0x71] = (int)getValAtAddress(buffer, i, 8); break;
                         }
                     case 0xB1:  //The true max mana of the character. Used with the orb on level 7
-                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = (int)getValAtAddress(buffer, i, 8);
                         break;
                     case 0xB6: //Game options. High nibble is detail which is ignored Bit 0 is sound. Bit 3 is music													
                         break;
                     case 0xCF: ///   game time
-                        GameClock.instance.game_time = (int)DataLoader.getValAtAddress(buffer, i, 32); break;
+                        GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
                     case 0xD0:
-                        GameClock.instance.gametimevals[0] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0xD1:
-                        GameClock.instance.gametimevals[1] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0xD2:
-                        GameClock.instance.gametimevals[2] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0xDD: ///    current vitality
                         UWCharacter.Instance.CurVIT = (int)buffer[i]; break;
@@ -716,7 +716,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath ,"SAVE" + slotNo, "playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath ,"SAVE" + slotNo, "playertmp.dat"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;
@@ -735,7 +735,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)buffer[i];
             }
-            File.WriteAllBytes(Path.Combine(Loader.BasePath , "SAVE" + slotNo , "PLAYER.DAT"), dataToWrite);
+            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo , "PLAYER.DAT"), dataToWrite);
         }
 
     }
@@ -747,7 +747,7 @@ public class SaveGame : Loader
     public static void WritePlayerDatUW2(int slotNo)
     {
         //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        FileStream file = File.Open(Path.Combine(Loader.BasePath, "SAVE" + slotNo , "playertmp.dat"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo , "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         //int runeOffset=0;
@@ -1487,7 +1487,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), out buffer))
         {
             char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
 
@@ -1608,15 +1608,15 @@ public class SaveGame : Loader
         UWCharacter.Instance.JustTeleported = true;
         UWCharacter.Instance.teleportedTimer = 0f;
 
-        if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out pDat))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out pDat))
         {
-            byte MS = (byte)DataLoader.getValAtAddress(pDat, 0, 8);
+            byte MS = (byte)getValAtAddress(pDat, 0, 8);
             UWCharacter.Instance.XorKey = (int)MS;
             char[] buffer = DecodeEncodeUW2PlayerDat(pDat, MS);
             if (UWCharacter.Instance.decode)
             {
                 //write out decrypted file for analysis
-                StreamWriter output = new StreamWriter(Path.Combine(Loader.BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".csv"));
+                StreamWriter output = new StreamWriter(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".csv"));
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
@@ -1624,7 +1624,7 @@ public class SaveGame : Loader
                     output.WriteLine((byte)buffer[i]);
                 }
                 output.Close();
-                File.WriteAllBytes(Path.Combine(Loader.BasePath,"SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
+                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
             /*for (int c=0; c<=pDat.GetUpperBound(0);c++)
             {
@@ -1676,10 +1676,10 @@ public class SaveGame : Loader
                     case 0x4D: ///   weight in 0.1 stones
                         //Or STR * 2; safe to ignore?
                         //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-                        Debug.Log("Weight value is " + (int)DataLoader.getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
+                        Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)(DataLoader.getValAtAddress(buffer, i, 32) *0.1f); break;
+                        UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) *0.1f); break;
                     case 0x53: // skillpoints available to spend
                         UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
                     case 0x55: ///   x-position in level
@@ -1695,7 +1695,7 @@ public class SaveGame : Loader
                         effectCounter = ((int)buffer[i] >> 6) & 0x3;
                         break;
                     case 0x62://alco
-                        UWCharacter.Instance.Intoxication = ((int)DataLoader.getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
+                        UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
                         break;
                     case 0x64:
                         Quest.instance.DreamPlantEaten = (1 == (((int)buffer[i]) & 0x1));
@@ -1741,7 +1741,7 @@ public class SaveGame : Loader
                     case 0xDF:  //Quests 120 to 123
                     case 0xE3:  //Quests 124 to 127
                         {//The first 4 bits of each of these is the quest flags.
-                            int val = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            int val = (int)getValAtAddress(buffer, i, 8);
                             for (int q = 0; q < 4; q++)
                             {
                                 Quest.instance.QuestVariables[QuestCounter++] = (val >> q) & 0x1;
@@ -1769,7 +1769,7 @@ public class SaveGame : Loader
                     case 0xF8:  //Quest 145
                     case 0xF9:  //Quest 146
                         {//TODO:These quests are not tested.
-                            Quest.instance.QuestVariables[i - 103] = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            Quest.instance.QuestVariables[i - 103] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                     case 0xFA:  //Variable0
@@ -1901,12 +1901,12 @@ public class SaveGame : Loader
                     case 0x1F6:  //126
                     case 0x1F8:  //Variable 127
                         {
-                            Quest.instance.variables[VariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            Quest.instance.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                     case 0x1D2:  //Variable 108 //Int 16 used in qbert
                         {
-                            Quest.instance.variables[VariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 16);
+                            Quest.instance.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 16);
                             break;
                         }
 
@@ -2041,7 +2041,7 @@ public class SaveGame : Loader
                     case 0x2F6:
                     case 0x2F8://end bit variables
                         {
-                            Quest.instance.BitVariables[BitVariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 16);
+                            Quest.instance.BitVariables[BitVariableCounter++] = (int)getValAtAddress(buffer, i, 16);
                             break;
                         }
                     //Skip for bit variables
@@ -2177,11 +2177,11 @@ public class SaveGame : Loader
                             break;
                         }   
                     case 0x2fb: ///   x-position in level
-                        x_position_dream = (int)DataLoader.getValAtAddress(buffer, i, 16); break;
+                        x_position_dream = (int)getValAtAddress(buffer, i, 16); break;
                     case 0x2fd: ///   y-position
-                        y_position_dream = (int)DataLoader.getValAtAddress(buffer, i, 16); break;
+                        y_position_dream = (int)getValAtAddress(buffer, i, 16); break;
                     case 0x301:
-                        UWCharacter.Instance.DreamReturnLevel = (short)(DataLoader.getValAtAddress(buffer, i, 8) - 1); break;
+                        UWCharacter.Instance.DreamReturnLevel = (short)(getValAtAddress(buffer, i, 8) - 1); break;
                     case 0x303:
                         //{//Game options high nibble is graphic detail
                         //		int val =	(int)DataLoader.getValAtAddress(buffer,i,8);
@@ -2191,7 +2191,7 @@ public class SaveGame : Loader
                     //}
                     case 0x306:
                         {//Timer for paralyzed effect
-                            UWCharacter.Instance.ParalyzeTimer = (short)(DataLoader.getValAtAddress(buffer, i, 8));
+                            UWCharacter.Instance.ParalyzeTimer = (short)(getValAtAddress(buffer, i, 8));
                             break;
                         }
                     case 0x361://Item Ids of arena warriors.
@@ -2200,18 +2200,18 @@ public class SaveGame : Loader
                     case 0x364:
                     case 0x365:
                         {
-                            Quest.instance.ArenaOpponents[arena++] = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            Quest.instance.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                     //x_clocks
                     case 0x36a: ///   game time
-                        GameClock.instance.game_time = (int)DataLoader.getValAtAddress(buffer, i, 32); break;
+                        GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
                     case 0x36b:
-                        GameClock.instance.gametimevals[0] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x36c:
-                        GameClock.instance.gametimevals[1] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x36d:
-                        GameClock.instance.gametimevals[2] = (int)DataLoader.getValAtAddress(buffer, i, 8); break;
+                        GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x36f://1 Castle events
                     case 0x370://2
                     case 0x371://3 DjinnCapture
@@ -2228,7 +2228,7 @@ public class SaveGame : Loader
                     case 0x37c://14
                                //case 0x37d://15 -- This could be wrong.
                         {//The mysterious x_clocks
-                            Quest.instance.x_clocks[x_clock++] = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            Quest.instance.x_clocks[x_clock++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                 }
@@ -2394,7 +2394,7 @@ public class SaveGame : Loader
                 case 0x41:
                 case 0x43://Active spell effect
                     {
-                        ActiveEffectIds[effectCounter] = SaveGame.GetActiveSpellID((int)buffer[i]); break;
+                        ActiveEffectIds[effectCounter] = GetActiveSpellID((int)buffer[i]); break;
                     }
                 case 0x3F + 1:
                 case 0x41 + 1:
@@ -2476,10 +2476,10 @@ public class SaveGame : Loader
     /// <param name="i">The index.</param>
     static void LoadGameOptions(char[] buffer, int i)
     {
-        int val = (int)DataLoader.getValAtAddress(buffer, i, 8);
+        int val = (int)getValAtAddress(buffer, i, 8);
         ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
         MusicController.PlayMusic = (((val >> 2) & 0x1) == 1);
-        GameWorldController.instance.difficulty = (int)DataLoader.getValAtAddress(buffer, i-1, 8) & 0x1;
+        GameWorldController.instance.difficulty = (int)getValAtAddress(buffer, i-1, 8) & 0x1;
     }
 
     /// <summary>
@@ -2550,7 +2550,7 @@ public class SaveGame : Loader
         }
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Object.Destroy(child.gameObject);
         }
     }
 
@@ -2589,7 +2589,7 @@ public class SaveGame : Loader
         {
             for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0);x++)
             {
-                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, GameWorldController.CurrentTileMap(),false);//Inventory indices start at 1
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, UWEBase.CurrentTileMap(),false);//Inventory indices start at 1
                 GameWorldController.instance.inventoryLoader.objInfo[x].parentList = GameWorldController.instance.inventoryLoader;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
@@ -2610,7 +2610,7 @@ public class SaveGame : Loader
             for (int j = lBoundSlots; j < uBoundSlots; j = j + 2)
             {
                 //Apply objects to slots
-                int index = ((int)DataLoader.getValAtAddress(buffer, j, 16) >> 6);
+                int index = ((int)getValAtAddress(buffer, j, 16) >> 6);
                 ObjectInteraction item; 
                 if (index != 0)
                 {
@@ -3080,16 +3080,16 @@ public class SaveGame : Loader
     static void LoadPosition(char[] buffer)
     {
         //   x-position in level
-        int x_position = (int)DataLoader.getValAtAddress(buffer, 0x55, 16);
+        int x_position = (int)getValAtAddress(buffer, 0x55, 16);
         //   y-position
-        int y_position = (int)DataLoader.getValAtAddress(buffer, 0x57, 16);
+        int y_position = (int)getValAtAddress(buffer, 0x57, 16);
         //   z-position
-        int z_position = (int)DataLoader.getValAtAddress(buffer, 0x59, 16);
-        float heading = (float)DataLoader.getValAtAddress(buffer, 0x5c, 8);
+        int z_position = (int)getValAtAddress(buffer, 0x59, 16);
+        float heading = (float)getValAtAddress(buffer, 0x5c, 8);
         Debug.Log("Player heading is " + heading);
         UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, heading * (360f / 255f), 0f);
         UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
-        GameWorldController.instance.startLevel = (short)(DataLoader.getValAtAddress(buffer, 0x5d, 16) - 1);
+        GameWorldController.instance.startLevel = (short)(getValAtAddress(buffer, 0x5d, 16) - 1);
         InitPlayerPosition(x_position, y_position, z_position);
     }
 
@@ -3133,7 +3133,7 @@ public class SaveGame : Loader
         //};
 
 
-        FileStream file = File.Open(Path.Combine(Loader.BasePath,"SAVE" + slotNo ,"playertmp.dat"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         int runeOffset = 0;
@@ -3754,7 +3754,7 @@ public class SaveGame : Loader
 
         char[] buffer;
         //Reopen and encrypt the file
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath , "SAVE" + slotNo , "playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath , "SAVE" + slotNo , "playertmp.dat"), out buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;

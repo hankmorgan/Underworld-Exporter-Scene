@@ -26,11 +26,11 @@ public class SpellEffectLevitate : SpellEffect {
 			UWCharacter.Instance.isFloating=true;	
 			if (_RES==GAME_UW2)
 			{
-				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW2_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, UW2_Spell_Effect_SlowFall, Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
 			}
 			else
 			{
-				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);				
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, UW1_Spell_Effect_SlowFall, Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);				
 			}				
 		}		
 		UWCharacter.Instance.flySpeed=0;		

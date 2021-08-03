@@ -769,7 +769,7 @@ public class ObjectInteraction : UWEBase{
         item = this.GetComponent<object_base>();
         if (item != null)
         {
-            return item.GetContextMenuText(item_id, isUsable && WindowDetect.ContextUIUse, CanBePickedUp && WindowDetect.ContextUIUse, ((CurrentObjectInHand) != null && (UWCharacter.InteractionMode != UWCharacter.InteractionModePickup)));
+            return item.GetContextMenuText(item_id, isUsable && WindowDetect.ContextUIUse, CanBePickedUp && WindowDetect.ContextUIUse, ((CurrentObjectInHand) != null && (Character.InteractionMode != Character.InteractionModePickup)));
         }
         else
         {
@@ -1107,9 +1107,9 @@ public class ObjectInteraction : UWEBase{
                 }
 
                 ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(lstOutput[i], 40, 0, 0, 256);
-                ObjectInteraction Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+                ObjectInteraction Created = CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
                 GameWorldController.MoveToInventory(Created);
-                UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+                Character.InteractionMode = Character.InteractionModePickup;
 
                     Created.UpdateAnimation();
 
@@ -1143,12 +1143,12 @@ public class ObjectInteraction : UWEBase{
             BaseObjectData.InUseFlag = 0;//Free up the slot
 
             // Destroy(this.gameObject);
-            ObjectInteraction.DestroyObjectFromUW(this);
+            DestroyObjectFromUW(this);
         }
         else
         {//just decrement the quantity value;
             link--;
-            ObjectInteraction.Split(this);
+            Split(this);
             UWCharacter.Instance.playerInventory.Refresh();
         }
     }
@@ -1298,7 +1298,7 @@ public class ObjectInteraction : UWEBase{
         BoxCollider box = myObj.GetComponent<BoxCollider>();
         if (
                 (box == null)
-                && (objInteract.GetItemType() != ObjectInteraction.NPC_TYPE)
+                && (objInteract.GetItemType() != NPC_TYPE)
                 && (objInteract.isUsable)
             )
         {
@@ -1397,17 +1397,17 @@ public class ObjectInteraction : UWEBase{
                 &&
                     (
                         (  //Only merge keys if they have the same owner
-                            (mergingInto.GetItemType() == ObjectInteraction.KEY)
+                            (mergingInto.GetItemType() == KEY)
                             &&
-                            (mergingFrom.GetItemType() == ObjectInteraction.KEY)
+                            (mergingFrom.GetItemType() == KEY)
                             &&
                             (mergingInto.owner == mergingFrom.owner)
                         )
                         ||
                         (
-                            (mergingInto.GetItemType() != ObjectInteraction.KEY)
+                            (mergingInto.GetItemType() != KEY)
                             ||
-                            (mergingFrom.GetItemType() != ObjectInteraction.KEY)
+                            (mergingFrom.GetItemType() != KEY)
                         )
                     )
         );
@@ -1487,9 +1487,9 @@ public class ObjectInteraction : UWEBase{
         newObj.transform.position = myObj.transform.position;
         newObj.AddComponent<BillboardNPC>();
         SpriteRenderer mysprite = newObj.AddComponent<SpriteRenderer>();
-        switch (Loader._RES)
+        switch (UWClass._RES)
         {
-            case Loader.GAME_UW2:
+            case UWClass.GAME_UW2:
                 mysprite.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);//Scale up sprites.
                 break;
             default:
@@ -1969,8 +1969,8 @@ public class ObjectInteraction : UWEBase{
             Debug.Log(LinkEventCtr++ + oI.name + " is attempting to unlink from an offmap tile");
             return;
         }
-        TileMap tm = GameWorldController.CurrentTileMap();
-        ObjectLoader objList = GameWorldController.CurrentObjectList();
+        TileMap tm = CurrentTileMap();
+        ObjectLoader objList = CurrentObjectList();
         TileInfo ti = tm.Tiles[x, y];
 
         if (ti.indexObjectList == oI.BaseObjectData.index)
@@ -2006,8 +2006,8 @@ public class ObjectInteraction : UWEBase{
     /// <param name="y"></param>
     public static void LinkItemToTileMapChain(ObjectInteraction oI, int x, int y)
     {
-        TileMap tm = GameWorldController.CurrentTileMap();
-        ObjectLoader objList = GameWorldController.CurrentObjectList();
+        TileMap tm = CurrentTileMap();
+        ObjectLoader objList = CurrentObjectList();
         TileInfo ti = tm.Tiles[x, y];
 
         if (ti.indexObjectList==0)
@@ -2870,7 +2870,7 @@ public class ObjectInteraction : UWEBase{
         if ((CreateSprite) || (EditorMode) )
         {
             //GameObject SpriteObj =
-            objInt.ObjectSprite= ObjectInteraction.CreateObjectGraphics(myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, !RemoveBillboard);
+            objInt.ObjectSprite= CreateObjectGraphics(myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, !RemoveBillboard);
         }
 
 
@@ -2947,7 +2947,7 @@ public class ObjectInteraction : UWEBase{
             {
                 if (currObj.link <= objList.GetUpperBound(0))
                 {
-                    if ((objList[currObj.link].GetItemType() == ObjectInteraction.SPELL) && (objList[currObj.link].InUseFlag == 1))
+                    if ((objList[currObj.link].GetItemType() == SPELL) && (objList[currObj.link].InUseFlag == 1))
                     {
                         return true;
                     }
@@ -3056,9 +3056,9 @@ public class ObjectInteraction : UWEBase{
      //"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
         switch (currObj.GetItemType())
         {
-            case ObjectInteraction.DOOR:
-            case ObjectInteraction.HIDDENDOOR:
-            case ObjectInteraction.PORTCULLIS:
+            case DOOR:
+            case HIDDENDOOR:
+            case PORTCULLIS:
                 return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
             default:
                 return currObj.getDesc() + System.Guid.NewGuid();

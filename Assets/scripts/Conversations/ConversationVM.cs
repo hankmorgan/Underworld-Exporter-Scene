@@ -197,13 +197,13 @@ public class ConversationVM : UWEBase
     public void LoadCnvArk(string cnv_ark_path)
     {
         char[] cnv_ark;
-        if (DataLoader.ReadStreamFile(cnv_ark_path, out cnv_ark))
+        if (Loader.ReadStreamFile(cnv_ark_path, out cnv_ark))
         {
-            int NoOfConversations = (int)DataLoader.getValAtAddress(cnv_ark, 0, 16);
+            int NoOfConversations = (int)Loader.getValAtAddress(cnv_ark, 0, 16);
             conv = new cnvHeader[NoOfConversations];
             for (int i = 0; i < NoOfConversations; i++)
             {
-                int add_ptr = (int)DataLoader.getValAtAddress(cnv_ark, 2 + i * 4, 32);
+                int add_ptr = (int)Loader.getValAtAddress(cnv_ark, 2 + i * 4, 32);
                 if (add_ptr != 0)
                 {
                     /*
@@ -217,10 +217,10 @@ public class ConversationVM : UWEBase
 000E   Int16   number of imported globals (functions + variables)
 0010           start of imported functions list
 */
-                    conv[i].CodeSize = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
-                    conv[i].StringBlock = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
-                    conv[i].NoOfMemorySlots = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
-                    conv[i].NoOfImportedGlobals = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
+                    conv[i].CodeSize = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
+                    conv[i].StringBlock = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
+                    conv[i].NoOfMemorySlots = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
+                    conv[i].NoOfImportedGlobals = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
                     conv[i].functions = new ImportedFunctions[conv[i].NoOfImportedGlobals];
                     int funcptr = add_ptr + 0x10;
                     for (int f = 0; f < conv[i].NoOfImportedGlobals; f++)
@@ -232,21 +232,21 @@ n+02   Int16   ID (imported func.) / memory address (variable)
 n+04   Int16   unknown, always seems to be 1
 n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
 n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
-                        int len = (int)DataLoader.getValAtAddress(cnv_ark, funcptr, 16);
+                        int len = (int)Loader.getValAtAddress(cnv_ark, funcptr, 16);
                         for (int j = 0; j < len; j++)
                         {
-                            conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
+                            conv[i].functions[f].functionName += (char)Loader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
                         }
-                        conv[i].functions[f].ID_or_Address = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
-                        conv[i].functions[f].import_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
-                        conv[i].functions[f].return_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
+                        conv[i].functions[f].ID_or_Address = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
+                        conv[i].functions[f].import_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
+                        conv[i].functions[f].return_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
                         funcptr += len + 10;
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
                     for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
                     {
-                        conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+                        conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
                 }
             }
@@ -264,21 +264,21 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     {
         char[] tmp_ark;
         int address_pointer = 2;
-        if (!DataLoader.ReadStreamFile(cnv_ark_path, out tmp_ark))
+        if (!Loader.ReadStreamFile(cnv_ark_path, out tmp_ark))
         {
             Debug.Log("unable to load uw2 conv ark");
             return;
         }
 
-        int NoOfConversations = (int)DataLoader.getValAtAddress(tmp_ark, 0, 32);
+        int NoOfConversations = (int)Loader.getValAtAddress(tmp_ark, 0, 32);
 
         conv = new cnvHeader[NoOfConversations];
 
         for (int i = 0; i < NoOfConversations; i++)
         {
-            int compressionFlag = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer + (NoOfConversations * 4), 32);
+            int compressionFlag = (int)Loader.getValAtAddress(tmp_ark, address_pointer + (NoOfConversations * 4), 32);
             int isCompressed = (compressionFlag >> 1) & 0x01;
-            long add_ptr = DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+            long add_ptr = Loader.getValAtAddress(tmp_ark, address_pointer, 32);
             if (add_ptr != 0)
             {
                 if (isCompressed == 1)
@@ -297,10 +297,10 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
    000E   Int16   number of imported globals (functions + variables)
    0010           start of imported functions list
     */
-                    conv[i].CodeSize = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
-                    conv[i].StringBlock = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
-                    conv[i].NoOfMemorySlots = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
-                    conv[i].NoOfImportedGlobals = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
+                    conv[i].CodeSize = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
+                    conv[i].StringBlock = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
+                    conv[i].NoOfMemorySlots = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
+                    conv[i].NoOfImportedGlobals = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
                     conv[i].functions = new ImportedFunctions[conv[i].NoOfImportedGlobals];
                     long funcptr = add_ptr + 0x10;
                     for (int f = 0; f < conv[i].NoOfImportedGlobals; f++)
@@ -313,21 +313,21 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
         n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)
         */
-                        int len = (int)DataLoader.getValAtAddress(cnv_ark, funcptr, 16);
+                        int len = (int)Loader.getValAtAddress(cnv_ark, funcptr, 16);
                         for (int j = 0; j < len; j++)
                         {
-                            conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
+                            conv[i].functions[f].functionName += (char)Loader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
                         }
-                        conv[i].functions[f].ID_or_Address = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
-                        conv[i].functions[f].import_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
-                        conv[i].functions[f].return_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
+                        conv[i].functions[f].ID_or_Address = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
+                        conv[i].functions[f].import_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
+                        conv[i].functions[f].return_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
                         funcptr += len + 10;
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
                     for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
                     {
-                        conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+                        conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
 
 
@@ -465,7 +465,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     public void RunConversation(NPC npc)
     {
         string npcname = "";
-        if (!ConversationVM.VMLoaded)
+        if (!VMLoaded)
         {
             InitConvVM();
             if (_RES == GAME_UW2)
@@ -527,9 +527,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
 
 
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeInConversation;//Set converation mode.
-        ConversationVM.CurrentConversation = npc.npc_whoami;//To make obsolete
-        ConversationVM.InConversation = true;
+        Character.InteractionMode = Character.InteractionModeInConversation;//Set converation mode.
+        CurrentConversation = npc.npc_whoami;//To make obsolete
+        InConversation = true;
 
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
         UWHUD.instance.Conversation_tl.Clear();
@@ -1142,7 +1142,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         for (int c = 0; c <= GameWorldController.instance.bGlobals.GetUpperBound(0); c++)
         {
-            if (ConversationVM.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
+            if (CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
             {
                 GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex] = 1;
                 for (int x = 0; x <= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0); x++)
@@ -1254,19 +1254,19 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         //yield return new WaitForSeconds(8f);
         yield return StartCoroutine(WaitForMore());
         yield return new WaitForSeconds(0.5f);
-        ConversationVM.InConversation = false;
+        InConversation = false;
         //npc.npc_talkedto=1;
         UWHUD.instance.Conversation_tl.Clear();
         UWHUD.instance.MessageScroll.Clear();
 
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeTalk;
+        Character.InteractionMode = Character.InteractionModeTalk;
         if (MusicController.instance != null)
         {
             MusicController.instance.InMap = false;
         }
         if (CurrentObjectInHand != null)
         {
-            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+            Character.InteractionMode = Character.InteractionModePickup;
         }
         StopAllCoroutines();
 
@@ -4135,7 +4135,7 @@ return value: 1 when found (?)
         newobjt.is_quant = 1;
         ObjectInteraction myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
-        ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
+        BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj);
         return myObj.GetComponent<ObjectInteraction>().BaseObjectData.index;
 

@@ -23,7 +23,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 		public void End()
 		{
-			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask= NormalCullingMask;
 			if (cs!=null)
 			{
 				cs.PostCutSceneEvent();
@@ -157,7 +157,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	{
 		if ((PlayingSequence==false) || (cs==null))
 		{
-			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask= NormalCullingMask;
 			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			mlCuts.Set("");
 			End();
@@ -177,7 +177,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			PreviousAnimationFile=SetAnimationFile;
 			if (SetAnimationFile.ToLower()=="anim_base")
 			{
-				UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+				UWCharacter.Instance.playerCam.cullingMask= NormalCullingMask;
 			}
 		}
 
@@ -188,7 +188,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			{
 					if (CutsceneTime>=3.0f)
 					{//Only end a cutscene if it has been running for longer than 3 seconds
-							UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+							UWCharacter.Instance.playerCam.cullingMask= NormalCullingMask;
 							SetAnimationFile= "Anim_Base";//End of anim.
 							PlayingSequence=false;
 							PostAnimPlay();

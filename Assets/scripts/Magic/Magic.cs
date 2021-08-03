@@ -1507,7 +1507,7 @@ public class Magic : UWEBase
     /// <param name="EffectID">Effect ID of the spell</param>
     void Cast_VasKalCorp(GameObject caster, int EffectID)
     {//Armageddon//Destroys almost everything!
-        GameObject[] allGameObj = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+        GameObject[] allGameObj = FindObjectsOfType(typeof(GameObject)) as GameObject[];
         for (int i = 0; i <= allGameObj.GetUpperBound(0); i++)
         {
             if ((allGameObj[i].layer == LayerMask.NameToLayer("UWObjects"))
@@ -3922,7 +3922,7 @@ public class Magic : UWEBase
     /// </summary>
     void OnGUI()
     {
-        if ((WindowDetectUW.InMap == true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) { return; }
+        if ((WindowDetect.InMap == true) || (WindowDetect.WaitingForInput) || (ConversationVM.InConversation)) { return; }
         if (
                 (Event.current.keyCode == GameWorldController.instance.config.CastSpell)
                 &&

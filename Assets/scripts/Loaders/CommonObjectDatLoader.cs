@@ -64,36 +64,36 @@ public class CommonObjectDatLoader : Loader {
 				
 				char[] comobj_dat;
 				//int add_ptr;
-				if (DataLoader.ReadStreamFile(Path.Combine(BasePath, "DATA", "COMOBJ.DAT"),out comobj_dat))
+				if (ReadStreamFile(Path.Combine(BasePath, "DATA", "COMOBJ.DAT"),out comobj_dat))
 						{
 						int len= (comobj_dat.GetUpperBound(0)-2)/11;
 						properties = new CommonObjectProperties[len];
 						int addressPtr = 2;//SKip first two bytes
 						for (int i=0; i<=properties.GetUpperBound(0);i++)
 						{
-								properties[i].height= (int)DataLoader.getValAtAddress(comobj_dat, addressPtr, 8);
-								properties[i].radius = (int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7;
-								properties[i].animFlag=((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1;
-								properties[i].mass=((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4);
-								properties[i].Flag0= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01;//Flags0
-								properties[i].Flag1= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01;//Flags1
-								properties[i].Flag2= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01;//Flags2
-								properties[i].FlagMagicObject= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01;//Magic?
-								properties[i].FlagDecalObject= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01;//Decal
-								properties[i].FlagCanBePickedUp= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01;//Pickable
-								properties[i].Flag6 = ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01;//Flags6
-								properties[i].FlagisContainer = ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01;//Container
+								properties[i].height= (int)getValAtAddress(comobj_dat, addressPtr, 8);
+								properties[i].radius = (int)getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7;
+								properties[i].animFlag=((int)getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1;
+								properties[i].mass=((int)getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4);
+								properties[i].Flag0= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01;//Flags0
+								properties[i].Flag1= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01;//Flags1
+								properties[i].Flag2= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01;//Flags2
+								properties[i].FlagMagicObject= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01;//Magic?
+								properties[i].FlagDecalObject= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01;//Decal
+								properties[i].FlagCanBePickedUp= ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01;//Pickable
+								properties[i].Flag6 = ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01;//Flags6
+								properties[i].FlagisContainer = ((int)getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01;//Container
 
-								properties[i].Value= (int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 4, 16);
-								properties[i].QualityClass=((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
+								properties[i].Value= (int)getValAtAddress(comobj_dat, addressPtr + 4, 16);
+								properties[i].QualityClass=((int)getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
 
-								properties[i].CanBelongTo=((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 7) & 0x1;
+								properties[i].CanBelongTo=((int)getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 7) & 0x1;
 
-                                properties[i].scaleValue = (int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 8, 16);
+                                properties[i].scaleValue = (int)getValAtAddress(comobj_dat, addressPtr + 8, 16);
 
-                                properties[i].QualityType =(int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
+                                properties[i].QualityType =(int)getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
 
-								properties[i].LookAt= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1;
+								properties[i].LookAt= ((int)getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1;
 								addressPtr = addressPtr + 11;
 						}
 

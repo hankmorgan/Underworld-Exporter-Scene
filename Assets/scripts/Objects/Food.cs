@@ -211,7 +211,7 @@ public class Food : object_base {
             ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
             GameWorldController.MoveToInventory(created.gameObject);
             CurrentObjectInHand = created;
-            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+            Character.InteractionMode = Character.InteractionModePickup;
         }
     }
 

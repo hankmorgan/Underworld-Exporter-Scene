@@ -72,21 +72,21 @@ public class TerrainDatLoader : Loader
         Terrain = new int[256 + 256];//wall and floor
         char[] terrain_dat;
         int add_ptr = 0;
-        if (DataLoader.ReadStreamFile( Path.Combine(BasePath, "DATA", filename), out terrain_dat))
+        if (ReadStreamFile( Path.Combine(BasePath, "DATA", filename), out terrain_dat))
         {
-            switch (Loader._RES)
+            switch (_RES)
             {
                 case GAME_UW1:
                 case GAME_UWDEMO:
                     for (int i = 0; i < 256; i++)
                     {
-                        Terrain[i] = (int)DataLoader.getValAtAddress(terrain_dat, add_ptr, 16);
+                        Terrain[i] = (int)getValAtAddress(terrain_dat, add_ptr, 16);
                         add_ptr += 2;
                     }
                     add_ptr = 0x200;
                     for (int i = 256; i < 512; i++)
                     {
-                        Terrain[i] = (int)DataLoader.getValAtAddress(terrain_dat, add_ptr, 16);
+                        Terrain[i] = (int)getValAtAddress(terrain_dat, add_ptr, 16);
                         add_ptr += 2;
                     }
                     break;
@@ -94,7 +94,7 @@ public class TerrainDatLoader : Loader
                     {
                         for (int i = 0; i < 256; i++)
                         {
-                            Terrain[i] = (int)DataLoader.getValAtAddress(terrain_dat, add_ptr, 16);
+                            Terrain[i] = (int)getValAtAddress(terrain_dat, add_ptr, 16);
                             add_ptr += 2;
                         }
                         break;

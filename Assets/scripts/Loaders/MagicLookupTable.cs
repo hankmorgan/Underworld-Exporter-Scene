@@ -50,7 +50,7 @@ public class MagicLookupTable : Loader
                 }
         }
 
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath, Exe), out uw_exe))
+        if (ReadStreamFile(Path.Combine(BasePath, Exe), out uw_exe))
         {
             for (int i = 0; i <= NoOfEntries; i++)
             {

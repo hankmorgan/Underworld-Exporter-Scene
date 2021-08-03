@@ -66,7 +66,7 @@ public class DataLoader :Loader {
     ///This decompresses UW2 blocks.
     public static char[] unpackUW2(char[] tmp, long address_pointer, ref long datalen)
 	{
-		long BlockLen = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
+		long BlockLen = (int)getValAtAddress(tmp,address_pointer,32);	//lword(base);
 		long NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
 		//char[] buf = new char[BlockLen+100];
 		char[] buf = new char[ Math.Max(NoOfSegs, BlockLen+100)];
@@ -221,7 +221,7 @@ public class DataLoader :Loader {
 
 			//Write the data to a file.
 			
-			WriteListToBytes(Output, Path.Combine(Loader.BasePath, "DATA", "recodetest.dat"));
+			WriteListToBytes(Output, Path.Combine(BasePath, "DATA", "recodetest.dat"));
 			char[] outchar = new char[Output.Count];
 			for (int i=0; i<Output.Count;i++)
 			{
@@ -240,10 +240,10 @@ public class DataLoader :Loader {
 		{
 			FileStream file = File.Open(path,FileMode.Create);
 			BinaryWriter writer= new BinaryWriter(file);
-			DataLoader.WriteInt32(writer, Output.Count);
+        WriteInt32(writer, Output.Count);
 			for (int i=0; i<Output.Count;i++)
 			{
-				DataLoader.WriteInt8(writer, (long)Output[i]);
+            WriteInt8(writer, (long)Output[i]);
 			}
 			writer.Close();
 		}
@@ -502,22 +502,22 @@ public class DataLoader :Loader {
 				//Finds the address of the block based on the directory block no.
 				//Justs loops through until it finds a match.
 				int blnLevelFound =0;
-				long DirectoryAddress=DataLoader.getValAtAddress(tmp_ark,124,32);
+				long DirectoryAddress= getValAtAddress(tmp_ark,124,32);
 				//printf("\nThe directory is at %d\n", DirectoryAddress);
 
-				int NoOfChunks = (int)DataLoader.getValAtAddress(tmp_ark,DirectoryAddress,16);
+				int NoOfChunks = (int)getValAtAddress(tmp_ark,DirectoryAddress,16);
 				//printf("there are %d chunks\n",NoOfChunks);
-				long firstChunkAddress = DataLoader.getValAtAddress(tmp_ark,DirectoryAddress+2,32);
+				long firstChunkAddress = getValAtAddress(tmp_ark,DirectoryAddress+2,32);
 				//printf("The first chunk is at %d\n", firstChunkAddress);
 				long address_pointer=DirectoryAddress+6;
 				long AddressOfBlockStart= firstChunkAddress;
 				for (int k=0; k< NoOfChunks; k++)
 				{
-						int chunkId = (int)DataLoader.getValAtAddress(tmp_ark,address_pointer,16);
-						chunkUnpackedLength =DataLoader.getValAtAddress(tmp_ark,address_pointer+2,24);
-						chunkCompressionType = (int)DataLoader.getValAtAddress(tmp_ark,address_pointer+5,8);  //Compression.
-						chunkPackedLength = DataLoader.getValAtAddress(tmp_ark,address_pointer+6,24);
-						chunkContentType =(short)DataLoader.getValAtAddress(tmp_ark,address_pointer+9,8);
+						int chunkId = (int)getValAtAddress(tmp_ark,address_pointer,16);
+						chunkUnpackedLength = getValAtAddress(tmp_ark,address_pointer+2,24);
+						chunkCompressionType = (int)getValAtAddress(tmp_ark,address_pointer+5,8);  //Compression.
+						chunkPackedLength = getValAtAddress(tmp_ark,address_pointer+6,24);
+						chunkContentType =(short)getValAtAddress(tmp_ark,address_pointer+9,8);
 
 						//Debug.Log(chunkId + " of type " + chunkContentType + " compress=" + chunkCompressionType + " packed= " + chunkPackedLength + " unpacked=" + chunkUnpackedLength + " at file address " + AddressOfBlockStart );
 
@@ -604,7 +604,7 @@ public class DataLoader :Loader {
 				case 3://Subdir compressed  //Just return the compressed data and unpack the sub chunks individually?
 						{
 								//uncompressed the sub chunks
-								int NoOfEntries=(int)DataLoader.getValAtAddress(archive_ark,AddressOfBlockStart,16);
+								int NoOfEntries=(int)getValAtAddress(archive_ark,AddressOfBlockStart,16);
 								int SubDirLength=(NoOfEntries+1) * 4 + 2;
 								char[] temp_ark = new char[chunkPackedLength]; 
 								char[] tmpchunk = new char[chunkUnpackedLength]; 
@@ -709,15 +709,15 @@ public class DataLoader :Loader {
 		public static bool LoadUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
 		{		
 			uwb = new UWBlock();		
-			int NoOfBlocks =  (int)DataLoader.getValAtAddress(arkData,0,32);
+			int NoOfBlocks =  (int)getValAtAddress(arkData,0,32);
 			switch (_RES)
 			{
 			case GAME_UW2:
 				{//6 + block *4 + (noOfBlocks*type)
-					uwb.Address=(int)DataLoader.getValAtAddress(arkData, 6 + (blockNo*4) ,32)  ;
-					uwb.CompressionFlag =(int)DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*4) ,32)  ;
-					uwb.DataLen =DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*8)  ,32)  ;
-					uwb.ReservedSpace =DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*12)  ,32)  ;	
+					uwb.Address=(int)getValAtAddress(arkData, 6 + (blockNo*4) ,32)  ;
+					uwb.CompressionFlag =(int)getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*4) ,32)  ;
+					uwb.DataLen = getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*8)  ,32)  ;
+					uwb.ReservedSpace = getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*12)  ,32)  ;	
 					if (uwb.Address!=0)
 					{
 						if (((uwb.CompressionFlag >>1) & 0x01) == 1)
@@ -744,7 +744,7 @@ public class DataLoader :Loader {
 				}
 			default:
 				{
-					uwb.Address =  DataLoader.getValAtAddress(arkData,(blockNo * 4) + 2,32);	
+					uwb.Address = getValAtAddress(arkData,(blockNo * 4) + 2,32);	
 					if (uwb.Address!=0)
 					{
 						uwb.Data = new char[targetDataLen];

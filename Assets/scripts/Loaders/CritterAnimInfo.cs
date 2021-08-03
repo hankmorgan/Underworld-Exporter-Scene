@@ -13,9 +13,9 @@ public class CritterAnimInfo {
 	{
 		animSequence=new string[NoOfAnims,8];
 		animIndices=new int[NoOfAnims,8];
-		switch (Loader._RES)
+		switch (UWClass._RES)
 		{
-		case Loader.GAME_UW2:
+		case UWClass.GAME_UW2:
 			animSprites=new Sprite[180];
 			break;
 		default:

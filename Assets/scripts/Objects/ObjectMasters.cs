@@ -30,10 +30,10 @@ public class ObjectMasters {
 	{
         objProp = new ObjectProperties[500];
 
-        switch (Loader._RES)
+        switch (UWClass._RES)
 		{
-		case Loader.GAME_UWDEMO:
-		case Loader.GAME_UW1:
+		case UWClass.GAME_UWDEMO:
+		case UWClass.GAME_UW1:
             initUW1ObjectProps();
 			break;
 		default:

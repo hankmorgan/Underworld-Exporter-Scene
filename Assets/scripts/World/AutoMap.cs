@@ -202,7 +202,7 @@ public class AutoMap : Loader
         {
             for (int x = 0; x <= TileMap.TileMapSizeX; x++)
             {
-                short val = (short)DataLoader.getValAtAddress(lev_ark, automapAddress + z, 8);
+                short val = (short)getValAtAddress(lev_ark, automapAddress + z, 8);
                 //The automap contains one byte per tile, in the same order as the
                 //level tilemap. A valid value in the low nybble means the tile is displayed
                 //on the map. Valid values are the same as tile types:
@@ -231,8 +231,8 @@ public class AutoMap : Loader
             bool terminated = false;
             int PosX = 0;
             int PosY = 0;
-            PosX = (int)DataLoader.getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
-            PosY = (int)DataLoader.getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
+            PosX = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
+            PosY = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
             for (int c = 0; c <= 0x31; c++)
             {
                 if ((lev_ark[automapNotesAddress + c].ToString() != "\0") && (!terminated))
@@ -285,13 +285,13 @@ public class AutoMap : Loader
         long automapNotesAddress = 0;
         //long AUTOMAP_EOF_ADDRESS=0;
 
-        int NoOfBlocks = (int)DataLoader.getValAtAddress(lev_ark, 0, 32);
+        int NoOfBlocks = (int)getValAtAddress(lev_ark, 0, 32);
 
-        automapAddress = DataLoader.getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4), 32);
+        automapAddress = getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4), 32);
         //Load Automap info
         if (automapAddress != 0)
         {
-            int compressionFlag = (int)DataLoader.getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
+            int compressionFlag = (int)getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
             if (((compressionFlag >> 1) & 0x1) == 1)
             {//automap is compressed
                 char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapAddress, ref datalen);
@@ -303,7 +303,7 @@ public class AutoMap : Loader
             }
         }
 
-        automapNotesAddress = DataLoader.getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (240 * 4), 32);
+        automapNotesAddress = getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (240 * 4), 32);
         if (automapNotesAddress != 0)
         {
             DataLoader.UWBlock noteblock;
@@ -334,15 +334,15 @@ public class AutoMap : Loader
         //Goes in order of when notes are added.
         for (int au = 0; au <= AutomapNoteAddresses.GetUpperBound(0); au++)
         {
-            AutomapNoteAddresses[au] = DataLoader.getValAtAddress(lev_ark, ((au + 36) * 4) + 2, 32);
+            AutomapNoteAddresses[au] = getValAtAddress(lev_ark, ((au + 36) * 4) + 2, 32);
             if (AutomapNoteAddresses[au] != 0)
             {
                 initAutoMaps = false;
             }
         }
 
-        automapAddress = DataLoader.getValAtAddress(lev_ark, ((LevelNo + 27) * 4) + 2, 32);
-        automapNotesAddress = DataLoader.getValAtAddress(lev_ark, ((LevelNo + 36) * 4) + 2, 32);
+        automapAddress = getValAtAddress(lev_ark, ((LevelNo + 27) * 4) + 2, 32);
+        automapNotesAddress = getValAtAddress(lev_ark, ((LevelNo + 36) * 4) + 2, 32);
 
         AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo, lev_ark);
         if (initAutoMaps)
@@ -1215,7 +1215,7 @@ public class AutoMap : Loader
         }
         else
         {
-            if ((Tiles[tileX, tileY].tileType == 10) && (IngameEditor.EditorMode == false))
+            if ((Tiles[tileX, tileY].tileType == 10) && (UWEBase.EditorMode == false))
             {
                 return TILE_SOLID;
             }

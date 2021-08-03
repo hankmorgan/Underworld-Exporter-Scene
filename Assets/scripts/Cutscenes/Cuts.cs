@@ -196,13 +196,13 @@ public class Cuts : GuiBase {
 		GameWorldController.instance.AtMainMenu=true;
 		//Clear out game objects
 		foreach (Transform child in GameWorldController.instance.LevelModel.transform) {
-				GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
 		}
 		foreach (Transform child in GameWorldController.instance.DynamicObjectMarker()) {
-				GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
 		}
 		foreach (Transform child in GameWorldController.instance.SceneryModel.transform) {
-				GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
 		}
 		MainMenuHud.instance.gameObject.SetActive(true);
 		MainMenuHud.instance.MenuMode=0;
@@ -230,11 +230,6 @@ public class Cuts : GuiBase {
                     }
                 }
             }
-            // AudioClip x = (AudioClip)Resources.Load(AudioClipName[i]);
-            //if (x != null)
-           // {
-            //    SubsDuration[i] = x.length;
-           // }
         }
     }
 }

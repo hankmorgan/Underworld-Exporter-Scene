@@ -51,7 +51,7 @@ public override bool use ()
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_catch_a_lovely_fish_));
                             ObjectInteraction FishobjInt = CreateFish();
 							CurrentObjectInHand= FishobjInt;
-							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+                            Character.InteractionMode = Character.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
 						}
 						else

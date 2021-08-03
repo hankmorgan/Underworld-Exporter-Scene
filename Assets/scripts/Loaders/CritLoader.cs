@@ -37,12 +37,12 @@ public class CritLoader : ArtLoader {
     {
         char[] assoc;
         long AssocAddressPtr = 256;
-        if (DataLoader.ReadStreamFile(assocpath, out assoc))
+        if (ReadStreamFile(assocpath, out assoc))
         {
             for (int ass = 0; ass <= 63; ass++)
             {
-                int FileID = (int)DataLoader.getValAtAddress(assoc, AssocAddressPtr++, 8);
-                int auxPal = (int)DataLoader.getValAtAddress(assoc, AssocAddressPtr++, 8);
+                int FileID = (int)getValAtAddress(assoc, AssocAddressPtr++, 8);
+                int auxPal = (int)getValAtAddress(assoc, AssocAddressPtr++, 8);
                 if (ass == CritterToLoad)
                 {
                     critter = new CritterInfo(FileID, GameWorldController.instance.palLoader.Palettes[0], auxPal);
@@ -93,15 +93,15 @@ public class CritLoader : ArtLoader {
 				//Load the assoc file
 				long AssocAddressPtr=0;
 				if  ( 
-						( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "AS.AN"), out assoc) ) 
-						&& ( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "PG.MP"), out pgmp) ) 
-						&& ( DataLoader.ReadStreamFile(Path.Combine(BasePath, "CRIT", "CR.AN"), out cran) )  
+						(ReadStreamFile(Path.Combine(BasePath, "CRIT", "AS.AN"), out assoc) ) 
+						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "PG.MP"), out pgmp) ) 
+						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "CR.AN"), out cran) )  
 				)
 				{
 						for (int ass = 0 ; ass <=63 ; ass++)
 						{
-								int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
-								int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
+								int FileID= (int)getValAtAddress(assoc,AssocAddressPtr++,8);
+								int auxPal = (int)getValAtAddress(assoc,AssocAddressPtr++,8);
 								if (FileID!=255)
 								{
 										if (ass==CritterToLoad)

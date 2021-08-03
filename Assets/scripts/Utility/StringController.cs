@@ -571,9 +571,9 @@ public class StringController : UWEBase
         GameStrings = new Hashtable();
         EntryCounts = new Hashtable();
 
-        if (DataLoader.ReadStreamFile(path, out Buffer))
+        if (Loader.ReadStreamFile(path, out Buffer))
         {
-            long NoOfNodes = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
+            long NoOfNodes = Loader.getValAtAddress(Buffer, address_pointer, 16);
             int i = 0;
             hman = new huffman_node[NoOfNodes];
             address_pointer = address_pointer + 2;
@@ -587,17 +587,17 @@ public class StringController : UWEBase
                 address_pointer = address_pointer + 4;
             }
 
-            long NoOfStringBlocks = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
+            long NoOfStringBlocks = Loader.getValAtAddress(Buffer, address_pointer, 16);
             blocks = new block_dir[NoOfStringBlocks];
             address_pointer = address_pointer + 2;
             i = 0;
             while (i < NoOfStringBlocks)
             {
-                blocks[i].block_no = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
+                blocks[i].block_no = Loader.getValAtAddress(Buffer, address_pointer, 16);
                 address_pointer = address_pointer + 2;
-                blocks[i].address = DataLoader.getValAtAddress(Buffer, address_pointer, 32);
+                blocks[i].address = Loader.getValAtAddress(Buffer, address_pointer, 32);
                 address_pointer = address_pointer + 4;
-                blocks[i].NoOfEntries = DataLoader.getValAtAddress(Buffer, blocks[i].address, 16);  //look ahead and get no of entries.
+                blocks[i].NoOfEntries = Loader.getValAtAddress(Buffer, blocks[i].address, 16);  //look ahead and get no of entries.
                 EntryCounts["_" + blocks[i].block_no] = blocks[i].NoOfEntries.ToString();
                 i++;
             }

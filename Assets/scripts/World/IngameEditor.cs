@@ -152,7 +152,7 @@ public class IngameEditor : GuiBase_Draggable
         FloorTextureMapSelect.ClearOptions();
         foreach (Transform child in FloorTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
 
         switch (_RES)
@@ -214,7 +214,7 @@ public class IngameEditor : GuiBase_Draggable
         WallTextureMapSelect.ClearOptions();
         foreach (Transform child in WallTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
         switch (_RES)
         {
@@ -275,7 +275,7 @@ public class IngameEditor : GuiBase_Draggable
         DoorTextureMapSelect.ClearOptions();
         foreach (Transform child in DoorTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
         switch (_RES)
         {
@@ -954,7 +954,7 @@ public class IngameEditor : GuiBase_Draggable
             WallTexture = -1;
         }
         CurrentTileMap().Tiles[tileX, tileY].VisibleFaces[TileMap.vTOP] = true;
-        IngameEditor.instance.UpdateTile(tileX, tileY, TileTypeSelected, FloorTexture, WallTexture, FloorHeight);
+        instance.UpdateTile(tileX, tileY, TileTypeSelected, FloorTexture, WallTexture, FloorHeight);
     }
 
 

@@ -172,7 +172,7 @@ public class Action_Change_Type : MonoBehaviour {
 	private void loadGameObjectResourceAsModel(GameObject myObj, string path)
 	{
 		GameObject myInstance = Resources.Load(path) as GameObject;
-		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		GameObject newObj = (GameObject)Instantiate(myInstance);
 		newObj.name=myObj.name + "_Model";
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.position = myObj.transform.position;

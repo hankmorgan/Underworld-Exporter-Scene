@@ -57,8 +57,8 @@ public class WeaponsLoader : ArtLoader {
 		}
 		int add_ptr=0;
 		int alpha=0;
-		DataLoader.ReadStreamFile(datfile, out AnimData);
-		DataLoader.ReadStreamFile(grfile, out textureFile);
+        ReadStreamFile(datfile, out AnimData);
+        ReadStreamFile(grfile, out textureFile);
 		if (_RES != GAME_UW2)
 		{
 			GroupSize = 28;
@@ -67,11 +67,11 @@ public class WeaponsLoader : ArtLoader {
 			{
 				for (int j = 0; j<GroupSize; j++)
 				{
-					AnimX[j + offset] = (int)DataLoader.getValAtAddress(AnimData, add_ptr++, 8);
+					AnimX[j + offset] = (int)getValAtAddress(AnimData, add_ptr++, 8);
 				}
 				for (int j = 0; j<GroupSize; j++)
 				{
-					AnimY[j + offset] = (int)DataLoader.getValAtAddress(AnimData, add_ptr++, 8);
+					AnimY[j + offset] = (int)getValAtAddress(AnimData, add_ptr++, 8);
 				}
 				offset = offset + GroupSize;
 			}
@@ -80,7 +80,7 @@ public class WeaponsLoader : ArtLoader {
 		{//In UW2 I just read the values into one array
 			for (int i = 0; i <= AnimData.GetUpperBound(0); i++)
 			{
-				AnimXY[i] = (int)DataLoader.getValAtAddress(AnimData, add_ptr++, 8);
+				AnimXY[i] = (int)getValAtAddress(AnimData, add_ptr++, 8);
 			}
 		}
 
@@ -96,16 +96,16 @@ public class WeaponsLoader : ArtLoader {
 
 		for (int i = 0; i < NoOfTextures; i++)
 		{
-			long textureOffset = DataLoader.getValAtAddress(textureFile, (i * 4) + 3, 32);
-			int BitMapWidth = (int)DataLoader.getValAtAddress(textureFile, textureOffset + 1, 8);
-			int BitMapHeight = (int)DataLoader.getValAtAddress(textureFile, textureOffset + 2, 8);
+			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
+			int BitMapWidth = (int)getValAtAddress(textureFile, textureOffset + 1, 8);
+			int BitMapHeight = (int)getValAtAddress(textureFile, textureOffset + 2, 8);
 			int datalen;
 			Palette auxpal =PaletteLoader.LoadAuxilaryPal(cmfile,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
 			char[] imgNibbles;
 			char[] outputImg;
 			char[] srcImg;
 
-			datalen =  (int)DataLoader.getValAtAddress(textureFile, textureOffset + 4, 16);
+			datalen =  (int)getValAtAddress(textureFile, textureOffset + 4, 16);
 			imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 			textureOffset = textureOffset + 6;	//Start of raw data.
 		
@@ -196,15 +196,15 @@ public class WeaponsLoader : ArtLoader {
 				//NoOfNibbles=NoOfNibbles*2;
 				while (NoOfNibbles > 1)
 				{
-						OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);		//High nibble
-						OutputData[i + 1] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8)) & 0xf);	//Low nibble
+						OutputData[i] = (char)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);		//High nibble
+						OutputData[i + 1] = (char)((getValAtAddress(InputData, add_ptr, 8)) & 0xf);	//Low nibble
 						i=i+2;
 						add_ptr++;
 						NoOfNibbles = NoOfNibbles-2;
 				}
 				if (NoOfNibbles == 1)
 				{	//Odd nibble out.
-						OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
+						OutputData[i] = (char)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
 				}
 		}
 

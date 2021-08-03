@@ -45,7 +45,7 @@ public class RuneBag : object_base {
 		}
 		else
 		{
-			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
+			if (Character.InteractionMode == Character.InteractionModeUse)
 			{
 				return ObjectUsed.FailMessage();
 			}

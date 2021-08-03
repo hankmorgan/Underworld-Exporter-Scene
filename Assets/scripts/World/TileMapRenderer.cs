@@ -98,11 +98,11 @@ public class TileMapRenderer : Loader
             //Clear out the children in the transform
             foreach (Transform child in parent.transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
             foreach (Transform child in sceneryParent.transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
         }
 
@@ -155,7 +155,7 @@ public class TileMapRenderer : Loader
             }
 
         }
-        if ((GameWorldController.EditorMode) && (UpdateOnly))
+        if ((UWEBase.EditorMode) && (UpdateOnly))
         {
             UWHUD.instance.editor.RefreshTileMap();
         }
@@ -228,7 +228,6 @@ public class TileMapRenderer : Loader
         {
             MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
-        //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 
         //Uv ratios across the x axis of the door
         float uvXPos1 = 0f;
@@ -251,11 +250,9 @@ public class TileMapRenderer : Loader
                 break;
         }
 
-
-        //float y0 = 0f;//+doorthickness /2f;
         float y1 = 0f;//-doorthickness /2f;
         float x0 = -doorframewidth / 2f;
-        float x1 = +doorframewidth / 2f;
+        float x1;// = +doorframewidth / 2f;
         float z0 = 0f;
         float z1 = CEILING_HEIGHT * 0.15f;
 
@@ -291,13 +288,11 @@ public class TileMapRenderer : Loader
         GameObject tile = RenderCuboid(Parent, leftHand, UVs, position, MatsToUse, 1, "rear_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
         tile.transform.Rotate(new Vector3(0f, 0f, -180f));
 
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorwidth / 2f;
         x1 = +doorwidth / 2f;
         z0 = 0f + floorHeight + doorheight;
         z1 = CEILING_HEIGHT * 0.15f;
-        //1.2
+
         Vector3[] overHead = new Vector3[4];
         switch (currDoor.heading * 45)
         {
@@ -318,12 +313,9 @@ public class TileMapRenderer : Loader
                 break;
         }
 
-
         float dist = (z0) / 0.15f;//Get back to steps.
         dist = dist / 8f;
 
-
-        //Vector2[] UVs = new Vector2[4];
         UVs[0] = new Vector2(uvXPos2, dist);
         UVs[1] = new Vector2(uvXPos2, CEILING_HEIGHT / 8f);
         UVs[2] = new Vector2(uvXPos3, CEILING_HEIGHT / 8f);
@@ -335,10 +327,8 @@ public class TileMapRenderer : Loader
         {//Special case for possible map bug
             tile.layer = LayerMask.NameToLayer("UWObjects");
         }
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorframewidth / 2f;
-        x1 = +doorframewidth / 2f;
+        //x1 = +doorframewidth / 2f;
         z0 = 0f;
         z1 = CEILING_HEIGHT * 0.15f;
         //My vertex tris
@@ -371,7 +361,6 @@ public class TileMapRenderer : Loader
 
         tile = RenderCuboid(Parent, rightHand, UVs, position, MatsToUse, 1, "rear_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
         tile.transform.Rotate(new Vector3(0f, 0f, -180f));
-
     }
 
 
@@ -390,27 +379,14 @@ public class TileMapRenderer : Loader
         {
             MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
-        //Door params
-        //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-        //if (level.Tiles[currDoor.tileX,currDoor.tileY].hasBridge)
-        //{						
-        /*						int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList.objInfo, currDoor.tileX, currDoor.tileY, ObjectInteraction.BRIDGE);
-                                if (BridgeIndex!=-1)
-                                {
-                                        floorheight = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, BridgeIndex, currDoor.tileX,currDoor.tileY,0).y;		
-                                }*/
 
-        //}
         //Uv ratios across the x axis of the door
         float uvXPos1 = 0f;
         float uvXPos2 = uvXPos1 + doorSideWidth / 1.2f;
         float uvXPos3 = uvXPos2 + doorwidth / 1.2f;
         float uvXPos4 = 1f; // or 1.2f/1.2f
 
-        //Vector3 doorposition;
-        //positions
         Vector3 position = ObjectLoader.CalcObjectXYZ(currDoor.index, 0);
-        //doorposition=position;
         //center in the tile and at the bottom of the map.
         switch (currDoor.heading * 45)
         {
@@ -432,7 +408,6 @@ public class TileMapRenderer : Loader
         float z1 = CEILING_HEIGHT * 0.15f;
 
         //My vertex tris
-
         Vector3[] leftHand = new Vector3[4];
 
         switch (currDoor.heading * 45)
@@ -454,28 +429,18 @@ public class TileMapRenderer : Loader
                 break;
         }
         Vector2[] UVs = new Vector2[4];
-        //UVs[0]= new Vector2(0f,0f);
-        //UVs[1]= new Vector2(0f,4);
-        //UVs[2]= new Vector2(doorSideWidth,4);
-        //UVs[3]= new Vector2(doorSideWidth,0f);
-
         UVs[0] = new Vector2(uvXPos1, 0f);
         UVs[1] = new Vector2(uvXPos1, 4);
         UVs[2] = new Vector2(uvXPos2, 4);
         UVs[3] = new Vector2(uvXPos2, 0f);
 
-
         RenderCuboid(Parent, leftHand, UVs, position, MatsToUse, 1, "front_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 
-
-
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorwidth / 2f;
         x1 = +doorwidth / 2f;
         z0 = 0f + floorHeight + doorheight;
         z1 = CEILING_HEIGHT * 0.15f;
-        //1.2
+
         Vector3[] overHead = new Vector3[4];
 
         switch (currDoor.heading * 45)
@@ -499,12 +464,6 @@ public class TileMapRenderer : Loader
         float dist = (z0) / 0.15f;//Get back to steps.
         dist = dist / 8f;
 
-
-        //Vector2[] UVs = new Vector2[4];
-        //UVs[0]= new Vector2(0+doorSideWidth, dist);
-        //UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
-        //UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
-        //UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
         UVs[0] = new Vector2(uvXPos2, dist);
         UVs[1] = new Vector2(uvXPos2, CEILING_HEIGHT / 8f);
         UVs[2] = new Vector2(uvXPos3, CEILING_HEIGHT / 8f);
@@ -517,8 +476,6 @@ public class TileMapRenderer : Loader
             tile.layer = LayerMask.NameToLayer("UWObjects");
         }
 
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorframewidth / 2f;
         x1 = +doorframewidth / 2f;
         z0 = 0f;
@@ -545,11 +502,6 @@ public class TileMapRenderer : Loader
                 break;
         }
         UVs = new Vector2[4];
-        //UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
-        //UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
-        //UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
-        //UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
-
         UVs[0] = new Vector2(uvXPos3, 0f);
         UVs[1] = new Vector2(uvXPos3, 4);
         UVs[2] = new Vector2(uvXPos4, 4);
@@ -574,7 +526,6 @@ public class TileMapRenderer : Loader
         UVs[9] = new Vector2(0, 1);
         UVs[10] = new Vector2(1, 1);
         UVs[11] = new Vector2(1, 0f);
-
 
         switch (currDoor.heading * 45)
         {
@@ -638,9 +589,6 @@ public class TileMapRenderer : Loader
                 RenderCuboid(Parent, filler, UVs, position, MatsToUse, 1, "side2_filler_" + ObjectLoader.UniqueObjectName(currDoor));
                 break;
         }
-
-
-
         RenderCuboid(Parent, filler, UVs, position, MatsToUse, 3, "front_filler_" + ObjectLoader.UniqueObjectName(currDoor));
     }
 
@@ -656,7 +604,6 @@ public class TileMapRenderer : Loader
         {
             return;
         }
-
         for (int i = 0; i <= objList.objInfo.GetUpperBound(0); i++)
         {
             if (objList.objInfo[i] != null)
@@ -4466,12 +4413,7 @@ public class TileMapRenderer : Loader
     /// <param name="RenderImmediate">If set to <c>true</c> render immediately. Otherwise wait for next frame.</param>
     public static void UpdateTile(int TileX, int TileY, short NewTileType, short NewFloorHeight, short NewFloorTexture, short NewWallTexture, bool RenderImmediate)
     {
-        //GameObject tileSelected;
         bool ReRenderNeighbours = false;
-        //= GameWorldController.FindTile(TileX,TileX,TileMap.SURFACE_FLOOR);
-        //Update entered info
-        //TileInfo tileToChange= CurrentTileMap().Tiles[TileX,TileY];
-
         if (RenderImmediate)
         {
             DestroyTile(TileX, TileY);
@@ -4487,17 +4429,8 @@ public class TileMapRenderer : Loader
         }
 
         CurrentTileMap().Tiles[TileX, TileY].tileType = NewTileType;
-        //int FloorHeight=0;
-        //if (int.TryParse(TileHeightDetails.text,out FloorHeight))
-        //{
         CurrentTileMap().Tiles[TileX, TileY].floorHeight = NewFloorHeight; //FloorHeight*2;	
-                                                                           //}
-
         CurrentTileMap().Tiles[TileX, TileY].floorTexture = NewFloorTexture;
-        //int ActualTextureIndex= CurrentTileMap().texture_map[FloorTextureSelect.value+48];
-        //CurrentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
-        //CurrentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
-        //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],CurrentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
 
         if (CurrentTileMap().Tiles[TileX, TileY].wallTexture != NewWallTexture)
         {
@@ -4512,49 +4445,33 @@ public class TileMapRenderer : Loader
 
             if (TileY > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX, TileY - 1].North = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX, TileY + 1].South = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileX > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX - 1, TileY].East = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX + 1, TileY].West = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
-
         }
-
 
         if (RenderImmediate)
         {
-            //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],true,false,false,true);
-            TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, CurrentTileMap().Tiles[TileX, TileY], false, false, false, true);
+            RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, CurrentTileMap().Tiles[TileX, TileY], false, false, false, true);
         }
-
 
         if (ReRenderNeighbours)
         {
@@ -4571,24 +4488,15 @@ public class TileMapRenderer : Loader
                                 if (RenderImmediate)
                                 {
                                     DestroyTile(x + TileX, y + TileY);
-                                    //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,CurrentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
-                                    TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, CurrentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
+                                    RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, CurrentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
                                 }
                             }
                         }
                     }
                 }
-
             }
-
         }
-
-
-        //RefreshTileMap();
-
     }
-
-
 
     /// <summary>
     /// Destroys the tile at the specified location
@@ -4605,8 +4513,8 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
             case TileMap.TILE_DIAG_NE:
@@ -4617,15 +4525,15 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 tileSelected = GameWorldController.FindTile(x, y, TileMap.SURFACE_WALL);
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
             default:
@@ -4633,13 +4541,13 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
         }
     }
-
+    
     /// <summary>
     /// Set the gameobject layer that this tile uses.
     /// </summary>
@@ -4680,8 +4588,6 @@ public class TileMapRenderer : Loader
         }
     }
 
-
-
     /// <summary>
     /// Renders a Terra Nova map using the Unity Terrain System
     /// </summary>
@@ -4706,9 +4612,9 @@ public class TileMapRenderer : Loader
             for (int y = 0; y <= height.GetUpperBound(1); y++)
             {
                 meshcount++;
-                int byte0 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Texture
-                int byte1 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
-                int byte2 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Object object list index?
+                int byte0 = (int)getValAtAddress(data, address_pointer++, 8);//Texture
+                int byte1 = (int)getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
+                int byte2 = (int)getValAtAddress(data, address_pointer++, 8);//Object object list index?
 
                 if (byte0 > 191)
                     byte0 = byte0 - 64;
@@ -4919,7 +4825,6 @@ public class TileMapRenderer : Loader
         float brushSize = 12f;
 
         long address_pointer = 0;
-        address_pointer = 0;
         int meshcount = 1;
         short maxHeight = 0; short minHeight = 0;
         for (int x = 0; x <= height.GetUpperBound(0); x++)
@@ -4927,9 +4832,9 @@ public class TileMapRenderer : Loader
             for (int y = 0; y <= height.GetUpperBound(1); y++)
             {
                 meshcount++;
-                int byte0 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Texture
-                int byte1 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
-                int byte2 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Object object list index?
+                int byte0 = (int)getValAtAddress(data, address_pointer++, 8);//Texture
+                int byte1 = (int)getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
+                int byte2 = (int)getValAtAddress(data, address_pointer++, 8);//Object object list index?
 
                 if (byte0 > 191)
                     byte0 = byte0 - 64;
@@ -5118,10 +5023,8 @@ public class TileMapRenderer : Loader
                 mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
                 mf.mesh = mesh;
-
             }
         }
-
         return true;
     }
 

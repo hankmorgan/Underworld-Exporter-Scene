@@ -37,7 +37,7 @@ public class ArtLoader : Loader
     public virtual bool LoadImageFile()
     {
         //var toLoad = Path.Combine(BasePath, filePath);
-        if (DataLoader.ReadStreamFile(filePath, out ImageFileData))
+        if (ReadStreamFile(filePath, out ImageFileData))
         {//data read
             DataLoaded = true;
         }
@@ -119,7 +119,7 @@ public class ArtLoader : Loader
         {
             for (int j = (iRow * width); j < (iRow * width) + width; j++)
             {
-                byte pixel = (byte)DataLoader.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
+                byte pixel = (byte)getValAtAddress(databuffer, dataOffSet + (long)j, 8);
                 
                 if (useXFER)
                 {
@@ -200,7 +200,7 @@ public class ArtLoader : Loader
                     nibble = 0;
 
                 //rawbits = ( int)fgetc(fd);
-                rawbits = (int)DataLoader.getValAtAddress(FileIn, addr_ptr, 8);
+                rawbits = (int)getValAtAddress(FileIn, addr_ptr, 8);
                 addr_ptr++;
                 if ((int)rawbits == -1)  //EOF
                     return;

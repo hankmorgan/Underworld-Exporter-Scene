@@ -55,7 +55,7 @@ public class ActiveRuneSlot : GuiBase_Draggable
         {
             return;
         }
-        if ((WindowDetectUW.InMap == true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation) || (UWCharacter.InteractionMode == UWCharacter.InteractionModeOptions)) { return; }
+        if ((WindowDetect.InMap == true) || (WindowDetect.WaitingForInput) || (ConversationVM.InConversation) || (Character.InteractionMode == Character.InteractionModeOptions)) { return; }
 
         if (UWCharacter.Instance.PlayerMagic.ReadiedSpell == "")
         {

@@ -124,7 +124,7 @@ public class TileMap : Loader
     /// <summary>
     /// Tile info storage class
     /// </summary>
-    public TileInfo[,] Tiles = new TileInfo[TileMap.TileMapSizeX + 1, TileMap.TileMapSizeY + 1];
+    public TileInfo[,] Tiles = new TileInfo[TileMapSizeX + 1, TileMapSizeY + 1];
 
     /// <summary>
     /// The current tile X that the player is in
@@ -171,7 +171,7 @@ public class TileMap : Loader
     {
         int tileX = (int)(location.x / 1.2f);
         int tileY = (int)(location.y / 1.2f);
-        if ((tileX > TileMap.TileMapSizeX) || (tileX < 0) || (tileY > TileMap.TileMapSizeY) || (tileY < 0))
+        if ((tileX > TileMapSizeX) || (tileX < 0) || (tileY > TileMapSizeY) || (tileY < 0))
         {//Location is outside the map
             return false;
         }
@@ -281,7 +281,7 @@ public class TileMap : Loader
     public int GetTileType(int tileX, int tileY)
     {
         //if ((tileX>TileMap.TileMapSizeX) || (tileY>TileMap.TileMapSizeY) || (tileX<0) || (tileY<0))
-        if (!TileMap.ValidTile(tileX, tileY))
+        if (!ValidTile(tileX, tileY))
         {//Assume out of bounds is solid
             return TILE_SOLID;
         }
@@ -299,7 +299,7 @@ public class TileMap : Loader
     /// <param name="tileY">Tile y.</param>
     public int GetRoom(int tileX, int tileY)
     {
-        if (TileMap.ValidTile(tileX, tileY))
+        if (ValidTile(tileX, tileY))
         {
             return Tiles[tileX, tileY].roomRegion;
         }
@@ -375,9 +375,9 @@ public class TileMap : Loader
         CEILING_HEIGHT = UW_CEILING_HEIGHT;
         BuildTextureMap(tex_ark, ref CeilingTexture, levelNo);
         this.UWCeilingTexture = CeilingTexture;
-        for (short y = 0; y <= TileMap.TileMapSizeY; y++)
+        for (short y = 0; y <= TileMapSizeY; y++)
         {
-            for (short x = 0; x <= TileMap.TileMapSizeX; x++)
+            for (short x = 0; x <= TileMapSizeX; x++)
             {
                 int FirstTileInt = (int)DataLoader.getValAtAddress(lev_ark, (address_pointer + 0), 16);
                 int SecondTileInt = (int)DataLoader.getValAtAddress(lev_ark, (address_pointer + 2), 16);
@@ -456,9 +456,9 @@ public class TileMap : Loader
     public void SetTileMapWallFacesUW()
     {
         short x; short y;
-        for (y = 0; y <= TileMap.TileMapSizeY; y++)
+        for (y = 0; y <= TileMapSizeY; y++)
         {
-            for (x = 0; x <= TileMap.TileMapSizeX; x++)
+            for (x = 0; x <= TileMapSizeX; x++)
             {
                 SetTileWallFacesUW(x, y);
             }
@@ -475,7 +475,7 @@ public class TileMap : Loader
         if (Tiles[x, y].tileType >= 0)//was just solid only. Note: If textures are all wrong it's probably caused here!
         {
             //assign it's north texture
-            if (y < TileMap.TileMapSizeY)
+            if (y < TileMapSizeY)
             {
                 Tiles[x, y].North = Tiles[x, y + 1].wallTexture;
             }
@@ -493,7 +493,7 @@ public class TileMap : Loader
                 Tiles[x, y].South = -1;
             }
             //it's east
-            if (x < TileMap.TileMapSizeX)
+            if (x < TileMapSizeX)
             {
                 Tiles[x, y].East = Tiles[x + 1, y].wallTexture;
             }
@@ -539,7 +539,7 @@ unsigned char *sub_ark;*/
             return false;
         }
         //Process level properties (height c-space)
-        int HeightUnits = (int)DataLoader.getValAtAddress(inf_ark.data, 16, 32);  //Log2 value. The higher the value the lower the level height.
+        int HeightUnits = (int)getValAtAddress(inf_ark.data, 16, 32);  //Log2 value. The higher the value the lower the level height.
         if (HeightUnits > 3)  //Any higher we lose data, 
         {
             HeightUnits = 3;
@@ -578,7 +578,7 @@ address_pointer=0;  */
         address_pointer = 0;
         for (long k = 0; k < tex_ark.chunkUnpackedLength / 2; k++)
         {
-            texture_map[k] = (short)DataLoader.getValAtAddress(tex_ark.data, address_pointer, 16);
+            texture_map[k] = (short)getValAtAddress(tex_ark.data, address_pointer, 16);
             address_pointer = address_pointer + 2;   //tmp_ark[AddressOfBlockStart+k];
         }
         address_pointer = 0;
@@ -592,9 +592,9 @@ address_pointer=0;  */
         //Beta grove  Map 13 (chunk 53xx)
         //C/space L1-2    Map 14 (chunk 54xx)
         //C/space other Map 15 (chunk 55xx)
-        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
+        for (int y = 0; y <= TileMapSizeY; y++)
         {
-            for (int x = 0; x <= TileMap.TileMapSizeX; x++)
+            for (int x = 0; x <= TileMapSizeX; x++)
             {
                 //Read in the tile data 
                 Tiles[x, y] = new TileInfo();
@@ -623,11 +623,11 @@ address_pointer=0;  */
 11-15 Floor texture
 */
                 //Tiles[x,y].wallTexture = texture_map[(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F];
-                Tiles[x, y].wallTexture = (short)(DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F);
+                Tiles[x, y].wallTexture = (short)(getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F);
                 //Tiles[x,y].shockCeilingTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F];
-                Tiles[x, y].shockCeilingTexture = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F);
+                Tiles[x, y].shockCeilingTexture = (short)((getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F);
                 //Tiles[x,y].floorTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F];
-                Tiles[x, y].floorTexture = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F);
+                Tiles[x, y].floorTexture = (short)((getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F);
                 //Tiles[x,y].wallTexture = 270;//debug
                 //Tiles[x,y].shockCeilingTexture = 273;
                 Tiles[x, y].North = Tiles[x, y].wallTexture;
@@ -666,7 +666,7 @@ address_pointer=0;  */
                 {
                     Tiles[x, y].TileSlopeSteepness = 0;
                 }
-                Tiles[x, y].indexObjectList = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 4, 16);
+                Tiles[x, y].indexObjectList = (int)getValAtAddress(lev_ark.data, address_pointer + 4, 16);
 
 
                 //if(Tiles[x,y].indexObjectList!=0)
@@ -680,14 +680,14 @@ xxxxx4xx  Floor & ceiling, ceiling opposite dir to tile type
 xxxxx8xx  Floor only
 xxxxxCxx  Ceiling only
 */
-                Tiles[x, y].shockSlopeFlag = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 10) & 0x03);
-                Tiles[x, y].UseAdjacentTextures = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01);
-                Tiles[x, y].shockTextureOffset = (short)(DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF);
+                Tiles[x, y].shockSlopeFlag = (short)((getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 10) & 0x03);
+                Tiles[x, y].UseAdjacentTextures = (short)((getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01);
+                Tiles[x, y].shockTextureOffset = (short)(getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF);
                 //unknownflags
                 //70E000E0
                 //  fprintf(LOGFILE,"\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
-                Tiles[x, y].shockShadeLower = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 16) & 0x0F);
-                Tiles[x, y].shockShadeUpper = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 24) & 0x0F);
+                Tiles[x, y].shockShadeLower = (short)(((int)getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 16) & 0x0F);
+                Tiles[x, y].shockShadeUpper = (short)(((int)getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 24) & 0x0F);
                 //Tiles[x,y].shadeUpperGlobal = 0;
                 // Tiles[x,y].shadeLowerGlobal = 0;
                 Tiles[x, y].shockNorthOffset = Tiles[x, y].shockTextureOffset;
@@ -695,10 +695,10 @@ xxxxxCxx  Ceiling only
                 Tiles[x, y].shockEastOffset = Tiles[x, y].shockTextureOffset;
                 Tiles[x, y].shockWestOffset = Tiles[x, y].shockTextureOffset;
 
-                Tiles[x, y].SHOCKSTATE[0] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xC, 8);
-                Tiles[x, y].SHOCKSTATE[1] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xD, 8);
-                Tiles[x, y].SHOCKSTATE[2] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xE, 8);
-                Tiles[x, y].SHOCKSTATE[3] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xF, 8);
+                Tiles[x, y].SHOCKSTATE[0] = (int)getValAtAddress(lev_ark.data, address_pointer + 0xC, 8);
+                Tiles[x, y].SHOCKSTATE[1] = (int)getValAtAddress(lev_ark.data, address_pointer + 0xD, 8);
+                Tiles[x, y].SHOCKSTATE[2] = (int)getValAtAddress(lev_ark.data, address_pointer + 0xE, 8);
+                Tiles[x, y].SHOCKSTATE[3] = (int)getValAtAddress(lev_ark.data, address_pointer + 0xF, 8);
 
                 //Tiles[x,y].indexObjectList=0;
                 //if (y == 0)
@@ -712,9 +712,9 @@ xxxxxCxx  Ceiling only
             }
         }
 
-        for (int y = 1; y < TileMap.TileMapSizeY; y++) //skip the outer textures.
+        for (int y = 1; y < TileMapSizeY; y++) //skip the outer textures.
         {
-            for (int x = 1; x < TileMap.TileMapSizeX; x++)
+            for (int x = 1; x < TileMapSizeX; x++)
             {
                 //if (
                 //  (Tiles[x,y].tileType  != TILE_OPEN) 
@@ -785,9 +785,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         if (!GameWorldController.instance.DoCleanUp) { return; }
         int x; int y;
 
-        for (x = 0; x <= TileMap.TileMapSizeX; x++)
+        for (x = 0; x <= TileMapSizeX; x++)
         {
-            for (y = 0; y <= TileMap.TileMapSizeY; y++)
+            for (y = 0; y <= TileMapSizeY; y++)
             {
                 //Set some easy tile visible settings
                 switch (Tiles[x, y].tileType)
@@ -805,9 +805,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                 }
             }
 
-            for (x = 0; x <= TileMap.TileMapSizeX; x++)
+            for (x = 0; x <= TileMapSizeX; x++)
             {
-                for (y = 0; y <= TileMap.TileMapSizeY; y++)
+                for (y = 0; y <= TileMapSizeY; y++)
                 {
                     //lets test this tile for visibility
                     //A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
@@ -823,7 +823,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                                 && (Tiles[x + 1, y].TerrainChange == false) && (Tiles[x, y + 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; ; break; }
                                         else { Tiles[x, y].Render = true; break; }
-                                    case TileMap.TileMapSizeX://br corner
+                                    case TileMapSizeX://br corner
                                         if ((Tiles[x - 1, y].tileType == 0) && (Tiles[x, y + 1].tileType == 0)
                                                 && (Tiles[x - 1, y].TerrainChange == false) && (Tiles[x, y + 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; break; }
@@ -835,7 +835,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                         else { Tiles[x, y].Render = true; break; }
                                 }
                                 break;
-                            case TileMap.TileMapSizeY: //Top row
+                            case TileMapSizeY: //Top row
                                 switch (x)
                                 {
                                     case 0: //tl corner
@@ -843,7 +843,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                                 && (Tiles[x + 1, y].TerrainChange == false) && (Tiles[x, y - 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; break; }
                                         else { Tiles[x, y].Render = true; break; }
-                                    case TileMap.TileMapSizeX://tr corner
+                                    case TileMapSizeX://tr corner
                                         if ((Tiles[x - 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0)
                                                 && (Tiles[x - 1, y].TerrainChange == false) && (Tiles[x, y - 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; break; }
@@ -863,7 +863,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                                 && (Tiles[x, y + 1].TerrainChange == false) && (Tiles[x + 1, y].TerrainChange == false) && (Tiles[x, y - 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; break; }
                                         else { Tiles[x, y].Render = true; break; }
-                                    case TileMap.TileMapSizeX:  //right edge
+                                    case TileMapSizeX:  //right edge
                                         if ((Tiles[x, y + 1].tileType == 0) && (Tiles[x - 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0)
                                                 && (Tiles[x, y + 1].TerrainChange == false) && (Tiles[x - 1, y].TerrainChange == false) && (Tiles[x, y - 1].TerrainChange == false))
                                         { Tiles[x, y].Render = false; break; }
@@ -889,9 +889,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         //return;
         int j = 1;
         //Now lets combine the solids along particular axis
-        for (x = 0; x < TileMap.TileMapSizeX; x++)
+        for (x = 0; x < TileMapSizeX; x++)
         {
-            for (y = 0; y < TileMap.TileMapSizeY; y++)
+            for (y = 0; y < TileMapSizeY; y++)
             {
                 if ((Tiles[x, y].Grouped == false))
                 {
@@ -921,9 +921,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         j = 1;
 
         ////Now lets combine solids along the other axis
-        for (y = 0; y < TileMap.TileMapSizeY; y++)
+        for (y = 0; y < TileMapSizeY; y++)
         {
-            for (x = 0; x < TileMap.TileMapSizeX; x++)
+            for (x = 0; x < TileMapSizeX; x++)
             {
                 if ((Tiles[x, y].Grouped == false))
                 {
@@ -953,9 +953,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
         //Clear invisible faces on solid tiles. 
         //TODO:Support all 64x64 tiles
-        for (y = 0; y <= TileMap.TileMapSizeY; y++)
+        for (y = 0; y <= TileMapSizeY; y++)
         {
-            for (x = 0; x <= TileMap.TileMapSizeX; x++)
+            for (x = 0; x <= TileMapSizeX; x++)
             {
                 if ((Tiles[x, y].tileType == TILE_SOLID))
                 {
@@ -966,7 +966,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                     {
                         Tiles[x, y].VisibleFaces[vWEST] = false;
                     }
-                    if (x == TileMap.TileMapSizeX)
+                    if (x == TileMapSizeX)
                     {
                         Tiles[x, y].VisibleFaces[vEAST] = false;
                     }
@@ -975,11 +975,11 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                         Tiles[x, y].VisibleFaces[vSOUTH] = false;
                     }
 
-                    if (y == TileMap.TileMapSizeY)
+                    if (y == TileMapSizeY)
                     {
                         Tiles[x, y].VisibleFaces[vNORTH] = false;
                     }
-                    if ((x + dimx <= TileMap.TileMapSizeX) && (y + dimy <= TileMap.TileMapSizeY))
+                    if ((x + dimx <= TileMapSizeX) && (y + dimy <= TileMapSizeY))
                     {
                         if ((Tiles[x + dimx, y].tileType == TILE_SOLID) && (Tiles[x + dimx, y].TerrainChange == false) && (Tiles[x, y].TerrainChange == false))//Tile to the east is a solid
                         {
@@ -997,9 +997,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         }
 
         //Clear invisible faces on diagonals
-        for (y = 1; y < TileMap.TileMapSizeY; y++)
+        for (y = 1; y < TileMapSizeY; y++)
         {
-            for (x = 1; x < TileMap.TileMapSizeX; x++)
+            for (x = 1; x < TileMapSizeX; x++)
             {
                 switch (Tiles[x, y].tileType)
                 {
@@ -1065,9 +1065,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
         }
 
-        for (y = 1; y < TileMap.TileMapSizeY; y++)
+        for (y = 1; y < TileMapSizeY; y++)
         {
-            for (x = 1; x < TileMap.TileMapSizeX; x++)
+            for (x = 1; x < TileMapSizeX; x++)
             {
                 if ((Tiles[x, y].tileType == TILE_OPEN) && (Tiles[x, y].TerrainChange == false))
                 {
@@ -1113,9 +1113,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
             }
         }
         //Make sure solids & opens are still consistently visible.
-        for (y = 1; y < TileMap.TileMapSizeY; y++)
+        for (y = 1; y < TileMapSizeY; y++)
         {
-            for (x = 1; x < TileMap.TileMapSizeX; x++)
+            for (x = 1; x < TileMapSizeX; x++)
             {
 
                 if ((Tiles[x, y].tileType == TILE_SOLID) || (Tiles[x, y].tileType == TILE_OPEN))
@@ -1159,15 +1159,15 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                 }
             }
         }
-        for (y = 0; y <= TileMap.TileMapSizeY; y++)
+        for (y = 0; y <= TileMapSizeY; y++)
         {
             Tiles[0, y].VisibleFaces[vEAST] = true;
-            Tiles[TileMap.TileMapSizeX, y].VisibleFaces[vWEST] = true;
+            Tiles[TileMapSizeX, y].VisibleFaces[vWEST] = true;
         }
-        for (x = 0; x <= TileMap.TileMapSizeX; x++)
+        for (x = 0; x <= TileMapSizeX; x++)
         {
             Tiles[x, 0].VisibleFaces[vNORTH] = true;
-            Tiles[x, TileMap.TileMapSizeY].VisibleFaces[vSOUTH] = true;
+            Tiles[x, TileMapSizeY].VisibleFaces[vSOUTH] = true;
         }
     }
 
@@ -1784,7 +1784,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                         TileMapData[addptr + 0xb + 1] = (char)((ByteToWrite >> 8) & 0xFF);
 
 
-                        int val = (int)DataLoader.getValAtAddress(TileMapData, addptr + 0xd, 16);
+                        int val = (int)getValAtAddress(TileMapData, addptr + 0xd, 16);
                         val = val & 0x1ff0;
                         ByteToWrite = ((currobj.npc_attitude & 0x3) << 14) |
                                 ((currobj.npc_talkedto & 0x1) << 13) |
@@ -2021,7 +2021,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                     ((x == 0) && (y == +1))
                 )
                 {
-                    if (TileMap.ValidTile(startX + x, startY + y))
+                    if (ValidTile(startX + x, startY + y))
                     {
                         if (
                             (Tiles[startX + x, startY + y].tileType != TILE_SOLID)

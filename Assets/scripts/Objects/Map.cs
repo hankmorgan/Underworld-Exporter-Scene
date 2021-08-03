@@ -40,7 +40,7 @@ public class Map : object_base {
 	public bool OpenMap(int levelno)
 	{
         Time.timeScale = 0f;
-        WindowDetectUW.InMap = true;
+        WindowDetect.InMap = true;
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
         UWCharacter.Instance.playerMotor.jumping.enabled=false;
 		MapInteraction.UpdateMap(levelno);

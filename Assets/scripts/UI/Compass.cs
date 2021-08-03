@@ -118,7 +118,7 @@ public class Compass : GuiBase_Draggable
 
     public static string getCompassHeading(GameObject src, GameObject dst)
     {//String representation of the above.
-        int Offset = Compass.getCompassHeadingOffset(src, dst);
+        int Offset = getCompassHeadingOffset(src, dst);
 
         return StringController.instance.GetString(1, StringController.str_to_the_north + Offset);  //36	
     }
@@ -182,7 +182,7 @@ public class Compass : GuiBase_Draggable
     public void OnClick()
     {
         if (Dragging == true) { return; }
-        if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) { return; }
+        if ((WindowDetect.WaitingForInput) || (ConversationVM.InConversation)) { return; }
         UWHUD.instance.MessageScroll.Clear();
         switch (_RES)
         {

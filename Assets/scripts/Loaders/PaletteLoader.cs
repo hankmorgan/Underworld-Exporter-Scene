@@ -38,7 +38,7 @@ public class PaletteLoader : ArtLoader {
 					Palettes[0]=new Palette();
 					char[] pal_file;
 					DataLoader.Chunk pal_ark;
-					if(DataLoader.ReadStreamFile(filePath,out pal_file))
+					if(ReadStreamFile(filePath,out pal_file))
 					{
 						if (DataLoader.LoadChunk(pal_file,PaletteNo, out pal_ark))
 							{
@@ -61,16 +61,16 @@ public class PaletteLoader : ArtLoader {
 			{
 				char[] pals_dat;
 				Palettes=new Palette[NoOfPals];
-				if(DataLoader.ReadStreamFile(filePath,out pals_dat))
+				if(ReadStreamFile(filePath,out pals_dat))
 				{
 					for (int palNo =0; palNo<=Palettes.GetUpperBound(0); palNo++ )
 					{
 						Palettes[palNo]=new Palette();
 						for (int pixel=0; pixel<256; pixel++)
 						{
-							Palettes[palNo].red[pixel]= (byte)(DataLoader.getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 0 ,8) <<2);
-							Palettes[palNo].green[pixel]= (byte)(DataLoader.getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 1 ,8) <<2);
-							Palettes[palNo].blue[pixel]= (byte)(DataLoader.getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 2 ,8) <<2);
+							Palettes[palNo].red[pixel]= (byte)(getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 0 ,8) <<2);
+							Palettes[palNo].green[pixel]= (byte)(getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 1 ,8) <<2);
+							Palettes[palNo].blue[pixel]= (byte)(getValAtAddress(pals_dat, palNo*256 + (pixel*3) + 2 ,8) <<2);
 						}
 					}
 
@@ -85,11 +85,11 @@ public class PaletteLoader : ArtLoader {
         char[] palf;
         int[] auxpal = new int[16];
 
-        if (DataLoader.ReadStreamFile(auxPalPath, out palf))
+        if (ReadStreamFile(auxPalPath, out palf))
         {
             for (int j = 0; j < 16; j++)
             {               
-                auxpal[j] = (int)DataLoader.getValAtAddress(palf, auxPalIndex * 16 + j, 8);
+                auxpal[j] = (int)getValAtAddress(palf, auxPalIndex * 16 + j, 8);
             }
         }
         return auxpal;
@@ -102,11 +102,11 @@ public class PaletteLoader : ArtLoader {
 		auxpal.red = new byte[16];
 		auxpal.green = new byte[16];
 		auxpal.blue = new byte[16];
-		if (DataLoader.ReadStreamFile(auxPalPath, out palf))
+		if (ReadStreamFile(auxPalPath, out palf))
 		{
 			for (int j = 0; j <16; j++)
 			{
-				int value = (int)DataLoader.getValAtAddress(palf, auxPalIndex * 16 + j, 8);
+				int value = (int)getValAtAddress(palf, auxPalIndex * 16 + j, 8);
 				auxpal.green[j] = gamepal.green[value];
 				auxpal.blue[j] = gamepal.blue[value];
 				auxpal.red[j] = gamepal.red[value];
@@ -130,6 +130,6 @@ public class PaletteLoader : ArtLoader {
 			{
 					imgData[i] = (char)i;
 			}
-			return ArtLoader.Image(imgData,0,width,height,"name here", Palettes[PalIndex], true);
+			return Image(imgData,0,width,height,"name here", Palettes[PalIndex], true);
 		}
 }

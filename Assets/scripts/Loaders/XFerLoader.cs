@@ -21,8 +21,8 @@ public class XFerLoader : Loader {
     public XFerLoader()
     {
        // char[] pal_file;
-        filePath = Path.Combine(Loader.BasePath, "data\\xfer.dat");
-        if (DataLoader.ReadStreamFile(filePath, out auxPalVal))
+        filePath = Path.Combine(BasePath, "data\\xfer.dat");
+        if (ReadStreamFile(filePath, out auxPalVal))
         {
             /*for (int a = 0; a <= auxPalVal.GetUpperBound(0); a++)
             {

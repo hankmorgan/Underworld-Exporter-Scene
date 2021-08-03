@@ -16,21 +16,21 @@ public class SaveGameButton : GuiBase {
 		public override void Start()
 		{
 				base.Start();
-				label.color= SaveGameButton.Off;	
+				label.color= Off;	
 		}
 
 
 		public void OnHoverEnter()
 		{
 				//ButtonBG.texture=ButtonOn;
-				label.color= SaveGameButton.On;
+				label.color= On;
 
 		}
 
 		public void OnHoverExit()
 		{
 			//ButtonBG.texture=ButtonOff;
-				label.color= SaveGameButton.Off;
+				label.color= Off;
 		}
 
 		public virtual void OnClick()

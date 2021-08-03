@@ -549,7 +549,7 @@ public class object_base : UWEBase
     /// <param name="ObjectUsed">Object used.</param>
     public virtual bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
-        if (UWCharacter.InteractionMode == UWCharacter.InteractionModeUse)
+        if (Character.InteractionMode == Character.InteractionModeUse)
         {
             switch (ObjectUsed.GetItemType())
                 {
@@ -634,7 +634,7 @@ public class object_base : UWEBase
     {//In order to use it.
         //UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
         CurrentObjectInHand = this.objInt();
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
+        Character.InteractionMode = Character.InteractionModeUse;
         InteractionModeControl.UpdateNow = true;
     }
 
@@ -904,7 +904,7 @@ return false;*/
                 PickAvail = false;
             }
         }
-        if ((UWCharacter.InteractionMode == UWCharacter.InteractionModePickup) && (CurrentObjectInHand != null))
+        if ((Character.InteractionMode == Character.InteractionModePickup) && (CurrentObjectInHand != null))
         {//I'm actually throwing something.
             UseAvail = false;
             UseableDesc = "";

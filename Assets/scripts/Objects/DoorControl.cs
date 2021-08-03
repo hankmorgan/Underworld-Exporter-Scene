@@ -197,7 +197,7 @@ public class DoorControl : object_base {
 		else
 		{//Normal Usage
 			PlayerUse=true;
-            if ((UWCharacter.AutoKeyUse) && (locked()))
+            if ((Character.AutoKeyUse) && (locked()))
             {//Try each key in the players inventory to see if it can open the door
                 foreach (Transform t in GameWorldController.instance.InventoryMarker.transform)
                 {
@@ -427,11 +427,11 @@ public class DoorControl : object_base {
 		{//Toggle Open and closed
 			if (state()==false)
 				{//Door is closed
-				OpenDoor (DoorControl.DefaultDoorTravelTime);
+				OpenDoor (DefaultDoorTravelTime);
 				}
 			else
 				{//Door is open
-					CloseDoor (DoorControl.DefaultDoorTravelTime);
+					CloseDoor (DefaultDoorTravelTime);
 				}
 		}
 		else
@@ -807,7 +807,7 @@ public class DoorControl : object_base {
 		if ((quality<=0))
 			{
 				UnlockDoor(true);
-				OpenDoor(DoorControl.DefaultDoorTravelTime);
+				OpenDoor(DefaultDoorTravelTime);
 			}
 		}
 		return true;		
@@ -995,7 +995,7 @@ public class DoorControl : object_base {
                 {
 				case ObjectInteraction.PORTCULLIS:
 						{
-						newObj = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("Models/Portcullis"));
+						newObj = (GameObject)Instantiate((GameObject)Resources.Load("Models/Portcullis"));
 						newObj.name=myObj.name + "_Model";
 						newObj.transform.parent=myObj.transform;
 						newObj.transform.position = myObj.transform.position;
@@ -1012,7 +1012,7 @@ public class DoorControl : object_base {
 						{
 
 							GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
-							newObj = (GameObject)GameObject.Instantiate(myInstance);
+							newObj = (GameObject)Instantiate(myInstance);
 							newObj.name=myObj.name + "_Model";
 							newObj.transform.parent=myObj.transform;
 							newObj.transform.position = myObj.transform.position;

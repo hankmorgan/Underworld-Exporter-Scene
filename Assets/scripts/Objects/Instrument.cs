@@ -48,7 +48,7 @@ public class Instrument : object_base {
 		/// </summary>
 	public void PlayInstrument()
 	{
-		WindowDetectUW.WaitingForInput=true;
+        WindowDetect.WaitingForInput = true;
 		UWCharacter.Instance.playerMotor.enabled=false;
 		PlayingInstrument=true;
 		CurrentInstrument=this.name;
@@ -85,7 +85,7 @@ public class Instrument : object_base {
 			//000~001~251~You put the instrument down.
 			PlayingInstrument=false;
 			CurrentInstrument="";
-			WindowDetectUW.WaitingForInput=false;
+            WindowDetect.WaitingForInput = false;
 			UWCharacter.Instance.playerMotor.enabled=true;
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_put_the_instrument_down_));
 			MusicController.instance.Resume();
@@ -108,7 +108,7 @@ public class Instrument : object_base {
 							GameWorldController.MoveToInventory(myObjInt);
 
 							CurrentObjectInHand=myObjInt;
-							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+                            Character.InteractionMode = Character.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
 							Quest.instance.isCupFound=true;
 							//An object appears in the air and falls into your hands

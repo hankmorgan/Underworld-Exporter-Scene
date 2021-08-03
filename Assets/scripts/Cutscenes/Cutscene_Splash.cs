@@ -7,9 +7,9 @@ public class Cutscene_Splash : Cuts {
 		{
 				base.Awake();
 
-				switch(UWEBase._RES)
+				switch(_RES)
 				{
-				case UWEBase.GAME_UWDEMO:
+				case GAME_UWDEMO:
 						noOfImages=3;
 						ImageTimes[0]=0.0f;
 						ImageTimes[1]=2.0f;
@@ -23,7 +23,7 @@ public class Cutscene_Splash : Cuts {
 						noOfSubs=0;
 						noOfAudioClips=0;
 						break;
-				case UWEBase.GAME_UW1:
+				case GAME_UW1:
 						noOfImages=4;
 						ImageTimes[0]=0.0f;
 						ImageTimes[1]=1.0f;
@@ -41,7 +41,7 @@ public class Cutscene_Splash : Cuts {
 						noOfAudioClips=0;
 						break;
 
-				case UWEBase.GAME_UW2:
+				case GAME_UW2:
 						noOfImages=4;
 						ImageTimes[0]=0.0f;
 						ImageTimes[1]=1.0f;

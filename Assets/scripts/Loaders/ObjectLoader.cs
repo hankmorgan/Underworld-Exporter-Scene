@@ -297,7 +297,7 @@ public class ObjectLoader : DataLoader
         for (i = 0; i <= objList.GetUpperBound(0); i++)
         {
             //To stop later crashes in ascii dumps I set some inital values.
-            objList[i] = new ObjectLoaderInfo(i, GameWorldController.CurrentTileMap(), true);
+            objList[i] = new ObjectLoaderInfo(i, UWEBase.CurrentTileMap(), true);
             objList[i].index = i; objList[i].next = 0; objList[i].item_id = 0; objList[i].link = 0; objList[i].owner = 0;
         }
 
@@ -1630,10 +1630,10 @@ public class ObjectLoader : DataLoader
                         //Doors will always go at the tile height.
                         int newZpos = tileMap.Tiles[x, y].floorHeight * 4;
                         offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
+                        int BridgeIndex = findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
                         if (BridgeIndex != -1)
                         {//Adjust for possible bridges in this tile. If so the door goes at the bridge height
-                            offZ = ObjectLoader.CalcObjectXYZ( BridgeIndex, 0).y * 100;
+                            offZ = CalcObjectXYZ( BridgeIndex, 0).y * 100;
                         }
 
 
@@ -1707,7 +1707,7 @@ public class ObjectLoader : DataLoader
                         {//Adjust the object x,y to avoid clipping into walls.
                             switch (_RES)
                             {
-                                case Loader.GAME_SHOCK:
+                                case GAME_SHOCK:
                                     if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
                                     if (objList[ObjectIndex].xpos == 128) { offX = offX - 4f; }
                                     if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
@@ -1748,7 +1748,7 @@ public class ObjectLoader : DataLoader
         //Clear out the children in the transform
         foreach (Transform child in parent.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Object.Destroy(child.gameObject);
         }
         //Init the objects
         //instance.ObjectInteractions=new ObjectInteraction[1600];
@@ -1778,8 +1778,8 @@ public class ObjectLoader : DataLoader
             }
         }
 
-        ObjectLoader.LinkObjectListWands(instance);//Link wands to their spell objects
-        ObjectLoader.LinkObjectListPotions(instance);
+        LinkObjectListWands(instance);//Link wands to their spell objects
+        LinkObjectListPotions(instance);
 
         GameWorldController.LoadingObjects = false;
     }
@@ -2150,7 +2150,7 @@ public class ObjectLoader : DataLoader
         int PrevIndex = cnObjInt.BaseObjectData.index;
         if (cn.LockObject != 0)
         {
-            ObjectInteraction lockObj = ObjectLoader.getObjectIntAt(cn.LockObject);
+            ObjectInteraction lockObj = getObjectIntAt(cn.LockObject);
             if (lockObj != null)
             {
                 if (lockObj.GetItemType() == ObjectInteraction.LOCK)
@@ -2181,8 +2181,8 @@ public class ObjectLoader : DataLoader
                     {
                         Debug.Log("null object on " + i + " for container " + cn.name);
                     }
-                    ObjectLoader.getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
-                    ObjectLoader.getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
+                    getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
+                    getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
                     itemObjInt.next = 0;//end for now.
                     itemObjInt.BaseObjectData.next = 0;
                     PrevIndex = itemObjInt.BaseObjectData.index;
@@ -2421,7 +2421,7 @@ public class ObjectLoader : DataLoader
         else
         {
             Debug.Log("New Object created. Shuld not happen!");
-            ObjectLoaderInfo objI = new ObjectLoaderInfo(index,GameWorldController.CurrentTileMap(),true);
+            ObjectLoaderInfo objI = new ObjectLoaderInfo(index, UWEBase.CurrentTileMap(),true);
             //objI.guid = System.Guid.NewGuid();
             objI.quality = (short)quality;
             objI.flags = 0;

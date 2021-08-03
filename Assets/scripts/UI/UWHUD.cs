@@ -237,11 +237,11 @@ public class UWHUD : HUD
         RuneBagPanel.GetComponent<RawImage>().texture = grPanels.LoadImageAt(1);
         StatsDisplayPanel.GetComponent<RawImage>().texture = grPanels.LoadImageAt(2);
 
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1, _RES != GAME_UW2);
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2, _RES == GAME_UW2);
+        instance.EnableDisableControl(instance.main_windowUW1, _RES != GAME_UW2);
+        instance.EnableDisableControl(instance.main_windowUW2, _RES == GAME_UW2);
 
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW1.gameObject, _RES != GAME_UW2);
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2.gameObject, _RES == GAME_UW2);
+        instance.EnableDisableControl(instance.InteractionControlUW1.gameObject, _RES != GAME_UW2);
+        instance.EnableDisableControl(instance.InteractionControlUW2.gameObject, _RES == GAME_UW2);
 
         MapPanel.transform.SetAsLastSibling();
         ConversationPanel.transform.SetAsLastSibling();
@@ -263,18 +263,18 @@ public class UWHUD : HUD
         //Set Keycodes for interaction mode controls
 
         //Apply to UI
-        UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
-        UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
-        UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
-        UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
-        UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
-        UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
-        UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
-        UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
-        UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
-        UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
-        UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
-        UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
 
         switch (_RES)
         {
@@ -659,7 +659,7 @@ public class UWHUD : HUD
         {
             RuneSlot.UpdateRuneDisplay();
         }
-        EnableDisableControl(ContextMenu.gameObject, WindowDetectUW.ContextUIEnabled);
+        EnableDisableControl(ContextMenu.gameObject, WindowDetect.ContextUIEnabled);
         EnableDisableControl(StatsDisplayPanel, StatsEnabled);
         EnableDisableControl(InventoryPanel, InventoryEnabled);
         EnableDisableControl(PaperDollFemalePanel, InventoryEnabled && UWCharacter.Instance.isFemale);
@@ -685,11 +685,11 @@ public class UWHUD : HUD
         EnableDisableControl(UW1ConversationPaperBackground, ConversationEnabled && _RES != GAME_UW2);
 
         EnableDisableControl(MapPanel, MapEnabled);
-        EnableDisableControl(DragonLeftPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false))));
-        EnableDisableControl(DragonRightPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false))));
+        EnableDisableControl(DragonLeftPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (instance.window.FullScreen == false))));
+        EnableDisableControl(DragonRightPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (instance.window.FullScreen == false))));
         EnableDisableControl(CutsceneSmallPanel, CutSceneSmallEnabled);
         EnableDisableControl(CutsceneFullPanel, CutSceneFullEnabled);
-        EnableDisableControl(MonsterEyes.gameObject, ((((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled)) && (!ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false)));
+        EnableDisableControl(MonsterEyes.gameObject, ((((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled)) && (!ConversationEnabled)) && (instance.window.FullScreen == false)));
         EnableDisableControl(HudCompass.gameObject, !ConversationEnabled);
         EnableDisableControl(powergem.gameObject, !ConversationEnabled);
 
