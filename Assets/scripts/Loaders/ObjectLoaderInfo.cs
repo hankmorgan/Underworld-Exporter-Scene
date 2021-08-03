@@ -62,7 +62,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x1FF; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xFE00;
-            val = val | (value & 0x1ff);
+            val |= (value & 0x1ff);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID != item_id)
@@ -87,7 +87,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x7; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xF1FF;
-            val = val | ((value & 0x7) << 9);
+            val |= ((value & 0x7) << 9);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID != item_id)
@@ -112,7 +112,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xEFFF;
-            val = val | ((value & 0x1) << 12);
+            val |= ((value & 0x1) << 12);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID != item_id)
@@ -135,7 +135,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xDFFF;
-            val = val | ((value & 0x1) << 13);
+            val |= ((value & 0x1) << 13);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID != item_id)
@@ -157,7 +157,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xBFFF;
-            val = val | ((value & 0x1) << 14);
+            val |= ((value & 0x1) << 14);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID != item_id)
@@ -179,7 +179,7 @@ public class ObjectLoaderInfo : UWClass
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0x7FFF;
-            val = val | ((value & 0x1) << 15);
+            val |= ((value & 0x1) << 15);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
             if (origItemID!=item_id)
@@ -206,7 +206,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x7F; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFF80;
-            val = val | ((value & 0x7f));
+            val |= ((value & 0x7f));
             DataBuffer[PTR + 2] = (char)(val & 0xFF);
             DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
             if (zpos != value)
@@ -227,7 +227,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x7; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFC7F;
-            val = val | ((value & 0x7) << 7);
+            val |= ((value & 0x7) << 7);
             DataBuffer[PTR + 2] = (char)(val & 0xFF);
             DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
             if (heading != value)
@@ -249,7 +249,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x7; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xE3FF;
-            val = val | ((value & 0x7) << 10);
+            val |= ((value & 0x7) << 10);
             DataBuffer[PTR + 2] = (char)(val & 0xFF);
             DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
             if (ypos != value)
@@ -271,7 +271,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x7; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0x1FFF;
-            val = val | ((value & 0x7) << 13);
+            val |= ((value & 0x7) << 13);
             DataBuffer[PTR + 2] = (char)(val & 0xFF);
             DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
             if (xpos != value)
@@ -293,7 +293,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x3F; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0xFFC0;
-            val = val | ((value & 0x3f));
+            val |= ((value & 0x3f));
             DataBuffer[PTR + 4] = (char)(val & 0xFF);
             DataBuffer[PTR + 5] = (char)((val >> 8) & 0xFF);
             if (quality != value)
@@ -314,7 +314,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x3FF; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0x003F;
-            val = val | ((value & 0x3ff) << 6);
+            val |= ((value & 0x3ff) << 6);
             DataBuffer[PTR + 4] = (char)(val & 0xFF);
             DataBuffer[PTR + 5] = (char)((val >> 8) & 0xFF);
             if (next != value)
@@ -336,7 +336,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x3F; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0xFFC0;
-            val = val | ((value & 0x3f));
+            val |= ((value & 0x3f));
             DataBuffer[PTR + 6] = (char)(val & 0xFF);
             DataBuffer[PTR + 7] = (char)((val >> 8) & 0xFF);
             if (owner != value)
@@ -357,7 +357,7 @@ public class ObjectLoaderInfo : UWClass
         {
             value &= 0x3FF; //Keep value in range;
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0x003F;
-            val = val | ((value & 0x3ff) << 6);
+            val |= ((value & 0x3ff) << 6);
             DataBuffer[PTR + 6] = (char)(val & 0xFF);
             DataBuffer[PTR + 7] = (char)((val >> 8) & 0xFF);
             if (link != value)

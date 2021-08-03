@@ -20,7 +20,7 @@ public class MapPiece : Map {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 9));            
             //Debug.Log("Copying map chunck " + link);
             CopyMap(70 + quality, owner -1); //Copy the map in  level 78 to the map in level 24
-            link = link & 0x300;//Clear link bits 0-7
+            link &= 0x300;//Clear link bits 0-7
         }
         else
         {//use as a normal map

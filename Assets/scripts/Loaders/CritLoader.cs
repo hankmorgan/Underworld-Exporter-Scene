@@ -35,9 +35,8 @@ public class CritLoader : ArtLoader {
 
     private void ReadUw1AssocFile(int CritterToLoad, string assocpath)
     {
-        char[] assoc;
         long AssocAddressPtr = 256;
-        if (ReadStreamFile(assocpath, out assoc))
+        if (ReadStreamFile(assocpath, out char[] assoc))
         {
             for (int ass = 0; ass <= 63; ass++)
             {
@@ -87,15 +86,12 @@ public class CritLoader : ArtLoader {
 
 		void ReadUW2AssocFile(int CritterToLoad)
 		{
-				char[] assoc;
-				char[] pgmp;
-				char[] cran;
-				//Load the assoc file
-				long AssocAddressPtr=0;
-				if  ( 
-						(ReadStreamFile(Path.Combine(BasePath, "CRIT", "AS.AN"), out assoc) ) 
-						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "PG.MP"), out pgmp) ) 
-						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "CR.AN"), out cran) )  
+        //Load the assoc file
+        long AssocAddressPtr = 0;
+        if  ( 
+						(ReadStreamFile(Path.Combine(BasePath, "CRIT", "AS.AN"), out char[] assoc) ) 
+						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "PG.MP"), out char[] pgmp) ) 
+						&& (ReadStreamFile(Path.Combine(BasePath, "CRIT", "CR.AN"), out char[] cran) )  
 				)
 				{
 						for (int ass = 0 ; ass <=63 ; ass++)

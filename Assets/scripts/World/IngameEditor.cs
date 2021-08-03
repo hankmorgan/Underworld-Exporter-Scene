@@ -327,8 +327,7 @@ public class IngameEditor : GuiBase_Draggable
 
     public void ChangeLevel()
     {
-        int levelnotoload = 0;
-        if (int.TryParse(LevelNoToLoad.text, out levelnotoload))
+        if (int.TryParse(LevelNoToLoad.text, out int levelnotoload))
         {
             if (levelnotoload <= GameWorldController.instance.Tilemaps.GetUpperBound(0))
             {
@@ -396,12 +395,10 @@ public class IngameEditor : GuiBase_Draggable
 
     public void UpdateTile()
     {
-        int DimX = 0; int DimY = 0;
-        int FloorHeight = 0;
         int WallTexture = WallTextureSelect.value;
         int FloorTexture = FloorTextureSelect.value;
         int TileTypeSelected = TileTypeSelect.value;
-        int.TryParse(TileHeightDetails.text, out FloorHeight);
+        int.TryParse(TileHeightDetails.text, out int FloorHeight);
 
         if (LockTileHeight.isOn)
         {
@@ -420,11 +417,11 @@ public class IngameEditor : GuiBase_Draggable
             WallTexture = -1;
         }
 
-        if (!int.TryParse(TileRangeX.text, out DimX))
+        if (!int.TryParse(TileRangeX.text, out int DimX))
         {
             DimX = 0;
         }
-        if (!int.TryParse(TileRangeY.text, out DimY))
+        if (!int.TryParse(TileRangeY.text, out int DimY))
         {
             DimY = 0;
         }
@@ -477,7 +474,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes up to this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimX) * -1));
+                            HeightToSet += (Mathf.Abs(DimX) * -1);
                         }
                         //else
                         //{//slopes up from this point
@@ -514,7 +511,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes down this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimX) * +1));
+                            HeightToSet += (Mathf.Abs(DimX) * +1);
                         }
                         //else
                         //{//slopes down from this point
@@ -551,7 +548,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinY < TileY)
                         {//Slopes up to this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimY) * -1));
+                            HeightToSet += (Mathf.Abs(DimY) * -1);
                         }
                         //else
                         //{//slopes up from this point
@@ -587,7 +584,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes down this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimY) * +1));
+                            HeightToSet += (Mathf.Abs(DimY) * +1);
                         }
                         //else
                         //{//slopes down from this point
@@ -931,11 +928,10 @@ public class IngameEditor : GuiBase_Draggable
     public static void UpdateFollowMeMode(int tileX, int tileY)
     {
         //int DimX=0;int DimY=0;
-        int FloorHeight = 0;
         int WallTexture = instance.WallTextureSelect.value;
         int FloorTexture = instance.FloorTextureSelect.value;
         int TileTypeSelected = instance.TileTypeSelect.value;
-        int.TryParse(instance.TileHeightDetails.text, out FloorHeight);
+        int.TryParse(instance.TileHeightDetails.text, out int FloorHeight);
 
         if (instance.LockTileHeight.isOn)
         {
@@ -996,8 +992,7 @@ public class IngameEditor : GuiBase_Draggable
         {
             currObj.enchantment = 0;
         }
-        int val = 0;
-        if (int.TryParse(ObjectFlagValue.text, out val))
+        if (int.TryParse(ObjectFlagValue.text, out int val))
         {
             currObj.flags = (short)(val & 0x7);
             ObjectFlagValue.text = currObj.flags.ToString();
@@ -1214,8 +1209,7 @@ public class IngameEditor : GuiBase_Draggable
 
     public void GenerateRandomLevel()
     {
-        int levelseed = 0;
-        if (int.TryParse(seed.text, out levelseed))
+        if (int.TryParse(seed.text, out int levelseed))
         {
             UnderworldGenerator.instance.GenerateLevel(levelseed);
             UnderworldGenerator.instance.RoomsToTileMap(CurrentTileMap(), CurrentTileMap().Tiles);

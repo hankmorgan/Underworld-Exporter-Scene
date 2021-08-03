@@ -9,12 +9,12 @@ public class CaveRegion: Region
 {
 
     public int PercentAreWalls { get; set; }
-    private int NoOfIterations = 2;
+    private readonly int NoOfIterations = 2;
     int[,] Flood;
     int[,] BorderFlood;
     int floodIndex = 1;
     int borderfloodIndex = 1;
-    List<int> floodSizes = new List<int>();
+    readonly List<int> floodSizes = new List<int>();
 
     public CaveRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions, Region Parent)
     {
@@ -51,9 +51,10 @@ public class CaveRegion: Region
     public void MakeCaverns()
     {
         // By initilizing column in the outter loop, its only created ONCE
-        for (int column = 0, row = 0; row <= MapHeight ; row++)
+        for (int row = 0; row <= MapHeight; row++)
         {
-            for (column = 0; column <= MapWidth ; column++)
+            int column;
+            for (column = 0; column <= MapWidth; column++)
             {
                 Map[column, row].TileLayoutMap = PlaceWallLogic(column, row);
             }
@@ -92,13 +93,15 @@ public class CaveRegion: Region
         // New, empty map
        // Map = new GeneratorMap[MapWidth, MapHeight];
         BlankMap();
-        int mapMiddle = 0; // Temp variable
-        for (int column = 0, row = 0; row <= MapHeight; row++)
+        for (int row = 0; row <= MapHeight; row++)
         {
+            int column;
             for (column = 0; column <= MapWidth; column++)
             {
-                Map[column,row] = new GeneratorMap();
-                Map[column, row].TileLayoutMap = OPEN;
+                Map[column, row] = new GeneratorMap
+                {
+                    TileLayoutMap = OPEN
+                };
                 // If coordinants lie on the the edge of the map (creates a border)
                 if (column == 0)
                 {
@@ -119,7 +122,7 @@ public class CaveRegion: Region
                 // Else, fill with a wall a random percent of the time
                 else
                 {
-                    mapMiddle = (MapHeight / 2);
+                    int mapMiddle = (MapHeight / 2);
 
                     if (row == mapMiddle)
                     {

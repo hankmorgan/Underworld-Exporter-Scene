@@ -11,7 +11,7 @@ public class ScrollButtonStatsDisplay : Scrollbutton {
 
 	public void OnClick()
 	{
-		ScrollValue = ScrollValue + stepSize;
+		ScrollValue += stepSize;
 		if (ScrollValue >MaxScrollValue)
 		{
 				ScrollValue=MaxScrollValue;

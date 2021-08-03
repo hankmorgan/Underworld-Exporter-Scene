@@ -20,9 +20,8 @@ public class event_processor : UWClass
     public event_processor()
     {
         char[] scd_ark;
-        char[] scd_ark_file_data;
         var toLoad = Path.Combine(Loader.BasePath, GameWorldController.instance.SCD_Ark_File_Selected);
-        if (!Loader.ReadStreamFile(toLoad, out scd_ark_file_data))
+        if (!Loader.ReadStreamFile(toLoad, out char[] scd_ark_file_data))
         {
             Debug.Log(toLoad + " was not loaded");
             return;
@@ -43,7 +42,6 @@ public class event_processor : UWClass
             }
             long BlockStart = Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
             int j = 0;
-            address_pointer = 0;//Since I am at the start of a fresh array.
             scd_ark = new char[datalen];
             for (long i = BlockStart; i < BlockStart + datalen; i++)
             {
@@ -57,8 +55,10 @@ public class event_processor : UWClass
             if (noOfRows != 0)
             {
                 //output = output + "Unknown info 1-325\n";
-                events_blocks[BlockNo] = new event_block();
-                events_blocks[BlockNo].eventheader = new int[325];
+                events_blocks[BlockNo] = new event_block
+                {
+                    eventheader = new int[325]
+                };
                 for (int i = 1; i < 324; i++)
                 {
                     events_blocks[BlockNo].eventheader[i - 1] = (int)Loader.getValAtAddress(scd_ark, add_ptr++, 8);

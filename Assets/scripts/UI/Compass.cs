@@ -27,7 +27,7 @@ public class Compass : GuiBase_Draggable
     private RawImage comp;
     public RawImage[] NorthIndicators = new RawImage[16];
 
-    private Texture2D[] CompassPoles = new Texture2D[4];
+    private readonly Texture2D[] CompassPoles = new Texture2D[4];
 
     public override void Start()
     {

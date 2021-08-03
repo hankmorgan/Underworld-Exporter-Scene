@@ -119,23 +119,22 @@ public class a_hack_trap_qbert : a_hack_trap {
 		/// <param name="src">Source.</param>
 	void RandomTeleport(object_base src)
 	{
-		ObjectInteraction obj=null;
-		if (FindMoongateInTile((int)src.ObjectTileX, (int)src.ObjectTileY, out obj))
-		{//not all teleport locations are confirmed!
-		switch (obj.link)
-			{
-			case 545://Red 
-			case 557://Red on red hell
-				TeleportRed(); break;
-			case 591 ://blue
-				TeleportBlue();break;			
-			case 603: //purple
-				TeleportPurple();break;
-			case 528: //Yellow
-				TeleportYellow();break;						
-			}
-		}
-	}
+        if (FindMoongateInTile((int)src.ObjectTileX, (int)src.ObjectTileY, out ObjectInteraction obj))
+        {//not all teleport locations are confirmed!
+            switch (obj.link)
+            {
+                case 545://Red 
+                case 557://Red on red hell
+                    TeleportRed(); break;
+                case 591://blue
+                    TeleportBlue(); break;
+                case 603: //purple
+                    TeleportPurple(); break;
+                case 528: //Yellow
+                    TeleportYellow(); break;
+            }
+        }
+    }
 
 	void TeleportRed()
 	{
@@ -265,10 +264,8 @@ public class a_hack_trap_qbert : a_hack_trap {
 		/// <param name="tileY">Tile y.</param>
 		void StepOnPyramid(int tileX, int tileY)
 		{
-			int previousTileX=0;
-			int previousTileY=0;
-			getPreviousTileXY(out previousTileX, out previousTileY);
-			if ((tileX==previousTileX) && (tileY==previousTileY))
+        getPreviousTileXY(out int previousTileX, out int previousTileY);
+        if ((tileX==previousTileX) && (tileY==previousTileY))
 			{
 				return;
 			}

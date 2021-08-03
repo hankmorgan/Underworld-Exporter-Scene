@@ -116,7 +116,7 @@ public class UWCombat : Combat
     /// </summary>
     public override void CombatCharging()
     {//While still charging increase the charge by the charge rate.
-        Charge = (Charge + (chargeRate * Time.deltaTime));
+        Charge += (chargeRate * Time.deltaTime);
         if (Charge > 100)
         {
             Charge = 100;
@@ -592,9 +592,6 @@ public class UWCombat : Combat
     /// <param name="hit">Hit.</param>
     public static void PC_Hits_NPC(UWCharacter playerUW, WeaponMelee currentWeapon, string StrikeName, float StrikeCharge, NPC npc, RaycastHit hit)
     {
-
-        int attackScore = 0;
-
         int flankingbonus = 0; //need to calcu but depending on relative headings between attacker and defender.
         int magicbonus = 0;//currently unknown what provides this but is calculated by casting/5 + 0xA when set.
         short MinCharge;
@@ -608,6 +605,8 @@ public class UWCombat : Combat
         }
 
 
+
+        int attackScore;
         if (currentWeapon != null)
         {
             attackScore = (playerUW.PlayerSkills.GetSkill(Skills.SkillAttack) >> 1) + playerUW.PlayerSkills.GetSkill(currentWeapon.GetSkill()) + (playerUW.PlayerSkills.DEX / 7) + magicbonus + flankingbonus;
@@ -736,8 +735,7 @@ public class UWCombat : Combat
     /// <param name="npc">Npc.</param>
     public static void NPC_Hits_PC(UWCharacter playerUW, NPC npc)
      {
-        int flankingbonus = 0;
-        flankingbonus = CalcFlankingBonus(npc.objInt().heading, playerUW.currentHeading);
+        int flankingbonus = CalcFlankingBonus(npc.objInt().heading, playerUW.currentHeading);
         int attackScore = npc.CurrentAttackScore + (npc.EquipDamage >> 1) + Random.Range(0, 5) + 7 + flankingbonus; //+Maybe Npc Level
 
         //Player defence
@@ -757,9 +755,7 @@ public class UWCombat : Combat
         {
             rollresult = Skills.SkillRollResult.Success;//Slasher of veils will always hit.
         }
-
-        short Damage = 0;
-        Damage = (short)(npc.CurrentAttackDamage + (npc.Strength / 5));
+        short Damage = (short)(npc.CurrentAttackDamage + npc.Strength / 5);
         Damage = (short)Mathf.Max(Damage, 2);
         int baseDamage = Damage;
 
@@ -884,7 +880,7 @@ public class UWCombat : Combat
 
     public static int GetPlayerBaseDamage(WeaponMelee currentWeapon, string StrikeName)
     {
-        int BaseDamage = 1;
+        int BaseDamage;
         if (currentWeapon != null)
         {
             switch (StrikeName)

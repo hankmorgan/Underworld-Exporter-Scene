@@ -178,7 +178,7 @@ public class InventorySlot : GuiBase
             if (UWCharacter.Instance.PlayerMagic.InventorySpell == true)
             {
                 UWCharacter.Instance.PlayerMagic.ObjectInSlot = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(slotIndex);
-                UWCharacter.Instance.PlayerMagic.castSpell(this.gameObject, UWCharacter.Instance.PlayerMagic.ReadiedSpell, false);
+                UWCharacter.Instance.PlayerMagic.CastSpell(this.gameObject, UWCharacter.Instance.PlayerMagic.ReadiedSpell, false);
                 UWCharacter.Instance.PlayerMagic.SpellCost = 0;
                 UWHUD.instance.window.UWWindowWait(1.0f);
             }
@@ -230,7 +230,6 @@ public class InventorySlot : GuiBase
             {
                 if(CurrentObjectInHand.Eat())
                 {//True is returned if some eating action has taken place.
-                    DoNotPickup = true;
                     return;
                 }
             }
@@ -315,7 +314,6 @@ public class InventorySlot : GuiBase
                 if (CurrentObjectInHand.GetItemType() == ObjectInteraction.FOOD)
                 {
                     CurrentObjectInHand.Use();
-                    DoNotPickup = true;
                     return;
                 }
             }
@@ -487,7 +485,7 @@ public class InventorySlot : GuiBase
             {
                 //split the obj. 
                 ObjectInteraction objI = QuantityObj.GetComponent<ObjectInteraction>();
-                objI.link = objI.link - quant;
+                objI.link -= quant;
                 ObjectLoaderInfo newObj = ObjectLoader.newWorldObject(objI.item_id, objI.quality, objI.owner, quant, -1);
                 newObj.is_quant = 1;
                 ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(CurrentTileMap(), newObj, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker, GameWorldController.instance.InventoryMarker.transform.position);
@@ -549,9 +547,8 @@ public class InventorySlot : GuiBase
 
         if (objInt != null)
         {
-            string ObjectName = "";
             string UseString = "";
-            ObjectName = objInt.GetComponent<object_base>().ContextMenuDesc(objInt.item_id);
+            string ObjectName = objInt.GetComponent<object_base>().ContextMenuDesc(objInt.item_id);
             if (CurrentObjectInHand == null)
             {
                 switch (Character.InteractionMode)

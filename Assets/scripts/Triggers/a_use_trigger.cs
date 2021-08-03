@@ -11,7 +11,7 @@ public class a_use_trigger : trigger_base
     public bool Activate(GameObject src, bool mode)
     {
         //Debug.Log (this.name);
-        GameObject triggerObj = null;
+        GameObject triggerObj;
         if (mode)
         {
             triggerObj = ObjectLoader.getGameObjectAt(link);

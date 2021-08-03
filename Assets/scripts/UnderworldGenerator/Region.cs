@@ -40,7 +40,7 @@ public class Region : GeneratorClasses {
     /// <summary>
     /// List of regions formed within the current region
     /// </summary>
-    List<Region> SubRegions = new List<Region>();
+    readonly List<Region> SubRegions = new List<Region>();
 
     public Region()
     {
@@ -72,10 +72,12 @@ public class Region : GeneratorClasses {
         {
             for (int b = 0; b <= Map.GetUpperBound(1); b++)
             {
-                Map[a, b] = new GeneratorMap();
-                Map[a, b].FloorTexture = index;
-                Map[a, b].FloorHeight = BaseHeight;
-                Map[a, b].TileLayoutMap = OPEN;
+                Map[a, b] = new GeneratorMap
+                {
+                    FloorTexture = index,
+                    FloorHeight = BaseHeight,
+                    TileLayoutMap = OPEN
+                };
             }
         }
     }
@@ -282,8 +284,9 @@ public class Region : GeneratorClasses {
     string MapToString()
     {
         string returnString = "";
-        for (int column = 0, row = 0; row < MapHeight; row++)
+        for (int row = 0; row < MapHeight; row++)
         {
+            int column;
             for (column = 0; column < MapWidth; column++)
             {
                 returnString += Map[column, row].TileLayoutMap + ",";
@@ -311,14 +314,12 @@ public class Region : GeneratorClasses {
         int startY = y - scopeY;
         int endX = x + scopeX;
         int endY = y + scopeY;
-
-        int iX = startX;
-        int iY = startY;
-
         int wallCounter = 0;
-
+        int iY;
         for (iY = startY; iY <= endY; iY++)
         {
+
+            int iX;
             for (iX = startX; iX <= endX; iX++)
             {
                 if (!(iX == x && iY == y))
@@ -369,8 +370,9 @@ public class Region : GeneratorClasses {
 
     public void BlankMap()
     {
-        for (int column = 0, row = 0; row <= MapHeight; row++)
+        for (int row = 0; row <= MapHeight; row++)
         {
+            int column;
             for (column = 0; column <= MapWidth; column++)
             {
                 Map[column, row].TileLayoutMap = OPEN;

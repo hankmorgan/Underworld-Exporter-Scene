@@ -13,8 +13,7 @@ public class Dragons : GuiBase {
 		const int RightHeadScrollIndex = 5;
 		const int RightHeadCowerIndex = 6;
 		const int RightHeadIdleIndex = 7;
-
-		int[,] AnimFrames=
+    readonly int[,] AnimFrames=
 		{
 				{14,15,16,17,16,15},	//left tail shake
 				{2, 3, 4, 5, 4, 3 },	//left head scroll	
@@ -25,14 +24,12 @@ public class Dragons : GuiBase {
 				{28,29,30,31,30,29},	//right head cower
 				{19,19,19,19,19,19}		//right head idle
 		};
-
-		float frameRate = 0.5f;
-
-		float[] counters = new float[4];
-		bool[] loops = new bool[4];
-		int[] currentFrames = new int[4];
-		int[] targetFrames = new int[4];
-		int[] AnimSequencePlaying = new int[4];
+    readonly float frameRate = 0.5f;
+    readonly float[] counters = new float[4];
+    readonly bool[] loops = new bool[4];
+    readonly int[] currentFrames = new int[4];
+    readonly int[] targetFrames = new int[4];
+    readonly int[] AnimSequencePlaying = new int[4];
 		//int[] AnimSequenceTransition = new int[4]; //sequence to move to when complete
 
 		public RawImage[] targetControls = new RawImage[6];//First four are controlled by the anim sequence

@@ -42,8 +42,8 @@ public class CritterInfo : Loader
     //public int Item_Id;
     //public int FileNo;
     //public int AuxPalNo;
-    char[] FilePage0;
-    char[] FilePage1;
+    readonly char[] FilePage0;
+    readonly char[] FilePage1;
     public Palette pal; //the game pal.
                         //private Palette auxpal;
 
@@ -182,10 +182,10 @@ public class CritterInfo : Loader
         }
 
         //Skip past the palettes
-        addptr = addptr + NoOfPals * 32;
+        addptr += NoOfPals * 32;
         int NoOfFrames = (int)getValAtAddress(PageFile, addptr, 8);
         //AnimInfo.animSprites=new Sprite[NoOfFrames];
-        addptr = addptr + 2;
+        addptr += 2;
         int addptr_start = addptr;//Bookmark my positiohn
         int MaxWidth = 0;
         int MaxHeight = 0;
@@ -259,7 +259,7 @@ public class CritterInfo : Loader
                     }
                     else
                     {
-                        cornerX = cornerX - 1;
+                        cornerX--;
                     }
                     if (cornerY <= 0)
                     {
@@ -282,7 +282,7 @@ public class CritterInfo : Loader
                         char[] srcImg;
                         srcImg = new char[BitMapWidth * BitMapHeight * 2];
                         outputImg = new char[MaxWidth * MaxHeight * 2];
-                        ArtLoader.ua_image_decode_rle(PageFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
+                        ArtLoader.Ua_image_decode_rle(PageFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
 
 
                         //*Put the sprite in the a frame of size max width & height
@@ -621,13 +621,11 @@ public class CritterInfo : Loader
         if (data == "0")
         { return "00"; }
         string result = string.Empty;
-        int rem = 0;
-
         int num = int.Parse(data);
         while (num > 0)
         {
-            rem = num % 8;
-            num = num / 8;
+            int rem = num % 8;
+            num /= 8;
             result = rem.ToString() + result;
         }
         if (result.Length == 1)
@@ -698,7 +696,6 @@ public class CritterInfo : Loader
     {
         //Debug.Log(fileCrit + " starting at  "  + spriteIndex);
         Palette pal = paletteToUse;
-        char[] critterFile;
         //char[] auxpalval=new char[32];
         //Palette[] auxpal = new Palette[32];
         //int auxPalNo = PaletteNo;
@@ -708,7 +705,7 @@ public class CritterInfo : Loader
         //pal = new palette[256];
         //getPalette(PaletteFile, pal, 0);//always palette 0?
 
-        ReadStreamFile(fileCrit, out critterFile);
+        ReadStreamFile(fileCrit, out char[] critterFile);
 
 
         //UW2 uses a different method
@@ -733,7 +730,7 @@ public class CritterInfo : Loader
         {
             if (pass == 0)
             {//First pass is getting max image sizes
-                for (int index = 128; index < 640; index = index + 2)
+                for (int index = 128; index < 640; index += 2)
                 {
                     int frameOffset = (int)getValAtAddress(critterFile, index, 16);
                     if (frameOffset != 0)
@@ -766,7 +763,7 @@ public class CritterInfo : Loader
                 }
                 char[] outputImg;
                 outputImg = new char[MaxWidth * MaxHeight * 2];
-                for (int index = 128; index < 640; index = index + 2)
+                for (int index = 128; index < 640; index += 2)
                 {
                     int frameOffset = (int)getValAtAddress(critterFile, index, 16);
                     if (frameOffset != 0)
@@ -782,7 +779,7 @@ public class CritterInfo : Loader
                         cornerX = MaxHotSpotX - hotspotx;
                         cornerY = MaxHotSpotY - hotspoty;
                         if (cornerX <= 0) { cornerX = 0; }
-                        else { cornerX = cornerX - 1; }
+                        else { cornerX--; }
                         if (cornerY <= 0) { cornerY = 0; }
 
                         if (true)
@@ -791,7 +788,7 @@ public class CritterInfo : Loader
                             char[] srcImg;
 
                             srcImg = new char[BitMapWidth * BitMapHeight * 2];
-                            ArtLoader.ua_image_decode_rle(critterFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
+                            ArtLoader.Ua_image_decode_rle(critterFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
                             cornerY = MaxHeight - cornerY;//y is from the top left corner
 
                             int ColCounter = 0; int RowCounter = 0;

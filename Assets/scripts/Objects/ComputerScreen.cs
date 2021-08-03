@@ -29,7 +29,7 @@ public class ComputerScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//TODO:Invoke repeating?
-		AnimationTime = AnimationTime+Time.deltaTime;
+		AnimationTime += Time.deltaTime;
 		if (AnimationTime>=NextFrame)
 			{
 			AnimationTime =0;

@@ -218,7 +218,7 @@ public class MapInteraction : GuiBase
                 PointerEventData pntr = (PointerEventData)evnt;
                 CursorPos = UWHUD.instance.window.CursorPosition.center;//pntr.pressPosition;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, pntr.pressPosition, pntr.pressEventCamera, out pos);
-                pos = pos + new Vector2(150.0f, -4.0f);
+                pos += new Vector2(150.0f, -4.0f);
                 GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
                 mapNoteCurrent = myObj.GetComponent<Text>();
                 mapNoteCurrent.transform.parent = this.transform;

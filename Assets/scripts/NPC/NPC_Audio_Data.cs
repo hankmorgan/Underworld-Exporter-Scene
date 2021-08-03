@@ -17,9 +17,9 @@ public class NPC_Audio_Data : Loader {
     AudioClip WalkSoundLeft; //A class can have only set of walk sounds.
     AudioClip WalkSoundRight; //A class can have only set of walk sounds.
     AudioClip DeathSound; //A class can have only one death sound.
-    AudioClip[,] IdleSounds= new AudioClip[256,4]; //A class could have 4 idle sounds per whoami. [NPC_WHO_AM_I, BARK No]
-    bool[] loaded = new bool[256]; //Flag to show that specific whoami has been loaded into this dataset
-    int ThisItemId;
+    readonly AudioClip[,] IdleSounds= new AudioClip[256,4]; //A class could have 4 idle sounds per whoami. [NPC_WHO_AM_I, BARK No]
+    readonly bool[] loaded = new bool[256]; //Flag to show that specific whoami has been loaded into this dataset
+    readonly int ThisItemId;
 
     /// <summary>
     /// Initialise the NPC audio data for the specified item Id

@@ -130,16 +130,15 @@ public class HealthFlask : GuiBase_Draggable {
 			if (output!="")
 			{
 					UWHUD.instance.MessageScroll.Add(output);
-					output="";
-			}
+            }
 
 
-			//Your current vitality is out of 
-			//if (UWCharacter.Instance.Poisoned==true)
-			//{
-			//	output = "You are [barely/mildly/badly] poisoned\n";
-			//}
-			output= "Your current vitality is " +UWCharacter.Instance.CurVIT + " out of " + UWCharacter.Instance.MaxVIT;
+            //Your current vitality is out of 
+            //if (UWCharacter.Instance.Poisoned==true)
+            //{
+            //	output = "You are [barely/mildly/badly] poisoned\n";
+            //}
+            output = "Your current vitality is " +UWCharacter.Instance.CurVIT + " out of " + UWCharacter.Instance.MaxVIT;
 		}
 		else
 		{//your current mana points are 

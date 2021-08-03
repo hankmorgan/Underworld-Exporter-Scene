@@ -43,12 +43,8 @@ public class WeaponsLoader : ArtLoader {
 			cmfile= Path.Combine(BasePath, "DATA", "WEAP.CM");
 			grfile= Path.Combine(BasePath, "DATA", "WEAP.GR");	
 		}
-		char[] AnimData;
-		char[] textureFile;
-		int offset=0;
-		int GroupSize=28; //28 for uw1
-
-		int MaxHeight = 112;
+        int offset = 0;
+        int MaxHeight = 112;
 		int MaxWidth = 172;
 		if (_RES== GAME_UW2)
 		{
@@ -56,14 +52,13 @@ public class WeaponsLoader : ArtLoader {
 			MaxWidth = 208;
 		}
 		int add_ptr=0;
-		int alpha=0;
-        ReadStreamFile(datfile, out AnimData);
-        ReadStreamFile(grfile, out textureFile);
+        ReadStreamFile(datfile, out char[] AnimData);
+        ReadStreamFile(grfile, out char[] textureFile);
 		if (_RES != GAME_UW2)
 		{
-			GroupSize = 28;
+            int GroupSize = 28;
 
-			for (int i = 0; i<8; i++)
+            for (int i = 0; i<8; i++)
 			{
 				for (int j = 0; j<GroupSize; j++)
 				{
@@ -73,7 +68,7 @@ public class WeaponsLoader : ArtLoader {
 				{
 					AnimY[j + offset] = (int)getValAtAddress(AnimData, add_ptr++, 8);
 				}
-				offset = offset + GroupSize;
+				offset += GroupSize;
 			}
 		}
 		else
@@ -84,10 +79,7 @@ public class WeaponsLoader : ArtLoader {
 			}
 		}
 
-
-		add_ptr=0;
-
-		int NoOfTextures = textureFile[2] << 8 | textureFile[1];
+        int NoOfTextures = textureFile[2] << 8 | textureFile[1];
 		if (_RES==GAME_UW2)
 		{
 			NoOfTextures=230;
@@ -107,7 +99,7 @@ public class WeaponsLoader : ArtLoader {
 
 			datalen =  (int)getValAtAddress(textureFile, textureOffset + 4, 16);
 			imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
-			textureOffset = textureOffset + 6;	//Start of raw data.
+			textureOffset += 6;	//Start of raw data.
 		
 			copyNibbles(textureFile, ref imgNibbles, datalen, textureOffset);
 			//LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
@@ -158,8 +150,8 @@ public class WeaponsLoader : ArtLoader {
 						}
 						else
 						{
-							alpha=0;//0
-							outputImg[x + (y*MaxWidth)] = (char)alpha;
+                            int alpha = 0;
+                            outputImg[x + (y*MaxWidth)] = (char)alpha;
 						}
 					}
 					if (ImgStarted == true)
@@ -198,9 +190,9 @@ public class WeaponsLoader : ArtLoader {
 				{
 						OutputData[i] = (char)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);		//High nibble
 						OutputData[i + 1] = (char)((getValAtAddress(InputData, add_ptr, 8)) & 0xf);	//Low nibble
-						i=i+2;
+						i+=2;
 						add_ptr++;
-						NoOfNibbles = NoOfNibbles-2;
+						NoOfNibbles -= 2;
 				}
 				if (NoOfNibbles == 1)
 				{	//Odd nibble out.
@@ -320,12 +312,10 @@ public class WeaponsLoader : ArtLoader {
 				int n1;
 				int n2;
 				int n3;
-				int count=0;
+        n1 = getNibble(nibbles,ref addr_ptr);
+        int count = n1;
 
-				n1 = getNibble(nibbles,ref addr_ptr);
-				count = n1;
-
-				if (count==0)
+        if (count==0)
 				{
 						n1 = getNibble(nibbles, ref addr_ptr);
 						n2 = getNibble(nibbles, ref addr_ptr);
@@ -351,7 +341,7 @@ public class WeaponsLoader : ArtLoader {
 		char getNibble(char[] nibbles, ref int addr_ptr)
 		{
 				char n1 = nibbles[addr_ptr];
-				addr_ptr = addr_ptr + 1;
+				addr_ptr++;
 				return n1;
 		}
 

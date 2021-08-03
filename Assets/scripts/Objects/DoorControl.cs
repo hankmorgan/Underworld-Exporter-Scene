@@ -938,58 +938,56 @@ public class DoorControl : object_base {
 	/// <param name="isOpen">Is open.</param>
 		public static void CreateDoor(GameObject myObj, ObjectInteraction objInt)
 		{
-			int doorIndex=0;
-				int textureIndex=0;
-				//string DoorTexturePath="";
-			//Try and match up the door item id with a texture.
-				NavMeshObstacle navobs= myObj.AddComponent<NavMeshObstacle>();
-				navobs.center= new Vector3(-.4f, 0f, 0.5f);
+        //string DoorTexturePath="";
+        //Try and match up the door item id with a texture.
+        NavMeshObstacle navobs = myObj.AddComponent<NavMeshObstacle>();
+        navobs.center= new Vector3(-.4f, 0f, 0.5f);
 				navobs.size= new Vector3(0.8f, 0.1f, 1.1f);
+        int textureIndex;
+        switch (objInt.GetItemType())
+        {
+            case ObjectInteraction.HIDDENDOOR:
+                {
+                    if (objInt.ObjectTileX <= TileMap.TileMapSizeX)
+                    {
+                        textureIndex = CurrentTileMap().Tiles[objInt.ObjectTileX, objInt.ObjectTileY].wallTexture;
+                    }
+                    else
+                    {
+                        textureIndex = 0;
+                    }
 
+                    //textureIndex = CurrentTileMap().texture_map[CurrentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
+                    //DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
+                    break;
+                }
+            case ObjectInteraction.DOOR:
+            default:
+                {
+                    int doorIndex;
+                    if ((objInt.item_id >= 320) && (objInt.item_id <= 325))
+                    {//320>>58
+                        doorIndex = objInt.item_id - 320;
+                    }
+                    else
+                    {//328>>58
+                        doorIndex = objInt.item_id - 328;
+                    }
+                    if (_RES == GAME_UW2)
+                    {
+                        textureIndex = CurrentTileMap().texture_map[64 + doorIndex];
+                    }
+                    else
+                    {
+                        textureIndex = CurrentTileMap().texture_map[58 + doorIndex];
+                    }
 
-			switch  (objInt.GetItemType())
-				{
-				case ObjectInteraction.HIDDENDOOR:
-						{
-							if (objInt.ObjectTileX <= TileMap.TileMapSizeX)
-							{
-								textureIndex = 	CurrentTileMap().Tiles[objInt.ObjectTileX, objInt.ObjectTileY].wallTexture;
-							}
-							else
-							{
-								textureIndex=0;
-							}
-							
-							//textureIndex = CurrentTileMap().texture_map[CurrentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
-							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
-							break;	
-						}
-				case ObjectInteraction.DOOR:
-				default:
-					{
-						if ((objInt.item_id>=320) && (objInt.item_id<=325))
-						{//320>>58
-								doorIndex=objInt.item_id-320;
-						}
-						else
-						{//328>>58
-								doorIndex= objInt.item_id-328;
-						}
-								if (_RES==GAME_UW2)
-								{
-										textureIndex= CurrentTileMap().texture_map[64+doorIndex];	
-								}
-								else
-								{
-										textureIndex= CurrentTileMap().texture_map[58+doorIndex];	
-								}
-						
-						//DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
-						break;
-					}					
-				}
+                    //DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
+                    break;
+                }
+        }
 
-			myObj.layer=LayerMask.NameToLayer("Doors");
+        myObj.layer=LayerMask.NameToLayer("Doors");
 			GameObject newObj;
 			switch  (objInt.GetItemType())
                 {
@@ -1067,25 +1065,28 @@ public class DoorControl : object_base {
 				float uvXPos1 = 0f;
 				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
 				float uvXPos3 =uvXPos2 + doorwidth/1.2f;
-				//float uvXPos4 = 1f; // or 1.2f/1.2f
+        //float uvXPos4 = 1f; // or 1.2f/1.2f
 
-				//Now create the mesh
-				GameObject Tile = new GameObject(dc.name + "_Model");
+        //Now create the mesh
+        GameObject Tile = new GameObject(dc.name + "_Model")
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
 
-				Tile.layer=LayerMask.NameToLayer("MapMesh");
-
-				Tile.transform.parent=dc.transform;
+        Tile.transform.parent=dc.transform;
 				Tile.transform.localPosition = Vector3.zero;
 
 				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 				MeshFilter mf = Tile.AddComponent<MeshFilter>();
 				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
-				//MeshCollider mc = Tile.AddComponent<MeshCollider>();
-				//mc.sharedMesh=null;
-				Mesh mesh = new Mesh();
-				mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+        //MeshCollider mc = Tile.AddComponent<MeshCollider>();
+        //mc.sharedMesh=null;
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
-				Material[] MatsToUse=new Material[NumberOfVisibleFaces];
+        Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 				//Now allocate the visible faces to triangles.
 				int FaceCounter=0;//Tracks which number face we are now on.
 				float PolySize= Top-Bottom;
@@ -1230,7 +1231,7 @@ public class DoorControl : object_base {
 				int newZpos=CurrentTileMap().Tiles[dc.ObjectTileX, dc.ObjectTileY].floorHeight * 4;
 				float BrushZ = 15f;
 				float offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-				offZ= offZ/100.0f;
+				offZ/= 100.0f;
 				BoxCollider bx= dc.GetComponent<BoxCollider>();
 				bx.center= new Vector3(-0.4f,0,0.525f+ offZ);
 				bx.size=new Vector3(0.8f, 0.04f, 1.05f);

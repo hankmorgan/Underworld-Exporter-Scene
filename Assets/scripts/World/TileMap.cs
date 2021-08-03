@@ -382,7 +382,7 @@ public class TileMap : Loader
                 int FirstTileInt = (int)DataLoader.getValAtAddress(lev_ark, (address_pointer + 0), 16);
                 int SecondTileInt = (int)DataLoader.getValAtAddress(lev_ark, (address_pointer + 2), 16);
                 Tiles[x, y] = new TileInfo(this, x, y);
-                address_pointer = address_pointer + 4;
+                address_pointer += 4;
             }
         }
 
@@ -515,15 +515,11 @@ public class TileMap : Loader
 
     public bool BuildTileMapShock(char[] archive_ark, int LevelNo)
     {
-        long address_pointer = 4;
         //LevelInfo=new TileInfo[64,64];
 
         //char[] archive_ark; //file data
-        DataLoader.Chunk lev_ark;
         /*  unsigned char *tmp_ark; 
 unsigned char *sub_ark;*/
-        DataLoader.Chunk tex_ark;
-        DataLoader.Chunk inf_ark;
 
 
 
@@ -534,7 +530,7 @@ unsigned char *sub_ark;*/
         //			return false;
         //}
 
-        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4004, out inf_ark))
+        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4004, out DataLoader.Chunk inf_ark))
         {//Read in the evel properties.
             return false;
         }
@@ -554,7 +550,7 @@ unsigned char *sub_ark;*/
         //long always6_1 = getValAtAddress(inf_ark,8,32);
         //long always6_2 = getValAtAddress(inf_ark,12,32);  
 
-        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4005, out lev_ark))
+        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4005, out DataLoader.Chunk lev_ark))
         {//Read in the level tilemap data
             return false;
         }
@@ -567,7 +563,7 @@ AddressOfBlockStart=0;
 address_pointer=0;  */
 
 
-        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4007, out tex_ark))
+        if (!DataLoader.LoadChunk(archive_ark, LevelNo * 100 + 4007, out DataLoader.Chunk tex_ark))
         {//Read in the level texture data
             return false;
         }
@@ -575,11 +571,11 @@ address_pointer=0;  */
         //get the texture data from the archive.is never compressed?
         //AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark, ref chunkPackedLength, ref chunkUnpackedLength,ref chunkType);
         //tex_ark = new char[chunkUnpackedLength]; 
-        address_pointer = 0;
+        long address_pointer = 0;
         for (long k = 0; k < tex_ark.chunkUnpackedLength / 2; k++)
         {
             texture_map[k] = (short)getValAtAddress(tex_ark.data, address_pointer, 16);
-            address_pointer = address_pointer + 2;   //tmp_ark[AddressOfBlockStart+k];
+            address_pointer += 2;   //tmp_ark[AddressOfBlockStart+k];
         }
         address_pointer = 0;
 
@@ -597,10 +593,12 @@ address_pointer=0;  */
             for (int x = 0; x <= TileMapSizeX; x++)
             {
                 //Read in the tile data 
-                Tiles[x, y] = new TileInfo();
-                Tiles[x, y].tileX = (short)x;
-                Tiles[x, y].tileY = (short)y;
-                Tiles[x, y].tileType = (short)lev_ark.data[address_pointer];
+                Tiles[x, y] = new TileInfo
+                {
+                    tileX = (short)x,
+                    tileY = (short)y,
+                    tileType = (short)lev_ark.data[address_pointer]
+                };
                 switch (Tiles[x, y].tileType)
                 {//Need to swap some tile types around so that they conform to uw naming standards.
                     case 4: { Tiles[x, y].tileType = 5; break; }
@@ -708,7 +706,7 @@ xxxxxCxx  Ceiling only
                 //  Tiles[x,y].floorHeight=x;
                 //  Tiles[x,y].shockSteep=11;
                 //}
-                address_pointer = address_pointer + 16;
+                address_pointer += 16;
             }
         }
 
@@ -887,7 +885,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
             return;
         }
         //return;
-        int j = 1;
+        int j;
         //Now lets combine the solids along particular axis
         for (x = 0; x < TileMapSizeX; x++)
         {
@@ -914,11 +912,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
                     }
                     Tiles[x, y].DimY = (short)(Tiles[x, y].DimY + j - 1);
-                    j = 1;
                 }
             }
         }
-        j = 1;
 
         ////Now lets combine solids along the other axis
         for (y = 0; y < TileMapSizeY; y++)
@@ -946,7 +942,6 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
                     }
                     Tiles[x, y].DimX = (short)(Tiles[x, y].DimX + j - 1);
-                    j = 1;
                 }
             }
         }
@@ -1735,7 +1730,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                     }
                     else
                     {
-                        addptr = addptr + 8;
+                        addptr += 8;
                     }
                 }
                 else
@@ -1785,7 +1780,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
 
                         int val = (int)getValAtAddress(TileMapData, addptr + 0xd, 16);
-                        val = val & 0x1ff0;
+                        val &= 0x1ff0;
                         ByteToWrite = ((currobj.npc_attitude & 0x3) << 14) |
                                 ((currobj.npc_talkedto & 0x1) << 13) |
                                 (currobj.npc_level & 0xF)
@@ -1825,7 +1820,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                     }
                     else
                     {
-                        addptr = addptr + 8;
+                        addptr += 8;
                     }
                 }
             }
@@ -2201,14 +2196,14 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                         {
                             texture_map[i] = (short)DataLoader.getValAtAddress(tex_ark, offset, 16);
                             //(i * 2)
-                            offset = offset + 2;
+                            offset += 2;
                         }
                         else
                             if (i <= 57)//Floor textures are 49 to 56, ceiling is 57
                         {
                             texture_map[i] = (short)(DataLoader.getValAtAddress(tex_ark, offset, 16) + 48);
                             //(i * 2)
-                            offset = offset + 2;
+                            offset += 2;
                             if (i == 57)
                             {
                                 CeilingTexture = (short)i;
@@ -2228,13 +2223,13 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                         if (i < 48)//Wall textures
                         {
                             texture_map[i] = (short)DataLoader.getValAtAddress(tex_ark, offset, 16);
-                            offset = offset + 2;
+                            offset += 2;
                         }
                         else
                             if (i <= 57)//Floor textures are 48 to 56, ceiling is 57
                         {
                             texture_map[i] = (short)(DataLoader.getValAtAddress(tex_ark, offset, 16) + 210);
-                            offset = offset + 2;
+                            offset += 2;
                             if (i == 57)
                             {
                                 CeilingTexture = (short)i;
@@ -2255,7 +2250,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                         {
                             texture_map[i] = (short)DataLoader.getValAtAddress(tex_ark, offset, 16);
                             //tmp //textureAddress+//(i*2)
-                            offset = offset + 2;
+                            offset += 2;
                         }
                         else
                         {

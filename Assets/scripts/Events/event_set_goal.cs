@@ -13,7 +13,7 @@ public class event_set_goal : event_always
         int WhoAmIorRace = RawData[4];
         int newGoal = RawData[5];
         int gtarg = RawData[6];
-        NPC[] npcs = null;
+        NPC[] npcs;
         if (isNPC)
         {
             npcs = findNPC(WhoAmIorRace);

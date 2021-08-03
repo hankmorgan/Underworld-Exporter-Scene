@@ -12,7 +12,7 @@ public class CameraShake : UWEBase
 
     // Amplitude of the shake. A larger value shakes the camera harder.
     private float shakeAmount = 0.7f;
-    private float decreaseFactor = 1.0f;
+    private readonly float decreaseFactor = 1.0f;
 
     public static Vector3 CurrentShake= Vector3.zero;
 

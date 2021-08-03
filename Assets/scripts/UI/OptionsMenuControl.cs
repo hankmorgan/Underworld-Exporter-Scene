@@ -10,7 +10,7 @@ using System.IO;
 /// </summary>
 public class OptionsMenuControl : GuiBase_Draggable
 {
-    string[] saveNames = { "", "", "", "" };
+    readonly string[] saveNames = { "", "", "", "" };
     public GameObject test;
 
     private const int SAVE = 0;
@@ -461,8 +461,7 @@ public class OptionsMenuControl : GuiBase_Draggable
 
         for (int i = 1; i <= 4; i++)
         {
-            char[] fileDesc;
-            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
+            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + i, "DESC"), out char[] fileDesc))
             {
                 saveNames[i - 1] = new string(fileDesc);
             }

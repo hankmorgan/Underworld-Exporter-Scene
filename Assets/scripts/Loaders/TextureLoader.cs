@@ -7,12 +7,12 @@ using System.IO;
 /// </summary>
 public class TextureLoader : ArtLoader {
 
-    private string pathTexW_UW0 = "DW64.TR";
-    private string pathTexF_UW0 = "DF32.TR";
+    private readonly string pathTexW_UW0 = "DW64.TR";
+    private readonly string pathTexF_UW0 = "DF32.TR";
     private string pathTexW_UW1 = "W64.TR";
     private string pathTexF_UW1 = "F32.TR";
-    private string pathTex_UW2 = "T64.TR";
-    private string pathTex_SS1 = "Texture.res";
+    private readonly string pathTex_UW2 = "T64.TR";
+    private readonly string pathTex_SS1 = "Texture.res";
 
     char[] texturebufferW;
     char[] texturebufferF;
@@ -22,8 +22,8 @@ public class TextureLoader : ArtLoader {
     public bool texturesFLoaded;
     private int TextureSplit = 210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
     private int FloorDim = 32;
-    private string ModPathW;
-    private string ModPathF;
+    private readonly string ModPathW;
+    private readonly string ModPathF;
 
     public const float BumpMapStrength = 1f;
 
@@ -128,8 +128,7 @@ public class TextureLoader : ArtLoader {
                     }
                     //Load the chunk requested
                     //For textures this is index + 1000
-                    DataLoader.Chunk art_ark;
-                    if (DataLoader.LoadChunk(texturebufferT, index + 1000, out art_ark))
+                    if (DataLoader.LoadChunk(texturebufferT, index + 1000, out DataLoader.Chunk art_ark))
                     {
                         switch (art_ark.chunkContentType)
                         {
@@ -145,9 +144,8 @@ public class TextureLoader : ArtLoader {
 
                                         if (CompressionType == 4)
                                         {//compressed
-                                            char[] outputImg;
                                             //  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
-                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out outputImg, Height * Width);
+                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out char[] outputImg, Height * Width);
                                             return Image(outputImg, 0, Width, Height, "namehere", palToUse, true);
                                         }
                                         else

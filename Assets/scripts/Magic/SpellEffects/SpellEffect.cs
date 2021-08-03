@@ -499,7 +499,7 @@ public class SpellEffect : UWEBase {
 	/// Spell Icons for the spell effect ids
 	/// </summary>
 	/// From a spreadsheet I created. The Icons that match up with the above effects constants
-	private static int[] UW1_Spell_Icons=
+	private static readonly int[] UW1_Spell_Icons=
         {-1,
 17,
 17,
@@ -993,7 +993,7 @@ public class SpellEffect : UWEBase {
 -1,
 -1};
 
-		private static int[] UW2_Spell_Icons=
+		private static readonly int[] UW2_Spell_Icons=
 		{-1,
 				23,
 				23,

@@ -33,6 +33,7 @@
 			<npc_gtarg>58</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15450</CoOrdinateX>
+			<CoOrdinateY>50086</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>56</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -93,6 +94,7 @@
 			<npc_gtarg>84</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>13638</CoOrdinateX>
+			<CoOrdinateY>13638</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>52</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -153,6 +155,7 @@
 			<npc_gtarg>108</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1734</CoOrdinateX>
+			<CoOrdinateY>1734</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>237</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -213,6 +216,7 @@
 			<npc_gtarg>68</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-31665</CoOrdinateX>
+			<CoOrdinateY>33871</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>222</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -273,6 +277,7 @@
 			<npc_gtarg>208</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-13056</CoOrdinateX>
+			<CoOrdinateY>52480</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>210</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -333,6 +338,7 @@
 			<npc_gtarg>48</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15611</CoOrdinateX>
+			<CoOrdinateY>49925</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>104</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -393,6 +399,7 @@
 			<npc_gtarg>48</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-27898</CoOrdinateX>
+			<CoOrdinateY>37638</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -453,6 +460,7 @@
 			<npc_gtarg>202</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-850</CoOrdinateX>
+			<CoOrdinateY>64686</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>140</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -513,6 +521,7 @@
 			<npc_gtarg>231</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>3698</CoOrdinateX>
+			<CoOrdinateY>3698</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>104</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -573,6 +582,7 @@
 			<npc_gtarg>205</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-805</CoOrdinateX>
+			<CoOrdinateY>64731</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>14</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -633,6 +643,7 @@
 			<npc_gtarg>216</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-8821</CoOrdinateX>
+			<CoOrdinateY>56715</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>98</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -693,6 +704,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>20485</CoOrdinateX>
+			<CoOrdinateY>20485</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>72</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -753,6 +765,7 @@
 			<npc_gtarg>191</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5122</CoOrdinateX>
+			<CoOrdinateY>60414</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>143</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -813,6 +826,7 @@
 			<npc_gtarg>142</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-1813</CoOrdinateX>
+			<CoOrdinateY>63723</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>255</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -873,6 +887,7 @@
 			<npc_gtarg>63</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15367</CoOrdinateX>
+			<CoOrdinateY>50169</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>224</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -933,6 +948,7 @@
 			<npc_gtarg>225</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-16865</CoOrdinateX>
+			<CoOrdinateY>48671</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>3</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -993,6 +1009,7 @@
 			<npc_gtarg>190</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>3051</CoOrdinateX>
+			<CoOrdinateY>3051</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>91</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -1053,6 +1070,7 @@
 			<npc_gtarg>92</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>30148</CoOrdinateX>
+			<CoOrdinateY>30148</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>62</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1113,6 +1131,7 @@
 			<npc_gtarg>142</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>10472</CoOrdinateX>
+			<CoOrdinateY>10472</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>144</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -1173,6 +1192,7 @@
 			<npc_gtarg>35</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>573</CoOrdinateX>
+			<CoOrdinateY>573</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -1233,6 +1253,7 @@
 			<npc_gtarg>144</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>30982</CoOrdinateX>
+			<CoOrdinateY>30982</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>56</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -1293,6 +1314,7 @@
 			<npc_gtarg>220</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15815</CoOrdinateX>
+			<CoOrdinateY>15815</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>1</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1353,6 +1375,7 @@
 			<npc_gtarg>172</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-21824</CoOrdinateX>
+			<CoOrdinateY>43712</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>187</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1413,6 +1436,7 @@
 			<npc_gtarg>108</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-14653</CoOrdinateX>
+			<CoOrdinateY>50883</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1473,6 +1497,7 @@
 			<npc_gtarg>237</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-28976</CoOrdinateX>
+			<CoOrdinateY>36560</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>110</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1533,6 +1558,7 @@
 			<npc_gtarg>23</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>12660</CoOrdinateX>
+			<CoOrdinateY>12660</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>211</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1593,6 +1619,7 @@
 			<npc_gtarg>96</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1544</CoOrdinateX>
+			<CoOrdinateY>1544</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>237</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1653,6 +1680,7 @@
 			<npc_gtarg>91</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>5567</CoOrdinateX>
+			<CoOrdinateY>5567</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>56</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -1713,6 +1741,7 @@
 			<npc_gtarg>32</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29184</CoOrdinateX>
+			<CoOrdinateY>29184</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>176</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1773,6 +1802,7 @@
 			<npc_gtarg>48</npc_gtarg>
 			<MobileUnk_0xB_12_F>4</MobileUnk_0xB_12_F>
 			<CoOrdinateX>17157</CoOrdinateX>
+			<CoOrdinateY>17157</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>124</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1833,6 +1863,7 @@
 			<npc_gtarg>116</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-30898</CoOrdinateX>
+			<CoOrdinateY>34638</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>91</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1893,6 +1924,7 @@
 			<npc_gtarg>133</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6053</CoOrdinateX>
+			<CoOrdinateY>59483</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>49</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -1953,6 +1985,7 @@
 			<npc_gtarg>26</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32337</CoOrdinateX>
+			<CoOrdinateY>33199</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>126</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2013,6 +2046,7 @@
 			<npc_gtarg>96</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>5636</CoOrdinateX>
+			<CoOrdinateY>5636</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>96</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2073,6 +2107,7 @@
 			<npc_gtarg>167</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-1419</CoOrdinateX>
+			<CoOrdinateY>64117</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>235</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2133,6 +2168,7 @@
 			<npc_gtarg>124</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>30661</CoOrdinateX>
+			<CoOrdinateY>30661</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2193,6 +2229,7 @@
 			<npc_gtarg>178</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29914</CoOrdinateX>
+			<CoOrdinateY>35622</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>20</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2253,6 +2290,7 @@
 			<npc_gtarg>237</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-28967</CoOrdinateX>
+			<CoOrdinateY>36569</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>145</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2313,6 +2351,7 @@
 			<npc_gtarg>111</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1783</CoOrdinateX>
+			<CoOrdinateY>1783</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>237</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2373,6 +2412,7 @@
 			<npc_gtarg>71</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1140</CoOrdinateX>
+			<CoOrdinateY>1140</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>203</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2433,6 +2473,7 @@
 			<npc_gtarg>236</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7875</CoOrdinateX>
+			<CoOrdinateY>7875</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>224</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2493,6 +2534,7 @@
 			<npc_gtarg>56</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-3189</CoOrdinateX>
+			<CoOrdinateY>62347</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>104</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2553,6 +2595,7 @@
 			<npc_gtarg>188</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>3015</CoOrdinateX>
+			<CoOrdinateY>3015</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>59</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2613,6 +2656,7 @@
 			<npc_gtarg>234</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>11948</CoOrdinateX>
+			<CoOrdinateY>11948</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>111</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2673,6 +2717,7 @@
 			<npc_gtarg>64</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29696</CoOrdinateX>
+			<CoOrdinateY>29696</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2733,6 +2778,7 @@
 			<npc_gtarg>94</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-27160</CoOrdinateX>
+			<CoOrdinateY>38376</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2793,6 +2839,7 @@
 			<npc_gtarg>25</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>409</CoOrdinateX>
+			<CoOrdinateY>409</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>94</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2853,6 +2900,7 @@
 			<npc_gtarg>236</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7875</CoOrdinateX>
+			<CoOrdinateY>7875</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>232</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -2913,6 +2961,7 @@
 			<npc_gtarg>42</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>12964</CoOrdinateX>
+			<CoOrdinateY>12964</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>172</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -2973,6 +3022,7 @@
 			<npc_gtarg>136</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6013</CoOrdinateX>
+			<CoOrdinateY>59523</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>117</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3033,6 +3083,7 @@
 			<npc_gtarg>254</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-8216</CoOrdinateX>
+			<CoOrdinateY>57320</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3093,6 +3144,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4108</CoOrdinateX>
+			<CoOrdinateY>4108</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>135</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3153,6 +3205,7 @@
 			<npc_gtarg>168</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-17777</CoOrdinateX>
+			<CoOrdinateY>47759</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>60</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3213,6 +3266,7 @@
 			<npc_gtarg>78</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>9448</CoOrdinateX>
+			<CoOrdinateY>9448</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>160</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3273,6 +3327,7 @@
 			<npc_gtarg>152</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-30332</CoOrdinateX>
+			<CoOrdinateY>35204</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>193</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3333,6 +3388,7 @@
 			<npc_gtarg>91</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>9658</CoOrdinateX>
+			<CoOrdinateY>9658</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>136</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3393,6 +3449,7 @@
 			<npc_gtarg>170</npc_gtarg>
 			<MobileUnk_0xB_12_F>6</MobileUnk_0xB_12_F>
 			<CoOrdinateX>27299</CoOrdinateX>
+			<CoOrdinateY>27299</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>168</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3453,6 +3510,7 @@
 			<npc_gtarg>65</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29712</CoOrdinateX>
+			<CoOrdinateY>29712</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3513,6 +3571,7 @@
 			<npc_gtarg>126</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2019</CoOrdinateX>
+			<CoOrdinateY>2019</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>11</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3573,6 +3632,7 @@
 			<npc_gtarg>91</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>21946</CoOrdinateX>
+			<CoOrdinateY>21946</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>136</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3633,6 +3693,7 @@
 			<npc_gtarg>76</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1216</CoOrdinateX>
+			<CoOrdinateY>1216</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>68</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3693,6 +3754,7 @@
 			<npc_gtarg>24</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>386</CoOrdinateX>
+			<CoOrdinateY>386</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>59</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3753,6 +3815,7 @@
 			<npc_gtarg>3</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-16334</CoOrdinateX>
+			<CoOrdinateY>49202</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>175</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3813,6 +3876,7 @@
 			<npc_gtarg>39</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>631</CoOrdinateX>
+			<CoOrdinateY>631</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3873,6 +3937,7 @@
 			<npc_gtarg>131</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6091</CoOrdinateX>
+			<CoOrdinateY>59445</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>176</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -3933,6 +3998,7 @@
 			<npc_gtarg>243</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-195</CoOrdinateX>
+			<CoOrdinateY>65341</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>79</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -3993,6 +4059,7 @@
 			<npc_gtarg>183</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2933</CoOrdinateX>
+			<CoOrdinateY>2933</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>200</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4053,6 +4120,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1</CoOrdinateX>
+			<CoOrdinateY>1</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>110</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4113,6 +4181,7 @@
 			<npc_gtarg>195</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>31806</CoOrdinateX>
+			<CoOrdinateY>31806</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4173,6 +4242,7 @@
 			<npc_gtarg>59</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>5050</CoOrdinateX>
+			<CoOrdinateY>5050</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>56</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4233,6 +4303,7 @@
 			<npc_gtarg>85</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15018</CoOrdinateX>
+			<CoOrdinateY>50518</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>147</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4293,6 +4364,7 @@
 			<npc_gtarg>20</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>324</CoOrdinateX>
+			<CoOrdinateY>324</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>23</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4353,6 +4425,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>42</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4413,6 +4486,7 @@
 			<npc_gtarg>217</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15760</CoOrdinateX>
+			<CoOrdinateY>15760</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4473,6 +4547,7 @@
 			<npc_gtarg>123</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>6068</CoOrdinateX>
+			<CoOrdinateY>6068</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>203</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4533,6 +4608,7 @@
 			<npc_gtarg>213</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15704</CoOrdinateX>
+			<CoOrdinateY>15704</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4593,6 +4669,7 @@
 			<npc_gtarg>147</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-14029</CoOrdinateX>
+			<CoOrdinateY>51507</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>35</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4653,6 +4730,7 @@
 			<npc_gtarg>55</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>884</CoOrdinateX>
+			<CoOrdinateY>884</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>142</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4713,6 +4791,7 @@
 			<npc_gtarg>147</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-14029</CoOrdinateX>
+			<CoOrdinateY>51507</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>27</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4773,6 +4852,7 @@
 			<npc_gtarg>144</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5887</CoOrdinateX>
+			<CoOrdinateY>59649</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>230</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4833,6 +4913,7 @@
 			<npc_gtarg>35</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-11725</CoOrdinateX>
+			<CoOrdinateY>53811</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>168</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -4893,6 +4974,7 @@
 			<npc_gtarg>215</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29319</CoOrdinateX>
+			<CoOrdinateY>36217</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>35</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -4953,6 +5035,7 @@
 			<npc_gtarg>232</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>16003</CoOrdinateX>
+			<CoOrdinateY>16003</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>138</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5013,6 +5096,7 @@
 			<npc_gtarg>178</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29906</CoOrdinateX>
+			<CoOrdinateY>35630</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5073,6 +5157,7 @@
 			<npc_gtarg>126</npc_gtarg>
 			<MobileUnk_0xB_12_F>6</MobileUnk_0xB_12_F>
 			<CoOrdinateX>26601</CoOrdinateX>
+			<CoOrdinateY>26601</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>191</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5133,6 +5218,7 @@
 			<npc_gtarg>167</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2677</CoOrdinateX>
+			<CoOrdinateY>2677</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>130</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5193,6 +5279,7 @@
 			<npc_gtarg>174</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>31465</CoOrdinateX>
+			<CoOrdinateY>31465</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>159</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5253,6 +5340,7 @@
 			<npc_gtarg>8</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>129</CoOrdinateX>
+			<CoOrdinateY>129</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>107</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5313,6 +5401,7 @@
 			<npc_gtarg>110</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-26904</CoOrdinateX>
+			<CoOrdinateY>38632</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5373,6 +5462,7 @@
 			<npc_gtarg>95</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>30207</CoOrdinateX>
+			<CoOrdinateY>30207</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>129</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5433,6 +5523,7 @@
 			<npc_gtarg>242</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>24367</CoOrdinateX>
+			<CoOrdinateY>24367</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>240</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5493,6 +5584,7 @@
 			<npc_gtarg>170</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-21845</CoOrdinateX>
+			<CoOrdinateY>43691</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>139</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5553,6 +5645,7 @@
 			<npc_gtarg>5</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-24496</CoOrdinateX>
+			<CoOrdinateY>41040</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>5</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5613,6 +5706,7 @@
 			<npc_gtarg>241</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-16621</CoOrdinateX>
+			<CoOrdinateY>48915</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>218</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5673,6 +5767,7 @@
 			<npc_gtarg>160</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-17920</CoOrdinateX>
+			<CoOrdinateY>47616</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5733,6 +5828,7 @@
 			<npc_gtarg>16</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4358</CoOrdinateX>
+			<CoOrdinateY>4358</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>24</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5793,6 +5889,7 @@
 			<npc_gtarg>208</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>23815</CoOrdinateX>
+			<CoOrdinateY>23815</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>229</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5853,6 +5950,7 @@
 			<npc_gtarg>220</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15819</CoOrdinateX>
+			<CoOrdinateY>15819</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>255</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -5913,6 +6011,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>40</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -5973,6 +6072,7 @@
 			<npc_gtarg>151</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2418</CoOrdinateX>
+			<CoOrdinateY>2418</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>253</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6033,6 +6133,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>37</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6093,6 +6194,7 @@
 			<npc_gtarg>90</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1455</CoOrdinateX>
+			<CoOrdinateY>1455</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>103</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6153,6 +6255,7 @@
 			<npc_gtarg>195</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15408</CoOrdinateX>
+			<CoOrdinateY>15408</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>66</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6213,6 +6316,7 @@
 			<npc_gtarg>115</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1850</CoOrdinateX>
+			<CoOrdinateY>1850</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>119</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6273,6 +6377,7 @@
 			<npc_gtarg>152</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5757</CoOrdinateX>
+			<CoOrdinateY>59779</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>24</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6333,6 +6438,7 @@
 			<npc_gtarg>8</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-12150</CoOrdinateX>
+			<CoOrdinateY>53386</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>43</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6393,6 +6499,7 @@
 			<npc_gtarg>186</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29792</CoOrdinateX>
+			<CoOrdinateY>35744</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>72</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6453,6 +6560,7 @@
 			<npc_gtarg>43</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-23878</CoOrdinateX>
+			<CoOrdinateY>41658</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>136</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6513,6 +6621,7 @@
 			<npc_gtarg>160</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-30208</CoOrdinateX>
+			<CoOrdinateY>35328</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>76</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6573,6 +6682,7 @@
 			<npc_gtarg>174</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29975</CoOrdinateX>
+			<CoOrdinateY>35561</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>240</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6633,6 +6743,7 @@
 			<npc_gtarg>7</npc_gtarg>
 			<MobileUnk_0xB_12_F>6</MobileUnk_0xB_12_F>
 			<CoOrdinateX>24692</CoOrdinateX>
+			<CoOrdinateY>24692</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>179</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6693,6 +6804,7 @@
 			<npc_gtarg>179</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15164</CoOrdinateX>
+			<CoOrdinateY>15164</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>103</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6753,6 +6865,7 @@
 			<npc_gtarg>33</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32237</CoOrdinateX>
+			<CoOrdinateY>33299</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6813,6 +6926,7 @@
 			<npc_gtarg>91</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-23106</CoOrdinateX>
+			<CoOrdinateY>42430</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>200</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6873,6 +6987,7 @@
 			<npc_gtarg>2</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32730</CoOrdinateX>
+			<CoOrdinateY>32806</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>3</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -6933,6 +7048,7 @@
 			<npc_gtarg>255</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-7</CoOrdinateX>
+			<CoOrdinateY>65529</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -6993,6 +7109,7 @@
 			<npc_gtarg>171</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>6836</CoOrdinateX>
+			<CoOrdinateY>6836</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>11</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7053,6 +7170,7 @@
 			<npc_gtarg>202</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-13151</CoOrdinateX>
+			<CoOrdinateY>52385</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>169</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7113,6 +7231,7 @@
 			<npc_gtarg>81</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29968</CoOrdinateX>
+			<CoOrdinateY>29968</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7173,6 +7292,7 @@
 			<npc_gtarg>11</npc_gtarg>
 			<MobileUnk_0xB_12_F>4</MobileUnk_0xB_12_F>
 			<CoOrdinateX>16568</CoOrdinateX>
+			<CoOrdinateY>16568</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>224</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7233,6 +7353,7 @@
 			<npc_gtarg>236</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-306</CoOrdinateX>
+			<CoOrdinateY>65230</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>44</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7293,6 +7414,7 @@
 			<npc_gtarg>43</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>692</CoOrdinateX>
+			<CoOrdinateY>692</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>35</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7353,6 +7475,7 @@
 			<npc_gtarg>27</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32322</CoOrdinateX>
+			<CoOrdinateY>33214</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>240</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7413,6 +7536,7 @@
 			<npc_gtarg>249</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-16488</CoOrdinateX>
+			<CoOrdinateY>49048</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>254</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7473,6 +7597,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>7</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7533,6 +7658,7 @@
 			<npc_gtarg>36</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>21056</CoOrdinateX>
+			<CoOrdinateY>21056</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>42</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7593,6 +7719,7 @@
 			<npc_gtarg>168</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-13696</CoOrdinateX>
+			<CoOrdinateY>51840</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7653,6 +7780,7 @@
 			<npc_gtarg>212</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-12987</CoOrdinateX>
+			<CoOrdinateY>52549</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>66</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -7713,6 +7841,7 @@
 			<npc_gtarg>113</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1822</CoOrdinateX>
+			<CoOrdinateY>1822</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>27</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7773,6 +7902,7 @@
 			<npc_gtarg>138</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-26455</CoOrdinateX>
+			<CoOrdinateY>39081</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>248</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7833,6 +7963,7 @@
 			<npc_gtarg>203</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-25414</CoOrdinateX>
+			<CoOrdinateY>40122</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>184</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7893,6 +8024,7 @@
 			<npc_gtarg>210</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15649</CoOrdinateX>
+			<CoOrdinateY>15649</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -7953,6 +8085,7 @@
 			<npc_gtarg>11</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32582</CoOrdinateX>
+			<CoOrdinateY>32954</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>184</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8013,6 +8146,7 @@
 			<npc_gtarg>236</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7875</CoOrdinateX>
+			<CoOrdinateY>7875</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>224</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8073,6 +8207,7 @@
 			<npc_gtarg>103</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>13941</CoOrdinateX>
+			<CoOrdinateY>13941</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>232</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8133,6 +8268,7 @@
 			<npc_gtarg>227</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>11834</CoOrdinateX>
+			<CoOrdinateY>11834</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>10</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8193,6 +8329,7 @@
 			<npc_gtarg>55</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>884</CoOrdinateX>
+			<CoOrdinateY>884</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>254</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8253,6 +8390,7 @@
 			<npc_gtarg>80</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>5382</CoOrdinateX>
+			<CoOrdinateY>5382</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>24</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8313,6 +8451,7 @@
 			<npc_gtarg>8</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32627</CoOrdinateX>
+			<CoOrdinateY>32909</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>179</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8373,6 +8512,7 @@
 			<npc_gtarg>104</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>1678</CoOrdinateX>
+			<CoOrdinateY>1678</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>44</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8433,6 +8573,7 @@
 			<npc_gtarg>170</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2723</CoOrdinateX>
+			<CoOrdinateY>2723</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>96</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8493,6 +8634,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>35</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8553,6 +8695,7 @@
 			<npc_gtarg>237</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-28963</CoOrdinateX>
+			<CoOrdinateY>36573</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>158</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8613,6 +8756,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>58</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8673,6 +8817,7 @@
 			<npc_gtarg>128</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6144</CoOrdinateX>
+			<CoOrdinateY>59392</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>27</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8733,6 +8878,7 @@
 			<npc_gtarg>135</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-1932</CoOrdinateX>
+			<CoOrdinateY>63604</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>179</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8793,6 +8939,7 @@
 			<npc_gtarg>76</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29899</CoOrdinateX>
+			<CoOrdinateY>29899</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>160</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -8853,6 +9000,7 @@
 			<npc_gtarg>248</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-8313</CoOrdinateX>
+			<CoOrdinateY>57223</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>108</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8913,6 +9061,7 @@
 			<npc_gtarg>64</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29709</CoOrdinateX>
+			<CoOrdinateY>29709</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>128</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -8973,6 +9122,7 @@
 			<npc_gtarg>61</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>13279</CoOrdinateX>
+			<CoOrdinateY>13279</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>108</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9033,6 +9183,7 @@
 			<npc_gtarg>18</npc_gtarg>
 			<MobileUnk_0xB_12_F>4</MobileUnk_0xB_12_F>
 			<CoOrdinateX>16684</CoOrdinateX>
+			<CoOrdinateY>16684</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>120</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9093,6 +9244,7 @@
 			<npc_gtarg>64</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29699</CoOrdinateX>
+			<CoOrdinateY>29699</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>192</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9153,6 +9305,7 @@
 			<npc_gtarg>215</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29321</CoOrdinateX>
+			<CoOrdinateY>36215</CoOrdinateY>
 			<npc_level>14</npc_level>
 			<MobileUnk_0xD_4_FF>232</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9213,6 +9366,7 @@
 			<npc_gtarg>129</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6113</CoOrdinateX>
+			<CoOrdinateY>59423</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>196</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9273,6 +9427,7 @@
 			<npc_gtarg>120</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-2169</CoOrdinateX>
+			<CoOrdinateY>63367</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>2</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9333,6 +9488,7 @@
 			<npc_gtarg>72</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-31608</CoOrdinateX>
+			<CoOrdinateY>33928</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>94</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9393,6 +9549,7 @@
 			<npc_gtarg>197</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-21417</CoOrdinateX>
+			<CoOrdinateY>44119</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>46</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9453,6 +9610,7 @@
 			<npc_gtarg>83</npc_gtarg>
 			<MobileUnk_0xB_12_F>4</MobileUnk_0xB_12_F>
 			<CoOrdinateX>17722</CoOrdinateX>
+			<CoOrdinateY>17722</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>95</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9513,6 +9671,7 @@
 			<npc_gtarg>232</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-373</CoOrdinateX>
+			<CoOrdinateY>65163</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>133</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9573,6 +9732,7 @@
 			<npc_gtarg>151</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2420</CoOrdinateX>
+			<CoOrdinateY>2420</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>238</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9633,6 +9793,7 @@
 			<npc_gtarg>76</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29888</CoOrdinateX>
+			<CoOrdinateY>29888</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>143</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9693,6 +9854,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>6</CoOrdinateX>
+			<CoOrdinateY>6</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>94</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9753,6 +9915,7 @@
 			<npc_gtarg>48</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-31998</CoOrdinateX>
+			<CoOrdinateY>33538</CoOrdinateY>
 			<npc_level>12</npc_level>
 			<MobileUnk_0xD_4_FF>3</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9813,6 +9976,7 @@
 			<npc_gtarg>229</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>24152</CoOrdinateX>
+			<CoOrdinateY>24152</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>49</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9873,6 +10037,7 @@
 			<npc_gtarg>192</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>15370</CoOrdinateX>
+			<CoOrdinateY>15370</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>38</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -9933,6 +10098,7 @@
 			<npc_gtarg>176</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-29952</CoOrdinateX>
+			<CoOrdinateY>35584</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>61</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -9993,6 +10159,7 @@
 			<npc_gtarg>110</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>5867</CoOrdinateX>
+			<CoOrdinateY>5867</CoOrdinateY>
 			<npc_level>1</npc_level>
 			<MobileUnk_0xD_4_FF>75</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10053,6 +10220,7 @@
 			<npc_gtarg>112</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>30470</CoOrdinateX>
+			<CoOrdinateY>30470</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>136</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10113,6 +10281,7 @@
 			<npc_gtarg>53</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15527</CoOrdinateX>
+			<CoOrdinateY>50009</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10173,6 +10342,7 @@
 			<npc_gtarg>232</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>16000</CoOrdinateX>
+			<CoOrdinateY>16000</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>42</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10233,6 +10403,7 @@
 			<npc_gtarg>147</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-14029</CoOrdinateX>
+			<CoOrdinateY>51507</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>35</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10293,6 +10464,7 @@
 			<npc_gtarg>35</npc_gtarg>
 			<MobileUnk_0xB_12_F>13</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-11725</CoOrdinateX>
+			<CoOrdinateY>53811</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>62</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10353,6 +10525,7 @@
 			<npc_gtarg>141</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5934</CoOrdinateX>
+			<CoOrdinateY>59602</CoOrdinateY>
 			<npc_level>9</npc_level>
 			<MobileUnk_0xD_4_FF>203</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10413,6 +10586,7 @@
 			<npc_gtarg>64</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>29696</CoOrdinateX>
+			<CoOrdinateY>29696</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>208</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10473,6 +10647,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>71</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10533,6 +10708,7 @@
 			<npc_gtarg>28</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8653</CoOrdinateX>
+			<CoOrdinateY>8653</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>235</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10593,6 +10769,7 @@
 			<npc_gtarg>136</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-6013</CoOrdinateX>
+			<CoOrdinateY>59523</CoOrdinateY>
 			<npc_level>7</npc_level>
 			<MobileUnk_0xD_4_FF>158</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10653,6 +10830,7 @@
 			<npc_gtarg>85</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-15018</CoOrdinateX>
+			<CoOrdinateY>50518</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>147</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10713,6 +10891,7 @@
 			<npc_gtarg>140</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5949</CoOrdinateX>
+			<CoOrdinateY>59587</CoOrdinateY>
 			<npc_level>11</npc_level>
 			<MobileUnk_0xD_4_FF>252</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10773,6 +10952,7 @@
 			<npc_gtarg>158</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2536</CoOrdinateX>
+			<CoOrdinateY>2536</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>176</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10833,6 +11013,7 @@
 			<npc_gtarg>33</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-32237</CoOrdinateX>
+			<CoOrdinateY>33299</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>58</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -10893,6 +11074,7 @@
 			<npc_gtarg>8</npc_gtarg>
 			<MobileUnk_0xB_12_F>11</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-20339</CoOrdinateX>
+			<CoOrdinateY>45197</CoOrdinateY>
 			<npc_level>10</npc_level>
 			<MobileUnk_0xD_4_FF>179</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10953,6 +11135,7 @@
 			<npc_gtarg>161</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>23071</CoOrdinateX>
+			<CoOrdinateY>23071</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>204</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11013,6 +11196,7 @@
 			<npc_gtarg>147</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2364</CoOrdinateX>
+			<CoOrdinateY>2364</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>183</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11073,6 +11257,7 @@
 			<npc_gtarg>106</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-31062</CoOrdinateX>
+			<CoOrdinateY>34474</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>172</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11133,6 +11318,7 @@
 			<npc_gtarg>94</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-2581</CoOrdinateX>
+			<CoOrdinateY>62955</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>5</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11193,6 +11379,7 @@
 			<npc_gtarg>61</npc_gtarg>
 			<MobileUnk_0xB_12_F>8</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-31782</CoOrdinateX>
+			<CoOrdinateY>33754</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>14</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11253,6 +11440,7 @@
 			<npc_gtarg>49</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>798</CoOrdinateX>
+			<CoOrdinateY>798</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11313,6 +11501,7 @@
 			<npc_gtarg>195</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>23612</CoOrdinateX>
+			<CoOrdinateY>23612</CoOrdinateY>
 			<npc_level>8</npc_level>
 			<MobileUnk_0xD_4_FF>53</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11373,6 +11562,7 @@
 			<npc_gtarg>199</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>11381</CoOrdinateX>
+			<CoOrdinateY>11381</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>187</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11433,6 +11623,7 @@
 			<npc_gtarg>222</npc_gtarg>
 			<MobileUnk_0xB_12_F>5</MobileUnk_0xB_12_F>
 			<CoOrdinateX>24040</CoOrdinateX>
+			<CoOrdinateY>24040</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11493,6 +11684,7 @@
 			<npc_gtarg>232</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
 			<CoOrdinateX>16000</CoOrdinateX>
+			<CoOrdinateY>16000</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11553,6 +11745,7 @@
 			<npc_gtarg>180</npc_gtarg>
 			<MobileUnk_0xB_12_F>14</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-5306</CoOrdinateX>
+			<CoOrdinateY>60230</CoOrdinateY>
 			<npc_level>3</npc_level>
 			<MobileUnk_0xD_4_FF>143</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11613,6 +11806,7 @@
 			<npc_gtarg>97</npc_gtarg>
 			<MobileUnk_0xB_12_F>12</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-14830</CoOrdinateX>
+			<CoOrdinateY>50706</CoOrdinateY>
 			<npc_level>6</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11673,6 +11867,7 @@
 			<npc_gtarg>67</npc_gtarg>
 			<MobileUnk_0xB_12_F>4</MobileUnk_0xB_12_F>
 			<CoOrdinateX>17464</CoOrdinateX>
+			<CoOrdinateY>17464</CoOrdinateY>
 			<npc_level>2</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11733,6 +11928,7 @@
 			<npc_gtarg>243</npc_gtarg>
 			<MobileUnk_0xB_12_F>15</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-204</CoOrdinateX>
+			<CoOrdinateY>65332</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>39</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11793,6 +11989,7 @@
 			<npc_gtarg>142</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>6376</CoOrdinateX>
+			<CoOrdinateY>6376</CoOrdinateY>
 			<npc_level>15</npc_level>
 			<MobileUnk_0xD_4_FF>159</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11853,6 +12050,7 @@
 			<npc_gtarg>200</npc_gtarg>
 			<MobileUnk_0xB_12_F>9</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-25457</CoOrdinateX>
+			<CoOrdinateY>40079</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>232</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11913,6 +12111,7 @@
 			<npc_gtarg>176</npc_gtarg>
 			<MobileUnk_0xB_12_F>7</MobileUnk_0xB_12_F>
 			<CoOrdinateX>31494</CoOrdinateX>
+			<CoOrdinateY>31494</CoOrdinateY>
 			<npc_level>13</npc_level>
 			<MobileUnk_0xD_4_FF>88</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11973,6 +12172,7 @@
 			<npc_gtarg>239</npc_gtarg>
 			<MobileUnk_0xB_12_F>10</MobileUnk_0xB_12_F>
 			<CoOrdinateX>-20750</CoOrdinateX>
+			<CoOrdinateY>44786</CoOrdinateY>
 			<npc_level>5</npc_level>
 			<MobileUnk_0xD_4_FF>151</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12033,6 +12233,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>12</CoOrdinateX>
+			<CoOrdinateY>12</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12093,6 +12294,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12153,6 +12355,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>12</CoOrdinateX>
+			<CoOrdinateY>12</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12213,6 +12416,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12273,6 +12477,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12333,6 +12538,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12393,6 +12599,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12453,6 +12660,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12513,6 +12721,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12573,6 +12782,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12633,6 +12843,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12693,6 +12904,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12753,6 +12965,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12813,6 +13026,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12873,6 +13087,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>20</CoOrdinateX>
+			<CoOrdinateY>20</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12933,6 +13148,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12993,6 +13209,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13053,6 +13270,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13113,6 +13331,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13173,6 +13392,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>2</CoOrdinateX>
+			<CoOrdinateY>2</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13233,6 +13453,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7</CoOrdinateX>
+			<CoOrdinateY>7</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13293,6 +13514,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13353,6 +13575,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13413,6 +13636,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13473,6 +13697,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13533,6 +13758,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13593,6 +13819,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13653,6 +13880,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13713,6 +13941,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13773,6 +14002,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13833,6 +14063,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7</CoOrdinateX>
+			<CoOrdinateY>7</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13893,6 +14124,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13953,6 +14185,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14013,6 +14246,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>7</CoOrdinateX>
+			<CoOrdinateY>7</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14073,6 +14307,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14133,6 +14368,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14193,6 +14429,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14253,6 +14490,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14313,6 +14551,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14373,6 +14612,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>24</CoOrdinateX>
+			<CoOrdinateY>24</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14433,6 +14673,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4120</CoOrdinateX>
+			<CoOrdinateY>4120</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14493,6 +14734,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8216</CoOrdinateX>
+			<CoOrdinateY>8216</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14553,6 +14795,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14613,6 +14856,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8216</CoOrdinateX>
+			<CoOrdinateY>8216</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14673,6 +14917,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14733,6 +14978,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14793,6 +15039,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>32</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14853,6 +15100,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14913,6 +15161,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14973,6 +15222,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15033,6 +15283,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15093,6 +15344,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15153,6 +15405,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>20</CoOrdinateX>
+			<CoOrdinateY>20</CoOrdinateY>
 			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>1</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15213,6 +15466,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15273,6 +15527,7 @@
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8212</CoOrdinateX>
+			<CoOrdinateY>8212</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15333,6 +15588,7 @@
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>

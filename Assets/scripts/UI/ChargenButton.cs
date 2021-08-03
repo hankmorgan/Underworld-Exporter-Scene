@@ -11,7 +11,7 @@ public class ChargenButton :  GuiBase{
 		public RawImage ButtonBG;
 		public int Value;
 		public MainMenuHud SubmitTarget;
-		static GRLoader ButtonLoader;
+		static readonly GRLoader ButtonLoader;
 
     public override void Start()
     {

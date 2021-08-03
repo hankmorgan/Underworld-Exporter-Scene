@@ -63,8 +63,7 @@ public class InputHandler : GuiBase
     {
         InputField inputctrl = UWHUD.instance.InputControl;
         //Debug.Log (inputctrl.text);
-        int quant = 0;
-        if (int.TryParse(inputctrl.text, out quant) == false)
+        if (int.TryParse(inputctrl.text, out int quant) == false)
         {
             return 0;
         }

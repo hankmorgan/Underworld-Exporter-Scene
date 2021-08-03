@@ -16,8 +16,7 @@ public class VocLoader : Loader {
 
     public VocLoader(string clipPath, string clipName)
     {
-        char[] VocData;
-        if (ReadStreamFile(clipPath, out VocData))
+        if (ReadStreamFile(clipPath, out char[] VocData))
         {
             ProcessAudioBytes(VocData, clipName);
         }
@@ -39,7 +38,7 @@ public class VocLoader : Loader {
         //Check file header
         for (int i = 0; i < 19; i++)
         {
-            Header = Header + VocData[i];
+            Header += VocData[i];
         }
         if (Header == "Creative Voice File")
         {

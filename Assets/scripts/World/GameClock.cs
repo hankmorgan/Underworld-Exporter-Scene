@@ -106,13 +106,11 @@ public class GameClock : UWEBase {
 		for (int i=0; i<60; i++)
 		{
 			ClockTick();//one minute
-
-			int overflow=0;
-			instance.gametimevals[0]+=60;
+            instance.gametimevals[0]+=60;
 			if(instance.gametimevals[0]>=255)
 			{
-				overflow= Mathf.Max(0,instance.gametimevals[0]-255);
-				instance.gametimevals[0]=overflow;
+                int overflow = Mathf.Max(0, instance.gametimevals[0] - 255);
+                instance.gametimevals[0]=overflow;
 				instance.gametimevals[1]++;
 				if(instance.gametimevals[1]>=255)
 				{

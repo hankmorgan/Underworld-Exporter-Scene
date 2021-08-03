@@ -5,14 +5,12 @@ using System.Collections;
 /// Palette class for texture cycling effects. A cycled and default uncycled palette are stored.
 /// </summary>
 public class UWPalette : UWEBase {
-
-		float[] red = new float[256];
-		float[] blue = new float[256];
-		float[] green = new float[256];
-
-		float[] Defred = new float[256];
-		float[] Defblue = new float[256];
-		float[] Defgreen = new float[256];
+    readonly float[] red = new float[256];
+    readonly float[] blue = new float[256];
+    readonly float[] green = new float[256];
+    readonly float[] Defred = new float[256];
+    readonly float[] Defblue = new float[256];
+    readonly float[] Defgreen = new float[256];
 
 		void Awake () {
 				//Set the palette RGB values

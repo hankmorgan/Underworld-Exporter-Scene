@@ -21,10 +21,10 @@ public class BytLoader : ArtLoader {
 		public const int UW2MAIN_BYT=5;
 
 
-		private int currentIndex=-1;
+		private readonly int currentIndex=-1;
 
 
-		private string[] FilePaths={
+		private readonly string[] FilePaths={
 			"BLNKMAP.BYT",
 			"CHARGEN.BYT",
 			"CONV.BYT",
@@ -37,7 +37,7 @@ public class BytLoader : ArtLoader {
 			"PRESD.BYT"
 		};
 
-		private int[] PaletteIndices=
+		private readonly int[] PaletteIndices=
 		{
 			3,
 			9,
@@ -52,7 +52,7 @@ public class BytLoader : ArtLoader {
 		};
 
 
-		private int[] PaletteIndicesUW2=
+		private readonly int[] PaletteIndicesUW2=
 		{
 			3,
 			0,
@@ -112,16 +112,16 @@ public class BytLoader : ArtLoader {
 
 		public Texture2D extractUW2Bitmap(string toLoad, int index, bool Alpha)
 		{
-			char[] textureFile;          // Pointer to our buffered data (little endian format)
-			//int i;
-			long NoOfTextures;
-			var toLoadMod = Path.Combine(toLoad, index.ToString("d3") + ".tga");
+        // Pointer to our buffered data (little endian format)
+        //int i;
+        long NoOfTextures;
+        var toLoadMod = Path.Combine(toLoad, index.ToString("d3") + ".tga");
 			if (File.Exists(toLoadMod))
 			{
 				return TGALoader.LoadTGA(toLoadMod)	;
 			}
 
-			if (!ReadStreamFile(toLoad, out textureFile))
+			if (!ReadStreamFile(toLoad, out char[] textureFile))
 			{return null;}
 			// Get the size of the file in bytes
 

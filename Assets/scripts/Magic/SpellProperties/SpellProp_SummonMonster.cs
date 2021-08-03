@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class SpellProp_SummonMonster : SpellProp {
-		/*
-		 * NPC properties for SummonMonster.
-		 * TODO: Include more advanced monster properties.
-		 */
-	int[] NPCs={
+    /*
+     * NPC properties for SummonMonster.
+     * TODO: Include more advanced monster properties.
+     */
+    readonly int[] NPCs={
 			64,
 			65,
 			66,

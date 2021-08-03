@@ -196,8 +196,7 @@ public class ConversationVM : UWEBase
     /// <param name="cnv_ark_path">Cnv ark path.</param>
     public void LoadCnvArk(string cnv_ark_path)
     {
-        char[] cnv_ark;
-        if (Loader.ReadStreamFile(cnv_ark_path, out cnv_ark))
+        if (Loader.ReadStreamFile(cnv_ark_path, out char[] cnv_ark))
         {
             int NoOfConversations = (int)Loader.getValAtAddress(cnv_ark, 0, 16);
             conv = new cnvHeader[NoOfConversations];
@@ -244,7 +243,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
-                    for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
+                    for (int c = 0; c < conv[i].CodeSize * 2; c += 2)
                     {
                         conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
@@ -262,9 +261,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="cnv_ark_path">Cnv ark path.</param>
     public void LoadCnvArkUW2(string cnv_ark_path)
     {
-        char[] tmp_ark;
         int address_pointer = 2;
-        if (!Loader.ReadStreamFile(cnv_ark_path, out tmp_ark))
+        if (!Loader.ReadStreamFile(cnv_ark_path, out char[] tmp_ark))
         {
             Debug.Log("unable to load uw2 conv ark");
             return;
@@ -325,7 +323,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
-                    for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
+                    for (int c = 0; c < conv[i].CodeSize * 2; c += 2)
                     {
                         conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
@@ -337,7 +335,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     Debug.Log("uncompressed flag in cnv.ark");
                 }
             }
-            address_pointer = address_pointer + 4;
+            address_pointer += 4;
         }
 
     }
@@ -347,9 +345,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// </summary>
     public void DisplayInstructionSet()
     {
-        string result = "";
-
-        result = "String Block = " + conv[currConv].StringBlock + "\n";
+        string result = "String Block = " + conv[currConv].StringBlock + "\n";
         result += "Code Size = " + conv[currConv].CodeSize + "\n";
 
         //Display the properties of the conversation
@@ -1451,7 +1447,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
                 for (int i = 0; i <= Paragraphs.GetUpperBound(0); i++)
                 {
-                    string Markup = "";
+                    string Markup;
                     switch (PrintType)
                     {
                         case PC_SAY:
@@ -1504,9 +1500,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             {
                 string ReplacementType = "";
                 int ReplacementValue = 0;
-                string OffsetType = "";
                 int OffsetValue = 0;
-                string formatting = "";
                 string FoundString = "";
 
                 for (int sg = 0; sg < matches[sm].Groups.Count; sg++)
@@ -1519,8 +1513,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                 ReplacementType = matches[sm].Groups[sg].Value; break;
                             case 2: //Replacement value
                                 {
-                                    int val = 0;
-                                    if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+                                    if (int.TryParse(matches[sm].Groups[sg].Value, out int val))
                                     {
                                         ReplacementValue = val;
                                     }
@@ -1531,11 +1524,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                     break;
                                 }
                             case 3: //Offset Type (should only be SI?)
-                                OffsetType = matches[sm].Groups[sg].Value; break;
+                                string OffsetType = matches[sm].Groups[sg].Value;
+                                break;
                             case 4: //Offset value
                                 {
-                                    int val = 0;
-                                    if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+                                    if (int.TryParse(matches[sm].Groups[sg].Value, out int val))
                                     {
                                         OffsetValue = val;
                                     }
@@ -1546,7 +1539,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                     break;
                                 }
                             case 5: //formatting specifier (unimplemented
-                                formatting = matches[sm].Groups[sg].Value; break;
+                                string formatting = matches[sm].Groups[sg].Value;
+                                break;
                         }
                     }
 
@@ -2728,7 +2722,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     //GameWorldController.MoveToWorld(demanded);//ok
                     objsGiven[i] = demanded;//These have to be moved to world after this function ends or else the master list will get messed up
                     demanded.transform.position = GameWorldController.instance.InventoryMarker.transform.position;
-                    SomethingGiven = true;
                     cn.AddItemToContainer(demanded);
                     //pcSlot.clear ();
                 }
@@ -3326,6 +3319,8 @@ return value appears to have something to do with if the door is broken or not.
 
     public void x_obj_stuff(int arg1, int arg2, int arg3, int link, int arg5, int owner, int quality, int item_id, int pos)
     {
+        pos = stack.at(pos);
+
         //Debug.Log("x_obj_stuff");		
         //id=002f name="x_obj_stuff" ret_type=void
         //	parameters:   arg1: not used in uw1
@@ -3343,35 +3338,30 @@ return value appears to have something to do with if the door is broken or not.
         //If -1 then it returns the value in the array?
         /*This may be implemented wrongly*/
 
-        ObjectInteraction obj = null;
-
-
-        pos = stack.at(pos);
-
         /*	if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
-    {
-        pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
-        pos--;
-        if (pos<0)
-        {
-            return;
-        }
-        if (pos<=3)
-        {//Item is in players trade area.
-            obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
+{
+pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
+pos--;
+if (pos<0)
+{
+    return;
+}
+if (pos<=3)
+{//Item is in players trade area.
+    obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
 
-        }
-        else if (pos <=7)
-        {//item in npc trade area
-            obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
-        }	
-    }
-    else
-    {//Item is in the object masterlist
-        obj = CurrentObjectList().objInfo[pos].instance;
-    }	*/
+}
+else if (pos <=7)
+{//item in npc trade area
+    obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
+}	
+}
+else
+{//Item is in the object masterlist
+obj = CurrentObjectList().objInfo[pos].instance;
+}	*/
 
-        obj = FindObjectInteractionInObjectList(pos);
+        ObjectInteraction obj = FindObjectInteractionInObjectList(pos);
 
         if (obj == null)
         {
@@ -3556,7 +3546,7 @@ return value appears to have something to do with if the door is broken or not.
             int qty = objInt.GetQty();
             if (pStrPtr >= 0)
             {
-                string objName = "";
+                string objName;
                 if (objInt.GetComponent<enchantment_base>())
                 {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for deadly seeker
                     //string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
@@ -3892,13 +3882,13 @@ return value: none
             return 2;
         }
         ObjectInteraction objInt = CurrentObjectList().objInfo[index].instance;
-        int playerHasSpace = 1;
         Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
         //Container npcContainer = npc.GetComponent<Container>();
 
         //GameObject obj = GameObject.Find(ItemName);
         if (objInt == null) { return 1; }
 
+        int playerHasSpace;
         //Give to PC
         if (Container.GetFreeSlot(playerContainer) != -1)//Is there space in the container.
         {
@@ -3914,7 +3904,7 @@ return value: none
                 {
                     ObjectInteraction containerItem = cn.GetItemAt(i);
                     if (containerItem != null)
-                    {    
+                    {
                         npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
                         containerItem.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
                         GameWorldController.MoveToInventory(containerItem);
@@ -3941,7 +3931,7 @@ return value: none
                 {
                     ObjectInteraction containerItem = cn.GetItemAt(i);
                     if (containerItem != null)
-                    {                        
+                    {
                         if (containerItem != null)
                         {
                             npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
@@ -4071,21 +4061,6 @@ return value: none
     /// keep a number of found slots.
     public int find_barter_total(int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id)//TODO:I swapped ptrslot around with ptrcount.
     {
-        /*
-id=0032 name="find_barter_total" ret_type=int
-parameters:   s[0]: ???
-         s[1]: pointer to number of found items
-         s[2]: pointer to
-         s[3]: pointer to
-         s[4]: pointer to item ID to find
-description:  searches for item in barter area
-return value: 1 when found (?)
-
-*/
-
-
-
-        ObjectInteraction objInt = null;
         int slotFoundCounter = 0;
         stack.Set(ptrNoOfSlots, 0);
         stack.Set(ptrCount, 0);
@@ -4094,7 +4069,21 @@ return value: 1 when found (?)
         {
             if (UWHUD.instance.playerTrade[i].isSelected())
             {
-                objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+                /*
+        id=0032 name="find_barter_total" ret_type=int
+        parameters:   s[0]: ???
+                 s[1]: pointer to number of found items
+                 s[2]: pointer to
+                 s[3]: pointer to
+                 s[4]: pointer to item ID to find
+        description:  searches for item in barter area
+        return value: 1 when found (?)
+
+        */
+
+
+
+                ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 
                 if (objInt != null)
                 {

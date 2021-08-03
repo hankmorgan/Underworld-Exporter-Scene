@@ -13,11 +13,10 @@ public class a_hack_trap_teleport : a_hack_trap {
 	const int Pits = 5;
 	const int Tomb =6;
 	const int EtherealVoid=7;
-
-	short[] DestinationLevels = {8,16,24,32,40,56,48,68};
-	short[] DestinationTileX = {33,27,18,32,4,59,32,33};
-	short[] DestinationTileY = {32,34,39,31,38,20,32,4};
-    short[] DestinationFloorHeight = { -1, -1, -1, 24, -1, -1, -1, -1 };
+    readonly short[] DestinationLevels = {8,16,24,32,40,56,48,68};
+    readonly short[] DestinationTileX = {33,27,18,32,4,59,32,33};
+    readonly short[] DestinationTileY = {32,34,39,31,38,20,32,4};
+    readonly short[] DestinationFloorHeight = { -1, -1, -1, 24, -1, -1, -1, -1 };
     //TODO: destination heights.
 
     public static a_hack_trap_teleport instance;

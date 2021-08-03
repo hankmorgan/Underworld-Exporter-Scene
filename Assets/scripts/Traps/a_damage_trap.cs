@@ -27,7 +27,7 @@ owner != 0 poison trap
 		{
 			if (Random.Range(0,11) >= 7)
 			{
-				UWCharacter.Instance.CurVIT= UWCharacter.Instance.CurVIT- quality;
+				UWCharacter.Instance.CurVIT-= quality;
 			}
 		}
 		else//poison version

@@ -33,10 +33,10 @@ public class LevArk : Loader {
         //First update the object list so as to match indices properly	
         ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
 
-        //First block is always here.
-        long AddressToCopyFrom = 0;
-        long ReadDataLen = 0;
 
+
+        //First block is always here.
+        long AddressToCopyFrom;
         //Read in the data for the 80 tile/object maps
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
         {
@@ -45,9 +45,8 @@ public class LevArk : Loader {
             blockData[l].ReservedSpace = getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 12), 32);
             if (GameWorldController.instance.Tilemaps[l] != null)
             {
-                long UnPackDatalen = 0;
                 blockData[l].CompressionFlag = DataLoader.UW2_NOCOMPRESSION;
-                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);
+                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out long UnPackDatalen);
                 //blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;//32279;//
                 blockData[l].DataLen = UnPackDatalen;
                 //if (blockData[l].ReservedSpace< blockData[l].DataLen)
@@ -70,6 +69,7 @@ public class LevArk : Loader {
             }
         }
 
+        long ReadDataLen;
         //read in the texture maps
         //TODO: At the moment this is just a straight copy of this information
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
@@ -291,15 +291,14 @@ public class LevArk : Loader {
         ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
 
         //First block is always here.
-        long AddressToCopyFrom = 0;
+        long AddressToCopyFrom;
 
         //Read in the data for the 9 tile/object maps
         for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
         {
             if (GameWorldController.instance.Tilemaps[l] != null)
             {
-                long UnPackDatalen = 0;
-                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);
+                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out long UnPackDatalen);
                 blockData[l].DataLen = blockData[l].Data.GetUpperBound(0) + 1;
             }///31752
             else

@@ -37,9 +37,11 @@ public class Words : MonoBehaviour {
 
 	void AddLetter(int index, int Asciichar)
 	{
-		GameObject newObj = new GameObject();
-		newObj.name=this.name + "_letter_" + index;
-		newObj.transform.parent=this.transform;
+        GameObject newObj = new GameObject
+        {
+            name = this.name + "_letter_" + index
+        };
+        newObj.transform.parent=this.transform;
 		newObj.transform.position=this.transform.position;
 		newObj.transform.localPosition=new Vector3((float)fontSpacing*index,0.0f,0.0f);
 		newObj.transform.localRotation=new Quaternion(0,0,0,0);

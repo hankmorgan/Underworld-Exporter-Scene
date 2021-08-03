@@ -17,14 +17,14 @@ public class ShockCharacter : MonoBehaviour {
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
 	//public string CurrObjectSprite;
-	private int cursorSizeX =64;
-	private int cursorSizeY =64;
+	private readonly int cursorSizeX =64;
+	private readonly int cursorSizeY =64;
 	
 	//For controlling switching between mouse look and interaction
 	private MouseLook XAxis;
 	private MouseLook YAxis;
 	private bool MouseLookEnabled;
-	private GameObject MainCam;
+	private readonly GameObject MainCam;
 	public bool CursorInMainWindow;
 	
 	public StringController StringControl;

@@ -50,7 +50,7 @@ public class WindowDetectUW : WindowDetect
         }
         if (JustClicked == true)
         {//Wait until the timer has gone down before allowing further clicks
-            WindowWaitCount = WindowWaitCount - Time.deltaTime;
+            WindowWaitCount -= Time.deltaTime;
             if (WindowWaitCount <= 0)
             {
                 JustClicked = false;

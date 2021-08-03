@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WeaponAnimationPlayer : UWEBase
 {
-    static float frameRate = 0.2f;
+    static readonly float frameRate = 0.2f;
     //public int AnimationIndex;//Animation to display
     public int AnimationPos;//Position in the animation.
     public float animationCounter;//TIming

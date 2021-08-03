@@ -92,10 +92,9 @@ public class a_set_variable_trap : a_variable_trap
     static void Set_Variables(int[] vars, int index, int operation, a_set_variable_trap trap, string debugname)
     {
         string op = "";
-        int OrigValue = 0;
         if (index != 0)
         {//Variable Operations
-            OrigValue = vars[index];
+            int OrigValue = vars[index];
             switch (operation)
             {
                 case 0://Add

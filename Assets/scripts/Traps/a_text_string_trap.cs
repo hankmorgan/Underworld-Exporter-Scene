@@ -12,9 +12,8 @@ public class a_text_string_trap : trap_base {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		int StringNo=0;
-
-		switch (_RES)
+        int StringNo;
+        switch (_RES)
 		{
 		case GAME_UW2:
 			StringNo=(32*quality + owner);//I hope.

@@ -94,7 +94,7 @@ public class Repulsor : MonoBehaviour {
 		float traveltime =Mathf.Abs(play.transform.position.y - TargetPos.y) *  TravelSpeed;
 		if(RepulsorOn==false)
 		{
-			traveltime=traveltime*4;
+			traveltime*=4;
 		}
 		StartCoroutine(MovePlayer (play.gameObject, TargetPos-play.transform.position, traveltime));
 	}

@@ -249,7 +249,7 @@ public class PlayerInventory : UWEBase
 
 
     public GameObject InventoryMarker;
-    private ObjectInteraction[] LightGameObjects = new ObjectInteraction[4];
+    private readonly ObjectInteraction[] LightGameObjects = new ObjectInteraction[4];
 
     //public bool atTopLevel;
     public Container currentContainer;
@@ -1152,7 +1152,7 @@ public class PlayerInventory : UWEBase
     {
 
         float InventoryWeight = getInventoryWeight();
-        float CarryWeight = 0f;
+        float CarryWeight;
         switch (_RES)
         {
             case GAME_UW2:

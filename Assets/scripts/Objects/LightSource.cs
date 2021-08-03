@@ -196,7 +196,7 @@ public class LightSource : object_base {
 		pInv.RemoveItem (this.objInt());
 		pInv.SetObjectAtSlot (invSlot.slotIndex, objInt());
 		objInt().inventorySlot = invSlot.slotIndex;
-		item_id = item_id + 4;
+		item_id += 4;
 		objInt().InvDisplayIndex = item_id;
 	}
 
@@ -249,7 +249,7 @@ public class LightSource : object_base {
 		//IsOn=false;
 		//item_id=ItemIdOff;
 		//objInt().InvDisplayIndex=ItemIdOff;
-		item_id=item_id-4;
+		item_id-=4;
 		objInt().InvDisplayIndex=item_id;
 		objInt().WorldDisplayIndex=item_id;
 		isquant=1;

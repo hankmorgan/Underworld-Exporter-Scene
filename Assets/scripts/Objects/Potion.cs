@@ -32,8 +32,7 @@ public class Potion : enchantment_base
             }
             else
             {
-                int UseString = -1;
-                UseString = StringController.str_you_quaff_the_potion_in_one_gulp_;
+                int UseString = StringController.str_you_quaff_the_potion_in_one_gulp_;
 
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, UseString));
                 UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, GetActualSpellIndex(), Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);

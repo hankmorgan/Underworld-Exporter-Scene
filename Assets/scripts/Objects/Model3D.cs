@@ -31,10 +31,12 @@ public class Model3D : object_base {
 		MeshFilter meshF = parent.AddComponent<MeshFilter>();
 		MeshRenderer mr = parent.AddComponent<MeshRenderer>();
 		Material[] mats = new Material[NoOfMeshes ()];
-		Mesh mesh = new Mesh ();
-		mesh.subMeshCount = NoOfMeshes ();
-		mesh.vertices = ModelVertices ();
-		Vector2[] uvs = ModelUVs (mesh.vertices);
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NoOfMeshes(),
+            vertices = ModelVertices()
+        };
+        Vector2[] uvs = ModelUVs (mesh.vertices);
 		for (int i = 0; i < NoOfMeshes (); i++) {
 			mesh.SetTriangles (ModelTriangles (i), i);
 			mats [i] = ModelMaterials (i);

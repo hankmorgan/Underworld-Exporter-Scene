@@ -70,9 +70,8 @@ public class TerrainDatLoader : Loader
             filename = "DTERRAIN.DAT";
         }
         Terrain = new int[256 + 256];//wall and floor
-        char[] terrain_dat;
         int add_ptr = 0;
-        if (ReadStreamFile( Path.Combine(BasePath, "DATA", filename), out terrain_dat))
+        if (ReadStreamFile( Path.Combine(BasePath, "DATA", filename), out char[] terrain_dat))
         {
             switch (_RES)
             {

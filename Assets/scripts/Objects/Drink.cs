@@ -89,7 +89,7 @@ public class Drink : Food {
                     //heal 2 points of health and you feel better.
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_drink_makes_you_feel_a_little_better_for_now_));
 
-                    UWCharacter.Instance.CurVIT = UWCharacter.Instance.CurVIT + 2;
+                    UWCharacter.Instance.CurVIT += 2;
                     if (UWCharacter.Instance.CurVIT > UWCharacter.Instance.MaxVIT)
                     {
                         UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;

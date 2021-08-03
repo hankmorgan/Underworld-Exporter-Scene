@@ -25,8 +25,7 @@ public class Eyes : GuiBase {
 	/// The eyes gr for loading the image files
 	/// </summary>
 	GRLoader EyesGr;
-
-	int[,] ImgSequences = {{0,0,0,0,0}, {1,2,3,2,1}, {4,5,6,5,4}, {7,8,9,8,7}};//blue 0,green 1, orange 2, red 3
+    readonly int[,] ImgSequences = {{0,0,0,0,0}, {1,2,3,2,1}, {4,5,6,5,4}, {7,8,9,8,7}};//blue 0,green 1, orange 2, red 3
 
 	public override void Start()
 	{

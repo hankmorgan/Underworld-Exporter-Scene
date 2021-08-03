@@ -597,8 +597,10 @@ public class UnderworldGenerator : UWEBase {
     /// <returns></returns>
     public TileMap CreateTileMap(short levelNo)
     {
-        TileMap tm = new TileMap(levelNo);
-        tm.texture_map = new short[TileMap.UW1_TEXTUREMAPSIZE];
+        TileMap tm = new TileMap(levelNo)
+        {
+            texture_map = new short[TileMap.UW1_TEXTUREMAPSIZE]
+        };
         for (short t = 0; t <= tm.texture_map.GetUpperBound(0); t++)
         {//Some quick and dirty values
             if (t <= 57)

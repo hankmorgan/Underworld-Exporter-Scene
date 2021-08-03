@@ -19,7 +19,7 @@ public class StatsDisplay : GuiBase_Draggable {
 
 	//public static UWCharacter UWCharacter.Instance;
 
-	private string[] Skillnames = {"ATTACK","DEFENSE","UNARMED","SWORD","AXE","MACE","MISSILE",
+	private readonly string[] Skillnames = {"ATTACK","DEFENSE","UNARMED","SWORD","AXE","MACE","MISSILE",
 									"MANA","LORE","CASTING","TRAPS","SEARCH","TRACK","SNEAK","REPAIR",
 									"CHARM","PICKLOCK","ACROBAT","APPRAISE","SWIMMING"};
 	public static bool UpdateNow=true;
@@ -82,12 +82,12 @@ public class StatsDisplay : GuiBase_Draggable {
 							}
 							for (int i = 0; i<=5;i++)
 							{
-									tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
-									tmpSkillValues=tmpSkillValues+UWCharacter.Instance.PlayerSkills.GetSkill(i+Offset+1);
+									tmpSkillNames += Skillnames[i+Offset];
+									tmpSkillValues+=UWCharacter.Instance.PlayerSkills.GetSkill(i+Offset+1);
 									if (i!=5)
 									{
-											tmpSkillNames = tmpSkillNames +"\n";
-											tmpSkillValues = tmpSkillValues +"\n";
+											tmpSkillNames += "\n";
+											tmpSkillValues += "\n";
 									}
 							}
 							CharSkills.text=tmpSkillNames;

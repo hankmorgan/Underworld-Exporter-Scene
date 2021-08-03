@@ -24,14 +24,13 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		string created="";
-		ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(link);
+        ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(link);
 		if (objToClone !=null)
 		{
 			GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);
 			LastObjectCreated=NewObject.name;
-			created=NewObject.name;
-			if (objToClone.GetComponent<Container>()!=null)
+            string created = NewObject.name;
+            if (objToClone.GetComponent<Container>()!=null)
 			{//Clone the items on this object
 				for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
 				{

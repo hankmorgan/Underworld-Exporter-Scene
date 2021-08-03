@@ -26,26 +26,26 @@ public class Chargen : Props {
 
 
 	//String nos of gender choice
-		private static  int[] GenderChoice={9,10};
+		private static readonly int[] GenderChoice={9,10};
 
-		private static  int[] PortraitsChoice={0,1,2,3,4};
+		private static readonly int[] PortraitsChoice={0,1,2,3,4};
 
 	//String nos of handedness choice
-		private static  int[] HandednessChoice={11,12};
+		private static readonly int[] HandednessChoice={11,12};
 
 	//String nos of char classes choice
-		private static  int[] ClassesChoice={23,24,25,26,27,28,29,30};
+		private static readonly int[] ClassesChoice={23,24,25,26,27,28,29,30};
 
 	//Class specific base attributes numbers. These are taken from skills.dat
-		private static  int[] BaseStr={20,12,14,18,18,12,16,12};
-		private static  int[] BaseDex={16,16,20,18,12,18,16,12};
-		private static  int[] BaseInt={12,20,14,12,18,18,16,12};
+		private static readonly int[] BaseStr={20,12,14,18,18,12,16,12};
+		private static readonly int[] BaseDex={16,16,20,18,12,18,16,12};
+		private static readonly int[] BaseInt={12,20,14,12,18,18,16,12};
 
 	//Skill points random range These are taken from skills.dat.
-		private static  int[] SkillSeed={12,12,12,12,12,12,12,20};
+		private static readonly int[] SkillSeed={12,12,12,12,12,12,12,20};
 
 	//Skills specific skill choices. points to the string no. These are taken from skills.dat
-		private static  int[][] FighterSkills={  
+		private static readonly int[][] FighterSkills={  
 				new int[]{31} , 
 				new int[]{32} , 
 				new int[]{31,32}, 
@@ -53,7 +53,7 @@ public class Chargen : Props {
 				new int[]{50,41,42,46,48,49}
 	};
 
-		private static  int[][] MageSkills={
+		private static readonly int[][] MageSkills={
 				new int[]{31},
 				new int[]{32},
 				new int[]{38},
@@ -61,7 +61,7 @@ public class Chargen : Props {
 				new int[]{38,40}
 	};
 
-		private static  int [][] BardSkills={
+		private static readonly int [][] BardSkills={
 				new int[]{31},
 				new int[]{32},
 				new int[]{39,46},
@@ -69,7 +69,7 @@ public class Chargen : Props {
 				new int[]{38,40,34,35,36,33,37}
 	};
 
-		private static  int[][] TinkerSkills = {
+		private static readonly int[][] TinkerSkills = {
 				new int[]{31},
 				new int[]{32},
 				new int[]{45},
@@ -77,7 +77,7 @@ public class Chargen : Props {
 				new int[]{47,41,42,49,45}
 	};
 
-		private static  int[][] DruidSkills = {
+		private static readonly int[][] DruidSkills = {
 				new int[]{31},
 				new int[]{32},
 				new int[]{40},
@@ -85,7 +85,7 @@ public class Chargen : Props {
 				new int[]{43,39,42}
 	};
 
-		private static  int[][]  PaladinSkills = {
+		private static readonly int[][]  PaladinSkills = {
 				new int[]{31},
 				new int[]{32},
 				new int[]{46},
@@ -93,7 +93,7 @@ public class Chargen : Props {
 				new int[]{33,34,35,36,37}
 	};
 
-		private static  int[][] RangerSkills = {
+		private static readonly int[][] RangerSkills = {
 				new int[]{31},
 				new int[]{32},
 				new int[]{43},
@@ -101,7 +101,7 @@ public class Chargen : Props {
 				new int[]{33,34,35,36,37,31,32,43}
 	};
 
-		private static  int[][] ShepherdSkills={
+		private static readonly int[][] ShepherdSkills={
 				new int[]{31},
 				new int[]{32},
 				new int[]{33,34,35,36,37,32},
@@ -109,9 +109,9 @@ public class Chargen : Props {
 				new int[]{41,42,44,48,49,50,43,40,39,38}
 	};
 
-		private static  int[] YesNoChoice = {15,16};
+		private static readonly int[] YesNoChoice = {15,16};
 
-		private static int[] DifficultyChoice = {14,13};
+		private static readonly int[] DifficultyChoice = {14,13};
 
 
 

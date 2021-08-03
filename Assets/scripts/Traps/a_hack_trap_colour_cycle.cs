@@ -38,8 +38,8 @@ public class a_hack_trap_colour_cycle : a_hack_trap
                 if (TileMap.ValidTile(x, y))
                 {
                     tm.Tiles[x, y].TileNeedsUpdate();
-                    GameObject tile = null;
                     GameObject tileWall = null;
+                    GameObject tile;
                     switch (tm.Tiles[x, y].tileType)
                     {
                         case TileMap.TILE_DIAG_NE:

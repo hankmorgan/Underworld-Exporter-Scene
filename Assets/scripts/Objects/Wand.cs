@@ -97,7 +97,7 @@ public class Wand : enchantment_base {
 	void BreakWand ()
 	{
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_with_a_loud_snap_the_wand_cracks_));
-		item_id = item_id + 4;
+		item_id += 4;
 		//Become a broken wand.
 		objInt().InvDisplayIndex = objInt().InvDisplayIndex + 4;
 		objInt().WorldDisplayIndex = objInt().WorldDisplayIndex + 4;

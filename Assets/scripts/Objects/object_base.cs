@@ -1138,8 +1138,8 @@ return false;*/
                 if ((Col.gameObject.GetComponent<NPC>().GetRace() == (Owner & 0x1f)))
                 {
                     string OwnerName = StringController.instance.GetString(1, 370 + (Owner & 0x1f));
-                    string reaction = "";
                     Col.gameObject.GetComponent<NPC>().npc_attitude--;//Make the npc angry with the player.
+                    string reaction;
                     if (Col.gameObject.GetComponent<NPC>().npc_attitude <= 0)
                     {
                         Col.gameObject.GetComponent<NPC>().npc_attitude = 0;

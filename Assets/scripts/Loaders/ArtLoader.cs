@@ -152,6 +152,7 @@ public class ArtLoader : Loader
 
             }
         }
+        image.name = imageName;
         image.filterMode = FilterMode.Point;
         image.SetPixels32(imageColors);
         image.Apply();
@@ -169,7 +170,7 @@ public class ArtLoader : Loader
     /// <param name="maxpix">Maxpix.</param>
     /// <param name="addr_ptr">Address ptr.</param>
     /// <param name="auxpal">Auxpal.</param>
-    public static void ua_image_decode_rle(char[] FileIn, char[] pixels, int bits, int datalen, int maxpix, int addr_ptr, char[] auxpal)
+    public static void Ua_image_decode_rle(char[] FileIn, char[] pixels, int bits, int datalen, int maxpix, int addr_ptr, char[] auxpal)
     {
         //Code lifted from Underworld adventures.
         // bit extraction variables
@@ -354,26 +355,24 @@ public class ArtLoader : Loader
         0x0200      fade to white
         0x0280      fade to black
         */
-    static char getActualAuxPalVal(char[] auxpal, int nibble)
-    {
-        switch ((int)auxpal[nibble])
-        {
-            case 0xf0: // fade to red
-                return (char)(256 + 0x80 + nibble);
-            case 0xf4: // fade to blue
-                return (char)(256 + 0x180 + nibble);
-            case 0xf8:// fade to green 
-                return (char)(256 + 0x200 + nibble);
-            case 252:  // fade to white 
-                return (char)(256 + 0x280 + nibble);
+    //static char getActualAuxPalVal(char[] auxpal, int nibble)
+    //{
+    //    switch ((int)auxpal[nibble])
+    //    {
+    //        case 0xf0: // fade to red
+    //            return (char)(256 + 0x80 + nibble);
+    //        case 0xf4: // fade to blue
+    //            return (char)(256 + 0x180 + nibble);
+    //        case 0xf8:// fade to green 
+    //            return (char)(256 + 0x200 + nibble);
+    //        case 252:  // fade to white 
+    //            return (char)(256 + 0x280 + nibble);
 
-            //????   fade to black
-            default:
-                return auxpal[nibble];
-        }
-
-
-    }
+    //        //????   fade to black
+    //        default:
+    //            return auxpal[nibble];
+    //    }
+    //}
 
     // UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
     // This one is also almost directly from Jim Cameron's code.
@@ -500,7 +499,7 @@ public class ArtLoader : Loader
     /// <param name="clockwise"></param>
     /// https://answers.unity.com/questions/951835/rotate-the-contents-of-a-texture.html
     /// <returns></returns>
-    public static Texture2D rotateTexture(Texture2D originalTexture, bool clockwise)
+    public static Texture2D RotateTexture(Texture2D originalTexture, bool clockwise)
     {
         Color[] original = originalTexture.GetPixels();
         Color[] rotated = new Color[original.Length];

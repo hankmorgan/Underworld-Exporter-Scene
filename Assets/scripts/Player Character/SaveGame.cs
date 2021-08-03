@@ -71,15 +71,13 @@ public class SaveGame : Loader
     /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW1(int slotNo)
     {
-        char[] buffer;//File data
+        //File data
 
         int[] ActiveEffectIds = new int[3]; //array of spell effects currently applied to the player.
         short[] ActiveEffectStability = new short[3];
-        int effectCounter = 0;
-
         ResetUI();
 
-        if (ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out char[] buffer))
         {
             int xOrValue = (int)buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
@@ -99,7 +97,7 @@ public class SaveGame : Loader
             //Load some common items for uw1/2
             LoadName(buffer);
             LoadStats(buffer);
-            effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
+            int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
             LoadPlayerClass(buffer, 0x65);
             LoadGameOptions(buffer, 0xB6);
@@ -379,8 +377,7 @@ public class SaveGame : Loader
         //int runeOffset=0;
 
         //update inventory linking
-        int NoOfInventoryItems = 0;
-        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out NoOfInventoryItems);
+        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
 
         //Write the XOR Key
         DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
@@ -445,7 +442,7 @@ public class SaveGame : Loader
                         }
                         if (Quest.instance.isCupFound)
                         {
-                            val = val | 64;     // bit 6 is the cup found.
+                            val |= 64;     // bit 6 is the cup found.
                         }
                         DataLoader.WriteInt8(writer, val);
                         break;
@@ -458,7 +455,6 @@ public class SaveGame : Loader
                         DataLoader.WriteInt16(writer, val);
                         if (Quest.instance.isGaramonBuried)
                         {
-                            val |= 0xC00;
                         }
                         break;
                     }
@@ -714,9 +710,8 @@ public class SaveGame : Loader
 
         writer.Close();//The file now saved is un-encrypted
 
-        char[] buffer;
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath ,"SAVE" + slotNo, "playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;
@@ -735,7 +730,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)buffer[i];
             }
-            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo , "PLAYER.DAT"), dataToWrite);
+            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
         }
 
     }
@@ -755,8 +750,7 @@ public class SaveGame : Loader
         int variableCounter = 0;
         int bitVariableCounter = 0;
         //update inventory linking
-        int NoOfInventoryItems = 0;
-        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out NoOfInventoryItems);
+        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
         Vector3 dreamReturn = CurrentTileMap().getTileVector(UWCharacter.Instance.DreamReturnTileX, UWCharacter.Instance.DreamReturnTileY);
 
         //Write the MS Key
@@ -1485,9 +1479,8 @@ public class SaveGame : Loader
         writer.Close();//The file now saved is un-encrypted
 
 
-        char[] buffer;
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
         {
             char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
 
@@ -1496,7 +1489,7 @@ public class SaveGame : Loader
             {
                 dataToWrite[i] = (byte)recodetest[i];
             }
-            File.WriteAllBytes(Path.Combine(BasePath,"SAVE" + slotNo,"PLAYER.DAT"), dataToWrite);
+            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
         }
     }
 
@@ -1554,7 +1547,7 @@ public class SaveGame : Loader
 
     static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, short slotIndex)
     {
-        ObjectInteraction itemAtSlot = null;
+        ObjectInteraction itemAtSlot;
         if (slotIndex <= 10)
         {
             itemAtSlot = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(slotIndex);
@@ -1583,7 +1576,6 @@ public class SaveGame : Loader
     public static void LoadPlayerDatUW2(int slotNo)
     {
         UWCharacter.Instance.CharName = "";
-        char[] pDat;
         //int x_position=0;
         //int y_position=0;
 
@@ -1597,7 +1589,6 @@ public class SaveGame : Loader
         //int[] gametimevals=new int[3];
         int[] ActiveEffectIds = new int[3];
         short[] ActiveEffectStability = new short[3];
-        int effectCounter = 0;
         int QuestCounter = 0;
         int VariableCounter = 0;
         int BitVariableCounter = 0;
@@ -1608,7 +1599,7 @@ public class SaveGame : Loader
         UWCharacter.Instance.JustTeleported = true;
         UWCharacter.Instance.teleportedTimer = 0f;
 
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out pDat))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out char[] pDat))
         {
             byte MS = (byte)getValAtAddress(pDat, 0, 8);
             UWCharacter.Instance.XorKey = (int)MS;
@@ -1664,7 +1655,7 @@ public class SaveGame : Loader
             //Load some common items for uw1/2
             LoadName(buffer);
             LoadStats(buffer);
-            effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
+            int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
             LoadPlayerClass(buffer, 0x66);
             LoadGameOptions(buffer, 0x303);
@@ -2571,7 +2562,6 @@ public class SaveGame : Loader
         int NoOfItems = (buffer.GetUpperBound(0) - StartOffset) / 8;
 
         GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];   //+ 2];
-        int x = 1;
 
         //InventoryData = new char[768 * 8];
         //if (buffer.GetUpperBound(0) >= StartOffset)
@@ -2587,16 +2577,19 @@ public class SaveGame : Loader
         ///Initialise as many inventory objects as needed
         if (buffer.GetUpperBound(0) >= StartOffset)
         {
-            for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0);x++)
+            int x;
+            for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0); x++)
             {
-                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, UWEBase.CurrentTileMap(),false);//Inventory indices start at 1
-                GameWorldController.instance.inventoryLoader.objInfo[x].parentList = GameWorldController.instance.inventoryLoader;
-                GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
-                GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
-                GameWorldController.instance.inventoryLoader.objInfo[x].InUseFlag = 1;
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, UWEBase.CurrentTileMap(), false)
+                {
+                    parentList = GameWorldController.instance.inventoryLoader,
+                    ObjectTileX = TileMap.ObjectStorageTile,
+                    ObjectTileY = TileMap.ObjectStorageTile,
+                    InUseFlag = 1,
 
-                GameWorldController.instance.inventoryLoader.objInfo[x].InventoryData = new char[8];
-                for (int i = 0; i<8;i++)
+                    InventoryData = new char[8]
+                };//Inventory indices start at 1
+                for (int i = 0; i < 8; i++)
                 {//Copy data into the local objectloader buffer for the inventory object.
                     GameWorldController.instance.inventoryLoader.objInfo[x].InventoryData[i] = buffer[Add_ptr + i];
                 }
@@ -2607,7 +2600,7 @@ public class SaveGame : Loader
             ObjectLoader.RenderObjectList(GameWorldController.instance.inventoryLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
             ObjectLoader.LinkObjectListWands(GameWorldController.instance.inventoryLoader);
             ObjectLoader.LinkObjectListPotions(GameWorldController.instance.inventoryLoader);
-            for (int j = lBoundSlots; j < uBoundSlots; j = j + 2)
+            for (int j = lBoundSlots; j < uBoundSlots; j += 2)
             {
                 //Apply objects to slots
                 int index = ((int)getValAtAddress(buffer, j, 16) >> 6);
@@ -2982,9 +2975,7 @@ public class SaveGame : Loader
         {
             if (UWCharacter.Instance.ActiveSpell[e] != null)
             {
-                int effectId = 0;
-                int byteToWrite = 0;
-
+                int effectId;
                 switch (UWCharacter.Instance.ActiveSpell[e].EffectID)
                 {//Fix spell effects that do not work with the nibble swap //TODO:check if the right effect ids are in use
                     case SpellEffect.UW1_Spell_Effect_Speed:
@@ -3000,7 +2991,7 @@ public class SaveGame : Loader
                         break;
                 }
                 int stability = UWCharacter.Instance.ActiveSpell[e].counter;
-                byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
+                int byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
                 DataLoader.WriteInt16(writer, byteToWrite);
                 NoOfActiveEffects++;
             }
@@ -3063,11 +3054,11 @@ public class SaveGame : Loader
         //High detail	
         if (ObjectInteraction.PlaySoundEffects)
         {
-            valToWrite = valToWrite | 0x1;
+            valToWrite |= 0x1;
         }
         if (MusicController.PlayMusic)
         {
-            valToWrite = valToWrite | 0x4;
+            valToWrite |= 0x4;
         }
         DataLoader.WriteInt8(writer, valToWrite);
     }
@@ -3139,8 +3130,7 @@ public class SaveGame : Loader
         int runeOffset = 0;
 
         //update inventory linking
-        int NoOfInventoryItems = 0;
-        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out NoOfInventoryItems);
+        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
 
         //Write the XOR Key
         DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
@@ -3234,9 +3224,7 @@ public class SaveGame : Loader
                             {
                                 if (UWCharacter.Instance.ActiveSpell[e] != null)
                                 {
-                                    int effectId = 0;
-                                    int byteToWrite = 0;
-
+                                    int effectId;
                                     switch (UWCharacter.Instance.ActiveSpell[e].EffectID)
                                     {//Fix spell effects that do not work with the nibble swap 
                                         case SpellEffect.UW1_Spell_Effect_Speed:
@@ -3252,7 +3240,7 @@ public class SaveGame : Loader
                                             break;
                                     }
                                     int stability = UWCharacter.Instance.ActiveSpell[e].counter;
-                                    byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
+                                    int byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
 
                                     //int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
 
@@ -3384,7 +3372,7 @@ public class SaveGame : Loader
                             }
                             if (Quest.instance.isCupFound)
                             {
-                                val = val | 64;     // bit 6 is the cup found.
+                                val |= 64;     // bit 6 is the cup found.
                             }
 
                             DataLoader.WriteInt8(writer, val);
@@ -3543,11 +3531,11 @@ public class SaveGame : Loader
                             int valToWrite = 0x30;//High detail	
                             if (ObjectInteraction.PlaySoundEffects)
                             {
-                                valToWrite = valToWrite | 0x1;
+                                valToWrite |= 0x1;
                             }
                             if (MusicController.PlayMusic)
                             {
-                                valToWrite = valToWrite | 0x4;
+                                valToWrite |= 0x4;
                             }
                             DataLoader.WriteInt8(writer, valToWrite);
                         }
@@ -3752,9 +3740,8 @@ public class SaveGame : Loader
 
         writer.Close();//The file now saved is un-encrypted
 
-        char[] buffer;
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath , "SAVE" + slotNo , "playertmp.dat"), out buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
         {
             int xOrValue = (int)buffer[0];
             int incrnum = 3;

@@ -12,8 +12,7 @@ public class GameSelect : GuiBase
 	public Text PathStatus;
 	public string exe;
 	public bool FolderTestPassed = false;
-
-	string[] UW1RequiredFiles = { "uw.exe",
+    readonly string[] UW1RequiredFiles = { "uw.exe",
 								"DATA\\3DWIN.GR",
 								"DATA\\ALLPALS.DAT",
 								"DATA\\ANIMO.GR",
@@ -225,8 +224,7 @@ public class GameSelect : GuiBase
 								"CUTS\\CS410.N00",
 								"CUTS\\CS410.N01"
 					};
-
-	string[] UW2RequiredFiles = { "uw2.exe",
+    readonly string[] UW2RequiredFiles = { "uw2.exe",
 		"DATA\\3DWIN.GR",
 		"DATA\\ALLPALS.DAT",
 		"DATA\\ANIMO.GR",
@@ -455,11 +453,11 @@ public class GameSelect : GuiBase
 		string Path = "";
 		switch (RES)
 		{
-			case GAME_UWDEMO: Path = GameWorldController.instance.path_uw0; break;
-			case GAME_UW1: Path = GameWorldController.instance.path_uw1; break;
-			case GAME_UW2: Path = GameWorldController.instance.path_uw2; break;
-			case GAME_SHOCK: Path = GameWorldController.instance.path_shock; break;
-			case GAME_TNOVA: Path = GameWorldController.instance.path_tnova; break;
+			case GAME_UWDEMO: Path = GameWorldController.instance.Path_uw0; break;
+			case GAME_UW1: Path = GameWorldController.instance.Path_uw1; break;
+			case GAME_UW2: Path = GameWorldController.instance.Path_uw2; break;
+			case GAME_SHOCK: Path = GameWorldController.instance.Path_shock; break;
+			case GAME_TNOVA: Path = GameWorldController.instance.Path_tnova; break;
 		}
 
 		Game_Found = (Directory.Exists(Path));
@@ -481,11 +479,11 @@ public class GameSelect : GuiBase
 		{
 			case GAME_UW1:
 				{
-					return CheckRequiredFiles(GameWorldController.instance.path_uw1, UW1RequiredFiles);
+					return CheckRequiredFiles(GameWorldController.instance.Path_uw1, UW1RequiredFiles);
 				}
 			case GAME_UW2:
 				{
-					return CheckRequiredFiles(GameWorldController.instance.path_uw2, UW2RequiredFiles);
+					return CheckRequiredFiles(GameWorldController.instance.Path_uw2, UW2RequiredFiles);
 				}
 			default:
 				return true;

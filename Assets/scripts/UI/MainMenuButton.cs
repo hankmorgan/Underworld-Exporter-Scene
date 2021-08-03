@@ -19,9 +19,11 @@ public class MainMenuButton : GuiBase {
 		default:
 			if (ButtonLoader== null)
 			{
-				ButtonLoader= new GRLoader(GRLoader.OPBTN_GR);
-				ButtonLoader.PaletteNo=6;
-			}
+                    ButtonLoader = new GRLoader(GRLoader.OPBTN_GR)
+                    {
+                        PaletteNo = 6
+                    };
+                }
 			ButtonBG.texture= ButtonLoader.LoadImageAt(ButtonOffIndex,false);
 			break;
 		}	

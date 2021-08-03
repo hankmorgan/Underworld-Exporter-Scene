@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class an_enter_trigger : a_move_trigger {
+public class An_enter_trigger : a_move_trigger {
 
 	protected override void Start ()
 	{

@@ -33,23 +33,23 @@ public class MagicProjectile : MobileObject {
 
 		public NPC target;
 
-		/*
+    /*
 
-		    N  NE  E  SE  S  SW  W  NW
+        N  NE  E  SE  S  SW  W  NW
 --------------------------------------
-		N   0  1   1   1  1  -1 -1 -1
-		NE -1  0   1   1  1   1 -1 -1
-		E  -1  -1  0   1  1   1  1  -1
-		SE  -1  -1 -1  0  1   1  1  1
-		S   1  -1  -1  -1  0  1  1  1
-		SW  1   1  -1  -1 -1  0  1  1
-		W   1   1   1  -1 -1  -1  0  1
-		NW  1   1   1   1  -1  -1 -1 0
+    N   0  1   1   1  1  -1 -1 -1
+    NE -1  0   1   1  1   1 -1 -1
+    E  -1  -1  0   1  1   1  1  -1
+    SE  -1  -1 -1  0  1   1  1  1
+    S   1  -1  -1  -1  0  1  1  1
+    SW  1   1  -1  -1 -1  0  1  1
+    W   1   1   1  -1 -1  -1  0  1
+    NW  1   1   1   1  -1  -1 -1 0
 
 
 
-		*/
-		short[,] turningHeading = new short[,] {
+    */
+    readonly short[,] turningHeading = new short[,] {
 				{0,  1 ,  1 ,  1,  1 , -1 ,-1, -1},
 				{-1,  0,   1 ,  1,  1 ,  1 ,-1, -1},
 				{-1,  -1 , 0,   1,  1 ,  1,  1 , -1},

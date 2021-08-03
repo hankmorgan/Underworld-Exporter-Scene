@@ -640,7 +640,6 @@ public class UWHUD : HUD
             if (refreshed == false)
             {
                 UpdatePanelStates();
-                refreshed = true;
             }
             isRotating = false;
             currentPanel = toPanel;

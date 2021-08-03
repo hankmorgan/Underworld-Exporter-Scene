@@ -526,7 +526,6 @@ public class Container : UWEBase
 
             if (TestContainerRules(this, 11, false) == false)
             {
-                Valid = false;
                 return true;
             }
 
@@ -625,14 +624,14 @@ public class Container : UWEBase
         }
         //Test the various rules for this slot
         ObjectInteraction objInt = CurrentObjectInHand;
-        //If in a non player container check that the object in hand can be added to it.
-        bool TypeTest = false;
         //If in a non player container check that the container has the weight capacity to accept it.
         bool WeightTest = false;
         //		Container curContainer = this;
         bool CapacityTest = false;
         if (EditorMode)//Anything is allowed in editor mode.
         { return true; }
+        //If in a non player container check that the object in hand can be added to it.
+        bool TypeTest;
         switch (cn.ObjectsAccepted())
         {//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
             case 0://runes

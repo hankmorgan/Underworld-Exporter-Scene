@@ -641,7 +641,7 @@ public class UWCharacter : Character
         // playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
         playerCam.transform.localPosition = CameraLocalPos + CameraShake.CurrentShake;
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
-        SwimTimer = SwimTimer + Time.deltaTime;
+        SwimTimer += Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
         if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f)
         {
@@ -966,7 +966,7 @@ public class UWCharacter : Character
         if (poison_timer <= 0)
         {
             poison_timer = 30f;
-            CurVIT = CurVIT - 3;
+            CurVIT -= 3;
             play_poison--;
         }
     }
@@ -1064,7 +1064,7 @@ public class UWCharacter : Character
                 && ((PlayerCombat.AttackCharging == false) && (PlayerCombat.AttackExecuting == false))
         )
         {
-            PlayerMagic.castSpell(this.gameObject, PlayerMagic.ReadiedSpell, false);
+            PlayerMagic.CastSpell(this.gameObject, PlayerMagic.ReadiedSpell, false);
             PlayerMagic.SpellCost = 0;
             UWHUD.instance.window.UWWindowWait(1.0f);
         }
@@ -1237,8 +1237,7 @@ public class UWCharacter : Character
                         {
                             if (rend.materials[materialIndex].name.Length >= 7)
                             {
-                                int textureIndex = 0;
-                                if (int.TryParse(rend.materials[materialIndex].name.Substring(4, 3), out textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
+                                if (int.TryParse(rend.materials[materialIndex].name.Substring(4, 3), out int textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
                                 {
                                     //GetMessageLog ().text =
                                     if ((textureIndex == 142) && (_RES != GAME_UW2))
@@ -1400,18 +1399,18 @@ public class UWCharacter : Character
 
     public string GetFedStatus()
     {//Returns the string representing the players hunger.
-     /*
-000~001~104~starving
-000~001~105~famished
-000~001~106~very hungry
-000~001~107~hungry
-000~001~108~peckish
-000~001~109~fed
-000~001~110~well fed
-000~001~111~full
-000~001~112~satiated
-*/
-        int FoodLevelString = 0;//in 0x1e steps
+        /*
+   000~001~104~starving
+   000~001~105~famished
+   000~001~106~very hungry
+   000~001~107~hungry
+   000~001~108~peckish
+   000~001~109~fed
+   000~001~110~well fed
+   000~001~111~full
+   000~001~112~satiated
+   */
+        int FoodLevelString;
         if (FoodLevel < 0x1E)//starving
         {
             FoodLevelString = 0;
@@ -1830,7 +1829,7 @@ public class UWCharacter : Character
     /// </summary>
     void SleepRegen()
     {
-        for (int i = Instance.Fatigue; i < 29; i = i + 3)//Sleep restores at a rate of 3 points per hour
+        for (int i = Instance.Fatigue; i < 29; i += 3)//Sleep restores at a rate of 3 points per hour
         {
             if (Instance.FoodLevel >= 3)
             {
@@ -2195,8 +2194,7 @@ public class UWCharacter : Character
         onBridge = false;
         Rayposition = transform.position;
 
-        RaycastHit hit;
-        Physics.Raycast(Rayposition, Raydirection, out hit, Raydistance, mask);
+        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, mask);
 
         if (hit.collider != null)
         {

@@ -36,32 +36,30 @@ public class PaletteLoader : ArtLoader {
 				{
 					Palettes=new Palette[1];
 					Palettes[0]=new Palette();
-					char[] pal_file;
-					DataLoader.Chunk pal_ark;
-					if(ReadStreamFile(filePath,out pal_file))
-					{
-						if (DataLoader.LoadChunk(pal_file,PaletteNo, out pal_ark))
-							{
-								int p=0;
-								int palAddr=0;
-								for (int j = 0; j < 256; j++) {
-									Palettes[0].red[p] = (byte)pal_ark.data[palAddr + 0];//<<2;
-									Palettes[0].green[p] = (byte)pal_ark.data[palAddr + 1];// << 2;
-									Palettes[0].blue[p] = (byte)pal_ark.data[palAddr + 2];// << 2;
-									// pal[i].reserved = 0;
-									palAddr = palAddr +3;
-									p++;
-								}
-							}
-					}
-				}
+                    if (ReadStreamFile(filePath, out char[] pal_file))
+                    {
+                        if (DataLoader.LoadChunk(pal_file, PaletteNo, out DataLoader.Chunk pal_ark))
+                        {
+                            int p = 0;
+                            int palAddr = 0;
+                            for (int j = 0; j < 256; j++)
+                            {
+                                Palettes[0].red[p] = (byte)pal_ark.data[palAddr + 0];//<<2;
+                                Palettes[0].green[p] = (byte)pal_ark.data[palAddr + 1];// << 2;
+                                Palettes[0].blue[p] = (byte)pal_ark.data[palAddr + 2];// << 2;
+                                                                                      // pal[i].reserved = 0;
+                                palAddr += 3;
+                                p++;
+                            }
+                        }
+                    }
+                }
 			break;
 
 		default:
 			{
-				char[] pals_dat;
-				Palettes=new Palette[NoOfPals];
-				if(ReadStreamFile(filePath,out pals_dat))
+                    Palettes = new Palette[NoOfPals];
+                    if (ReadStreamFile(filePath,out char[] pals_dat))
 				{
 					for (int palNo =0; palNo<=Palettes.GetUpperBound(0); palNo++ )
 					{
@@ -82,10 +80,9 @@ public class PaletteLoader : ArtLoader {
 
     public static int[] LoadAuxilaryPalIndices(string auxPalPath, int auxPalIndex)
     {
-        char[] palf;
         int[] auxpal = new int[16];
 
-        if (ReadStreamFile(auxPalPath, out palf))
+        if (ReadStreamFile(auxPalPath, out char[] palf))
         {
             for (int j = 0; j < 16; j++)
             {               
@@ -97,12 +94,13 @@ public class PaletteLoader : ArtLoader {
 
     public static Palette LoadAuxilaryPal(string auxPalPath, Palette gamepal, int auxPalIndex)
 	{
-		char[] palf;
-		Palette auxpal = new Palette();
-		auxpal.red = new byte[16];
-		auxpal.green = new byte[16];
-		auxpal.blue = new byte[16];
-		if (ReadStreamFile(auxPalPath, out palf))
+        Palette auxpal = new Palette
+        {
+            red = new byte[16],
+            green = new byte[16],
+            blue = new byte[16]
+        };
+        if (ReadStreamFile(auxPalPath, out char[] palf))
 		{
 			for (int j = 0; j <16; j++)
 			{

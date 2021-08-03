@@ -32,8 +32,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr]);
-            val = val & 0xF0;
-            val = val | (value & 0xF);
+            val &= 0xF0;
+            val |= (value & 0xF);
             map.lev_ark_block.Data[Ptr] = (char)val;
         }
     }
@@ -50,8 +50,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr]);
-            val = val & 0x0F;
-            val = val | (((value / 2) & 0xF) << 4);
+            val &= 0x0F;
+            val |= (((value / 2) & 0xF) << 4);
             map.lev_ark_block.Data[Ptr] = (char)val;
         }
     }
@@ -74,8 +74,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0xC3;
-            val = val | ((value & 0xF) << 2);
+            val &= 0xC3;
+            val |= ((value & 0xF) << 2);
             map.lev_ark_block.Data[Ptr + 1] = (char)val;
         }
     }
@@ -92,8 +92,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr + 2]);
-            val = val & 0xC0;
-            val = val | ((value & 0x3F));
+            val &= 0xC0;
+            val |= ((value & 0x3F));
             map.lev_ark_block.Data[Ptr + 2] = (char)val;
         }
     }
@@ -127,8 +127,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0x7F;
-            val = val | ((value & 0x1) << 7);
+            val &= 0x7F;
+            val |= ((value & 0x1) << 7);
             map.lev_ark_block.Data[Ptr + 1] = (char)val;
         }
     }
@@ -253,8 +253,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr+1]);
-            val = val & 0xFC;
-            val = val | (value & 0x3);
+            val &= 0xFC;
+            val |= (value & 0x3);
             map.lev_ark_block.Data[Ptr+1] = (char)val;
         }
     }
@@ -273,8 +273,8 @@ public class TileInfo : Loader
         set
         {
             int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0xBF;
-            val = val | ((value & 0x1)<<6);
+            val &= 0xBF;
+            val |= ((value & 0x1)<<6);
             map.lev_ark_block.Data[Ptr + 1] = (char)val;
         }
     }

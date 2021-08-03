@@ -888,8 +888,7 @@ public class ObjectInteraction : UWEBase{
     /// </summary>
     public bool Pickup()
     {
-        object_base item = null;
-        item = this.GetComponent<object_base>();
+        object_base item = GetComponent<object_base>();
         if (TileMap.ValidTile(ObjectTileX, ObjectTileY))
         {
             if (CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex != 0)
@@ -917,8 +916,7 @@ public class ObjectInteraction : UWEBase{
     /// </summary>
     public bool Drop()
     {
-        object_base item = null;
-        item = this.GetComponent<object_base>();
+        object_base item = GetComponent<object_base>();
         if (item != null)
         {
             return (item.DropEvent());
@@ -937,8 +935,7 @@ public class ObjectInteraction : UWEBase{
     public bool PutItemAway(short SlotNo)
     {//What happens when an item is put into a backpack
         inventorySlot = SlotNo;
-        object_base item = null;
-        item = this.GetComponent<object_base>();
+        object_base item = GetComponent<object_base>();
         if (item != null)
         {
             return (item.PutItemAwayEvent(SlotNo));
@@ -2542,7 +2539,7 @@ public class ObjectInteraction : UWEBase{
                 CreateSprite = false;
                 break;
             case AN_ENTER_TRIGGER:
-                myObj.AddComponent<an_enter_trigger>();
+                myObj.AddComponent<An_enter_trigger>();
                 CreateSprite = false;
                 break;
             case AN_EXIT_TRIGGER:
@@ -3224,7 +3221,7 @@ public class ObjectInteraction : UWEBase{
         }
 
         label4d5:
-        VulnerabilityFlags = VulnerabilityFlags & 0xFC;
+        VulnerabilityFlags &= 0xFC;
 
         label4dd:
         if ((ScaleValue & VulnerabilityFlags) == 0)
@@ -3271,7 +3268,7 @@ public class ObjectInteraction : UWEBase{
         //the 7f code
         if (MultiplierToReturn < 0x7F)
         {
-            MultiplierToReturn = MultiplierToReturn << 1;
+            MultiplierToReturn <<= 1;
         }
         else
         {

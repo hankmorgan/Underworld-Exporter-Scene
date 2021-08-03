@@ -68,23 +68,23 @@ public class ProjectileDamage : UWEBase {
 		if (LastTarget != other.name)
 		{//only get hit once.
 			LastTarget=other.name;
-			//Perform damage calls
-			int otherDefenceScore=0;
-			int DamageReduction=0;
+            int DamageReduction = 0;
+            //Perform damage calls
+            int otherDefenceScore;
             if (other == UWCharacter.Instance.gameObject) //.name=="_Gronk")
-			{
-				otherDefenceScore=UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillDefense) + (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile)/2);
-				DamageReduction=UWCharacter.Instance.playerInventory.ArmourProtection;				
-			}
-			else if (other.GetComponent<NPC>()!=null)
-			{
-				otherDefenceScore= other.GetComponent<NPC>().Defence();
-			}
-			else
-			{
-					return;
-			}
-			int toHit =Mathf.Max( otherDefenceScore-AttackScore, 1);
+            {
+                otherDefenceScore = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillDefense) + (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile) / 2);
+                DamageReduction = UWCharacter.Instance.playerInventory.ArmourProtection;
+            }
+            else if (other.GetComponent<NPC>() != null)
+            {
+                otherDefenceScore = other.GetComponent<NPC>().Defence();
+            }
+            else
+            {
+                return;
+            }
+            int toHit =Mathf.Max( otherDefenceScore-AttackScore, 1);
 			int roll = Random.Range(1,31);
 			if (roll<toHit)
 			{

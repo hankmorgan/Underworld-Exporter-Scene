@@ -3,11 +3,11 @@ using System.Collections;
 
 public class CutsceneAnimationFullscreen : HudAnimation {
 	private bool PlayingSequence;
-	private bool isFullScreen;
+	private readonly bool isFullScreen;
 	private int currentFrameLoops;
 	public Cuts cs;
 	public string CurrentSpriteName;
-	Sprite CurrentSpriteLoaded;
+    readonly Sprite CurrentSpriteLoaded;
 	public ScrollController mlCuts; //What control will print the subtitles
 	public AudioSource aud; //What control will play the audio.
 	public bool SkipAnim=false;

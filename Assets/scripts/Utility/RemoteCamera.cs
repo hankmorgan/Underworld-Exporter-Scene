@@ -6,7 +6,7 @@ public class RemoteCamera : MonoBehaviour {
 	//public int X;
 	//public int Y;
 	public RemoteCameraCapture cam;
-	private int FrameInterval=30;
+	private readonly int FrameInterval=30;
 	private int FrameIntervalCounter=30;
 	//public Texture2D RenderedImage;
 	public string Target;

@@ -121,7 +121,7 @@ comes the color palette:*/
             lpd[i].baseRecord = (int)getValAtAddress(cutsFile, addptr, 16);
             lpd[i].nRecords = (int)getValAtAddress(cutsFile, addptr + 2, 16);
             lpd[i].nBytes = (int)getValAtAddress(cutsFile, addptr + 4, 16);
-            addptr = addptr + 6;
+            addptr += 6;
         }
         char[] pages = new char[cutsFile.GetUpperBound(0) - 2816 + 1];
         for (int i = 0; i <= pages.GetUpperBound(0); i++)

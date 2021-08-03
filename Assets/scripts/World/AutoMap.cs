@@ -229,10 +229,8 @@ public class AutoMap : Loader
         {
             string NoteText = "";
             bool terminated = false;
-            int PosX = 0;
-            int PosY = 0;
-            PosX = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
-            PosY = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
+            int PosX = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
+            int PosY = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
             for (int c = 0; c <= 0x31; c++)
             {
                 if ((lev_ark[automapNotesAddress + c].ToString() != "\0") && (!terminated))
@@ -281,13 +279,11 @@ public class AutoMap : Loader
         thisLevelNo = LevelNo;
 
         long datalen = 0;
-        long automapAddress = 0;
-        long automapNotesAddress = 0;
         //long AUTOMAP_EOF_ADDRESS=0;
 
         int NoOfBlocks = (int)getValAtAddress(lev_ark, 0, 32);
 
-        automapAddress = getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4), 32);
+        long automapAddress = getValAtAddress(lev_ark, LevelNo * 4 + 6 + 160 * 4, 32);
         //Load Automap info
         if (automapAddress != 0)
         {
@@ -303,11 +299,10 @@ public class AutoMap : Loader
             }
         }
 
-        automapNotesAddress = getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (240 * 4), 32);
+        long automapNotesAddress = getValAtAddress(lev_ark, LevelNo * 4 + 6 + 240 * 4, 32);
         if (automapNotesAddress != 0)
         {
-            DataLoader.UWBlock noteblock;
-            DataLoader.LoadUWBlock(lev_ark, LevelNo + 240, 0, out noteblock);
+            DataLoader.LoadUWBlock(lev_ark, LevelNo + 240, 0, out DataLoader.UWBlock noteblock);
             if (noteblock.Data != null)
             {
                 ProcessAutoMapNotes(LevelNo, noteblock.Data, 0, datalen);
@@ -325,9 +320,6 @@ public class AutoMap : Loader
     {
         MapNotes = new List<MapNote>();
         thisLevelNo = LevelNo;
-        long automapAddress = 0;
-        long automapNotesAddress = 0;
-        long AUTOMAP_EOF_ADDRESS = 0;
         bool initAutoMaps = true;
 
         //The order the automap notes are saved on file is different from the order of the level nos.
@@ -341,10 +333,9 @@ public class AutoMap : Loader
             }
         }
 
-        automapAddress = getValAtAddress(lev_ark, ((LevelNo + 27) * 4) + 2, 32);
-        automapNotesAddress = getValAtAddress(lev_ark, ((LevelNo + 36) * 4) + 2, 32);
-
-        AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo, lev_ark);
+        long automapAddress = getValAtAddress(lev_ark, (LevelNo + 27) * 4 + 2, 32);
+        long automapNotesAddress = getValAtAddress(lev_ark, (LevelNo + 36) * 4 + 2, 32);
+        long AUTOMAP_EOF_ADDRESS = GetNextAutomapBlock(LevelNo, lev_ark);
         if (initAutoMaps)
         {//No notes have been made yet so Init with some dummy data.
             MapNotes.Add(new MapNote(0, 0, LevelNo.ToString()));
@@ -412,11 +403,13 @@ public class AutoMap : Loader
                 playerPosIcon = GameWorldController.instance.grCursors.LoadImageAt(18);
                 break;
         }
-        
+
         ///Creates a blank texture2D of 64x64*TileSize in ARGB32 format.
-        Texture2D output = new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
-        output.filterMode = FilterMode.Point;
-        output.wrapMode = TextureWrapMode.Clamp;
+        Texture2D output = new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false)
+        {
+            filterMode = FilterMode.Point,
+            wrapMode = TextureWrapMode.Clamp
+        };
         //Init the tile map as a blank map first
         for (int i = 0; i < TileMap.TileMapSizeX; i++)
         {
@@ -433,7 +426,7 @@ public class AutoMap : Loader
             {//If the tile has been visited and can be rendered.
                 if ((GetTileRender(i, j) == 1) && (GetTileVisited(i, j)))
                 {
-                    fillTile(output, i, j, TileSize, TileSize, OpenTileColour, WaterTileColour, LavaTileColour, BridgeTileColour, IceTileColour);
+                    FillTile(output, i, j, TileSize, TileSize, OpenTileColour, WaterTileColour, LavaTileColour, BridgeTileColour, IceTileColour);
                 }
             }
         }
@@ -549,7 +542,7 @@ public class AutoMap : Loader
     /// <param name="WaterColour">Water colour.</param>
     /// <param name="LavaColour">Lava colour.</param>
     /// <param name="BridgeColour">Bridge colour.</param>
-    private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour, Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour, Color[] IceColour)
+    private void FillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour, Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour, Color[] IceColour)
     {
         Color[] TileColorPrimary;
         Color TileColorSecondary;
@@ -764,12 +757,12 @@ public class AutoMap : Loader
     /// <param name="InputColour">Input colour.</param>
     private void DrawDoor(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
     {
-        bool TileTypeNorth = isTileOpen(GetTileType(TileX, TileY + 1));
-        bool TileTypeSouth = isTileOpen(GetTileType(TileX, TileY - 1));
-        bool TileTypeEast = isTileOpen(GetTileType(TileX + 1, TileY));
-        bool TileTypeWest = isTileOpen(GetTileType(TileX - 1, TileY));
+        bool TileTypeNorth = IsTileOpen(GetTileType(TileX, TileY + 1));
+        bool TileTypeSouth = IsTileOpen(GetTileType(TileX, TileY - 1));
+        bool TileTypeEast = IsTileOpen(GetTileType(TileX + 1, TileY));
+        bool TileTypeWest = IsTileOpen(GetTileType(TileX - 1, TileY));
 
-        if (isTileOpen(GetTileType(TileX, TileY)))
+        if (IsTileOpen(GetTileType(TileX, TileY)))
         {   //Don't display if the door is currently in a solid tile
             if ((TileTypeEast) || (TileTypeWest))
             {
@@ -887,7 +880,7 @@ public class AutoMap : Loader
         if (TileY < TileMap.TileMapSizeY)
         {//north
             int TileToTest = GetTileType(TileX, TileY + 1);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SW))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SW))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, NORTH);
             }
@@ -895,7 +888,7 @@ public class AutoMap : Loader
         if (TileX < TileMap.TileMapSizeX)
         {//east
             int TileToTest = GetTileType(TileX + 1, TileY);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SW))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SW))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, EAST);
             }
@@ -938,7 +931,7 @@ public class AutoMap : Loader
         if (TileY > 0)
         {//South
             int TileToTest = GetTileType(TileX, TileY - 1);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NE))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NE))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, SOUTH);
             }
@@ -946,7 +939,7 @@ public class AutoMap : Loader
         if (TileX > 0)
         {//West
             int TileToTest = GetTileType(TileX - 1, TileY);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NE))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NE))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, WEST);
             }
@@ -989,7 +982,7 @@ public class AutoMap : Loader
         if (TileY > 0)
         {//South
             int TileToTest = GetTileType(TileX, TileY - 1);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NW))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NW))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, SOUTH);
             }
@@ -997,7 +990,7 @@ public class AutoMap : Loader
         if (TileX < TileMap.TileMapSizeX)
         {//East
             int TileToTest = GetTileType(TileX + 1, TileY);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NW))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_NW))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, EAST);
             }
@@ -1039,7 +1032,7 @@ public class AutoMap : Loader
         if (TileY < TileMap.TileMapSizeY)
         {//north
             int TileToTest = GetTileType(TileX, TileY + 1);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SE))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SE))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, NORTH);
             }
@@ -1048,7 +1041,7 @@ public class AutoMap : Loader
         if (TileX > 0)
         {//West
             int TileToTest = GetTileType(TileX - 1, TileY);
-            if ((isTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SE))
+            if ((IsTileOpen(TileToTest)) || (TileToTest == TILE_DIAG_SE))
             {
                 DrawLine(OutputTile, TileX, TileY, TileWidth, TileHeight, InputColour, WEST);
             }
@@ -1333,7 +1326,7 @@ public class AutoMap : Loader
     /// </summary>
     /// <returns><c>true</c>, if tile open was ised, <c>false</c> otherwise.</returns>
     /// <param name="TileType">Tile type.</param>
-    public static bool isTileOpen(int TileType)
+    public static bool IsTileOpen(int TileType)
     {
         switch (TileType)
         {
@@ -1476,7 +1469,7 @@ public class AutoMap : Loader
     /// <param name="thisLevelNo"></param>
     /// <param name="lev_ark"></param>
     /// <returns></returns>
-    public static long getNextAutomapBlock(int thisLevelNo, char[] lev_ark)
+    public static long GetNextAutomapBlock(int thisLevelNo, char[] lev_ark)
     {
         long thisAddress = AutomapNoteAddresses[thisLevelNo];
         long selectedAddress = lev_ark.GetUpperBound(0);

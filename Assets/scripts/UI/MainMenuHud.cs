@@ -5,7 +5,7 @@ using System.IO;
 
 public class MainMenuHud : GuiBase
 {
-    string[] saveNames = { "", "", "", "" };
+    readonly string[] saveNames = { "", "", "", "" };
     public Texture2D CursorIcon;
     public Rect CursorPosition;
 
@@ -160,8 +160,10 @@ public class MainMenuHud : GuiBase
                     OpScr.SetActive(false);
                     CharGenQuestion.text = getQuestion(0);
                     InitChargenScreen();
-                    chrBtns = new GRLoader(GRLoader.CHRBTNS_GR);
-                    chrBtns.PaletteNo = 9;
+                    chrBtns = new GRLoader(GRLoader.CHRBTNS_GR)
+                    {
+                        PaletteNo = 9
+                    };
                     PlaceButtons(Chargen.GetChoices(Chargen.STAGE_GENDER, -1), false);
                     break;
 
@@ -206,12 +208,11 @@ public class MainMenuHud : GuiBase
 
         for (int i = 1; i <= 4; i++)
         {
-            char[] fileDesc;
             var toLoad = Path.Combine(Loader.BasePath, "SAVE" + i, "DESC");
             saveNames[i - 1] = "";
             if (File.Exists(toLoad))
             {
-                if (Loader.ReadStreamFile(toLoad, out fileDesc))
+                if (Loader.ReadStreamFile(toLoad, out char[] fileDesc))
                 {
                     saveNames[i - 1] = new string(fileDesc);
                 }

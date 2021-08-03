@@ -233,20 +233,20 @@ public class ObjectLoader : DataLoader
 
         //unsigned char *archive_ark;	//the full file.
 
-        Chunk xref_ark;     //The crossref table
-        Chunk mst_ark;      //The master table
+        //The crossref table
+        //The master table
 
 
 
-        if (!LoadChunk(archive_ark, LevelNo * 100 + 4009, out xref_ark))
+        if (!LoadChunk(archive_ark, LevelNo * 100 + 4009, out Chunk xref_ark))
         {
             return false;
         }
 
         xrefTable[] xref;
         xref = new xrefTable[xref_ark.chunkUnpackedLength / 10];
-        int i = 0;
         int xref_ptr = 0;
+        int i;
         //int xRefLength = (xref_ark.chunkUnpackedLength/10);
 
 
@@ -266,7 +266,7 @@ public class ObjectLoader : DataLoader
             xref_ptr += 10;
         }
 
-        if (!LoadChunk(archive_ark, LevelNo * 100 + 4008, out mst_ark))
+        if (!LoadChunk(archive_ark, LevelNo * 100 + 4008, out Chunk mst_ark))
         {
             return false;
         }
@@ -297,8 +297,14 @@ public class ObjectLoader : DataLoader
         for (i = 0; i <= objList.GetUpperBound(0); i++)
         {
             //To stop later crashes in ascii dumps I set some inital values.
-            objList[i] = new ObjectLoaderInfo(i, UWEBase.CurrentTileMap(), true);
-            objList[i].index = i; objList[i].next = 0; objList[i].item_id = 0; objList[i].link = 0; objList[i].owner = 0;
+            objList[i] = new ObjectLoaderInfo(i, UWEBase.CurrentTileMap(), true)
+            {
+                index = i,
+                next = 0,
+                item_id = 0,
+                link = 0,
+                owner = 0
+            };
         }
 
         //now i can build based on my master list with no duplicates spoiling things.!	
@@ -475,16 +481,18 @@ public class ObjectLoader : DataLoader
             {
                 Vals[i] = (int)getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
             }
-            objList[x] = new ObjectLoaderInfo(x,map,true);
-            objList[x].map = map;
-            objList[x].parentList = this;
-            //objList[x].guid = System.Guid.NewGuid();
-            objList[x].index = x;
-           // objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-          //  objList[x].ObjectTileY = TileMap.ObjectStorageTile;
-           // objList[x].levelno = (short)map.thisLevelNo;
-           // objList[x].next = 0;
-            objList[x].address = map.lev_ark_block.Address + objectsAddress + address_pointer;
+            objList[x] = new ObjectLoaderInfo(x, map, true)
+            {
+                map = map,
+                parentList = this,
+                //objList[x].guid = System.Guid.NewGuid();
+                index = x,
+                // objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+                //  objList[x].ObjectTileY = TileMap.ObjectStorageTile;
+                // objList[x].levelno = (short)map.thisLevelNo;
+                // objList[x].next = 0;
+                address = map.lev_ark_block.Address + objectsAddress + address_pointer
+            };
             //objList[x].invis = 0;
             //objList[x].item_id = (int)ExtractBits(Vals[0], 0, 0x1FF);
 
@@ -583,7 +591,7 @@ public class ObjectLoader : DataLoader
             else
             {
                 //Static Objects
-                address_pointer = address_pointer + 8;
+                address_pointer += 8;
             }
         }
 
@@ -1550,7 +1558,6 @@ public class ObjectLoader : DataLoader
         TileMap tileMap = CurrentTileMap();
         int x = objList[ObjectIndex].ObjectTileX;
         int y = objList[ObjectIndex].ObjectTileY;
-        float offX = 0f; float offY = 0f; float offZ = 0f;
         float ResolutionXY = 7.0f;  // A tile has a 7x7 grid for object positioning.
         float ResolutionZ = 128.0f; //UW has 127 posible z positions for an object in tile.
         if (_RES == GAME_SHOCK) { ResolutionXY = 256.0f; ResolutionZ = 256.0f; } //Shock has more "z" in it.
@@ -1560,14 +1567,13 @@ public class ObjectLoader : DataLoader
         float BrushZ = 15f;
         float objX = (float)objList[ObjectIndex].xpos;
         float objY = (float)objList[ObjectIndex].ypos;
-        offX = (x * BrushX) + ((objList[ObjectIndex].xpos) * (BrushX / ResolutionXY));
-        offY = (y * BrushY) + ((objList[ObjectIndex].ypos) * (BrushY / ResolutionXY));
+        float offX = x * BrushX + objList[ObjectIndex].xpos * (BrushX / ResolutionXY);
+        float offY = y * BrushY + objList[ObjectIndex].ypos * (BrushY / ResolutionXY);
 
         float zpos = objList[ObjectIndex].zpos;
 
         float ceil = tileMap.CEILING_HEIGHT;
-
-        offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
+        float offZ = zpos / ResolutionZ * ceil * BrushZ;
         if ((_RES != GAME_SHOCK) && (x < 64) && (y < 64))
         {//Adjust zpos by a fraction for objects on sloped tiles.
             switch (tileMap.Tiles[x, y].tileType)
@@ -1664,10 +1670,10 @@ public class ObjectLoader : DataLoader
                                     break;
                                 }
                         }
-                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 2f; }
-                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 2f; }
-                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 2f; }
-                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 2f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX += 2f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX -= 2f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY += 2f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY -= 2f; }
                         break;
                     }
                 case ObjectInteraction.A_MOVE_TRIGGER:
@@ -1688,10 +1694,10 @@ public class ObjectLoader : DataLoader
                 case ObjectInteraction.BUTTON:
                 case ObjectInteraction.SIGN:
                     {//TODO: make this based on heading so as to support angled walls									
-                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 1.5f; }
-                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 1.5f; }
-                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 1.5f; }
-                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 1.5f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX += 1.5f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX -= 1.5f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY += 1.5f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY -= 1.5f; }
                         if (zpos == 127)
                         {
                             offZ -= 25f;
@@ -1708,16 +1714,16 @@ public class ObjectLoader : DataLoader
                             switch (_RES)
                             {
                                 case GAME_SHOCK:
-                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[ObjectIndex].xpos == 128) { offX = offX - 4f; }
-                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[ObjectIndex].ypos == 128) { offY = offY - 3f; }
+                                    if (objList[ObjectIndex].xpos == 0) { offX += 4f; }
+                                    if (objList[ObjectIndex].xpos == 128) { offX -= 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY += 4f; }
+                                    if (objList[ObjectIndex].ypos == 128) { offY -= 3f; }
                                     break;
                                 default:
-                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[ObjectIndex].xpos == 7) { offX = offX - 4f; }
-                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[ObjectIndex].ypos == 7) { offY = offY - 4f; }
+                                    if (objList[ObjectIndex].xpos == 0) { offX += 4f; }
+                                    if (objList[ObjectIndex].xpos == 7) { offX -= 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY += 4f; }
+                                    if (objList[ObjectIndex].ypos == 7) { offY -= 4f; }
                                     break;
                             }
                         }
@@ -2032,7 +2038,7 @@ public class ObjectLoader : DataLoader
         //First add the objects on the paperdoll to the so that they are first.
         for (short s = 0; s <= 18; s++)
         {
-            ObjectInteraction obj = null;
+            ObjectInteraction obj;
             if (s <= 10)//Paperdoll objects
             {
                 obj = pInv.GetObjectIntAtSlot(s);
@@ -2221,7 +2227,6 @@ public class ObjectLoader : DataLoader
     /// <param name="objInt">Object int.</param>
     public static int AssignObjectToList(ref ObjectInteraction objInt)
     {
-        int index;
         int startindex = 1;
         //Check if objINt is an npc
         if ((objInt.GetComponent<NPC>() == null))
@@ -2230,7 +2235,7 @@ public class ObjectLoader : DataLoader
                              //	startindex=979;
         }
         //find a free slot in the list.
-        if (CurrentObjectList().getFreeSlot(startindex, out index))
+        if (CurrentObjectList().getFreeSlot(startindex, out int index))
         {
             //Assign and return the reference
             objInt.BaseObjectData = CurrentObjectList().objInfo[index];
@@ -2383,7 +2388,7 @@ public class ObjectLoader : DataLoader
         int index = 0;
         if (startIndex >= 0)
         {
-            bool SlotAvailable = false;
+            bool SlotAvailable;
             if (startIndex >=256)//Static
             {
                 SlotAvailable=CurrentObjectList().GetFreeStaticObject(out index);
@@ -2421,25 +2426,27 @@ public class ObjectLoader : DataLoader
         else
         {
             Debug.Log("New Object created. Shuld not happen!");
-            ObjectLoaderInfo objI = new ObjectLoaderInfo(index, UWEBase.CurrentTileMap(),true);
-            //objI.guid = System.Guid.NewGuid();
-            objI.quality = (short)quality;
-            objI.flags = 0;
-            objI.owner = (short)owner;
-            objI.item_id = item_id;
-            objI.next = 0;
-            objI.link = link;
-            objI.zpos = 0;
-            objI.xpos = 0;
-            objI.ypos = 0;
-            objI.invis = 0;
-            objI.doordir = 0;
-            objI.is_quant = 0;
-            objI.enchantment = 0;
-            objI.ObjectTileX = TileMap.ObjectStorageTile;
-            objI.ObjectTileY = TileMap.ObjectStorageTile;
-            objI.InUseFlag = 1;
-            objI.index = index;
+            ObjectLoaderInfo objI = new ObjectLoaderInfo(index, UWEBase.CurrentTileMap(), true)
+            {
+                //objI.guid = System.Guid.NewGuid();
+                quality = (short)quality,
+                flags = 0,
+                owner = (short)owner,
+                item_id = item_id,
+                next = 0,
+                link = link,
+                zpos = 0,
+                xpos = 0,
+                ypos = 0,
+                invis = 0,
+                doordir = 0,
+                is_quant = 0,
+                enchantment = 0,
+                ObjectTileX = TileMap.ObjectStorageTile,
+                ObjectTileY = TileMap.ObjectStorageTile,
+                InUseFlag = 1,
+                index = index
+            };
             return objI;
 
         }
@@ -2525,8 +2532,7 @@ public class ObjectLoader : DataLoader
         //sub_ark=new unsigned char[chunkUnpackedLength];
         //fprintf(LOGFILE,"\nLoading Chunk at %d\n",blockAddress);
         //LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
-        Chunk sub_ark;
-        if (!LoadChunk(archive_ark, BlockNo, out sub_ark))
+        if (!LoadChunk(archive_ark, BlockNo, out Chunk sub_ark))
         {
             return false;
         }
@@ -2614,8 +2620,7 @@ public class ObjectLoader : DataLoader
                                             if ((objList[objIndex].shockProperties[SCREEN_START] >= 248) && (objList[objIndex].shockProperties[SCREEN_START] <= 255))
                                             {//Survellance
                                              //unsigned char *sur_ark;
-                                                Chunk sur_ark;
-                                                if (LoadChunk(archive_ark, levelNo * 100 + SURVELLANCE_OFFSET, out sur_ark))
+                                                if (LoadChunk(archive_ark, levelNo * 100 + SURVELLANCE_OFFSET, out Chunk sur_ark))
                                                 {
 
                                                     //fprintf(LOGFILE, "\n\tSurvellance Chunk at %d\n", blockAddress);

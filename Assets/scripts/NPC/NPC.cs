@@ -114,7 +114,7 @@ public class NPC : MobileObject
     public const int AI_ANIM_COMBAT_IDLE = 4000;
     public const int AI_ANIM_ATTACK_SECONDARY = 5000;
 
-    private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
+    private static readonly short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
     
    // [Header("AI Target")]
    /// <summary>
@@ -415,10 +415,9 @@ public class NPC : MobileObject
         {
             Vector3 pos = CurrentTileMap().getTileVector(CurTileX, CurTileY);
             //this.transform.position=pos;
-            NavMeshHit hit;
             int mask = (int)AgentMask();
             mask = 1 << mask;
-            NavMesh.SamplePosition(pos, out hit, 0.2f, mask);// NavMesh.AllAreas
+            NavMesh.SamplePosition(pos, out NavMeshHit hit, 0.2f, mask);// NavMesh.AllAreas
             if (hit.hit)
             {//Tests if the npc in question is on the nav mesh
                 AddAgent(mask);
@@ -831,7 +830,7 @@ public class NPC : MobileObject
         newAnim.FreezeAnimFrame = FreezeNpc;
         if ((WaitTimer > 0) && (!FreezeNpc))
         {
-            WaitTimer = WaitTimer - Time.deltaTime;
+            WaitTimer -= Time.deltaTime;
             if (WaitTimer < 0)
             {
                 WaitTimer = 0;
@@ -1693,7 +1692,7 @@ public class NPC : MobileObject
             if (item_id==0x69)
             {
                 //add fly, open! and flameproof
-                Output = Output + StringController.instance.GetString(6, 0x139);
+                Output += StringController.instance.GetString(6, 0x139);
                 Output = Output + " " + StringController.instance.GetString(6, 0x123);
                 Output = Output + " " + StringController.instance.GetString(6, 0x11c);
             }
@@ -1730,7 +1729,7 @@ public class NPC : MobileObject
         {//IN addition all liches have immunity to statis runes. I wonder why :)
             if(GameWorldController.instance.objDat.critterStats[item_id - 64].Race==0x17)
             {
-                Output = Output + StringController.instance.GetString(6, 0x125);
+                Output += StringController.instance.GetString(6, 0x125);
             }
         }
 
@@ -2118,7 +2117,7 @@ public class NPC : MobileObject
         TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	
                                                                         //}
         Vector3 TargetingVector = (TargetingPoint - NPC_Launcher.transform.position).normalized;
-        TargetingVector = TargetingVector + new Vector3(0.0f, 0.3f, 0.0f);//Try and give the vector an arc
+        TargetingVector += new Vector3(0.0f, 0.3f, 0.0f);//Try and give the vector an arc
         Ray ray = new Ray(NPC_Launcher.transform.position, TargetingVector);
         RaycastHit hit = new RaycastHit();
         float dropRange = 0.5f;
@@ -2338,7 +2337,7 @@ public class NPC : MobileObject
         int AttackProb = Random.Range(1, 100);
         //NPC npc = ai.Body.GetComponent<NPC>();
         int AccumulatedProb = 0;
-        int AnimSelected = 0;
+        int AnimSelected;
         for (AnimSelected = 0; AnimSelected <= GameWorldController.instance.objDat.critterStats[NPC_IDi - 64].AttackProbability.GetUpperBound(0); AnimSelected++)
         {
             AccumulatedProb += GameWorldController.instance.objDat.critterStats[NPC_IDi - 64].AttackProbability[AnimSelected];
@@ -2430,7 +2429,7 @@ public class NPC : MobileObject
     void DumpRemains()
     {
         //Spawn a bloodstain at this spot.
-        int bloodstain = -1;
+        int bloodstain;
         //Nothing = 0x00, 
         //RotwormCorpse = 0x20, //A??????
         //Rubble = 0x40, 

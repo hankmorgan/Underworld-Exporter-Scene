@@ -32,7 +32,7 @@ public class Shrine : Model3D {
 	public const string Mantra_FANLO  = "FANLO"; //Key of Truth 
 	public static bool HasGivenKey;
 
-	private int[] AttackSkills=
+	private readonly int[] AttackSkills=
 	{
 		Skills.SkillAttack,
 		Skills.SkillDefense,
@@ -43,14 +43,14 @@ public class Shrine : Model3D {
 		Skills.SkillMissile
 	};
 
-	private int[] MagicSkills=
+	private readonly int[] MagicSkills=
 	{
 		Skills.SkillMana,
 		Skills.SkillCasting,
 		Skills.SkillLore
 	};
 
-	private int[] OtherSkills=
+	private readonly int[] OtherSkills=
 	{//TODO:Check these!
 		Skills.SkillRepair,
 		Skills.SkillAppraise,
@@ -273,59 +273,59 @@ public class Shrine : Model3D {
 	{//TODO:Find out what happens when I have the cup of wonder.
 				//Cup is in tile 26,43 on level 2 (zero based)
 				string CupIs= StringController.instance.GetString(1,35);
-				string locLevel = "";
-				string locHeading=""; 
-				int TileX= TileMap.visitTileX;
-				int TileY= TileMap.visitTileY;
+        int TileX = TileMap.visitTileX;
+        int TileY= TileMap.visitTileY;
 
 				float angle = (float)Mathf.Atan2(TileY-43, TileX-26);
 				angle=Mathf.Rad2Deg*angle;
 				int headingIndex = facing(angle);
-				/*
-				000~001~036~to the North
-				000~001~037~to the Northeast
-				000~001~038~to the East
-				000~001~039~to the Southeast
-				000~001~040~to the South
-				000~001~041~to the Southwest
-				000~001~042~to the West
-				000~001~043~to the Northwest
-				*/
-				switch (headingIndex)
-				{
-				case 0://The the west
-						locHeading= StringController.instance.GetString(1,42);break;	
-				case 1://To the south west
-						locHeading= StringController.instance.GetString(1,41);break;	
-				case 2://To the south
-						locHeading= StringController.instance.GetString(1,40);break;	
-				case 3://To the south east
-						locHeading= StringController.instance.GetString(1,39);break;	
-				case 4://To the east
-						locHeading= StringController.instance.GetString(1,38);break;	
-				case 5://To the north east
-						locHeading= StringController.instance.GetString(1,37);break;	
-				case 6://To the north
-						locHeading= StringController.instance.GetString(1,36);break;	
-				case 7://To the northwest
-				default:
-						locHeading= StringController.instance.GetString(1,43);break;	
-				}
-				switch(GameWorldController.instance.LevelNo)
-				{
-				case 0:
-					locLevel = "and " +StringController.instance.GetString(1,47);break;
-				case 1: 
-					locLevel = "and " +StringController.instance.GetString(1,48);break;
-				case 2:
-					locLevel = "";break;
-				case 3: 
-					locLevel = "and " +StringController.instance.GetString(1,52);break;
-				default:
-					locLevel = "and " +StringController.instance.GetString(1,55);break;
-				}
+        string locHeading;
+        /*
+        000~001~036~to the North
+        000~001~037~to the Northeast
+        000~001~038~to the East
+        000~001~039~to the Southeast
+        000~001~040~to the South
+        000~001~041~to the Southwest
+        000~001~042~to the West
+        000~001~043~to the Northwest
+        */
+        switch (headingIndex)
+        {
+            case 0://The the west
+                locHeading = StringController.instance.GetString(1, 42); break;
+            case 1://To the south west
+                locHeading = StringController.instance.GetString(1, 41); break;
+            case 2://To the south
+                locHeading = StringController.instance.GetString(1, 40); break;
+            case 3://To the south east
+                locHeading = StringController.instance.GetString(1, 39); break;
+            case 4://To the east
+                locHeading = StringController.instance.GetString(1, 38); break;
+            case 5://To the north east
+                locHeading = StringController.instance.GetString(1, 37); break;
+            case 6://To the north
+                locHeading = StringController.instance.GetString(1, 36); break;
+            case 7://To the northwest
+            default:
+                locHeading = StringController.instance.GetString(1, 43); break;
+        }
+        string locLevel;
+        switch (GameWorldController.instance.LevelNo)
+        {
+            case 0:
+                locLevel = "and " + StringController.instance.GetString(1, 47); break;
+            case 1:
+                locLevel = "and " + StringController.instance.GetString(1, 48); break;
+            case 2:
+                locLevel = ""; break;
+            case 3:
+                locLevel = "and " + StringController.instance.GetString(1, 52); break;
+            default:
+                locLevel = "and " + StringController.instance.GetString(1, 55); break;
+        }
 
-				/*
+        /*
 000~001~035~The Cup of Wonder is 
 000~001~044~far far below you
 000~001~045~far far below you
@@ -342,8 +342,8 @@ public class Shrine : Model3D {
 000~001~057~far far above you
 000~001~058~far far above you
 
-				*/
-		UWHUD.instance.MessageScroll.Add (CupIs + locHeading + locLevel);
+        */
+        UWHUD.instance.MessageScroll.Add (CupIs + locHeading + locLevel);
 		//inputctrl.text=UWHUD.instance.MessageScroll.text;
 	}
 

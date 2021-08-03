@@ -161,7 +161,7 @@ public class Character : UWEBase {
 	{
 		if (!Invincible)
 		{
-			CurVIT=CurVIT-damage;	
+			CurVIT-=damage;	
 		}
 		else
 		{

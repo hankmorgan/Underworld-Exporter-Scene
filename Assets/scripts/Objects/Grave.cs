@@ -38,17 +38,16 @@ public class Grave : Model3D
 
 	public int GraveID()
 	{
-		char[] graves;
-		//Load in the grave information
-		if (_RES != GAME_UW2)
-		{
-            Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "GRAVE.DAT"), out graves);
-			if (link >= 512)
-			{
-				return (short)Loader.getValAtAddress(graves, link - 512, 8) - 1;
-			}
-		}
-		return 0;
+        //Load in the grave information
+        if (_RES != GAME_UW2)
+        {
+            Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "GRAVE.DAT"), out char[] graves);
+            if (link >= 512)
+            {
+                return (short)Loader.getValAtAddress(graves, link - 512, 8) - 1;
+            }
+        }
+        return 0;
 	}
 
 

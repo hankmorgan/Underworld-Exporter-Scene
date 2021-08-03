@@ -142,11 +142,11 @@ public class Instrument : object_base {
 	//	Debug.Log (noteNo);
 		if (note==10)
 		{
-			NoteRecord=NoteRecord+"0";
+			NoteRecord+="0";
 		}
 		else
 		{
-			NoteRecord=NoteRecord+note.ToString();
+			NoteRecord+=note.ToString();
 		}
 
 		if (NoteRecord.Length>9)

@@ -108,7 +108,7 @@ public class Configuration
 	[System.NonSerialized]
 	public KeyCode TrackSkill = KeyCode.T;
 
-	private static string path = "config.json";
+	private static readonly string path = "config.json";
    
     public MouseSettings mouse;
     public PathSettings paths;
@@ -205,9 +205,8 @@ public class Configuration
 
     KeyCode GetKeyCode(string key)
     {
-		KeyCode keyCodeToUse;
-        chartoKeycode.TryGetValue(key.ToLower(), out keyCodeToUse);
-		return keyCodeToUse;
+        chartoKeycode.TryGetValue(key.ToLower(), out KeyCode keyCodeToUse);
+        return keyCodeToUse;
     }
 
 

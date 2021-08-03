@@ -87,7 +87,7 @@ public class DataLoader :Loader {
 				if((bits & 1)==1)
 				{//Transfer
 					buf[upPtr++] = tmp[address_pointer++];
-					datalen = datalen+1;
+					datalen++;
 				}
 				else
 				{//copy
@@ -108,7 +108,7 @@ public class DataLoader :Loader {
 							
 
 					c = ((c&15) + 3);						
-					o = (o+18);								
+					o += 18;								
 
 					if (o>upPtr)
 						{
@@ -165,10 +165,9 @@ public class DataLoader :Loader {
 			List<char> Output = new List<char>();
 			int addptr=0;
 			int bit=0;
-				int MatchingOffset; 
-				//int PrevMatchingOffset=-1; 
-				//int CopyRecordOffset=0;
-				int copycount=0; int HeaderIndex=0;
+        //int PrevMatchingOffset=-1; 
+        //int CopyRecordOffset=0;
+        int copycount = 0; int HeaderIndex=0;
 			while (addptr<=srcData.GetUpperBound(0))
 			{
 				//Read in the data to the input list
@@ -176,7 +175,7 @@ public class DataLoader :Loader {
 				if (Input.Count>3)//One I have at least 3 bytes I can test its contents
 				{//THIS IS WRONG> Code will only match up to size 3.
 					//At this point I need to start testing increasing sizes of data up to 18 bytes until I find the max copy record to create;
-					if(FindMatchingSequence(ref Output, ref Input, out MatchingOffset))	
+					if(FindMatchingSequence(ref Output, ref Input, out int MatchingOffset))	
 						{//the data is part of a copy sequence. Try and find the biggest block and make a copy record out of that.
 									//TODO
 									//
@@ -277,7 +276,7 @@ public class DataLoader :Loader {
 		{
 			int val = getCopyCountAtOffset(ref Output, CopyRecordOffset);
 			val++;
-			val = val & 0xF;
+			val &= 0xF;
 			char chardata = (char)(Output[CopyRecordOffset] & 0xf8);//Clear the bits for the count.
 			chardata = (char)(chardata | val);
 			Output[CopyRecordOffset]=chardata;
@@ -292,7 +291,7 @@ public class DataLoader :Loader {
 			else
 			{
 				int val = Output[CopyRecordOffset];
-				val = val & 0xF;//Extract copy count
+				val &= 0xF;//Extract copy count
 				return val;	
 			}
 		}
@@ -321,7 +320,7 @@ public class DataLoader :Loader {
 			{
 				if (i<input.Count)
 				{
-					output = output + input[i].ToString();		
+					output += input[i].ToString();		
 				}
 			}
 			return output;
@@ -354,12 +353,7 @@ public class DataLoader :Loader {
 */
 		public static void unpack_data (char[] pack,    ref char[] unpack, long unpacksize)
 		{
-
-				//unsigned char *byteptr;
-				long byteptr=0;
-				//unsigned char *exptr;
-				long exptr=0;
-				int word = 0;  /* initialise to stop "might be used before set" */
+        int word = 0;  /* initialise to stop "might be used before set" */
 				int nbits;
 				/*    int type; */
 				int val;
@@ -376,12 +370,14 @@ public class DataLoader :Loader {
 						len_token [i] = 1;
 						org_token [i] = -1;
 				}
-				//memset (unpack, 0, unpacksize); Probably not needed here. Initialises the unpacked array with zeros.
+        //unsigned char *byteptr;
+        //memset (unpack, 0, unpacksize); Probably not needed here. Initialises the unpacked array with zeros.
 
 
-				byteptr =0; //pack;
-				exptr   = 0;//unpack;
-				nbits = 0;
+        long byteptr = 0;
+        //unsigned char *exptr;
+        long exptr = 0;
+        nbits = 0;
 
 				// while (exptr - unpack < unpacksize)
 				while (exptr<unpacksize)
@@ -474,18 +470,17 @@ public class DataLoader :Loader {
 
 		public static bool LoadChunk(char[] archive_ark, int chunkNo, out Chunk data_ark )
 		{
-				long blockAddress =0;    //  int chunkId;
-				//long chunkUnpackedLength=0;
-				//int chunkType=0;//compression type
-				// long chunkPackedLength=0;
-				//  long chunkContentType;
-				data_ark.chunkPackedLength=0;
+        //long chunkUnpackedLength=0;
+        //int chunkType=0;//compression type
+        // long chunkPackedLength=0;
+        //  long chunkContentType;
+        data_ark.chunkPackedLength=0;
 				data_ark.chunkUnpackedLength=0;
 				data_ark.chunkContentType=0;
 				data_ark.chunkCompressionType=0;
-				//get the level info data from the archive
-				blockAddress =getShockBlockAddress(chunkNo,archive_ark, ref data_ark.chunkPackedLength, ref data_ark.chunkUnpackedLength, ref data_ark.chunkCompressionType , ref data_ark.chunkContentType); 
-				if (blockAddress == -1) {
+        //get the level info data from the archive
+        long blockAddress = getShockBlockAddress(chunkNo, archive_ark, ref data_ark.chunkPackedLength, ref data_ark.chunkUnpackedLength, ref data_ark.chunkCompressionType, ref data_ark.chunkContentType);
+        if (blockAddress == -1) {
 						data_ark.data=new char[1];
 						return false;
 				}
@@ -525,17 +520,16 @@ public class DataLoader :Loader {
 						if (chunkId== BlockNo)    //4005+ LevelNo*100
 						{
 								blnLevelFound=1;
-								address_pointer=0;
-								break;
+                break;
 						}
 
 
-						AddressOfBlockStart=AddressOfBlockStart+ chunkPackedLength;
+						AddressOfBlockStart+=chunkPackedLength;
 						if ((AddressOfBlockStart % 4) != 0)
 								AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries
 
 
-						address_pointer=address_pointer+10;     
+						address_pointer+=10;     
 				}
 
 				if (blnLevelFound == 0)
@@ -828,8 +822,8 @@ public class DataLoader :Loader {
 				mask = (mask << 1) | 0;			
 			}
 		}
-		valueToChange = valueToChange & mask;//Clear out the existing bits in the space to be changed;
-		valueToInsert = valueToInsert & getMask(Length);//Make sure only the require bits are inserted.
+
+        valueToInsert &= getMask(Length);//Make sure only the require bits are inserted.
 		valueToChange = valueToInsert << From;
 
 		return valueToChange;

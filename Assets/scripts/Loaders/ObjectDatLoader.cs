@@ -151,9 +151,8 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 
     public ObjectDatLoader()
     {
-        char[] obj_dat;
         int add_ptr;
-        if (ReadStreamFile(Path.Combine(BasePath,"DATA" , "OBJECTS.DAT"), out obj_dat))
+        if (ReadStreamFile(Path.Combine(BasePath,"DATA" , "OBJECTS.DAT"), out char[] obj_dat))
         {
             add_ptr = 2;
             int j = 0;
@@ -167,7 +166,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 weaponStats[j].MaxCharge = (short)getValAtAddress(obj_dat, add_ptr + 5, 8);
                 weaponStats[j].Skill = (short)getValAtAddress(obj_dat, add_ptr + 6, 8);
                 weaponStats[j].Durability = (short)getValAtAddress(obj_dat, add_ptr + 7, 8);
-                add_ptr = add_ptr + 8;
+                add_ptr += 8;
                 j++;
             }
 
@@ -177,7 +176,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             for (int i = 0; i < 8; i++)
             {//ranged weapon damage stats.
                 rangedStats[j].damage = (int)((getValAtAddress(obj_dat, add_ptr, 16) >> 9) & 0x7f);
-                add_ptr = add_ptr + 3;
+                add_ptr += 3;
                 j++;
             }
             j = 0;
@@ -189,7 +188,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
              //rangedStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8);
                 rangedStats[j].damage = (int)getValAtAddress(obj_dat, add_ptr, 8);
                 rangedStats[j].ammo = (int)getValAtAddress(obj_dat, add_ptr + 2, 8) + 16;//an index into the ranged table+16;
-                add_ptr = add_ptr + 3;
+                add_ptr += 3;
                 j++;
             }
 
@@ -200,7 +199,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 armourStats[j].protection = (short)getValAtAddress(obj_dat, add_ptr, 8);
                 armourStats[j].durability = (short)getValAtAddress(obj_dat, add_ptr + 1, 8);
                 armourStats[j].category = (short)getValAtAddress(obj_dat, add_ptr + 3, 8);
-                add_ptr = add_ptr + 4;
+                add_ptr += 4;
                 j++;
             }
 
@@ -212,7 +211,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 containerStats[i].capacity = (int)getValAtAddress(obj_dat, add_ptr, 8);
                 containerStats[i].objectsMask = (int)getValAtAddress(obj_dat, add_ptr + 1, 8);
                 containerStats[i].slots = (int)getValAtAddress(obj_dat, add_ptr + 2, 8);
-                add_ptr = add_ptr + 3;
+                add_ptr += 3;
                 j++;
             }
 
@@ -223,7 +222,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             {//Light sources
                 lightSourceStats[j].duration = (int)getValAtAddress(obj_dat, add_ptr, 8);
                 lightSourceStats[j].brightness = (int)getValAtAddress(obj_dat, add_ptr + 1, 8);
-                add_ptr = add_ptr + 2;
+                add_ptr += 2;
                 j++;
             }
 
@@ -232,7 +231,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             for (int i = 0; i < 16; i++)
             {//Nutrition stats
                 nutritionStats[j].FoodValue = (int)(sbyte)getValAtAddress(obj_dat, add_ptr, 8);
-                add_ptr = add_ptr + 1;
+                add_ptr++;
                 j++;
             }
 
@@ -350,7 +349,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 //}
 
 
-                add_ptr = add_ptr + 48;
+                add_ptr += 48;
                 j++;
             }
         }

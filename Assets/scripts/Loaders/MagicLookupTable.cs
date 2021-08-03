@@ -13,7 +13,6 @@ public class MagicLookupTable : Loader
 
     public MagicLookupTable()
     {
-        char[] uw_exe;
         int FileOffset = 0;
         int NoOfEntries = 0;
         string Exe = "";
@@ -50,7 +49,7 @@ public class MagicLookupTable : Loader
                 }
         }
 
-        if (ReadStreamFile(Path.Combine(BasePath, Exe), out uw_exe))
+        if (ReadStreamFile(Path.Combine(BasePath, Exe), out char[] uw_exe))
         {
             for (int i = 0; i <= NoOfEntries; i++)
             {
