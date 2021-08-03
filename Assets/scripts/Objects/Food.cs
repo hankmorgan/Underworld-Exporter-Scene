@@ -1,33 +1,33 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Food : object_base {
+public class Food : object_base
+{
     /*Food items*/
     public int DebugNutrition;
 
 
-	protected override void Start ()
-	{
-		base.Start();
+    protected override void Start()
+    {
+        base.Start();
 
         //Fix to repair invalid food properties.
-        if  ((isquant==0) && (link<=1))
-		{
-			if ((item_id>=176) && (item_id<=192))
-			{
-					//Debug.Log("Fixing food item " + this.name);
-					isquant=1;
-					link=1;	
-			}
-		}
-	}
+        if ((isquant == 0) && (link <= 1))
+        {
+            if ((item_id >= 176) && (item_id <= 192))
+            {
+                //Debug.Log("Fixing food item " + this.name);
+                isquant = 1;
+                link = 1;
+            }
+        }
+    }
 
-		/// <summary>
-		/// Nutrition provided by this item of food
-		/// </summary>
-		public int Nutrition()
-		{
-        if ((item_id >=176) && ((item_id <=192)))
+    /// <summary>
+    /// Nutrition provided by this item of food
+    /// </summary>
+    public int Nutrition()
+    {
+        if ((item_id >= 176) && ((item_id <= 192)))
         {
             Debug.Log(this.name + " provides nutrition of " + GameWorldController.instance.objDat.nutritionStats[item_id - 176].FoodValue);
             return GameWorldController.instance.objDat.nutritionStats[item_id - 176].FoodValue;
@@ -39,62 +39,62 @@ public class Food : object_base {
         }
     }
 
-	public override bool use ()
-	{
-		if ((CurrentObjectInHand==null) || (CurrentObjectInHand==this.objInt()))
-		{//Eat if no object in hand or if the object in hand is this item.			
-								
-			switch(item_id)
-			{
-			case 191://Wine of compassion.
-				if (_RES==GAME_UW1)
-				{
-					//000~001~127~You are unable to open the wine bottle.
-					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,127));
-					return true;
-				}
-				else
-				{
-					return Eat();
-				}
-				
-			default:
-				return Eat();
-			}
-		}
-		else
-		{
-			return ActivateByObject(CurrentObjectInHand);
-		}
-	}
+    public override bool use()
+    {
+        if ((CurrentObjectInHand == null) || (CurrentObjectInHand == this.objInt()))
+        {//Eat if no object in hand or if the object in hand is this item.			
+
+            switch (item_id)
+            {
+                case 191://Wine of compassion.
+                    if (_RES == GAME_UW1)
+                    {
+                        //000~001~127~You are unable to open the wine bottle.
+                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 127));
+                        return true;
+                    }
+                    else
+                    {
+                        return Eat();
+                    }
+
+                default:
+                    return Eat();
+            }
+        }
+        else
+        {
+            return ActivateByObject(CurrentObjectInHand);
+        }
+    }
 
     public override bool Eat()
-	{
-		if (Nutrition()+UWCharacter.Instance.FoodLevel>=255)
-		{
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_are_too_full_to_eat_that_now_));
-			return false;
-		}
-		else
+    {
+        if (Nutrition() + UWCharacter.Instance.FoodLevel >= 255)
+        {
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_are_too_full_to_eat_that_now_));
+            return false;
+        }
+        else
         {
             UWCharacter.Instance.FoodLevel = Nutrition() + UWCharacter.Instance.FoodLevel;
             switch (_RES)
             {
                 case GAME_UW2:
-                    TasteUW2();break;
+                    TasteUW2(); break;
                 default:
-                    TasteUW1();break;
+                    TasteUW1(); break;
             }
-            
+
             if (ObjectInteraction.PlaySoundEffects)
             {
-                switch(objInt().GetItemType())
+                switch (objInt().GetItemType())
                 {
                     case ObjectInteraction.DRINK:
                         DrinkSoundEffects(); break;
                     default:
-                        EatSoundEffects();break;
-                }                
+                        EatSoundEffects(); break;
+                }
             }
 
             if (_RES == GAME_UW2)
@@ -233,7 +233,7 @@ public class Food : object_base {
                         UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(), foodSmellText()) + OwnershipString());
                         break;
                 }
-                break;   
+                break;
 
             case GAME_UW1:
             default:
@@ -253,106 +253,106 @@ public class Food : object_base {
                             break;
                     }
                     break;
-                }            
+                }
         }
         return true;
     }
 
-		/// <summary>
-		/// The quality string of the food. Eg is it disgusting or not etc.
-		/// </summary>
-		/// <returns>The flavour text.</returns>
-		/// TODO:These are the strings for fish. This needs to reflect other food types!
-	private string foodFlavourText()//Literally!
-	{
-		int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
-		int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
-	    Debug.Log (StringController.instance.GetSimpleObjectNameUW(this.item_id) + "  : quality class=" + QualityClass + " quality type=" + QualityType);
-		int BaseStringNo=StringController.str__tasted_putrid_;
-		if (quality == 0)
-			{
-				return StringController.instance.GetString (1,BaseStringNo);//worm
-			}
-		if ((quality >=1) && (quality <15))
-			{
-				return StringController.instance.GetString (1,BaseStringNo+1);//rotten
-			}
-		if ((quality >=15) && (quality <32))
-			{
-				return StringController.instance.GetString (1,BaseStringNo+2);//smelly
-			}
-		if ((quality >=32) && (quality <40))
-			{
-				return StringController.instance.GetString (1,BaseStringNo+3);//day old
-			}
-		if ((quality >=40) && (quality <48))
-			{
-				return StringController.instance.GetString (1,BaseStringNo+4);//fresh
-			}
-		else
-			{
-				return StringController.instance.GetString (1,BaseStringNo+5);//fresh
-			}
-	}
+    /// <summary>
+    /// The quality string of the food. Eg is it disgusting or not etc.
+    /// </summary>
+    /// <returns>The flavour text.</returns>
+    /// TODO:These are the strings for fish. This needs to reflect other food types!
+    private string foodFlavourText()//Literally!
+    {
+        int QualityClass = GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+        int QualityType = GameWorldController.instance.commonObject.properties[item_id].QualityType;
+        Debug.Log(StringController.instance.GetSimpleObjectNameUW(this.item_id) + "  : quality class=" + QualityClass + " quality type=" + QualityType);
+        int BaseStringNo = StringController.str__tasted_putrid_;
+        if (quality == 0)
+        {
+            return StringController.instance.GetString(1, BaseStringNo);//worm
+        }
+        if ((quality >= 1) && (quality < 15))
+        {
+            return StringController.instance.GetString(1, BaseStringNo + 1);//rotten
+        }
+        if ((quality >= 15) && (quality < 32))
+        {
+            return StringController.instance.GetString(1, BaseStringNo + 2);//smelly
+        }
+        if ((quality >= 32) && (quality < 40))
+        {
+            return StringController.instance.GetString(1, BaseStringNo + 3);//day old
+        }
+        if ((quality >= 40) && (quality < 48))
+        {
+            return StringController.instance.GetString(1, BaseStringNo + 4);//fresh
+        }
+        else
+        {
+            return StringController.instance.GetString(1, BaseStringNo + 5);//fresh
+        }
+    }
 
-		/// <summary>
-		/// How appetising the food looks and smells
-		/// </summary>
-		/// <returns>The smell text.</returns>
-		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
-	private string foodSmellText()//
-	{
-		int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
-		int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
-		Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
-		if (quality == 0)
-		{
-				return StringController.instance.GetString (5,18);//worm
-		}
-		if ((quality >=1) && (quality <15))
-		{
-				return StringController.instance.GetString (5,19);//rotten
-		}
-		if ((quality >=15) && (quality <32))
-		{
-				return StringController.instance.GetString (5,20);//smelly
-		}
-		if ((quality >=32) && (quality <40))
-		{
-				return StringController.instance.GetString (5,21);//day old
-		}
+    /// <summary>
+    /// How appetising the food looks and smells
+    /// </summary>
+    /// <returns>The smell text.</returns>
+    /// TODO:Integrate common object settings as appropiate. Currently everything is fish!
+    private string foodSmellText()//
+    {
+        int QualityClass = GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+        int QualityType = GameWorldController.instance.commonObject.properties[item_id].QualityType;
+        Debug.Log("Food : quality class=" + QualityClass + " quality type=" + QualityType);
+        if (quality == 0)
+        {
+            return StringController.instance.GetString(5, 18);//worm
+        }
+        if ((quality >= 1) && (quality < 15))
+        {
+            return StringController.instance.GetString(5, 19);//rotten
+        }
+        if ((quality >= 15) && (quality < 32))
+        {
+            return StringController.instance.GetString(5, 20);//smelly
+        }
+        if ((quality >= 32) && (quality < 40))
+        {
+            return StringController.instance.GetString(5, 21);//day old
+        }
 
-		if ((quality >=40) && (quality <48))
-		{
-				return StringController.instance.GetString (5,22);//fresh
-		}
-		else
-		{
-				return StringController.instance.GetString (5,23);//fresh
-		}	
-	}
+        if ((quality >= 40) && (quality < 48))
+        {
+            return StringController.instance.GetString(5, 22);//fresh
+        }
+        else
+        {
+            return StringController.instance.GetString(5, 23);//fresh
+        }
+    }
 
-	public override bool ApplyAttack (short damage)
-	{
-		quality-=damage;
-		if (quality<=0)
-		{
-			ChangeType(213);//Change to debris.
-			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			objInt().BaseObjectData.InUseFlag=0;
+    public override bool ApplyAttack(short damage)
+    {
+        quality -= damage;
+        if (quality <= 0)
+        {
+            ChangeType(213);//Change to debris.
+            this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+            objInt().BaseObjectData.InUseFlag = 0;
             ObjectInteraction.DestroyObjectFromUW(this.objInt());
         }
-		return true;
-	}
+        return true;
+    }
 
-	public override string UseVerb ()
-	{
+    public override string UseVerb()
+    {
         switch (objInt().GetItemType())
         {
-        case ObjectInteraction.DRINK:
-            return "drink";
-        default:
-            return "eat";
-        }			
-	}
+            case ObjectInteraction.DRINK:
+                return "drink";
+            default:
+                return "eat";
+        }
+    }
 }

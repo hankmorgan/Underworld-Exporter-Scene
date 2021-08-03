@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SilverTree : object_base {
+public class SilverTree : object_base
+{
 
     public override bool PickupEvent()
     {
@@ -57,7 +56,7 @@ public class SilverTree : object_base {
         //newseedobj.UpdateAnimation();
         //UWHUD.instance.CursorIcon = newseedobj.GetWorldDisplay().texture;
         Character.InteractionMode = Character.InteractionModePickup;
-		InteractionModeControl.UpdateNow=true;
+        InteractionModeControl.UpdateNow = true;
 
         objInt().consumeObject();
         return true;

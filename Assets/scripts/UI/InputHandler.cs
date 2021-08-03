@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class InputHandler : GuiBase
@@ -54,7 +53,7 @@ public class InputHandler : GuiBase
                 target.gameObject.GetComponent<Equipment>().OnSubmitPickup(valueStr);
                 currentInputMode = InputNone;
                 break;
-        }        
+        }
         UWHUD.instance.InputControl.text = "";
     }
 

@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class MainMenuHud : GuiBase
 {
@@ -65,7 +64,7 @@ public class MainMenuHud : GuiBase
         {
             CharSkillName[i].text = "";
             CharSkillVal[i].text = "";
-            if (_RES==GAME_UW2)
+            if (_RES == GAME_UW2)
             {
                 CharSkillVal[i].color = Color.white;
                 CharSkillName[i].color = Color.white;
@@ -353,7 +352,7 @@ public class MainMenuHud : GuiBase
                 CharInt.text = "Int:   " + UWCharacter.Instance.PlayerSkills.INT.ToString();
                 CharDex.text = "Dex:   " + UWCharacter.Instance.PlayerSkills.DEX.ToString();
                 CharClass.text = getClass(UWCharacter.Instance.CharClass);
-              // UWCharacter.Instance.MaxVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
+                // UWCharacter.Instance.MaxVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
                 //UWCharacter.Instance.CurVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
                 UWCharacter.Instance.MaxVIT = 30 + ((UWCharacter.Instance.PlayerSkills.STR * 1) / 5);
                 UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;

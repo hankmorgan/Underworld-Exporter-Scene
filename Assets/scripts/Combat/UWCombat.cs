@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class UWCombat : Combat
 {
@@ -21,7 +21,7 @@ public class UWCombat : Combat
     {
         get
         {
-            switch(_RES)
+            switch (_RES)
             {
                 case GAME_UW2:
                     return 43;
@@ -78,7 +78,7 @@ public class UWCombat : Combat
     /// </summary>
     public override void CombatBegin()
     {
-        chargeRate =10f * (GetWeaponSpeed() );
+        chargeRate = 10f * (GetWeaponSpeed());
 
         if (IsMelee())
         {///If melee sets the proper weapon drawn back animation.
@@ -425,7 +425,7 @@ public class UWCombat : Combat
             }
             else
             {
-                 return 4;//stab
+                return 4;//stab
             }
         }
         else
@@ -544,7 +544,7 @@ public class UWCombat : Combat
         result = (short)(MaxCharge - MinCharge);
         result = (short)((result * Strikecharge) / 100);
         result = (short)(MinCharge + result);
-        result = (short)((BaseDamage*result) >> 7);
+        result = (short)((BaseDamage * result) >> 7);
         return result;
     }
 
@@ -562,7 +562,7 @@ public class UWCombat : Combat
         {
             return 0;
         }
-        for (int i =0; i<NoOfRolls;i++)
+        for (int i = 0; i < NoOfRolls; i++)
         {
             result += (short)Random.Range(1, Die + 1);
         }
@@ -727,28 +727,28 @@ public class UWCombat : Combat
 
         return CriticalHit;
     }
-    
+
     /// <summary>
     /// NPC hits player
     /// </summary>
     /// <param name="playerUW">Player U.</param>
     /// <param name="npc">Npc.</param>
     public static void NPC_Hits_PC(UWCharacter playerUW, NPC npc)
-     {
+    {
         int flankingbonus = CalcFlankingBonus(npc.objInt().heading, playerUW.currentHeading);
         int attackScore = npc.CurrentAttackScore + (npc.EquipDamage >> 1) + Random.Range(0, 5) + 7 + flankingbonus; //+Maybe Npc Level
 
         //Player defence
         //defence skill + sum of all armour+(skill with current weapon >>1) + unknownbonus(stored in critterdata)
-        int DefenderScore = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + playerUW.playerInventory.ArmourProtection;   
+        int DefenderScore = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + playerUW.playerInventory.ArmourProtection;
         if (playerUW.PlayerCombat.currWeapon != null)
         {
-            DefenderScore += (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill())>>1);
+            DefenderScore += (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill()) >> 1);
         }
         else
         {
             DefenderScore += (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) >> 1);
-        }    
+        }
 
         Skills.SkillRollResult rollresult = Skills.SkillRoll(attackScore, DefenderScore);
         if ((_RES == GAME_UW1) && (npc.item_id == 124) && (rollresult == Skills.SkillRollResult.CriticalFailure || rollresult == Skills.SkillRollResult.Failure))
@@ -780,7 +780,7 @@ public class UWCombat : Combat
                     //TODO: restore equipment damage and poisoning.
 
                     //Ten more seconds of combat music
-                    MusicController.LastAttackCounter = 10.0f; 
+                    MusicController.LastAttackCounter = 10.0f;
                     if (ObjectInteraction.PlaySoundEffects)
                     {
                         UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
@@ -795,61 +795,61 @@ public class UWCombat : Combat
         }
 
 
-            ////////    int PlayerDefence = 0;
-            ////////    if (playerUW.PlayerCombat.currWeapon != null)
-            ////////    {
-            ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill() + 1) / 2);
-            ////////    }
-            ////////    else
-            ////////    {
-            ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) / 2);
-            ////////    }
-            ////////    int toHit = Mathf.Max(PlayerDefence - npc.Dexterity, 0);
-            ////////    int roll = Random.Range(-1, 31);
-            ////////    if ((_RES == GAME_UW1) && (npc.item_id == 124))
-            ////////    {
-            ////////        roll = 30;//Slasher will always hit.
-            ////////    }
-            ////////    int BaseDamage = npc.CurrentAttackDamage;//get the damage of the current attack
-            ////////    if (((roll >= toHit) || (roll >= 30)) && (roll > -1))
-            ////////    {
-            ////////        int PlayerArmourScore = playerUW.playerInventory.getArmourScore();
-            ////////        int ReducedDamage = Mathf.Max(1, BaseDamage - PlayerArmourScore);
-            ////////        //Hit
-            ////////        playerUW.ApplyDamage(Random.Range(1, ReducedDamage + 1), npc.gameObject);
-            ////////        //reduce damage by protection
-            ////////        if (BaseDamage > PlayerArmourScore)
-            ////////        {
-            ////////            //apply equipment damage to a random piece of armour
-            ////////            playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, npc.ArmourDamage + 1));
-            ////////        }
-            ////////        if (npc.PoisonLevel() > 0)
-            ////////        {//roll for poisoning.
-            ////////            if (!UWCharacter.Instance.isPoisonResistant())
-            ////////            {//Player has resistence against poisoning
-            ////////                int PoisonRoll = Random.Range(1, 30);
-            ////////                if (PoisonRoll < npc.PoisonLevel())
-            ////////                {
-            ////////                    int PoisonToAdd = Random.Range(1, npc.PoisonLevel() + 1);
-            ////////                    int newPlayPoison = (short)Mathf.Min(playerUW.play_poison + PoisonToAdd, 15);
-            ////////                    UWCharacter.Instance.play_poison = (short)newPlayPoison;
-            ////////                    if (UWCharacter.Instance.poison_timer == 0)
-            ////////                    {
-            ////////                        UWCharacter.Instance.poison_timer = 30f;
-            ////////                    }
-            ////////                }
-            ////////            }
+        ////////    int PlayerDefence = 0;
+        ////////    if (playerUW.PlayerCombat.currWeapon != null)
+        ////////    {
+        ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill() + 1) / 2);
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) / 2);
+        ////////    }
+        ////////    int toHit = Mathf.Max(PlayerDefence - npc.Dexterity, 0);
+        ////////    int roll = Random.Range(-1, 31);
+        ////////    if ((_RES == GAME_UW1) && (npc.item_id == 124))
+        ////////    {
+        ////////        roll = 30;//Slasher will always hit.
+        ////////    }
+        ////////    int BaseDamage = npc.CurrentAttackDamage;//get the damage of the current attack
+        ////////    if (((roll >= toHit) || (roll >= 30)) && (roll > -1))
+        ////////    {
+        ////////        int PlayerArmourScore = playerUW.playerInventory.getArmourScore();
+        ////////        int ReducedDamage = Mathf.Max(1, BaseDamage - PlayerArmourScore);
+        ////////        //Hit
+        ////////        playerUW.ApplyDamage(Random.Range(1, ReducedDamage + 1), npc.gameObject);
+        ////////        //reduce damage by protection
+        ////////        if (BaseDamage > PlayerArmourScore)
+        ////////        {
+        ////////            //apply equipment damage to a random piece of armour
+        ////////            playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, npc.ArmourDamage + 1));
+        ////////        }
+        ////////        if (npc.PoisonLevel() > 0)
+        ////////        {//roll for poisoning.
+        ////////            if (!UWCharacter.Instance.isPoisonResistant())
+        ////////            {//Player has resistence against poisoning
+        ////////                int PoisonRoll = Random.Range(1, 30);
+        ////////                if (PoisonRoll < npc.PoisonLevel())
+        ////////                {
+        ////////                    int PoisonToAdd = Random.Range(1, npc.PoisonLevel() + 1);
+        ////////                    int newPlayPoison = (short)Mathf.Min(playerUW.play_poison + PoisonToAdd, 15);
+        ////////                    UWCharacter.Instance.play_poison = (short)newPlayPoison;
+        ////////                    if (UWCharacter.Instance.poison_timer == 0)
+        ////////                    {
+        ////////                        UWCharacter.Instance.poison_timer = 30f;
+        ////////                    }
+        ////////                }
+        ////////            }
 
-            ////////        }
+        ////////        }
 
-            ////////        MusicController.LastAttackCounter = 10.0f; //Ten more seconds of combat music
-            ////////        if (ObjectInteraction.PlaySoundEffects)
-            ////////        {
-            ////////            UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
-            ////////            UWCharacter.Instance.aud.Play();
-            ////////        }
-            ////////    }
-        }
+        ////////        MusicController.LastAttackCounter = 10.0f; //Ten more seconds of combat music
+        ////////        if (ObjectInteraction.PlaySoundEffects)
+        ////////        {
+        ////////            UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+        ////////            UWCharacter.Instance.aud.Play();
+        ////////        }
+        ////////    }
+    }
 
     /// <summary>
     /// NPC hits another NPC
@@ -859,7 +859,7 @@ public class UWCombat : Combat
     public static void NPC_Hits_NPC(NPC targetNPC, NPC originNPC)
     {
         //TODO: update with above calculations.
-        
+
         int Defence = targetNPC.Defence();
         int Attack = originNPC.Dexterity;
         int toHit = Mathf.Max(Defence - Attack, 1);
@@ -912,7 +912,7 @@ public class UWCombat : Combat
 
     static int GetHitSound()
     {
-        if (instance.currWeapon!=null)
+        if (instance.currWeapon != null)
         {
             return Random.Range(7, 9);
         }

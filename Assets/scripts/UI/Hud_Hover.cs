@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Hud_Hover : MonoBehaviour {
-	//No longer in use
-	/*private UILabel MessageLog;
+public class Hud_Hover : MonoBehaviour
+{
+    //No longer in use
+    /*private UILabel MessageLog;
 	public int InteractionMode;
 	// Use this for initialization
 	void Start () {

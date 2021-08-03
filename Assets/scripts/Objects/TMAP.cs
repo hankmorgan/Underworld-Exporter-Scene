@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class TMAP : object_base
 {
@@ -122,7 +121,7 @@ public class TMAP : object_base
     {
         if (TextureIndex == 47)//The door to the base of the abyss.
         {
-           // ObjectInteraction ObjIntInHand = CurrentObjectInHand;
+            // ObjectInteraction ObjIntInHand = CurrentObjectInHand;
             if (CurrentObjectInHand != null)
             {
                 switch (CurrentObjectInHand.item_id)
@@ -143,7 +142,7 @@ public class TMAP : object_base
             Destroy(myObj.transform.GetChild(0).gameObject);
         }
         ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
-       // TileMap tm = CurrentTileMap();
+        // TileMap tm = CurrentTileMap();
         float doorFrameOffsetX = 0f; float doorFrameOffsetY = 0f;
         //TODO:This should only apply when the door occupies the same space as the tmap.
         //if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
@@ -169,7 +168,7 @@ public class TMAP : object_base
         GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Quad);
         SpriteController.name = "_quad"; // myObj.name + "_quad";
 
-            SpriteController.transform.position = myObj.transform.position;
+        SpriteController.transform.position = myObj.transform.position;
         SpriteController.layer = LayerMask.NameToLayer("UWObjects");
         SpriteController.transform.parent = myObj.transform;
         SpriteController.transform.localRotation = Quaternion.identity;

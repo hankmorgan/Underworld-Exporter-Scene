@@ -1,13 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
 
 /// <summary>
 /// Sample Cutscene
 /// </summary>
-public class Cutscene_Intro : Cuts {
+public class Cutscene_Intro : Cuts
+{
 
-	public override void Awake()
+    public override void Awake()
     {
         base.Awake();
         //Sample script (of sorts) Plays some clips from the intro.
@@ -289,7 +288,7 @@ public class Cutscene_Intro : Cuts {
         //At last you are asleep=26
         AudioTimes[0] = 0.0f;
         //AudioClipName[0] = _RES + "/sfx/voice/26";//1.8s
-        AudioClipName[0] = Path.Combine(Loader.BasePath,"SOUND", "26.voc");//1.8s
+        AudioClipName[0] = Path.Combine(Loader.BasePath, "SOUND", "26.voc");//1.8s
 
 
         //for 3 nights each attem=27

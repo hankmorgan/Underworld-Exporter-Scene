@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class event_scheduled : event_base
+﻿public class event_scheduled : event_base
 {
     //AN event that fires a scheduled trigger in the specified tile X & Y
 

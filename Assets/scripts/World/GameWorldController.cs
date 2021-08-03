@@ -1,14 +1,10 @@
 ﻿using System;
 using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 /// <summary>
 /// Game world controller for controlling references and various global activities
@@ -111,7 +107,7 @@ public class GameWorldController : UWEBase
         Ethereal7 = 71,
         Ethereal8 = 72
     };
-        
+
 
     [Header("Controls")]
     public MouseLook MouseX;
@@ -526,7 +522,7 @@ public class GameWorldController : UWEBase
     {
         instance = this;
         //Set the seperator in file paths.
-       // UWClass.sep = Path.DirectorySeparatorChar;
+        // UWClass.sep = Path.DirectorySeparatorChar;
         Lev_Ark_File_Selected = Path.Combine("DATA", "LEV.ARK");
         SCD_Ark_File_Selected = Path.Combine("DATA", "SCD.ARK");
 
@@ -667,10 +663,10 @@ public class GameWorldController : UWEBase
                 UWCharacter.Instance.speedMultiplier = 20;
                 break;
             case GAME_SHOCK:
-                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath, "res" , "DATA" , "GAMEPAL.RES"), 700);
+                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath, "res", "DATA", "GAMEPAL.RES"), 700);
                 texLoader = new TextureLoader();
                 objectMaster = new ObjectMasters();
-                ObjectArt = new GRLoader( Path.Combine(Loader.BasePath,"res" , "DATA" , "OBJART.RES"), 1350);
+                ObjectArt = new GRLoader(Path.Combine(Loader.BasePath, "res", "DATA", "OBJART.RES"), 1350);
                 ShockObjProp = new ObjectPropLoader();
                 UWCharacter.Instance.XAxis.enabled = true;
                 UWCharacter.Instance.YAxis.enabled = true;
@@ -682,10 +678,10 @@ public class GameWorldController : UWEBase
                 objectMaster = new ObjectMasters();
                 objDat = new ObjectDatLoader();
                 commonObject = new CommonObjectDatLoader();
-                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath,"DATA", "PALS.DAT"), -1);
+                palLoader = new PaletteLoader(Path.Combine(Loader.BasePath, "DATA", "PALS.DAT"), -1);
                 magiclookup = new MagicLookupTable();
                 //Create palette cycles and store them in the palette array
-                PaletteLoader palCycler = new PaletteLoader(Path.Combine(Loader.BasePath,"DATA" , "PALS.DAT"), -1);
+                PaletteLoader palCycler = new PaletteLoader(Path.Combine(Loader.BasePath, "DATA", "PALS.DAT"), -1);
 
                 for (int c = 0; c <= 27; c++)
                 {//Create palette cycles
@@ -710,7 +706,7 @@ public class GameWorldController : UWEBase
                 ObjectArt = new GRLoader(GRLoader.OBJECTS_GR)
                 {
                     xfer = true
-                }; 
+                };
                 SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
                 DoorArt = new GRLoader(GRLoader.DOORS_GR);
                 TmObjArt = new GRLoader(GRLoader.TMOBJ_GR);
@@ -787,7 +783,7 @@ public class GameWorldController : UWEBase
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
-                StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath , "DATA" ,"STRINGS.PAK"));
+                StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath, "DATA", "STRINGS.PAK"));
                 break;
             case GAME_UW2:
                 UWHUD.instance.Begin();
@@ -811,7 +807,7 @@ public class GameWorldController : UWEBase
         }
 
         if (AtMainMenu)
-        {            
+        {
             SwitchLevel(-1);//Turn off all level maps
             UWHUD.instance.CutsceneFullPanel.SetActive(true);
             UWHUD.instance.mainmenu.gameObject.SetActive(true);
@@ -1108,7 +1104,7 @@ public class GameWorldController : UWEBase
     /// Create shrine lava for the abyss in UW1.
     /// </summary>
     private void CreateShrineLava()
-    {        
+    {
         GameObject shrineLava = new GameObject();
         shrineLava.transform.parent = SceneryModel.transform;
         shrineLava.transform.localPosition = new Vector3(-39f, 39.61f, 0.402f);
@@ -1161,7 +1157,7 @@ public class GameWorldController : UWEBase
         switch (_RES)
         {
             case GAME_UWDEMO:
-                Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA" ,"LEVEL13.TXM"), out tex_ark_block.Data);
+                Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "LEVEL13.TXM"), out tex_ark_block.Data);
                 tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
                 break;
             case GAME_UW2:
@@ -1231,7 +1227,7 @@ public class GameWorldController : UWEBase
         SwitchLevel(newLevelNo);
     }
 
-     /// <summary>
+    /// <summary>
     /// Detects where the player currently is an updates their swimming state and auto map as needed.
     /// </summary>
     public void PositionDetect()
@@ -1311,7 +1307,7 @@ public class GameWorldController : UWEBase
         {
             if (!CurrentObjectList().GetFreeStaticObject(out NewIndex))
             {
-                Debug.Log("Unable to find a free static slot for this object");return null;
+                Debug.Log("Unable to find a free static slot for this object"); return null;
             }
             NewIndex = CurrentObjectList().GetStaticAtSlot(NewIndex);
         }
@@ -1324,17 +1320,17 @@ public class GameWorldController : UWEBase
             NewIndex = CurrentObjectList().GetMobileAtSlot(NewIndex);
         }
         //Destroy the existing object instance at the new slot.
-        if (CurrentObjectList().objInfo[NewIndex].instance !=null)
+        if (CurrentObjectList().objInfo[NewIndex].instance != null)
         {
             Destroy(CurrentObjectList().objInfo[NewIndex].instance.gameObject);
         }
 
 
-        CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex,CurrentTileMap(),true);
+        CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex, CurrentTileMap(), true);
         //Copy existing static info from inventory to objectdata
-        for (int i =0; i<8;i++)
+        for (int i = 0; i < 8; i++)
         {
-            CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR+i] = obj.BaseObjectData.InventoryData[i];
+            CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR + i] = obj.BaseObjectData.InventoryData[i];
         }
         //Link the instances
         CurrentObjectList().objInfo[NewIndex].instance = obj;
@@ -1344,16 +1340,16 @@ public class GameWorldController : UWEBase
         obj.transform.name = ObjectLoader.UniqueObjectName(obj.BaseObjectData);
 
         Container cnt = obj.GetComponent<Container>();
-        if (cnt!=null)
+        if (cnt != null)
         {//Object has a container that has objects that need to be moved as well
-            for (int i = 0; i<cnt.items.GetUpperBound(0);i++)
+            for (int i = 0; i < cnt.items.GetUpperBound(0); i++)
             {
-                if (cnt.items[i]!=null)
+                if (cnt.items[i] != null)
                 {
                     MoveToWorld(cnt.items[i], true); //Move container objects as static objects into the world. (The parent might be mobile)
-                }              
+                }
             }
-            
+
             //Relink container contents
             bool isNext = false;//What property should be updated.
             ObjectInteraction parentItem = cnt.objInt();
@@ -1411,7 +1407,7 @@ public class GameWorldController : UWEBase
         obj.transform.parent = instance.InventoryMarker.transform;
         //Copy loader data to obj.
         char[] NewinventoryData = new char[8];
-        for (int i=0; i<8;i++)
+        for (int i = 0; i < 8; i++)
         {
             NewinventoryData[i] = obj.BaseObjectData.DataBuffer[obj.BaseObjectData.PTR + i];
         }
@@ -1427,8 +1423,8 @@ public class GameWorldController : UWEBase
         {
             ObjectLoaderInfo.CleanUp(obj.BaseObjectData);
         }
-        
-        if(obj.BaseObjectData.IsStatic)
+
+        if (obj.BaseObjectData.IsStatic)
         {
             CurrentObjectList().ReleaseFreeStaticObject(obj.BaseObjectData.index);
         }
@@ -1436,7 +1432,7 @@ public class GameWorldController : UWEBase
         {
             CurrentObjectList().ReleaseFreeMobileObject(obj.BaseObjectData.index);
         }
-      
+
 
         //Link instances
         newObj.instance = obj;
@@ -1508,7 +1504,7 @@ public class GameWorldController : UWEBase
                 AutoMaps = new AutoMap[9];
                 break;
         }
-        
+
         switch (_RES)
         {
             case GAME_SHOCK:
@@ -1536,7 +1532,7 @@ public class GameWorldController : UWEBase
             else
             {
                 MaterialMasterList[i] = (Material)Resources.Load(_RES + "/Materials/textures/" + _RES + "_" + i.ToString("d3"));
-            }            
+            }
             switch (MaterialMasterList[i].shader.name.ToUpper())
             {
                 case "COLOURREPLACEMENT":
@@ -1600,10 +1596,10 @@ public class GameWorldController : UWEBase
         switch (_RES)
         {
             case GAME_SHOCK:
-                Lev_Ark_File = Path.Combine("RES" , "DATA" , "ARCHIVE.DAT");
+                Lev_Ark_File = Path.Combine("RES", "DATA", "ARCHIVE.DAT");
                 break;
             case GAME_UWDEMO:
-                Lev_Ark_File = Path.Combine( "DATA", "LEVEL13.ST");
+                Lev_Ark_File = Path.Combine("DATA", "LEVEL13.ST");
                 break;
             case GAME_UW2:
             case GAME_UW1:
@@ -1685,7 +1681,7 @@ public class GameWorldController : UWEBase
                 NoOfSlots = bglob_data.GetUpperBound(0) / 4;
                 NoOfSlots++;
             }
-            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + SlotNo, "BGLOBALS.DAT"), out bglob_data))
+            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + SlotNo, "BGLOBALS.DAT"), out bglob_data))
             {
                 //int NoOfSlots = bglob_data.GetUpperBound(0)/4;
                 int add_ptr = 0;
@@ -1742,10 +1738,10 @@ public class GameWorldController : UWEBase
                 add_ptr += 2;
             }
         }
-        File.WriteAllBytes(Path.Combine(Loader.BasePath, "SAVE" + SlotNo ,"BGLOBALS.DAT"), output);
+        File.WriteAllBytes(Path.Combine(Loader.BasePath, "SAVE" + SlotNo, "BGLOBALS.DAT"), output);
 
     }
-    
+
     /// <summary>
     /// Switchs to a Terra nova map.
     /// </summary>
@@ -1759,7 +1755,7 @@ public class GameWorldController : UWEBase
         }
         else
         {
-            path = levelFileName;		
+            path = levelFileName;
         }
 
         if (Loader.ReadStreamFile(path, out char[] archive_ark))
@@ -1796,9 +1792,9 @@ public class GameWorldController : UWEBase
     /// <returns><c>true</c>, if config file was loaded, <c>false</c> otherwise.</returns>
     bool LoadConfigFile()
     {
-        config =Configuration.Read();
+        config = Configuration.Read();
 
-       // Configuration.Save(config);
+        // Configuration.Save(config);
         return true;
         //string fileName = Application.dataPath + sep + ".." + sep + "config.ini";
         //if (File.Exists(fileName))
@@ -1824,7 +1820,7 @@ public class GameWorldController : UWEBase
         //                        //string pathfound="";
         //                        KeyCode keyCodeToUse;
         //                        config.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
-                                
+
         //                        switch (entries[0].ToUpper())
         //                        {
         //                            case "MOUSEX"://Mouse sensitivity X
@@ -2017,7 +2013,7 @@ public class GameWorldController : UWEBase
                 //if
                 //((objList[o].GetItemType() == ObjectInteraction.A_CHECK_VARIABLE_TRAP)||(objList[o].GetItemType() == ObjectInteraction.A_SET_VARIABLE_TRAP))
                 //{
-                    WriteObjectXML(objList, writer, o);
+                WriteObjectXML(objList, writer, o);
                 //}               
             }
         }
@@ -2064,7 +2060,7 @@ public class GameWorldController : UWEBase
             writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
             writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
             writer.WriteLine("\t\t\t<MobileUnk_0xB_12_F>" + objList[o].MobileUnk_0xB_12_F + "</MobileUnk_0xB_12_F>");
-            int OriginX = (objList[o].MobileUnk_0xB_12_F <<12) | (objList[o].npc_gtarg<<4) | objList[o].npc_goal & 0xF;
+            int OriginX = (objList[o].MobileUnk_0xB_12_F << 12) | (objList[o].npc_gtarg << 4) | objList[o].npc_goal & 0xF;
             writer.WriteLine("\t\t\t<CoOrdinateX>" + objList[o].CoordinateX + "</CoOrdinateX>");
             writer.WriteLine("\t\t\t<CoOrdinateY>" + OriginX + "</CoOrdinateY>");
             writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");

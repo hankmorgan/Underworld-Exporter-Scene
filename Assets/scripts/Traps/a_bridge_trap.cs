@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
@@ -12,12 +10,13 @@ using UnityEngine;
 /// remove the bridges
 /// </summary>
 /// This trap appears to be fairly buggy in vanilla.
-public class a_bridge_trap : trap_base {
+public class a_bridge_trap : trap_base
+{
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-      
-        if (((owner >> 5)  & 0x1) == 1)
+
+        if (((owner >> 5) & 0x1) == 1)
         {
             DestroyBridges(triggerX, triggerY);
         }

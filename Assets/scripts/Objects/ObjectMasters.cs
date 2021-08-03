@@ -1,12 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
-using System.IO;
-
-/// <summary>
+﻿/// <summary>
 /// Generic Object behaviour settings. Eg can it be moved what sprite to use etc.
 /// </summary>
-public class ObjectMasters {
+public class ObjectMasters
+{
 
     public struct ObjectProperties
     {
@@ -26,61 +22,61 @@ public class ObjectMasters {
 
     public ObjectProperties[] objProp;
 
-	public ObjectMasters()
-	{
+    public ObjectMasters()
+    {
         objProp = new ObjectProperties[500];
 
         switch (UWClass._RES)
-		{
-		case UWClass.GAME_UWDEMO:
-		case UWClass.GAME_UW1:
-            initUW1ObjectProps();
-			break;
-		default:
-            initUW2ObjectProps();
-            break;
-		}	
-	}
+        {
+            case UWClass.GAME_UWDEMO:
+            case UWClass.GAME_UW1:
+                initUW1ObjectProps();
+                break;
+            default:
+                initUW2ObjectProps();
+                break;
+        }
+    }
 
-	//private bool Load(string fileName)
-	//{
-	//	int i=0;
-	//	string line;
-	//	StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-	//	//string PreviousKey="";
-	//	//string PreviousValue="";
-	//	using (fileReader)
-	//	{
-	//		// While there's lines left in the text file, do this:
-	//		do
-	//		{
-	//			line = fileReader.ReadLine();
-	//			if (line != null)
-	//			{
-	//				string[] entries = line.Split('\t');
-	//				if (entries.Length > 0)
-	//				{
-	//					objProp[i].index = int.Parse(entries[0]);
- //                       objProp[i].objClass= int.Parse(entries[1]);  //For Shock
- //                       objProp[i].objSubClass= int.Parse(entries[2]);
- //                       objProp[i].objSubClassIndex= int.Parse(entries[3]);
- //                       objProp[i].type =  int.Parse (entries[4]);
- //                       objProp[i].desc= entries[5];
- //                       objProp[i].WorldIndex= int.Parse (entries[6]);
- //                       objProp[i].InventoryIndex= int.Parse (entries[7]);
- //                       objProp[i].isUseable= int.Parse(entries[8]);
- //                       objProp[i].isMoveable= int.Parse(entries[9]);
- //                       objProp[i].startFrame= int.Parse(entries[10]);
- //                       objProp[i].useSprite= int.Parse(entries[11]);
-	//					i++;
-	//				}
-	//			}
-	//		}
-	//		while (line != null);
-	//		fileReader.Close();
-	//		return true;
-	//	}
-	//}
+    //private bool Load(string fileName)
+    //{
+    //	int i=0;
+    //	string line;
+    //	StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+    //	//string PreviousKey="";
+    //	//string PreviousValue="";
+    //	using (fileReader)
+    //	{
+    //		// While there's lines left in the text file, do this:
+    //		do
+    //		{
+    //			line = fileReader.ReadLine();
+    //			if (line != null)
+    //			{
+    //				string[] entries = line.Split('\t');
+    //				if (entries.Length > 0)
+    //				{
+    //					objProp[i].index = int.Parse(entries[0]);
+    //                       objProp[i].objClass= int.Parse(entries[1]);  //For Shock
+    //                       objProp[i].objSubClass= int.Parse(entries[2]);
+    //                       objProp[i].objSubClassIndex= int.Parse(entries[3]);
+    //                       objProp[i].type =  int.Parse (entries[4]);
+    //                       objProp[i].desc= entries[5];
+    //                       objProp[i].WorldIndex= int.Parse (entries[6]);
+    //                       objProp[i].InventoryIndex= int.Parse (entries[7]);
+    //                       objProp[i].isUseable= int.Parse(entries[8]);
+    //                       objProp[i].isMoveable= int.Parse(entries[9]);
+    //                       objProp[i].startFrame= int.Parse(entries[10]);
+    //                       objProp[i].useSprite= int.Parse(entries[11]);
+    //					i++;
+    //				}
+    //			}
+    //		}
+    //		while (line != null);
+    //		fileReader.Close();
+    //		return true;
+    //	}
+    //}
 
 
     /// <summary>

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Implementation of the conversation virtual machine
@@ -170,13 +170,13 @@ public class ConversationVM : UWEBase
 
     public void InitConvVM()
     {
-        
+
         switch (_RES)
         {
             case GAME_UW2:
                 LoadCnvArkUW2(Path.Combine(Loader.BasePath, "DATA", "CNV.ARK")); break;
             default:
-                LoadCnvArk(Path.Combine(Loader.BasePath, "DATA","CNV.ARK")); break;
+                LoadCnvArk(Path.Combine(Loader.BasePath, "DATA", "CNV.ARK")); break;
         }
         VMLoaded = true;
     }
@@ -646,7 +646,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     {
         //basep = 0;
         //stack.result_register = 1;//Set a default value
-        
+
         bool finished = false;
         stack = new CnvStack(4096);
         stack.set_stackp(200);//Skip over imported memory for the moment
@@ -1457,8 +1457,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         default:
                             Markup = "<color=black>"; break;//[00FF00]
                     }
-                   // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
-                    UWHUD.instance.Conversation_tl.Add(Paragraphs[i],Markup); //\n	
+                    // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
+                    UWHUD.instance.Conversation_tl.Add(Paragraphs[i], Markup); //\n	
                     if (i < Paragraphs.GetUpperBound(0))
                     {
                         //UWHUD.instance.Conversation_tl.Add("<color=white>MORE</color>");
@@ -2395,7 +2395,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
                     bablf_array[j - 1] = stack.at(i);
                     //tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
-                   // UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
+                    // UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
                     UWHUD.instance.ConversationOptions[j - 1].SetText(j + "." + TextLine + "");
                     UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j - 1], true);
                     j++;
@@ -2424,7 +2424,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         PlayerTypedAnswer = "";
         //tl_input.Set(">");
         //PlayerInput.text = ">";
-        for (int j=0; j <= UWHUD.instance.ConversationOptions.GetUpperBound(0);j++)
+        for (int j = 0; j <= UWHUD.instance.ConversationOptions.GetUpperBound(0); j++)
         {
             UWHUD.instance.ConversationOptions[j].SetText("");
         }
@@ -2803,7 +2803,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (cn.GetItemAt(i) != null)
                 {
                     ObjectInteraction objInt = cn.GetItemAt(i);//cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-                                                                                                        //lastObjectTraded=objInt;
+                                                               //lastObjectTraded=objInt;
                     if (objInt != null)
                     {
                         if (objInt.item_id == arg1)
@@ -2825,7 +2825,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (cn.GetItemAt(i) != null)
                 {
                     ObjectInteraction objInt = cn.GetItemAt(i);// cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-                                                                                                        //lastObjectTraded=objInt;
+                                                               //lastObjectTraded=objInt;
                     if (
                             ((arg1 >= 1000) && (objInt.item_id >= rangeS) && (objInt.item_id <= rangeE))
                             ||
@@ -2842,7 +2842,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
     static int TakeItemFromNPCCOntainer(NPC npc, Container PlayerContainer, int index)
     {
-                //Give to PC
+        //Give to PC
         ObjectInteraction demanded = npc.GetComponent<Container>().GetItemAt((short)index);
         if (Container.GetFreeSlot(PlayerContainer) != -1)//Is there space in the container.
         {
@@ -3557,7 +3557,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
                 {
                     objName = StringController.instance.GetSimpleObjectNameUW(objInt);
                 }
-                
+
                 //Add temporary string to string controller
                 stack.Set(
                         pStrPtr,
@@ -3595,7 +3595,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
         {
             return 0;//no cheating...
         }
-        if (StringToSearch.ToUpper().Contains(StringToFind.ToUpper())) 
+        if (StringToSearch.ToUpper().Contains(StringToFind.ToUpper()))
         {
             return 1;
         }
@@ -4188,7 +4188,7 @@ description:  places a generated object in underworld
                 //GameObject itemObj = GameObject.Find(Item);
                 //if (itemObj != null)
                 //{
-                    Item.consumeObject();
+                Item.consumeObject();
                 //}
             }
         }
@@ -4497,7 +4497,7 @@ description:  places a generated object in underworld
     static ObjectInteraction FindObjectInteractionInObjectList(int index)
     {
         ObjectInteraction obj = FindGameObjectInObjectList(index);
-        return obj; 
+        return obj;
     }
 
     static ObjectInteraction FindGameObjectInObjectList(int index)
@@ -4526,7 +4526,7 @@ description:  places a generated object in underworld
         if (objName == "") { return null; }
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
-            if (UWHUD.instance.playerTrade[i].objectInSlot!=null)
+            if (UWHUD.instance.playerTrade[i].objectInSlot != null)
             {
                 if (UWHUD.instance.playerTrade[i].objectInSlot.name == objName)
                 {
@@ -4536,7 +4536,7 @@ description:  places a generated object in underworld
         }
         for (int i = 0; i <= UWHUD.instance.npcTrade.GetUpperBound(0); i++)
         {
-            if (UWHUD.instance.npcTrade[i].objectInSlot !=null)
+            if (UWHUD.instance.npcTrade[i].objectInSlot != null)
             {
                 if (UWHUD.instance.npcTrade[i].objectInSlot.name == objName)
                 {

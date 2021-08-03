@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Placeholding object_base to allow interacting with containers in the world
 /// </summary>
-public class container_obj : object_base {
+public class container_obj : object_base
+{
 
     public override bool use()
     {

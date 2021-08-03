@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -63,7 +63,7 @@ public class UWHUD : HUD
     public GameObject gameUi;
     public GameObject gameSelectUi;
     public MainMenuHud mainmenu;
-   
+
 
     //Conversation Controls
     [Header("Conversation")]
@@ -101,7 +101,7 @@ public class UWHUD : HUD
     public GameObject ConversationButtonParent;
     public ConversationButton[] ConversationOptions = new ConversationButton[5];
 
-    
+
 
     [Header("Inventory")]
     public RawImage playerBody;
@@ -247,13 +247,13 @@ public class UWHUD : HUD
         ConversationPanel.transform.SetAsLastSibling();
 
         GRLoader grButtons = new GRLoader(GRLoader.BUTTONS_GR);
-        if (grButtons!=null)
+        if (grButtons != null)
         {
             InvUp.GetComponent<RawImage>().texture = grButtons.LoadImageAt(27);
             InvDown.GetComponent<RawImage>().texture = grButtons.LoadImageAt(28);
         }
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {//Set line width of message scroll for UW2.
             MessageScroll.LineWidth = 54;
             Conversation_tl.LineWidth = 48;
@@ -380,7 +380,7 @@ public class UWHUD : HUD
 
                 //Player Trade
 
-                SetUIElementPosition(playerTrade[0], 16f, 16f, new Vector2(130.7f- 158.6f, 180.8f - 100.69f));
+                SetUIElementPosition(playerTrade[0], 16f, 16f, new Vector2(130.7f - 158.6f, 180.8f - 100.69f));
                 SetUIElementPosition(playerTrade[1], 16f, 16f, new Vector2(151.2f - 158.6f, 180.8f - 100.69f));
                 SetUIElementPosition(playerTrade[2], 16f, 16f, new Vector2(130.7f - 158.6f, 163.2f - 100.69f));
                 SetUIElementPosition(playerTrade[3], 16f, 16f, new Vector2(151.2f - 158.6f, 163.2f - 100.69f));
@@ -415,7 +415,7 @@ public class UWHUD : HUD
             FreeLookCursor.enabled = true;
             //FreeLookCursor.texture = UWHUD.instance.CursorIcon;
             FreeLookCursor.transform.position = Input.mousePosition;
-        }   
+        }
         else
         {
             FreeLookCursor.enabled = false;
@@ -728,7 +728,7 @@ public class UWHUD : HUD
         }
 
         //additional tradeslots for uw2
-        EnableDisableControl(playerTrade[4], ConversationEnabled && _RES==GAME_UW2);
+        EnableDisableControl(playerTrade[4], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(playerTrade[5], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(npcTrade[4], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(npcTrade[5], ConversationEnabled && _RES == GAME_UW2);
@@ -756,10 +756,10 @@ public class UWHUD : HUD
     /// <param name="targetState">If set to <c>true</c> target state.</param>
     public void EnableDisableControl(GuiBase control, bool targetState)
     {
-        if (control!=null)
+        if (control != null)
         {
-            EnableDisableControl(control.gameObject,targetState);
-        }        
+            EnableDisableControl(control.gameObject, targetState);
+        }
     }
 
 }

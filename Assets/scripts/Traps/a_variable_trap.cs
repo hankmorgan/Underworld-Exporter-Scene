@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class a_variable_trap : trap_base
+﻿public class a_variable_trap : trap_base
 {
     public int value;
     //   field   bits in value

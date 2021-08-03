@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Potion : enchantment_base
 {
@@ -14,7 +13,7 @@ public class Potion : enchantment_base
     public override bool use()
     {
         if (ConversationVM.InConversation) { return false; }
-        if ((CurrentObjectInHand == null) ||((CurrentObjectInHand ==this.objInt())))
+        if ((CurrentObjectInHand == null) || ((CurrentObjectInHand == this.objInt())))
         {
             if (linked != null)
             {
@@ -38,7 +37,7 @@ public class Potion : enchantment_base
                 UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, GetActualSpellIndex(), Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
                 objInt().consumeObject();
                 return true;
-            }  
+            }
         }
         else
         {
@@ -61,7 +60,7 @@ public class Potion : enchantment_base
         else
         {
             return base.GetActualSpellIndex(); //link - 256;//527;
-        }        
+        }
     }
 
     public override bool ApplyAttack(short damage)
@@ -115,7 +114,7 @@ public class Potion : enchantment_base
                 if (!match)
                 {
                     //linkedspell.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    GameWorldController.MoveToWorld(linked.gameObject);                  
+                    GameWorldController.MoveToWorld(linked.gameObject);
                 }
             }
         }

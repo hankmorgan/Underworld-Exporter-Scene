@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class a_lock : object_base {
+﻿public class a_lock : object_base
+{
     /*
 Not really used by uwexporter but does exist in UW. Created here for compatabilty.
 The lock acts as a flag to show that a door is locked

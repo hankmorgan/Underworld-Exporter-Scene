@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SaveGame : Loader
-{     
+{
     public enum InventorySlotsOffsets
     {
         UW1Helm = 248,
@@ -52,9 +51,9 @@ public class SaveGame : Loader
     /// <summary>
     /// Array for storing inventory data.
     /// </summary>
-   // public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
+    // public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
 
-    
+
     /// <summary>
     /// Ratio of UNITY co-ordinates to Tile co-ordinates
     /// </summary>
@@ -77,7 +76,7 @@ public class SaveGame : Loader
         short[] ActiveEffectStability = new short[3];
         ResetUI();
 
-        if (ReadStreamFile(Path.Combine(BasePath,"SAVE" + slotNo, "PLAYER.DAT"), out char[] buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out char[] buffer))
         {
             int xOrValue = (int)buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
@@ -286,7 +285,7 @@ public class SaveGame : Loader
                     output.WriteLine((byte)buffer[i]);
                 }
                 output.Close();
-                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo , "decode_" + slotNo + ".dat"), dataToWrite);
+                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
 
             /*	if (recode)//Rewrite the file with test value changes.
@@ -742,7 +741,7 @@ public class SaveGame : Loader
     public static void WritePlayerDatUW2(int slotNo)
     {
         //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo , "playertmp.dat"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         //int runeOffset=0;
@@ -787,7 +786,7 @@ public class SaveGame : Loader
                 case 0x4D + 1:
                     break;
                 case 0x4F: ///   experience in 0.1 points
-                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP*10); break;
+                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP * 10); break;
                 case 0x4F + 1:
                 case 0x4F + 2:
                 case 0x4F + 3:
@@ -816,8 +815,8 @@ public class SaveGame : Loader
                 case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)//This differs from uw1 so it needs to be tested properly
                     DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 5)) | (UWCharacter.Instance.play_poison << 1));
                     break;
-                case 0x62:                   
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.Intoxication<<6);
+                case 0x62:
+                    DataLoader.WriteInt8(writer, UWCharacter.Instance.Intoxication << 6);
                     break;
                 case 0x64:
                     {
@@ -1629,26 +1628,26 @@ public class SaveGame : Loader
             //File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
             if (UWCharacter.Instance.recode)
             {
-                    if (UWCharacter.Instance.recode_cheat)
+                if (UWCharacter.Instance.recode_cheat)
+                {
+                    for (int r = 31; r <= 53; r++)
                     {
-                            for (int r=31; r<=53;r++)
-                            {
-                                    buffer[r]=(char)0;
-                            }
+                        buffer[r] = (char)0;
                     }
-                    else
-                    {
-                            buffer[UWCharacter.Instance.IndexToRecode]=(char)UWCharacter.Instance.ValueToRecode;		
-                    }
+                }
+                else
+                {
+                    buffer[UWCharacter.Instance.IndexToRecode] = (char)UWCharacter.Instance.ValueToRecode;
+                }
 
-                    char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
+                char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
 
-                    byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];
-                    for (long i=0; i<=recodetest.GetUpperBound(0);i++)
-                    {
-                            dataToWrite[i] = (byte)recodetest[i];
-                    }
-                    File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
+                byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
+                for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
+                {
+                    dataToWrite[i] = (byte)recodetest[i];
+                }
+                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
             }
 
 
@@ -1670,7 +1669,7 @@ public class SaveGame : Loader
                         Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) *0.1f); break;
+                        UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) * 0.1f); break;
                     case 0x53: // skillpoints available to spend
                         UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
                     case 0x55: ///   x-position in level
@@ -2166,7 +2165,7 @@ public class SaveGame : Loader
                     case 0x2F8 + 1:
                         {//end skip for bit variables
                             break;
-                        }   
+                        }
                     case 0x2fb: ///   x-position in level
                         x_position_dream = (int)getValAtAddress(buffer, i, 16); break;
                     case 0x2fd: ///   y-position
@@ -2470,7 +2469,7 @@ public class SaveGame : Loader
         int val = (int)getValAtAddress(buffer, i, 8);
         ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
         MusicController.PlayMusic = (((val >> 2) & 0x1) == 1);
-        GameWorldController.instance.difficulty = (int)getValAtAddress(buffer, i-1, 8) & 0x1;
+        GameWorldController.instance.difficulty = (int)getValAtAddress(buffer, i - 1, 8) & 0x1;
     }
 
     /// <summary>
@@ -2561,7 +2560,7 @@ public class SaveGame : Loader
         //Inventory list
         int NoOfItems = (buffer.GetUpperBound(0) - StartOffset) / 8;
 
-        GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];   //+ 2];
+        GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems + 2];   //+ 2];
 
         //InventoryData = new char[768 * 8];
         //if (buffer.GetUpperBound(0) >= StartOffset)
@@ -2604,7 +2603,7 @@ public class SaveGame : Loader
             {
                 //Apply objects to slots
                 int index = ((int)getValAtAddress(buffer, j, 16) >> 6);
-                ObjectInteraction item; 
+                ObjectInteraction item;
                 if (index != 0)
                 {
                     item = GameWorldController.instance.inventoryLoader.objInfo[index].instance;
@@ -3124,7 +3123,7 @@ public class SaveGame : Loader
         //};
 
 
-        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo ,"playertmp.dat"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         int NoOfActiveEffects = 0;
         int runeOffset = 0;

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
+﻿/// <summary>
 /// Quest variables.
 /// </summary>
 /// 	 * per uw-specs.txt

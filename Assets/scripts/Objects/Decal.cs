@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 /// <summary>
 /// Decal object_base for flat wall mounted objects like signs and switches.
 /// </summary>

@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿public class SpellEffectAccuracy : SpellEffect
+{
 
-public class SpellEffectAccuracy : SpellEffect {
-
-//The weapon is more accurate.
+    //The weapon is more accurate.
 
 }

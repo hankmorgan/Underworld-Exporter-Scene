@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-/// <summary>
+﻿/// <summary>
 /// Player becomes fireproof.
 /// </summary>
-public class SpellEffectFlameproof : SpellEffectImmunity {
+public class SpellEffectFlameproof : SpellEffectImmunity
+{
 
-	/*public override void ApplyEffect ()
+    /*public override void ApplyEffect ()
 	{
 		UWCharacter.Instance.FireProof=true;
 		base.ApplyEffect ();

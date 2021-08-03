@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Gloves : Armour {
+﻿public class Gloves : Armour
+{
 
 }

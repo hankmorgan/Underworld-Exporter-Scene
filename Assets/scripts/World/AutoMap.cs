@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Game automap display information.
@@ -459,7 +456,7 @@ public class AutoMap : Loader
                             }
                         case TILE_DIAG_SE:
                             {
-                                 DrawDiagSE(output, i, j, TileSize, TileSize, BorderColour);
+                                DrawDiagSE(output, i, j, TileSize, TileSize, BorderColour);
                                 break;
                             }
                         case TILE_DIAG_NW:

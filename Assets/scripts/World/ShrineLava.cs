@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityStandardAssets.ImageEffects;
+﻿using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// Special move trigger to handle throwing objects into the lava in the Shrine.

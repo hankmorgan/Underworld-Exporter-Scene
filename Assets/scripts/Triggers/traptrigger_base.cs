@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class traptrigger_base : object_base {
+﻿public class traptrigger_base : object_base
+{
 
     /// <summary>
     /// Will the trigger fire. Usually the third bit of the flags (zero based)

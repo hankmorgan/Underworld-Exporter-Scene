@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 
 /// <summary>
@@ -268,7 +267,7 @@ public class CritterInfo : Loader
                     bool ModFileIsLoaded = false;
                     if (LoadMod)
                     {
-                        var toLoadMod = Path.Combine(ModPath,AuxPalNo.ToString(), i.ToString("d3") + ".tga");
+                        var toLoadMod = Path.Combine(ModPath, AuxPalNo.ToString(), i.ToString("d3") + ".tga");
                         if (File.Exists(toLoadMod))
                         {
                             Texture2D tex = TGALoader.LoadTGA(toLoadMod);

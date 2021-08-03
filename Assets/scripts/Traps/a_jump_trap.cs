@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_jump_trap : trap_base
 {
@@ -31,10 +30,10 @@ public class a_jump_trap : trap_base
     {
         if (Timer <= 0)
         {
-            if (current==null)
+            if (current == null)
             {
                 ExecuteJumpOnController(UWCharacter.Instance.transform);
-            }            
+            }
         }
     }
 
@@ -71,7 +70,7 @@ public class a_jump_trap : trap_base
     private void ApplyToController()
     {
         // apply the impact force:
-        if ((impact.magnitude > 0.2) && (current!=null))
+        if ((impact.magnitude > 0.2) && (current != null))
         {
             current.Move(impact * Time.deltaTime);
         }
@@ -91,7 +90,7 @@ public class a_jump_trap : trap_base
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (current==null)
+        if (current == null)
         {
             ExecuteJumpOnController(other.transform);
         }

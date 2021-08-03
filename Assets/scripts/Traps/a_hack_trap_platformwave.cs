@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class a_hack_trap_platformwave : a_hack_trap {
+public class a_hack_trap_platformwave : a_hack_trap
+{
     //Raises or lowers tiles along a line
     //X000X111X
     //X = stationary platforms.
@@ -45,9 +44,9 @@ public class a_hack_trap_platformwave : a_hack_trap {
         switch (owner)
         {
             case 1:
-                ChangeTileHeight(10, 49, baseHeight-2);
+                ChangeTileHeight(10, 49, baseHeight - 2);
                 ChangeTileHeight(10, 50, baseHeight);
-                ChangeTileHeight(10, 51, baseHeight-2);
+                ChangeTileHeight(10, 51, baseHeight - 2);
 
                 ChangeTileHeight(10, 45, baseHeight + 2);
                 ChangeTileHeight(10, 46, baseHeight);
@@ -55,33 +54,33 @@ public class a_hack_trap_platformwave : a_hack_trap {
 
                 break;
             case 3:
-                ChangeTileHeight(10, 49, baseHeight + 4 -2);
-                ChangeTileHeight(10, 50, baseHeight + 4 );
-                ChangeTileHeight(10, 51, baseHeight + 4 -2);
+                ChangeTileHeight(10, 49, baseHeight + 4 - 2);
+                ChangeTileHeight(10, 50, baseHeight + 4);
+                ChangeTileHeight(10, 51, baseHeight + 4 - 2);
 
-                ChangeTileHeight(10, 45, baseHeight  -4 + 2);
-                ChangeTileHeight(10, 46, baseHeight -4 );
-                ChangeTileHeight(10, 47, baseHeight -4 + 2);
+                ChangeTileHeight(10, 45, baseHeight - 4 + 2);
+                ChangeTileHeight(10, 46, baseHeight - 4);
+                ChangeTileHeight(10, 47, baseHeight - 4 + 2);
 
                 break;
             case 5:
-                ChangeTileHeight(10, 49, baseHeight+6-2);
+                ChangeTileHeight(10, 49, baseHeight + 6 - 2);
                 ChangeTileHeight(10, 50, baseHeight + 6);
-                ChangeTileHeight(10, 51, baseHeight+6-2);
+                ChangeTileHeight(10, 51, baseHeight + 6 - 2);
 
-                ChangeTileHeight(10, 45, baseHeight -6 + 2);
-                ChangeTileHeight(10, 46, baseHeight - 6 );
-                ChangeTileHeight(10, 47, baseHeight -6 + 2);
+                ChangeTileHeight(10, 45, baseHeight - 6 + 2);
+                ChangeTileHeight(10, 46, baseHeight - 6);
+                ChangeTileHeight(10, 47, baseHeight - 6 + 2);
 
                 break;
             case 7:
-                ChangeTileHeight(10, 49, baseHeight+4-2);
+                ChangeTileHeight(10, 49, baseHeight + 4 - 2);
                 ChangeTileHeight(10, 50, baseHeight + 4);
-                ChangeTileHeight(10, 51, baseHeight+4-2);
+                ChangeTileHeight(10, 51, baseHeight + 4 - 2);
 
-                ChangeTileHeight(10, 45, baseHeight -4+2);
-                ChangeTileHeight(10, 46, baseHeight -4);
-                ChangeTileHeight(10, 47, baseHeight -4+2);
+                ChangeTileHeight(10, 45, baseHeight - 4 + 2);
+                ChangeTileHeight(10, 46, baseHeight - 4);
+                ChangeTileHeight(10, 47, baseHeight - 4 + 2);
 
                 break;
             case 9:
@@ -89,39 +88,39 @@ public class a_hack_trap_platformwave : a_hack_trap {
                 ChangeTileHeight(10, 50, baseHeight);
                 ChangeTileHeight(10, 51, baseHeight);
 
-                ChangeTileHeight(10, 45, baseHeight );
-                ChangeTileHeight(10, 46, baseHeight );
+                ChangeTileHeight(10, 45, baseHeight);
+                ChangeTileHeight(10, 46, baseHeight);
                 ChangeTileHeight(10, 47, baseHeight);
 
                 break;
             case 11:
-                ChangeTileHeight(10, 49, baseHeight-4+2);
-                ChangeTileHeight(10, 50, baseHeight -4);
-                ChangeTileHeight(10, 51, baseHeight-4+2);
+                ChangeTileHeight(10, 49, baseHeight - 4 + 2);
+                ChangeTileHeight(10, 50, baseHeight - 4);
+                ChangeTileHeight(10, 51, baseHeight - 4 + 2);
 
-                ChangeTileHeight(10, 45, baseHeight +4-2);
-                ChangeTileHeight(10, 46, baseHeight +4 );
-                ChangeTileHeight(10, 47, baseHeight +4-2);
+                ChangeTileHeight(10, 45, baseHeight + 4 - 2);
+                ChangeTileHeight(10, 46, baseHeight + 4);
+                ChangeTileHeight(10, 47, baseHeight + 4 - 2);
 
                 break;
             case 13:
-                ChangeTileHeight(10, 49, baseHeight-6+2);
-                ChangeTileHeight(10, 50, baseHeight -6);
-                ChangeTileHeight(10, 51, baseHeight-6+2);
+                ChangeTileHeight(10, 49, baseHeight - 6 + 2);
+                ChangeTileHeight(10, 50, baseHeight - 6);
+                ChangeTileHeight(10, 51, baseHeight - 6 + 2);
 
-                ChangeTileHeight(10, 45, baseHeight +6-2);
-                ChangeTileHeight(10, 46, baseHeight+6);
-                ChangeTileHeight(10, 47, baseHeight + 6-2);
+                ChangeTileHeight(10, 45, baseHeight + 6 - 2);
+                ChangeTileHeight(10, 46, baseHeight + 6);
+                ChangeTileHeight(10, 47, baseHeight + 6 - 2);
 
                 break;
             case 15:
-                ChangeTileHeight(10, 49, baseHeight-4+2);
+                ChangeTileHeight(10, 49, baseHeight - 4 + 2);
                 ChangeTileHeight(10, 50, baseHeight - 4);
-                ChangeTileHeight(10, 51, baseHeight-4+2);
+                ChangeTileHeight(10, 51, baseHeight - 4 + 2);
 
-                ChangeTileHeight(10, 45, baseHeight +4-2);
-                ChangeTileHeight(10, 46, baseHeight + 4 );
-                ChangeTileHeight(10, 47, baseHeight +4-2);
+                ChangeTileHeight(10, 45, baseHeight + 4 - 2);
+                ChangeTileHeight(10, 46, baseHeight + 4);
+                ChangeTileHeight(10, 47, baseHeight + 4 - 2);
 
                 break;
         }
@@ -138,9 +137,9 @@ public class a_hack_trap_platformwave : a_hack_trap {
         GameObject platformTile = GameWorldController.FindTile(tileX, tileY, TileMap.SURFACE_FLOOR);
         TileVector = CurrentTileMap().getTileVector(tileX, tileY);
         Collider[] colliders = Physics.OverlapBox(TileVector, ContactArea);
-        
+
         MoveObjectsInContact((float)(newHeight) * 0.15f, colliders);
-        
+
         //CurrentTileMap().Tiles[tileX, tileX].TileNeedsUpdate();
         DestroyImmediate(platformTile);
         TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, t.tileX, t.tileY, t, false, false, false, true);

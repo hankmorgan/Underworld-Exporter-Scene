@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 
 public class WindowDetectUW : WindowDetect
@@ -492,7 +491,7 @@ public class WindowDetectUW : WindowDetect
             if (UWCharacter.Instance.MouseLookEnabled == false)
             {
                 //DrawCursor();
-               // UWHUD.instance.MessageScroll.Add(Time.time.ToString());
+                // UWHUD.instance.MessageScroll.Add(Time.time.ToString());
             }
             else
             {
@@ -595,7 +594,7 @@ public class WindowDetectUW : WindowDetect
         UWCharacter.Instance.XAxis.enabled = true;
         UWCharacter.Instance.MouseLookEnabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;        
+        Cursor.visible = false;
         UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIcon;
     }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_set_variable_trap : a_variable_trap
 {
@@ -61,14 +60,14 @@ public class a_set_variable_trap : a_variable_trap
                     Set_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
                     break;
                 case 3://xclock  
-                    if (zpos-16 >=0)
+                    if (zpos - 16 >= 0)
                     {
                         Set_Variables(Quest.instance.x_clocks, zpos - 16, heading, this, "xclocks");
                     }
                     else
                     {
                         Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().BaseObjectData.index);
-                    }                    
+                    }
                     break;
                 default:
                     Debug.Log("unknown usage of set trap " + xpos + " " + this.name);

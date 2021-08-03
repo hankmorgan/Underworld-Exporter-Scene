@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
 using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CutsAnimator : GuiBase
 {
@@ -156,7 +156,7 @@ public class CutsAnimator : GuiBase
             case "uw2resurrecttransition"://UW2 death by ally or in alternate dimension
                 TargetControl.material = UI_UNLIT;
                 TargetControl.texture = black;
-                mode = false;looping = false;
+                mode = false; looping = false;
                 StartCoroutine(CutsceneWait(0.5f));
                 break;
             case "fadetoblacksleep":

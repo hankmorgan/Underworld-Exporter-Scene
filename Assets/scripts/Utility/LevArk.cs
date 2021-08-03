@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using System.IO;
-using System;
+using UnityEngine;
 
 /// <summary>
 /// Used for storing levark file data
 /// </summary>
-public class LevArk : Loader {
-    
-    
-    
+public class LevArk : Loader
+{
+
+
+
     /// <summary>
     /// The lev ark file data.
     /// </summary>
@@ -27,7 +26,7 @@ public class LevArk : Loader {
     /// 80 map notes - top copy for the moment
     public static void WriteBackLevArkUW2(int slotNo)
     {
-            int NoOfBlocks = 320;
+        int NoOfBlocks = 320;
         DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
 
         //First update the object list so as to match indices properly	
@@ -192,7 +191,7 @@ public class LevArk : Loader {
 
 
         //Data is copied. now begin writing the output file
-        FileStream file = File.Open( Path.Combine(BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
+        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "LEV.ARK"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         long add_ptr = 0;
 

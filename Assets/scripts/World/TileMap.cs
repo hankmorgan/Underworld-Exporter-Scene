@@ -1,9 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 
 /// <summary>
 /// Tile map class for storing and accessing the tilemap and tile properties..
@@ -96,7 +91,7 @@ public class TileMap : Loader
     /// <summary>
     /// Animation overlay. Controls how long an animated effect appears for.
     /// </summary>
-    public struct Overlay  
+    public struct Overlay
     {
         public int header;
         public int link;
@@ -230,7 +225,7 @@ public class TileMap : Loader
         }
         else
         {
-           // Debug.Log("invalid tile for height at " + tileX + "," + tileY);
+            // Debug.Log("invalid tile for height at " + tileX + "," + tileY);
             return 0;
         }
     }
@@ -404,14 +399,14 @@ public class TileMap : Loader
                             Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 2, 16);
                             Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 4, 8);
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 5, 8);
-                            if (Overlays[overlayIndex].link!=0)
+                            if (Overlays[overlayIndex].link != 0)
                             {
-                               // Debug.Log("Overlay at " + OverlayAddress
+                                // Debug.Log("Overlay at " + OverlayAddress
                                 //    + " obj " + Overlays[overlayIndex].link
-                               //     + " for " + Overlays[overlayIndex].duration
-                               //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
-                               //     + " header :" + Overlays[overlayIndex].header);
-                            }                            
+                                //     + " for " + Overlays[overlayIndex].duration
+                                //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                                //     + " header :" + Overlays[overlayIndex].header);
+                            }
                             OverlayAddress += 6;
                         }
                     }
@@ -425,16 +420,16 @@ public class TileMap : Loader
                         if (OverlayAddress + 5 <= lev_ark.Data.GetUpperBound(0))
                         {
                             Overlays[overlayIndex].header = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16);
-                            Overlays[overlayIndex].link = (int)(DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16)>> 6) & 0x3ff;
+                            Overlays[overlayIndex].link = (int)(DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16) >> 6) & 0x3ff;
                             Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 2, 16);
                             Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 4, 8);
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 5, 8);
                             if (Overlays[overlayIndex].link != 0)
                             {
-                               // Debug.Log("Overlay at " + OverlayAddress 
-                               //     + " obj " + Overlays[overlayIndex].link 
-                               //     + " for " + Overlays[overlayIndex].duration 
-                               //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                                // Debug.Log("Overlay at " + OverlayAddress 
+                                //     + " obj " + Overlays[overlayIndex].link 
+                                //     + " for " + Overlays[overlayIndex].duration 
+                                //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
                                 //    + " header :" + Overlays[overlayIndex].header);
                             }
                         }
@@ -1202,7 +1197,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         }
     }
 
-     public static bool isTerrainWater(int terraintype)
+    public static bool isTerrainWater(int terraintype)
     {
         switch (terraintype)
         {
@@ -1217,11 +1212,11 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         return false;
     }
 
-/// <summary>
-/// Checks if the terrain is lava
-/// </summary>
-/// <param name="terraintype"></param>
-/// <returns>True if it lava</returns>
+    /// <summary>
+    /// Checks if the terrain is lava
+    /// </summary>
+    /// <param name="terraintype"></param>
+    /// <returns>True if it lava</returns>
     public static bool isTerrainLava(int terraintype)
     {
         switch (terraintype)
@@ -1609,7 +1604,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         char[] TileMapData = new char[31752];//Size of tilemap + object list
 
         //Copy filedata from tile map to data array
-        for (int i=0;i< 16384;i++)
+        for (int i = 0; i < 16384; i++)
         {
             TileMapData[i] = lev_ark_block.Data[i];
         }
@@ -1767,7 +1762,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                     {//Additional npc mobile data.
 
                         TileMapData[addptr + 0x8] = (char)(currobj.npc_hp);
-                      //  TileMapData[addptr + 0x9] = (char)((currobj.ProjectileHeadingMajor & 0xE0) | ((char)(currobj.ProjectileHeadingMinor & 0x1F)));
+                        //  TileMapData[addptr + 0x9] = (char)((currobj.ProjectileHeadingMajor & 0xE0) | ((char)(currobj.ProjectileHeadingMinor & 0x1F)));
                         //+A is copied  unknown value
                         //+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
                         ByteToWrite = (
@@ -1792,7 +1787,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
                         //TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
 
-                       //// TileMapData[addptr + 0x14] = (char)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x7) << 4) | (currobj.Projectile_Speed & 0xf));
+                        //// TileMapData[addptr + 0x14] = (char)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x7) << 4) | (currobj.Projectile_Speed & 0xf));
 
                         ByteToWrite = ((currobj.npc_xhome & 0x3F) << 10) |
                                 ((currobj.npc_yhome & 0x3F) << 4) |
@@ -1854,8 +1849,8 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         //TileMapData[0x7c02] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile & 0xFF);
         //TileMapData[0x7c03] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile >> 8) & 0xFF);
 
-       // TileMapData[0x7c04] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic & 0xFF);
-       // TileMapData[0x7c05] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic >> 8) & 0xFF);
+        // TileMapData[0x7c04] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic & 0xFF);
+        // TileMapData[0x7c05] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic >> 8) & 0xFF);
 
         return TileMapData;
     }

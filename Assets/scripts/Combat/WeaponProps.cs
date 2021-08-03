@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
-using System.IO;
-
-/// <summary>
+﻿/// <summary>
 /// Weapon properties.
 /// </summary>
-public class WeaponProps : Props {
-		//Obsolete
-	/*
+public class WeaponProps : Props
+{
+    //Obsolete
+    /*
 	private int[] Slash = new int[16];
 	private int[] Bash = new int[16];	
 	private int[] Stab = new int[16];	

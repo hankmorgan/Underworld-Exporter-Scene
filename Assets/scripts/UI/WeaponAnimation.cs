@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-
-public class WeaponAnimation : Loader
+﻿public class WeaponAnimation : Loader
 {
 
     public const int Sword_Slash_Right_Charge = 0;

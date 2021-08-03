@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Linq; // used for Sum of array
+﻿using System.Linq; // used for Sum of array
+using UnityEngine;
 
 /// <summary>
 /// Tile map renderer.
@@ -138,7 +137,7 @@ public class TileMapRenderer : Loader
         {
             if (!UpdateOnly)
             {
-                GameObject output = RenderCeiling(parent, 0, 0, CEILING_HEIGHT, CEILING_HEIGHT + CEIL_ADJ,Level.UWCeilingTexture, "CEILING");
+                GameObject output = RenderCeiling(parent, 0, 0, CEILING_HEIGHT, CEILING_HEIGHT + CEIL_ADJ, Level.UWCeilingTexture, "CEILING");
             }
         }
         if (!UpdateOnly)
@@ -194,9 +193,9 @@ public class TileMapRenderer : Loader
     /// <param name="i"></param>
     public static void RenderDoor(GameObject Parent, TileMap level, ObjectLoader objList, int i)
     {
-        if ((objList.objInfo[i].ObjectTileX>=64) || (objList.objInfo[i].ObjectTileY >= 64))
+        if ((objList.objInfo[i].ObjectTileX >= 64) || (objList.objInfo[i].ObjectTileY >= 64))
         {//door is off map!
-            return; 
+            return;
         }
 
 
@@ -1502,7 +1501,7 @@ public class TileMapRenderer : Loader
         float PolySize = Top - Bottom;
         float uv0 = (float)(Bottom * 0.125f);
         float uv1 = (PolySize / 8.0f) + (uv0);
-       // float offset = 0f;
+        // float offset = 0f;
 
         //bottom wall vertices
         MatsToUse[FaceCounter] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CeilingTexture]];
@@ -4571,7 +4570,7 @@ public class TileMapRenderer : Loader
                 break;
         }
     }
-    
+
     /// <summary>
     /// Set the gameobject layer that this tile uses.
     /// </summary>
@@ -4834,7 +4833,7 @@ public class TileMapRenderer : Loader
     public static bool RenderTNovaMap(Transform parent, char[] data)
     {
 
-//BlockSize * No of Blocks must equal 512, setting values too extremely may cause performance issues!
+        //BlockSize * No of Blocks must equal 512, setting values too extremely may cause performance issues!
         const int NoOfBlocks = 8;
         const int BlockSize = 64;
 
@@ -5063,13 +5062,13 @@ public class TileMapRenderer : Loader
     /// <param name="t"></param>
     static void AddWaterContact(GameObject tile, TileInfo t)
     {
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
-            if (FloorTexture(fTOP, t) ==193)
+            if (FloorTexture(fTOP, t) == 193)
             {
                 tile.AddComponent<TileContactMud>();
                 return;
-            }           
+            }
         }
         tile.AddComponent<TileContactWater>();
     }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class IngameEditor : GuiBase_Draggable
@@ -1113,7 +1112,7 @@ public class IngameEditor : GuiBase_Draggable
 
         if (currObj.instance != null)
         {
-           // Destroy(currObj.instance.gameObject);
+            // Destroy(currObj.instance.gameObject);
             ObjectInteraction.DestroyObjectFromUW(currObj.instance);
             Vector3 pos = ObjectLoader.CalcObjectXYZ(currObj.index, 0);
             ObjectInteraction.CreateNewObject(CurrentTileMap(),

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class StorageCrystal : object_base
+﻿public class StorageCrystal : object_base
 {
     public string DisplayName;
 

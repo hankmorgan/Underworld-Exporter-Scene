@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Class for loading VOC audio files
 /// </summary>
-public class VocLoader : Loader {
+public class VocLoader : Loader
+{
 
     public AudioClip Audio;
     public int DataSize;

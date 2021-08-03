@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObjectLoader : DataLoader
 {
@@ -133,7 +132,7 @@ public class ObjectLoader : DataLoader
     {
         get
         {
-          return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
+            return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
         }
         set
         {
@@ -500,22 +499,22 @@ public class ObjectLoader : DataLoader
             {
                 objList[x].item_id = 0;
             }
-            
-           // objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
-           // objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
+
+            // objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
+            // objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
             //objList[x].doordir = (short)(ExtractBits(Vals[0], 13, 1));
-           // objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
+            // objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
             //objList[x].is_quant = (short)(ExtractBits(Vals[0], 15, 1));
 
             //position at +2
-           // objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
-           // objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
+            // objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
+            // objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
             //objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 0x7)); //bits 7-9	//bits 10-12
             //objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 0x7));    //bits 13-15
 
             //+4
             //objList[x].quality = (short)(ExtractBits(Vals[2], 0, 0x3f));
-           // objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
+            // objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
 
             //+6
             //objList[x].owner = (short)(ExtractBits(Vals[3], 0, 0x3f));//bits 0-5
@@ -531,11 +530,11 @@ public class ObjectLoader : DataLoader
                 //mobile objects		
                 // objList[x].npc_hp = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x8, 8));
 
-               // int val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x9, 8);
-               // objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
-               // objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
+                // int val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x9, 8);
+                // objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
+                // objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
 
-               // objList[x].MobileUnk_0xA = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xa, 8));
+                // objList[x].MobileUnk_0xA = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xa, 8));
 
 
                 //objList[x].npc_goal = (short)(ExtractBits(val, 0, 0xF));
@@ -584,7 +583,7 @@ public class ObjectLoader : DataLoader
                 // objList[x].npc_hunger = (short)(ExtractBits(val, 0, 0x3f));
                 //objList[x].MobileUnk_0x19_6_3 = (short)(ExtractBits(val, 6, 0x3));
 
-               // objList[x].npc_whoami = (short)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x1a, 8);
+                // objList[x].npc_whoami = (short)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x1a, 8);
 
                 address_pointer = address_pointer + 8 + 19;
             }
@@ -598,7 +597,7 @@ public class ObjectLoader : DataLoader
 
 
 
-       // BuildFreeObjectLists(objList, map.lev_ark_block, ref address_pointer, ref objectsAddress);
+        // BuildFreeObjectLists(objList, map.lev_ark_block, ref address_pointer, ref objectsAddress);
 
     }
 
@@ -632,7 +631,7 @@ public class ObjectLoader : DataLoader
         ////   7300    01fc   free list for mobile objects (objects 0002-00ff, 254 x 2 bytes)
         int offset = slot * 2;
         int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x7300 + offset, 16);
-       
+
         //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
         return val;
     }
@@ -657,7 +656,7 @@ public class ObjectLoader : DataLoader
             return false;
         }
     }
-    
+
     /// <summary>
     /// Releases a free static object from the list.
     /// Shift all used objects up by one
@@ -668,22 +667,22 @@ public class ObjectLoader : DataLoader
     {
         int Slot = -1;
         //Find the slot it is currently in.
-        for (int i = 0; i<768;i++)
+        for (int i = 0; i < 768; i++)
         {
-            if (index==GetStaticAtSlot(i))
+            if (index == GetStaticAtSlot(i))
             {
                 Slot = i;
                 break;
             }
         }
 
-        if (Slot>0)
+        if (Slot > 0)
         {//Found
 
             //Shift all values between start of used to object up by one in the list.
-            for (int i = Slot; i>=NoOfFreeStatic; i--)
+            for (int i = Slot; i >= NoOfFreeStatic; i--)
             {
-                int ValueToShift = GetStaticAtSlot(i-1);
+                int ValueToShift = GetStaticAtSlot(i - 1);
                 SetStaticAtSlot(i, ValueToShift);
             }
 
@@ -693,7 +692,7 @@ public class ObjectLoader : DataLoader
             NoOfFreeStatic++;
         }
 
-        objInfo[index].next = 0;        
+        objInfo[index].next = 0;
     }
 
 
@@ -759,7 +758,7 @@ public class ObjectLoader : DataLoader
     {
         int offset = slot * 2;
         map.lev_ark_block.Data[0x74fc + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x74fc + offset+1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset + 1] = (char)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -790,56 +789,56 @@ public class ObjectLoader : DataLoader
     {
         Debug.Log("BuildFreeObjectLists");
         return;
-       //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
-       ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
-       //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
-       //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
-       //////////////// {
-       ////////////////     if (i > 2)
-       ////////////////     {
-       ////////////////         objList[i].InUseFlag = 1;
-       ////////////////         //Assume in use unless informed otherwise in the next loop.			
-       ////////////////     }
-       //////////////// }
-       //////////////// objectsAddress = 0x7300;
-       //////////////// //location of the mobile object free list
-       //////////////// address_pointer = 0;
-       //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
-       //////////////// string output = "Mobile List\n";
-       //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
-       //////////////// {
-       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-       ////////////////     objList[freed].InUseFlag = 0;
-       ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
-       ////////////////     address_pointer += 2;
-       //////////////// }
-       //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
-       //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
-       //////////////// {
-       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-       ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
-       ////////////////     address_pointer += 2;
-       //////////////// }
-       //////////////// output = output + "Static List\n";
-       //////////////// objectsAddress = 0x74fc;
-       //////////////// //location of the static object free list
-       //////////////// address_pointer = 0;
-       //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
-       //////////////// {
-       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-       ////////////////     objList[freed].InUseFlag = 0;
-       ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
-       ////////////////     address_pointer += 2;
-       //////////////// }
-       //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
-       //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
-       //////////////// {
-       ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-       ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
-       ////////////////     address_pointer += 2;
-       //////////////// }
-       //////////////// writer.Write(output);
-       //////////////// writer.Close();
+        //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
+        ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
+        //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
+        //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
+        //////////////// {
+        ////////////////     if (i > 2)
+        ////////////////     {
+        ////////////////         objList[i].InUseFlag = 1;
+        ////////////////         //Assume in use unless informed otherwise in the next loop.			
+        ////////////////     }
+        //////////////// }
+        //////////////// objectsAddress = 0x7300;
+        //////////////// //location of the mobile object free list
+        //////////////// address_pointer = 0;
+        //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
+        //////////////// string output = "Mobile List\n";
+        //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     objList[freed].InUseFlag = 0;
+        ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
+        //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Static List\n";
+        //////////////// objectsAddress = 0x74fc;
+        //////////////// //location of the static object free list
+        //////////////// address_pointer = 0;
+        //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     objList[freed].InUseFlag = 0;
+        ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
+        //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// writer.Write(output);
+        //////////////// writer.Close();
     }
 
     static void HandleMovingDoors(ObjectLoaderInfo[] objList, int x)
@@ -988,7 +987,7 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.PORTCULLIS:
                 {
                     return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
-                }                
+                }
             case ObjectInteraction.NPC_TYPE:
                 {
                     string npcname = StringController.instance.GetString(7, currObj.npc_whoami + 16);
@@ -1004,8 +1003,8 @@ public class ObjectLoader : DataLoader
             default:
                 {
                     return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
-                }                
-        }       
+                }
+        }
     }
 
     public static string UniqueObjectNameEditor(ObjectLoaderInfo currObj)
@@ -1405,31 +1404,31 @@ public class ObjectLoader : DataLoader
     /// <param name="LevelNo"></param>
     void SetFloorCollapseTiles(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int LevelNo)
     {
-        for (int i=256; i<=objList.GetUpperBound(0);i++)
+        for (int i = 256; i <= objList.GetUpperBound(0); i++)
         {
             ObjectLoaderInfo currobj = objList[i];
-            if ((currobj.link>0) && (currobj.link<= objList.GetUpperBound(0)))
+            if ((currobj.link > 0) && (currobj.link <= objList.GetUpperBound(0)))
             {
                 ObjectLoaderInfo linkobj = objList[currobj.link];
-                if (isTrigger(currobj) && (linkobj.item_id==387) && (linkobj.quality==17))
+                if (isTrigger(currobj) && (linkobj.item_id == 387) && (linkobj.quality == 17))
                 {
                     //Flag each tile in a 20 tile block as being a tile change tile
                     int triggerX = currobj.quality; int triggerY = currobj.owner;
-                    for (int x=-10; x<=10; x++)
+                    for (int x = -10; x <= 10; x++)
                     {
                         for (int y = -10; y <= 10; y++)
                         {
-                            if (TileMap.ValidTile(triggerX+x, triggerY+y))
+                            if (TileMap.ValidTile(triggerX + x, triggerY + y))
                             {
                                 if (LevelInfo[triggerX + x, triggerY + y].tileType == TileMap.TILE_OPEN)
                                 {
                                     LevelInfo[triggerX + x, triggerY + y].TerrainChange = true;
-                                }                                
+                                }
                             }
                         }
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -1549,10 +1548,10 @@ public class ObjectLoader : DataLoader
     /// <summary>
     /// Calculates the position in world space of the object at ObjectIndex in the current object list
     /// </summary>
-     /// <param name="ObjectIndex"></param>
+    /// <param name="ObjectIndex"></param>
     /// <param name="WallAdjust"></param>
     /// <returns></returns>
-    public static Vector3 CalcObjectXYZ( int ObjectIndex, short WallAdjust)
+    public static Vector3 CalcObjectXYZ(int ObjectIndex, short WallAdjust)
     {//?
         ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         TileMap tileMap = CurrentTileMap();
@@ -1639,7 +1638,7 @@ public class ObjectLoader : DataLoader
                         int BridgeIndex = findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
                         if (BridgeIndex != -1)
                         {//Adjust for possible bridges in this tile. If so the door goes at the bridge height
-                            offZ = CalcObjectXYZ( BridgeIndex, 0).y * 100;
+                            offZ = CalcObjectXYZ(BridgeIndex, 0).y * 100;
                         }
 
 
@@ -1910,7 +1909,7 @@ public class ObjectLoader : DataLoader
         //////////////////        t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
         //////////////////    }
         //////////////////}
-        
+
         ////////////////////foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
         ////////////////////{
         ////////////////////    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
@@ -2117,24 +2116,24 @@ public class ObjectLoader : DataLoader
                 //GameObject obj = GameObject.Find(itemname);
                 //if (obj != null)
                 //{
-                    index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
-                    if (cnLinked == false)
-                    {//The container is first linked to this object							
-                        cn.gameObject.GetComponent<ObjectInteraction>().link = index;
-                        cnLinked = true;
-                        prev = item;
-                    }
-                    else
-                    {//The object needs to be a next of the previous object
-                     //index= System.Array.IndexOf(InventoryObjects,obj.name);
-                        prev.GetComponent<ObjectInteraction>().next = index;
-                        prev = item;
-                    }
-                    if (item.GetComponent<Container>() != null)
-                    {//if a container then link the items in that container.
-                        linkInventoryContainers(item.GetComponent<Container>(), ref InventoryObjects);
-                    }
-               // }
+                index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
+                if (cnLinked == false)
+                {//The container is first linked to this object							
+                    cn.gameObject.GetComponent<ObjectInteraction>().link = index;
+                    cnLinked = true;
+                    prev = item;
+                }
+                else
+                {//The object needs to be a next of the previous object
+                 //index= System.Array.IndexOf(InventoryObjects,obj.name);
+                    prev.GetComponent<ObjectInteraction>().next = index;
+                    prev = item;
+                }
+                if (item.GetComponent<Container>() != null)
+                {//if a container then link the items in that container.
+                    linkInventoryContainers(item.GetComponent<Container>(), ref InventoryObjects);
+                }
+                // }
             }
         }
     }
@@ -2168,7 +2167,7 @@ public class ObjectLoader : DataLoader
                 }
             }
         }
-        
+
         for (short i = 0; i < cn.GetCapacity(); i++)
         {
             ObjectInteraction itemObjInt = cn.GetItemAt(i);
@@ -2249,7 +2248,7 @@ public class ObjectLoader : DataLoader
                 int prevLink = index;
                 for (short i = 0; i <= cn.GetCapacity(); i++)
                 {
-                    ObjectInteraction objI  = cn.GetItemAt(i);
+                    ObjectInteraction objI = cn.GetItemAt(i);
                     if (objI != null)
                     {
                         //ObjectInteraction objI = obj.GetComponent<ObjectInteraction>();
@@ -2389,9 +2388,9 @@ public class ObjectLoader : DataLoader
         if (startIndex >= 0)
         {
             bool SlotAvailable;
-            if (startIndex >=256)//Static
+            if (startIndex >= 256)//Static
             {
-                SlotAvailable=CurrentObjectList().GetFreeStaticObject(out index);
+                SlotAvailable = CurrentObjectList().GetFreeStaticObject(out index);
                 index = CurrentObjectList().GetStaticAtSlot(index);
             }
             else
@@ -2842,19 +2841,19 @@ public class ObjectLoader : DataLoader
         {
             case ObjectInteraction.ACTION_DO_NOTHING:
                 {//Default action.
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr,28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }	*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr,28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }	*/
                     break;
                 }
             case ObjectInteraction.ACTION_TRANSPORT_LEVEL:
@@ -2882,19 +2881,19 @@ public class ObjectLoader : DataLoader
                 }
             case ObjectInteraction.ACTION_RESURRECTION:
                 {//Brings the player back to life?
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr,30);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr,30);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }*/
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 16, 16);  //Target Health
                     break;
                 }
@@ -2905,26 +2904,26 @@ public class ObjectLoader : DataLoader
                  //	0010	int16	Tile destination X
                  //	0014	int16	Tile destination Y
                  //	0018	int16	Destination height?		
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
-                         //fprintf(LOGFILE,"\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-                         //fprintf(LOGFILE,"\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
-                         //fprintf(LOGFILE,"\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-                         //fprintf(LOGFILE,"\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-                         //fprintf(LOGFILE,"\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
+                            //fprintf(LOGFILE,"\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+                            //fprintf(LOGFILE,"\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+                            //fprintf(LOGFILE,"\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+                            //fprintf(LOGFILE,"\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+                            //fprintf(LOGFILE,"\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 
 
-                 }*/
+                    }*/
                     objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);    //obj to transport
                     objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0E, 16);     //Delete flag
                     objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16); //Target X
@@ -2939,23 +2938,23 @@ public class ObjectLoader : DataLoader
                  //0010	int16	value
                  //0012	int16	?? action 00 set 01 add
                  //0014	int16	Optional message to receive
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
-                         //fprintf(LOGFILE,"\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-                         //fprintf(LOGFILE,"\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
-                         //fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-                         //fprintf(LOGFILE,"\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*					fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-     fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-     fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-     fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-     fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-     fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-     fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-     fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/
-                 //	}
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
+                            //fprintf(LOGFILE,"\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+                            //fprintf(LOGFILE,"\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
+                            //fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+                            //fprintf(LOGFILE,"\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*					fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+        fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+        fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+        fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+        fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+        fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+        fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+        fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/
+                    //	}
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
                     objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
@@ -3041,19 +3040,19 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_EFFECT:
                 {//Preforms a special effect. One example is the power breaker sparking on research level.
-                 /*if (PrintDebug==1)
-                 {
-                         fprintf(LOGFILE,"\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }		*/
+                    /*if (PrintDebug==1)
+                    {
+                            fprintf(LOGFILE,"\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }		*/
                     break;
                 }
             case ObjectInteraction.ACTION_MOVING_PLATFORM:
@@ -3126,23 +3125,23 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_EMAIL:
                 {//Sends the player an email. (Differs from a message in that a message just plays once and does not hit the data reader)
-                 /*if (PrintDebug==1)
-                 {
-                         fprintf(LOGFILE,"\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
-                         //	0F Player receives email
-                         //000C	int16	Chunk no. of email (offset from 2441 0x0989)
-                         //Note the subject line of an email may be used to chain a sequence of emails together (see sspecs)
-                         fprintf(LOGFILE,"\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
-                 //}			
+                    /*if (PrintDebug==1)
+                    {
+                            fprintf(LOGFILE,"\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
+                            //	0F Player receives email
+                            //000C	int16	Chunk no. of email (offset from 2441 0x0989)
+                            //Note the subject line of an email may be used to chain a sequence of emails together (see sspecs)
+                            fprintf(LOGFILE,"\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+   fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+   fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+   fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+   fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+   fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+   fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+   fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
+                    //}			
                     objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16) + 2441;
 
                     break;
@@ -3150,40 +3149,40 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_RADAWAY:
                 {//Radiation healing on the reactor?
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
- fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
- fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
- fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
- fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
- fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
- fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
- fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
-                 //}
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+    fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+    fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+    fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+    fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+    fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+    fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+    fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
+                    //}
                     break;
                 }
             case ObjectInteraction.ACTION_CHANGE_STATE:
                 {//Used a lot in switches. Needs more research. (changes the image?)
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
-                         objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
-                         objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
-                         fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
-                         fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
+                            objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+                            objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
+                            fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+                            fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }*/
                     break;
                 }
             case ObjectInteraction.ACTION_AWAKEN:
@@ -3745,7 +3744,7 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
             if (
-                    (objList[i].InUseFlag !=0)
+                    (objList[i].InUseFlag != 0)
                     &&
                     (objList[i].ObjectTileX == tileX)
                     &&

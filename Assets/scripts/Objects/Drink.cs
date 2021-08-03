@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
-public class Drink : Food {
+public class Drink : Food
+{
 
     public override bool Eat()
     {
@@ -14,19 +13,19 @@ public class Drink : Food {
 
 
         //uw1 strings
-            //000~001~237~The water refreshes you. \n
-            //000~001~238~You drink the port. \n
-            //000~001~239~You drink the dark ale. \n
+        //000~001~237~The water refreshes you. \n
+        //000~001~238~You drink the port. \n
+        //000~001~239~You drink the dark ale. \n
 
         //uw2 strings
-            //000~001~252~The water refreshes you. \n
-            //000~001~253~You drink the wine. \n
-            //000~001~254~You drink the dark ale. \n
+        //000~001~252~The water refreshes you. \n
+        //000~001~253~You drink the wine. \n
+        //000~001~254~You drink the dark ale. \n
 
         switch (_RES)
         {
             case GAME_UW2:
-                switch(item_id)
+                switch (item_id)
                 {
                     case 187: //ale
                         StringNo = 254;
@@ -104,7 +103,7 @@ public class Drink : Food {
         else
         {//water Healing effect. (water should be 1 point (-1 in table)
             FoodValue = Mathf.Abs(FoodValue);
-            UWCharacter.Instance.CurVIT +=FoodValue ;
+            UWCharacter.Instance.CurVIT += FoodValue;
             if (UWCharacter.Instance.CurVIT > UWCharacter.Instance.MaxVIT)
             {
                 UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
@@ -117,6 +116,6 @@ public class Drink : Food {
             LeftOvers();
         }
         objInt().consumeObject();//destroy and remove from inventory/world.
-        return true;    
+        return true;
     }
 }

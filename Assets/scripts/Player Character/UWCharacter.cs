@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using System.IO;
 
 /*
 The basic character. Stats and interaction.
@@ -45,7 +42,7 @@ public class UWCharacter : Character
     {
         get
         {
-            if(isSwimming)
+            if (isSwimming)
             {
                 //float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
                 return new Vector3(0f,
@@ -83,7 +80,7 @@ public class UWCharacter : Character
         set
         {
             if (!_isSwimming)
-            {     
+            {
                 //Player is not already swimming          
                 if (value == true)
                 {
@@ -131,7 +128,7 @@ public class UWCharacter : Character
     };
 
     [SerializeField]
-    LuckState _IsLucky= LuckState.Neutral;
+    LuckState _IsLucky = LuckState.Neutral;
     public LuckState isLucky
     {
         get
@@ -141,15 +138,15 @@ public class UWCharacter : Character
         set
         {
             {
-                switch(_IsLucky)
+                switch (_IsLucky)
                 {
                     case LuckState.Cursed:
                         {
                             switch (value)
                             {
-                                case LuckState.Cursed:break;
+                                case LuckState.Cursed: break;
                                 case LuckState.Neutral:
-                                case LuckState.Lucky: _IsLucky = LuckState.Neutral;  break;                              
+                                case LuckState.Lucky: _IsLucky = LuckState.Neutral; break;
                             }
                             break;
                         }
@@ -180,7 +177,7 @@ public class UWCharacter : Character
     public int Fatigue;   //0-29 range
     public int Intoxication; //0-63 range
 
-    [SerializeField]   
+    [SerializeField]
     private short _play_poison;
     /// <summary>
     /// How badly poisoned is the player. The higher the value the longer poison ticks down for.
@@ -193,16 +190,16 @@ public class UWCharacter : Character
         }
         set
         {
-            if (_play_poison==0 && value !=0)
+            if (_play_poison == 0 && value != 0)
             {//Clears poisoning on the flask.
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(true);
             }
-            else if (_play_poison !=0 && value ==0)
+            else if (_play_poison != 0 && value == 0)
             {//Sets poisoning on the flask
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
             }
             _play_poison = value;
-            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();            
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }
     }
 
@@ -418,7 +415,7 @@ public class UWCharacter : Character
                     }
                     if (Quest.instance.QuestVariables[112] == 1)
                     {//You have been fighting your allies. You will awake in jail
-                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";                            
+                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                         return;
                     }
                     else
@@ -432,8 +429,8 @@ public class UWCharacter : Character
             case 3:
             case 4:
                 //You're gonna die down here
-                    UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
-                    return;
+                UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
+                return;
             default://resurrect in gem chamber
                 UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                 return;
@@ -511,7 +508,7 @@ public class UWCharacter : Character
         Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
         Instance.isSwimming = false;
         Instance.play_poison = 0;
-        Instance.CurVIT = Random.Range(Instance.MaxVIT/2, Instance.MaxVIT);
+        Instance.CurVIT = Random.Range(Instance.MaxVIT / 2, Instance.MaxVIT);
     }
 
     public static void ResurrectPlayerUW2()
@@ -531,25 +528,25 @@ public class UWCharacter : Character
                 a_hack_trap_castle_npcs.MakeEveryoneFriendly();
                 //Move lord british
                 ObjectInteraction obj = ObjectLoader.getObjectIntAt(NPC.findNpcByWhoAmI(142));
-                if (obj!=null)
+                if (obj != null)
                 {
                     NPC npc = obj.GetComponent<NPC>();
                     if (npc != null)
                     {
-                        if (npc.Agent==null)
+                        if (npc.Agent == null)
                         {
                             npc.transform.position = CurrentTileMap().getTileVector(42, 35);
                         }
                         else
                         {
                             npc.Agent.Warp(CurrentTileMap().getTileVector(42, 35));
-                        }                        
+                        }
                     }
                 }
                 else
                 {
                     Debug.Log("Lord British is missing. This should not happen.");
-                }               
+                }
                 //008~009~004~You awaken in jail. \n
                 //This message is supposed to be called by a scheduled trigger.
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, 4));
@@ -632,8 +629,8 @@ public class UWCharacter : Character
     /// Management of the character when in water.
     /// </summary>
     void SwimmingEffects()
-    {        
-        if (InteractionMode ==  InteractionModeAttack)
+    {
+        if (InteractionMode == InteractionModeAttack)
         {
             InteractionMode = InteractionModeWalk;
         }
@@ -704,16 +701,16 @@ public class UWCharacter : Character
         //Check if player is on ground.
         Grounded = IsGrounded();
 
-        TerrainAndCurrentsUpdate();    
+        TerrainAndCurrentsUpdate();
 
         base.Update();
 
         FallDamageUpdate();
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
             BounceUpdate();//For handling the bounce spell
-        }        
+        }
 
         if (EditorMode)
         {
@@ -833,7 +830,7 @@ public class UWCharacter : Character
         else
         {//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
             DetectionRange = MinDetectionRange + ((BaseDetectionRange - MinDetectionRange) * ((30.0f - (GetBaseStealthLevel() + StealthLevel)) / 30.0f));
-        }        
+        }
     }
 
     /// <summary>
@@ -1377,7 +1374,7 @@ public class UWCharacter : Character
         }
         if (FoodLevel < 10 && AutoEat)
         {
-           AutoEatFood();//automatically eat some food
+            AutoEatFood();//automatically eat some food
         }
         if (FoodLevel < 3)
         {
@@ -1391,7 +1388,7 @@ public class UWCharacter : Character
     void AutoEatFood()
     {
         ObjectInteraction foodtoeat = Instance.playerInventory.playerContainer.findItemOfCategory(ObjectInteraction.FOOD);
-        if (foodtoeat !=null)
+        if (foodtoeat != null)
         {
             foodtoeat.Use();
         }
@@ -1482,7 +1479,7 @@ public class UWCharacter : Character
             //000~001~147~You have attained experience level
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_attained_experience_level_));
             TrainingPoints += 3;
-            Instance.MaxVIT = 30 + ((Instance.PlayerSkills.STR * CharLevel)/5);
+            Instance.MaxVIT = 30 + ((Instance.PlayerSkills.STR * CharLevel) / 5);
             int defaultMaxMana = (Instance.PlayerSkills.INT * Instance.PlayerSkills.ManaSkill) >> 3;
             switch (_RES)
             {//TODO:max these properties?
@@ -1517,7 +1514,7 @@ public class UWCharacter : Character
     public void AddXP(int xp)
     {//TODO:These are UW1 level thresholds        
         switch (_RES)
-        {            
+        {
             case GAME_UW2:
                 {
                     int curskillthreashold = EXP % 150;
@@ -1582,7 +1579,7 @@ public class UWCharacter : Character
                     else if (EXP < 65535)
                     {
                         SetCharLevel(15);
-                        if (newskillthreashold>curskillthreashold)
+                        if (newskillthreashold > curskillthreashold)
                         {//Additional skill point every 150 exp per mitch aigner
                             TrainingPoints++;
                         }
@@ -1595,76 +1592,76 @@ public class UWCharacter : Character
                 }
             default:
                 {
-                EXP += xp;
-                if (EXP <= 600)
-                        {//1
-                            SetCharLevel(1);
-                        }
-                        else if (EXP <= 1200)
-                        {//2
-                            SetCharLevel(2);
-                        }
-                        else if (EXP <= 1800)
-                        {//3
-                            SetCharLevel(3);
-                        }
-                        else if (EXP <= 2400)
-                        {//4
-                            SetCharLevel(4);
-                        }
-                        else if (EXP <= 3000)
-                        {//5
-                            SetCharLevel(5);
-                        }
-                        else if (EXP <= 3600)
-                        {//6
-                            SetCharLevel(6);
-                        }
-                        else if (EXP <= 4200)
-                        {//7
-                            SetCharLevel(7);
-                        }
-                        else if (EXP <= 4800)
-                        {//8
-                            SetCharLevel(8);
-                        }
-                        else if (EXP <= 5400)
-                        {//9
-                            SetCharLevel(9);
-                        }
-                        else if (EXP <= 6000)
-                        {//10
-                            SetCharLevel(10);
-                        }
-                        else if (EXP <= 6600)
-                        {//11
-                            SetCharLevel(11);
-                        }
-                        else if (EXP <= 7200)
-                        {//12
-                            SetCharLevel(12);
-                        }
-                        else if (EXP <= 7800)
-                        {//13
-                            SetCharLevel(13);
-                        }
-                        else if (EXP <= 8400)
-                        {//14
-                            SetCharLevel(14);
-                        }
-                        else if (EXP <= 9000)
-                        {//15
-                            SetCharLevel(15);
-                        }
-                        else if (EXP <= 9600)
-                        {
-                            SetCharLevel(16);
-                        }
-                        else
-                        {
-                            EXP = 9600;//Cap XP in UW1
-                            SetCharLevel(16);
-                        }
+                    EXP += xp;
+                    if (EXP <= 600)
+                    {//1
+                        SetCharLevel(1);
+                    }
+                    else if (EXP <= 1200)
+                    {//2
+                        SetCharLevel(2);
+                    }
+                    else if (EXP <= 1800)
+                    {//3
+                        SetCharLevel(3);
+                    }
+                    else if (EXP <= 2400)
+                    {//4
+                        SetCharLevel(4);
+                    }
+                    else if (EXP <= 3000)
+                    {//5
+                        SetCharLevel(5);
+                    }
+                    else if (EXP <= 3600)
+                    {//6
+                        SetCharLevel(6);
+                    }
+                    else if (EXP <= 4200)
+                    {//7
+                        SetCharLevel(7);
+                    }
+                    else if (EXP <= 4800)
+                    {//8
+                        SetCharLevel(8);
+                    }
+                    else if (EXP <= 5400)
+                    {//9
+                        SetCharLevel(9);
+                    }
+                    else if (EXP <= 6000)
+                    {//10
+                        SetCharLevel(10);
+                    }
+                    else if (EXP <= 6600)
+                    {//11
+                        SetCharLevel(11);
+                    }
+                    else if (EXP <= 7200)
+                    {//12
+                        SetCharLevel(12);
+                    }
+                    else if (EXP <= 7800)
+                    {//13
+                        SetCharLevel(13);
+                    }
+                    else if (EXP <= 8400)
+                    {//14
+                        SetCharLevel(14);
+                    }
+                    else if (EXP <= 9000)
+                    {//15
+                        SetCharLevel(15);
+                    }
+                    else if (EXP <= 9600)
+                    {
+                        SetCharLevel(16);
+                    }
+                    else
+                    {
+                        EXP = 9600;//Cap XP in UW1
+                        SetCharLevel(16);
+                    }
                     break;
                 }
         }
@@ -1792,7 +1789,7 @@ public class UWCharacter : Character
         Cutscene_Incense d = UWHUD.instance.gameObject.AddComponent<Cutscene_Incense>();
         UWHUD.instance.CutScenesFull.cs = d;
         UWHUD.instance.CutScenesFull.Begin();
-     }
+    }
 
 
     /// <summary>
@@ -1874,7 +1871,7 @@ public class UWCharacter : Character
                 if (npc.npc_attitude == NPC.AI_ATTITUDE_HOSTILE)
                 {
                     return true;
-                }               
+                }
             }
         }
         return false;
@@ -2265,8 +2262,8 @@ public class UWCharacter : Character
                     {
                         footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_FOOT_2];
                         step = true;
-                    }                   
-                    footsteps.Play();   
+                    }
+                    footsteps.Play();
                 }
             }
         }

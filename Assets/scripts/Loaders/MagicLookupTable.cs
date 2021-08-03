@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 public class MagicLookupTable : Loader
 {
@@ -39,7 +39,7 @@ public class MagicLookupTable : Loader
                     LookupValues = new int[138];
                     FileOffset = 0x66490;
                     Exe = "uw2.exe";
-                    NoOfEntries =137;
+                    NoOfEntries = 137;
                     break;
                 }
             default:

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Action_Email : MonoBehaviour {
+public class Action_Email : MonoBehaviour
+{
 
-	public void PerformAction()
-	{
-		Debug.Log ("Action Email");
-	}
+    public void PerformAction()
+    {
+        Debug.Log("Action Email");
+    }
 }

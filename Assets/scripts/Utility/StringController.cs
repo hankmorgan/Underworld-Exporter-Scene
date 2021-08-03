@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
+﻿using System.Collections;
 using System.IO;
+using System.Text;
 
 /// <summary>
 /// Class for holding game strings and returning formatted strings and text

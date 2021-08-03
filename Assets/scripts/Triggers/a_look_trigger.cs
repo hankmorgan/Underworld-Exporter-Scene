@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class a_look_trigger : trigger_base {
+public class a_look_trigger : trigger_base
+{
 
     /*
     Special kind of trigger that fires when the player looks at object linked to it.
@@ -13,13 +13,13 @@ public class a_look_trigger : trigger_base {
     //in vanilla this is a dice roll. Here it is not.
     public override bool Activate(GameObject src)
     {
-        if (zpos>0)
+        if (zpos > 0)
         {
-            if (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillSearch) + Random.Range(0,16) <= zpos)
+            if (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillSearch) + Random.Range(0, 16) <= zpos)
             {
                 Debug.Log("unable to activate look trigger due to skills");
                 return false;
-            }            
+            }
         }
         return base.Activate(src);
     }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 /// <summary>
 /// Magic spell casting code
 /// </summary>
@@ -44,7 +43,7 @@ public class Magic : UWEBase
     }
 
     ///How much mana the player can have
-   [SerializeField]
+    [SerializeField]
     private int _MaxMana;
     public int MaxMana
     {
@@ -74,7 +73,7 @@ public class Magic : UWEBase
     }
     ///The true max mana the character has when their mana is drained.
     public int TrueMaxMana;
-    
+
     ///The mana cost of the next spell the player will cast
     public int SpellCost;
 
@@ -255,7 +254,7 @@ public class Magic : UWEBase
                 }
         }//magicwords
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
             TestSpellLevel--;//UW2 seems to have different rules here. To confirm
         }
@@ -1520,7 +1519,7 @@ public class Magic : UWEBase
                 {//Only deactivate top level items
                     //allGameObj[i].SetActive(false);
                     ObjectInteraction objI = allGameObj[i].GetComponent<ObjectInteraction>();
-                    if (objI!=null)
+                    if (objI != null)
                     {
                         ObjectInteraction.DestroyObjectFromUW(objI);
                     }
@@ -1583,7 +1582,7 @@ public class Magic : UWEBase
             poison.init(EffectID, caster);
             //Apply a impact effect to the npc
             Impact.SpawnHitImpact(Impact.ImpactMagic(), npc.GetImpactPoint(), poison.impactFrameStart, poison.impactFrameEnd);
-            npc.ApplyAttack((short)((poison.BaseDamage / poison.counter)),caster);
+            npc.ApplyAttack((short)((poison.BaseDamage / poison.counter)), caster);
 
             //int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
             //if (EffectSlot != -1)
@@ -2110,12 +2109,12 @@ public class Magic : UWEBase
     void EnchantObject(ObjectInteraction obj)
     {
 
-        if (obj.link==0)
+        if (obj.link == 0)
         {
             InitialEnchantObject(obj);
             return;
         }
-        if (obj.enchantment ==1)
+        if (obj.enchantment == 1)
         {
             IncreaseEnchantment(obj);
         }
@@ -2135,9 +2134,9 @@ public class Magic : UWEBase
             case ObjectInteraction.HELM:
             case ObjectInteraction.GLOVES:
             case ObjectInteraction.SHIELD:
-                if (Random.Range(0,2)==0)
+                if (Random.Range(0, 2) == 0)
                 {
-                    enchant = 464 + 240;                    
+                    enchant = 464 + 240;
                 }
                 else
                 {
@@ -2153,14 +2152,14 @@ public class Magic : UWEBase
                 {
                     enchant = 456 + 240;
                 }
-                 break;
+                break;
             default:
                 //000~001~300~You cannot enchant that. \n
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
                 return;
         }
 
-        if (obj.link>0)
+        if (obj.link > 0)
         {
             //000~001~300~You cannot enchant that. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
@@ -2174,7 +2173,7 @@ public class Magic : UWEBase
             {
                 obj.GetComponent<Equipment>().SetDisplayEnchantment();
             }
-            
+
             //000~001~301~You have enchanted the
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 301) + StringController.instance.GetObjectNounUW(obj));
         }
@@ -2186,8 +2185,8 @@ public class Magic : UWEBase
     /// <param name="obj"></param>
     void IncreaseEnchantment(ObjectInteraction obj)
     {
-        if((obj.link>=464+240) && (obj.link <=479+240))
-            {
+        if ((obj.link >= 464 + 240) && (obj.link <= 479 + 240))
+        {
             bool safetoenchant = false;
             if ((obj.link >= 464 + 240) && (obj.link < 464 + 240 + 2))
             {//is between minor and additional
@@ -2243,17 +2242,17 @@ public class Magic : UWEBase
             if (tm.ValidTile(pos))
             {
                 pos.Set(pos.x, 4.5f, pos.z); //Put it on the roof.
-                                             /*
-                                 GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
-                                 myObj.layer=LayerMask.NameToLayer("UWObjects");
-                                 myObj.transform.position=pos;
-                                 myObj.transform.Rotate(-90,0,0);
-                                 myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                                 GameWorldController.MoveToWorld(myObj);
-                                 ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
-                                 ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
-                                 a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
-                                 */
+                /*
+    GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
+    myObj.layer=LayerMask.NameToLayer("UWObjects");
+    myObj.transform.position=pos;
+    myObj.transform.Rotate(-90,0,0);
+    myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
+    GameWorldController.MoveToWorld(myObj);
+    ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
+    ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+    a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
+    */
                 ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(386, 40, 0, 0, 256);
                 GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
                 myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(), 0, 0, 0);
@@ -2562,10 +2561,10 @@ public class Magic : UWEBase
             if (Col.gameObject.GetComponent<ObjectInteraction>() != null)
             {
                 ObjectInteraction objint = Col.gameObject.GetComponent<ObjectInteraction>();
-                if(objint.isquant==0 && objint.link>0)
+                if (objint.isquant == 0 && objint.link > 0)
                 {
                     ObjectInteraction objLink = ObjectLoader.getObjectIntAt(objint.link);
-                    if (objLink.GetItemType()==ObjectInteraction.A_LOOK_TRIGGER)
+                    if (objLink.GetItemType() == ObjectInteraction.A_LOOK_TRIGGER)
                     {
                         objLink.GetComponent<a_look_trigger>().ForceActivate(objLink.gameObject);
                     }
@@ -2796,10 +2795,10 @@ public class Magic : UWEBase
 
     public void Cast_StoneStrike(GameObject caster, GameObject target, int effectID)
     {
-        if (Random.Range(1,6)> 4)
+        if (Random.Range(1, 6) > 4)
         {//1 in 5 hits will cast
             SpellEffectPetrified sep = target.AddComponent<SpellEffectPetrified>();
-            sep.counter = (short)Random.Range(5,15);
+            sep.counter = (short)Random.Range(5, 15);
             sep.Go();
         }
     }
@@ -3211,7 +3210,7 @@ public class Magic : UWEBase
                         case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectRoamingSight>();
                             break;
-                        case SpellEffect.UW2_Spell_Effect_Curse:                       
+                        case SpellEffect.UW2_Spell_Effect_Curse:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectLucky>();
                             break;
                         case SpellEffect.UW2_Spell_Effect_Cursed:
@@ -3701,7 +3700,7 @@ public class Magic : UWEBase
                 {
                     if (!spellprop.silent)
                     {
-                        if (caster.GetComponent<AudioSource>()!=null)
+                        if (caster.GetComponent<AudioSource>() != null)
                         {
                             caster.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
                             caster.GetComponent<AudioSource>().Play();
@@ -3836,7 +3835,7 @@ public class Magic : UWEBase
                 mgp.Projectile_Pitch |= 0x8;  //Set bit 3
             }
 
-            mgp.ProjectileHeading =  (short)(this.transform.eulerAngles.y * (255f / 360f));
+            mgp.ProjectileHeading = (short)(this.transform.eulerAngles.y * (255f / 360f));
 
             ////////if ((projectileAngle >= 0) && (projectileAngle < 45))
             ////////{
@@ -5530,7 +5529,7 @@ public class Magic : UWEBase
 
 
             case SpellEffect.UW2_Spell_Effect_NameEnchantment:
-            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:            
+            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:
                 {
                     Cast_NameEnchantment(caster, ready, EffectID);
                     SpellResultType = SpellResultNone;
@@ -5560,7 +5559,7 @@ public class Magic : UWEBase
                         case SpellRule_Equipable:
                             if (PassiveArrayIndex != -1)
                             {
-                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex,UWCharacter.LuckState.Lucky);
+                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex, UWCharacter.LuckState.Lucky);
                             }
                             SpellResultType = SpellResultPassive;
                             break;
@@ -6041,7 +6040,7 @@ public class Magic : UWEBase
                 }
             case SpellEffect.UW2_Spell_Effect_StoneStrike:
                 {
-                    Cast_StoneStrike(caster,target, EffectID);
+                    Cast_StoneStrike(caster, target, EffectID);
                     SpellResultType = SpellResultNone;
                     break;
                 }
@@ -6225,7 +6224,7 @@ public class Magic : UWEBase
     /// </summary>
     void IronFleshXClock()
     {
-        if (Quest.instance.x_clocks[3]==4)
+        if (Quest.instance.x_clocks[3] == 4)
         {
             Quest.instance.x_clocks[3] = 5;
             //000~001~335~The baked mud hardens into a clear glaze. \n

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ScrollButtonInventory : Scrollbutton
 {
@@ -14,7 +13,7 @@ public class ScrollButtonInventory : Scrollbutton
     {
         ScrollValue = (short)(ScrollValue + stepSize);
         int noOfItems = UWCharacter.Instance.playerInventory.currentContainer.CountItems();
-        MaxScrollValue = (short)(Mathf.Max((((noOfItems)/ 4)-1) * 4,8));
+        MaxScrollValue = (short)(Mathf.Max((((noOfItems) / 4) - 1) * 4, 8));
         if (ScrollValue > MaxScrollValue)
         {
             ScrollValue = MaxScrollValue;

@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 public class CutsLoader : ArtLoader
 {
 
@@ -30,7 +29,7 @@ public class CutsLoader : ArtLoader
 
     public CutsLoader(string File)
     {
-        filePath =Path.Combine(BasePath, "CUTS", File.ToUpper());
+        filePath = Path.Combine(BasePath, "CUTS", File.ToUpper());
         if (LoadImageFile())
         {
             ReadCutsFile(ref ImageFileData, UseAlpha(File), UseErrorHandling(File));
@@ -243,7 +242,7 @@ comes the color palette:*/
                     // longOp
                     //Uint16 wordCnt = *((Uint16*)srcP);
                     int wordCnt = (int)getValAtAddress(srcData, inptr, 16);//srcData[inptr];
-                                                                                      //srcP += 2;
+                                                                           //srcP += 2;
                     inptr += 2;
                     int wordcntSign = (wordCnt & 0x8000) >> 15;//try and get the sign.
                     if (wordcntSign == 1)

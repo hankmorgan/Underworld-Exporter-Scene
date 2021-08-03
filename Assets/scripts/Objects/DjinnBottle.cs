@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DjinnBottle : object_base {
+public class DjinnBottle : object_base
+{
 
 
     public override bool use()
@@ -16,7 +15,7 @@ public class DjinnBottle : object_base {
         else
         {
             return base.use();
-        }        
+        }
     }
 
     public override bool ApplyAttack(short damage)
@@ -35,7 +34,7 @@ public class DjinnBottle : object_base {
             case 2:
             case 3:
             case 4://Before ironflesh
-                DjinnKillsPlayer();break;
+                DjinnKillsPlayer(); break;
             case 5://after iron flesh.               
                 if (IsAtSigil())
                 { //If at sigil bind to player.
@@ -48,7 +47,7 @@ public class DjinnBottle : object_base {
                 break;
             default:
                 Debug.Log("You broke another bottle!. I've yet to test this!");
-                break; 
+                break;
         }
         objInt().consumeObject();//Destroy bottle.
         return true;
@@ -66,7 +65,7 @@ public class DjinnBottle : object_base {
         //You do this in the wrong location or without protection
         //000~001~369~The air daemon is released, and then rends you. \n
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 369));
-        UWCharacter.Instance.ApplyDamage(UWCharacter.Instance.MaxVIT + 1);        
+        UWCharacter.Instance.ApplyDamage(UWCharacter.Instance.MaxVIT + 1);
     }
 
     /// <summary>
@@ -75,10 +74,10 @@ public class DjinnBottle : object_base {
     /// <returns></returns>
     bool IsAtSigil()
     {
-        if (GameWorldController.instance.LevelNo==68)
+        if (GameWorldController.instance.LevelNo == 68)
         {
             int tileX = TileMap.visitTileX; int tileY = TileMap.visitTileY;
-            if ((tileX>=18) && (tileX<=25) && (tileY >= 49) && (tileY <= 56))
+            if ((tileX >= 18) && (tileX <= 25) && (tileY >= 49) && (tileY <= 56))
             {
                 return true;
             }

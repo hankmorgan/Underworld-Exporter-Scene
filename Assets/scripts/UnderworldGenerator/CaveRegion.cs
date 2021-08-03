@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 //Taken from
 //http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels
 
-public class CaveRegion: Region
+public class CaveRegion : Region
 {
 
     public int PercentAreWalls { get; set; }
@@ -26,7 +25,7 @@ public class CaveRegion: Region
     protected override void Generate(int NoOfSubRegions)
     {
         PercentAreWalls = 40;
-        RandomFillMap();        
+        RandomFillMap();
         for (int i = 0; i < NoOfIterations; i++)
         {
             MakeCaverns();
@@ -37,7 +36,7 @@ public class CaveRegion: Region
         if (layer > 1)
         {//This is not at the top layer so I need to remove the outer tiles to avoid a block surrounding the cave.
             //TODO: Only do this depending on what the parent layer is like.
-            if (ParentRegion!=null)
+            if (ParentRegion != null)
             {
                 if (ParentRegion.RegionType() == "Base")
                 {//Do not clean up the border if in the middle of a solid region such as the base region
@@ -91,7 +90,7 @@ public class CaveRegion: Region
     public void RandomFillMap()
     {
         // New, empty map
-       // Map = new GeneratorMap[MapWidth, MapHeight];
+        // Map = new GeneratorMap[MapWidth, MapHeight];
         BlankMap();
         for (int row = 0; row <= MapHeight; row++)
         {
@@ -152,27 +151,27 @@ public class CaveRegion: Region
     }
 
     void FillCaves()
-    {       
+    {
         floodSizes.Add(0);
-        for (int x=0; x<=Map.GetUpperBound(0); x++)
+        for (int x = 0; x <= Map.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= Map.GetUpperBound(1); y++)
             {
-                if (Flood[x,y] == 0 )
+                if (Flood[x, y] == 0)
                 {
-                    if (Map[x,y].TileLayoutMap != SOLID)
+                    if (Map[x, y].TileLayoutMap != SOLID)
                     {//This is an open tile that has not been filled in.
                         floodSizes.Add(0);
-                        FloodFill(x, y, floodIndex++);                        
+                        FloodFill(x, y, floodIndex++);
                     }
                 }
             }
         }
         int maxFlood = 0;
         //Find the biggest cavern
-        for (int i=1; i<floodSizes.Count;i++)
+        for (int i = 1; i < floodSizes.Count; i++)
         {
-            if (floodSizes[i]> floodSizes[maxFlood])
+            if (floodSizes[i] > floodSizes[maxFlood])
             {
                 maxFlood = i;
             }
@@ -182,7 +181,7 @@ public class CaveRegion: Region
         {
             for (int y = 0; y <= Map.GetUpperBound(1); y++)
             {
-                if (Flood[x,y]!=maxFlood)
+                if (Flood[x, y] != maxFlood)
                 {
                     Map[x, y].TileLayoutMap = SOLID;
                     Flood[x, y] = 0;//Clear from flood map
@@ -195,18 +194,18 @@ public class CaveRegion: Region
     {
         //Check n,s,e,w of each tile
         Flood[x, y] = indexToFill;
-        floodSizes[indexToFill]= floodSizes[indexToFill]+1;
+        floodSizes[indexToFill] = floodSizes[indexToFill] + 1;
         if (x + 1 <= Map.GetUpperBound(0))
         {
-            if ((Map[x + 1, y].TileLayoutMap != SOLID) && (Flood[x+1, y]==0))
+            if ((Map[x + 1, y].TileLayoutMap != SOLID) && (Flood[x + 1, y] == 0))
             {
                 FloodFill(x + 1, y, indexToFill);
             }
         }
 
-        if (x - 1 >= 0 )
+        if (x - 1 >= 0)
         {
-            if ((Map[x - 1, y].TileLayoutMap != SOLID) && (Flood[x-1, y] == 0))
+            if ((Map[x - 1, y].TileLayoutMap != SOLID) && (Flood[x - 1, y] == 0))
             {
                 FloodFill(x - 1, y, indexToFill);
             }
@@ -214,16 +213,16 @@ public class CaveRegion: Region
 
         if (y + 1 <= Map.GetUpperBound(0))
         {
-            if ((Map[x, y + 1].TileLayoutMap != SOLID) && (Flood[x, y+1] == 0))
+            if ((Map[x, y + 1].TileLayoutMap != SOLID) && (Flood[x, y + 1] == 0))
             {
                 FloodFill(x, y + 1, indexToFill);
             }
         }
         if (y - 1 >= 0)
         {
-            if ((Map[x, y-1].TileLayoutMap != SOLID) && (Flood[x, y-1] == 0))
+            if ((Map[x, y - 1].TileLayoutMap != SOLID) && (Flood[x, y - 1] == 0))
             {
-                FloodFill(x, y-1, indexToFill);
+                FloodFill(x, y - 1, indexToFill);
             }
         }
     }
@@ -243,9 +242,9 @@ public class CaveRegion: Region
                     {
                         if ((a != 0) && (b != 0))
                         {
-                            if ( (x + a >= 0) && (x + a <= Map.GetUpperBound(0)) && (y + b >= 0) && (y + b <= Map.GetUpperBound(1)))
+                            if ((x + a >= 0) && (x + a <= Map.GetUpperBound(0)) && (y + b >= 0) && (y + b <= Map.GetUpperBound(1)))
                             {
-                                if (Flood[x + a, y + b] !=0)
+                                if (Flood[x + a, y + b] != 0)
                                 {
                                     touching = true;
                                 }
@@ -264,13 +263,13 @@ public class CaveRegion: Region
     void CleanUpBorder()
     {
         BorderFlood = new int[MapWidth + 1, MapHeight + 1];
-        for (int x=0; x<=Map.GetUpperBound(0);x++)
+        for (int x = 0; x <= Map.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= Map.GetUpperBound(1); y++)
             {
-                if (x==0 || y==0 || x==Map.GetUpperBound(0) || y==Map.GetUpperBound(0))
+                if (x == 0 || y == 0 || x == Map.GetUpperBound(0) || y == Map.GetUpperBound(0))
                 {//Only test from the edge
-                    if (!isTouchingOpenArea(x,y))
+                    if (!isTouchingOpenArea(x, y))
                     {
                         floodFillBorder(x, y, borderfloodIndex++);
                     }
@@ -282,7 +281,7 @@ public class CaveRegion: Region
         {
             for (int y = 0; y <= Map.GetUpperBound(1); y++)
             {
-            if (BorderFlood[x,y]!=0)
+                if (BorderFlood[x, y] != 0)
                 {
                     Map[x, y].TileLayoutMap = OPEN;
                 }
@@ -303,9 +302,9 @@ public class CaveRegion: Region
                 {
                     if ((x + a >= 0) && (x + a <= Map.GetUpperBound(0)) && (y + b >= 0) && (y + b <= Map.GetUpperBound(1)))
                     {
-                        if (!isTouchingOpenArea(x+a, y+b))
+                        if (!isTouchingOpenArea(x + a, y + b))
                         {
-                            floodFillBorder(x+a, y+b, floodIndex);
+                            floodFillBorder(x + a, y + b, floodIndex);
                         }
                     }
                 }
@@ -317,19 +316,19 @@ public class CaveRegion: Region
     bool isTouchingOpenArea(int x, int y)
     {
         bool touching = false;
-        if (Map[x,y].TileLayoutMap !=SOLID)
+        if (Map[x, y].TileLayoutMap != SOLID)
         {
             return true;
         }
-        for (int a=-1; a<=1; a++)
+        for (int a = -1; a <= 1; a++)
         {
             for (int b = -1; b <= 1; b++)
             {
-                if ((a!=0) && (b!=0))
+                if ((a != 0) && (b != 0))
                 {
                     if ((x + a >= 0) && (y + b >= 0) && (x + a <= Map.GetUpperBound(0)) && (y + b <= Map.GetUpperBound(1)))
                     {
-                        if (Flood[x+a,y+b]!=0)
+                        if (Flood[x + a, y + b] != 0)
                         {
                             return true;
                         }

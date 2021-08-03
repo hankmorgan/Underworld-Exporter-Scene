@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// A hack trap castle npcs.
@@ -27,7 +26,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
         Tory = 141,
         LordBritish = 142,
         Feridwyn = 143,
-        FemaleGuard = 149,        
+        FemaleGuard = 149,
         Syria = 168
     };
     //Seems to move npcs to different locations.
@@ -50,7 +49,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        switch(Quest.instance.x_clocks[0])
+        switch (Quest.instance.x_clocks[0])
         {
             case 0:
                 EventsAtXClock0();
@@ -60,7 +59,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
                 break;
         }
     }
-    
+
     void EventsAtXClock0()
     {
         //Play Cutscene for Guardian taunt.
@@ -105,29 +104,29 @@ public class a_hack_trap_castle_npcs : a_hack_trap
 
     public static void MakeEveryoneFriendly()
     {
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nell), NPC.npc_goals.npc_goal_wander_2,NPC.AI_ATTITUDE_FRIENDLY);
-       // NPC.SetNPCLocation(227, 42, 35, NPC.npc_goals.npc_goal_wander_2);//a guard
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Charles),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nell), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        // NPC.SetNPCLocation(227, 42, 35, NPC.npc_goals.npc_goal_wander_2);//a guard
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Charles), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
         //NPC.SetNPCLocation(230, 29, 36, NPC.npc_goals.npc_goal_wander_2);//another guard
         // NPC.SetNPCLocation(231, 30, 52, NPC.npc_goals.npc_goal_goto_1);//another guard next to lb
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Patterson),  NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Patterson), NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
         // NPC.SetNPCLocation(233, 34, 35, NPC.npc_goals.npc_goal_wander_2);//another guard
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.LordBritish),  NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.LordBritish), NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nelson), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Tory),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Tory), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nanna), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Feridwyn), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
         //NPC.SetNPCLocation(248, 33, 52, NPC.npc_goals.npc_goal_goto_1);//another guard next to lb
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Miranda), NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Geoffrey),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Julia),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Dupre),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Iolo),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nystrul),  NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Geoffrey), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Julia), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Dupre), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Iolo), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Nystrul), NPC.npc_goals.npc_goal_goto_1, NPC.AI_ATTITUDE_FRIENDLY);
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.Syria), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
 
         NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.FemaleGuard), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
-        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.MaleGuard),  NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
+        NPC.SetNPCAttitudeGoal(getNPC(BritanniaNPCS.MaleGuard), NPC.npc_goals.npc_goal_wander_2, NPC.AI_ATTITUDE_FRIENDLY);
 
     }
 

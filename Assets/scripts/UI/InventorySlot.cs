@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class InventorySlot : GuiBase
 {
     /*The slots containing items on the Inventory display*/
@@ -228,7 +228,7 @@ public class InventorySlot : GuiBase
             //Special case Eating food dropped on helm slot
             if (SlotCategory == HELM)
             {
-                if(CurrentObjectInHand.Eat())
+                if (CurrentObjectInHand.Eat())
                 {//True is returned if some eating action has taken place.
                     return;
                 }
@@ -254,7 +254,7 @@ public class InventorySlot : GuiBase
             }
         }
 
-       
+
         if (ObjectUsedOn == null)//No object in slot -> add to the slot
         {
             if (DoNotPickup == false)
@@ -463,7 +463,7 @@ public class InventorySlot : GuiBase
         {
             UWHUD.instance.ConversationButtonParent.SetActive(true);
             UWHUD.instance.MessageScroll.Set("");
-           // UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
+            // UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
         }
 
         if (quant == 0)

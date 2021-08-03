@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_hack_trap_colour_cycle : a_hack_trap
 {

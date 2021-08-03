@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Moves buttons button up and down
 /// </summary>
 /// Trap zpos is the lower position of the button. owner is how much it moves up.
-public class a_hack_trap_button_mover : a_hack_trap {
+public class a_hack_trap_button_mover : a_hack_trap
+{
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {//950-954-- not sure yet if this is the correct behaviour to hard code indices
@@ -53,10 +52,10 @@ public class a_hack_trap_button_mover : a_hack_trap {
             }
             else
             {//Move back
-                MoveButton(zpos , button);
+                MoveButton(zpos, button);
             }
         }
-        
+
     }
 
     /// <summary>

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Object loader info.
@@ -32,7 +31,7 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsInventory)
             {
-                if (InventoryData==null)
+                if (InventoryData == null)
                 {
                     InventoryData = new char[8]; //8 bytes of static data.
                 }
@@ -148,7 +147,7 @@ public class ObjectLoaderInfo : UWClass
     public short invis     //14
     {//(short)(ExtractBits(Vals[0], 14, 1));
         get
-        {           
+        {
             int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 14, 1);
         }
@@ -182,7 +181,7 @@ public class ObjectLoaderInfo : UWClass
             val |= ((value & 0x1) << 15);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (origItemID!=item_id)
+            if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
             }
@@ -408,7 +407,7 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsStatic) { return 0; }
             return (short)Loader.getValAtAddress(DataBuffer, PTR + 0x9, 8);
-         }
+        }
         set
         {
             if (!IsStatic)
@@ -515,7 +514,7 @@ public class ObjectLoaderInfo : UWClass
                 int val = (MobileUnk_0xB_12_F << 12) | (value << 4) | (npc_goal & 0xF);
                 DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
                 DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
-                if (npc_gtarg !=value)
+                if (npc_gtarg != value)
                 {
                     Debug.Log("Npc_Gtarg!=value");
                 }
@@ -659,7 +658,7 @@ public class ObjectLoaderInfo : UWClass
             }
         }
     }
-    
+
 
 
     public short MobileUnk_0xF_0_3F
@@ -800,7 +799,7 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsStatic) { return 0; }
             int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x14, 8);
-            return (short)(DataLoader.ExtractBits(val, 4, 0xF));           
+            return (short)(DataLoader.ExtractBits(val, 4, 0xF));
         }
         set
         {
@@ -879,7 +878,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 value &= 0x3f; //Keep value in range;
-                              //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
+                               //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
                 int val = (npc_xhome << 9) | (value << 4) | (MobileUnk_0xF_0_3F & 0xF);
                 DataBuffer[PTR + 0x16] = (char)(val & 0xFF);
                 DataBuffer[PTR + 0x17] = (char)((val >> 8) & 0xFF);
@@ -900,7 +899,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 value &= 0x3f; //Keep value in range;
-                              //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
+                               //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
                 int val = (value << 9) | (npc_yhome << 4) | (MobileUnk_0xF_0_3F & 0xF);
                 DataBuffer[PTR + 0x16] = (char)(val & 0xFF);
                 DataBuffer[PTR + 0x17] = (char)((val >> 8) & 0xFF);
@@ -981,7 +980,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x1a, 8);            
+            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x1a, 8);
         }
         set
         {
@@ -1037,8 +1036,8 @@ public class ObjectLoaderInfo : UWClass
     //My additions
     public short InUseFlag//Based on values and no of values in the mobile and static free lists.
     {
-    get{return 1;}
-    set{}
+        get { return 1; }
+        set { }
     }
 
 
@@ -1129,7 +1128,7 @@ public class ObjectLoaderInfo : UWClass
     {
         index = _index;
         map = _map;
-        guid=System.Guid.NewGuid();
+        guid = System.Guid.NewGuid();
         if (isWorldObject)
         {
             parentList = UWEBase.CurrentObjectList();
@@ -1209,6 +1208,6 @@ public class ObjectLoaderInfo : UWClass
     {
         return GameWorldController.instance.objectMaster.objProp[item_id].startFrame;
     }
-     
+
 }
 

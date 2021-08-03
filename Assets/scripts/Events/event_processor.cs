@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 public class event_processor : UWClass
 {
@@ -131,7 +130,7 @@ public class event_processor : UWClass
         string output = "";
         for (int BlockNo = 0; BlockNo <= events_blocks.GetUpperBound(0); BlockNo++)
         {
-            if (events_blocks[BlockNo].events!=null)
+            if (events_blocks[BlockNo].events != null)
             {
                 for (int RowNo = 0; RowNo <= events_blocks[BlockNo].events.GetUpperBound(0); RowNo++)
                 {
@@ -148,10 +147,10 @@ public class event_processor : UWClass
     }
 
 
-        /// <summary>
-        /// Processes the events for the current level
-        /// </summary>
-        public void ProcessEvents()
+    /// <summary>
+    /// Processes the events for the current level
+    /// </summary>
+    public void ProcessEvents()
     {
         for (int b = 0; b <= events_blocks.GetUpperBound(0); b++)
         {

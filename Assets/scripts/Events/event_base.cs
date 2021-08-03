@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Event base.
@@ -81,14 +80,14 @@ public class event_base : UWClass
             clear = true;
         }
     }
-    
+
     /// <summary>
     /// Describe the event for a report.
     /// </summary>
     /// <returns></returns>
     public virtual string ReportEventDetails()
     {
-         return "\tEvent Type = " + type + " " + EventName() + summary() +  "\n\t\t" + GetRawData();
+        return "\tEvent Type = " + type + " " + EventName() + summary() + "\n\t\t" + GetRawData();
     }
 
     public virtual string EventName()

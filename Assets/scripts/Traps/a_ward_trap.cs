@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_ward_trap : trap_base
 {
@@ -78,7 +77,7 @@ public class a_ward_trap : trap_base
         }
         else
         {
-            if (other.gameObject.GetComponent<UWCharacter>() )
+            if (other.gameObject.GetComponent<UWCharacter>())
             {
                 if (CanHitPlayer)
                 {

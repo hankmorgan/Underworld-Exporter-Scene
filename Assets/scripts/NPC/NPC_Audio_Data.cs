@@ -1,14 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 using UnityEngine.Networking;
 
 
 /// <summary>
 /// Class for storing audio data for NPCs
 /// </summary>
-public class NPC_Audio_Data : Loader {
+public class NPC_Audio_Data : Loader
+{
 
     //For each of the 64 npc classes. 
     //Store a default sound set. (Npc whoami = 0)
@@ -17,7 +17,7 @@ public class NPC_Audio_Data : Loader {
     AudioClip WalkSoundLeft; //A class can have only set of walk sounds.
     AudioClip WalkSoundRight; //A class can have only set of walk sounds.
     AudioClip DeathSound; //A class can have only one death sound.
-    readonly AudioClip[,] IdleSounds= new AudioClip[256,4]; //A class could have 4 idle sounds per whoami. [NPC_WHO_AM_I, BARK No]
+    readonly AudioClip[,] IdleSounds = new AudioClip[256, 4]; //A class could have 4 idle sounds per whoami. [NPC_WHO_AM_I, BARK No]
     readonly bool[] loaded = new bool[256]; //Flag to show that specific whoami has been loaded into this dataset
     readonly int ThisItemId;
 
@@ -43,16 +43,16 @@ public class NPC_Audio_Data : Loader {
         if (loaded[who_ami] != true)
         {//Load data into my sound bank if not already loaded
             //If exists [uw path]\sound\npc\[item_id]\[who_ami] 
-            string dir = Path.Combine(new string[]{ BasePath, "sound", "npc", ThisItemId.ToString(), who_ami.ToString()});
+            string dir = Path.Combine(new string[] { BasePath, "sound", "npc", ThisItemId.ToString(), who_ami.ToString() });
             if (Directory.Exists(dir))
             {
                 string[] files = Directory.GetFiles(dir, "*.ogg"); //ogg files only at the moment.
-                for (int i=0; i<=files.GetUpperBound(0);i++)
+                for (int i = 0; i <= files.GetUpperBound(0); i++)
                 {
-                    switch(files[i].ToUpper())
+                    switch (files[i].ToUpper())
                     {
                         case "IDLE0.OGG"://idle track 0
-                            LoadIdleClip(files[i], who_ami, 0);break;
+                            LoadIdleClip(files[i], who_ami, 0); break;
                         case "IDLE1.OGG"://idle track 1
                             LoadIdleClip(files[i], who_ami, 1); break;
                         case "IDLE2.OGG"://idle track 2
@@ -63,7 +63,7 @@ public class NPC_Audio_Data : Loader {
                 }
             }
             loaded[who_ami] = true;//Flag true so as to not retry loading again.
-        }  
+        }
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class NPC_Audio_Data : Loader {
         {
             return WalkSoundRight;
         }
-        
+
     }
 
     /// <summary>
@@ -129,7 +129,7 @@ public class NPC_Audio_Data : Loader {
         else
         {
             WalkSoundRight = clip;
-        }        
+        }
     }
 
     /// <summary>

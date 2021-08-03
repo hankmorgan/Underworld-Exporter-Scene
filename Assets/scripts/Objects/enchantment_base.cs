@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 /// <summary>
 /// Base class for enchantments.
 /// </summary>
@@ -27,146 +26,147 @@ using System.Collections;
 ///  		the "quality" field of the spell object determines the number of charges.
 ///  Other objects may also carry spells in this way.
 /// 
-public class enchantment_base : object_base {
-	[Header("Enchantment Properties")]
-	public string DisplayEnchantment;
-	public int SpellIndex;
+public class enchantment_base : object_base
+{
+    [Header("Enchantment Properties")]
+    public string DisplayEnchantment;
+    public int SpellIndex;
 
-	protected override void Start ()
-	{
-		base.Start();
-		SetDisplayEnchantment ();
-		SpellIndex = GetActualSpellIndex();
-	}
+    protected override void Start()
+    {
+        base.Start();
+        SetDisplayEnchantment();
+        SpellIndex = GetActualSpellIndex();
+    }
 
-	public void SetDisplayEnchantment ()
-	{
-		DisplayEnchantment = StringController.instance.GetString (6, GetActualSpellIndex ());
-		if (DisplayEnchantment == "") 
-		{
-			DisplayEnchantment = "NONE";
-		}
-	}
+    public void SetDisplayEnchantment()
+    {
+        DisplayEnchantment = StringController.instance.GetString(6, GetActualSpellIndex());
+        if (DisplayEnchantment == "")
+        {
+            DisplayEnchantment = "NONE";
+        }
+    }
 
-	public override bool use ()
-	{
+    public override bool use()
+    {
         if (ConversationVM.InConversation) { return false; }
-		if (CurrentObjectInHand==null)
-		{
-			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Equipable);
-			return true;
-		}
-		else
-		{
-			return ActivateByObject(CurrentObjectInHand);
-		}	
-	}
+        if (CurrentObjectInHand == null)
+        {
+            UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, GetActualSpellIndex(), Magic.SpellRule_TargetSelf, Magic.SpellRule_Equipable);
+            return true;
+        }
+        else
+        {
+            return ActivateByObject(CurrentObjectInHand);
+        }
+    }
 
 
-	/// <summary>
-	/// Gets the actual spell index of the spell.
-	/// </summary>
-	/// <returns>The actual spell index.</returns>
-	protected virtual int GetActualSpellIndex()
-	{
-		//Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
-		int index=link-512;
-		if ( objInt().GetItemType() != ObjectInteraction.RING)
-		{
-			if (index<63)
-			{
-				return index+256;
-			}
-			else
-			{
-				return index+144;
-			}		
-		}
-		else 
-		{
-			return index;
-		}
-	}
+    /// <summary>
+    /// Gets the actual spell index of the spell.
+    /// </summary>
+    /// <returns>The actual spell index.</returns>
+    protected virtual int GetActualSpellIndex()
+    {
+        //Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
+        int index = link - 512;
+        if (objInt().GetItemType() != ObjectInteraction.RING)
+        {
+            if (index < 63)
+            {
+                return index + 256;
+            }
+            else
+            {
+                return index + 144;
+            }
+        }
+        else
+        {
+            return index;
+        }
+    }
 
 
-	public override bool LookAt ()
-	{//Look descriptions for different enchantable objects.
-		//string desc;
-		if (objInt().PickedUp==false)
-		{
-			return base.LookAt();
-		}
-		switch (item_id)
-		{	
-		case 54: //Ring of humility
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
-			break;
-		case 184 :// a_mushroom
-		case 185 :// a_toadstool
-		case 186 :// a_bottle_of_ale_bottles_of_ale
-			//No enchantment revealed
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
-			break;
-		case 316 :// a_scroll
-		case 317 :
-		case 318 :
-		case 319 :
-		case 187 :// a_red_potion
-		case 188 :// a_green_potion
-		default:
-			string enchantmentname=StringController.instance.GetString(6,GetActualSpellIndex());
-			switch(objInt().identity())
-			{
-			case ObjectInteraction.IdentificationFlags.Identified:
-					if (enchantmentname=="")
-					{
-						enchantmentname = "UNNAMED";
-					}
-					DisplayEnchantment = enchantmentname;
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);					
-				
-					break;
-			case ObjectInteraction.IdentificationFlags.Unidentified:
-			case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
-					if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
-					{
-						heading=7;
-						if (enchantmentname!="")
-						{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);										
-						}
-						else
-						{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()))	;								
-						}
-						
-					}
-					else
-					{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));		
-					}					
-					break;
-			}				
-			break;			
-		}
-		return true;
-	}
+    public override bool LookAt()
+    {//Look descriptions for different enchantable objects.
+     //string desc;
+        if (objInt().PickedUp == false)
+        {
+            return base.LookAt();
+        }
+        switch (item_id)
+        {
+            case 54: //Ring of humility
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+                break;
+            case 184:// a_mushroom
+            case 185:// a_toadstool
+            case 186:// a_bottle_of_ale_bottles_of_ale
+                     //No enchantment revealed
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+                break;
+            case 316:// a_scroll
+            case 317:
+            case 318:
+            case 319:
+            case 187:// a_red_potion
+            case 188:// a_green_potion
+            default:
+                string enchantmentname = StringController.instance.GetString(6, GetActualSpellIndex());
+                switch (objInt().identity())
+                {
+                    case ObjectInteraction.IdentificationFlags.Identified:
+                        if (enchantmentname == "")
+                        {
+                            enchantmentname = "UNNAMED";
+                        }
+                        DisplayEnchantment = enchantmentname;
+                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);
+
+                        break;
+                    case ObjectInteraction.IdentificationFlags.Unidentified:
+                    case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
+                        if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+                        {
+                            heading = 7;
+                            if (enchantmentname != "")
+                            {
+                                UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);
+                            }
+                            else
+                            {
+                                UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+                            }
+
+                        }
+                        else
+                        {
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+                        }
+                        break;
+                }
+                break;
+        }
+        return true;
+    }
 
 
-	public override string ContextMenuDesc (int item_id)
-	{
-		switch (objInt().identity())
-		{
-		case ObjectInteraction.IdentificationFlags.Identified:
-			return StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + DisplayEnchantment;					
-		default:
-			return base.ContextMenuDesc (item_id);
-		}		
-	}
+    public override string ContextMenuDesc(int item_id)
+    {
+        switch (objInt().identity())
+        {
+            case ObjectInteraction.IdentificationFlags.Identified:
+                return StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + DisplayEnchantment;
+            default:
+                return base.ContextMenuDesc(item_id);
+        }
+    }
 
-	public override float GetWeight ()
-	{
-		return (float)(GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f);
-	}
+    public override float GetWeight()
+    {
+        return (float)(GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f);
+    }
 
 }

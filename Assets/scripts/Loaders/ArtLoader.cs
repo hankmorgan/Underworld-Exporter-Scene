@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.IO;
 
 /// <summary>
 /// Base class for loading artwork
@@ -30,7 +28,7 @@ public class ArtLoader : Loader
     /// </summary>
     public short PaletteNo = 0;
 
-     /// <summary>
+    /// <summary>
     /// Loads the image file into the buffer
     /// </summary>
     /// <returns><c>true</c>, if image file was loaded, <c>false</c> otherwise.</returns>
@@ -120,7 +118,7 @@ public class ArtLoader : Loader
             for (int j = (iRow * width); j < (iRow * width) + width; j++)
             {
                 byte pixel = (byte)getValAtAddress(databuffer, dataOffSet + (long)j, 8);
-                
+
                 if (useXFER)
                 {
                     int p = (int)(pixel);
@@ -518,7 +516,7 @@ public class ArtLoader : Loader
             }
         }
 
-        Texture2D rotatedTexture = new Texture2D(h, w, TextureFormat.ARGB32,false);
+        Texture2D rotatedTexture = new Texture2D(h, w, TextureFormat.ARGB32, false);
         rotatedTexture.SetPixels(rotated);
         rotatedTexture.Apply();
         return rotatedTexture;

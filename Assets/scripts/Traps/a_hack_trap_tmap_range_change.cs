@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_hack_trap_tmap_range_change : a_hack_trap
 {

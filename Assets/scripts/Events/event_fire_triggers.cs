@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class event_fire_triggers : event_base
+﻿public class event_fire_triggers : event_base
 {
 
     //Fires any type of trigger at the specified tiles

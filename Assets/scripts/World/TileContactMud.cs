@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
 /// Used for throwing objects into special mud in UW2
 /// </summary>
-public class TileContactMud : TileContactWater {
+public class TileContactMud : TileContactWater
+{
 
 
     protected override void TileContactEvent(ObjectInteraction obj, Vector3 position)
@@ -14,7 +13,7 @@ public class TileContactMud : TileContactWater {
         switch (obj.item_id)
         {
             case 230:
-                if(obj.link==579)
+                if (obj.link == 579)
                 {//Potion of basilisk oil
                     BasiliskOilOnMud(obj);
                 }
@@ -29,7 +28,7 @@ public class TileContactMud : TileContactWater {
     /// <param name="obj"></param>
     void BasiliskOilOnMud(ObjectInteraction obj)
     {
-        if (Quest.instance.x_clocks[3]<2)
+        if (Quest.instance.x_clocks[3] < 2)
         {//Advance the xclock tracking quest progress.
             Quest.instance.x_clocks[3] = 2;
             //000~001~332~The thick oil permeates the mud. \n

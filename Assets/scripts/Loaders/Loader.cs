@@ -1,14 +1,13 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using UnityEngine;
 
-public class Loader: UWClass  {
+public class Loader : UWClass
+{
 
-	public static string BasePath = "C:\\GAMES\\UW1\\";
-	public string filePath;//To the file relative to the root of the game folder
-	public bool DataLoaded;
+    public static string BasePath = "C:\\GAMES\\UW1\\";
+    public string filePath;//To the file relative to the root of the game folder
+    public bool DataLoaded;
 
 
 
@@ -86,7 +85,7 @@ public class Loader: UWClass  {
                 { return ConvertInt16(buffer[Address], buffer[Address + 1]); }
             case 24:
                 { return ConvertInt24(buffer[Address], buffer[Address + 1], buffer[Address + 2]); }
-            case 32:   
+            case 32:
                 { return ConvertInt32(buffer[Address], buffer[Address + 1], buffer[Address + 2], buffer[Address + 3]); }
             default:
                 {

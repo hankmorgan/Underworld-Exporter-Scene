@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
+using UnityEngine;
 using UnityEngine.Networking;
 
 /// <summary>
@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 public class MusicController : UWEBase
 {
     public static string UW1Path
-    { 
+    {
         get { return GameWorldController.instance.config.audio.UW1_SOUNDBANK; }
     }
     public static string UW2Path
@@ -52,7 +52,7 @@ public class MusicController : UWEBase
         UW2trap = 31
     };
 
-    int currenttrack=-1;
+    int currenttrack = -1;
 
     public const int SOUND_EFFECT_FOOT_1 = 1;
     public const int SOUND_EFFECT_FOOT_2 = 2;
@@ -253,7 +253,7 @@ public class MusicController : UWEBase
             {
                 ((DownloadHandlerAudioClip)download.downloadHandler).streamAudio = true;
                 yield return download.SendWebRequest();
-                 MainTrackList[FileTrackNumber] = DownloadHandlerAudioClip.GetContent(download);
+                MainTrackList[FileTrackNumber] = DownloadHandlerAudioClip.GetContent(download);
             }
         }
     }
@@ -376,14 +376,14 @@ public class MusicController : UWEBase
         if (PlayMusic)
         {
             int rnd = Random.Range(0, tracklist.GetUpperBound(0) + 1);
-           // if ((int)tracklist[rnd] != currenttrack)
-           // {
-                Aud.clip = MainTrackList[(int)tracklist[rnd]];
-                if (Stopped == false)
-                {
-                    Aud.Play();
-                }
-           // }
+            // if ((int)tracklist[rnd] != currenttrack)
+            // {
+            Aud.clip = MainTrackList[(int)tracklist[rnd]];
+            if (Stopped == false)
+            {
+                Aud.Play();
+            }
+            // }
             currenttrack = (int)tracklist[rnd];
         }
         else

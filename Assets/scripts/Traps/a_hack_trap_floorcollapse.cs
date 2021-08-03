@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
@@ -11,16 +9,17 @@ using UnityEngine;
 /// Each covers a range of tiles.
 /// WHen the player is standing in a tile that has a floor texture = owner (texture map) then the 
 /// tile will collaps one step and it's texture will change to the value defined by xpos<<3 | ypos
-public class a_hack_trap_floorcollapse : a_hack_trap {
+public class a_hack_trap_floorcollapse : a_hack_trap
+{
 
     const int range = 10;
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
         //Check if the player is in range of the trap
-        if 
+        if
             (
-            (TileMap.visitedTileX >=  triggerX - range)
+            (TileMap.visitedTileX >= triggerX - range)
             &&
             (TileMap.visitedTileY >= triggerY - range)
             &&
@@ -31,13 +30,13 @@ public class a_hack_trap_floorcollapse : a_hack_trap {
         {
             //get the texture map of the floor the player is on.
 
-        if (UWCharacter.Instance.Grounded)
+            if (UWCharacter.Instance.Grounded)
             {
                 int texture = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].floorTexture;
                 if (texture == owner)
                 {
                     TileInfo tileToChange = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY];
-                    if (tileToChange.floorHeight>=2)
+                    if (tileToChange.floorHeight >= 2)
                     {
                         tileToChange.floorTexture = (short)(((int)ypos << 3) | (int)xpos);
                         tileToChange.floorHeight -= 2;

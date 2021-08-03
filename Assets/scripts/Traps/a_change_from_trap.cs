@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class a_change_from_trap : trap_base
+﻿public class a_change_from_trap : trap_base
 {
     //Theory. Untested 
     //This is used to change the tile type &  wall/floor texture on all tiles in a level.
@@ -39,7 +36,7 @@ public class a_change_from_trap : trap_base
                 if (quality == CurrentTileMap().Tiles[x, y].wallTexture)
                 {//This is probably a seperate test to the floor texture test above.
 
-                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality; 
+                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality;
                 }
 
                 if (CurrentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)

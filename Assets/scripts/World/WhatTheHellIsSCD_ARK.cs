@@ -1,46 +1,45 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 
 //SCD.ark in uw2 does things. I don't know what they are yet. 
 
-public class WhatTheHellIsSCD_ARK : UWEBase {
-		public bool TableView=true;
-		public int InfoSize=16;
-		public bool DoTheThingThisCodeDoes=false;
+public class WhatTheHellIsSCD_ARK : UWEBase
+{
+    public bool TableView = true;
+    public int InfoSize = 16;
+    public bool DoTheThingThisCodeDoes = false;
 
-		public void DumpScdArkInfo(string SCD_Ark_File_Path)
-		{
-				if (!DoTheThingThisCodeDoes)
-				{
-						return;
-				}
+    public void DumpScdArkInfo(string SCD_Ark_File_Path)
+    {
+        if (!DoTheThingThisCodeDoes)
+        {
+            return;
+        }
 
         string output = "";
         StreamWriter writer;// = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);
-				if (TableView)
-				{
-						writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.csv", false);	
-						output+="Address,Block,Level,1,Type,TypeDesc,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
-				}
-				else
-				{
-						writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);			
-				}
+        if (TableView)
+        {
+            writer = new StreamWriter(Application.dataPath + "//..//_scd_ark.csv", false);
+            output += "Address,Block,Level,1,Type,TypeDesc,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
+        }
+        else
+        {
+            writer = new StreamWriter(Application.dataPath + "//..//_scd_ark.txt", false);
+        }
 
 
 
-				char[] scd_ark;
+        char[] scd_ark;
         var toLoad = Path.Combine(Loader.BasePath, SCD_Ark_File_Path);
         if (!Loader.ReadStreamFile(toLoad, out char[] scd_ark_file_data))
-				{
-						Debug.Log(toLoad + " File not loaded");
-						return;
-				}	
+        {
+            Debug.Log(toLoad + " File not loaded");
+            return;
+        }
 
-				int NoOfBlocks=(int)Loader.getValAtAddress(scd_ark_file_data,0,32);
+        int NoOfBlocks = (int)Loader.getValAtAddress(scd_ark_file_data, 0, 32);
 
         int LevelNo;
         for (LevelNo = 0; LevelNo < NoOfBlocks; LevelNo++)
@@ -205,7 +204,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 
         }
         writer.WriteLine(output);
-				writer.Close();
+        writer.Close();
 
-		}
+    }
 }

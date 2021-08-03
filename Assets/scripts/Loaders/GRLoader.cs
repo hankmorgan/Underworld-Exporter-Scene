@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Loads data from various GR Files.
@@ -96,7 +95,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File, int PalToUse)
     {
-       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+        // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -107,7 +106,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File)
     {
-       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+        // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -180,7 +179,7 @@ public class GRLoader : ArtLoader
 
     public override bool LoadImageFile()
     {
-        string ModPath = Path.Combine(BasePath, pathGR[FileToLoad].Replace(".","_"));// BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
+        string ModPath = Path.Combine(BasePath, pathGR[FileToLoad].Replace(".", "_"));// BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
         if (Directory.Exists(ModPath))
         {
             LoadMod = true;
@@ -291,7 +290,7 @@ public class GRLoader : ArtLoader
                     imgNibbles = new char[Mathf.Max(BitMapWidth * BitMapHeight * 2, (5 + datalen) * 2)];
                     imageOffset += 6;  //Start of raw data.
                     copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-                    auxpal = PaletteLoader.LoadAuxilaryPal(Path.Combine(BasePath,"DATA",AuxPalPath), GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
+                    auxpal = PaletteLoader.LoadAuxilaryPal(Path.Combine(BasePath, "DATA", AuxPalPath), GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
                     ImageCache[index] = Image(imgNibbles, 0, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha, xfer);
                     return ImageCache[index];
                 }

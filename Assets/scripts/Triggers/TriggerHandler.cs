@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 //OPTIONS_MODE 0
 //TALK_MODE 1
@@ -10,50 +9,51 @@ using System.Collections;
 /*
 Functions for activating the next trigger in the chain.
  */
-public class TriggerHandler : MonoBehaviour {
-	//NO Longer in use!
-/*	public int triggerX;
-	public int triggerY;
-	//public int state;
-	public string trigger;//what is set off
-	private ObjectVariables Var;
-	private GameObject triggerObj;
-	private UILabel MessageLog;
-	public int InteractionFlag;	//Bit wise interaction 
+public class TriggerHandler : MonoBehaviour
+{
+    //NO Longer in use!
+    /*	public int triggerX;
+        public int triggerY;
+        //public int state;
+        public string trigger;//what is set off
+        private ObjectVariables Var;
+        private GameObject triggerObj;
+        private UILabel MessageLog;
+        public int InteractionFlag;	//Bit wise interaction 
 
-	// Use this for initialization
-	void Start () {
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		Var=GetComponent<ObjectVariables>();
-		triggerObj=GameObject.Find (trigger);
-	}
+        // Use this for initialization
+        void Start () {
+            MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+            Var=GetComponent<ObjectVariables>();
+            triggerObj=GameObject.Find (trigger);
+        }
 
-	public void Activate()
-	{
-		ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
-		targetvars.triggerX=triggerX;
-		targetvars.triggerY=triggerY;
-		targetvars.state=Var.state;
-		//MessageLog.text=MessageLog.text + name +"_activated";
-		//Debug.Log ("TriggerHandler:" + name);
-		triggerObj.SendMessage ("Activate");
-		
-		if (Var.state == 8)
-		{
-			Var.state = 0;
-		}
-		else
-		{
-			Var.state++;
-		}
-	}
+        public void Activate()
+        {
+            ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
+            targetvars.triggerX=triggerX;
+            targetvars.triggerY=triggerY;
+            targetvars.state=Var.state;
+            //MessageLog.text=MessageLog.text + name +"_activated";
+            //Debug.Log ("TriggerHandler:" + name);
+            triggerObj.SendMessage ("Activate");
 
-	void OnTriggerEnter(Collider other)
-		{
-		Debug.Log ("move");
-		if (other.name=="Gronk")
-			{
-			Activate ();
-			}
-		}*/
+            if (Var.state == 8)
+            {
+                Var.state = 0;
+            }
+            else
+            {
+                Var.state++;
+            }
+        }
+
+        void OnTriggerEnter(Collider other)
+            {
+            Debug.Log ("move");
+            if (other.name=="Gronk")
+                {
+                Activate ();
+                }
+            }*/
 }

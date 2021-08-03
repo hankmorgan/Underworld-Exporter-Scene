@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 /// <summary>
 /// Base class for weapons and armour
@@ -66,9 +65,9 @@ public class Equipment : object_base
                     {
                         //Do a difficulty check and prompt for approval.
                         int RepairDifficulty = repairEstimate();
-                        int estimateStringNo=0;
+                        int estimateStringNo = 0;
                         int repairStringOffset = StringController.str_you_think_it_will_be_;
-                        if (_RES==GAME_UW2)
+                        if (_RES == GAME_UW2)
                         {
                             repairStringOffset = 231;
                         }
@@ -80,23 +79,23 @@ public class Equipment : object_base
                         else
                         {
                             int estimate = RepairDifficulty - UWCharacter.Instance.PlayerSkills.Repair + 0xF;
-                            if (estimate>=0x1E)
-                                {
+                            if (estimate >= 0x1E)
+                            {
                                 estimate = 4;
-                                }
+                            }
                             else
                             {
                                 estimate = (estimate / 0xA) + 1;
                             }
-                            estimateStringNo += repairStringOffset + estimate + 3 ;
+                            estimateStringNo += repairStringOffset + estimate + 3;
                         }
-                        
+
 
                         string question = StringController.instance.GetString(1, repairStringOffset)
                             + StringController.instance.GetString(1, estimateStringNo)
                             + StringController.instance.GetString(1, repairStringOffset + 1)
                             + StringController.instance.GetObjectNounUW(item_id)
-                            + StringController.instance.GetString(1,StringController.str__make_an_attempt_ ); 
+                            + StringController.instance.GetString(1, StringController.str__make_an_attempt_);
 
                         UWHUD.instance.MessageScroll.Set(question);
                         InputField inputctrl = UWHUD.instance.InputControl;
@@ -145,7 +144,7 @@ public class Equipment : object_base
                 default:
                     UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs404.n01";
                     break;
-            }          
+            }
 
             int RepairDifficulty = repairEstimate();
 
@@ -155,11 +154,11 @@ public class Equipment : object_base
             {
                 case Skills.SkillRollResult.CriticalFailure://attempt fails. dice roll of 0-63. If repair skill is lower than result damage item by another roll (0-7)+4;
                     {
-                        if (Random.Range(0,64) >= UWCharacter.Instance.PlayerSkills.Repair)
+                        if (Random.Range(0, 64) >= UWCharacter.Instance.PlayerSkills.Repair)
                         {
                             int damage = Random.Range(0, 7) + 4;
                             quality = (short)(quality - (short)damage);
-                            if (quality>0)
+                            if (quality > 0)
                             {
                                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_damaged_the_) + StringController.instance.GetObjectNounUW(item_id));
                             }
@@ -167,25 +166,25 @@ public class Equipment : object_base
                     }
                     break;
                 case Skills.SkillRollResult.Failure://attempt fails. no change to item.
-                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id) );
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id));
                     break;
                 case Skills.SkillRollResult.Success://repair up to (repair skill/5+3)
                     int newQuality = (UWCharacter.Instance.PlayerSkills.Repair / 5 + 3);
-                    if(quality>= newQuality)
+                    if (quality >= newQuality)
                     {
-                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id)) ;
+                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id));
                     }
                     else
                     {
                         quality = (short)newQuality;
                         if (quality > 63)
                         {
-                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetObjectNounUW(item_id) );
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetObjectNounUW(item_id));
                             quality = 63;
                         }
                         else
                         {
-                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_partially_repaired_the_) + StringController.instance.GetObjectNounUW(item_id)) ;
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_partially_repaired_the_) + StringController.instance.GetObjectNounUW(item_id));
                         }
                     }
 
@@ -193,7 +192,7 @@ public class Equipment : object_base
                     break;
                 case Skills.SkillRollResult.CriticalSuccess://fully repair the item.
                     quality = 63;
-                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetObjectNounUW(item_id) );
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetObjectNounUW(item_id));
                     break;
 
             }
@@ -208,11 +207,11 @@ public class Equipment : object_base
             else
             {
                 UpdateQuality();
-            }            
+            }
         }
         //cancel the repair 
         CurrentObjectInHand = null;
-     }
+    }
 
     public override bool LookAt()
     {

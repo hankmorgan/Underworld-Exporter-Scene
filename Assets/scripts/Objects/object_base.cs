@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 /// <summary>
 /// Base class for objects and npcs
 /// Works hand in hand with ObjectInteraction
@@ -184,14 +182,14 @@ public class object_base : UWEBase
         }
         set
         {
-            if (value<0)
+            if (value < 0)
             {
-                objInt().quality =0;
+                objInt().quality = 0;
             }
             else
             {
                 objInt().quality = value;
-            }           
+            }
         }
     }
 
@@ -552,14 +550,14 @@ public class object_base : UWEBase
         if (Character.InteractionMode == Character.InteractionModeUse)
         {
             switch (ObjectUsed.GetItemType())
-                {
+            {
                 case ObjectInteraction.ANVIL:
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_cannot_repair_that_));
                     break;
                 default:
                     FailMessage();
                     break;
-                }            
+            }
             UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
             CurrentObjectInHand = null;
             return true;
@@ -589,11 +587,11 @@ public class object_base : UWEBase
                 {//Hope this does'nt mess up everything!
                     if (
                         (
-                        (link != 0) && (objInt().isQuantityBln == false) 
+                        (link != 0) && (objInt().isQuantityBln == false)
                         ||
                         (link == 1) && (objInt().isQuantityBln)
                         )
-                        && 
+                        &&
                         (enchantment == 0)
                         )
                     {//Not a quantity or an enchanted item.
@@ -772,7 +770,7 @@ return false;*/
         {
 
             return (float)(objInt().GetQty()) * GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f;// .Mass[item_id]*0.1f;
-                                                                                                                                   //return (float)(objInt().GetQty())* GameWorldController.instance.commobj.Mass[item_id]*0.1f;
+                                                                                                                          //return (float)(objInt().GetQty())* GameWorldController.instance.commobj.Mass[item_id]*0.1f;
         }
     }
 

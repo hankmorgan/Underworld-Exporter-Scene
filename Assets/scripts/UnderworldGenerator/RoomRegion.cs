@@ -1,33 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// A region consisting of a single room.
 /// </summary>
 public class RoomRegion : Region
 {
     public RoomRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions, Region Parent)
     {
-        InitRegion(index, RegionLayer, x, y, width, height,Parent);
+        InitRegion(index, RegionLayer, x, y, width, height, Parent);
         Generate(NoOfSubRegions);
         BuildSubRegions(NoOfSubRegions);
     }
 
     protected override void Generate(int NoOfSubRegions)
-    {       
+    {
         for (int x = 0; x <= Map.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= Map.GetUpperBound(1); y++)
             {
-                if ((x==0) || (y==0) || (x== Map.GetUpperBound(0)) || (y== Map.GetUpperBound(1)))
+                if ((x == 0) || (y == 0) || (x == Map.GetUpperBound(0)) || (y == Map.GetUpperBound(1)))
                 {
                     Map[x, y].TileLayoutMap = SOLID;
                 }
                 else
                 {
                     Map[x, y].TileLayoutMap = OPEN;
-                }                
+                }
             }
         }
 

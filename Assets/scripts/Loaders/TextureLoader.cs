@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Loads textures.
 /// </summary>
-public class TextureLoader : ArtLoader {
+public class TextureLoader : ArtLoader
+{
 
     private readonly string pathTexW_UW0 = "DW64.TR";
     private readonly string pathTexF_UW0 = "DF32.TR";
@@ -58,7 +58,7 @@ public class TextureLoader : ArtLoader {
                 {
                     LoadMod = true;
                 }
-                ModPathF =  Path.Combine(BasePath, "DATA", pathTexF_UW1.Replace(".", "_"));
+                ModPathF = Path.Combine(BasePath, "DATA", pathTexF_UW1.Replace(".", "_"));
                 if (Directory.Exists(ModPathF))
                 {
                     LoadMod = true;
@@ -79,7 +79,7 @@ public class TextureLoader : ArtLoader {
             case 1: // Palette cycled
                 return LoadImageAt(index, GameWorldController.instance.palLoader.GreyScale);
             case 2://normal map                
-                return TGALoader.LoadTGA(Path.Combine(ModPathW,index.ToString("d3") + "_normal.tga"));
+                return TGALoader.LoadTGA(Path.Combine(ModPathW, index.ToString("d3") + "_normal.tga"));
             default:
                 return LoadImageAt(index, GameWorldController.instance.palLoader.Palettes[0]);
         }
@@ -117,7 +117,7 @@ public class TextureLoader : ArtLoader {
                 {
                     if (texturesFLoaded == false)
                     {
-                        if (!ReadStreamFile(Path.Combine(BasePath,"RES", "DATA", pathTex_SS1), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath, "RES", "DATA", pathTex_SS1), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -177,7 +177,7 @@ public class TextureLoader : ArtLoader {
                     }
                     if (texturesFLoaded == false)
                     {
-                        if (!ReadStreamFile(Path.Combine(BasePath,"DATA", pathTex_UW2), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTex_UW2), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -199,7 +199,7 @@ public class TextureLoader : ArtLoader {
                     {//Wall textures
                         if (texturesWLoaded == false)
                         {
-                            if (!ReadStreamFile(Path.Combine(BasePath ,"DATA", pathTexW_UW1), out texturebufferW))
+                            if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexW_UW1), out texturebufferW))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -256,7 +256,8 @@ public class TextureLoader : ArtLoader {
     /// <param name="source">Source.</param>
     /// <param name="strength">Strength.</param>
     /// Sourced from http://jon-martin.com/?p=123
-    public static Texture2D NormalMap(Texture2D source, float strength) {
+    public static Texture2D NormalMap(Texture2D source, float strength)
+    {
         strength = Mathf.Clamp(strength, 0.0F, 10.0F);
         Texture2D result;
         float xLeft;
@@ -266,8 +267,10 @@ public class TextureLoader : ArtLoader {
         float yDelta;
         float xDelta;
         result = new Texture2D(source.width, source.height, TextureFormat.ARGB32, true);
-        for (int by = 0; by < result.height; by++) {
-            for (int bx = 0; bx < result.width; bx++) {
+        for (int by = 0; by < result.height; by++)
+        {
+            for (int bx = 0; bx < result.width; bx++)
+            {
                 xLeft = source.GetPixel(bx - 1, by).grayscale * strength;
                 xRight = source.GetPixel(bx + 1, by).grayscale * strength;
                 yUp = source.GetPixel(bx, by - 1).grayscale * strength;

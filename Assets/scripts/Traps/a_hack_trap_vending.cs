@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// spawns vending selection
@@ -92,7 +91,7 @@ public class a_hack_trap_vending : a_hack_trap
         }
         return false;
     }
-    
+
     public override void PostActivate(object_base src)
     {
         Debug.Log("Overridden PostActivate to test " + this.name);
