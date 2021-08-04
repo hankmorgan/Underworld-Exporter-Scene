@@ -138,7 +138,7 @@ public class a_hack_trap_platformwave : a_hack_trap
         TileVector = CurrentTileMap().getTileVector(tileX, tileY);
         Collider[] colliders = Physics.OverlapBox(TileVector, ContactArea);
 
-        MoveObjectsInContact((float)(newHeight) * 0.15f, colliders);
+        MoveObjectsInContact(newHeight * 0.15f, colliders);
 
         //CurrentTileMap().Tiles[tileX, tileX].TileNeedsUpdate();
         DestroyImmediate(platformTile);

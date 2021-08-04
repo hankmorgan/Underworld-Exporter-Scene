@@ -31,9 +31,9 @@ public class WhatTheHellIsSCD_ARK : UWEBase
 
 
 
-        char[] scd_ark;
+        byte[] scd_ark;
         var toLoad = Path.Combine(Loader.BasePath, SCD_Ark_File_Path);
-        if (!Loader.ReadStreamFile(toLoad, out char[] scd_ark_file_data))
+        if (!Loader.ReadStreamFile(toLoad, out byte[] scd_ark_file_data))
         {
             Debug.Log(toLoad + " File not loaded");
             return;
@@ -68,7 +68,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase
                 long BlockStart = Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
                 int j = 0;
                 AddressOfBlockStart = BlockStart;
-                scd_ark = new char[datalen];
+                scd_ark = new byte[datalen];
                 for (long i = BlockStart; i < BlockStart + datalen; i++)
                 {
                     scd_ark[j] = scd_ark_file_data[i];

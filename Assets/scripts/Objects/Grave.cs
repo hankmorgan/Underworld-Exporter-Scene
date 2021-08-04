@@ -40,7 +40,7 @@ public class Grave : Model3D
         //Load in the grave information
         if (_RES != GAME_UW2)
         {
-            Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "GRAVE.DAT"), out char[] graves);
+            Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "GRAVE.DAT"), out byte[] graves);
             if (link >= 512)
             {
                 return (short)Loader.getValAtAddress(graves, link - 512, 8) - 1;

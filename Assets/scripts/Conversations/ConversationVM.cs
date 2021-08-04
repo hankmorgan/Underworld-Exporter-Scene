@@ -196,7 +196,7 @@ public class ConversationVM : UWEBase
     /// <param name="cnv_ark_path">Cnv ark path.</param>
     public void LoadCnvArk(string cnv_ark_path)
     {
-        if (Loader.ReadStreamFile(cnv_ark_path, out char[] cnv_ark))
+        if (Loader.ReadStreamFile(cnv_ark_path, out byte[] cnv_ark))
         {
             int NoOfConversations = (int)Loader.getValAtAddress(cnv_ark, 0, 16);
             conv = new cnvHeader[NoOfConversations];
@@ -262,7 +262,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     public void LoadCnvArkUW2(string cnv_ark_path)
     {
         int address_pointer = 2;
-        if (!Loader.ReadStreamFile(cnv_ark_path, out char[] tmp_ark))
+        if (!Loader.ReadStreamFile(cnv_ark_path, out byte[] tmp_ark))
         {
             Debug.Log("unable to load uw2 conv ark");
             return;
@@ -282,7 +282,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (isCompressed == 1)
                 {
                     long datalen = 0;
-                    char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
+                    byte[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
                     add_ptr = 0;
                     /*
    0000   Int16   unknown, always seems to be 0x0828, or 28 08
@@ -1286,9 +1286,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             if (TeleportLevel == GameWorldController.instance.LevelNo)
             {//stay on this level
-                float targetX = (float)TeleportTileX * 1.2f + 0.6f;
-                float targetY = (float)TeleportTileY * 1.2f + 0.6f;
-                float Height = ((float)(CurrentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY))) * 0.15f;
+                float targetX = TeleportTileX * 1.2f + 0.6f;
+                float targetY = TeleportTileY * 1.2f + 0.6f;
+                float Height = CurrentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY) * 0.15f;
                 UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
                 UWCharacter.Instance.TeleportPosition = UWCharacter.Instance.transform.position;
             }
@@ -2308,7 +2308,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <returns></returns>
     public IEnumerator pause(int waittime)
     {
-        yield return new WaitForSecondsRealtime((float)waittime);
+        yield return new WaitForSecondsRealtime(waittime);
     }
 
 

@@ -18,7 +18,7 @@ public class DataLoader : Loader
         public int chunkCompressionType;//compression type
         public long chunkPackedLength;
         public int chunkContentType;
-        public char[] data;
+        public byte[] data;
     };
 
     /// <summary>
@@ -26,7 +26,7 @@ public class DataLoader : Loader
     /// </summary>
     public struct UWBlock
     {
-        public char[] Data;
+        public byte[] Data;
         public long Address; //The file address of the block
 
         public long DataLen;
@@ -65,12 +65,12 @@ public class DataLoader : Loader
     /// <param name="datalen">Datalen.</param>
     /// Robbed and changed slightly from the Labyrinth of Worlds implementation project.
     ///This decompresses UW2 blocks.
-    public static char[] unpackUW2(char[] tmp, long address_pointer, ref long datalen)
+    public static byte[] unpackUW2(byte[] tmp, long address_pointer, ref long datalen)
     {
         long BlockLen = (int)getValAtAddress(tmp, address_pointer, 32); //lword(base);
         long NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
-        //char[] buf = new char[BlockLen+100];
-        char[] buf = new char[Math.Max(NoOfSegs, BlockLen + 100)];
+        //byte[] buf = new byte[BlockLen+100];
+        byte[] buf = new byte[Math.Max(NoOfSegs, BlockLen + 100)];
 
         long upPtr = 0;
         datalen = 0;
@@ -78,7 +78,7 @@ public class DataLoader : Loader
 
         while (upPtr < BlockLen)
         {
-            byte bits = (byte)tmp[address_pointer++];
+            byte bits = tmp[address_pointer++];
             for (int r = 0; r < 8; r++)
             {
                 if (address_pointer > tmp.GetUpperBound(0))
@@ -128,7 +128,7 @@ public class DataLoader : Loader
                             //int currentsegment = ((datalen/0x1000) + 1) * 0x1000;
                             //buf[upPtr++]= buf[buf.GetUpperBound(0) + o++];//This is probably very very wrong.
                             //buf[upPtr++]= buf[currentsegment + o++];//This is probably very very wrong.
-                            buf[upPtr++] = (char)0;
+                            buf[upPtr++] = 0;
                             o++;
                         }
                         else
@@ -160,10 +160,10 @@ public class DataLoader : Loader
     /// this is a transfer record
     ///else
     ///this is a transfer record
-    public static char[] RepackUW2(char[] srcData)
+    public static byte[] RepackUW2(byte[] srcData)
     {
-        List<char> Input = new List<char>();
-        List<char> Output = new List<char>();
+        List<byte> Input = new List<byte>();
+        List<byte> Output = new List<byte>();
         int addptr = 0;
         int bit = 0;
         //int PrevMatchingOffset=-1; 
@@ -222,7 +222,7 @@ public class DataLoader : Loader
         //Write the data to a file.
 
         WriteListToBytes(Output, Path.Combine(BasePath, "DATA", "recodetest.dat"));
-        char[] outchar = new char[Output.Count];
+        byte[] outchar = new byte[Output.Count];
         for (int i = 0; i < Output.Count; i++)
         {
             outchar[i] = Output[i];
@@ -230,60 +230,60 @@ public class DataLoader : Loader
         return outchar;
     }
 
-    static int CreateHeader(ref List<char> Output)
+    static int CreateHeader(ref List<byte> Output)
     {
-        Output.Add((char)0);
+        Output.Add((byte)0);
         return Output.Count - 1;
     }
 
-    static void WriteListToBytes(List<char> Output, string path)
+    static void WriteListToBytes(List<byte> Output, string path)
     {
         FileStream file = File.Open(path, FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
         WriteInt32(writer, Output.Count);
         for (int i = 0; i < Output.Count; i++)
         {
-            WriteInt8(writer, (long)Output[i]);
+            WriteInt8(writer, Output[i]);
         }
         writer.Close();
     }
 
-    static void CreateTransferRecord(ref List<char> Output, char TransferData, int headerIndex, int bit)
+    static void CreateTransferRecord(ref List<byte> Output, byte TransferData, int headerIndex, int bit)
     {
-        Output[headerIndex] = (char)(Output[headerIndex] | (1 << bit));
+        Output[headerIndex] = (byte)(Output[headerIndex] | (1 << bit));
         Output.Add(TransferData);
     }
 
-    static int CreateCopyRecord(ref List<char> Output, int Offset, int CopyCount, int headerIndex, int bit)
+    static int CreateCopyRecord(ref List<byte> Output, int Offset, int CopyCount, int headerIndex, int bit)
     {
         //The copy record starts with two Int8's:
         //0000   Int8   0..7: position
         //0001   Int8   0..3: copy count
         //				4..7: position
         //int val = Offset
-        Output[headerIndex] = (char)(Output[headerIndex] | (0 << bit));
+        Output[headerIndex] = (byte)(Output[headerIndex] | (0 << bit));
 
         //Offset= getTrueOffset(Offset);
         //CopyCount-=3;
         int val1 = Offset & 0xF;
         int val2 = (CopyCount & 0xf) | ((Offset >> 7) << 4);
 
-        Output.Add((char)val1);
-        Output.Add((char)val2);
+        Output.Add((byte)val1);
+        Output.Add((byte)val2);
         return Output.Count - 1;
     }
 
-    static void IncrementCopyRecord(ref List<char> Output, int CopyRecordOffset)
+    static void IncrementCopyRecord(ref List<byte> Output, int CopyRecordOffset)
     {
         int val = getCopyCountAtOffset(ref Output, CopyRecordOffset);
         val++;
         val &= 0xF;
-        char chardata = (char)(Output[CopyRecordOffset] & 0xf8);//Clear the bits for the count.
-        chardata = (char)(chardata | val);
+        byte chardata = (byte)(Output[CopyRecordOffset] & 0xf8);//Clear the bits for the count.
+        chardata = (byte)(chardata | val);
         Output[CopyRecordOffset] = chardata;
     }
 
-    static int getCopyCountAtOffset(ref List<char> Output, int CopyRecordOffset)
+    static int getCopyCountAtOffset(ref List<byte> Output, int CopyRecordOffset)
     {
         if (CopyRecordOffset < 0)
         {
@@ -297,7 +297,7 @@ public class DataLoader : Loader
         }
     }
 
-    static bool FindMatchingSequence(ref List<char> records, ref List<char> searchfor, out int MatchingOffset)
+    static bool FindMatchingSequence(ref List<byte> records, ref List<byte> searchfor, out int MatchingOffset)
     {
         int lowerbound = (records.Count / 4096) * 4096;
         string searchval = charListToVal(searchfor, 0, searchfor.Count);
@@ -314,7 +314,7 @@ public class DataLoader : Loader
         return false;
     }
 
-    static string charListToVal(List<char> input, int start, int len)
+    static string charListToVal(List<byte> input, int start, int len)
     {
         string output = "";
         for (int i = start; i <= start + len; i++)
@@ -352,7 +352,7 @@ Specifically, this procedure can be found on his "Unofficial System Shock
 Specifications" page at
 http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
 */
-    public static void unpack_data(char[] pack, ref char[] unpack, long unpacksize)
+    public static void unpack_data(byte[] pack, ref byte[] unpack, long unpacksize)
     {
         int word = 0;  /* initialise to stop "might be used before set" */
         int nbits;
@@ -422,7 +422,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
             if (val < 0x100)
             {
                 // *exptr++ = val;
-                unpack[exptr++] = (char)val;
+                unpack[exptr++] = (byte)val;
             }
             else
             {
@@ -469,7 +469,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
     //*********************
 
 
-    public static bool LoadChunk(char[] archive_ark, int chunkNo, out Chunk data_ark)
+    public static bool LoadChunk(byte[] archive_ark, int chunkNo, out Chunk data_ark)
     {
         //long chunkUnpackedLength=0;
         //int chunkType=0;//compression type
@@ -483,10 +483,10 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
         long blockAddress = getShockBlockAddress(chunkNo, archive_ark, ref data_ark.chunkPackedLength, ref data_ark.chunkUnpackedLength, ref data_ark.chunkCompressionType, ref data_ark.chunkContentType);
         if (blockAddress == -1)
         {
-            data_ark.data = new char[1];
+            data_ark.data = new byte[1];
             return false;
         }
-        data_ark.data = new char[data_ark.chunkUnpackedLength];
+        data_ark.data = new byte[data_ark.chunkUnpackedLength];
         LoadShockChunk(blockAddress, data_ark.chunkCompressionType, archive_ark, ref data_ark.data, data_ark.chunkPackedLength, data_ark.chunkUnpackedLength);
         return true;
     }
@@ -494,7 +494,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
 
 
 
-    static long getShockBlockAddress(long BlockNo, char[] tmp_ark, ref long chunkPackedLength, ref long chunkUnpackedLength, ref int chunkCompressionType, ref int chunkContentType)
+    static long getShockBlockAddress(long BlockNo, byte[] tmp_ark, ref long chunkPackedLength, ref long chunkUnpackedLength, ref int chunkCompressionType, ref int chunkContentType)
     {
         //Finds the address of the block based on the directory block no.
         //Justs loops through until it finds a match.
@@ -550,7 +550,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
 
 
 
-    static long LoadShockChunk(long AddressOfBlockStart, int chunkType, char[] archive_ark, ref char[] OutputChunk, long chunkPackedLength, long chunkUnpackedLength)
+    static long LoadShockChunk(long AddressOfBlockStart, int chunkType, byte[] archive_ark, ref byte[] OutputChunk, long chunkPackedLength, long chunkUnpackedLength)
     {
         //Util to return an uncompressed shock block. Will use this for all future lookups and replace old ones
 
@@ -586,7 +586,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
             case 1:
                 {//flat Compressed
                  //printf("\nCompressed chunk");
-                    char[] temp_ark = new char[chunkPackedLength];
+                    byte[] temp_ark = new byte[chunkPackedLength];
                     for (long k = 0; k < chunkPackedLength; k++)
                     {
                         temp_ark[k] = archive_ark[AddressOfBlockStart + k];
@@ -602,8 +602,8 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
                     //uncompressed the sub chunks
                     int NoOfEntries = (int)getValAtAddress(archive_ark, AddressOfBlockStart, 16);
                     int SubDirLength = (NoOfEntries + 1) * 4 + 2;
-                    char[] temp_ark = new char[chunkPackedLength];
-                    char[] tmpchunk = new char[chunkUnpackedLength];
+                    byte[] temp_ark = new byte[chunkPackedLength];
+                    byte[] tmpchunk = new byte[chunkUnpackedLength];
                     for (long k = 0; k < chunkPackedLength; k++)
                     {
                         temp_ark[k] = archive_ark[AddressOfBlockStart + k + SubDirLength];
@@ -702,7 +702,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
     /// <param name="blockNo">Block no.</param>
     /// <param name="targetDataLen">Target data length.</param>
     /// <param name="uwb">Uwb.</param>
-    public static bool LoadUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
+    public static bool LoadUWBlock(byte[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
     {
         uwb = new UWBlock();
         int NoOfBlocks = (int)getValAtAddress(arkData, 0, 32);
@@ -723,7 +723,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
                         }
                         else
                         {
-                            uwb.Data = new char[uwb.DataLen];
+                            uwb.Data = new byte[uwb.DataLen];
                             int b = 0;
                             for (long i = uwb.Address; i < uwb.Address + uwb.DataLen; i++)
                             {//Copy the data to the block.
@@ -743,7 +743,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
                     uwb.Address = getValAtAddress(arkData, (blockNo * 4) + 2, 32);
                     if (uwb.Address != 0)
                     {
-                        uwb.Data = new char[targetDataLen];
+                        uwb.Data = new byte[targetDataLen];
                         uwb.DataLen = targetDataLen;
                         int b = 0;
                         for (long i = uwb.Address; i < uwb.Address + uwb.DataLen; i++)

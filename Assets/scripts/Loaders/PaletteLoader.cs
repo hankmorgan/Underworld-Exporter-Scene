@@ -36,7 +36,7 @@ public class PaletteLoader : ArtLoader
                 {
                     Palettes = new Palette[1];
                     Palettes[0] = new Palette();
-                    if (ReadStreamFile(filePath, out char[] pal_file))
+                    if (ReadStreamFile(filePath, out byte[] pal_file))
                     {
                         if (DataLoader.LoadChunk(pal_file, PaletteNo, out DataLoader.Chunk pal_ark))
                         {
@@ -44,9 +44,9 @@ public class PaletteLoader : ArtLoader
                             int palAddr = 0;
                             for (int j = 0; j < 256; j++)
                             {
-                                Palettes[0].red[p] = (byte)pal_ark.data[palAddr + 0];//<<2;
-                                Palettes[0].green[p] = (byte)pal_ark.data[palAddr + 1];// << 2;
-                                Palettes[0].blue[p] = (byte)pal_ark.data[palAddr + 2];// << 2;
+                                Palettes[0].red[p] = pal_ark.data[palAddr + 0];//<<2;
+                                Palettes[0].green[p] = pal_ark.data[palAddr + 1];// << 2;
+                                Palettes[0].blue[p] = pal_ark.data[palAddr + 2];// << 2;
                                                                                       // pal[i].reserved = 0;
                                 palAddr += 3;
                                 p++;
@@ -59,7 +59,7 @@ public class PaletteLoader : ArtLoader
             default:
                 {
                     Palettes = new Palette[NoOfPals];
-                    if (ReadStreamFile(filePath, out char[] pals_dat))
+                    if (ReadStreamFile(filePath, out byte[] pals_dat))
                     {
                         for (int palNo = 0; palNo <= Palettes.GetUpperBound(0); palNo++)
                         {
@@ -82,7 +82,7 @@ public class PaletteLoader : ArtLoader
     {
         int[] auxpal = new int[16];
 
-        if (ReadStreamFile(auxPalPath, out char[] palf))
+        if (ReadStreamFile(auxPalPath, out byte[] palf))
         {
             for (int j = 0; j < 16; j++)
             {
@@ -100,7 +100,7 @@ public class PaletteLoader : ArtLoader
             green = new byte[16],
             blue = new byte[16]
         };
-        if (ReadStreamFile(auxPalPath, out char[] palf))
+        if (ReadStreamFile(auxPalPath, out byte[] palf))
         {
             for (int j = 0; j < 16; j++)
             {
@@ -123,10 +123,10 @@ public class PaletteLoader : ArtLoader
     {
         int height = 1;
         int width = 256;
-        char[] imgData = new char[height * width];
+        byte[] imgData = new byte[height * width];
         for (int i = 0; i < imgData.GetUpperBound(0); i++)
         {
-            imgData[i] = (char)i;
+            imgData[i] = (byte)i;
         }
         return Image(imgData, 0, width, height, "name here", Palettes[PalIndex], true);
     }

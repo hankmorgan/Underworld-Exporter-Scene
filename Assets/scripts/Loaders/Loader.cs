@@ -17,7 +17,7 @@ public class Loader : UWClass
     /// <returns><c>true</c>, if stream file was  read, <c>false</c> otherwise.</returns>
     /// <param name="Path">Path.</param>
     /// <param name="buffer">Buffer.</param>
-    public static bool ReadStreamFile(String Path, out char[] buffer)
+    public static bool ReadStreamFile(String Path, out byte[] buffer)
     {
         //Path = Path.Replace("--", sep.ToString());
         if (!File.Exists(Path))
@@ -26,45 +26,47 @@ public class Loader : UWClass
             buffer = null;
             return false;
         }
-        FileStream fs = File.OpenRead(Path);
-        if (fs.CanRead)
-        {
-            buffer = new char[fs.Length];
-            for (int i = 0; i < fs.Length; i++)
-            {
-                buffer[i] = (char)fs.ReadByte();
-            }
-            fs.Close();
-            return true;
-        }
         else
         {
-            fs.Close();
-            buffer = new char[0];
-            return false;
+            buffer = System.IO.File.ReadAllBytes(Path);
+            return (buffer != null);
         }
+        //FileStream fs = File.OpenRead(Path);
+        //if (fs.CanRead)
+        //{
+        //    buffer = new byte[fs.Length];
+        //    for (int i = 0; i < fs.Length; i++)
+        //    {
+        //        buffer[i] = (byte)fs.ReadByte();
+        //    }
+        //    fs.Close();
+        //    return true;
+        //}
+        //else
+        //{
+        //    fs.Close();
+        //    buffer = new byte[0];
+        //    return false;
+        //}
     }
 
 
-    public static long ConvertInt16(char Byte1, char Byte2)
+    public static long ConvertInt16(byte Byte1, byte Byte2)
     {
         // int b1 = (int)Byte1;
         //int b2 = (int)Byte2;
         return Byte2 << 8 | Byte1;
     }
 
-    public static long ConvertInt24(char Byte1, char Byte2, char Byte3)
+    public static long ConvertInt24(byte Byte1, byte Byte2, byte Byte3)
     {
         return Byte3 << 16 | Byte2 << 8 | Byte1;
     }
 
-    public static long ConvertInt32(char Byte1, char Byte2, char Byte3, char Byte4)
+    public static long ConvertInt32(byte Byte1, byte Byte2, byte Byte3, byte Byte4)
     {
         return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;      //24 was 32
     }
-
-
-
 
 
 
@@ -75,7 +77,7 @@ public class Loader : UWClass
     /// <param name="buffer">Buffer.</param>
     /// <param name="Address">Address.</param>
     /// <param name="size">Size of the data in bits</param>
-    public static long getValAtAddress(char[] buffer, long Address, int size)
+    public static long getValAtAddress(byte[] buffer, long Address, int size)
     {//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
         switch (size)
         {

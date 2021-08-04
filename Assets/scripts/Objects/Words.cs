@@ -44,7 +44,7 @@ public class Words : MonoBehaviour
         };
         newObj.transform.parent = this.transform;
         newObj.transform.position = this.transform.position;
-        newObj.transform.localPosition = new Vector3((float)fontSpacing * index, 0.0f, 0.0f);
+        newObj.transform.localPosition = new Vector3(fontSpacing * index, 0.0f, 0.0f);
         newObj.transform.localRotation = new Quaternion(0, 0, 0, 0);
         //Debug.Log ("Fonts/font_" + font.ToString("0000") + Asciichar.ToString ("0000"));
         SpriteRenderer mysprite = newObj.AddComponent<SpriteRenderer>();//Adds the sprite gameobject

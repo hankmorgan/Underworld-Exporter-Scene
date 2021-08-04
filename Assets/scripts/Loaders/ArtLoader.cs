@@ -21,7 +21,7 @@ public class ArtLoader : Loader
     /// <summary>
     /// The complete image file 
     /// </summary>
-    protected char[] ImageFileData;
+    protected byte[] ImageFileData;
 
     /// <summary>
     /// The palette no to use with this file.
@@ -77,7 +77,7 @@ public class ArtLoader : Loader
     /// <param name="imageName">Image name.</param>
     /// <param name="pal">Pal.</param>
     /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-    public static Texture2D Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha)
+    public static Texture2D Image(byte[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha)
     {
         return Image(databuffer, dataOffSet, width, height, imageName, pal, Alpha, false);
         //Texture2D image = new Texture2D(width, height, TextureFormat.ARGB32, false);
@@ -108,7 +108,7 @@ public class ArtLoader : Loader
     /// <param name="imageName">Image name.</param>
     /// <param name="pal">Pal.</param>
     /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-    public static Texture2D Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER)
+    public static Texture2D Image(byte[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER)
     {
         Texture2D image = new Texture2D(width, height, TextureFormat.ARGB32, false);
         Color32[] imageColors = new Color32[width * height];
@@ -117,11 +117,11 @@ public class ArtLoader : Loader
         {
             for (int j = (iRow * width); j < (iRow * width) + width; j++)
             {
-                byte pixel = (byte)getValAtAddress(databuffer, dataOffSet + (long)j, 8);
+                byte pixel = (byte)getValAtAddress(databuffer, dataOffSet + j, 8);
 
                 if (useXFER)
                 {
-                    int p = (int)(pixel);
+                    int p = pixel;
                     switch (p)
                     {
                         case 0xf9:
@@ -168,7 +168,7 @@ public class ArtLoader : Loader
     /// <param name="maxpix">Maxpix.</param>
     /// <param name="addr_ptr">Address ptr.</param>
     /// <param name="auxpal">Auxpal.</param>
-    public static void Ua_image_decode_rle(char[] FileIn, char[] pixels, int bits, int datalen, int maxpix, int addr_ptr, char[] auxpal)
+    public static void Ua_image_decode_rle(byte[] FileIn, byte[] pixels, int bits, int datalen, int maxpix, int addr_ptr, byte[] auxpal)
     {
         //Code lifted from Underworld adventures.
         // bit extraction variables
@@ -201,7 +201,7 @@ public class ArtLoader : Loader
                 //rawbits = ( int)fgetc(fd);
                 rawbits = (int)getValAtAddress(FileIn, addr_ptr, 8);
                 addr_ptr++;
-                if ((int)rawbits == -1)  //EOF
+                if (rawbits == -1)  //EOF
                     return;
 
                 //         fprintf(LOGFILE,"fgetc: %02x\n",rawbits);
@@ -353,18 +353,18 @@ public class ArtLoader : Loader
         0x0200      fade to white
         0x0280      fade to black
         */
-    //static char getActualAuxPalVal(char[] auxpal, int nibble)
+    //static char getActualAuxPalVal(byte[] auxpal, int nibble)
     //{
     //    switch ((int)auxpal[nibble])
     //    {
     //        case 0xf0: // fade to red
-    //            return (char)(256 + 0x80 + nibble);
+    //            return (byte)(256 + 0x80 + nibble);
     //        case 0xf4: // fade to blue
-    //            return (char)(256 + 0x180 + nibble);
+    //            return (byte)(256 + 0x180 + nibble);
     //        case 0xf8:// fade to green 
-    //            return (char)(256 + 0x200 + nibble);
+    //            return (byte)(256 + 0x200 + nibble);
     //        case 252:  // fade to white 
-    //            return (char)(256 + 0x280 + nibble);
+    //            return (byte)(256 + 0x280 + nibble);
 
     //        //????   fade to black
     //        default:
@@ -374,7 +374,7 @@ public class ArtLoader : Loader
 
     // UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
     // This one is also almost directly from Jim Cameron's code.
-    public void UncompressBitmap(char[] chunk_bits, long chunk_ptr, out char[] outbits, int numbits)
+    public void UncompressBitmap(byte[] chunk_bits, long chunk_ptr, out byte[] outbits, int numbits)
     {
         //int j=0;
         int i;
@@ -384,7 +384,7 @@ public class ArtLoader : Loader
         //  bits_end = bits + numbits;
         // int bits_end= numbits;
         //  memset(bits,0,numbits);
-        outbits = new char[numbits];
+        outbits = new byte[numbits];
         //while (bits < bits_end)
         while (outbits_ptr < numbits)
         {
@@ -394,7 +394,7 @@ public class ArtLoader : Loader
             if (xc == 0)
             {
                 //xc = *chunk_bits++;
-                xc = (int)chunk_bits[chunk_ptr++];
+                xc = chunk_bits[chunk_ptr++];
                 for (i = 0; ((i < xc) && (outbits_ptr < numbits)); ++i)
                 {
                     //*bits++ = *chunk_bits;

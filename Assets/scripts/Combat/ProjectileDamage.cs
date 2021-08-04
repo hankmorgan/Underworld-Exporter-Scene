@@ -93,7 +93,7 @@ public class ProjectileDamage : UWEBase
                 return; //no damage applied.
             }
 
-            int DamageToApply = (int)(Mathf.Max(((float)(Damage)) * (AttackCharge / 100f), 1));
+            int DamageToApply = (int)(Mathf.Max(Damage * (AttackCharge / 100f), 1));
             DamageToApply = Mathf.Max(1, DamageToApply - DamageReduction);
 
             if (other.gameObject.GetComponent<ObjectInteraction>() != null)

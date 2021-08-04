@@ -150,7 +150,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
     public ObjectDatLoader()
     {
         int add_ptr;
-        if (ReadStreamFile(Path.Combine(BasePath, "DATA", "OBJECTS.DAT"), out char[] obj_dat))
+        if (ReadStreamFile(Path.Combine(BasePath, "DATA", "OBJECTS.DAT"), out byte[] obj_dat))
         {
             add_ptr = 2;
             int j = 0;
@@ -228,7 +228,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 16; i++)
             {//Nutrition stats
-                nutritionStats[j].FoodValue = (int)(sbyte)getValAtAddress(obj_dat, add_ptr, 8);
+                nutritionStats[j].FoodValue = (sbyte)getValAtAddress(obj_dat, add_ptr, 8);
                 add_ptr++;
                 j++;
             }

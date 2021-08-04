@@ -22,7 +22,7 @@ public class event_base : UWClass
     /// <summary>
     /// The raw data from scd.ark
     /// </summary>
-    public char[] RawData = new char[16];
+    public byte[] RawData = new byte[16];
 
     /// <summary>
     /// The block within which this event is contained.
@@ -115,7 +115,7 @@ public class event_base : UWClass
     /// </summary>
     /// <param name="add_ptr">Add ptr.</param>
     /// <param name="fileData">File data.</param>
-    public void InitRawData(int blockNo, int add_ptr, char[] fileData)
+    public void InitRawData(int blockNo, int add_ptr, byte[] fileData)
     {
         BlockNo = blockNo;
         for (int i = 0; i <= RawData.GetUpperBound(0); i++)

@@ -52,8 +52,8 @@ public class WeaponsLoader : ArtLoader
             MaxWidth = 208;
         }
         int add_ptr = 0;
-        ReadStreamFile(datfile, out char[] AnimData);
-        ReadStreamFile(grfile, out char[] textureFile);
+        ReadStreamFile(datfile, out byte[] AnimData);
+        ReadStreamFile(grfile, out byte[] textureFile);
         if (_RES != GAME_UW2)
         {
             int GroupSize = 28;
@@ -93,18 +93,18 @@ public class WeaponsLoader : ArtLoader
             int BitMapHeight = (int)getValAtAddress(textureFile, textureOffset + 2, 8);
             int datalen;
             Palette auxpal = PaletteLoader.LoadAuxilaryPal(cmfile, GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
-            char[] imgNibbles;
-            char[] outputImg;
-            char[] srcImg;
+            byte[] imgNibbles;
+            byte[] outputImg;
+            byte[] srcImg;
 
             datalen = (int)getValAtAddress(textureFile, textureOffset + 4, 16);
-            imgNibbles = new char[Mathf.Max(BitMapWidth * BitMapHeight * 2, datalen * 2)];
+            imgNibbles = new byte[Mathf.Max(BitMapWidth * BitMapHeight * 2, datalen * 2)];
             textureOffset += 6; //Start of raw data.
 
             copyNibbles(textureFile, ref imgNibbles, datalen, textureOffset);
             //LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
-            srcImg = new char[BitMapWidth * BitMapHeight];
-            outputImg = new char[MaxWidth * MaxHeight];
+            srcImg = new byte[BitMapWidth * BitMapHeight];
+            outputImg = new byte[MaxWidth * MaxHeight];
             //Debug.Log("i= " + i + " datalen= " + datalen);
             if (datalen >= 6)
             {
@@ -151,7 +151,7 @@ public class WeaponsLoader : ArtLoader
                         else
                         {
                             int alpha = 0;
-                            outputImg[x + (y * MaxWidth)] = (char)alpha;
+                            outputImg[x + (y * MaxWidth)] = (byte)alpha;
                         }
                     }
                     if (ImgStarted == true)
@@ -180,7 +180,7 @@ public class WeaponsLoader : ArtLoader
     /// <param name="NoOfNibbles">No of nibbles.</param>
     /// <param name="add_ptr">Add ptr.</param>
     /// This code from underworld adventures
-    protected void copyNibbles(char[] InputData, ref char[] OutputData, int NoOfNibbles, long add_ptr)
+    protected void copyNibbles(byte[] InputData, ref byte[] OutputData, int NoOfNibbles, long add_ptr)
     {
         //Split the data up into it's nibbles.
         int i = 0;
@@ -188,15 +188,15 @@ public class WeaponsLoader : ArtLoader
         //NoOfNibbles=NoOfNibbles*2;
         while (NoOfNibbles > 1)
         {
-            OutputData[i] = (char)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);       //High nibble
-            OutputData[i + 1] = (char)((getValAtAddress(InputData, add_ptr, 8)) & 0xf); //Low nibble
+            OutputData[i] = (byte)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);       //High nibble
+            OutputData[i + 1] = (byte)((getValAtAddress(InputData, add_ptr, 8)) & 0xf); //Low nibble
             i += 2;
             add_ptr++;
             NoOfNibbles -= 2;
         }
         if (NoOfNibbles == 1)
         {   //Odd nibble out.
-            OutputData[i] = (char)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
+            OutputData[i] = (byte)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
         }
     }
 
@@ -217,15 +217,15 @@ public class WeaponsLoader : ArtLoader
     /// <param name="imageHeight">Image height.</param>
     /// <param name="BitSize">Bit size.</param>
     /// This code from underworld adventures
-    char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize)
+    byte[] DecodeRLEBitmap(byte[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize)
     //, palette *auxpal, int index, int BitSize, char OutFileName[255])
     {
-        char[] outputImg = new char[imageWidth * imageHeight];
+        byte[] outputImg = new byte[imageWidth * imageHeight];
         int state = 0;
         int curr_pxl = 0;
         int count = 0;
         int repeatcount = 0;
-        char nibble;
+        byte nibble;
 
         int add_ptr = 0;
 
@@ -253,7 +253,7 @@ public class WeaponsLoader : ArtLoader
                     }
                 case repeat_record:
                     {
-                        nibble = getNibble(imageData, ref add_ptr);
+                        nibble = GetNibble(imageData, ref add_ptr);
                         //for count times copy the palette data to the image at the output pointer
                         if (imageWidth * imageHeight - curr_pxl < count)
                         {
@@ -286,7 +286,7 @@ public class WeaponsLoader : ArtLoader
                         for (int i = 0; i < count; i++)
                         {
                             //get nibble for the palette;
-                            nibble = getNibble(imageData, ref add_ptr);
+                            nibble = GetNibble(imageData, ref add_ptr);
                             outputImg[curr_pxl++] = nibble;
                         }
                         state = repeat_record_start;
@@ -307,25 +307,25 @@ public class WeaponsLoader : ArtLoader
     /// <param name="addr_ptr">Address ptr.</param>
     /// <param name="size">Size.</param>
     /// This code from underworld adventures
-    int getcount(char[] nibbles, ref int addr_ptr, int size)
+    int getcount(byte[] nibbles, ref int addr_ptr, int size)
     {
         int n1;
         int n2;
         int n3;
-        n1 = getNibble(nibbles, ref addr_ptr);
+        n1 = GetNibble(nibbles, ref addr_ptr);
         int count = n1;
 
         if (count == 0)
         {
-            n1 = getNibble(nibbles, ref addr_ptr);
-            n2 = getNibble(nibbles, ref addr_ptr);
+            n1 = GetNibble(nibbles, ref addr_ptr);
+            n2 = GetNibble(nibbles, ref addr_ptr);
             count = (n1 << size) | n2;
         }
         if (count == 0)
         {
-            n1 = getNibble(nibbles, ref addr_ptr);
-            n2 = getNibble(nibbles, ref addr_ptr);
-            n3 = getNibble(nibbles, ref addr_ptr);
+            n1 = GetNibble(nibbles, ref addr_ptr);
+            n2 = GetNibble(nibbles, ref addr_ptr);
+            n3 = GetNibble(nibbles, ref addr_ptr);
             count = (((n1 << size) | n2) << size) | n3;
         }
         return count;
@@ -338,9 +338,9 @@ public class WeaponsLoader : ArtLoader
     /// <param name="nibbles">Nibbles.</param>
     /// <param name="addr_ptr">Address ptr.</param>
     /// This code from underworld adventures
-    char getNibble(char[] nibbles, ref int addr_ptr)
+    byte GetNibble(byte[] nibbles, ref int addr_ptr)
     {
-        char n1 = nibbles[addr_ptr];
+        byte n1 = nibbles[addr_ptr];
         addr_ptr++;
         return n1;
     }

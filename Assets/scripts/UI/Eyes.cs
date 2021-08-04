@@ -42,7 +42,7 @@ public class Eyes : GuiBase
     /// <param name="maxHealth">Max health.</param>
     public void SetTargetFrame(short currHealth, short maxHealth)
     {
-        float ratio = (float)(currHealth) / (float)(maxHealth);
+        float ratio = currHealth / (float)(maxHealth);
         if (ratio <= 0.15f)
         {
             TargetSequence = 3;

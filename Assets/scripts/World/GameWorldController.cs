@@ -1122,16 +1122,16 @@ public class GameWorldController : UWEBase
     {
         if ((startX != -1) && (startY != -1))
         {
-            float targetX = (float)startX * 1.2f + 0.6f;
-            float targetY = (float)startY * 1.2f + 0.6f;
+            float targetX = startX * 1.2f + 0.6f;
+            float targetY = startY * 1.2f + 0.6f;
             float Height;
             if (StartHeight == -1)
             {
-                Height = ((float)(instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
+                Height = instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY) * 0.15f;
             }
             else
             {
-                Height = (float)StartHeight * 0.15f;
+                Height = StartHeight * 0.15f;
             }
 
             UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
@@ -1406,7 +1406,7 @@ public class GameWorldController : UWEBase
 
         obj.transform.parent = instance.InventoryMarker.transform;
         //Copy loader data to obj.
-        char[] NewinventoryData = new char[8];
+        byte[] NewinventoryData = new byte[8];
         for (int i = 0; i < 8; i++)
         {
             NewinventoryData[i] = obj.BaseObjectData.DataBuffer[obj.BaseObjectData.PTR + i];
@@ -1656,7 +1656,7 @@ public class GameWorldController : UWEBase
     /// <param name="SlotNo">Slot no.</param>
     public void InitBGlobals(int SlotNo)
     {
-        char[] bglob_data;
+        byte[] bglob_data;
         if (SlotNo == 0)
         {//Init from BABGLOBS.DAT. Initialise the data.
             if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "DATA", "BABGLOBS.DAT"), out bglob_data))
@@ -1758,7 +1758,7 @@ public class GameWorldController : UWEBase
             path = levelFileName;
         }
 
-        if (Loader.ReadStreamFile(path, out char[] archive_ark))
+        if (Loader.ReadStreamFile(path, out byte[] archive_ark))
         {
             if (!DataLoader.LoadChunk(archive_ark, 86, out DataLoader.Chunk lev_ark))
             {
@@ -1771,7 +1771,7 @@ public class GameWorldController : UWEBase
         }
 
         //Try and play sound file from a tnova res file
-        if (Loader.ReadStreamFile("C:\\Games\\Terra Nova\\CD\\Terra_Nova\\SPEECH\\RESBRK01.RES", out char[] sound_ark))
+        if (Loader.ReadStreamFile("C:\\Games\\Terra Nova\\CD\\Terra_Nova\\SPEECH\\RESBRK01.RES", out byte[] sound_ark))
         {
             if (!DataLoader.LoadChunk(sound_ark, 3308, out DataLoader.Chunk voc_file))
             {

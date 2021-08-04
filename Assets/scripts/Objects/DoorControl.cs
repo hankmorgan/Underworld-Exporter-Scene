@@ -994,7 +994,7 @@ public class DoorControl : object_base
         {
             case ObjectInteraction.PORTCULLIS:
                 {
-                    newObj = (GameObject)Instantiate((GameObject)Resources.Load("Models/Portcullis"));
+                    newObj = Instantiate((GameObject)Resources.Load("Models/Portcullis"));
                     newObj.name = myObj.name + "_Model";
                     newObj.transform.parent = myObj.transform;
                     newObj.transform.position = myObj.transform.position;
@@ -1011,7 +1011,7 @@ public class DoorControl : object_base
                 {
 
                     GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
-                    newObj = (GameObject)Instantiate(myInstance);
+                    newObj = Instantiate(myInstance);
                     newObj.name = myObj.name + "_Model";
                     newObj.transform.parent = myObj.transform;
                     newObj.transform.position = myObj.transform.position;

@@ -431,7 +431,7 @@ public class NPC : MobileObject
         int agentId = GameWorldController.instance.NavMeshLand.agentTypeID;
         Agent = this.gameObject.AddComponent<NavMeshAgent>();
         Agent.autoTraverseOffMeshLink = false;
-        Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats[item_id - 64].Speed / 12.0f));
+        Agent.speed = 2f * ((GameWorldController.instance.objDat.critterStats[item_id - 64].Speed / 12.0f));
 
         switch (_RES)
         {

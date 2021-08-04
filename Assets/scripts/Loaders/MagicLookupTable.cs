@@ -49,7 +49,7 @@ public class MagicLookupTable : Loader
                 }
         }
 
-        if (ReadStreamFile(Path.Combine(BasePath, Exe), out char[] uw_exe))
+        if (ReadStreamFile(Path.Combine(BasePath, Exe), out byte[] uw_exe))
         {
             for (int i = 0; i <= NoOfEntries; i++)
             {

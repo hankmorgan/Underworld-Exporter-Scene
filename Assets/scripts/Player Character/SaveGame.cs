@@ -51,7 +51,7 @@ public class SaveGame : Loader
     /// <summary>
     /// Array for storing inventory data.
     /// </summary>
-    // public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
+    // public static byte[] InventoryData = new byte[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
 
 
     /// <summary>
@@ -76,9 +76,9 @@ public class SaveGame : Loader
         short[] ActiveEffectStability = new short[3];
         ResetUI();
 
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out char[] buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out byte[] buffer))
         {
-            int xOrValue = (int)buffer[0];
+            int xOrValue = buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
             int incrnum = 3;
 
@@ -88,7 +88,7 @@ public class SaveGame : Loader
                 {
                     incrnum = 3;
                 }
-                buffer[i] ^= (char)((xOrValue + incrnum) & 0xFF);
+                buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
 
                 incrnum += 3;
             }
@@ -114,7 +114,7 @@ public class SaveGame : Loader
                     case 0x4F: ///   experience in 0.1 points
                         UWCharacter.Instance.EXP = (int)getValAtAddress(buffer, i, 32); break;
                     case 0x53: // skillpoints available to spend
-                        UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
+                        UWCharacter.Instance.TrainingPoints = buffer[i]; break;
                     case 0x55:
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
@@ -123,10 +123,10 @@ public class SaveGame : Loader
                         UWCharacter.Instance.MoonGateLevel = (short)((buffer[i]) & 0xf);
                         break;
                     case 0x60: ///    bits 2..5: play_poison and no of active effects
-                        Quest.instance.IncenseDream = (int)(buffer[i] & 0x3);
+                        Quest.instance.IncenseDream = buffer[i] & 0x3;
                         UWCharacter.Instance.play_poison = (short)((buffer[i] >> 2) & 0xf);
                         UWCharacter.Instance.poison_timer = 30f;
-                        effectCounter = ((int)buffer[i] >> 6) & 0x3;
+                        effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x61:
                         {
@@ -260,7 +260,7 @@ public class SaveGame : Loader
                         GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0xDD: ///    current vitality
-                        UWCharacter.Instance.CurVIT = (int)buffer[i]; break;
+                        UWCharacter.Instance.CurVIT = buffer[i]; break;
                 }
             }
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
@@ -281,8 +281,8 @@ public class SaveGame : Loader
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
-                    dataToWrite[i] = (byte)buffer[i];
-                    output.WriteLine((byte)buffer[i]);
+                    dataToWrite[i] = buffer[i];
+                    output.WriteLine(buffer[i]);
                 }
                 output.Close();
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
@@ -294,7 +294,7 @@ public class SaveGame : Loader
                     incrnum = 3;
                     if (indextochange!=0)
                     {
-                            buffer[indextochange]=(char)newvalue;										
+                            buffer[indextochange]=(byte)newvalue;										
                     }
 
                     for(int i=1; i<220; i++)
@@ -303,7 +303,7 @@ public class SaveGame : Loader
                             {
                                     incrnum = 3;
                             }
-                            buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+                            buffer[i] ^= (byte)((xOrValue+incrnum) & 0xFF);
                             incrnum += 3;
                     }
                     //write back reencrypted file to test c
@@ -710,9 +710,9 @@ public class SaveGame : Loader
         writer.Close();//The file now saved is un-encrypted
 
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
         {
-            int xOrValue = (int)buffer[0];
+            int xOrValue = buffer[0];
             int incrnum = 3;
             for (int i = 1; i <= NoOfEncryptedBytes; i++)
             {
@@ -720,14 +720,14 @@ public class SaveGame : Loader
                 {
                     incrnum = 3;
                 }
-                buffer[i] ^= (char)((xOrValue + incrnum) & 0xFF);
+                buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
                 incrnum += 3;
             }
 
             byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
             for (long i = 0; i <= buffer.GetUpperBound(0); i++)
             {
-                dataToWrite[i] = (byte)buffer[i];
+                dataToWrite[i] = buffer[i];
             }
             File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
         }
@@ -1479,21 +1479,21 @@ public class SaveGame : Loader
 
 
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
         {
-            char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
+            byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
 
             byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
             for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
             {
-                dataToWrite[i] = (byte)recodetest[i];
+                dataToWrite[i] = recodetest[i];
             }
             File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
         }
     }
 
 
-    static char[] DecodeEncodeUW2PlayerDat(char[] pDat, byte MS)
+    static byte[] DecodeEncodeUW2PlayerDat(byte[] pDat, byte MS)
     {
         int[] MA = new int[80];
         MS += 7;
@@ -1517,18 +1517,18 @@ public class SaveGame : Loader
             MS += 0x49;
             MA[i * 7] = MS;
         }
-        char[] buffer = new char[pDat.GetUpperBound(0) + 1];
+        byte[] buffer = new byte[pDat.GetUpperBound(0) + 1];
         int offset = 1;
         int byteCounter = 0;
         for (int l = 0; l <= 11; l++)
         {
-            buffer[0 + offset] = (char)(pDat[0 + offset] ^ MA[0]);
+            buffer[0 + offset] = (byte)(pDat[0 + offset] ^ MA[0]);
             byteCounter++;
             for (int i = 1; i < 0x50; ++i)
             {
                 if (byteCounter < 0x37D)
                 {
-                    buffer[i + offset] = (char)(((pDat[i + offset] & 0xff) ^ ((buffer[i - 1 + offset] & 0xff) + (pDat[i - 1 + offset] & 0xff) + (MA[i] & 0xff))) & 0xff);
+                    buffer[i + offset] = (byte)(((pDat[i + offset] & 0xff) ^ ((buffer[i - 1 + offset] & 0xff) + (pDat[i - 1 + offset] & 0xff) + (MA[i] & 0xff))) & 0xff);
                     byteCounter++;
                 }
             }
@@ -1598,11 +1598,11 @@ public class SaveGame : Loader
         UWCharacter.Instance.JustTeleported = true;
         UWCharacter.Instance.teleportedTimer = 0f;
 
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out char[] pDat))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out byte[] pDat))
         {
             byte MS = (byte)getValAtAddress(pDat, 0, 8);
-            UWCharacter.Instance.XorKey = (int)MS;
-            char[] buffer = DecodeEncodeUW2PlayerDat(pDat, MS);
+            UWCharacter.Instance.XorKey = MS;
+            byte[] buffer = DecodeEncodeUW2PlayerDat(pDat, MS);
             if (UWCharacter.Instance.decode)
             {
                 //write out decrypted file for analysis
@@ -1610,8 +1610,8 @@ public class SaveGame : Loader
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
-                    dataToWrite[i] = (byte)buffer[i];
-                    output.WriteLine((byte)buffer[i]);
+                    dataToWrite[i] = buffer[i];
+                    output.WriteLine(buffer[i]);
                 }
                 output.Close();
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
@@ -1632,20 +1632,20 @@ public class SaveGame : Loader
                 {
                     for (int r = 31; r <= 53; r++)
                     {
-                        buffer[r] = (char)0;
+                        buffer[r] = 0;
                     }
                 }
                 else
                 {
-                    buffer[UWCharacter.Instance.IndexToRecode] = (char)UWCharacter.Instance.ValueToRecode;
+                    buffer[UWCharacter.Instance.IndexToRecode] = (byte)UWCharacter.Instance.ValueToRecode;
                 }
 
-                char[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
+                byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
 
                 byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
                 for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
                 {
-                    dataToWrite[i] = (byte)recodetest[i];
+                    dataToWrite[i] = recodetest[i];
                 }
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
             }
@@ -1671,7 +1671,7 @@ public class SaveGame : Loader
                     case 0x4F: ///   experience in 0.1 points
                         UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) * 0.1f); break;
                     case 0x53: // skillpoints available to spend
-                        UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
+                        UWCharacter.Instance.TrainingPoints = buffer[i]; break;
                     case 0x55: ///   x-position in level
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
@@ -1682,15 +1682,15 @@ public class SaveGame : Loader
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
                         UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);
                         UWCharacter.Instance.poison_timer = 30f;
-                        effectCounter = ((int)buffer[i] >> 6) & 0x3;
+                        effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x62://alco
                         UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
                         break;
                     case 0x64:
-                        Quest.instance.DreamPlantEaten = (1 == (((int)buffer[i]) & 0x1));
-                        Quest.instance.InDreamWorld = (1 == (((int)buffer[i] >> 1) & 0x1));
-                        Quest.instance.FightingInArena = (1 == (((int)buffer[i] >> 2) & 0x1));
+                        Quest.instance.DreamPlantEaten = (1 == (buffer[i] & 0x1));
+                        Quest.instance.InDreamWorld = (1 == ((buffer[i] >> 1) & 0x1));
+                        Quest.instance.FightingInArena = (1 == ((buffer[i] >> 2) & 0x1));
                         UWCharacter.Instance.DreamWorldTimer = 30f;
                         break;
                     case 0x66: // hand, Gender & body, and class
@@ -2234,7 +2234,7 @@ public class SaveGame : Loader
 
             LoadInventory(buffer, 995, 931, 969);
 
-            Vector3 DreamReturn = new Vector3((float)x_position_dream / Ratio, 0f, (float)y_position_dream / Ratio);
+            Vector3 DreamReturn = new Vector3(x_position_dream / Ratio, 0f, y_position_dream / Ratio);
             UWCharacter.Instance.DreamReturnTileX = (short)(DreamReturn.x / 1.2f);
             UWCharacter.Instance.DreamReturnTileY = (short)(DreamReturn.z / 1.2f);
             UWCharacter.Instance.TeleportPosition = GameWorldController.instance.StartPos;
@@ -2270,7 +2270,7 @@ public class SaveGame : Loader
     /// <summary>
     /// Loads the player name
     /// </summary>
-    static void LoadName(char[] buffer)
+    static void LoadName(byte[] buffer)
     {
         UWCharacter.Instance.CharName = "";
         for (int i = 1; i < 14; i++)
@@ -2288,75 +2288,75 @@ public class SaveGame : Loader
     /// Loads the skills from a save file for UW1 & 2
     /// </summary>
     /// <param name="buffer">Buffer.</param>
-    static void LoadStats(char[] buffer)
+    static void LoadStats(byte[] buffer)
     {
         for (int i = 1; i <= 0x3E; i++)
         {
             switch (i)
             {
                 case 0x1F://Strength
-                    UWCharacter.Instance.PlayerSkills.STR = (int)buffer[i];
+                    UWCharacter.Instance.PlayerSkills.STR = buffer[i];
                     GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
                     break;
                 case 0x20://Dex
-                    UWCharacter.Instance.PlayerSkills.DEX = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.DEX = buffer[i]; break;
                 case 0x21: ///    Intelligence
-                    UWCharacter.Instance.PlayerSkills.INT = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.INT = buffer[i]; break;
                 case 0x22: ///    Attack
-                    UWCharacter.Instance.PlayerSkills.Attack = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Attack = buffer[i]; break;
                 case 0x23: ///    Defense
-                    UWCharacter.Instance.PlayerSkills.Defense = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Defense = buffer[i]; break;
                 case 0x24: ///    Unarmed
-                    UWCharacter.Instance.PlayerSkills.Unarmed = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Unarmed = buffer[i]; break;
                 case 0x25: ///    Sword
-                    UWCharacter.Instance.PlayerSkills.Sword = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Sword = buffer[i]; break;
                 case 0x26: ///    Axe
-                    UWCharacter.Instance.PlayerSkills.Axe = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Axe = buffer[i]; break;
                 case 0x27: ///    Mace
-                    UWCharacter.Instance.PlayerSkills.Mace = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Mace = buffer[i]; break;
                 case 0x28: ///    Missile
-                    UWCharacter.Instance.PlayerSkills.Missile = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Missile = buffer[i]; break;
                 case 0x29: ///    Mana
-                    UWCharacter.Instance.PlayerSkills.ManaSkill = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.ManaSkill = buffer[i]; break;
                 case 0x2A: ///    Lore
-                    UWCharacter.Instance.PlayerSkills.Lore = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Lore = buffer[i]; break;
                 case 0x2B: ///    Casting
-                    UWCharacter.Instance.PlayerSkills.Casting = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Casting = buffer[i]; break;
                 case 0x2C: ///    Traps
-                    UWCharacter.Instance.PlayerSkills.Traps = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Traps = buffer[i]; break;
                 case 0x2D: ///    Search
-                    UWCharacter.Instance.PlayerSkills.Search = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Search = buffer[i]; break;
                 case 0x2E: ///    Track
-                    UWCharacter.Instance.PlayerSkills.Track = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Track = buffer[i]; break;
                 case 0x2F: ///    Sneak
-                    UWCharacter.Instance.PlayerSkills.Sneak = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Sneak = buffer[i]; break;
                 case 0x30: ///    Repair
-                    UWCharacter.Instance.PlayerSkills.Repair = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Repair = buffer[i]; break;
                 case 0x31: ///    Charm
-                    UWCharacter.Instance.PlayerSkills.Charm = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Charm = buffer[i]; break;
                 case 0x32: ///    Picklock
-                    UWCharacter.Instance.PlayerSkills.PickLock = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.PickLock = buffer[i]; break;
                 case 0x33: ///    Acrobat
-                    UWCharacter.Instance.PlayerSkills.Acrobat = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Acrobat = buffer[i]; break;
                 case 0x34: ///    Appraise
-                    UWCharacter.Instance.PlayerSkills.Appraise = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Appraise = buffer[i]; break;
                 case 0x35: ///    Swimming
-                    UWCharacter.Instance.PlayerSkills.Swimming = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.Swimming = buffer[i]; break;
                 case 0x36://Curvit
-                    UWCharacter.Instance.CurVIT = (int)buffer[i]; break;
+                    UWCharacter.Instance.CurVIT = buffer[i]; break;
                 case 0x37: ///    max. vitality
-                    UWCharacter.Instance.MaxVIT = (int)buffer[i]; break;
+                    UWCharacter.Instance.MaxVIT = buffer[i]; break;
                 case 0x38: ///    current mana, (play_mana)
-                    UWCharacter.Instance.PlayerMagic.CurMana = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerMagic.CurMana = buffer[i]; break;
                 case 0x39: ///    max. mana  (see also true max mana)
-                    UWCharacter.Instance.PlayerMagic.MaxMana = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerMagic.MaxMana = buffer[i]; break;
                 case 0x3A: ///    hunger, play_hunger
-                    UWCharacter.Instance.FoodLevel = (int)buffer[i]; break;
+                    UWCharacter.Instance.FoodLevel = buffer[i]; break;
                 case 0x3B:
                     //Unknown. Observed values 0 and 64?//Fatigue???
                     break;
                 case 0x3E: ///    character level (play_level)
-                    UWCharacter.Instance.CharLevel = (int)buffer[i]; break;
+                    UWCharacter.Instance.CharLevel = buffer[i]; break;
             }
         }
     }
@@ -2369,11 +2369,11 @@ public class SaveGame : Loader
     /// <param name="z_position">Z position.</param>
     static void InitPlayerPosition(int x_position, int y_position, int z_position)
     {
-        GameWorldController.instance.StartPos = new Vector3((float)x_position / Ratio, (float)z_position / Ratio + VertAdjust, (float)y_position / Ratio);
+        GameWorldController.instance.StartPos = new Vector3(x_position / Ratio, z_position / Ratio + VertAdjust, y_position / Ratio);
     }
 
 
-    static int LoadSpellEffects(char[] buffer, ref int[] ActiveEffectIds, ref short[] ActiveEffectStability)
+    static int LoadSpellEffects(byte[] buffer, ref int[] ActiveEffectIds, ref short[] ActiveEffectStability)
     {
         int effectCounter = 0;
         for (int i = 0x3f; i <= 0x44; i++)
@@ -2384,13 +2384,13 @@ public class SaveGame : Loader
                 case 0x41:
                 case 0x43://Active spell effect
                     {
-                        ActiveEffectIds[effectCounter] = GetActiveSpellID((int)buffer[i]); break;
+                        ActiveEffectIds[effectCounter] = GetActiveSpellID(buffer[i]); break;
                     }
                 case 0x3F + 1:
                 case 0x41 + 1:
                 case 0x43 + 1://Active spell effect stability
                     {
-                        ActiveEffectStability[effectCounter++] = (short)buffer[i]; break;
+                        ActiveEffectStability[effectCounter++] = buffer[i]; break;
                     }
             }
         }
@@ -2402,7 +2402,7 @@ public class SaveGame : Loader
     /// </summary>
     /// <param name="buffer">Buffer.</param>
     /// <param name="StartOffset">Start offset.</param>
-    static void LoadRunes(char[] buffer)
+    static void LoadRunes(byte[] buffer)
     {
         int StartOffset = 0x45;
         int runeOffset = 0;
@@ -2422,9 +2422,9 @@ public class SaveGame : Loader
             runeOffset += 8;
         }
 
-        SetActiveRuneSlots(0, (int)buffer[0x48]);
-        SetActiveRuneSlots(1, (int)buffer[0x49]);
-        SetActiveRuneSlots(2, (int)buffer[0x4A]);
+        SetActiveRuneSlots(0, buffer[0x48]);
+        SetActiveRuneSlots(1, buffer[0x49]);
+        SetActiveRuneSlots(2, buffer[0x4A]);
     }
 
     /// <summary>
@@ -2432,14 +2432,14 @@ public class SaveGame : Loader
     /// </summary>
     /// <param name="buffer">Buffer.</param>
     /// <param name="i">The index.</param>
-    static void LoadPlayerClass(char[] buffer, int i)
+    static void LoadPlayerClass(byte[] buffer, int i)
     {
         //bit 1 = hand left/right
         //bit 2-5 = gender & body
         //bit 6-8 = class
         GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
-        UWCharacter.Instance.isLefty = (((int)buffer[i] & 0x1) == 0);
-        int bodyval = ((int)buffer[i] >> 1) & 0xf;
+        UWCharacter.Instance.isLefty = ((buffer[i] & 0x1) == 0);
+        int bodyval = (buffer[i] >> 1) & 0xf;
         if (bodyval % 2 == 0)
         {
             //male 0,2,4,6,8
@@ -2464,7 +2464,7 @@ public class SaveGame : Loader
     /// </summary>
     /// <param name="buffer">Buffer.</param>
     /// <param name="i">The index.</param>
-    static void LoadGameOptions(char[] buffer, int i)
+    static void LoadGameOptions(byte[] buffer, int i)
     {
         int val = (int)getValAtAddress(buffer, i, 8);
         ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
@@ -2551,7 +2551,7 @@ public class SaveGame : Loader
     /// <param name="StartOffset">Start offset.</param>
     /// <param name="lBoundSlots">L bound slots.</param>
     /// <param name="uBoundSlots">U bound slots.</param>
-    static void LoadInventory(char[] buffer, int StartOffset, int lBoundSlots, int uBoundSlots)
+    static void LoadInventory(byte[] buffer, int StartOffset, int lBoundSlots, int uBoundSlots)
     {
         //Start offset  is 312 for uw1
         //lBoundSlots=248; uBoundSlots < 286
@@ -2562,7 +2562,7 @@ public class SaveGame : Loader
 
         GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems + 2];   //+ 2];
 
-        //InventoryData = new char[768 * 8];
+        //InventoryData = new byte[768 * 8];
         //if (buffer.GetUpperBound(0) >= StartOffset)
         //{//Copy the inventory data buffer into memory. Inventory object data will be manipulated here.
         //    int i = StartOffset;            
@@ -2586,7 +2586,7 @@ public class SaveGame : Loader
                     ObjectTileY = TileMap.ObjectStorageTile,
                     InUseFlag = 1,
 
-                    InventoryData = new char[8]
+                    InventoryData = new byte[8]
                 };//Inventory indices start at 1
                 for (int i = 0; i < 8; i++)
                 {//Copy data into the local objectloader buffer for the inventory object.
@@ -2807,7 +2807,7 @@ public class SaveGame : Loader
                 ByteToWrite = ((currobj.xpos & 0x7) << 13) | ((currobj.ypos & 0x7) << 10) | ((currobj.heading & 0x7) << 7) | ((currobj.zpos & 0x7F));
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
-                ByteToWrite = (((int)currobj.next & 0x3FF) << 6) | (currobj.quality & 0x3F);
+                ByteToWrite = ((currobj.next & 0x3FF) << 6) | (currobj.quality & 0x3F);
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
                 ByteToWrite = ((currobj.link & 0x3FF) << 6) | (currobj.owner & 0x3F);
@@ -2828,7 +2828,7 @@ public class SaveGame : Loader
             if (i - 1 < UWCharacter.Instance.CharName.Length)
             {
                 char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
-                DataLoader.WriteInt8(writer, (int)alpha);
+                DataLoader.WriteInt8(writer, alpha);
             }
             else
             {
@@ -3067,7 +3067,7 @@ public class SaveGame : Loader
     /// Loads the position from player.dat
     /// </summary>
     /// <param name="buffer">Buffer.</param>
-    static void LoadPosition(char[] buffer)
+    static void LoadPosition(byte[] buffer)
     {
         //   x-position in level
         int x_position = (int)getValAtAddress(buffer, 0x55, 16);
@@ -3075,7 +3075,7 @@ public class SaveGame : Loader
         int y_position = (int)getValAtAddress(buffer, 0x57, 16);
         //   z-position
         int z_position = (int)getValAtAddress(buffer, 0x59, 16);
-        float heading = (float)getValAtAddress(buffer, 0x5c, 8);
+        float heading = getValAtAddress(buffer, 0x5c, 8);
         Debug.Log("Player heading is " + heading);
         UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, heading * (360f / 255f), 0f);
         UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
@@ -3095,7 +3095,7 @@ public class SaveGame : Loader
         DataLoader.WriteInt16(writer, (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio)));
         DataLoader.WriteInt8(writer, 0);
         // DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f)));
-        DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.HeadingFull));
+        DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull);
         DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1);
     }
 
@@ -3142,7 +3142,7 @@ public class SaveGame : Loader
                 if (i - 1 < UWCharacter.Instance.CharName.Length)
                 {
                     char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
-                    DataLoader.WriteInt8(writer, (int)alpha);
+                    DataLoader.WriteInt8(writer, alpha);
                 }
                 else
                 {
@@ -3724,7 +3724,7 @@ public class SaveGame : Loader
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
 
-                ByteToWrite = (((int)currobj.next & 0x3FF) << 6) |
+                ByteToWrite = ((currobj.next & 0x3FF) << 6) |
                         (currobj.quality & 0x3F);
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
@@ -3740,9 +3740,9 @@ public class SaveGame : Loader
         writer.Close();//The file now saved is un-encrypted
 
         //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out char[] buffer))
+        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
         {
-            int xOrValue = (int)buffer[0];
+            int xOrValue = buffer[0];
             int incrnum = 3;
             for (int i = 1; i <= NoOfEncryptedBytes; i++)
             {
@@ -3750,14 +3750,14 @@ public class SaveGame : Loader
                 {
                     incrnum = 3;
                 }
-                buffer[i] ^= (char)((xOrValue + incrnum) & 0xFF);
+                buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
                 incrnum += 3;
             }
 
             byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
             for (long i = 0; i <= buffer.GetUpperBound(0); i++)
             {
-                dataToWrite[i] = (byte)buffer[i];
+                dataToWrite[i] = buffer[i];
             }
             File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
 

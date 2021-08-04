@@ -136,8 +136,8 @@ public class ObjectLoader : DataLoader
         }
         set
         {
-            map.lev_ark_block.Data[0x7c02] = (char)(value & 0xFF);
-            map.lev_ark_block.Data[0x7c03] = (char)((value >> 8) & 0xFF);
+            map.lev_ark_block.Data[0x7c02] = (byte)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c03] = (byte)((value >> 8) & 0xFF);
         }
     }
 
@@ -152,8 +152,8 @@ public class ObjectLoader : DataLoader
         }
         set
         {
-            map.lev_ark_block.Data[0x7c04] = (char)(value & 0xFF);
-            map.lev_ark_block.Data[0x7c05] = (char)((value >> 8) & 0xFF);
+            map.lev_ark_block.Data[0x7c04] = (byte)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c05] = (byte)((value >> 8) & 0xFF);
         }
     }
 
@@ -202,7 +202,7 @@ public class ObjectLoader : DataLoader
         }
     }
 
-    public void LoadObjectListShock(TileMap tileMap, char[] lev_ark)
+    public void LoadObjectListShock(TileMap tileMap, byte[] lev_ark)
     {
 
         objInfo = new ObjectLoaderInfo[1600];
@@ -218,8 +218,8 @@ public class ObjectLoader : DataLoader
     }
 
 
-    //void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, char[] lev_ark, int LevelNo)
-    bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, char[] archive_ark, short LevelNo)
+    //void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, byte[] lev_ark, int LevelNo)
+    bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, byte[] archive_ark, short LevelNo)
     {
 
         short InUseFlag;
@@ -757,8 +757,8 @@ public class ObjectLoader : DataLoader
     void SetStaticAtSlot(int slot, int itemIndex)
     {
         int offset = slot * 2;
-        map.lev_ark_block.Data[0x74fc + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x74fc + offset + 1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset] = (byte)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset + 1] = (byte)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -770,8 +770,8 @@ public class ObjectLoader : DataLoader
     void SetMobileAtSlot(int slot, int itemIndex)
     {
         int offset = slot * 2;
-        map.lev_ark_block.Data[0x7300 + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x7300 + offset + 1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x7300 + offset] = (byte)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x7300 + offset + 1] = (byte)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -1564,8 +1564,8 @@ public class ObjectLoader : DataLoader
         float BrushX = 120f;
         float BrushY = 120f;
         float BrushZ = 15f;
-        float objX = (float)objList[ObjectIndex].xpos;
-        float objY = (float)objList[ObjectIndex].ypos;
+        float objX = objList[ObjectIndex].xpos;
+        float objY = objList[ObjectIndex].ypos;
         float offX = x * BrushX + objList[ObjectIndex].xpos * (BrushX / ResolutionXY);
         float offY = y * BrushY + objList[ObjectIndex].ypos * (BrushY / ResolutionXY);
 
@@ -1767,7 +1767,7 @@ public class ObjectLoader : DataLoader
                     Vector3 position;
                     if (tilemap == null)
                     {
-                        position = new Vector3((float)TileMap.ObjectStorageTile * 1.2f, 5f, (float)TileMap.ObjectStorageTile * 1.2f);
+                        position = new Vector3(TileMap.ObjectStorageTile * 1.2f, 5f, TileMap.ObjectStorageTile * 1.2f);
                     }
                     else
                     {
@@ -2515,7 +2515,7 @@ public class ObjectLoader : DataLoader
 
 
 
-    bool lookUpSubClass(char[] archive_ark, TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef, ObjectLoaderInfo[] objList, short[] texture_map, int objIndex, short levelNo)
+    bool lookUpSubClass(byte[] archive_ark, TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef, ObjectLoaderInfo[] objList, short[] texture_map, int objIndex, short levelNo)
     {
         //
 

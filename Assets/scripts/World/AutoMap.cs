@@ -192,7 +192,7 @@ public class AutoMap : Loader
     /// </summary>
     public static long[] AutomapNoteAddresses = new long[9];
 
-    void ProcessAutomap(char[] lev_ark, long automapAddress)
+    void ProcessAutomap(byte[] lev_ark, long automapAddress)
     {
         int z = 0;
         for (int y = 0; y <= TileMap.TileMapSizeY; y++)
@@ -220,7 +220,7 @@ public class AutoMap : Loader
     /// Automaps are not necessarily stored in the same order as the tile maps. 
     /// EOF_Address is used to tell the loader when to 
     /// stop reading in data.
-    static void ProcessAutoMapNotes(int LevelNo, char[] lev_ark, long automapNotesAddress, long AUTOMAP_EOF_ADDRESS)
+    static void ProcessAutoMapNotes(int LevelNo, byte[] lev_ark, long automapNotesAddress, long AUTOMAP_EOF_ADDRESS)
     {
         while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
         {
@@ -269,7 +269,7 @@ public class AutoMap : Loader
     /// </summary>
     /// <param name="LevelNo"></param>
     /// <param name="lev_ark"></param>
-    public void InitAutoMapUW2(int LevelNo, char[] lev_ark)
+    public void InitAutoMapUW2(int LevelNo, byte[] lev_ark)
     {
         //AutomapNoteAddresses=new long[72];
         MapNotes = new List<MapNote>();
@@ -287,7 +287,7 @@ public class AutoMap : Loader
             int compressionFlag = (int)getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
             if (((compressionFlag >> 1) & 0x1) == 1)
             {//automap is compressed
-                char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapAddress, ref datalen);
+                byte[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapAddress, ref datalen);
                 ProcessAutomap(tmp_ark, 0);
             }
             else
@@ -313,7 +313,7 @@ public class AutoMap : Loader
     /// </summary>
     /// <param name="LevelNo">Level no.</param>
     /// <param name="lev_ark">Lev ark.</param>
-    public void InitAutoMapUW1(int LevelNo, char[] lev_ark)
+    public void InitAutoMapUW1(int LevelNo, byte[] lev_ark)
     {
         MapNotes = new List<MapNote>();
         thisLevelNo = LevelNo;
@@ -1466,7 +1466,7 @@ public class AutoMap : Loader
     /// <param name="thisLevelNo"></param>
     /// <param name="lev_ark"></param>
     /// <returns></returns>
-    public static long GetNextAutomapBlock(int thisLevelNo, char[] lev_ark)
+    public static long GetNextAutomapBlock(int thisLevelNo, byte[] lev_ark)
     {
         long thisAddress = AutomapNoteAddresses[thisLevelNo];
         long selectedAddress = lev_ark.GetUpperBound(0);
@@ -1487,9 +1487,9 @@ public class AutoMap : Loader
     /// Converts an Automap into a byte array for saving.
     /// </summary>
     /// <returns></returns>
-    public char[] AutoMapVisitedToBytes()
+    public byte[] AutoMapVisitedToBytes()
     {
-        char[] AutoMapData = new char[(TileMapSizeX + 1) * (TileMapSizeY + 1)];
+        byte[] AutoMapData = new byte[(TileMapSizeX + 1) * (TileMapSizeY + 1)];
         int add_ptr = 0;
         for (int y = 0; y <= TileMap.TileMapSizeY; y++)
         {
@@ -1499,8 +1499,8 @@ public class AutoMap : Loader
                         //The automap contains one byte per tile, in the same order as the
                         //level tilemap. A valid value in the low nybble means the tile is displayed
                         //on the map. Valid values are the same as tile types:
-                val = (int)Tiles[x, y].DisplayType << 4 | (int)Tiles[x, y].tileType;
-                AutoMapData[add_ptr] = (char)val;
+                val = Tiles[x, y].DisplayType << 4 | (int)Tiles[x, y].tileType;
+                AutoMapData[add_ptr] = (byte)val;
                 add_ptr++;
             }
         }
@@ -1513,12 +1513,12 @@ public class AutoMap : Loader
     /// Converts the automap into a byte array for saving.
     /// </summary>
     /// <returns></returns>
-    public char[] AutoMapNotesToBytes()
+    public byte[] AutoMapNotesToBytes()
     {
         if (MapNotes.Count > 0)
         {
             int add_ptr = 0;
-            char[] AutoMapData = new char[MapNotes.Count * 54];
+            byte[] AutoMapData = new byte[MapNotes.Count * 54];
             foreach (MapNote note in MapNotes)
             {
                 bool terminated = false;
@@ -1529,17 +1529,17 @@ public class AutoMap : Loader
                         if (i < note.NoteText.Length)
                         {//Lower case notes will crash the game
                             char alpha = note.NoteText.ToUpper().ToCharArray()[i];
-                            AutoMapData[add_ptr + i] = alpha;
+                            AutoMapData[add_ptr + i] = (byte)alpha;
                         }
                         else
                         {
                             if (terminated)
                             {//0x6f
-                                AutoMapData[add_ptr + i] = (char)0x6f;
+                                AutoMapData[add_ptr + i] = 0x6f;
                             }
                             else
                             {
-                                AutoMapData[add_ptr + i] = (char)0;
+                                AutoMapData[add_ptr + i] = 0;
                                 terminated = true;
                             }
                         }
@@ -1551,15 +1551,15 @@ public class AutoMap : Loader
                             case 0x32:
                                 {
                                     int val = note.PosX;
-                                    AutoMapData[add_ptr + i] = (char)(val & 0xFF);
-                                    AutoMapData[add_ptr + i + 1] = (char)((val >> 8) & 0xFF);
+                                    AutoMapData[add_ptr + i] = (byte)(val & 0xFF);
+                                    AutoMapData[add_ptr + i + 1] = (byte)((val >> 8) & 0xFF);
                                     break;
                                 }
                             case 0x34:
                                 {
                                     int val = note.PosY;
-                                    AutoMapData[add_ptr + i] = (char)(val & 0xFF);
-                                    AutoMapData[add_ptr + i + 1] = (char)((val >> 8) & 0xFF);
+                                    AutoMapData[add_ptr + i] = (byte)(val & 0xFF);
+                                    AutoMapData[add_ptr + i + 1] = (byte)((val >> 8) & 0xFF);
                                     break;
                                 }
                         }

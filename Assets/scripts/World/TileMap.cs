@@ -326,9 +326,9 @@ public class TileMap : Loader
     public Vector3 getTileVector(int tileX, int tileY)
     {
         return new Vector3(
-                (((float)tileX) * 1.2f) + 0.6f,
-                (float)GetFloorHeight(tileX, tileY) * 0.15f,
-                (((float)tileY) * 1.2f) + 0.6f
+                (tileX * 1.2f) + 0.6f,
+                GetFloorHeight(tileX, tileY) * 0.15f,
+                (tileY * 1.2f) + 0.6f
         );
     }
 
@@ -352,9 +352,9 @@ public class TileMap : Loader
     public Vector3 getTileVector(int tileX, int tileY, float zpos)
     {
         return new Vector3(
-                (((float)tileX) * 1.2f) + 0.6f,
+                (tileX * 1.2f) + 0.6f,
                 zpos,
-                (((float)tileY) * 1.2f) + 0.6f
+                (tileY * 1.2f) + 0.6f
         );
     }
 
@@ -508,11 +508,11 @@ public class TileMap : Loader
         }
     }
 
-    public bool BuildTileMapShock(char[] archive_ark, int LevelNo)
+    public bool BuildTileMapShock(byte[] archive_ark, int LevelNo)
     {
         //LevelInfo=new TileInfo[64,64];
 
-        //char[] archive_ark; //file data
+        //byte[] archive_ark; //file data
         /*  unsigned char *tmp_ark; 
 unsigned char *sub_ark;*/
 
@@ -552,7 +552,7 @@ unsigned char *sub_ark;*/
         //Read the main level data in
         /* blockAddress =getShockBlockAddress(LevelNo*100+4005,archive_ark, ref chunkPackedLength,ref chunkUnpackedLength,ref chunkType); 
 if (blockAddress == -1) {return false;}
-lev_ark=new char[chunkUnpackedLength]; //or 64*64*16
+lev_ark=new byte[chunkUnpackedLength]; //or 64*64*16
 LoadShockChunk(blockAddress, chunkType, archive_ark, ref lev_ark,chunkPackedLength,chunkUnpackedLength);
 AddressOfBlockStart=0;
 address_pointer=0;  */
@@ -565,7 +565,7 @@ address_pointer=0;  */
 
         //get the texture data from the archive.is never compressed?
         //AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark, ref chunkPackedLength, ref chunkUnpackedLength,ref chunkType);
-        //tex_ark = new char[chunkUnpackedLength]; 
+        //tex_ark = new byte[chunkUnpackedLength]; 
         long address_pointer = 0;
         for (long k = 0; k < tex_ark.chunkUnpackedLength / 2; k++)
         {
@@ -592,7 +592,7 @@ address_pointer=0;  */
                 {
                     tileX = (short)x,
                     tileY = (short)y,
-                    tileType = (short)lev_ark.data[address_pointer]
+                    tileType = lev_ark.data[address_pointer]
                 };
                 switch (Tiles[x, y].tileType)
                 {//Need to swap some tile types around so that they conform to uw naming standards.
@@ -1554,9 +1554,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
     }
 
 
-    /*	char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data, out long datalen)
+    /*	byte[] GetUW2TileMapBytes(int LevelNo, byte[] lev_ark_file_data, out long datalen)
 		{	
-				char[] lev_ark;
+				byte[] lev_ark;
 				long address_pointer=0;
 				int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark_file_data,0,32);	
 				datalen=0;
@@ -1568,7 +1568,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 				if ((int)DataLoader.getValAtAddress(lev_ark_file_data,address_pointer,32)==0)
 				{
 						Debug.Log("This should not happen in getuw2tilemapbytes");
-						lev_ark= new char[1];
+						lev_ark= new byte[1];
 						return lev_ark ;
 				}
 				if (isCompressed == 1)
@@ -1580,7 +1580,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 				{
 						datalen = 0x7c08;
 						int BlockStart = (int)DataLoader.getValAtAddress(lev_ark_file_data, address_pointer, 32);
-						lev_ark = new char[0x7c08];//Make sure this contains the object data as well.
+						lev_ark = new byte[0x7c08];//Make sure this contains the object data as well.
 						int j=0;
 						for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
 						{
@@ -1596,12 +1596,12 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
     /// Converts this tilemap/Objectlist into an array that can be written to file.
     /// </summary>
     /// <returns>The map to bytes.</returns>
-    public char[] TileMapToBytes(char[] lev_ark_file_data, out long datalen)
+    public byte[] TileMapToBytes(byte[] lev_ark_file_data, out long datalen)
     {
         //holy crap this is crap!
         //SCRAP IT ALL
 
-        char[] TileMapData = new char[31752];//Size of tilemap + object list
+        byte[] TileMapData = new byte[31752];//Size of tilemap + object list
 
         //Copy filedata from tile map to data array
         for (int i = 0; i < 16384; i++)
@@ -1654,18 +1654,18 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         //        int floorHeight = (t.floorHeight / 2) << 4;                
 
         //        int ByteToWrite = tileType | floorHeight;//| floorTexture | noMagic;//This will be set in the original data
-        //        TileMapData[addptr] = (char)(ByteToWrite);
+        //        TileMapData[addptr] = (byte)(ByteToWrite);
 
         //        int flags = t.flags & 0x3;
         //        int floorTexture = t.floorTexture << 2;
         //        int noMagic = t.noMagic << 6;
         //        int DoorBit = t.doorBit << 7;
         //        ByteToWrite = floorTexture | noMagic | DoorBit | flags;
-        //        TileMapData[addptr + 1] = (char)(ByteToWrite);
+        //        TileMapData[addptr + 1] = (byte)(ByteToWrite);
 
         //        ByteToWrite = ((t.indexObjectList & 0x3FF) << 6) | (t.wallTexture & 0x3F);
-        //        TileMapData[addptr + 2] = (char)(ByteToWrite & 0xFF);
-        //        TileMapData[addptr + 3] = (char)((ByteToWrite >> 8) & 0xFF);
+        //        TileMapData[addptr + 2] = (byte)(ByteToWrite & 0xFF);
+        //        TileMapData[addptr + 3] = (byte)((ByteToWrite >> 8) & 0xFF);
 
         //        addptr += 4;
         //    }
@@ -1692,35 +1692,35 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
                 if (IsObjectFree(o))
                 {
-                    TileMapData[addptr] = (char)0;
-                    TileMapData[addptr + 1] = (char)0;
-                    TileMapData[addptr + 2] = (char)0;
-                    TileMapData[addptr + 3] = (char)0;
-                    TileMapData[addptr + 4] = (char)0;
-                    TileMapData[addptr + 5] = (char)0;
-                    TileMapData[addptr + 6] = (char)0;
-                    TileMapData[addptr + 7] = (char)0;
+                    TileMapData[addptr] = 0;
+                    TileMapData[addptr + 1] = 0;
+                    TileMapData[addptr + 2] = 0;
+                    TileMapData[addptr + 3] = 0;
+                    TileMapData[addptr + 4] = 0;
+                    TileMapData[addptr + 5] = 0;
+                    TileMapData[addptr + 6] = 0;
+                    TileMapData[addptr + 7] = 0;
                     if (o < 256)
                     {
-                        TileMapData[addptr + 8] = (char)0;
-                        TileMapData[addptr + 9] = (char)0;
-                        TileMapData[addptr + 10] = (char)0;
-                        TileMapData[addptr + 11] = (char)0;
-                        TileMapData[addptr + 12] = (char)0;
-                        TileMapData[addptr + 13] = (char)0;
-                        TileMapData[addptr + 14] = (char)0;
-                        TileMapData[addptr + 15] = (char)0;
-                        TileMapData[addptr + 16] = (char)0;
-                        TileMapData[addptr + 17] = (char)0;
-                        TileMapData[addptr + 18] = (char)0;
-                        TileMapData[addptr + 19] = (char)0;
-                        TileMapData[addptr + 20] = (char)0;
-                        TileMapData[addptr + 21] = (char)0;
-                        TileMapData[addptr + 22] = (char)0;
-                        TileMapData[addptr + 23] = (char)0;
-                        TileMapData[addptr + 24] = (char)0;
-                        TileMapData[addptr + 25] = (char)0;
-                        TileMapData[addptr + 26] = (char)0;
+                        TileMapData[addptr + 8] = 0;
+                        TileMapData[addptr + 9] = 0;
+                        TileMapData[addptr + 10] = 0;
+                        TileMapData[addptr + 11] = 0;
+                        TileMapData[addptr + 12] = 0;
+                        TileMapData[addptr + 13] = 0;
+                        TileMapData[addptr + 14] = 0;
+                        TileMapData[addptr + 15] = 0;
+                        TileMapData[addptr + 16] = 0;
+                        TileMapData[addptr + 17] = 0;
+                        TileMapData[addptr + 18] = 0;
+                        TileMapData[addptr + 19] = 0;
+                        TileMapData[addptr + 20] = 0;
+                        TileMapData[addptr + 21] = 0;
+                        TileMapData[addptr + 22] = 0;
+                        TileMapData[addptr + 23] = 0;
+                        TileMapData[addptr + 24] = 0;
+                        TileMapData[addptr + 25] = 0;
+                        TileMapData[addptr + 26] = 0;
                         addptr = addptr + 8 + 19;
                     }
                     else
@@ -1737,32 +1737,32 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                             ((currobj.flags & 0x07) << 9) |
                             (currobj.item_id & 0x1FF);
 
-                    TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
-                    TileMapData[addptr + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+                    TileMapData[addptr] = (byte)(ByteToWrite & 0xFF);
+                    TileMapData[addptr + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
 
                     ByteToWrite = ((currobj.xpos & 0x7) << 13) |
                             ((currobj.ypos & 0x7) << 10) |
                             ((currobj.heading & 0x7) << 7) |
                             ((currobj.zpos & 0x7F));
-                    TileMapData[addptr + 2] = (char)(ByteToWrite & 0xFF);
-                    TileMapData[addptr + 3] = (char)((ByteToWrite >> 8) & 0xFF);
+                    TileMapData[addptr + 2] = (byte)(ByteToWrite & 0xFF);
+                    TileMapData[addptr + 3] = (byte)((ByteToWrite >> 8) & 0xFF);
 
-                    ByteToWrite = (((int)currobj.next & 0x3FF) << 6) |
+                    ByteToWrite = ((currobj.next & 0x3FF) << 6) |
                             (currobj.quality & 0x3F);
-                    TileMapData[addptr + 4] = (char)(ByteToWrite & 0xFF);
-                    TileMapData[addptr + 5] = (char)((ByteToWrite >> 8) & 0xFF);
+                    TileMapData[addptr + 4] = (byte)(ByteToWrite & 0xFF);
+                    TileMapData[addptr + 5] = (byte)((ByteToWrite >> 8) & 0xFF);
 
                     ByteToWrite = ((currobj.link & 0x3FF) << 6) |
                             (currobj.owner & 0x3F);
-                    TileMapData[addptr + 6] = (char)(ByteToWrite & 0xFF);
-                    TileMapData[addptr + 7] = (char)((ByteToWrite >> 8) & 0xFF);
+                    TileMapData[addptr + 6] = (byte)(ByteToWrite & 0xFF);
+                    TileMapData[addptr + 7] = (byte)((ByteToWrite >> 8) & 0xFF);
 
 
                     if (o < 256)
                     {//Additional npc mobile data.
 
-                        TileMapData[addptr + 0x8] = (char)(currobj.npc_hp);
-                        //  TileMapData[addptr + 0x9] = (char)((currobj.ProjectileHeadingMajor & 0xE0) | ((char)(currobj.ProjectileHeadingMinor & 0x1F)));
+                        TileMapData[addptr + 0x8] = (byte)(currobj.npc_hp);
+                        //  TileMapData[addptr + 0x9] = (byte)((currobj.ProjectileHeadingMajor & 0xE0) | ((byte)(currobj.ProjectileHeadingMinor & 0x1F)));
                         //+A is copied  unknown value
                         //+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
                         ByteToWrite = (
@@ -1770,8 +1770,8 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                 ((currobj.npc_gtarg & 0xFF) << 4) |
                                 ((TileMapData[addptr + 0xb + 1] & 0xf0) << 8)
                         );
-                        TileMapData[addptr + 0xb] = (char)(ByteToWrite & 0xFF);
-                        TileMapData[addptr + 0xb + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+                        TileMapData[addptr + 0xb] = (byte)(ByteToWrite & 0xFF);
+                        TileMapData[addptr + 0xb + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
 
 
                         int val = (int)getValAtAddress(TileMapData, addptr + 0xd, 16);
@@ -1782,32 +1782,32 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
                                 | val
                                 ;
 
-                        TileMapData[addptr + 0xd] = (char)(ByteToWrite & 0xFF);
-                        TileMapData[addptr + 0xd + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+                        TileMapData[addptr + 0xd] = (byte)(ByteToWrite & 0xFF);
+                        TileMapData[addptr + 0xd + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
 
-                        //TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
+                        //TileMapData[addptr+0x14] =  (byte)((TileMapData[addptr+0x14] & 0xC0) | (byte)(currobj.Projectile_Pitch & 0x3F));
 
-                        //// TileMapData[addptr + 0x14] = (char)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x7) << 4) | (currobj.Projectile_Speed & 0xf));
+                        //// TileMapData[addptr + 0x14] = (byte)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x7) << 4) | (currobj.Projectile_Speed & 0xf));
 
                         ByteToWrite = ((currobj.npc_xhome & 0x3F) << 10) |
                                 ((currobj.npc_yhome & 0x3F) << 4) |
                                 (TileMapData[addptr + 0x16] & 0xf);
-                        TileMapData[addptr + 0x16] = (char)(ByteToWrite & 0xFF);
-                        TileMapData[addptr + 0x16 + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+                        TileMapData[addptr + 0x16] = (byte)(ByteToWrite & 0xFF);
+                        TileMapData[addptr + 0x16 + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
 
 
                         ByteToWrite = (TileMapData[addptr + 0x18] & 0xE0)
                                 |
                                 (currobj.npc_heading & 0x1F);
-                        TileMapData[addptr + 0x18] = (char)(ByteToWrite & 0xFF);
-                        TileMapData[addptr + 0x18 + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+                        TileMapData[addptr + 0x18] = (byte)(ByteToWrite & 0xFF);
+                        TileMapData[addptr + 0x18 + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
 
 
-                        TileMapData[addptr + 0x19] = (char)(
+                        TileMapData[addptr + 0x19] = (byte)(
                                 ((currobj.npc_hunger & 0x3F))
                         );
 
-                        TileMapData[addptr + 0x1a] = (char)(
+                        TileMapData[addptr + 0x1a] = (byte)(
                                 ((currobj.npc_whoami & 0xFF))
                         );
 
@@ -1828,8 +1828,8 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         for (int i = 0; i <= GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile; i++)
         {
             int ByteToWrite = GameWorldController.instance.objectList[thisLevelNo].FreeMobileList[f];
-            TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
-            TileMapData[addptr + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+            TileMapData[addptr] = (byte)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
             f++;
             addptr += 2;
         }
@@ -1839,18 +1839,18 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         for (int i = 0; i <= GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic; i++)
         {
             int ByteToWrite = GameWorldController.instance.objectList[thisLevelNo].FreeStaticList[f];
-            TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
-            TileMapData[addptr + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+            TileMapData[addptr] = (byte)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 1] = (byte)((ByteToWrite >> 8) & 0xFF);
             f++;
             addptr += 2;
         }
 
         //Now write the counts of free objects
-        //TileMapData[0x7c02] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile & 0xFF);
-        //TileMapData[0x7c03] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile >> 8) & 0xFF);
+        //TileMapData[0x7c02] = (byte)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile & 0xFF);
+        //TileMapData[0x7c03] = (byte)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile >> 8) & 0xFF);
 
-        // TileMapData[0x7c04] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic & 0xFF);
-        // TileMapData[0x7c05] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic >> 8) & 0xFF);
+        // TileMapData[0x7c04] = (byte)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic & 0xFF);
+        // TileMapData[0x7c05] = (byte)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic >> 8) & 0xFF);
 
         return TileMapData;
     }
@@ -1886,19 +1886,19 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
     /// Converts the animation overlay data back to bytes
     /// </summary>
     /// <returns>The info to bytes.</returns>
-    public char[] OverlayInfoToBytes()
+    public byte[] OverlayInfoToBytes()
     {
-        char[] OverLayData = new char[64 * 6];
+        byte[] OverLayData = new byte[64 * 6];
         int OverlayAddress = 0;
         for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
         {
             int link = Overlays[overlayIndex].link << 6;
-            OverLayData[OverlayAddress + 0] = (char)(link & 0xFF);
-            OverLayData[OverlayAddress + 1] = (char)((link >> 8) & 0xFF);
-            OverLayData[OverlayAddress + 2] = (char)(Overlays[overlayIndex].duration & 0xFF);
-            OverLayData[OverlayAddress + 3] = (char)((Overlays[overlayIndex].duration >> 8) & 0xFF);
-            OverLayData[OverlayAddress + 4] = (char)(Overlays[overlayIndex].tileX & 0xFF);
-            OverLayData[OverlayAddress + 5] = (char)(Overlays[overlayIndex].tileY & 0xFF);
+            OverLayData[OverlayAddress + 0] = (byte)(link & 0xFF);
+            OverLayData[OverlayAddress + 1] = (byte)((link >> 8) & 0xFF);
+            OverLayData[OverlayAddress + 2] = (byte)(Overlays[overlayIndex].duration & 0xFF);
+            OverLayData[OverlayAddress + 3] = (byte)((Overlays[overlayIndex].duration >> 8) & 0xFF);
+            OverLayData[OverlayAddress + 4] = (byte)(Overlays[overlayIndex].tileX & 0xFF);
+            OverLayData[OverlayAddress + 5] = (byte)(Overlays[overlayIndex].tileY & 0xFF);
             OverlayAddress += 6;
         }
         return OverLayData;
@@ -1909,28 +1909,28 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
     /// Converts the uw1 texture map to bytes.
     /// </summary>
     /// <returns>The map to bytes.</returns>
-    public char[] TextureMapToBytes()
+    public byte[] TextureMapToBytes()
     {
-        char[] textureMapData = new char[122];
+        byte[] textureMapData = new byte[122];
         short textureMapSize = 64;
         int TextureMapAddress = 0;
         for (int i = 0; i < textureMapSize; i++)
         {
             if (i < 48) //Wall textures
             {
-                textureMapData[TextureMapAddress + 0] = (char)(texture_map[i] & 0xFF);
-                textureMapData[TextureMapAddress + 1] = (char)((texture_map[i] >> 8) & 0xFF);
+                textureMapData[TextureMapAddress + 0] = (byte)(texture_map[i] & 0xFF);
+                textureMapData[TextureMapAddress + 1] = (byte)((texture_map[i] >> 8) & 0xFF);
                 TextureMapAddress += 2;
             }
             else if (i <= 57)   //Floor textures are 49 to 56, ceiling is 57
             {
-                textureMapData[TextureMapAddress + 0] = (char)((texture_map[i] - 210) & 0xFF);
-                textureMapData[TextureMapAddress + 1] = (char)(((texture_map[i] - 210) >> 8) & 0xFF);
+                textureMapData[TextureMapAddress + 0] = (byte)((texture_map[i] - 210) & 0xFF);
+                textureMapData[TextureMapAddress + 1] = (byte)(((texture_map[i] - 210) >> 8) & 0xFF);
                 TextureMapAddress += 2;
             }
             else
             { //door textures
-                textureMapData[TextureMapAddress] = (char)(texture_map[i]);
+                textureMapData[TextureMapAddress] = (byte)(texture_map[i]);
                 TextureMapAddress++;
             }
         }

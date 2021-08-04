@@ -31,7 +31,7 @@ public class ObjectPropLoader : Loader
     {
 
         int add_ptr = 5099;
-        if (ReadStreamFile(Path.Combine(BasePath, "RES", "DATA", "OBJPROP.DAT"), out char[] objprop_dat))
+        if (ReadStreamFile(Path.Combine(BasePath, "RES", "DATA", "OBJPROP.DAT"), out byte[] objprop_dat))
         {
             properties = new ShockCommonObjectProperties[476];
             for (int i = 0; i <= properties.GetUpperBound(0); i++)

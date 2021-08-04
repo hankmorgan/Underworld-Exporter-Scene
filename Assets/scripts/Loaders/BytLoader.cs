@@ -121,7 +121,7 @@ public class BytLoader : ArtLoader
             return TGALoader.LoadTGA(toLoadMod);
         }
 
-        if (!ReadStreamFile(toLoad, out char[] textureFile))
+        if (!ReadStreamFile(toLoad, out byte[] textureFile))
         { return null; }
         // Get the size of the file in bytes
 

@@ -18,9 +18,9 @@ public class event_processor : UWClass
     /// </summary>
     public event_processor()
     {
-        char[] scd_ark;
+        byte[] scd_ark;
         var toLoad = Path.Combine(Loader.BasePath, GameWorldController.instance.SCD_Ark_File_Selected);
-        if (!Loader.ReadStreamFile(toLoad, out char[] scd_ark_file_data))
+        if (!Loader.ReadStreamFile(toLoad, out byte[] scd_ark_file_data))
         {
             Debug.Log(toLoad + " was not loaded");
             return;
@@ -41,7 +41,7 @@ public class event_processor : UWClass
             }
             long BlockStart = Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
             int j = 0;
-            scd_ark = new char[datalen];
+            scd_ark = new byte[datalen];
             for (long i = BlockStart; i < BlockStart + datalen; i++)
             {
                 scd_ark[j] = scd_ark_file_data[i];

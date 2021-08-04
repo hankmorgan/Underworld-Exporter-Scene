@@ -68,11 +68,11 @@
 
 
         return
-            ((char)(initial[0] + 65)).ToString()
+            ((byte)(initial[0] + 65)).ToString()
             +
             initial[1]
             +
-            ((char)(initial[2] + 65)).ToString()
+            ((byte)(initial[2] + 65)).ToString()
             +
             initial[3]
             ;

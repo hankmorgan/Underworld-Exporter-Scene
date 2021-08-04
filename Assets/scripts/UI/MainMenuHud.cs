@@ -211,10 +211,11 @@ public class MainMenuHud : GuiBase
             saveNames[i - 1] = "";
             if (File.Exists(toLoad))
             {
-                if (Loader.ReadStreamFile(toLoad, out char[] fileDesc))
-                {
-                    saveNames[i - 1] = new string(fileDesc);
-                }
+                var fileDesc = System.IO.File.ReadAllBytes(toLoad);
+               // if (Loader.ReadStreamFile(toLoad, out byte[] fileDesc))
+               // {
+                    saveNames[i - 1] = System.Text.Encoding.Default.GetString(fileDesc); //new string(fileDesc));
+                                                                                       // }
             }
         }
 

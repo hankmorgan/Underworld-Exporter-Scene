@@ -119,7 +119,7 @@ public class a_hack_trap_qbert : a_hack_trap
     /// <param name="src">Source.</param>
     void RandomTeleport(object_base src)
     {
-        if (FindMoongateInTile((int)src.ObjectTileX, (int)src.ObjectTileY, out ObjectInteraction obj))
+        if (FindMoongateInTile(src.ObjectTileX, src.ObjectTileY, out ObjectInteraction obj))
         {//not all teleport locations are confirmed!
             switch (obj.link)
             {
@@ -570,10 +570,10 @@ public class a_hack_trap_qbert : a_hack_trap
         }
         else
         {
-            float targetX = (float)tileX * 1.2f + 0.6f;
-            float targetY = (float)tileY * 1.2f + 0.6f;
+            float targetX = tileX * 1.2f + 0.6f;
+            float targetY = tileY * 1.2f + 0.6f;
 
-            float Height = ((float)(CurrentTileMap().GetFloorHeight(tileX, tileY))) * 0.15f;
+            float Height = CurrentTileMap().GetFloorHeight(tileX, tileY) * 0.15f;
             UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
             UWCharacter.Instance.TeleportPosition = UWCharacter.Instance.transform.position;
         }

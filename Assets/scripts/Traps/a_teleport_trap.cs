@@ -31,8 +31,8 @@ public class a_teleport_trap : trap_base
             return;
         }
 
-        float targetX = (float)quality * 1.2f + 0.6f;
-        float targetY = (float)owner * 1.2f + 0.6f;
+        float targetX = quality * 1.2f + 0.6f;
+        float targetY = owner * 1.2f + 0.6f;
         //Heading
         //0=north
         //1=northeast 
@@ -47,7 +47,7 @@ public class a_teleport_trap : trap_base
 
         if (zpos == 0)
         {//Stay on this level.
-            float Height = ((float)(CurrentTileMap().GetFloorHeight(quality, owner))) * 0.15f;
+            float Height = CurrentTileMap().GetFloorHeight(quality, owner) * 0.15f;
             UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
             UWCharacter.Instance.TeleportPosition = UWCharacter.Instance.transform.position;
         }

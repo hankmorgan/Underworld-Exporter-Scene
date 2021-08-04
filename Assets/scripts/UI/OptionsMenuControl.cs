@@ -460,14 +460,21 @@ public class OptionsMenuControl : GuiBase_Draggable
 
         for (int i = 1; i <= 4; i++)
         {
-            if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + i, "DESC"), out char[] fileDesc))
+            string toLoad = Path.Combine(Loader.BasePath, "SAVE" + i, "DESC");
+            if (File.Exists(toLoad))
             {
-                saveNames[i - 1] = new string(fileDesc);
+                var fileDesc = File.ReadAllBytes(toLoad);
+                saveNames[i - 1] = System.Text.Encoding.Default.GetString(fileDesc);
             }
             else
             {
                 saveNames[i - 1] = "";
             }
+            //if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + i, "DESC"), out byte[] fileDesc))
+            //{
+            //    saveNames[i - 1] = System.Text.Encoding.Default.GetString(result); //  new string(fileDesc);
+            //}
+
         }
         for (int i = 0; i <= saveNames.GetUpperBound(0); i++)
         {

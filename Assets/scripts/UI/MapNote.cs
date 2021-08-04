@@ -20,7 +20,7 @@ public class MapNote : UWClass
 
     public Vector2 NotePosition()
     {
-        return new Vector2((float)PosX, (float)PosY - 100f);
+        return new Vector2(PosX, PosY - 100f);
     }
 
 }

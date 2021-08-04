@@ -1105,7 +1105,7 @@ public class Magic : UWEBase
         {
             SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
             spOJ.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spOJ);
+            CastProjectile(caster, spOJ);
         }
     }
 
@@ -1127,7 +1127,7 @@ public class Magic : UWEBase
         {
             SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
             spOG.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spOG);
+            CastProjectile(caster, spOG);
         }
     }
 
@@ -1149,7 +1149,7 @@ public class Magic : UWEBase
         {
             SpellProp_Acid spAc = new SpellProp_Acid();
             spAc.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spAc);
+            CastProjectile(caster, spAc);
         }
     }
 
@@ -1172,7 +1172,7 @@ public class Magic : UWEBase
             SpellProp_Fireball spPF = new SpellProp_Fireball();
             spPF.init(EffectID, caster);
             spPF.caster = caster;
-            CastProjectile(caster, (SpellProp)spPF);
+            CastProjectile(caster, spPF);
         }
     }
 
@@ -1186,7 +1186,7 @@ public class Magic : UWEBase
         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
         spFH.init(EffectID, caster);
         spFH.caster = caster;
-        CastProjectile(caster, (SpellProp)spFH);
+        CastProjectile(caster, spFH);
     }
 
     /// <summary>
@@ -1199,7 +1199,7 @@ public class Magic : UWEBase
         SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
         spVOG.init(EffectID, caster);
         spVOG.CastRaySource = CastFromWindow;
-        CastProjectile(caster, (SpellProp)spVOG);
+        CastProjectile(caster, spVOG);
     }
 
 
@@ -1221,7 +1221,7 @@ public class Magic : UWEBase
             SpellProp_Homing spPF = new SpellProp_Homing();
             spPF.init(EffectID, caster);
             spPF.caster = caster;
-            CastProjectile(caster, (SpellProp)spPF);
+            CastProjectile(caster, spPF);
         }
     }
 
@@ -1962,7 +1962,7 @@ public class Magic : UWEBase
     {
         SpellProp_Mind mind = new SpellProp_Mind();
         mind.init(EffectID, caster);
-        Skills.TrackMonsters(caster, (float)mind.BaseDamage, true);
+        Skills.TrackMonsters(caster, mind.BaseDamage, true);
     }
 
 
@@ -4701,7 +4701,7 @@ public class Magic : UWEBase
                 {
                     SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
                     spVOG.init(EffectID, caster);
-                    CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spVOG);
+                    CastProjectile(caster, GetBestSpellVector(caster), spVOG);
                 }
                 SpellResultType = SpellResultNone;
                 break;
@@ -4730,7 +4730,7 @@ public class Magic : UWEBase
                 {
                     SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
                     spOJ.init(EffectID, caster);
-                    CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOJ);
+                    CastProjectile(caster, GetBestSpellVector(caster), spOJ);
                 }
                 SpellResultType = SpellResultNone;
                 break;
@@ -4745,7 +4745,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_Acid spAc = new SpellProp_Acid();
                         spAc.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spAc);
+                        CastProjectile(caster, GetBestSpellVector(caster), spAc);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4761,7 +4761,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
                         spOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4778,7 +4778,7 @@ public class Magic : UWEBase
                         SpellProp_Fireball spPF = new SpellProp_Fireball();
                         spPF.init(EffectID, caster);
                         spPF.caster = caster;
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                        CastProjectile(caster, GetBestSpellVector(caster), spPF);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4795,7 +4795,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
                         spFH.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spFH);
+                        CastProjectile(caster, GetBestSpellVector(caster), spFH);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5187,7 +5187,7 @@ public class Magic : UWEBase
                             SpellProp_Homing spPF = new SpellProp_Homing();
                             spPF.init(EffectID, caster);
                             spPF.caster = caster;
-                            CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                            CastProjectile(caster, GetBestSpellVector(caster), spPF);
                         }
                         SpellResultType = SpellResultNone;
                         break;
@@ -5834,7 +5834,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
                         spOJ.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOJ);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOJ);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5852,7 +5852,7 @@ public class Magic : UWEBase
                         SpellProp_Fireball spPF = new SpellProp_Fireball();
                         spPF.init(EffectID, caster);
                         spPF.caster = caster;
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                        CastProjectile(caster, GetBestSpellVector(caster), spPF);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5885,7 +5885,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
                         spOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5901,7 +5901,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
                         spVOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spVOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spVOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5918,7 +5918,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
                         spFH.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spFH);
+                        CastProjectile(caster, GetBestSpellVector(caster), spFH);
                     }
                     SpellResultType = SpellResultNone;
                     break;

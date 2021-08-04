@@ -30,7 +30,7 @@ public class WeaponMelee : Weapon
     /// <returns>The slash damage</returns>
     public short GetSlash()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Slash);
+        return GameWorldController.instance.objDat.weaponStats[item_id].Slash;
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class WeaponMelee : Weapon
     /// <returns>The bash damage</returns>
     public short GetBash()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Bash);
+        return GameWorldController.instance.objDat.weaponStats[item_id].Bash;
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class WeaponMelee : Weapon
     /// <returns>The stab damage</returns>
     public short GetStab()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Stab);
+        return GameWorldController.instance.objDat.weaponStats[item_id].Stab;
     }
 
 
@@ -101,24 +101,24 @@ public class WeaponMelee : Weapon
 
     public short GetMinCharge()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[item_id].MinCharge);
+        return GameWorldController.instance.objDat.weaponStats[item_id].MinCharge;
     }
 
     public short GetMaxCharge()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[item_id].MaxCharge);
+        return GameWorldController.instance.objDat.weaponStats[item_id].MaxCharge;
     }
 
 
 
     public static short GetMeleeMinCharge()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[15].MinCharge);
+        return GameWorldController.instance.objDat.weaponStats[15].MinCharge;
     }
 
     public static short GetMeleeMaxCharge()
     {
-        return (short)(GameWorldController.instance.objDat.weaponStats[15].MaxCharge);
+        return GameWorldController.instance.objDat.weaponStats[15].MaxCharge;
     }
 
     public override void UpdateQuality()

@@ -385,7 +385,7 @@ public class IngameEditor : GuiBase_Draggable
         TileDetails.text = "X=" + TileX + " Y=" + TileY;
         TileTypeSelect.value = CurrentTileMap().Tiles[TileX, TileY].tileType;
 
-        TileHeightDetails.text = ((float)CurrentTileMap().Tiles[TileX, TileY].floorHeight / 2f).ToString();
+        TileHeightDetails.text = (CurrentTileMap().Tiles[TileX, TileY].floorHeight / 2f).ToString();
         FloorTextureSelect.value = CurrentTileMap().Tiles[TileX, TileY].floorTexture;
         WallTextureSelect.value = CurrentTileMap().Tiles[TileX, TileY].wallTexture;
         RefreshTileMap();
@@ -805,22 +805,22 @@ public class IngameEditor : GuiBase_Draggable
     public void Teleport()
     {
 
-        float targetX = (float)TileX * 1.2f + 0.6f;
-        float targetY = (float)TileY * 1.2f + 0.6f;
+        float targetX = TileX * 1.2f + 0.6f;
+        float targetY = TileY * 1.2f + 0.6f;
         if (ObjectDetailsPanel.gameObject.activeInHierarchy)
         {
             if (currObj.ObjectTileX != 99)
             {
-                targetX = (float)currObj.ObjectTileX * 1.2f + 0.6f;
+                targetX = currObj.ObjectTileX * 1.2f + 0.6f;
             }
             if (currObj.ObjectTileY != 99)
             {
-                targetY = (float)currObj.ObjectTileY * 1.2f + 0.6f;
+                targetY = currObj.ObjectTileY * 1.2f + 0.6f;
             }
 
         }
 
-        float Height = ((float)(CurrentTileMap().GetFloorHeight(TileX, TileY))) * 0.15f;
+        float Height = CurrentTileMap().GetFloorHeight(TileX, TileY) * 0.15f;
         UWCharacter.Instance.gameObject.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
     }
 
@@ -1215,9 +1215,9 @@ public class IngameEditor : GuiBase_Draggable
             GameWorldController.WorldReRenderPending = true;
             GameWorldController.FullReRender = true;
 
-            float targetX = (float)UnderworldGenerator.instance.startX * 1.2f + 0.6f;
-            float targetY = (float)UnderworldGenerator.instance.startY * 1.2f + 0.6f;
-            float Height = ((float)(CurrentTileMap().GetFloorHeight(UnderworldGenerator.instance.startX, UnderworldGenerator.instance.startY))) * 0.15f;
+            float targetX = UnderworldGenerator.instance.startX * 1.2f + 0.6f;
+            float targetY = UnderworldGenerator.instance.startY * 1.2f + 0.6f;
+            float Height = CurrentTileMap().GetFloorHeight(UnderworldGenerator.instance.startX, UnderworldGenerator.instance.startY) * 0.15f;
             UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
         }
     }

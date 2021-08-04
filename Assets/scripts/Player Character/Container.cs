@@ -592,7 +592,7 @@ public class Container : UWEBase
 
     public float GetCapacity()
     {
-        return (float)(items.GetUpperBound(0));
+        return items.GetUpperBound(0);
     }
 
     public float GetFreeCapacity()
@@ -809,7 +809,7 @@ public class Container : UWEBase
             }
             while (tmpobj.next != 0)
             {
-                tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next, objList);//objList[tmpobj.next];
+                tmpobj = ObjectLoader.getObjectInfoAt(tmpobj.next, objList);//objList[tmpobj.next];
                 cn.AddItemToContainer(tmpobj.instance); //ObjectLoader.UniqueObjectName(tmpobj));
             }
         }

@@ -4,7 +4,7 @@ public class CutsLoader : ArtLoader
 {
 
     public Texture2D[] ImageCache = new Texture2D[1];
-    char[] dstImage; //repeating buffer
+    byte[] dstImage; //repeating buffer
 
 
     struct lpHeader
@@ -70,7 +70,7 @@ public class CutsLoader : ArtLoader
     /// Reads the cuts file.
     /// </summary>
     /// <param name="cutsFile">Cuts file.</param>
-    public void ReadCutsFile(ref char[] cutsFile, bool Alpha, bool ErrorHandling)
+    public void ReadCutsFile(ref byte[] cutsFile, bool Alpha, bool ErrorHandling)
     {
         long addptr = 0;
         int imagecount = 0;
@@ -101,7 +101,7 @@ comes the color palette:*/
         addptr += 128;//colour cycling info.
 
         //Init the buffer
-        dstImage = new char[lpH.height * lpH.width + 4000];
+        dstImage = new byte[lpH.height * lpH.width + 4000];
 
         //Read in the palette
         for (int i = 0; i < 256; i++)
@@ -122,7 +122,7 @@ comes the color palette:*/
             lpd[i].nBytes = (int)getValAtAddress(cutsFile, addptr + 4, 16);
             addptr += 6;
         }
-        char[] pages = new char[cutsFile.GetUpperBound(0) - 2816 + 1];
+        byte[] pages = new byte[cutsFile.GetUpperBound(0) - 2816 + 1];
         for (int i = 0; i <= pages.GetUpperBound(0); i++)
         {
             pages[i] = cutsFile[i + 2816];
@@ -170,7 +170,7 @@ comes the color palette:*/
             {
                 ppointer += 4;
             }
-            //	char[] imgOut ;//= //new char[lpH.height*lpH.width+ 4000];
+            //	byte[] imgOut ;//= //new byte[lpH.height*lpH.width+ 4000];
             myPlayRunSkipDump(ppointer, pages);//Stores in the global memory
                                                //output.texture= 
             ImageCache[imagecount++] = Image(dstImage, 0, lpH.width, lpH.height, "name here", pal, Alpha);
@@ -186,11 +186,11 @@ comes the color palette:*/
     /// </summary>
     /// <param name="inptr">Inptr.</param>
     /// <param name="srcData">Source data.</param>
-    void myPlayRunSkipDump(long inptr, char[] srcData)
+    void myPlayRunSkipDump(long inptr, byte[] srcData)
     {//From an implemtation by Underworld Adventures (hacking tools)
         long outPtr = 0;
 
-        //dstImage = new char[size];
+        //dstImage = new byte[size];
         while (true)
         {
             int sgn = (srcData[inptr] & 0x80) >> 7;//try and get the sign.
@@ -220,7 +220,7 @@ comes the color palette:*/
                 //Uint8 wordCnt = *srcP++;
                 int wordCnt = srcData[inptr++];
                 //Uint8 pixel = *srcP++;
-                char pixel = srcData[inptr++];
+                byte pixel = srcData[inptr++];
                 while (wordCnt > 0)
                 {
                     //*dstP++ = pixel;
@@ -267,7 +267,7 @@ comes the color palette:*/
                             // longRun
                             wordCnt -= 0x4000; // Clear "longRun" bit
                                                //Uint8 pixel = *srcP++;
-                            char pixel = srcData[inptr++];
+                            byte pixel = srcData[inptr++];
                             while (wordCnt > 0)
                             {
                                 //*dstP++ = pixel;

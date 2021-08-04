@@ -182,7 +182,7 @@ public class GameClock : UWEBase
         //in uw this value is gameday << 16 | gamehour <<8 | gamesecond
 
 
-        System.TimeSpan ts = System.TimeSpan.FromSeconds((double)timevalue);
+        System.TimeSpan ts = System.TimeSpan.FromSeconds(timevalue);
         instance._day = ts.Days;
         //instance._hour=ts.Hours;
         instance._minute = ts.Minutes + ts.Hours * 60;

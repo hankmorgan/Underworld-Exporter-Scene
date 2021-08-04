@@ -453,11 +453,11 @@ public class UWCombat : Combat
     {
         if (currWeapon != null)
         {
-            return (float)GameWorldController.instance.objDat.weaponStats[currWeapon.item_id].WeaponSpeed;
+            return GameWorldController.instance.objDat.weaponStats[currWeapon.item_id].WeaponSpeed;
         }
         else
         {//a fist
-            return (float)GameWorldController.instance.objDat.weaponStats[15].WeaponSpeed;
+            return GameWorldController.instance.objDat.weaponStats[15].WeaponSpeed;
         }
     }
 

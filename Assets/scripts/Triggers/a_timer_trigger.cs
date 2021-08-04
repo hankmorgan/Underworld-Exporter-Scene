@@ -11,7 +11,7 @@ public class a_timer_trigger : trigger_base
         base.Start();
         if (zpos != 0)
         {
-            interval = (float)zpos;
+            interval = zpos;
         }
         else
         {

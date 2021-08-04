@@ -38,7 +38,7 @@ public class a_arrow_trap : trap_base
 
         UnFreezeMovement(myObj);
         myObj.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-        myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward * 20.0f * ((float)(owner)));
+        myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward * 20.0f * owner);
 
         GameObject myObjChild = new GameObject(myObj.name + "_damage");
         myObjChild.transform.position = myObj.transform.position;

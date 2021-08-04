@@ -569,7 +569,7 @@ public class StringController : UWEBase
         GameStrings = new Hashtable();
         EntryCounts = new Hashtable();
 
-        if (Loader.ReadStreamFile(path, out char[] Buffer))
+        if (Loader.ReadStreamFile(path, out byte[] Buffer))
         {
             long NoOfNodes = Loader.getValAtAddress(Buffer, address_pointer, 16);
             int i = 0;

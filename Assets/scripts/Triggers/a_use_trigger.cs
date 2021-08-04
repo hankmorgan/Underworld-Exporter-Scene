@@ -19,7 +19,7 @@ public class a_use_trigger : trigger_base
         {
             if (next != 0)
             {
-                triggerObj = ObjectLoader.getGameObjectAt((int)next);
+                triggerObj = ObjectLoader.getGameObjectAt(next);
             }
             else
             {

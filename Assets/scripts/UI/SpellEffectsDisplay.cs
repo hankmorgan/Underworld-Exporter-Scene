@@ -17,7 +17,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable
         thisSpell = this.GetComponent<RawImage>();
         if (SpellBlank == null)
         {
-            SpellBlank = (Texture2D)Resources.Load<Texture2D>(_RES + "/HUD/Runes/rune_blank");
+            SpellBlank = Resources.Load<Texture2D>(_RES + "/HUD/Runes/rune_blank");
         }
     }
 

@@ -2,7 +2,7 @@
 
 public class XFerLoader : Loader
 {
-    public char[] auxPalVal; //= //new char[5,32];
+    public byte[] auxPalVal; //= //new byte[5,32];
                              //When aux pal is the following
                              //  0xf0   fade to red
                              // 0xf4   fade to blue
@@ -18,7 +18,7 @@ public class XFerLoader : Loader
 
     public XFerLoader()
     {
-        // char[] pal_file;
+        // byte[] pal_file;
         filePath = Path.Combine(BasePath, "data\\xfer.dat");
         if (ReadStreamFile(filePath, out auxPalVal))
         {
@@ -26,7 +26,7 @@ public class XFerLoader : Loader
             {
                 for (int i = 0; i < 32; i++)
                 {
-                    //auxPalVal[a, i] = (char)DataLoader.getValAtAddress(pal_file, 0x80 + a * 32 + i, 8);
+                    //auxPalVal[a, i] = (byte)DataLoader.getValAtAddress(pal_file, 0x80 + a * 32 + i, 8);
                 }
             }*/
         }

@@ -14,9 +14,9 @@ public class TextureLoader : ArtLoader
     private readonly string pathTex_UW2 = "T64.TR";
     private readonly string pathTex_SS1 = "Texture.res";
 
-    char[] texturebufferW;
-    char[] texturebufferF;
-    char[] texturebufferT;
+    byte[] texturebufferW;
+    byte[] texturebufferF;
+    byte[] texturebufferT;
 
     public bool texturesWLoaded;
     public bool texturesFLoaded;
@@ -145,7 +145,7 @@ public class TextureLoader : ArtLoader
                                         if (CompressionType == 4)
                                         {//compressed
                                             //  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
-                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out char[] outputImg, Height * Width);
+                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out byte[] outputImg, Height * Width);
                                             return Image(outputImg, 0, Width, Height, "namehere", palToUse, true);
                                         }
                                         else

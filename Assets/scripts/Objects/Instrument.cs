@@ -156,7 +156,7 @@ public class Instrument : object_base
         //From
         //http://answers.unity3d.com/questions/141771/whats-a-good-way-to-do-dynamically-generated-music.html
 
-        MusicController.instance.MusicalInstruments.pitch = Mathf.Pow(2.0f, ((float)note) / 12.0f);
+        MusicController.instance.MusicalInstruments.pitch = Mathf.Pow(2.0f, note / 12.0f);
         MusicController.instance.MusicalInstruments.Play();
         //this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
         //this.GetComponent<AudioSource>().Play();

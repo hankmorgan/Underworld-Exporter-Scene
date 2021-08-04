@@ -15,7 +15,7 @@ public class VocLoader : Loader
 
     public VocLoader(string clipPath, string clipName)
     {
-        if (ReadStreamFile(clipPath, out char[] VocData))
+        if (ReadStreamFile(clipPath, out byte[] VocData))
         {
             ProcessAudioBytes(VocData, clipName);
         }
@@ -26,12 +26,12 @@ public class VocLoader : Loader
     }
 
 
-    public VocLoader(char[] VocData, string clipName)
+    public VocLoader(byte[] VocData, string clipName)
     {
         ProcessAudioBytes(VocData, clipName);
     }
 
-    private void ProcessAudioBytes(char[] VocData, string clipName)
+    private void ProcessAudioBytes(byte[] VocData, string clipName)
     {
         string Header = "";
         //Check file header
@@ -53,7 +53,7 @@ public class VocLoader : Loader
                 {
                     if (i + 32 <= VocData.GetUpperBound(0))
                     {
-                        samples[i] = (float)(VocData[i + 32] / 255f);
+                        samples[i] = VocData[i + 32] / 255f;
                     }
                 }
                 Audio = AudioClip.Create(clipName, DataSize, 1, Hertz, false);

@@ -13,7 +13,7 @@ public class LevArk : Loader
     /// <summary>
     /// The lev ark file data.
     /// </summary>
-    public static char[] lev_ark_file_data;
+    public static byte[] lev_ark_file_data;
 
     /// <summary>
     /// Writes a lev ark file based on a rebuilding of the data.
@@ -258,7 +258,7 @@ public class LevArk : Loader
                 {
                     if (a <= blockUbound)
                     {
-                        add_ptr += DataLoader.WriteInt8(writer, (long)blockData[i].Data[a]);
+                        add_ptr += DataLoader.WriteInt8(writer, blockData[i].Data[a]);
                     }
                     else
                     {
@@ -400,7 +400,7 @@ public class LevArk : Loader
             {
                 for (long a = 0; a <= blockData[i].Data.GetUpperBound(0); a++)
                 {
-                    add_ptr += DataLoader.WriteInt8(writer, (long)blockData[i].Data[a]);
+                    add_ptr += DataLoader.WriteInt8(writer, blockData[i].Data[a]);
                 }
             }
         }
@@ -417,9 +417,9 @@ public class LevArk : Loader
     /// <returns>The data.</returns>
     /// <param name="address">Address.</param>
     /// <param name="length">Length.</param>
-    public static char[] CopyData(long address, long length)
+    public static byte[] CopyData(long address, long length)
     {
-        char[] DataToCopy = new char[length];
+        byte[] DataToCopy = new byte[length];
 
         for (int i = 0; i <= DataToCopy.GetUpperBound(0); i++)
         {

@@ -340,7 +340,7 @@ public class LightSource : object_base
 
     public float Brightness()
     {
-        return (float)GameWorldController.instance.objDat.lightSourceStats[item_id - 144].brightness * 1.5f;
+        return GameWorldController.instance.objDat.lightSourceStats[item_id - 144].brightness * 1.5f;
     }
 
     public int Duration()

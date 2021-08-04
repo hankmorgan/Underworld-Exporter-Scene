@@ -62,7 +62,7 @@ public class CommonObjectDatLoader : Loader
     {
 
         //int add_ptr;
-        if (ReadStreamFile(Path.Combine(BasePath, "DATA", "COMOBJ.DAT"), out char[] comobj_dat))
+        if (ReadStreamFile(Path.Combine(BasePath, "DATA", "COMOBJ.DAT"), out byte[] comobj_dat))
         {
             int len = (comobj_dat.GetUpperBound(0) - 2) / 11;
             properties = new CommonObjectProperties[len];

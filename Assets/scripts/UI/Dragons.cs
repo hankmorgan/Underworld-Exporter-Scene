@@ -70,7 +70,7 @@ public class Dragons : GuiBase
         loops[CounterIndex] = looping;
         currentFrames[CounterIndex] = 0;
         targetFrames[CounterIndex] = 0;
-        targetControls[CounterIndex].texture = (Texture)Output[AnimFrames[AnimSequencePlaying[CounterIndex], currentFrames[CounterIndex]]];
+        targetControls[CounterIndex].texture = Output[AnimFrames[AnimSequencePlaying[CounterIndex], currentFrames[CounterIndex]]];
         counters[CounterIndex] = 0f;
     }
 
@@ -96,7 +96,7 @@ public class Dragons : GuiBase
                 }
                 if (targetFrames[i] != currentFrames[i])
                 {
-                    targetControls[i].texture = (Texture)Output[AnimFrames[AnimSequencePlaying[i], currentFrames[i]]];
+                    targetControls[i].texture = Output[AnimFrames[AnimSequencePlaying[i], currentFrames[i]]];
                     currentFrames[i] = targetFrames[i];
                 }
             }

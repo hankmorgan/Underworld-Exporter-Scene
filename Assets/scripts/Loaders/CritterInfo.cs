@@ -41,8 +41,8 @@ public class CritterInfo : Loader
     //public int Item_Id;
     //public int FileNo;
     //public int AuxPalNo;
-    readonly char[] FilePage0;
-    readonly char[] FilePage1;
+    readonly byte[] FilePage0;
+    readonly byte[] FilePage1;
     public Palette pal; //the game pal.
                         //private Palette auxpal;
 
@@ -78,7 +78,7 @@ public class CritterInfo : Loader
     }
 
 
-    public CritterInfo(int critter_id, Palette paletteToUse, int palno, char[] assocData, char[] PGMP, char[] cran)
+    public CritterInfo(int critter_id, Palette paletteToUse, int palno, byte[] assocData, byte[] PGMP, byte[] cran)
     {
         int ExtractPageNo = 0;
         string critterIDO = DecimalToOct(critter_id.ToString());
@@ -127,7 +127,7 @@ public class CritterInfo : Loader
 
 
 
-    private int ReadPageFile(char[] PageFile, int XX, int YY, int spriteIndex, int AuxPalNo, bool LoadMod, string ModPath)
+    private int ReadPageFile(byte[] PageFile, int XX, int YY, int spriteIndex, int AuxPalNo, bool LoadMod, string ModPath)
     {
         int addptr = 0;
         int slotbase = (int)getValAtAddress(PageFile, addptr++, 8);
@@ -174,10 +174,10 @@ public class CritterInfo : Loader
         //Read in the palette
         int NoOfPals = (int)getValAtAddress(PageFile, addptr, 8);//Will skip ahead this far.
         addptr++;
-        char[] auxPalVal = new char[32];
+        byte[] auxPalVal = new byte[32];
         for (int i = 0; i < 32; i++)
         {
-            auxPalVal[i] = (char)getValAtAddress(PageFile, (addptr) + (AuxPalNo * 32) + i, 8);
+            auxPalVal[i] = (byte)getValAtAddress(PageFile, (addptr) + (AuxPalNo * 32) + i, 8);
         }
 
         //Skip past the palettes
@@ -236,8 +236,8 @@ public class CritterInfo : Loader
                 {//Try and center the hot spot in the image.
                     MaxWidth = MaxHotSpotX * 2;
                 }
-                char[] outputImg;
-                outputImg = new char[MaxWidth * MaxHeight * 2];
+                byte[] outputImg;
+                outputImg = new byte[MaxWidth * MaxHeight * 2];
                 for (int i = 0; i < NoOfFrames; i++)
                 {
                     int frameOffset = (int)getValAtAddress(PageFile, addptr + (i * 2), 16);
@@ -278,9 +278,9 @@ public class CritterInfo : Loader
                     if (!ModFileIsLoaded)
                     {
                         //Extract the image
-                        char[] srcImg;
-                        srcImg = new char[BitMapWidth * BitMapHeight * 2];
-                        outputImg = new char[MaxWidth * MaxHeight * 2];
+                        byte[] srcImg;
+                        srcImg = new byte[BitMapWidth * BitMapHeight * 2];
+                        outputImg = new byte[MaxWidth * MaxHeight * 2];
                         ArtLoader.Ua_image_decode_rle(PageFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
 
 
@@ -300,7 +300,7 @@ public class CritterInfo : Loader
                                 }
                                 else
                                 {
-                                    outputImg[x + (y * MaxWidth)] = (char)0;//alpha
+                                    outputImg[x + (y * MaxWidth)] = 0;//alpha
                                 }
                             }
                             if (ImgStarted == true)
@@ -691,11 +691,11 @@ public class CritterInfo : Loader
 
 
 
-    int ReadUW2PageFileData(char[] assocFile, int AuxPalNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
+    int ReadUW2PageFileData(byte[] assocFile, int AuxPalNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
     {
         //Debug.Log(fileCrit + " starting at  "  + spriteIndex);
         Palette pal = paletteToUse;
-        //char[] auxpalval=new char[32];
+        //byte[] auxpalval=new byte[32];
         //Palette[] auxpal = new Palette[32];
         //int auxPalNo = PaletteNo;
         int AddressPointer;
@@ -704,7 +704,7 @@ public class CritterInfo : Loader
         //pal = new palette[256];
         //getPalette(PaletteFile, pal, 0);//always palette 0?
 
-        ReadStreamFile(fileCrit, out char[] critterFile);
+        ReadStreamFile(fileCrit, out byte[] critterFile);
 
 
         //UW2 uses a different method
@@ -713,10 +713,10 @@ public class CritterInfo : Loader
         //auxPalNo=2;
         AddressPointer = 0;//auxPalNo * 32;
 
-        char[] auxPalVal = new char[32];
+        byte[] auxPalVal = new byte[32];
         for (int j = 0; j < 32; j++)
         {
-            auxPalVal[j] = (char)getValAtAddress(critterFile, (AddressPointer) + (AuxPalNo * 32) + j, 8);
+            auxPalVal[j] = (byte)getValAtAddress(critterFile, (AddressPointer) + (AuxPalNo * 32) + j, 8);
         }
 
         //int i = 0;
@@ -760,8 +760,8 @@ public class CritterInfo : Loader
                 {//Try and center the hot spot in the image.
                     MaxWidth = MaxHotSpotX * 2;
                 }
-                char[] outputImg;
-                outputImg = new char[MaxWidth * MaxHeight * 2];
+                byte[] outputImg;
+                outputImg = new byte[MaxWidth * MaxHeight * 2];
                 for (int index = 128; index < 640; index += 2)
                 {
                     int frameOffset = (int)getValAtAddress(critterFile, index, 16);
@@ -784,9 +784,9 @@ public class CritterInfo : Loader
                         if (true)
                         {
                             //Merge the image into a new big image at the hotspot coordinates.;
-                            char[] srcImg;
+                            byte[] srcImg;
 
-                            srcImg = new char[BitMapWidth * BitMapHeight * 2];
+                            srcImg = new byte[BitMapWidth * BitMapHeight * 2];
                             ArtLoader.Ua_image_decode_rle(critterFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth * BitMapHeight, frameOffset + 7, auxPalVal);
                             cornerY = MaxHeight - cornerY;//y is from the top left corner
 
@@ -804,7 +804,7 @@ public class CritterInfo : Loader
                                     }
                                     else
                                     {
-                                        outputImg[x + (y * MaxWidth)] = (char)0;//alpha
+                                        outputImg[x + (y * MaxWidth)] = 0;//alpha
                                     }
                                 }
                                 if (ImgStarted == true)
@@ -897,7 +897,7 @@ public class CritterInfo : Loader
     /// <param name="PalUsed">Pal used.</param>
     static void CropImageData(ref Texture2D imgData, Palette PalUsed)
     {
-        Color alphacolor = PalUsed.ColorAtPixel((byte)0, true);
+        Color alphacolor = PalUsed.ColorAtPixel(0, true);
         int InvalidRows = 0;//imgData.height;
         for (int x = 0; x < imgData.height; x++)
         {

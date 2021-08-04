@@ -521,9 +521,9 @@ public class UWCharacter : Character
         switch (GameWorldController.instance.LevelNo)
         {
             case 0://resurrect in jail
-                float targetX = (float)42 * 1.2f + 0.6f;
-                float targetY = (float)38 * 1.2f + 0.6f;
-                float Height = ((float)(CurrentTileMap().GetFloorHeight(42, 38))) * 0.15f;
+                float targetX = 42 * 1.2f + 0.6f;
+                float targetY = 38 * 1.2f + 0.6f;
+                float Height = CurrentTileMap().GetFloorHeight(42, 38) * 0.15f;
                 Instance.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
                 a_hack_trap_castle_npcs.MakeEveryoneFriendly();
                 //Move lord british
@@ -554,7 +554,7 @@ public class UWCharacter : Character
             default://resurrect in the gem chamber
                 //000~001~361~You regain awareness in the cavern containing the pulsating blackrock gem. \n
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 361));
-                GameWorldController.instance.SwitchLevel((short)4, 30, 39);//TODO:confirm exact co-ords
+                GameWorldController.instance.SwitchLevel(4, 30, 39);//TODO:confirm exact co-ords
                 break;
         }
 
@@ -1344,7 +1344,7 @@ public class UWCharacter : Character
     {
         if (isSwimming == false)
         {
-            float fallspeedAdjusted = fallSpeed - ((float)PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
+            float fallspeedAdjusted = fallSpeed - (PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
             //Do stuff with acrobat here. In the mean time a flat skill check.
             if (fallspeedAdjusted >= 5f)
             {
