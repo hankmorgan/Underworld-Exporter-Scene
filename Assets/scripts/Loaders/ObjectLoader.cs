@@ -2398,7 +2398,7 @@ public class ObjectLoader : DataLoader
                 SlotAvailable = CurrentObjectList().GetFreeMobileObject(out index);
                 index = CurrentObjectList().GetMobileAtSlot(index);
             }
-            Debug.Log("Allocating Slot " + index + " for newObject()");
+           // Debug.Log("Allocating Slot " + index + " for newObject()");
             if (SlotAvailable)
             {
                 CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Tile map class for storing and accessing the tilemap and tile properties..
@@ -138,6 +139,10 @@ public class TileMap : Loader
     /// </summary>
     public static short visitedTileY;
 
+    /// <summary>
+    /// Map used for A* path finding tests.
+    /// </summary>
+    public List<string> map = new List<string>();
 
     /// <summary>
     /// Reference to the objects list for this level.
@@ -358,8 +363,6 @@ public class TileMap : Loader
         );
     }
 
-
-
     public bool BuildTileMapUW(int levelNo, DataLoader.UWBlock lev_ark, DataLoader.UWBlock tex_ark, DataLoader.UWBlock ovl_ark)
     {
         long address_pointer = 0;
@@ -383,7 +386,22 @@ public class TileMap : Loader
 
         SetTileMapWallFacesUW();
 
-
+        map = new List<string>();
+        for (short y=63; y>=0; y--)
+        {
+            string rowX="";
+            for (short x = 0; x <= TileMapSizeX; x++)
+            {
+                switch (Tiles[x,y].tileType)
+                {
+                    case TILE_SOLID:
+                        rowX += "#";break;
+                   default:
+                        rowX += " "; break;
+                }               
+            }
+            map.Add(rowX);
+        }      
         //if (OverlayAddress!=0)
         switch (_RES)
         {

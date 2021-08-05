@@ -64,9 +64,9 @@ public class ObjectLoaderInfo : UWClass
             val |= (value & 0x1ff);
             DataBuffer[PTR] = (byte)(val & 0xFF);
             DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
-            if (origItemID != item_id)
+            if ((origItemID != item_id) &&  (item_id !=0))
             {
-                Debug.Log("ItemID has changed");
+               Debug.Log("ItemID + for " + index + " has changed from " + origItemID + " to " + item_id);
             }
         }
     }

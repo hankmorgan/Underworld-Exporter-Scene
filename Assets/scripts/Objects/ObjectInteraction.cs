@@ -1938,14 +1938,14 @@ public class ObjectInteraction : UWEBase
             }
             else
             {
-                Debug.Log(LinkEventCtr++ + " UNLINK For " + this.ObjectIndex + " moving from tile (" + BaseObjectData.ObjectTileX + "," + BaseObjectData.ObjectTileY + ")");
+              //  Debug.Log(LinkEventCtr++ + " UNLINK For " + this.ObjectIndex + " moving from tile (" + BaseObjectData.ObjectTileX + "," + BaseObjectData.ObjectTileY + ")");
                 //Object has moved between map tiles. Update it's next  and remove it from it's previous tile.
                 UnlinkItemFromTileMapChain(this, BaseObjectData.ObjectTileX, BaseObjectData.ObjectTileY);
             }
 
             if ((ObjectTileX < 64) && (ObjectTileY < 64) && (ObjectTileX >= 0) && (ObjectTileY >= 0))
             {//Object has moved on to the map. Link it to the list for that destination tile.
-                Debug.Log(LinkEventCtr++ + " LINK For " + this.ObjectIndex + " moving to tile  (" + ObjectTileX + ", " + ObjectTileY + ")");
+               // Debug.Log(LinkEventCtr++ + " LINK For " + this.ObjectIndex + " moving to tile  (" + ObjectTileX + ", " + ObjectTileY + ")");
                 LinkItemToTileMapChain(this, ObjectTileX, ObjectTileY);
             }
 
@@ -1962,7 +1962,7 @@ public class ObjectInteraction : UWEBase
     {
         if (!TileMap.ValidTile(x, y))
         {
-            Debug.Log(LinkEventCtr++ + oI.name + " is attempting to unlink from an offmap tile");
+            //Debug.Log(LinkEventCtr++ + oI.name + " is attempting to unlink from an offmap tile");
             return;
         }
         TileMap tm = CurrentTileMap();
@@ -1971,7 +1971,7 @@ public class ObjectInteraction : UWEBase
 
         if (ti.indexObjectList == oI.BaseObjectData.index)
         {//Object is at indexobjectlist. Just remove.
-            Debug.Log(LinkEventCtr++ + " UNLINK For " + oI.ObjectIndex + " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.next);
+            //Debug.Log(LinkEventCtr++ + " UNLINK For " + oI.ObjectIndex + " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.next);
             ti.indexObjectList = oI.BaseObjectData.next;
         }
         else
@@ -1988,7 +1988,7 @@ public class ObjectInteraction : UWEBase
                     break;
                 }
             }
-            Debug.Log(LinkEventCtr++ + " UNLINK For " + oI.ObjectIndex + " " + oI.BaseObjectData.next + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
+            //Debug.Log(LinkEventCtr++ + " UNLINK For " + oI.ObjectIndex + " " + oI.BaseObjectData.next + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
             currObj.next = oI.BaseObjectData.next;//Link the item that is found with the item that is the next of the item being removed.
         }
         oI.next = 0;//clear next of the moving object.
@@ -2008,7 +2008,7 @@ public class ObjectInteraction : UWEBase
 
         if (ti.indexObjectList == 0)
         {//Object is to be at the head of the chain.
-            Debug.Log(LinkEventCtr++ + " LINK For " + oI.ObjectIndex + " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.index);
+            //Debug.Log(LinkEventCtr++ + " LINK For " + oI.ObjectIndex + " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.index);
             ti.indexObjectList = oI.BaseObjectData.index;
         }
         else
@@ -2027,7 +2027,7 @@ public class ObjectInteraction : UWEBase
             }
             if (currObj.index != oI.BaseObjectData.index)
             {//Make sure it is not the object linking to itself.
-                Debug.Log(LinkEventCtr++ + " LINK : For " + oI.ObjectIndex + " " + oI.BaseObjectData.index + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
+               // Debug.Log(LinkEventCtr++ + " LINK : For " + oI.ObjectIndex + " " + oI.BaseObjectData.index + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
                 currObj.next = oI.BaseObjectData.index;
             }
         }
@@ -3136,12 +3136,12 @@ public class ObjectInteraction : UWEBase
         {
             if (objToDestroy.BaseObjectData.IsStatic)
             {
-                Debug.Log("Releasing Static Object " + objToDestroy.name);
+               // Debug.Log("Releasing Static Object " + objToDestroy.name);
                 CurrentObjectList().ReleaseFreeStaticObject(objToDestroy.BaseObjectData.index);
             }
             else
             {
-                Debug.Log("Releasing Mobile Object " + objToDestroy.name);
+               // Debug.Log("Releasing Mobile Object " + objToDestroy.name);
                 CurrentObjectList().ReleaseFreeMobileObject(objToDestroy.BaseObjectData.index);
             }
         }
