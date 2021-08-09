@@ -45,6 +45,7 @@ public class UWCharacter : Character
     {
         get
         {
+            /*
             if(isSwimming)
             {
                 //float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
@@ -52,7 +53,7 @@ public class UWCharacter : Character
                     -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f))))),
                     0.38f);
             }
-            else
+            else*/
             {
                 return new Vector3(0f, 0.91f, 0.38f);
             }
@@ -105,6 +106,7 @@ public class UWCharacter : Character
     public float braking;
     public float bounceMult = 1f;
     public Vector3 BounceMovement;
+    public CameraBob cameraBob;
     // <summary>
     // Is the player fleeing from combat (recently attacked and no weapon drawn)
     // </summary>
@@ -919,6 +921,36 @@ public class UWCharacter : Character
             );
         }
         onIcePrev = onIce;
+
+        // Update camera bobbing
+        if (cameraBob)
+        {
+            CameraBob.Mode bobMode = CameraBob.Mode.NONE;
+            Vector3 velocity = playerMotor.movement.velocity;
+            velocity.y = 0;
+            float speed = velocity.magnitude;
+            if (isSwimming)
+            {
+                bobMode = CameraBob.Mode.SWIM;
+            }
+            else if (isFloating || isFlying)
+            {
+                bobMode = CameraBob.Mode.FLY;
+            }
+            else if (Grounded && !Mathf.Approximately(speed, 0.0f))
+            {
+                Vector3 inputDir = playerMotor.inputMoveDirection;
+                Vector3 charDir = transform.forward;
+                inputDir.y = 0;
+                charDir.y = 0;
+                float angle = Vector3.Angle(inputDir, charDir);
+                if (angle < 80.0f) bobMode = CameraBob.Mode.WALK_FORWARD;
+                else if (angle < 100) bobMode = CameraBob.Mode.STRAFE;
+                // else player is walking backwards - no bob
+            }
+            cameraBob.SetBobMode(bobMode);
+            cameraBob.SetSpeed(speed);
+        }
     }
 
     /// <summary>
