@@ -3,9 +3,32 @@ UnderworldExporter
  
 Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity. 
 
-Release 1.09
+Scene Files
+https://github.com/hankmorgan/Underworld-Exporter-Scene
+
+This is a release of the Unity Development folder. For the forseeable future any releases will be of just this folder. This is to allow others to see more under the hood and possibly contribute fixes. A repo fo the scene files is now at https://github.com/hankmorgan/Underworld-Exporter-Scene
+
+Please review known issues below.
+
+Contents.
++All scripts
++Unity Scene file
++UI template
+
+To use. 
+Install Unity 2020 if needed
+Clone the repository.
+Open in Unity
+Adjust paths in config.ini to point to the full installation folder for UW1 or 2.
+
+Project compatable with Unity 2020.3.15.f2
+
+Known Issues
++Broken saving of games. Saving and loading do not currently work in this release.
++UI Scaling breaks at non 16:10 resolutions.
 
 
+Notes on previous release 1.09
 Contents
 	0 - Notes on this release
 	1 - Game Support
