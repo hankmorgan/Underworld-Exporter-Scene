@@ -41,24 +41,6 @@ public class UWCharacter : Character
     public bool onLava;
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
-    public Vector3 CameraLocalPos
-    {
-        get
-        {
-            /*
-            if(isSwimming)
-            {
-                //float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
-                return new Vector3(0f,
-                    -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f))))),
-                    0.38f);
-            }
-            else*/
-            {
-                return new Vector3(0f, 0.91f, 0.38f);
-            }
-        }
-    }
     /// <summary>
     ///  Conversion of player transform into UW heading value for the save file.
     /// </summary>
@@ -640,8 +622,6 @@ public class UWCharacter : Character
             UWCharacter.InteractionMode = InteractionModeWalk;
         }
 
-        // playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
-        playerCam.transform.localPosition = CameraLocalPos + CameraShake.CurrentShake;
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
         SwimTimer = SwimTimer + Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
@@ -1016,7 +996,6 @@ public class UWCharacter : Character
         else
         {//0.9198418f
             playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
-            playerCam.transform.localPosition = CameraLocalPos + CameraShake.CurrentShake;//new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
             swimSpeedMultiplier = 1.0f;
             SwimTimer = 0.0f;
         }
