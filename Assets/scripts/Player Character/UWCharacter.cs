@@ -993,6 +993,7 @@ public class UWCharacter : Character
         }
         else
         {//0.9198418f
+            playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetect.InMap));
             swimSpeedMultiplier = 1.0f;
             SwimTimer = 0.0f;
         }
