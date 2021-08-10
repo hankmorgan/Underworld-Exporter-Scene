@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Base monobehavior for Underworld Exporter (UWE)
@@ -47,7 +46,7 @@ public class UWEBase : MonoBehaviour
         set
         {
             UWCharacter.Instance.playerInventory.ObjectInHand = value;
-        }     
+        }
     }
 
     /// <summary>

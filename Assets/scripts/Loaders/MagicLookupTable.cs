@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 public class MagicLookupTable : Loader
 {
@@ -13,7 +13,6 @@ public class MagicLookupTable : Loader
 
     public MagicLookupTable()
     {
-        char[] uw_exe;
         int FileOffset = 0;
         int NoOfEntries = 0;
         string Exe = "";
@@ -40,7 +39,7 @@ public class MagicLookupTable : Loader
                     LookupValues = new int[138];
                     FileOffset = 0x66490;
                     Exe = "uw2.exe";
-                    NoOfEntries =137;
+                    NoOfEntries = 137;
                     break;
                 }
             default:
@@ -50,7 +49,7 @@ public class MagicLookupTable : Loader
                 }
         }
 
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath, Exe), out uw_exe))
+        if (ReadStreamFile(Path.Combine(BasePath, Exe), out byte[] uw_exe))
         {
             for (int i = 0; i <= NoOfEntries; i++)
             {

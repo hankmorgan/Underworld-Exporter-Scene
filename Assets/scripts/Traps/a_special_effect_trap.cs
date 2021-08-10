@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -16,7 +15,8 @@ using UnityEngine;
 ///     q=8 is another black flash
 /// Owner controls how long the earthquake effect lasts for.
 /// 
-public class a_special_effect_trap : trap_base {
+public class a_special_effect_trap : trap_base
+{
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
@@ -37,9 +37,9 @@ public class a_special_effect_trap : trap_base {
                 StartCoroutine(Flash("FadeToRed"));
                 break;
             default:
-                Debug.Log("unimplemented special effect " + this.name + " q=" +  quality);
+                Debug.Log("unimplemented special effect " + this.name + " q=" + quality);
                 break;
-        }        
+        }
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public class a_special_effect_trap : trap_base {
         UWHUD.instance.CutScenesSmall.anim.SetAnimation = anim;
         yield return new WaitForSeconds(0.2f);
         UWHUD.instance.CutScenesSmall.anim.SetAnimation = "Anim_Base";
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject, false);        
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject, false);
     }
 
 }

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Shield : Equipment
+﻿public class Shield : Equipment
 {
     public SpellEffect SpellEffectApplied;
 

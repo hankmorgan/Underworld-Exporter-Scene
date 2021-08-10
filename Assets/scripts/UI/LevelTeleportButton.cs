@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LevelTeleportButton : GuiBase {
+﻿public class LevelTeleportButton : GuiBase
+{
 
     public GameWorldController.UW2_LevelNos levelToLoad;
 

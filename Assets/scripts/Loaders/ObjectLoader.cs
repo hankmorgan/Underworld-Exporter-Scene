@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObjectLoader : DataLoader
 {
@@ -133,12 +132,12 @@ public class ObjectLoader : DataLoader
     {
         get
         {
-          return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
+            return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
         }
         set
         {
-            map.lev_ark_block.Data[0x7c02] = (char)(value & 0xFF);
-            map.lev_ark_block.Data[0x7c03] = (char)((value >> 8) & 0xFF);
+            map.lev_ark_block.Data[0x7c02] = (byte)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c03] = (byte)((value >> 8) & 0xFF);
         }
     }
 
@@ -153,8 +152,8 @@ public class ObjectLoader : DataLoader
         }
         set
         {
-            map.lev_ark_block.Data[0x7c04] = (char)(value & 0xFF);
-            map.lev_ark_block.Data[0x7c05] = (char)((value >> 8) & 0xFF);
+            map.lev_ark_block.Data[0x7c04] = (byte)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c05] = (byte)((value >> 8) & 0xFF);
         }
     }
 
@@ -203,7 +202,7 @@ public class ObjectLoader : DataLoader
         }
     }
 
-    public void LoadObjectListShock(TileMap tileMap, char[] lev_ark)
+    public void LoadObjectListShock(TileMap tileMap, byte[] lev_ark)
     {
 
         objInfo = new ObjectLoaderInfo[1600];
@@ -219,8 +218,8 @@ public class ObjectLoader : DataLoader
     }
 
 
-    //void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, char[] lev_ark, int LevelNo)
-    bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, char[] archive_ark, short LevelNo)
+    //void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, byte[] lev_ark, int LevelNo)
+    bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, byte[] archive_ark, short LevelNo)
     {
 
         short InUseFlag;
@@ -233,20 +232,20 @@ public class ObjectLoader : DataLoader
 
         //unsigned char *archive_ark;	//the full file.
 
-        Chunk xref_ark;     //The crossref table
-        Chunk mst_ark;      //The master table
+        //The crossref table
+        //The master table
 
 
 
-        if (!LoadChunk(archive_ark, LevelNo * 100 + 4009, out xref_ark))
+        if (!LoadChunk(archive_ark, LevelNo * 100 + 4009, out Chunk xref_ark))
         {
             return false;
         }
 
         xrefTable[] xref;
         xref = new xrefTable[xref_ark.chunkUnpackedLength / 10];
-        int i = 0;
         int xref_ptr = 0;
+        int i;
         //int xRefLength = (xref_ark.chunkUnpackedLength/10);
 
 
@@ -266,7 +265,7 @@ public class ObjectLoader : DataLoader
             xref_ptr += 10;
         }
 
-        if (!LoadChunk(archive_ark, LevelNo * 100 + 4008, out mst_ark))
+        if (!LoadChunk(archive_ark, LevelNo * 100 + 4008, out Chunk mst_ark))
         {
             return false;
         }
@@ -297,8 +296,14 @@ public class ObjectLoader : DataLoader
         for (i = 0; i <= objList.GetUpperBound(0); i++)
         {
             //To stop later crashes in ascii dumps I set some inital values.
-            objList[i] = new ObjectLoaderInfo(i, GameWorldController.CurrentTileMap(), true);
-            objList[i].index = i; objList[i].next = 0; objList[i].item_id = 0; objList[i].link = 0; objList[i].owner = 0;
+            objList[i] = new ObjectLoaderInfo(i, UWEBase.CurrentTileMap(), true)
+            {
+                index = i,
+                next = 0,
+                item_id = 0,
+                link = 0,
+                owner = 0
+            };
         }
 
         //now i can build based on my master list with no duplicates spoiling things.!	
@@ -475,16 +480,18 @@ public class ObjectLoader : DataLoader
             {
                 Vals[i] = (int)getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
             }
-            objList[x] = new ObjectLoaderInfo(x,map,true);
-            objList[x].map = map;
-            objList[x].parentList = this;
-            //objList[x].guid = System.Guid.NewGuid();
-            objList[x].index = x;
-           // objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-          //  objList[x].ObjectTileY = TileMap.ObjectStorageTile;
-           // objList[x].levelno = (short)map.thisLevelNo;
-           // objList[x].next = 0;
-            objList[x].address = map.lev_ark_block.Address + objectsAddress + address_pointer;
+            objList[x] = new ObjectLoaderInfo(x, map, true)
+            {
+                map = map,
+                parentList = this,
+                //objList[x].guid = System.Guid.NewGuid();
+                index = x,
+                // objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+                //  objList[x].ObjectTileY = TileMap.ObjectStorageTile;
+                // objList[x].levelno = (short)map.thisLevelNo;
+                // objList[x].next = 0;
+                address = map.lev_ark_block.Address + objectsAddress + address_pointer
+            };
             //objList[x].invis = 0;
             //objList[x].item_id = (int)ExtractBits(Vals[0], 0, 0x1FF);
 
@@ -492,22 +499,22 @@ public class ObjectLoader : DataLoader
             {
                 objList[x].item_id = 0;
             }
-            
-           // objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
-           // objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
+
+            // objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
+            // objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
             //objList[x].doordir = (short)(ExtractBits(Vals[0], 13, 1));
-           // objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
+            // objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
             //objList[x].is_quant = (short)(ExtractBits(Vals[0], 15, 1));
 
             //position at +2
-           // objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
-           // objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
+            // objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
+            // objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
             //objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 0x7)); //bits 7-9	//bits 10-12
             //objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 0x7));    //bits 13-15
 
             //+4
             //objList[x].quality = (short)(ExtractBits(Vals[2], 0, 0x3f));
-           // objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
+            // objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
 
             //+6
             //objList[x].owner = (short)(ExtractBits(Vals[3], 0, 0x3f));//bits 0-5
@@ -523,11 +530,11 @@ public class ObjectLoader : DataLoader
                 //mobile objects		
                 // objList[x].npc_hp = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x8, 8));
 
-               // int val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x9, 8);
-               // objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
-               // objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
+                // int val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x9, 8);
+                // objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
+                // objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
 
-               // objList[x].MobileUnk_0xA = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xa, 8));
+                // objList[x].MobileUnk_0xA = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xa, 8));
 
 
                 //objList[x].npc_goal = (short)(ExtractBits(val, 0, 0xF));
@@ -576,21 +583,21 @@ public class ObjectLoader : DataLoader
                 // objList[x].npc_hunger = (short)(ExtractBits(val, 0, 0x3f));
                 //objList[x].MobileUnk_0x19_6_3 = (short)(ExtractBits(val, 6, 0x3));
 
-               // objList[x].npc_whoami = (short)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x1a, 8);
+                // objList[x].npc_whoami = (short)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x1a, 8);
 
                 address_pointer = address_pointer + 8 + 19;
             }
             else
             {
                 //Static Objects
-                address_pointer = address_pointer + 8;
+                address_pointer += 8;
             }
         }
 
 
 
 
-       // BuildFreeObjectLists(objList, map.lev_ark_block, ref address_pointer, ref objectsAddress);
+        // BuildFreeObjectLists(objList, map.lev_ark_block, ref address_pointer, ref objectsAddress);
 
     }
 
@@ -624,7 +631,7 @@ public class ObjectLoader : DataLoader
         ////   7300    01fc   free list for mobile objects (objects 0002-00ff, 254 x 2 bytes)
         int offset = slot * 2;
         int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x7300 + offset, 16);
-       
+
         //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
         return val;
     }
@@ -649,7 +656,7 @@ public class ObjectLoader : DataLoader
             return false;
         }
     }
-    
+
     /// <summary>
     /// Releases a free static object from the list.
     /// Shift all used objects up by one
@@ -660,22 +667,22 @@ public class ObjectLoader : DataLoader
     {
         int Slot = -1;
         //Find the slot it is currently in.
-        for (int i = 0; i<768;i++)
+        for (int i = 0; i < 768; i++)
         {
-            if (index==GetStaticAtSlot(i))
+            if (index == GetStaticAtSlot(i))
             {
                 Slot = i;
                 break;
             }
         }
 
-        if (Slot>0)
+        if (Slot > 0)
         {//Found
 
             //Shift all values between start of used to object up by one in the list.
-            for (int i = Slot; i>=NoOfFreeStatic; i--)
+            for (int i = Slot; i >= NoOfFreeStatic; i--)
             {
-                int ValueToShift = GetStaticAtSlot(i-1);
+                int ValueToShift = GetStaticAtSlot(i - 1);
                 SetStaticAtSlot(i, ValueToShift);
             }
 
@@ -685,7 +692,7 @@ public class ObjectLoader : DataLoader
             NoOfFreeStatic++;
         }
 
-        objInfo[index].next = 0;        
+        objInfo[index].next = 0;
     }
 
 
@@ -750,8 +757,8 @@ public class ObjectLoader : DataLoader
     void SetStaticAtSlot(int slot, int itemIndex)
     {
         int offset = slot * 2;
-        map.lev_ark_block.Data[0x74fc + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x74fc + offset+1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset] = (byte)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset + 1] = (byte)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -763,8 +770,8 @@ public class ObjectLoader : DataLoader
     void SetMobileAtSlot(int slot, int itemIndex)
     {
         int offset = slot * 2;
-        map.lev_ark_block.Data[0x7300 + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x7300 + offset + 1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x7300 + offset] = (byte)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x7300 + offset + 1] = (byte)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -780,86 +787,59 @@ public class ObjectLoader : DataLoader
     /// <param name="objectsAddress">Objects address.</param>
     void BuildFreeObjectLists(ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
     {
+        Debug.Log("BuildFreeObjectLists");
         return;
-        //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
-       // NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
-        //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
-        for (int i = 0; i <= objList.GetUpperBound(0); i++)
-        {
-            if (i > 2)
-            {
-                objList[i].InUseFlag = 1;
-                //Assume in use unless informed otherwise in the next loop.			
-            }
-        }
-        objectsAddress = 0x7300;
-        //location of the mobile object free list
-        address_pointer = 0;
-        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
-        string output = "Mobile List\n";
-        for (int i = 0; i <= NoOfFreeMobile; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            objList[freed].InUseFlag = 0;
-            output = output + "Mobile Free:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Count:" + NoOfFreeMobile + "\n";
-        for (int i = NoOfFreeMobile + 1; i < 254; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            output = output + "Mobile Junk:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Static List\n";
-        objectsAddress = 0x74fc;
-        //location of the static object free list
-        address_pointer = 0;
-        for (int i = 0; i <= NoOfFreeStatic; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            objList[freed].InUseFlag = 0;
-            output = output + "Static Free:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        output = output + "Count (static):" + NoOfFreeStatic + "\n";
-        for (int i = NoOfFreeStatic + 1; i < 768; i++)
-        {
-            int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-            output = output + "Static Junk:" + i + " = " + freed + "\n";
-            address_pointer += 2;
-        }
-        writer.Write(output);
-        writer.Close();
-        /*	for (int i=2; i<254+768;i++)//Skip over objects 0 and 1
-				{
-					int freed =	(int)getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
-					bool valid = ( ( (i<256) && ( i<NoOfFreeMobile) ) ||  ( (i>=256) && ( i-256<NoOfFreeStatic) ) );
-
-					if (valid)
-					{
-						if ((freed<objList.GetUpperBound(0)) && (freed>=0))
-						{
-							objList[freed].InUseFlag = 0;				
-						}
-						else
-						{
-							Debug.Log("Object index out of range in free list " + freed + " at offset " + (objectsAddress+address_pointer) );
-						}
-					}									
-
-					address_pointer+=2;
-				}
-				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);	
-				string output="";
-				for (int i=0; i<=objList.GetUpperBound(0);i++)//Skip over objects 0 and 1
-				{
-						output = output +  i + "=" + objList[i].InUseFlag + "\n";
-				}
-				writer.Write(output);
-				writer.Close();*/
+        //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
+        ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
+        //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
+        //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
+        //////////////// {
+        ////////////////     if (i > 2)
+        ////////////////     {
+        ////////////////         objList[i].InUseFlag = 1;
+        ////////////////         //Assume in use unless informed otherwise in the next loop.			
+        ////////////////     }
+        //////////////// }
+        //////////////// objectsAddress = 0x7300;
+        //////////////// //location of the mobile object free list
+        //////////////// address_pointer = 0;
+        //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
+        //////////////// string output = "Mobile List\n";
+        //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     objList[freed].InUseFlag = 0;
+        ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
+        //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Static List\n";
+        //////////////// objectsAddress = 0x74fc;
+        //////////////// //location of the static object free list
+        //////////////// address_pointer = 0;
+        //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     objList[freed].InUseFlag = 0;
+        ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
+        //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
+        //////////////// {
+        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+        ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
+        ////////////////     address_pointer += 2;
+        //////////////// }
+        //////////////// writer.Write(output);
+        //////////////// writer.Close();
     }
-
 
     static void HandleMovingDoors(ObjectLoaderInfo[] objList, int x)
     {
@@ -1007,7 +987,7 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.PORTCULLIS:
                 {
                     return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
-                }                
+                }
             case ObjectInteraction.NPC_TYPE:
                 {
                     string npcname = StringController.instance.GetString(7, currObj.npc_whoami + 16);
@@ -1023,8 +1003,8 @@ public class ObjectLoader : DataLoader
             default:
                 {
                     return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
-                }                
-        }       
+                }
+        }
     }
 
     public static string UniqueObjectNameEditor(ObjectLoaderInfo currObj)
@@ -1424,31 +1404,31 @@ public class ObjectLoader : DataLoader
     /// <param name="LevelNo"></param>
     void SetFloorCollapseTiles(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int LevelNo)
     {
-        for (int i=256; i<=objList.GetUpperBound(0);i++)
+        for (int i = 256; i <= objList.GetUpperBound(0); i++)
         {
             ObjectLoaderInfo currobj = objList[i];
-            if ((currobj.link>0) && (currobj.link<= objList.GetUpperBound(0)))
+            if ((currobj.link > 0) && (currobj.link <= objList.GetUpperBound(0)))
             {
                 ObjectLoaderInfo linkobj = objList[currobj.link];
-                if (isTrigger(currobj) && (linkobj.item_id==387) && (linkobj.quality==17))
+                if (isTrigger(currobj) && (linkobj.item_id == 387) && (linkobj.quality == 17))
                 {
                     //Flag each tile in a 20 tile block as being a tile change tile
                     int triggerX = currobj.quality; int triggerY = currobj.owner;
-                    for (int x=-10; x<=10; x++)
+                    for (int x = -10; x <= 10; x++)
                     {
                         for (int y = -10; y <= 10; y++)
                         {
-                            if (TileMap.ValidTile(triggerX+x, triggerY+y))
+                            if (TileMap.ValidTile(triggerX + x, triggerY + y))
                             {
                                 if (LevelInfo[triggerX + x, triggerY + y].tileType == TileMap.TILE_OPEN)
                                 {
                                     LevelInfo[triggerX + x, triggerY + y].TerrainChange = true;
-                                }                                
+                                }
                             }
                         }
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -1568,16 +1548,15 @@ public class ObjectLoader : DataLoader
     /// <summary>
     /// Calculates the position in world space of the object at ObjectIndex in the current object list
     /// </summary>
-     /// <param name="ObjectIndex"></param>
+    /// <param name="ObjectIndex"></param>
     /// <param name="WallAdjust"></param>
     /// <returns></returns>
-    public static Vector3 CalcObjectXYZ( int ObjectIndex, short WallAdjust)
+    public static Vector3 CalcObjectXYZ(int ObjectIndex, short WallAdjust)
     {//?
         ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         TileMap tileMap = CurrentTileMap();
         int x = objList[ObjectIndex].ObjectTileX;
         int y = objList[ObjectIndex].ObjectTileY;
-        float offX = 0f; float offY = 0f; float offZ = 0f;
         float ResolutionXY = 7.0f;  // A tile has a 7x7 grid for object positioning.
         float ResolutionZ = 128.0f; //UW has 127 posible z positions for an object in tile.
         if (_RES == GAME_SHOCK) { ResolutionXY = 256.0f; ResolutionZ = 256.0f; } //Shock has more "z" in it.
@@ -1585,16 +1564,15 @@ public class ObjectLoader : DataLoader
         float BrushX = 120f;
         float BrushY = 120f;
         float BrushZ = 15f;
-        float objX = (float)objList[ObjectIndex].xpos;
-        float objY = (float)objList[ObjectIndex].ypos;
-        offX = (x * BrushX) + ((objList[ObjectIndex].xpos) * (BrushX / ResolutionXY));
-        offY = (y * BrushY) + ((objList[ObjectIndex].ypos) * (BrushY / ResolutionXY));
+        float objX = objList[ObjectIndex].xpos;
+        float objY = objList[ObjectIndex].ypos;
+        float offX = x * BrushX + objList[ObjectIndex].xpos * (BrushX / ResolutionXY);
+        float offY = y * BrushY + objList[ObjectIndex].ypos * (BrushY / ResolutionXY);
 
         float zpos = objList[ObjectIndex].zpos;
 
         float ceil = tileMap.CEILING_HEIGHT;
-
-        offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
+        float offZ = zpos / ResolutionZ * ceil * BrushZ;
         if ((_RES != GAME_SHOCK) && (x < 64) && (y < 64))
         {//Adjust zpos by a fraction for objects on sloped tiles.
             switch (tileMap.Tiles[x, y].tileType)
@@ -1657,10 +1635,10 @@ public class ObjectLoader : DataLoader
                         //Doors will always go at the tile height.
                         int newZpos = tileMap.Tiles[x, y].floorHeight * 4;
                         offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
+                        int BridgeIndex = findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
                         if (BridgeIndex != -1)
                         {//Adjust for possible bridges in this tile. If so the door goes at the bridge height
-                            offZ = ObjectLoader.CalcObjectXYZ( BridgeIndex, 0).y * 100;
+                            offZ = CalcObjectXYZ(BridgeIndex, 0).y * 100;
                         }
 
 
@@ -1691,10 +1669,10 @@ public class ObjectLoader : DataLoader
                                     break;
                                 }
                         }
-                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 2f; }
-                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 2f; }
-                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 2f; }
-                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 2f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX += 2f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX -= 2f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY += 2f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY -= 2f; }
                         break;
                     }
                 case ObjectInteraction.A_MOVE_TRIGGER:
@@ -1715,10 +1693,10 @@ public class ObjectLoader : DataLoader
                 case ObjectInteraction.BUTTON:
                 case ObjectInteraction.SIGN:
                     {//TODO: make this based on heading so as to support angled walls									
-                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 1.5f; }
-                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 1.5f; }
-                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 1.5f; }
-                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 1.5f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX += 1.5f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX -= 1.5f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY += 1.5f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY -= 1.5f; }
                         if (zpos == 127)
                         {
                             offZ -= 25f;
@@ -1734,17 +1712,17 @@ public class ObjectLoader : DataLoader
                         {//Adjust the object x,y to avoid clipping into walls.
                             switch (_RES)
                             {
-                                case Loader.GAME_SHOCK:
-                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[ObjectIndex].xpos == 128) { offX = offX - 4f; }
-                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[ObjectIndex].ypos == 128) { offY = offY - 3f; }
+                                case GAME_SHOCK:
+                                    if (objList[ObjectIndex].xpos == 0) { offX += 4f; }
+                                    if (objList[ObjectIndex].xpos == 128) { offX -= 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY += 4f; }
+                                    if (objList[ObjectIndex].ypos == 128) { offY -= 3f; }
                                     break;
                                 default:
-                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[ObjectIndex].xpos == 7) { offX = offX - 4f; }
-                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[ObjectIndex].ypos == 7) { offY = offY - 4f; }
+                                    if (objList[ObjectIndex].xpos == 0) { offX += 4f; }
+                                    if (objList[ObjectIndex].xpos == 7) { offX -= 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY += 4f; }
+                                    if (objList[ObjectIndex].ypos == 7) { offY -= 4f; }
                                     break;
                             }
                         }
@@ -1775,7 +1753,7 @@ public class ObjectLoader : DataLoader
         //Clear out the children in the transform
         foreach (Transform child in parent.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Object.Destroy(child.gameObject);
         }
         //Init the objects
         //instance.ObjectInteractions=new ObjectInteraction[1600];
@@ -1789,7 +1767,7 @@ public class ObjectLoader : DataLoader
                     Vector3 position;
                     if (tilemap == null)
                     {
-                        position = new Vector3((float)TileMap.ObjectStorageTile * 1.2f, 5f, (float)TileMap.ObjectStorageTile * 1.2f);
+                        position = new Vector3(TileMap.ObjectStorageTile * 1.2f, 5f, TileMap.ObjectStorageTile * 1.2f);
                     }
                     else
                     {
@@ -1805,8 +1783,8 @@ public class ObjectLoader : DataLoader
             }
         }
 
-        ObjectLoader.LinkObjectListWands(instance);//Link wands to their spell objects
-        ObjectLoader.LinkObjectListPotions(instance);
+        LinkObjectListWands(instance);//Link wands to their spell objects
+        LinkObjectListPotions(instance);
 
         GameWorldController.LoadingObjects = false;
     }
@@ -1890,143 +1868,143 @@ public class ObjectLoader : DataLoader
 
         Debug.Log("RebuildObjectListUW() This needs to be rewritten or made obsolete");
 
-        return;
-        if (currObjList == null) { return; }
-        //int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
+        //////////////////return;
+        //////////////////if (currObjList == null) { return; }
+        ////////////////////int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
 
-        //Update indices to match the array.
-        for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
-        {
-            if ((_RES == GAME_UW2) && (i > 2))
-            {
-                ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
-            }
-            //bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
-            //if ((OnMap))
-            //{//Only clear nexts if the object is onmap. Items destroyed will have their nexts cleared at that time.
-            //    currObjList.objInfo[i].next = 0;
-            //    if (currObjList.objInfo[i].instance != null)
-            //    {
-            //        currObjList.objInfo[i].instance.next = 0;
-            //    }
-            //}
-        }
+        ////////////////////Update indices to match the array.
+        //////////////////for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
+        //////////////////{
+        //////////////////    if ((_RES == GAME_UW2) && (i > 2))
+        //////////////////    {
+        //////////////////        ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
+        //////////////////    }
+        //////////////////    //bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
+        //////////////////    //if ((OnMap))
+        //////////////////    //{//Only clear nexts if the object is onmap. Items destroyed will have their nexts cleared at that time.
+        //////////////////    //    currObjList.objInfo[i].next = 0;
+        //////////////////    //    if (currObjList.objInfo[i].instance != null)
+        //////////////////    //    {
+        //////////////////    //        currObjList.objInfo[i].instance.next = 0;
+        //////////////////    //    }
+        //////////////////    //}
+        //////////////////}
 
-        //if (currTileMap != null)
-        //{
-        //    //Clear the tilemaps indexobjectlist
-        //    for (int x = 0; x <= TileMap.TileMapSizeX; x++)
-        //    {
-        //        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
-        //        {
-        //            currTileMap.Tiles[x, y].indexObjectList = 0;
-        //        }
-        //    }
-        //}
+        ////////////////////if (currTileMap != null)
+        ////////////////////{
+        ////////////////////    //Clear the tilemaps indexobjectlist
+        ////////////////////    for (int x = 0; x <= TileMap.TileMapSizeX; x++)
+        ////////////////////    {
+        ////////////////////        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
+        ////////////////////        {
+        ////////////////////            currTileMap.Tiles[x, y].indexObjectList = 0;
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
-        {
-            if (t.gameObject.GetComponent<ObjectInteraction>() != null)
-            {
-                t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
-            }
-        }
-        
-        //foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
-        //{
-        //    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
-        //    if (objInt != null)
-        //    {                
-        //        if (objInt.BaseObjectData == null)
-        //        {//Fill in missing object loader instances to avoid null errors
-        //            objInt.BaseObjectData = new ObjectLoaderInfo(objInt.BaseObjectData.index,GameWorldController.CurrentTileMap(),true);
-        //            objInt.BaseObjectData.InUseFlag = 0;
-        //            objInt.BaseObjectData.ObjectTileX = TileMap.ObjectStorageTile;
-        //            objInt.BaseObjectData.ObjectTileY = TileMap.ObjectStorageTile;
-        //        }
-        //        objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
-        //        if ((t.gameObject.GetComponent<Container>() != null))
-        //        {//Clear container link index. Will repoint later.
-        //            t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
+        //////////////////foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
+        //////////////////{
+        //////////////////    if (t.gameObject.GetComponent<ObjectInteraction>() != null)
+        //////////////////    {
+        //////////////////        t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
+        //////////////////    }
+        //////////////////}
 
-        //        }
-        //    }
-        //}
+        ////////////////////foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
+        ////////////////////{
+        ////////////////////    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
+        ////////////////////    if (objInt != null)
+        ////////////////////    {                
+        ////////////////////        if (objInt.BaseObjectData == null)
+        ////////////////////        {//Fill in missing object loader instances to avoid null errors
+        ////////////////////            objInt.BaseObjectData = new ObjectLoaderInfo(objInt.BaseObjectData.index,GameWorldController.CurrentTileMap(),true);
+        ////////////////////            objInt.BaseObjectData.InUseFlag = 0;
+        ////////////////////            objInt.BaseObjectData.ObjectTileX = TileMap.ObjectStorageTile;
+        ////////////////////            objInt.BaseObjectData.ObjectTileY = TileMap.ObjectStorageTile;
+        ////////////////////        }
+        ////////////////////        objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
+        ////////////////////        if ((t.gameObject.GetComponent<Container>() != null))
+        ////////////////////        {//Clear container link index. Will repoint later.
+        ////////////////////            t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
 
-        ////rebuild the linked list
-        //for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
-        //{
-        //    int x = currObjList.objInfo[i].ObjectTileX;
-        //    int y = currObjList.objInfo[i].ObjectTileY;
-        //    if (currObjList.objInfo[i].InUseFlag == 1)
-        //    {
-        //        if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
-        //        {
-        //            if (nexts[x, y] == 0)
-        //            {//This object is the first in the chain at this tile
-        //                currTileMap.Tiles[x, y].indexObjectList = i;
-        //                nexts[x, y] = i;
-        //            }
-        //            else
-        //            {
-        //                currObjList.objInfo[nexts[x, y]].next = i;
-        //                currObjList.objInfo[nexts[x, y]].instance.next = i;
-        //                nexts[x, y] = i;
-        //            }
-        //        }
-        //    }
-        //}
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        //Rebuild container chains only!
+        //////////////////////rebuild the linked list
+        ////////////////////for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
+        ////////////////////{
+        ////////////////////    int x = currObjList.objInfo[i].ObjectTileX;
+        ////////////////////    int y = currObjList.objInfo[i].ObjectTileY;
+        ////////////////////    if (currObjList.objInfo[i].InUseFlag == 1)
+        ////////////////////    {
+        ////////////////////        if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
+        ////////////////////        {
+        ////////////////////            if (nexts[x, y] == 0)
+        ////////////////////            {//This object is the first in the chain at this tile
+        ////////////////////                currTileMap.Tiles[x, y].indexObjectList = i;
+        ////////////////////                nexts[x, y] = i;
+        ////////////////////            }
+        ////////////////////            else
+        ////////////////////            {
+        ////////////////////                currObjList.objInfo[nexts[x, y]].next = i;
+        ////////////////////                currObjList.objInfo[nexts[x, y]].instance.next = i;
+        ////////////////////                nexts[x, y] = i;
+        ////////////////////            }
+        ////////////////////        }
+        ////////////////////    }
+        ////////////////////}
 
-        //TODO:
+        ////////////////////Rebuild container chains only!
 
-        ////return;
+        ////////////////////TODO:
 
-        //////Count the number of freeobjects in the mobile and static lists and update these lists as needed			
-        ////currObjList.FreeMobileList = new int[254];
-        ////currObjList.FreeStaticList = new int[768];
-        ////int newFreeMobileObjectCount = 0;
-        ////int newFreeStaticObjectCount = 0;
-        ////for (int o = 2; o < 256; o++)
-        ////{
-        ////    if (currObjList.objInfo[o].InUseFlag == 0)
-        ////    {//Store that the object slot is free in the array.			
-        ////        currObjList.objInfo[o].instance = null;
-        ////        currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
-        ////    }
-        ////}
-        ////for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
-        ////{
-        ////    if (currObjList.objInfo[o].InUseFlag == 0)
-        ////    {//Store that the object slot is free in the array.	
-        ////        currObjList.objInfo[o].instance = null;
-        ////        currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
-        ////    }
-        ////}
+        //////////////////////return;
 
-        ////for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
-        ////{
-        ////    if (currObjList.objInfo[o].instance != null)
-        ////    {
-        ////        currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
-        ////    }
-        ////}
+        ////////////////////////Count the number of freeobjects in the mobile and static lists and update these lists as needed			
+        //////////////////////currObjList.FreeMobileList = new int[254];
+        //////////////////////currObjList.FreeStaticList = new int[768];
+        //////////////////////int newFreeMobileObjectCount = 0;
+        //////////////////////int newFreeStaticObjectCount = 0;
+        //////////////////////for (int o = 2; o < 256; o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].InUseFlag == 0)
+        //////////////////////    {//Store that the object slot is free in the array.			
+        //////////////////////        currObjList.objInfo[o].instance = null;
+        //////////////////////        currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
+        //////////////////////    }
+        //////////////////////}
+        //////////////////////for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].InUseFlag == 0)
+        //////////////////////    {//Store that the object slot is free in the array.	
+        //////////////////////        currObjList.objInfo[o].instance = null;
+        //////////////////////        currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
+        //////////////////////    }
+        //////////////////////}
 
-        ////if (newFreeMobileObjectCount > 0)
-        ////{
-        ////    newFreeMobileObjectCount--;
-        ////}
-        ////if (newFreeStaticObjectCount > 0)
-        ////{
-        ////    newFreeStaticObjectCount--;
-        ////}
-        //////Debug.Log(
-        //////		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
-        //////		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
-        //////);
-        ////currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
-        ////currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
+        //////////////////////for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
+        //////////////////////{
+        //////////////////////    if (currObjList.objInfo[o].instance != null)
+        //////////////////////    {
+        //////////////////////        currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
+        //////////////////////    }
+        //////////////////////}
+
+        //////////////////////if (newFreeMobileObjectCount > 0)
+        //////////////////////{
+        //////////////////////    newFreeMobileObjectCount--;
+        //////////////////////}
+        //////////////////////if (newFreeStaticObjectCount > 0)
+        //////////////////////{
+        //////////////////////    newFreeStaticObjectCount--;
+        //////////////////////}
+        ////////////////////////Debug.Log(
+        ////////////////////////		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
+        ////////////////////////		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
+        ////////////////////////);
+        //////////////////////currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
+        //////////////////////currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
 
 
 
@@ -2059,7 +2037,7 @@ public class ObjectLoader : DataLoader
         //First add the objects on the paperdoll to the so that they are first.
         for (short s = 0; s <= 18; s++)
         {
-            ObjectInteraction obj = null;
+            ObjectInteraction obj;
             if (s <= 10)//Paperdoll objects
             {
                 obj = pInv.GetObjectIntAtSlot(s);
@@ -2138,24 +2116,24 @@ public class ObjectLoader : DataLoader
                 //GameObject obj = GameObject.Find(itemname);
                 //if (obj != null)
                 //{
-                    index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
-                    if (cnLinked == false)
-                    {//The container is first linked to this object							
-                        cn.gameObject.GetComponent<ObjectInteraction>().link = index;
-                        cnLinked = true;
-                        prev = item;
-                    }
-                    else
-                    {//The object needs to be a next of the previous object
-                     //index= System.Array.IndexOf(InventoryObjects,obj.name);
-                        prev.GetComponent<ObjectInteraction>().next = index;
-                        prev = item;
-                    }
-                    if (item.GetComponent<Container>() != null)
-                    {//if a container then link the items in that container.
-                        linkInventoryContainers(item.GetComponent<Container>(), ref InventoryObjects);
-                    }
-               // }
+                index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
+                if (cnLinked == false)
+                {//The container is first linked to this object							
+                    cn.gameObject.GetComponent<ObjectInteraction>().link = index;
+                    cnLinked = true;
+                    prev = item;
+                }
+                else
+                {//The object needs to be a next of the previous object
+                 //index= System.Array.IndexOf(InventoryObjects,obj.name);
+                    prev.GetComponent<ObjectInteraction>().next = index;
+                    prev = item;
+                }
+                if (item.GetComponent<Container>() != null)
+                {//if a container then link the items in that container.
+                    linkInventoryContainers(item.GetComponent<Container>(), ref InventoryObjects);
+                }
+                // }
             }
         }
     }
@@ -2177,7 +2155,7 @@ public class ObjectLoader : DataLoader
         int PrevIndex = cnObjInt.BaseObjectData.index;
         if (cn.LockObject != 0)
         {
-            ObjectInteraction lockObj = ObjectLoader.getObjectIntAt(cn.LockObject);
+            ObjectInteraction lockObj = getObjectIntAt(cn.LockObject);
             if (lockObj != null)
             {
                 if (lockObj.GetItemType() == ObjectInteraction.LOCK)
@@ -2189,7 +2167,7 @@ public class ObjectLoader : DataLoader
                 }
             }
         }
-        
+
         for (short i = 0; i < cn.GetCapacity(); i++)
         {
             ObjectInteraction itemObjInt = cn.GetItemAt(i);
@@ -2208,8 +2186,8 @@ public class ObjectLoader : DataLoader
                     {
                         Debug.Log("null object on " + i + " for container " + cn.name);
                     }
-                    ObjectLoader.getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
-                    ObjectLoader.getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
+                    getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
+                    getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
                     itemObjInt.next = 0;//end for now.
                     itemObjInt.BaseObjectData.next = 0;
                     PrevIndex = itemObjInt.BaseObjectData.index;
@@ -2248,7 +2226,6 @@ public class ObjectLoader : DataLoader
     /// <param name="objInt">Object int.</param>
     public static int AssignObjectToList(ref ObjectInteraction objInt)
     {
-        int index;
         int startindex = 1;
         //Check if objINt is an npc
         if ((objInt.GetComponent<NPC>() == null))
@@ -2257,7 +2234,7 @@ public class ObjectLoader : DataLoader
                              //	startindex=979;
         }
         //find a free slot in the list.
-        if (CurrentObjectList().getFreeSlot(startindex, out index))
+        if (CurrentObjectList().getFreeSlot(startindex, out int index))
         {
             //Assign and return the reference
             objInt.BaseObjectData = CurrentObjectList().objInfo[index];
@@ -2271,7 +2248,7 @@ public class ObjectLoader : DataLoader
                 int prevLink = index;
                 for (short i = 0; i <= cn.GetCapacity(); i++)
                 {
-                    ObjectInteraction objI  = cn.GetItemAt(i);
+                    ObjectInteraction objI = cn.GetItemAt(i);
                     if (objI != null)
                     {
                         //ObjectInteraction objI = obj.GetComponent<ObjectInteraction>();
@@ -2334,70 +2311,70 @@ public class ObjectLoader : DataLoader
     void CopyDataToList(ObjectInteraction objInt, ref ObjectLoaderInfo info)
     {
         Debug.Log("copy data to list");
-        return;
-        info.item_id = objInt.item_id;
-        info.flags = objInt.flags;  //9-12
-        info.enchantment = objInt.enchantment;  //12
-        info.doordir = objInt.doordir;  //13
-        info.invis = objInt.invis;      //14
-        info.is_quant = objInt.isquant; //15						
-        info.zpos = objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-        info.heading = objInt.heading;  //        7- 9   3   "heading"   Heading (*45 deg)
-        info.xpos = objInt.xpos; //   10-12   3   "ypos"      Object Y position (0-7)
-        info.ypos = objInt.ypos; //  13-15   3   "xpos"      Object X position (0-7)
-        info.quality = objInt.quality;  //;     0- 5   6   "quality"   Quality
-        info.next = objInt.next; //    6-15   10  "next"      Index of next object in chain
-        info.owner = objInt.owner;  //Also special
-        info.link = objInt.link;    //also quantity	
+        //////////return;
+        //////////info.item_id = objInt.item_id;
+        //////////info.flags = objInt.flags;  //9-12
+        //////////info.enchantment = objInt.enchantment;  //12
+        //////////info.doordir = objInt.doordir;  //13
+        //////////info.invis = objInt.invis;      //14
+        //////////info.is_quant = objInt.isquant; //15						
+        //////////info.zpos = objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+        //////////info.heading = objInt.heading;  //        7- 9   3   "heading"   Heading (*45 deg)
+        //////////info.xpos = objInt.xpos; //   10-12   3   "ypos"      Object Y position (0-7)
+        //////////info.ypos = objInt.ypos; //  13-15   3   "xpos"      Object X position (0-7)
+        //////////info.quality = objInt.quality;  //;     0- 5   6   "quality"   Quality
+        //////////info.next = objInt.next; //    6-15   10  "next"      Index of next object in chain
+        //////////info.owner = objInt.owner;  //Also special
+        //////////info.link = objInt.link;    //also quantity	
 
-        info.ObjectTileX = objInt.ObjectTileX;
-        info.ObjectTileY = objInt.ObjectTileY;
+        //////////info.ObjectTileX = objInt.ObjectTileX;
+        //////////info.ObjectTileY = objInt.ObjectTileY;
 
-        //mobile object specific
-        if (info.index < 256)
-        {
-            info.npc_hp = objInt.npc_hp;
-            info.npc_goal = objInt.npc_goal;
-            info.npc_gtarg = objInt.npc_gtarg;
-            info.npc_level = (short)objInt.npc_level;
-            info.npc_talkedto = objInt.npc_talkedto;
-            info.npc_attitude = objInt.npc_attitude;
-            info.npc_voidanim = objInt.npc_voidanim;
-            info.npc_yhome = objInt.npc_yhome;
-            info.npc_xhome = objInt.npc_xhome;
-            info.npc_heading = objInt.npc_heading;
-            info.npc_hunger = objInt.npc_hunger;
-            info.npc_whoami = objInt.npc_whoami;
-            info.npc_health = objInt.npc_health;
-            info.npc_arms = objInt.npc_arms;
-            info.npc_power = objInt.npc_power;
-            info.npc_name = objInt.npc_name;
-            info.npc_health = objInt.npc_height;
-            info.Projectile_Pitch = objInt.Projectile_Pitch;
-            info.Projectile_Speed = objInt.Projectile_Speed;
-            //info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
+        ////////////mobile object specific
+        //////////if (info.index < 256)
+        //////////{
+        //////////    info.npc_hp = objInt.npc_hp;
+        //////////    info.npc_goal = objInt.npc_goal;
+        //////////    info.npc_gtarg = objInt.npc_gtarg;
+        //////////    info.npc_level = (short)objInt.npc_level;
+        //////////    info.npc_talkedto = objInt.npc_talkedto;
+        //////////    info.npc_attitude = objInt.npc_attitude;
+        //////////    info.npc_voidanim = objInt.npc_voidanim;
+        //////////    info.npc_yhome = objInt.npc_yhome;
+        //////////    info.npc_xhome = objInt.npc_xhome;
+        //////////    info.npc_heading = objInt.npc_heading;
+        //////////    info.npc_hunger = objInt.npc_hunger;
+        //////////    info.npc_whoami = objInt.npc_whoami;
+        //////////    info.npc_health = objInt.npc_health;
+        //////////    info.npc_arms = objInt.npc_arms;
+        //////////    info.npc_power = objInt.npc_power;
+        //////////    info.npc_name = objInt.npc_name;
+        //////////    info.npc_health = objInt.npc_height;
+        //////////    info.Projectile_Pitch = objInt.Projectile_Pitch;
+        //////////    info.Projectile_Speed = objInt.Projectile_Speed;
+        //////////    //info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
 
-            //info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
-            info.MobileUnk_0xA = objInt.MobileUnk_0xA;
-            info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
-            info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
-            info.MobileUnk_0xD_12_1 = objInt.MobileUnk_0xD_12_1;
-            info.MobileUnk_0xF_0_3F = objInt.MobileUnk_0xF_0_3F;
-            info.MobileUnk_0xF_C_F = objInt.MobileUnk_0xF_C_F;
-            info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
-            info.ProjectileSourceID = objInt.ProjectileSourceID;
-            info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
-            //info.Projectile_Sign = objInt.Projectile_Sign;
-            info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
-            info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
-            info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
-            info.MobileUnk_0x19_6_3 = objInt.MobileUnk_0x19_6_3;
-        }
+        //////////    //info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
+        //////////    info.MobileUnk_0xA = objInt.MobileUnk_0xA;
+        //////////    info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
+        //////////    info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
+        //////////    info.MobileUnk_0xD_12_1 = objInt.MobileUnk_0xD_12_1;
+        //////////    info.MobileUnk_0xF_0_3F = objInt.MobileUnk_0xF_0_3F;
+        //////////    info.MobileUnk_0xF_C_F = objInt.MobileUnk_0xF_C_F;
+        //////////    info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
+        //////////    info.ProjectileSourceID = objInt.ProjectileSourceID;
+        //////////    info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
+        //////////    //info.Projectile_Sign = objInt.Projectile_Sign;
+        //////////    info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
+        //////////    info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
+        //////////    info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
+        //////////    info.MobileUnk_0x19_6_3 = objInt.MobileUnk_0x19_6_3;
+        //////////}
 
 
-        //Match the two instances
-        info.instance = objInt;
-        objInt.BaseObjectData = info;
+        ////////////Match the two instances
+        //////////info.instance = objInt;
+        //////////objInt.BaseObjectData = info;
     }
 
 
@@ -2410,10 +2387,10 @@ public class ObjectLoader : DataLoader
         int index = 0;
         if (startIndex >= 0)
         {
-            bool SlotAvailable = false;
-            if (startIndex >=256)//Static
+            bool SlotAvailable;
+            if (startIndex >= 256)//Static
             {
-                SlotAvailable=CurrentObjectList().GetFreeStaticObject(out index);
+                SlotAvailable = CurrentObjectList().GetFreeStaticObject(out index);
                 index = CurrentObjectList().GetStaticAtSlot(index);
             }
             else
@@ -2421,7 +2398,7 @@ public class ObjectLoader : DataLoader
                 SlotAvailable = CurrentObjectList().GetFreeMobileObject(out index);
                 index = CurrentObjectList().GetMobileAtSlot(index);
             }
-            Debug.Log("Allocating Slot " + index + " for newObject()");
+           // Debug.Log("Allocating Slot " + index + " for newObject()");
             if (SlotAvailable)
             {
                 CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();
@@ -2448,25 +2425,27 @@ public class ObjectLoader : DataLoader
         else
         {
             Debug.Log("New Object created. Shuld not happen!");
-            ObjectLoaderInfo objI = new ObjectLoaderInfo(index,GameWorldController.CurrentTileMap(),true);
-            //objI.guid = System.Guid.NewGuid();
-            objI.quality = (short)quality;
-            objI.flags = 0;
-            objI.owner = (short)owner;
-            objI.item_id = item_id;
-            objI.next = 0;
-            objI.link = link;
-            objI.zpos = 0;
-            objI.xpos = 0;
-            objI.ypos = 0;
-            objI.invis = 0;
-            objI.doordir = 0;
-            objI.is_quant = 0;
-            objI.enchantment = 0;
-            objI.ObjectTileX = TileMap.ObjectStorageTile;
-            objI.ObjectTileY = TileMap.ObjectStorageTile;
-            objI.InUseFlag = 1;
-            objI.index = index;
+            ObjectLoaderInfo objI = new ObjectLoaderInfo(index, UWEBase.CurrentTileMap(), true)
+            {
+                //objI.guid = System.Guid.NewGuid();
+                quality = (short)quality,
+                flags = 0,
+                owner = (short)owner,
+                item_id = item_id,
+                next = 0,
+                link = link,
+                zpos = 0,
+                xpos = 0,
+                ypos = 0,
+                invis = 0,
+                doordir = 0,
+                is_quant = 0,
+                enchantment = 0,
+                ObjectTileX = TileMap.ObjectStorageTile,
+                ObjectTileY = TileMap.ObjectStorageTile,
+                InUseFlag = 1,
+                index = index
+            };
             return objI;
 
         }
@@ -2536,7 +2515,7 @@ public class ObjectLoader : DataLoader
 
 
 
-    bool lookUpSubClass(char[] archive_ark, TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef, ObjectLoaderInfo[] objList, short[] texture_map, int objIndex, short levelNo)
+    bool lookUpSubClass(byte[] archive_ark, TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef, ObjectLoaderInfo[] objList, short[] texture_map, int objIndex, short levelNo)
     {
         //
 
@@ -2552,8 +2531,7 @@ public class ObjectLoader : DataLoader
         //sub_ark=new unsigned char[chunkUnpackedLength];
         //fprintf(LOGFILE,"\nLoading Chunk at %d\n",blockAddress);
         //LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
-        Chunk sub_ark;
-        if (!LoadChunk(archive_ark, BlockNo, out sub_ark))
+        if (!LoadChunk(archive_ark, BlockNo, out Chunk sub_ark))
         {
             return false;
         }
@@ -2641,8 +2619,7 @@ public class ObjectLoader : DataLoader
                                             if ((objList[objIndex].shockProperties[SCREEN_START] >= 248) && (objList[objIndex].shockProperties[SCREEN_START] <= 255))
                                             {//Survellance
                                              //unsigned char *sur_ark;
-                                                Chunk sur_ark;
-                                                if (LoadChunk(archive_ark, levelNo * 100 + SURVELLANCE_OFFSET, out sur_ark))
+                                                if (LoadChunk(archive_ark, levelNo * 100 + SURVELLANCE_OFFSET, out Chunk sur_ark))
                                                 {
 
                                                     //fprintf(LOGFILE, "\n\tSurvellance Chunk at %d\n", blockAddress);
@@ -2864,19 +2841,19 @@ public class ObjectLoader : DataLoader
         {
             case ObjectInteraction.ACTION_DO_NOTHING:
                 {//Default action.
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr,28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }	*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr,28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }	*/
                     break;
                 }
             case ObjectInteraction.ACTION_TRANSPORT_LEVEL:
@@ -2904,19 +2881,19 @@ public class ObjectLoader : DataLoader
                 }
             case ObjectInteraction.ACTION_RESURRECTION:
                 {//Brings the player back to life?
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr,30);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr,30);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }*/
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 16, 16);  //Target Health
                     break;
                 }
@@ -2927,26 +2904,26 @@ public class ObjectLoader : DataLoader
                  //	0010	int16	Tile destination X
                  //	0014	int16	Tile destination Y
                  //	0018	int16	Destination height?		
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
-                         //fprintf(LOGFILE,"\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-                         //fprintf(LOGFILE,"\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
-                         //fprintf(LOGFILE,"\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-                         //fprintf(LOGFILE,"\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-                         //fprintf(LOGFILE,"\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
+                            //fprintf(LOGFILE,"\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+                            //fprintf(LOGFILE,"\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+                            //fprintf(LOGFILE,"\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+                            //fprintf(LOGFILE,"\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+                            //fprintf(LOGFILE,"\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 
 
-                 }*/
+                    }*/
                     objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);    //obj to transport
                     objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0E, 16);     //Delete flag
                     objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16); //Target X
@@ -2961,23 +2938,23 @@ public class ObjectLoader : DataLoader
                  //0010	int16	value
                  //0012	int16	?? action 00 set 01 add
                  //0014	int16	Optional message to receive
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
-                         //fprintf(LOGFILE,"\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-                         //fprintf(LOGFILE,"\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
-                         //fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-                         //fprintf(LOGFILE,"\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*					fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-     fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-     fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-     fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-     fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-     fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-     fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-     fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/
-                 //	}
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
+                            //fprintf(LOGFILE,"\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+                            //fprintf(LOGFILE,"\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
+                            //fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+                            //fprintf(LOGFILE,"\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*					fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+        fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+        fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+        fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+        fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+        fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+        fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+        fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/
+                    //	}
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
                     objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
                     objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
@@ -3063,19 +3040,19 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_EFFECT:
                 {//Preforms a special effect. One example is the power breaker sparking on research level.
-                 /*if (PrintDebug==1)
-                 {
-                         fprintf(LOGFILE,"\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }		*/
+                    /*if (PrintDebug==1)
+                    {
+                            fprintf(LOGFILE,"\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }		*/
                     break;
                 }
             case ObjectInteraction.ACTION_MOVING_PLATFORM:
@@ -3148,23 +3125,23 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_EMAIL:
                 {//Sends the player an email. (Differs from a message in that a message just plays once and does not hit the data reader)
-                 /*if (PrintDebug==1)
-                 {
-                         fprintf(LOGFILE,"\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
-                         //	0F Player receives email
-                         //000C	int16	Chunk no. of email (offset from 2441 0x0989)
-                         //Note the subject line of an email may be used to chain a sequence of emails together (see sspecs)
-                         fprintf(LOGFILE,"\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
-                 //}			
+                    /*if (PrintDebug==1)
+                    {
+                            fprintf(LOGFILE,"\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
+                            //	0F Player receives email
+                            //000C	int16	Chunk no. of email (offset from 2441 0x0989)
+                            //Note the subject line of an email may be used to chain a sequence of emails together (see sspecs)
+                            fprintf(LOGFILE,"\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+   fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+   fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+   fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+   fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+   fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+   fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+   fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
+                    //}			
                     objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16) + 2441;
 
                     break;
@@ -3172,40 +3149,40 @@ fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16)
                 }
             case ObjectInteraction.ACTION_RADAWAY:
                 {//Radiation healing on the reactor?
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
-                         //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         /*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
- fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
- fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
- fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
- fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
- fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
- fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
- fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
-                 //}
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
+                            //DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            /*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+    fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+    fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+    fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+    fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+    fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+    fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+    fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/
+                    //}
                     break;
                 }
             case ObjectInteraction.ACTION_CHANGE_STATE:
                 {//Used a lot in switches. Needs more research. (changes the image?)
-                 /*if (PrintDebug==1)
-                 {
-                         //fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
-                         objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
-                         objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
-                         fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
-                         fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
-                         DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-                         //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-                         //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-                         //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-                         //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-                         //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-                         //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-                         //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
-                 }*/
+                    /*if (PrintDebug==1)
+                    {
+                            //fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
+                            objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+                            objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
+                            fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+                            fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+                            DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+                            //fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+                            //fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+                            //fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+                            //fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+                            //fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+                            //fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+                            //fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+                    }*/
                     break;
                 }
             case ObjectInteraction.ACTION_AWAKEN:
@@ -3767,7 +3744,7 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
             if (
-                    (objList[i].InUseFlag !=0)
+                    (objList[i].InUseFlag != 0)
                     &&
                     (objList[i].ObjectTileX == tileX)
                     &&

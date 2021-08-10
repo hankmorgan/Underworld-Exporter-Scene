@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class RemoteCameraRender : MonoBehaviour {
+public class RemoteCameraRender : MonoBehaviour
+{
 
 }

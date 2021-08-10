@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Controller for playing npc audio effects.
 /// </summary>
-public class NPC_Audio : UWClass {
+public class NPC_Audio : UWClass
+{
 
     public AudioSource audMovement; //AudioSource for walking & running based actions.
     public AudioSource audCombat; //Audiosource for combat actions performed by the npc
@@ -17,12 +16,12 @@ public class NPC_Audio : UWClass {
     public short SoundWalk = -1;
     public short SoundIdle = -1;
     public short SoundAngered = -1;
-    public short SoundDeath 
+    public short SoundDeath
+    {
+        get
         {
-            get
+            switch ((NPC.NPCCategory)GameWorldController.instance.objDat.critterStats[npc.item_id - 64].Category)
             {
-                switch ((NPC.NPCCategory)GameWorldController.instance.objDat.critterStats[npc.item_id - 64].Category)
-                {
 
                 //Set the death sound effect to use
                 //Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
@@ -37,42 +36,42 @@ public class NPC_Audio : UWClass {
                 //case 0x0:
                 //case 0x02:
                 case NPC.NPCCategory.ethereal:
-                    case NPC.NPCCategory.flying:
-                       return MusicController.SOUND_EFFECT_NPC_DEATH_3; 
-                    //case 0x03:
-                    case NPC.NPCCategory.swimming:
-                        return MusicController.SOUND_EFFECT_SPLASH_1; 
-                    //case 0x04:
-                    //case 0x05:
-                    case NPC.NPCCategory.crawling:
-                    case NPC.NPCCategory.creeping:
-                        return  MusicController.SOUND_EFFECT_NPC_DEATH_2; 
-                    //case 0x11:
-                    case NPC.NPCCategory.golem:
-                        return  MusicController.SOUND_EFFECT_RUMBLE; 
-                    //case 0x01:
-                    case NPC.NPCCategory.human:
-                    case NPC.NPCCategory.humanoid:
-                    default:
-                        return MusicController.SOUND_EFFECT_NPC_DEATH_1; 
-                }
+                case NPC.NPCCategory.flying:
+                    return MusicController.SOUND_EFFECT_NPC_DEATH_3;
+                //case 0x03:
+                case NPC.NPCCategory.swimming:
+                    return MusicController.SOUND_EFFECT_SPLASH_1;
+                //case 0x04:
+                //case 0x05:
+                case NPC.NPCCategory.crawling:
+                case NPC.NPCCategory.creeping:
+                    return MusicController.SOUND_EFFECT_NPC_DEATH_2;
+                //case 0x11:
+                case NPC.NPCCategory.golem:
+                    return MusicController.SOUND_EFFECT_RUMBLE;
+                //case 0x01:
+                case NPC.NPCCategory.human:
+                case NPC.NPCCategory.humanoid:
+                default:
+                    return MusicController.SOUND_EFFECT_NPC_DEATH_1;
             }
         }
+    }
     public short SoundSpellCast = -1;
     public short SoundNPCMissed //= -1; //Sound when NPC is swung at by the play and the hit does not land
+    {
+        get
         {
-            get
+            switch (Random.Range(0, 2))
             {
-                switch (Random.Range(0,2))
-                {
-                    case 0:
-                        return MusicController.SOUND_EFFECT_MELEE_MISS_1;
-                    case 1:
-                    default:
-                        return MusicController.SOUND_EFFECT_MELEE_MISS_2;
-                }            
+                case 0:
+                    return MusicController.SOUND_EFFECT_MELEE_MISS_1;
+                case 1:
+                default:
+                    return MusicController.SOUND_EFFECT_MELEE_MISS_2;
             }
         }
+    }
 
     //public AudioSource aud;
 
@@ -100,7 +99,7 @@ public class NPC_Audio : UWClass {
             {
                 source.PlayOneShot(MusicController.instance.SoundEffects[clip]);
             }
-        }      
+        }
     }
 
     /// <summary>
@@ -140,7 +139,7 @@ public class NPC_Audio : UWClass {
 
     public virtual void PlayIdleSound()
     {
-        playTestSound(this.npc.audVoice, Random.Range(0,6));// MusicController.SOUND_EFFECT_GUARDIAN_LAUGH_1);
+        playTestSound(this.npc.audVoice, Random.Range(0, 6));// MusicController.SOUND_EFFECT_GUARDIAN_LAUGH_1);
     }
 
     public virtual void PlayAngeredSound()

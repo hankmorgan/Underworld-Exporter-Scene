@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MapInteraction : GuiBase
 {
@@ -54,7 +53,7 @@ public class MapInteraction : GuiBase
                 switch (Buttons[i].world)
                 {
                     case GameWorldController.Worlds.Britannia:
-                        Buttons[i].ButtonOff = GRLoader.CreateBlankImage(29, 29);
+                        Buttons[i].ButtonOff = ArtLoader.CreateBlankImage(29, 29);
                         Buttons[i].ButtonOn = gempt.LoadImageAt(16);
                         break;
                     case GameWorldController.Worlds.PrisonTower:
@@ -159,9 +158,9 @@ public class MapInteraction : GuiBase
                 }
             }
         }
-        MapInteraction.MapNo = LevelNo;
+        MapNo = LevelNo;
         UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
-        UWHUD.instance.MapDisplay.texture = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].TileMapImage();
+        UWHUD.instance.MapDisplay.texture = GameWorldController.instance.AutoMaps[MapNo].TileMapImage();
 
         ///Display the map notes
         ///Delete the map notes in memory
@@ -169,21 +168,21 @@ public class MapInteraction : GuiBase
         {
             if (child.name.Substring(0, 4) == "_Map")
             {
-                GameObject.Destroy(child.transform.gameObject);
+                Destroy(child.transform.gameObject);
             }
         }
-        if (GameWorldController.instance.AutoMaps[MapInteraction.MapNo] != null)
+        if (GameWorldController.instance.AutoMaps[MapNo] != null)
         {
-            if (GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes != null)
+            if (GameWorldController.instance.AutoMaps[MapNo].MapNotes != null)
             {
-                for (int i = 0; i < GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count; i++)
+                for (int i = 0; i < GameWorldController.instance.AutoMaps[MapNo].MapNotes.Count; i++)
                 {///Instantiates the map note template UI control.
-                    GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+                    GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
                     myObj.name = "_Map-Note Number " + i;
                     myObj.transform.parent = UWHUD.instance.MapPanel.transform;
-                    myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NoteText;
-                    myObj.GetComponent<RectTransform>().anchoredPosition = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NotePosition();
-                    myObj.GetComponent<MapNoteId>().guid = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].guid;
+                    myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapNo].MapNotes[i].NoteText;
+                    myObj.GetComponent<RectTransform>().anchoredPosition = GameWorldController.instance.AutoMaps[MapNo].MapNotes[i].NotePosition();
+                    myObj.GetComponent<MapNoteId>().guid = GameWorldController.instance.AutoMaps[MapNo].MapNotes[i].guid;
                     //Move the control so that it sits in front of the map,
                     myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
                 }
@@ -218,7 +217,7 @@ public class MapInteraction : GuiBase
                 PointerEventData pntr = (PointerEventData)evnt;
                 CursorPos = UWHUD.instance.window.CursorPosition.center;//pntr.pressPosition;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, pntr.pressPosition, pntr.pressEventCamera, out pos);
-                pos = pos + new Vector2(150.0f, -4.0f);
+                pos += new Vector2(150.0f, -4.0f);
                 GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
                 mapNoteCurrent = myObj.GetComponent<Text>();
                 mapNoteCurrent.transform.parent = this.transform;

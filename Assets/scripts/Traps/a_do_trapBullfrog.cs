@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_do_trapBullfrog : a_hack_trap
 {
@@ -32,14 +31,14 @@ public class a_do_trapBullfrog : a_hack_trap
                 break;
             case 2:
 
-                targetX = targetX + 1;
+                targetX++;
                 if (targetX >= 8)
                 {
                     targetX = 0;
                 }
                 break;
             case 3:
-                targetY = targetY + 1;
+                targetY++;
 
                 if (targetY >= 8)
                 {

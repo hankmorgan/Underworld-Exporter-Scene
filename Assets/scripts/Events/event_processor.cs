@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 public class event_processor : UWClass
 {
@@ -19,32 +18,30 @@ public class event_processor : UWClass
     /// </summary>
     public event_processor()
     {
-        char[] scd_ark;
-        char[] scd_ark_file_data;
+        byte[] scd_ark;
         var toLoad = Path.Combine(Loader.BasePath, GameWorldController.instance.SCD_Ark_File_Selected);
-        if (!DataLoader.ReadStreamFile(toLoad, out scd_ark_file_data))
+        if (!Loader.ReadStreamFile(toLoad, out byte[] scd_ark_file_data))
         {
             Debug.Log(toLoad + " was not loaded");
             return;
         }
 
-        int NoOfBlocks = (int)DataLoader.getValAtAddress(scd_ark_file_data, 0, 32);
+        int NoOfBlocks = (int)Loader.getValAtAddress(scd_ark_file_data, 0, 32);
 
         events_blocks = new event_block[NoOfBlocks];
         for (int BlockNo = 0; BlockNo <= events_blocks.GetUpperBound(0); BlockNo++)
         {
             long address_pointer = 6;
-            int datalen = (int)DataLoader.getValAtAddress(scd_ark_file_data, address_pointer + (NoOfBlocks * 4 * 2) + (BlockNo * 4), 32);
+            int datalen = (int)Loader.getValAtAddress(scd_ark_file_data, address_pointer + (NoOfBlocks * 4 * 2) + (BlockNo * 4), 32);
 
             address_pointer = (BlockNo * 4) + 6;
-            if ((int)DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32) == 0)
+            if ((int)Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32) == 0)
             {
                 Debug.Log("No Scd.ark data for this level");
             }
-            long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
+            long BlockStart = Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
             int j = 0;
-            address_pointer = 0;//Since I am at the start of a fresh array.
-            scd_ark = new char[datalen];
+            scd_ark = new byte[datalen];
             for (long i = BlockStart; i < BlockStart + datalen; i++)
             {
                 scd_ark[j] = scd_ark_file_data[i];
@@ -53,15 +50,17 @@ public class event_processor : UWClass
 
             int add_ptr = 0;
 
-            int noOfRows = (int)DataLoader.getValAtAddress(scd_ark, 0, 8);
+            int noOfRows = (int)Loader.getValAtAddress(scd_ark, 0, 8);
             if (noOfRows != 0)
             {
                 //output = output + "Unknown info 1-325\n";
-                events_blocks[BlockNo] = new event_block();
-                events_blocks[BlockNo].eventheader = new int[325];
+                events_blocks[BlockNo] = new event_block
+                {
+                    eventheader = new int[325]
+                };
                 for (int i = 1; i < 324; i++)
                 {
-                    events_blocks[BlockNo].eventheader[i - 1] = (int)DataLoader.getValAtAddress(scd_ark, add_ptr++, 8);
+                    events_blocks[BlockNo].eventheader[i - 1] = (int)Loader.getValAtAddress(scd_ark, add_ptr++, 8);
                 }
 
                 add_ptr = 326;
@@ -70,7 +69,7 @@ public class event_processor : UWClass
                 for (int i = 0; i < events_blocks[BlockNo].events.GetUpperBound(0); i++)
                 {
                     //Match event type to proper classes
-                    switch ((int)DataLoader.getValAtAddress(scd_ark, add_ptr + 2, 8))
+                    switch ((int)Loader.getValAtAddress(scd_ark, add_ptr + 2, 8))
                     {
                         case event_base.RowTypeCondition:
                             events_blocks[BlockNo].events[r] = new event_conditional();
@@ -131,7 +130,7 @@ public class event_processor : UWClass
         string output = "";
         for (int BlockNo = 0; BlockNo <= events_blocks.GetUpperBound(0); BlockNo++)
         {
-            if (events_blocks[BlockNo].events!=null)
+            if (events_blocks[BlockNo].events != null)
             {
                 for (int RowNo = 0; RowNo <= events_blocks[BlockNo].events.GetUpperBound(0); RowNo++)
                 {
@@ -148,10 +147,10 @@ public class event_processor : UWClass
     }
 
 
-        /// <summary>
-        /// Processes the events for the current level
-        /// </summary>
-        public void ProcessEvents()
+    /// <summary>
+    /// Processes the events for the current level
+    /// </summary>
+    public void ProcessEvents()
     {
         for (int b = 0; b <= events_blocks.GetUpperBound(0); b++)
         {

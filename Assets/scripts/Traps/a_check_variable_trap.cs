@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class a_check_variable_trap :a_variable_trap {
+public class a_check_variable_trap : a_variable_trap
+{
     /*
 	 * Per uw-formats.txt
   018e  a_check variable trap
@@ -49,12 +49,12 @@ the left, right, center button combination on Level3.
     //    Debug.Log(this.name + " will check " + zpos);
     //}
 
-    public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
-	{
+    public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
+    {
 
         bool result = false;
 
-        switch(_RES)
+        switch (_RES)
         {
             case GAME_UW2:
                 {
@@ -64,7 +64,7 @@ the left, right, center button combination on Level3.
                             {
                                 if (zpos - 16 >= 0)
                                 {
-                                    result= Check_Variables(Quest.instance.x_clocks, zpos - 16, heading, this, "xclocks");
+                                    result = Check_Variables(Quest.instance.x_clocks, zpos - 16, heading, this, "xclocks");
                                 }
                                 else
                                 {
@@ -79,7 +79,7 @@ the left, right, center button combination on Level3.
                             result = Check_Variables(Quest.instance.BitVariables, zpos, heading, this, "bitvars");
                             break;
                         case 6://A quest flag list
-                              result = Check_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
+                            result = Check_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
                             break;
                         default:
                             Debug.Log("unknown usage of check trap " + xpos + " " + this.name);
@@ -93,18 +93,18 @@ the left, right, center button combination on Level3.
                     break;
                 }
         }
-		//Debug.Log (this.name);
-		if (result)
-		{
-			TriggerNext(triggerX,triggerY,State);
-			PostActivate(src);
-		}
-		else
-		{
-			if (_RES==GAME_UW2)	
-			{//If linked to a null trap in UW2 the next of the null trap will act as a "false" action.
-				ObjectInteraction nullObj= ObjectLoader.getObjectIntAt(link);
-                if (nullObj!=null)
+        //Debug.Log (this.name);
+        if (result)
+        {
+            TriggerNext(triggerX, triggerY, State);
+            PostActivate(src);
+        }
+        else
+        {
+            if (_RES == GAME_UW2)
+            {//If linked to a null trap in UW2 the next of the null trap will act as a "false" action.
+                ObjectInteraction nullObj = ObjectLoader.getObjectIntAt(link);
+                if (nullObj != null)
                 {
                     if (nullObj.GetItemType() == ObjectInteraction.A_NULL_TRAP)
                     {
@@ -119,30 +119,31 @@ the left, right, center button combination on Level3.
                         }
                     }
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 
-		/// <summary>
-		/// The Comparison value the trap checks against
-		/// </summary>
-		/// <returns>The value.</returns>
-	int ComparisonValue ()
-	{
-		int cmp = 0;
-		for (int i = zpos; i <= zpos + heading; i++) {
-			if (xpos != 0)
+    /// <summary>
+    /// The Comparison value the trap checks against
+    /// </summary>
+    /// <returns>The value.</returns>
+    int ComparisonValue()
+    {
+        int cmp = 0;
+        for (int i = zpos; i <= zpos + heading; i++)
+        {
+            if (xpos != 0)
             {
                 cmp += Quest.instance.variables[i];
-            }				
-			else
+            }
+            else
             {
-				cmp <<= 3;
-				cmp |= (Quest.instance.variables [i] & 0x7);
-			}
-		}
-		return cmp;
-	}
+                cmp <<= 3;
+                cmp |= (Quest.instance.variables[i] & 0x7);
+            }
+        }
+        return cmp;
+    }
 
     /// <summary>
     /// Resumption of the execution chain is handled by the execution of the trap.
@@ -152,30 +153,30 @@ the left, right, center button combination on Level3.
     /// <param name="triggerY"></param>
     /// <param name="State"></param>
     /// <returns></returns>
-	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
-	{
-		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chain for this trap is handled by the execute action.
-		return true;
-	}
+	public override bool Activate(object_base src, int triggerX, int triggerY, int State)
+    {
+        ExecuteTrap(this, triggerX, triggerY, State);//The next in the chain for this trap is handled by the execute action.
+        return true;
+    }
 
 
     static bool Check_Variables(int[] vars, int index, int operation, a_check_variable_trap trap, string debugname)
     {//Based on what uw-formats says. Seems to work okay.
-		if (operation!=0)
-			{
-			    int cmp = trap.ComparisonValue ();
-			    if (cmp == trap.VariableValue())
-			    {
-				    Debug.Log (debugname + " cmp = " + cmp + " value=" + trap.VariableValue());	
-			    }				
-			    return cmp == trap.VariableValue();				
-			}
-		else
-			{//Is this right?
-                Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " to variable " + index + " which is currently =" + vars[index]);
-                return trap.VariableValue() == vars[index];
-			}
-		}
+        if (operation != 0)
+        {
+            int cmp = trap.ComparisonValue();
+            if (cmp == trap.VariableValue())
+            {
+                Debug.Log(debugname + " cmp = " + cmp + " value=" + trap.VariableValue());
+            }
+            return cmp == trap.VariableValue();
+        }
+        else
+        {//Is this right?
+            Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " to variable " + index + " which is currently =" + vars[index]);
+            return trap.VariableValue() == vars[index];
+        }
+    }
 
     public override bool WillFireRepeatedly()
     {

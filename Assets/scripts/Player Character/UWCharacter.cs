@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using System.IO;
 
 /*
 The basic character. Stats and interaction.
@@ -41,6 +38,7 @@ public class UWCharacter : Character
     public bool onLava;
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
+
     /// <summary>
     ///  Conversion of player transform into UW heading value for the save file.
     /// </summary>
@@ -66,7 +64,7 @@ public class UWCharacter : Character
         set
         {
             if (!_isSwimming)
-            {     
+            {
                 //Player is not already swimming          
                 if (value == true)
                 {
@@ -115,7 +113,7 @@ public class UWCharacter : Character
     };
 
     [SerializeField]
-    LuckState _IsLucky= LuckState.Neutral;
+    LuckState _IsLucky = LuckState.Neutral;
     public LuckState isLucky
     {
         get
@@ -125,15 +123,15 @@ public class UWCharacter : Character
         set
         {
             {
-                switch(_IsLucky)
+                switch (_IsLucky)
                 {
                     case LuckState.Cursed:
                         {
                             switch (value)
                             {
-                                case LuckState.Cursed:break;
+                                case LuckState.Cursed: break;
                                 case LuckState.Neutral:
-                                case LuckState.Lucky: _IsLucky = LuckState.Neutral;  break;                              
+                                case LuckState.Lucky: _IsLucky = LuckState.Neutral; break;
                             }
                             break;
                         }
@@ -164,7 +162,7 @@ public class UWCharacter : Character
     public int Fatigue;   //0-29 range
     public int Intoxication; //0-63 range
 
-    [SerializeField]   
+    [SerializeField]
     private short _play_poison;
     /// <summary>
     /// How badly poisoned is the player. The higher the value the longer poison ticks down for.
@@ -177,16 +175,16 @@ public class UWCharacter : Character
         }
         set
         {
-            if (_play_poison==0 && value !=0)
+            if (_play_poison == 0 && value != 0)
             {//Clears poisoning on the flask.
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(true);
             }
-            else if (_play_poison !=0 && value ==0)
+            else if (_play_poison != 0 && value == 0)
             {//Sets poisoning on the flask
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
             }
             _play_poison = value;
-            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();            
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }
     }
 
@@ -200,7 +198,7 @@ public class UWCharacter : Character
     {
         get
         {
-            return UWCharacter.Instance.CurVIT <= 10;
+            return Instance.CurVIT <= 10;
         }
     }
     /// <summary>
@@ -298,7 +296,7 @@ public class UWCharacter : Character
         YAxis.enabled = false;
         MouseLookEnabled = false;
         Cursor.SetCursor(UWHUD.instance.CursorIconBlank, Vector2.zero, CursorMode.ForceSoftware);
-        InteractionMode = UWCharacter.DefaultInteractionMode;
+        InteractionMode = DefaultInteractionMode;
 
         //Tells other objects about this component;
 
@@ -309,7 +307,7 @@ public class UWCharacter : Character
         UWHUD.instance.InputControl.text = "";
         UWHUD.instance.MessageScroll.Clear();
 
-        switch (UWCharacter.Instance.Body)
+        switch (Instance.Body)
         {
             case 0:
             case 2:
@@ -330,7 +328,7 @@ public class UWCharacter : Character
      //UWCharacter.Instance.playerCam.cullingMask=31;
      //MusicController.instance.Death=true;
         Death = true;
-        UWCharacter.InteractionMode = InteractionModeUse;
+        InteractionMode = InteractionModeUse;
         UWHUD.instance.window.UnSetFullScreen();
 
 
@@ -402,7 +400,7 @@ public class UWCharacter : Character
                     }
                     if (Quest.instance.QuestVariables[112] == 1)
                     {//You have been fighting your allies. You will awake in jail
-                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";                            
+                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                         return;
                     }
                     else
@@ -416,8 +414,8 @@ public class UWCharacter : Character
             case 3:
             case 4:
                 //You're gonna die down here
-                    UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
-                    return;
+                UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
+                return;
             default://resurrect in gem chamber
                 UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                 return;
@@ -467,16 +465,16 @@ public class UWCharacter : Character
     {
         ResurrectCommon();
 
-        if (GameWorldController.instance.LevelNo != UWCharacter.Instance.ResurrectLevel - 1)
+        if (GameWorldController.instance.LevelNo != Instance.ResurrectLevel - 1)
         {
             if (_RES == GAME_UW1)
             {
                 //Special case for the magic drain effect in UW1
-                UWCharacter.ResetTrueMana();
+                ResetTrueMana();
             }
-            GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel - 1));
+            GameWorldController.instance.SwitchLevel((short)(Instance.ResurrectLevel - 1));
         }
-        UWCharacter.Instance.gameObject.transform.position = UWCharacter.Instance.ResurrectPosition;
+        Instance.gameObject.transform.position = Instance.ResurrectPosition;
 
     }
 
@@ -485,17 +483,17 @@ public class UWCharacter : Character
     /// </summary>
     private static void ResurrectCommon()
     {
-        UWCharacter.Instance.Death = false;
+        Instance.Death = false;
         //UWCharacter.Instance.Fleeing = false;
         if (MusicController.instance != null)
         {
             MusicController.instance.Combat = false;
             MusicController.LastAttackCounter = 0.0f;
         }
-        UWCharacter.Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
-        UWCharacter.Instance.isSwimming = false;
-        UWCharacter.Instance.play_poison = 0;
-        UWCharacter.Instance.CurVIT = Random.Range(UWCharacter.Instance.MaxVIT/2, UWCharacter.Instance.MaxVIT);
+        Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
+        Instance.isSwimming = false;
+        Instance.play_poison = 0;
+        Instance.CurVIT = Random.Range(Instance.MaxVIT / 2, Instance.MaxVIT);
     }
 
     public static void ResurrectPlayerUW2()
@@ -508,32 +506,32 @@ public class UWCharacter : Character
         switch (GameWorldController.instance.LevelNo)
         {
             case 0://resurrect in jail
-                float targetX = (float)42 * 1.2f + 0.6f;
-                float targetY = (float)38 * 1.2f + 0.6f;
-                float Height = ((float)(CurrentTileMap().GetFloorHeight(42, 38))) * 0.15f;
-                UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
+                float targetX = 42 * 1.2f + 0.6f;
+                float targetY = 38 * 1.2f + 0.6f;
+                float Height = CurrentTileMap().GetFloorHeight(42, 38) * 0.15f;
+                Instance.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
                 a_hack_trap_castle_npcs.MakeEveryoneFriendly();
                 //Move lord british
                 ObjectInteraction obj = ObjectLoader.getObjectIntAt(NPC.findNpcByWhoAmI(142));
-                if (obj!=null)
+                if (obj != null)
                 {
                     NPC npc = obj.GetComponent<NPC>();
                     if (npc != null)
                     {
-                        if (npc.Agent==null)
+                        if (npc.Agent == null)
                         {
                             npc.transform.position = CurrentTileMap().getTileVector(42, 35);
                         }
                         else
                         {
                             npc.Agent.Warp(CurrentTileMap().getTileVector(42, 35));
-                        }                        
+                        }
                     }
                 }
                 else
                 {
                     Debug.Log("Lord British is missing. This should not happen.");
-                }               
+                }
                 //008~009~004~You awaken in jail. \n
                 //This message is supposed to be called by a scheduled trigger.
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, 4));
@@ -541,7 +539,7 @@ public class UWCharacter : Character
             default://resurrect in the gem chamber
                 //000~001~361~You regain awareness in the cavern containing the pulsating blackrock gem. \n
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 361));
-                GameWorldController.instance.SwitchLevel((short)4, 30, 39);//TODO:confirm exact co-ords
+                GameWorldController.instance.SwitchLevel(4, 30, 39);//TODO:confirm exact co-ords
                 break;
         }
 
@@ -598,13 +596,13 @@ public class UWCharacter : Character
         playerMotor.movement.maxSidewaysSpeed = playerMotor.movement.maxForwardSpeed * 2 / 3;
         playerMotor.movement.maxBackwardsSpeed = playerMotor.movement.maxForwardSpeed / 3;
 
-        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyUp)) || (Input.GetKey(GameWorldController.instance.config.FlyUp))) && (WindowDetectUW.WaitingForInput == false))
+        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyUp)) || (Input.GetKey(GameWorldController.instance.config.FlyUp))) && (WindowDetect.WaitingForInput == false))
         {
             //Fly up
             this.GetComponent<CharacterController>().Move(new Vector3(0, 0.2f * Time.deltaTime * speedMultiplier, 0));
         }
         else
-        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyDown)) || (Input.GetKey(GameWorldController.instance.config.FlyDown))) && (WindowDetectUW.WaitingForInput == false))
+        if (((Input.GetKeyDown(GameWorldController.instance.config.FlyDown)) || (Input.GetKey(GameWorldController.instance.config.FlyDown))) && (WindowDetect.WaitingForInput == false))
         {
             //Fly down
             this.GetComponent<CharacterController>().Move(new Vector3(0, -0.2f * Time.deltaTime * speedMultiplier, 0));
@@ -616,14 +614,14 @@ public class UWCharacter : Character
     /// Management of the character when in water.
     /// </summary>
     void SwimmingEffects()
-    {        
-        if (UWCharacter.InteractionMode==  InteractionModeAttack)
+    {
+        if (InteractionMode == InteractionModeAttack)
         {
-            UWCharacter.InteractionMode = InteractionModeWalk;
+            InteractionMode = InteractionModeWalk;
         }
 
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
-        SwimTimer = SwimTimer + Time.deltaTime;
+        SwimTimer += Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
         if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f)
         {
@@ -686,16 +684,16 @@ public class UWCharacter : Character
         //Check if player is on ground.
         Grounded = IsGrounded();
 
-        TerrainAndCurrentsUpdate();    
+        TerrainAndCurrentsUpdate();
 
         base.Update();
 
         FallDamageUpdate();
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
             BounceUpdate();//For handling the bounce spell
-        }        
+        }
 
         if (EditorMode)
         {
@@ -706,7 +704,7 @@ public class UWCharacter : Character
 
         InventoryUpdate();//Update inventory display
 
-        if ((WindowDetectUW.WaitingForInput == true) && (Instrument.PlayingInstrument == false))//TODO:Make this cleaner!!
+        if ((WindowDetect.WaitingForInput == true) && (Instrument.PlayingInstrument == false))//TODO:Make this cleaner!!
         {//TODO: This should be in window detect
             UWHUD.instance.InputControl.Select();
         }
@@ -781,7 +779,7 @@ public class UWCharacter : Character
         }
 
         //MusicController.instance.
-        WeaponDrawn = (InteractionMode == UWCharacter.InteractionModeAttack);
+        WeaponDrawn = (InteractionMode == InteractionModeAttack);
 
         if (PlayerMagic.ReadiedSpell != "")
         {//Player has a spell thats about to be cast. All other activity is ignored.	
@@ -815,7 +813,7 @@ public class UWCharacter : Character
         else
         {//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
             DetectionRange = MinDetectionRange + ((BaseDetectionRange - MinDetectionRange) * ((30.0f - (GetBaseStealthLevel() + StealthLevel)) / 30.0f));
-        }        
+        }
     }
 
     /// <summary>
@@ -978,7 +976,7 @@ public class UWCharacter : Character
         if (poison_timer <= 0)
         {
             poison_timer = 30f;
-            CurVIT = CurVIT - 3;
+            CurVIT -= 3;
             play_poison--;
         }
     }
@@ -995,7 +993,6 @@ public class UWCharacter : Character
         }
         else
         {//0.9198418f
-            playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
             swimSpeedMultiplier = 1.0f;
             SwimTimer = 0.0f;
         }
@@ -1070,12 +1067,12 @@ public class UWCharacter : Character
     {//Casts a spell on right click.
         if (
                 (Input.GetMouseButtonDown(1))
-                && ((WindowDetectUW.CursorInMainWindow == true) || (MouseLookEnabled == true))
+                && ((WindowDetect.CursorInMainWindow == true) || (MouseLookEnabled == true))
                 && (UWHUD.instance.window.JustClicked == false)
                 && ((PlayerCombat.AttackCharging == false) && (PlayerCombat.AttackExecuting == false))
         )
         {
-            PlayerMagic.castSpell(this.gameObject, PlayerMagic.ReadiedSpell, false);
+            PlayerMagic.CastSpell(this.gameObject, PlayerMagic.ReadiedSpell, false);
             PlayerMagic.SpellCost = 0;
             UWHUD.instance.window.UWWindowWait(1.0f);
         }
@@ -1093,7 +1090,7 @@ public class UWCharacter : Character
 
         Time.timeScale = 1.0f;
         inputctrl.gameObject.SetActive(false);
-        WindowDetectUW.WaitingForInput = false;
+        WindowDetect.WaitingForInput = false;
         inputctrl.text = "";
         inputctrl.text = "";
         UWHUD.instance.MessageScroll.Clear();
@@ -1248,8 +1245,7 @@ public class UWCharacter : Character
                         {
                             if (rend.materials[materialIndex].name.Length >= 7)
                             {
-                                int textureIndex = 0;
-                                if (int.TryParse(rend.materials[materialIndex].name.Substring(4, 3), out textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
+                                if (int.TryParse(rend.materials[materialIndex].name.Substring(4, 3), out int textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
                                 {
                                     //GetMessageLog ().text =
                                     if ((textureIndex == 142) && (_RES != GAME_UW2))
@@ -1359,7 +1355,7 @@ public class UWCharacter : Character
     {
         if (isSwimming == false)
         {
-            float fallspeedAdjusted = fallSpeed - ((float)PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
+            float fallspeedAdjusted = fallSpeed - (PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
             //Do stuff with acrobat here. In the mean time a flat skill check.
             if (fallspeedAdjusted >= 5f)
             {
@@ -1387,9 +1383,9 @@ public class UWCharacter : Character
         {
             FoodLevel = 0;
         }
-        if (FoodLevel < 10 && UWCharacter.AutoEat)
+        if (FoodLevel < 10 && AutoEat)
         {
-           AutoEatFood();//automatically eat some food
+            AutoEatFood();//automatically eat some food
         }
         if (FoodLevel < 3)
         {
@@ -1402,8 +1398,8 @@ public class UWCharacter : Character
     /// </summary>
     void AutoEatFood()
     {
-        ObjectInteraction foodtoeat = UWCharacter.Instance.playerInventory.playerContainer.findItemOfCategory(ObjectInteraction.FOOD);
-        if (foodtoeat !=null)
+        ObjectInteraction foodtoeat = Instance.playerInventory.playerContainer.findItemOfCategory(ObjectInteraction.FOOD);
+        if (foodtoeat != null)
         {
             foodtoeat.Use();
         }
@@ -1411,18 +1407,18 @@ public class UWCharacter : Character
 
     public string GetFedStatus()
     {//Returns the string representing the players hunger.
-     /*
-000~001~104~starving
-000~001~105~famished
-000~001~106~very hungry
-000~001~107~hungry
-000~001~108~peckish
-000~001~109~fed
-000~001~110~well fed
-000~001~111~full
-000~001~112~satiated
-*/
-        int FoodLevelString = 0;//in 0x1e steps
+        /*
+   000~001~104~starving
+   000~001~105~famished
+   000~001~106~very hungry
+   000~001~107~hungry
+   000~001~108~peckish
+   000~001~109~fed
+   000~001~110~well fed
+   000~001~111~full
+   000~001~112~satiated
+   */
+        int FoodLevelString;
         if (FoodLevel < 0x1E)//starving
         {
             FoodLevelString = 0;
@@ -1489,37 +1485,37 @@ public class UWCharacter : Character
 
     public void SetCharLevel(int level)
     {
-        if (UWCharacter.Instance.CharLevel < level)
+        if (Instance.CharLevel < level)
         {
             //000~001~147~You have attained experience level
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_attained_experience_level_));
             TrainingPoints += 3;
-            UWCharacter.Instance.MaxVIT = 30 + ((UWCharacter.Instance.PlayerSkills.STR * CharLevel)/5);
-            int defaultMaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
+            Instance.MaxVIT = 30 + ((Instance.PlayerSkills.STR * CharLevel) / 5);
+            int defaultMaxMana = (Instance.PlayerSkills.INT * Instance.PlayerSkills.ManaSkill) >> 3;
             switch (_RES)
             {//TODO:max these properties?
                 case GAME_UW1:
                     if ((GameWorldController.instance.LevelNo == 6) && (!Quest.instance.isOrbDestroyed))
                     {
-                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
+                        Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
                     }
                     else
                     {
-                        UWCharacter.Instance.PlayerMagic.MaxMana = defaultMaxMana;
-                        UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
-                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
+                        Instance.PlayerMagic.MaxMana = defaultMaxMana;
+                        Instance.PlayerMagic.CurMana = Instance.PlayerMagic.MaxMana;
+                        Instance.PlayerMagic.TrueMaxMana = Instance.PlayerMagic.MaxMana;
                     }
                     break;
                 default:
-                    UWCharacter.Instance.PlayerMagic.MaxMana = defaultMaxMana;
-                    UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
-                    UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
+                    Instance.PlayerMagic.MaxMana = defaultMaxMana;
+                    Instance.PlayerMagic.CurMana = Instance.PlayerMagic.MaxMana;
+                    Instance.PlayerMagic.TrueMaxMana = Instance.PlayerMagic.MaxMana;
                     break;
             }
 
 
         }
-        UWCharacter.Instance.CharLevel = level;
+        Instance.CharLevel = level;
     }
 
     /// <summary>
@@ -1529,7 +1525,7 @@ public class UWCharacter : Character
     public void AddXP(int xp)
     {//TODO:These are UW1 level thresholds        
         switch (_RES)
-        {            
+        {
             case GAME_UW2:
                 {
                     int curskillthreashold = EXP % 150;
@@ -1594,7 +1590,7 @@ public class UWCharacter : Character
                     else if (EXP < 65535)
                     {
                         SetCharLevel(15);
-                        if (newskillthreashold>curskillthreashold)
+                        if (newskillthreashold > curskillthreashold)
                         {//Additional skill point every 150 exp per mitch aigner
                             TrainingPoints++;
                         }
@@ -1607,76 +1603,76 @@ public class UWCharacter : Character
                 }
             default:
                 {
-                EXP += xp;
-                if (EXP <= 600)
-                        {//1
-                            SetCharLevel(1);
-                        }
-                        else if (EXP <= 1200)
-                        {//2
-                            SetCharLevel(2);
-                        }
-                        else if (EXP <= 1800)
-                        {//3
-                            SetCharLevel(3);
-                        }
-                        else if (EXP <= 2400)
-                        {//4
-                            SetCharLevel(4);
-                        }
-                        else if (EXP <= 3000)
-                        {//5
-                            SetCharLevel(5);
-                        }
-                        else if (EXP <= 3600)
-                        {//6
-                            SetCharLevel(6);
-                        }
-                        else if (EXP <= 4200)
-                        {//7
-                            SetCharLevel(7);
-                        }
-                        else if (EXP <= 4800)
-                        {//8
-                            SetCharLevel(8);
-                        }
-                        else if (EXP <= 5400)
-                        {//9
-                            SetCharLevel(9);
-                        }
-                        else if (EXP <= 6000)
-                        {//10
-                            SetCharLevel(10);
-                        }
-                        else if (EXP <= 6600)
-                        {//11
-                            SetCharLevel(11);
-                        }
-                        else if (EXP <= 7200)
-                        {//12
-                            SetCharLevel(12);
-                        }
-                        else if (EXP <= 7800)
-                        {//13
-                            SetCharLevel(13);
-                        }
-                        else if (EXP <= 8400)
-                        {//14
-                            SetCharLevel(14);
-                        }
-                        else if (EXP <= 9000)
-                        {//15
-                            SetCharLevel(15);
-                        }
-                        else if (EXP <= 9600)
-                        {
-                            SetCharLevel(16);
-                        }
-                        else
-                        {
-                            EXP = 9600;//Cap XP in UW1
-                            SetCharLevel(16);
-                        }
+                    EXP += xp;
+                    if (EXP <= 600)
+                    {//1
+                        SetCharLevel(1);
+                    }
+                    else if (EXP <= 1200)
+                    {//2
+                        SetCharLevel(2);
+                    }
+                    else if (EXP <= 1800)
+                    {//3
+                        SetCharLevel(3);
+                    }
+                    else if (EXP <= 2400)
+                    {//4
+                        SetCharLevel(4);
+                    }
+                    else if (EXP <= 3000)
+                    {//5
+                        SetCharLevel(5);
+                    }
+                    else if (EXP <= 3600)
+                    {//6
+                        SetCharLevel(6);
+                    }
+                    else if (EXP <= 4200)
+                    {//7
+                        SetCharLevel(7);
+                    }
+                    else if (EXP <= 4800)
+                    {//8
+                        SetCharLevel(8);
+                    }
+                    else if (EXP <= 5400)
+                    {//9
+                        SetCharLevel(9);
+                    }
+                    else if (EXP <= 6000)
+                    {//10
+                        SetCharLevel(10);
+                    }
+                    else if (EXP <= 6600)
+                    {//11
+                        SetCharLevel(11);
+                    }
+                    else if (EXP <= 7200)
+                    {//12
+                        SetCharLevel(12);
+                    }
+                    else if (EXP <= 7800)
+                    {//13
+                        SetCharLevel(13);
+                    }
+                    else if (EXP <= 8400)
+                    {//14
+                        SetCharLevel(14);
+                    }
+                    else if (EXP <= 9000)
+                    {//15
+                        SetCharLevel(15);
+                    }
+                    else if (EXP <= 9600)
+                    {
+                        SetCharLevel(16);
+                    }
+                    else
+                    {
+                        EXP = 9600;//Cap XP in UW1
+                        SetCharLevel(16);
+                    }
                     break;
                 }
         }
@@ -1715,7 +1711,7 @@ public class UWCharacter : Character
             }
             else
             {
-                if (UWCharacter.Instance.FoodLevel >= 3)
+                if (Instance.FoodLevel >= 3)
                 {
                     if (IsGaramonTime())
                     {//PLay a garamon dream
@@ -1765,14 +1761,14 @@ public class UWCharacter : Character
 
         if (!CheckForMonsters())
         {
-            ObjectInteraction incense = UWCharacter.Instance.playerInventory.findObjInteractionByID(277);
+            ObjectInteraction incense = Instance.playerInventory.findObjInteractionByID(277);
             if (incense != null)
             {
                 IncenseDream(incense);
             }
             else
             {
-                if (UWCharacter.Instance.FoodLevel >= 3)
+                if (Instance.FoodLevel >= 3)
                 {
                     if (IsGaramonTime())
                     {//PLay a garamon dream
@@ -1804,7 +1800,7 @@ public class UWCharacter : Character
         Cutscene_Incense d = UWHUD.instance.gameObject.AddComponent<Cutscene_Incense>();
         UWHUD.instance.CutScenesFull.cs = d;
         UWHUD.instance.CutScenesFull.Begin();
-     }
+    }
 
 
     /// <summary>
@@ -1841,9 +1837,9 @@ public class UWCharacter : Character
     /// </summary>
     void SleepRegen()
     {
-        for (int i = UWCharacter.Instance.Fatigue; i < 29; i = i + 3)//Sleep restores at a rate of 3 points per hour
+        for (int i = Instance.Fatigue; i < 29; i += 3)//Sleep restores at a rate of 3 points per hour
         {
-            if (UWCharacter.Instance.FoodLevel >= 3)
+            if (Instance.FoodLevel >= 3)
             {
                 GameClock.Advance();
                 //Move time forward.
@@ -1853,22 +1849,22 @@ public class UWCharacter : Character
                 //Too hungry to sleep.
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 17));
                 UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel, false);
-                UWCharacter.Instance.Fatigue += i;
+                Instance.Fatigue += i;
                 return;
                 // true;
             }
         }
-        UWCharacter.Instance.Fatigue = 29;
+        Instance.Fatigue = 29;
         //Fully rested
-        if (UWCharacter.Instance.CurVIT < UWCharacter.Instance.MaxVIT)
+        if (Instance.CurVIT < Instance.MaxVIT)
         {
             //Random regen of an amount of health
-            UWCharacter.Instance.CurVIT += Random.Range(1, UWCharacter.Instance.MaxVIT - UWCharacter.Instance.CurVIT + 1);
+            Instance.CurVIT += Random.Range(1, Instance.MaxVIT - Instance.CurVIT + 1);
         }
-        if (UWCharacter.Instance.PlayerMagic.CurMana < UWCharacter.Instance.PlayerMagic.MaxMana)
+        if (Instance.PlayerMagic.CurMana < Instance.PlayerMagic.MaxMana)
         {
             //Random regen of an amount of mana
-            UWCharacter.Instance.PlayerMagic.CurMana += Random.Range(1, UWCharacter.Instance.PlayerMagic.MaxMana - UWCharacter.Instance.PlayerMagic.CurMana + 1);
+            Instance.PlayerMagic.CurMana += Random.Range(1, Instance.PlayerMagic.MaxMana - Instance.PlayerMagic.CurMana + 1);
         }
     }
 
@@ -1886,7 +1882,7 @@ public class UWCharacter : Character
                 if (npc.npc_attitude == NPC.AI_ATTITUDE_HOSTILE)
                 {
                     return true;
-                }               
+                }
             }
         }
         return false;
@@ -2043,12 +2039,12 @@ public class UWCharacter : Character
     /// </summary>
     public static void ResetTrueMana()
     {
-        if (UWCharacter.Instance.PlayerMagic.MaxMana < UWCharacter.Instance.PlayerMagic.TrueMaxMana)
+        if (Instance.PlayerMagic.MaxMana < Instance.PlayerMagic.TrueMaxMana)
         {
-            UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerMagic.TrueMaxMana;
-            if (UWCharacter.Instance.PlayerMagic.CurMana == 0)
+            Instance.PlayerMagic.MaxMana = Instance.PlayerMagic.TrueMaxMana;
+            if (Instance.PlayerMagic.CurMana == 0)
             {
-                UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana / 4;
+                Instance.PlayerMagic.CurMana = Instance.PlayerMagic.MaxMana / 4;
             }
         }
     }
@@ -2123,7 +2119,7 @@ public class UWCharacter : Character
                     {
                         ratio++;
                     }
-                    if (UWCharacter.Instance.Resistance > 0)
+                    if (Instance.Resistance > 0)
                     {
                         ratio++;
                     }
@@ -2169,7 +2165,7 @@ public class UWCharacter : Character
             {
                 if (hit.normal.y < 1f)//Probably a wall
                 {
-                    Vector3 reflected = Vector3.Reflect(UWCharacter.Instance.IceCurrentVelocity, hit.normal);
+                    Vector3 reflected = Vector3.Reflect(Instance.IceCurrentVelocity, hit.normal);
                     IceCurrentVelocity = new Vector3(reflected.x, 0f, reflected.z);
                 }
             }
@@ -2206,8 +2202,7 @@ public class UWCharacter : Character
         onBridge = false;
         Rayposition = transform.position;
 
-        RaycastHit hit;
-        Physics.Raycast(Rayposition, Raydirection, out hit, Raydistance, mask);
+        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, mask);
 
         if (hit.collider != null)
         {
@@ -2230,7 +2225,7 @@ public class UWCharacter : Character
         {
             if (playerMotor.movement.velocity.y < currYVelocity)
             {
-                fallSpeed = Mathf.Max(-UWCharacter.Instance.playerMotor.movement.velocity.y, fallSpeed);
+                fallSpeed = Mathf.Max(-Instance.playerMotor.movement.velocity.y, fallSpeed);
             }
             else
             {
@@ -2278,8 +2273,8 @@ public class UWCharacter : Character
                     {
                         footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_FOOT_2];
                         step = true;
-                    }                   
-                    footsteps.Play();   
+                    }
+                    footsteps.Play();
                 }
             }
         }

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -63,7 +63,7 @@ public class UWHUD : HUD
     public GameObject gameUi;
     public GameObject gameSelectUi;
     public MainMenuHud mainmenu;
-   
+
 
     //Conversation Controls
     [Header("Conversation")]
@@ -101,7 +101,7 @@ public class UWHUD : HUD
     public GameObject ConversationButtonParent;
     public ConversationButton[] ConversationOptions = new ConversationButton[5];
 
-    
+
 
     [Header("Inventory")]
     public RawImage playerBody;
@@ -213,7 +213,6 @@ public class UWHUD : HUD
         EnableDisableControl(EditorButton, Application.isEditor);
     }
 
-
     public void Begin()
     {
         gameUi.SetActive(true);
@@ -238,23 +237,23 @@ public class UWHUD : HUD
         RuneBagPanel.GetComponent<RawImage>().texture = grPanels.LoadImageAt(1);
         StatsDisplayPanel.GetComponent<RawImage>().texture = grPanels.LoadImageAt(2);
 
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1, _RES != GAME_UW2);
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2, _RES == GAME_UW2);
+        instance.EnableDisableControl(instance.main_windowUW1, _RES != GAME_UW2);
+        instance.EnableDisableControl(instance.main_windowUW2, _RES == GAME_UW2);
 
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW1.gameObject, _RES != GAME_UW2);
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2.gameObject, _RES == GAME_UW2);
+        instance.EnableDisableControl(instance.InteractionControlUW1.gameObject, _RES != GAME_UW2);
+        instance.EnableDisableControl(instance.InteractionControlUW2.gameObject, _RES == GAME_UW2);
 
         MapPanel.transform.SetAsLastSibling();
         ConversationPanel.transform.SetAsLastSibling();
 
         GRLoader grButtons = new GRLoader(GRLoader.BUTTONS_GR);
-        if (grButtons!=null)
+        if (grButtons != null)
         {
             InvUp.GetComponent<RawImage>().texture = grButtons.LoadImageAt(27);
             InvDown.GetComponent<RawImage>().texture = grButtons.LoadImageAt(28);
         }
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {//Set line width of message scroll for UW2.
             MessageScroll.LineWidth = 54;
             Conversation_tl.LineWidth = 48;
@@ -264,18 +263,18 @@ public class UWHUD : HUD
         //Set Keycodes for interaction mode controls
 
         //Apply to UI
-        UWHUD.instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
-        UWHUD.instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
-        UWHUD.instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
-        UWHUD.instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
-        UWHUD.instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
-        UWHUD.instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
-        UWHUD.instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
-        UWHUD.instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
-        UWHUD.instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
-        UWHUD.instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
-        UWHUD.instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
-        UWHUD.instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        instance.InteractionControlUW1.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        instance.InteractionControlUW1.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        instance.InteractionControlUW1.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        instance.InteractionControlUW1.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        instance.InteractionControlUW1.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        instance.InteractionControlUW1.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
+        instance.InteractionControlUW2.ControlItems[0].ShortCutKey = GameWorldController.instance.config.InteractionOptions;
+        instance.InteractionControlUW2.ControlItems[1].ShortCutKey = GameWorldController.instance.config.InteractionTalk;
+        instance.InteractionControlUW2.ControlItems[2].ShortCutKey = GameWorldController.instance.config.InteractionPickup;
+        instance.InteractionControlUW2.ControlItems[3].ShortCutKey = GameWorldController.instance.config.InteractionLook;
+        instance.InteractionControlUW2.ControlItems[4].ShortCutKey = GameWorldController.instance.config.InteractionAttack;
+        instance.InteractionControlUW2.ControlItems[5].ShortCutKey = GameWorldController.instance.config.InteractionUse;
 
         switch (_RES)
         {
@@ -381,7 +380,7 @@ public class UWHUD : HUD
 
                 //Player Trade
 
-                SetUIElementPosition(playerTrade[0], 16f, 16f, new Vector2(130.7f- 158.6f, 180.8f - 100.69f));
+                SetUIElementPosition(playerTrade[0], 16f, 16f, new Vector2(130.7f - 158.6f, 180.8f - 100.69f));
                 SetUIElementPosition(playerTrade[1], 16f, 16f, new Vector2(151.2f - 158.6f, 180.8f - 100.69f));
                 SetUIElementPosition(playerTrade[2], 16f, 16f, new Vector2(130.7f - 158.6f, 163.2f - 100.69f));
                 SetUIElementPosition(playerTrade[3], 16f, 16f, new Vector2(151.2f - 158.6f, 163.2f - 100.69f));
@@ -416,7 +415,7 @@ public class UWHUD : HUD
             FreeLookCursor.enabled = true;
             //FreeLookCursor.texture = UWHUD.instance.CursorIcon;
             FreeLookCursor.transform.position = Input.mousePosition;
-        }   
+        }
         else
         {
             FreeLookCursor.enabled = false;
@@ -641,7 +640,6 @@ public class UWHUD : HUD
             if (refreshed == false)
             {
                 UpdatePanelStates();
-                refreshed = true;
             }
             isRotating = false;
             currentPanel = toPanel;
@@ -660,7 +658,7 @@ public class UWHUD : HUD
         {
             RuneSlot.UpdateRuneDisplay();
         }
-        EnableDisableControl(ContextMenu.gameObject, WindowDetectUW.ContextUIEnabled);
+        EnableDisableControl(ContextMenu.gameObject, WindowDetect.ContextUIEnabled);
         EnableDisableControl(StatsDisplayPanel, StatsEnabled);
         EnableDisableControl(InventoryPanel, InventoryEnabled);
         EnableDisableControl(PaperDollFemalePanel, InventoryEnabled && UWCharacter.Instance.isFemale);
@@ -686,11 +684,11 @@ public class UWHUD : HUD
         EnableDisableControl(UW1ConversationPaperBackground, ConversationEnabled && _RES != GAME_UW2);
 
         EnableDisableControl(MapPanel, MapEnabled);
-        EnableDisableControl(DragonLeftPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false))));
-        EnableDisableControl(DragonRightPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false))));
+        EnableDisableControl(DragonLeftPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (instance.window.FullScreen == false))));
+        EnableDisableControl(DragonRightPanel, ((_RES != GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (instance.window.FullScreen == false))));
         EnableDisableControl(CutsceneSmallPanel, CutSceneSmallEnabled);
         EnableDisableControl(CutsceneFullPanel, CutSceneFullEnabled);
-        EnableDisableControl(MonsterEyes.gameObject, ((((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled)) && (!ConversationEnabled)) && (UWHUD.instance.window.FullScreen == false)));
+        EnableDisableControl(MonsterEyes.gameObject, ((((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled)) && (!ConversationEnabled)) && (instance.window.FullScreen == false)));
         EnableDisableControl(HudCompass.gameObject, !ConversationEnabled);
         EnableDisableControl(powergem.gameObject, !ConversationEnabled);
 
@@ -730,7 +728,7 @@ public class UWHUD : HUD
         }
 
         //additional tradeslots for uw2
-        EnableDisableControl(playerTrade[4], ConversationEnabled && _RES==GAME_UW2);
+        EnableDisableControl(playerTrade[4], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(playerTrade[5], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(npcTrade[4], ConversationEnabled && _RES == GAME_UW2);
         EnableDisableControl(npcTrade[5], ConversationEnabled && _RES == GAME_UW2);
@@ -758,10 +756,10 @@ public class UWHUD : HUD
     /// <param name="targetState">If set to <c>true</c> target state.</param>
     public void EnableDisableControl(GuiBase control, bool targetState)
     {
-        if (control!=null)
+        if (control != null)
         {
-            EnableDisableControl(control.gameObject,targetState);
-        }        
+            EnableDisableControl(control.gameObject, targetState);
+        }
     }
 
 }

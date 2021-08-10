@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 public class Container : UWEBase
 {
@@ -33,14 +32,14 @@ public class Container : UWEBase
     /// </summary>
     public Container ContainerParent;
 
-   // public ObjectLoader objList;
+    // public ObjectLoader objList;
 
     void Start()
     {
-        if (objInt()!=null)
+        if (objInt() != null)
         {
             PopulateContainer(this, objInt(), objInt().BaseObjectData.parentList);
-        }        
+        }
     }
 
 
@@ -231,7 +230,7 @@ public class Container : UWEBase
             return;
         }
         //Sort the container
-        Container.SortContainer(this);
+        SortContainer(this);
         UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture = GetContainerEquipDisplay().texture; //currObjInt.GetEquipDisplay().texture;
         if (this.isOpenOnPanel == false)
         {
@@ -387,7 +386,7 @@ public class Container : UWEBase
                 }
                 else if (item.GetComponent<Container>() != null)
                 {
-                    Container.SetPickedUpFlag(item.GetComponent<Container>(), NewValue);
+                    SetPickedUpFlag(item.GetComponent<Container>(), NewValue);
                 }
             }
         }
@@ -400,15 +399,15 @@ public class Container : UWEBase
             ObjectInteraction item = cn.GetItemAt(i);
             //if (ItemName != "")
             //{
-                //GameObject item = cn.GetGameObjectAt(i);//GameObject.Find (cn.GetItemAt(i));
-                if (item != null)
+            //GameObject item = cn.GetGameObjectAt(i);//GameObject.Find (cn.GetItemAt(i));
+            if (item != null)
+            {
+                item.transform.position = Position;
+                if (item.GetComponent<Container>() != null)
                 {
-                    item.transform.position = Position;
-                    if (item.GetComponent<Container>() != null)
-                    {
-                        Container.SetItemsPosition(item.GetComponent<Container>(), Position);
-                    }
+                    SetItemsPosition(item.GetComponent<Container>(), Position);
                 }
+            }
             //}
         }
     }
@@ -420,24 +419,24 @@ public class Container : UWEBase
             ObjectInteraction item = cn.GetItemAt(i);
             //if (ItemName != "")
             //{
-                //GameObject item = cn.GetGameObjectAt(i); //GameObject.Find (cn.GetItemAt(i));
-                if (item != null)
+            //GameObject item = cn.GetGameObjectAt(i); //GameObject.Find (cn.GetItemAt(i));
+            if (item != null)
+            {
+                item.transform.parent = Parent;
+                if (Parent == GameWorldController.instance.DynamicObjectMarker())
                 {
-                    item.transform.parent = Parent;
-                    if (Parent == GameWorldController.instance.DynamicObjectMarker())
-                    {
-                        //GameWorldController.MoveToWorld(item);
-                    }
-                    else
-                    {
-                        //GameWorldController.MoveToInventory(item);
-                    }
-                    if (item.GetComponent<Container>() != null)
-                    {
-                        Container.SetItemsParent(item.GetComponent<Container>(), Parent);
-                    }
+                    //GameWorldController.MoveToWorld(item);
                 }
-           // }
+                else
+                {
+                    //GameWorldController.MoveToInventory(item);
+                }
+                if (item.GetComponent<Container>() != null)
+                {
+                    SetItemsParent(item.GetComponent<Container>(), Parent);
+                }
+            }
+            // }
         }
     }
 
@@ -459,7 +458,7 @@ public class Container : UWEBase
         //Debug.Log ("Sorting container");
         //Flattens the contents of a container so that they occupy the first slots 
         int currFreeSlot = -1;
-       // string ItemName;
+        // string ItemName;
         bool GetNextSlot = true;
         for (short i = 0; i <= cn.MaxCapacity(); i++)
         {
@@ -524,9 +523,8 @@ public class Container : UWEBase
                     return true;
             }
 
-            if (Container.TestContainerRules(this, 11, false) == false)
+            if (TestContainerRules(this, 11, false) == false)
             {
-                Valid = false;
                 return true;
             }
 
@@ -573,16 +571,16 @@ public class Container : UWEBase
             ObjectInteraction objContainerItem = GetItemAt(i);
             //if (GetItemAt(i) != "")
             //{
-                //GameObject ItemAt = GetGameObjectAt(i); //GameObject.Find (GetItemAt(i));
-                if (objContainerItem != null)
-                {
-                    //ObjectInteraction objContainerItem = ItemAt.GetComponent<ObjectInteraction>();
-                    //if (objContainerItem != null)
-                    //{
-                        answer += objContainerItem.GetWeight();
-                    //}
-                }
-           // }
+            //GameObject ItemAt = GetGameObjectAt(i); //GameObject.Find (GetItemAt(i));
+            if (objContainerItem != null)
+            {
+                //ObjectInteraction objContainerItem = ItemAt.GetComponent<ObjectInteraction>();
+                //if (objContainerItem != null)
+                //{
+                answer += objContainerItem.GetWeight();
+                //}
+            }
+            // }
         }
         return answer;
     }
@@ -594,7 +592,7 @@ public class Container : UWEBase
 
     public float GetCapacity()
     {
-        return (float)(items.GetUpperBound(0));
+        return items.GetUpperBound(0);
     }
 
     public float GetFreeCapacity()
@@ -618,21 +616,21 @@ public class Container : UWEBase
         }
         else
         {
-            if(CurrentObjectInHand.CanBePickedUp==false)
+            if (CurrentObjectInHand.CanBePickedUp == false)
             {
                 return false;
             }
         }
         //Test the various rules for this slot
         ObjectInteraction objInt = CurrentObjectInHand;
-        //If in a non player container check that the object in hand can be added to it.
-        bool TypeTest = false;
         //If in a non player container check that the container has the weight capacity to accept it.
         bool WeightTest = false;
         //		Container curContainer = this;
         bool CapacityTest = false;
         if (EditorMode)//Anything is allowed in editor mode.
         { return true; }
+        //If in a non player container check that the object in hand can be added to it.
+        bool TypeTest;
         switch (cn.ObjectsAccepted())
         {//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
             case 0://runes
@@ -811,7 +809,7 @@ public class Container : UWEBase
             }
             while (tmpobj.next != 0)
             {
-                tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next, objList);//objList[tmpobj.next];
+                tmpobj = ObjectLoader.getObjectInfoAt(tmpobj.next, objList);//objList[tmpobj.next];
                 cn.AddItemToContainer(tmpobj.instance); //ObjectLoader.UniqueObjectName(tmpobj));
             }
         }
@@ -884,11 +882,11 @@ public class Container : UWEBase
                 //GameObject obj = GetGameObjectAt(i);
                 //if (obj != null)
                 //{
-                    if (items[i].GetComponent<object_base>() != null)
-                    {
+                if (items[i].GetComponent<object_base>() != null)
+                {
                     items[i].GetComponent<object_base>().DropEvent();
-                    }
-               // }
+                }
+                // }
             }
         }
         return true;
@@ -904,11 +902,11 @@ public class Container : UWEBase
                 //GameObject obj = GetGameObjectAt(i);
                 //if (obj != null)
                 //{
-                    if (items[i].GetComponent<object_base>() != null)
-                    {
+                if (items[i].GetComponent<object_base>() != null)
+                {
                     items[i].GetComponent<object_base>().PickupEvent();
-                    }
-               // }
+                }
+                // }
             }
         }
         return true;

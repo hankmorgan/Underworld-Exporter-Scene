@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -9,7 +8,7 @@ using UnityEngine.AI;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject
 {
-   // public string debugname;
+    // public string debugname;
     public CharacterController CharController;
 
     /// <summary>
@@ -62,7 +61,7 @@ public class NPC : MobileObject
         npc_goal_attack_9 = 9,
         npc_goal_flee = 6,
         npc_goal_follow = 3,
-        npc_goal_petrified =15,
+        npc_goal_petrified = 15,
         npc_goal_unk13 = 13,
         npc_goal_unk14 = 14
     };
@@ -114,31 +113,31 @@ public class NPC : MobileObject
     public const int AI_ANIM_COMBAT_IDLE = 4000;
     public const int AI_ANIM_ATTACK_SECONDARY = 5000;
 
-    private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
-    
-   // [Header("AI Target")]
-   /// <summary>
-   /// An object representing the npc_gtarg
-   /// </summary>
+    private static readonly short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
+
+    // [Header("AI Target")]
+    /// <summary>
+    /// An object representing the npc_gtarg
+    /// </summary>
     public GameObject gtarg
     {
         get
         {
-            if (npc_gtarg<5)
+            if (npc_gtarg < 5)
             {
                 return UWCharacter.Instance.gameObject;
             }
             else
             {
-                if (npc_gtarg<256)
+                if (npc_gtarg < 256)
                 {
-                    if (CurrentObjectList().objInfo[npc_gtarg].instance!=null)
+                    if (CurrentObjectList().objInfo[npc_gtarg].instance != null)
                     {
                         return CurrentObjectList().objInfo[npc_gtarg].instance.gameObject;
-                    }                   
+                    }
                 }
                 return null;
-            }            
+            }
         }
     }
 
@@ -166,7 +165,7 @@ public class NPC : MobileObject
     private short currentHeading;
     //Direction between the player and the NPC for calculating relative angle
     private Vector3 direction;  //vector between the player and the ai.
-                                /// The angle to the character from the player.
+    /// The angle to the character from the player.
 
     [Header("Status")]
     ///flags the NPC as dead so we can kill them off in the next frame
@@ -268,13 +267,13 @@ public class NPC : MobileObject
                             case 102: //a_gazer
                             case 69: //a_acid_slug
                             case 122: //a_wisp
-                                return  true;
+                                return true;
                             default:
                                 return false;
                         }
                     }
             }
-        }        
+        }
     }
 
     /// <summary>
@@ -401,10 +400,10 @@ public class NPC : MobileObject
         audVoice.minDistance = 1;
         audVoice.maxDistance = 4;
 
-        npc_aud = new NPC_Audio(this, audMovement, audCombat,audVoice, objInt().aud);
+        npc_aud = new NPC_Audio(this, audMovement, audCombat, audVoice, objInt().aud);
         StartCoroutine(playfootsteps());
         StartCoroutine(playIdleBarks());
-     
+
     }
 
     void AI_INIT()
@@ -415,10 +414,9 @@ public class NPC : MobileObject
         {
             Vector3 pos = CurrentTileMap().getTileVector(CurTileX, CurTileY);
             //this.transform.position=pos;
-            NavMeshHit hit;
             int mask = (int)AgentMask();
             mask = 1 << mask;
-            NavMesh.SamplePosition(pos, out hit, 0.2f, mask);// NavMesh.AllAreas
+            NavMesh.SamplePosition(pos, out NavMeshHit hit, 0.2f, mask);// NavMesh.AllAreas
             if (hit.hit)
             {//Tests if the npc in question is on the nav mesh
                 AddAgent(mask);
@@ -433,7 +431,7 @@ public class NPC : MobileObject
         int agentId = GameWorldController.instance.NavMeshLand.agentTypeID;
         Agent = this.gameObject.AddComponent<NavMeshAgent>();
         Agent.autoTraverseOffMeshLink = false;
-        Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats[item_id - 64].Speed / 12.0f));
+        Agent.speed = 2f * ((GameWorldController.instance.objDat.critterStats[item_id - 64].Speed / 12.0f));
 
         switch (_RES)
         {
@@ -601,7 +599,7 @@ public class NPC : MobileObject
             objInt().BaseObjectData.InUseFlag = 0;
             objInt().BaseObjectData.npc_hp = 0;
             NPC_DEAD = true;//Tells the update to execute the NPC death animation
-            PerformDeathAnim();       
+            PerformDeathAnim();
             //Dump npc inventory on the floor.
             Container cnt = this.GetComponent<Container>();
             if (cnt != null)
@@ -630,14 +628,14 @@ public class NPC : MobileObject
             }
         }
         Container cnt = this.GetComponent<Container>();
-        if (cnt!=null)
+        if (cnt != null)
         {
             if (cnt.CountItems() == 0)
             {
-                if ((item_id>=64) && (item_id <=127))
+                if ((item_id >= 64) && (item_id <= 127))
                 {
-                //Populate the container with a loot list
-                for (int i = 0; i <= GameWorldController.instance.objDat.critterStats[item_id - 64].Loot.GetUpperBound(0); i++)
+                    //Populate the container with a loot list
+                    for (int i = 0; i <= GameWorldController.instance.objDat.critterStats[item_id - 64].Loot.GetUpperBound(0); i++)
                     {
                         if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                         {
@@ -734,9 +732,9 @@ public class NPC : MobileObject
                             {
                                 Quest.instance.QuestVariables[7] = 1;
                                 ObjectInteraction trigObj = CurrentObjectList().objInfo[961].instance;
-                                if (trigObj !=null)
+                                if (trigObj != null)
                                 {
-                                    if (trigObj.GetComponent<trigger_base>()!=null)
+                                    if (trigObj.GetComponent<trigger_base>() != null)
                                     {
                                         trigObj.GetComponent<trigger_base>().Activate(null);//trigger the enter trigger that causes the earth quake.
                                     }
@@ -744,12 +742,12 @@ public class NPC : MobileObject
                                 break;
                             }
                         case 47://Mors gothri in Kilhorn
-                            if (Quest.instance.QuestVariables[117] ==0)
+                            if (Quest.instance.QuestVariables[117] == 0)
                             {
                                 Quest.instance.QuestVariables[117] = 1;
                                 npc_hp = 50;//restore health.
-                                npc_goal = (short)NPC.npc_goals.npc_goal_stand_still_0;
-                                npc_attitude = NPC.AI_ATTITUDE_UPSET;
+                                npc_goal = (short)npc_goals.npc_goal_stand_still_0;
+                                npc_attitude = AI_ATTITUDE_UPSET;
                                 TalkTo();
                                 return true;
                             }
@@ -831,7 +829,7 @@ public class NPC : MobileObject
         newAnim.FreezeAnimFrame = FreezeNpc;
         if ((WaitTimer > 0) && (!FreezeNpc))
         {
-            WaitTimer = WaitTimer - Time.deltaTime;
+            WaitTimer -= Time.deltaTime;
             if (WaitTimer < 0)
             {
                 WaitTimer = 0;
@@ -887,7 +885,7 @@ public class NPC : MobileObject
             if ((objInt().ObjectTileX <= 63) || (objInt().ObjectTileY <= 63))
             {//Only kill on map npcs
                 OnDeath();
-            }            
+            }
         }
         else
         {
@@ -898,17 +896,17 @@ public class NPC : MobileObject
 
     void UpdateSpecialNPCBehaviours()
     {
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
-            if (npc_whoami==142) //Lord British
-            if (GameWorldController.instance.LevelNo == 0)
-            {
-                if (Quest.instance.QuestVariables[112]==1)//Avatar has been fighting
+            if (npc_whoami == 142) //Lord British
+                if (GameWorldController.instance.LevelNo == 0)
+                {
+                    if (Quest.instance.QuestVariables[112] == 1)//Avatar has been fighting
                     {//Make sure I move to the correct location to talk to the avatar.
                         npc_xhome = 40;
                         npc_yhome = 38;
                     }
-            }
+                }
         }
     }
 
@@ -940,7 +938,7 @@ public class NPC : MobileObject
             Vector3 ABf = this.transform.position - gtarg.transform.position;
             Vector3 Movepos = gtarg.transform.position + (0.9f * ABf.normalized);
             Agent.destination = Movepos;
-            Agent.isStopped = false;            
+            Agent.isStopped = false;
             //Set to idle										
             if (gtarg.name == "_Gronk")
             {
@@ -983,7 +981,7 @@ public class NPC : MobileObject
                 {
                     //I just want to talk to you
                     //ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
-                    AnimRange = NPC.AI_RANGE_IDLE;
+                    AnimRange = AI_RANGE_IDLE;
                     if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false))
                     {
                         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5)
@@ -1044,7 +1042,7 @@ public class NPC : MobileObject
             case npc_goals.npc_goal_want_to_talk:
                 {
                     //I just want to talk to you
-                    AnimRange = NPC.AI_RANGE_IDLE;
+                    AnimRange = AI_RANGE_IDLE;
                     if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false))
                     {
                         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5)
@@ -1065,12 +1063,12 @@ public class NPC : MobileObject
                     DestTileX = npc_xhome; DestTileY = npc_yhome;
                     if ((CurTileX != npc_xhome) || (CurTileY != npc_yhome))
                     {
-                        AnimRange = NPC.AI_RANGE_MOVE;
+                        AnimRange = AI_RANGE_MOVE;
                         AgentGotoDestTileXY(ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
                     }
                     else
                     {
-                        AnimRange = NPC.AI_RANGE_IDLE;
+                        AnimRange = AI_RANGE_IDLE;
                         AgentStand();
                     }
                     break;
@@ -1210,26 +1208,26 @@ public class NPC : MobileObject
     {
         bool AtDestination = ((DestTileX == CurTileX) && (DestTileY == CurTileY));
         TravelTimer += Time.deltaTime;
-        if (TravelTimer >= 20f && AtDestination ==false)
+        if (TravelTimer >= 20f && AtDestination == false)
         {
             AtDestination = true;
         }
         if (!AtDestination)
         {
             //I need to move to this tile.
-            AnimRange = NPC.AI_RANGE_MOVE;
+            AnimRange = AI_RANGE_MOVE;
             AgentGotoDestTileXY(ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
             ArrivedAtDestination = false;
         }
         else
         {       //I am at this tile. Stand idle for a random period of time
-            if (npc_goal==(short)npc_goals.npc_goal_flee)
+            if (npc_goal == (short)npc_goals.npc_goal_flee)
             {
                 SetRandomDestination();
             }
             else
             {
-                AnimRange = NPC.AI_RANGE_IDLE;
+                AnimRange = AI_RANGE_IDLE;
                 if (ArrivedAtDestination == false)
                 {
                     ArrivedAtDestination = true;
@@ -1248,7 +1246,7 @@ public class NPC : MobileObject
                 (AtDestination)//I am at my destination already.
             )
         {
-            if (AnimRange == NPC.AI_RANGE_IDLE)
+            if (AnimRange == AI_RANGE_IDLE)
             {//and I am idling.
                 SetRandomDestination();
                 ArrivedAtDestination = false;
@@ -1276,7 +1274,7 @@ public class NPC : MobileObject
                                 transform.LookAt(gtarg.transform.position);
                                 if (AgentCanAttack(NPC_Launcher.transform.position, gtarg.GetComponent<UWEBase>().GetImpactPoint(), gtarg, AB.magnitude))
                                 {
-                                    AnimRange = NPC.AI_ANIM_ATTACK_SECONDARY;
+                                    AnimRange = AI_ANIM_ATTACK_SECONDARY;
                                     AttackState = AttackStages.AttackAnimateRanged;
                                     WaitTimer = 0.8f;
                                 }
@@ -1347,10 +1345,10 @@ public class NPC : MobileObject
                     {
                         ExecuteMagicAttack();
                     }
-                    else if(RangeAttack)
+                    else if (RangeAttack)
                     {
                         ExecuteRangedAttack();
-                    }                    
+                    }
                     AttackState = AttackStages.AttackExecute;
                     WaitTimer = 0.8f;
                 }
@@ -1363,7 +1361,7 @@ public class NPC : MobileObject
                 }
                 break;
             case AttackStages.AttackWaitCycle:
-                AnimRange = NPC.AI_ANIM_COMBAT_IDLE;
+                AnimRange = AI_ANIM_COMBAT_IDLE;
                 if (WaitTimer <= 0.2f)
                 {
                     AttackState = AttackStages.AttackPosition;
@@ -1376,7 +1374,7 @@ public class NPC : MobileObject
     {
         //Move to position
         AgentMoveToPosition(gtarg.transform.position);
-        AnimRange = NPC.AI_RANGE_MOVE;
+        AnimRange = AI_RANGE_MOVE;
     }
 
     void AgentGotoDestTileXY(ref int DestinationX, ref int DestinationY, ref int tileX, ref int tileY)
@@ -1496,7 +1494,7 @@ public class NPC : MobileObject
         if (!((_RES == GAME_UW1) && (item_id == 124)))
         {//Do not apply damage if attaching the slasher of veils.
             short NewHP = (short)(npc_hp - damage);
-            if (NewHP <0 ){ NewHP = 0; }
+            if (NewHP < 0) { NewHP = 0; }
             npc_hp = NewHP;
             UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP);
         }
@@ -1516,7 +1514,7 @@ public class NPC : MobileObject
         {
             if (source.name == "_Gronk")
             {//PLayer attacked the npc
-                if (npc_goal!=(short)npc_goals.npc_goal_petrified)
+                if (npc_goal != (short)npc_goals.npc_goal_petrified)
                 {
                     npc_attitude = 0;//Make the npc angry with the player.
                                      //Assumes the player has attacked
@@ -1545,7 +1543,7 @@ public class NPC : MobileObject
                             {
                                 Col.gameObject.GetComponent<NPC>().npc_attitude = 0;//Make the npc angry with the player.
                                 Col.gameObject.GetComponent<NPC>().npc_gtarg = 1;
-                               //Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
+                                //Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
                                 //Col.gameObject.GetComponent<NPC>().gtargName = gtarg.name;
                                 Col.gameObject.GetComponent<NPC>().npc_goal = (short)npc_goals.npc_goal_attack_5;
                             }
@@ -1617,7 +1615,7 @@ public class NPC : MobileObject
         }
         if ((npc_whoami >= 1) && (npc_whoami < 255))
         {
-            if ((npc_whoami == 231)&& (_RES==GAME_UW1))//Tybal
+            if ((npc_whoami == 231) && (_RES == GAME_UW1))//Tybal
             {
                 output = "You see Tybal";
             }
@@ -1651,11 +1649,11 @@ public class NPC : MobileObject
         ///powerful undead creature=3
         //Bit A at offset 0xD of the mobile data is how powerful the npc is.
         int PowerAndUndead = objInt().NPC_PowerFlag;
-        if (ObjectInteraction.ScaleDamage(this.item_id, 1, 0x80)==0)
+        if (ObjectInteraction.ScaleDamage(this.item_id, 1, 0x80) == 0)
         {//Presumably check if item is vulnerable to anti-undead damage??
             PowerAndUndead |= 2;
         }
-      
+
         string Output = StringController.instance.GetString(1, 309 + PowerAndUndead);
         Output = Output + "a " + NPCMoodDesc() + " " + StringController.instance.GetObjectNounUW(objInt());
 
@@ -1666,7 +1664,7 @@ public class NPC : MobileObject
         UWHUD.instance.MessageScroll.Add(Output);
 
 
-        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Poison>0)
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Poison > 0)
         {
             Output = StringController.instance.GetString(1, 316);
             UWHUD.instance.MessageScroll.Add(Output);
@@ -1679,25 +1677,25 @@ public class NPC : MobileObject
         //None of these are implemeted yet to actually cast. 
         //Duplicate names are output here.
         //First 3 spells are in the critter data
-        for(int k=0; k<3;k++ )
+        for (int k = 0; k < 3; k++)
         {
-            if ((GameWorldController.instance.objDat.critterStats[item_id - 64].Spells[k]) >  0)
+            if ((GameWorldController.instance.objDat.critterStats[item_id - 64].Spells[k]) > 0)
             {
-              Output =  Output + StringController.instance.GetString(6, 256 + (GameWorldController.instance.objDat.critterStats[item_id - 64].Spells[k] & 0x3F)) + " ";
+                Output = Output + StringController.instance.GetString(6, 256 + (GameWorldController.instance.objDat.critterStats[item_id - 64].Spells[k] & 0x3F)) + " ";
             }
         }
 
         //then for a special case NPC (liche) there are 3 additional spells
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
-            if (item_id==0x69)
+            if (item_id == 0x69)
             {
                 //add fly, open! and flameproof
-                Output = Output + StringController.instance.GetString(6, 0x139);
+                Output += StringController.instance.GetString(6, 0x139);
                 Output = Output + " " + StringController.instance.GetString(6, 0x123);
                 Output = Output + " " + StringController.instance.GetString(6, 0x11c);
             }
-        }   
+        }
 
         if (Output.Length > 0)
         {
@@ -1708,38 +1706,38 @@ public class NPC : MobileObject
 
         //Print resistances
         Output = "";
-        int[] Resistances = {3, 4, 8, 0x10, 0x20, 0x40, 0x4b};
+        int[] Resistances = { 3, 4, 8, 0x10, 0x20, 0x40, 0x4b };
         //Magic, phys, fire, poison, cold, missiles
 
         for (int i = 0; i < 6; i++)
         {
             if (ObjectInteraction.ScaleDamage(item_id, 1, Resistances[i]) == 0)
             {
-                if ((Resistances[i]<=8) && (_RES==GAME_UW2) && (GameWorldController.instance.objDat.critterStats[item_id - 64].Race == 0x17))
+                if ((Resistances[i] <= 8) && (_RES == GAME_UW2) && (GameWorldController.instance.objDat.critterStats[item_id - 64].Race == 0x17))
                 {
                     //do not apply the resistance to the liches. They should only have poison and rune of statis.
                 }
                 else
                 {
                     Output = Output + StringController.instance.GetString(1, 0x146 + i) + " ";
-                }                
+                }
             }
         }
 
-        if(_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {//IN addition all liches have immunity to statis runes. I wonder why :)
-            if(GameWorldController.instance.objDat.critterStats[item_id - 64].Race==0x17)
+            if (GameWorldController.instance.objDat.critterStats[item_id - 64].Race == 0x17)
             {
-                Output = Output + StringController.instance.GetString(6, 0x125);
+                Output += StringController.instance.GetString(6, 0x125);
             }
         }
 
-        if (Output.Length>0)
+        if (Output.Length > 0)
         {
             Output = StringController.instance.GetString(1, 0x13D) + Output;
             UWHUD.instance.MessageScroll.Add(Output);
-        }      
-        
+        }
+
 
     }
 
@@ -2031,7 +2029,7 @@ public class NPC : MobileObject
 
     protected void playAnimation(int index, bool isConstantAnim)
     {
-        newAnim.Play(index, isConstantAnim);        
+        newAnim.Play(index, isConstantAnim);
     }
 
 
@@ -2042,7 +2040,7 @@ public class NPC : MobileObject
     {
         if (ConversationVM.InConversation) { return; }
         if (UWCharacter.Instance.Death)//Don't attack if the player character is dead.
-            { return; }
+        { return; }
         if (gtarg == null)
         {
             return;
@@ -2050,7 +2048,7 @@ public class NPC : MobileObject
         float weaponRange = 1.5f;
         Debug.Log(this.name + " is executing an attack on " + gtarg.name);
 
-        Vector3 TargetingPoint;					
+        Vector3 TargetingPoint;
         TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	                                                                        //}
 
         Ray ray = new Ray(NPC_Launcher.transform.position, TargetingPoint - NPC_Launcher.transform.position);
@@ -2114,11 +2112,11 @@ public class NPC : MobileObject
             return;
         }
         Vector3 TargetingPoint;
-					
+
         TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	
                                                                         //}
         Vector3 TargetingVector = (TargetingPoint - NPC_Launcher.transform.position).normalized;
-        TargetingVector = TargetingVector + new Vector3(0.0f, 0.3f, 0.0f);//Try and give the vector an arc
+        TargetingVector += new Vector3(0.0f, 0.3f, 0.0f);//Try and give the vector an arc
         Ray ray = new Ray(NPC_Launcher.transform.position, TargetingVector);
         RaycastHit hit = new RaycastHit();
         float dropRange = 0.5f;
@@ -2127,7 +2125,7 @@ public class NPC : MobileObject
             float force = 100f * Vector3.Distance(TargetingPoint, NPC_Launcher.transform.position);
             int projectiletype = RangedAttackProjectile();
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(projectiletype, 0, 0, 1, 256);
-            if (newobjt!=null)
+            if (newobjt != null)
             {
                 newobjt.is_quant = 1;
                 newobjt.ProjectileSourceID = ObjectIndex;
@@ -2147,7 +2145,7 @@ public class NPC : MobileObject
                 pd.AttackCharge = 100f;
                 pd.AttackScore = Dexterity;//Assuming there is no special ranged attack score?
                 pd.ArmourDamage = EquipDamage;
-               
+
             }
         }
     }
@@ -2162,7 +2160,7 @@ public class NPC : MobileObject
         {
             case GAME_UW2:
                 {
-                    switch(item_id)
+                    switch (item_id)
                     {//TODO:ID more values
                         case 110://iolo
                             return 21;
@@ -2175,7 +2173,7 @@ public class NPC : MobileObject
             default://UW1 npcs only launch slingstones
                 return 16;
         }
-       
+
     }
 
     public override string ContextMenuDesc(int item_id)
@@ -2226,7 +2224,7 @@ public class NPC : MobileObject
         get
         {
             return GameWorldController.instance.objDat.critterStats[item_id - 64].Dexterity;
-        }        
+        }
     }
 
     public int Strength
@@ -2251,7 +2249,7 @@ public class NPC : MobileObject
         get
         {
             return GameWorldController.instance.objDat.critterStats[item_id - 64].AttackDamage[CurrentAttack];
-        }        
+        }
     }
 
     public int CurrentAttackScore
@@ -2272,7 +2270,7 @@ public class NPC : MobileObject
         get
         {
             return GameWorldController.instance.objDat.critterStats[item_id - 64].EquipDamage;
-        }        
+        }
     }
 
     public int GetRace()
@@ -2304,7 +2302,7 @@ public class NPC : MobileObject
         {
             case GAME_UW2:
                 switch (item_id)
-                {                    
+                {
                     case 88: //a_brain_creature
                         return SpellEffect.UW2_Spell_Effect_MindBlast;
                     case 96: //a_fire_elemental
@@ -2316,7 +2314,7 @@ public class NPC : MobileObject
                     case 117: //a_human
                     default:
                         return SpellEffect.UW2_Spell_Effect_MagicArrow_alt01;//Magic arrow 
-                }  
+                }
             default:
                 switch (item_id)
                 {
@@ -2338,7 +2336,7 @@ public class NPC : MobileObject
         int AttackProb = Random.Range(1, 100);
         //NPC npc = ai.Body.GetComponent<NPC>();
         int AccumulatedProb = 0;
-        int AnimSelected = 0;
+        int AnimSelected;
         for (AnimSelected = 0; AnimSelected <= GameWorldController.instance.objDat.critterStats[NPC_IDi - 64].AttackProbability.GetUpperBound(0); AnimSelected++)
         {
             AccumulatedProb += GameWorldController.instance.objDat.critterStats[NPC_IDi - 64].AttackProbability[AnimSelected];
@@ -2352,12 +2350,12 @@ public class NPC : MobileObject
         switch (AnimSelected)
         {
             case 1:
-                AnimRange = NPC.AI_ANIM_ATTACK_SLASH; break;
+                AnimRange = AI_ANIM_ATTACK_SLASH; break;
             case 2:
-                AnimRange = NPC.AI_ANIM_ATTACK_THRUST; break;
+                AnimRange = AI_ANIM_ATTACK_THRUST; break;
             case 0:
             default:
-                AnimRange = NPC.AI_ANIM_ATTACK_BASH; break;
+                AnimRange = AI_ANIM_ATTACK_BASH; break;
         }
 
 
@@ -2389,7 +2387,7 @@ public class NPC : MobileObject
             {
                 //&& (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID)
                 //if (CurrentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
-                if ( ( Room() == CurrentTileMap().GetRoom(candidateDestTileX, candidateDestTileY) ) && (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID))
+                if ((Room() == CurrentTileMap().GetRoom(candidateDestTileX, candidateDestTileY)) && (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID))
                 //if (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID)
                 {
                     DestTileX = candidateDestTileX;
@@ -2420,7 +2418,7 @@ public class NPC : MobileObject
     /// </summary>
     void PerformDeathAnim()
     {
-        AnimRange = NPC.AI_ANIM_DEATH;
+        AnimRange = AI_ANIM_DEATH;
         MusicController.LastAttackCounter = 0.0f;//Stops combat music unil the next time the player is hit
         MusicController.instance.PlaySpecialClip(MusicController.instance.VictoryTracks); //plays the fanfare
         WaitTimer = 0.8f;
@@ -2430,7 +2428,7 @@ public class NPC : MobileObject
     void DumpRemains()
     {
         //Spawn a bloodstain at this spot.
-        int bloodstain = -1;
+        int bloodstain;
         //Nothing = 0x00, 
         //RotwormCorpse = 0x20, //A??????
         //Rubble = 0x40, 
@@ -2521,7 +2519,7 @@ public class NPC : MobileObject
         }
     }
 
-    public static void SetNPCAttitudeGoal(int index,  NPC.npc_goals NewGoal, short NewAttitude)
+    public static void SetNPCAttitudeGoal(int index, NPC.npc_goals NewGoal, short NewAttitude)
     {
         if (index < 0) { return; }
         ObjectInteraction obj = ObjectLoader.getObjectIntAt(index);
@@ -2751,7 +2749,7 @@ public class NPC : MobileObject
     {//WIP!!
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(2f,20f));
+            yield return new WaitForSeconds(Random.Range(2f, 20f));
             if (Agent != null)
             {
                 if (newAnim.enabled)//AI is awake
@@ -2761,7 +2759,7 @@ public class NPC : MobileObject
                         npc_aud.PlayIdleSound();
                         //audVoice.Play();
                     }
-                }              
+                }
             }
         }
     }

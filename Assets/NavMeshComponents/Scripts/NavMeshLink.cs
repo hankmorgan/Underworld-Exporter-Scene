@@ -18,15 +18,15 @@ namespace UnityEngine.AI
 
         [SerializeField]
         Vector3 m_EndPoint = new Vector3(0.0f, 0.0f, 2.5f);
-        public Vector3 endPoint { get { return m_EndPoint; } set { m_EndPoint = value; UpdateLink(); } }
+        public Vector3 EndPoint { get { return m_EndPoint; } set { m_EndPoint = value; UpdateLink(); } }
 
         [SerializeField]
         float m_Width;
-        public float width { get { return m_Width; } set { m_Width = value; UpdateLink(); } }
+        public float Width { get { return m_Width; } set { m_Width = value; UpdateLink(); } }
 
         [SerializeField]
         int m_CostModifier = -1;
-        public int costModifier { get { return m_CostModifier; } set { m_CostModifier = value; UpdateLink(); } }
+        public int CostModifier { get { return m_CostModifier; } set { m_CostModifier = value; UpdateLink(); } }
 
         [SerializeField]
         bool m_Bidirectional = true;
@@ -111,14 +111,16 @@ namespace UnityEngine.AI
             }
 #endif
 
-            var link = new NavMeshLinkData();
-            link.startPosition = m_StartPoint;
-            link.endPosition = m_EndPoint;
-            link.width = m_Width;
-            link.costModifier = m_CostModifier;
-            link.bidirectional = m_Bidirectional;
-            link.area = m_Area;
-            link.agentTypeID = m_AgentTypeID;
+            var link = new NavMeshLinkData
+            {
+                startPosition = m_StartPoint,
+                endPosition = m_EndPoint,
+                width = m_Width,
+                costModifier = m_CostModifier,
+                bidirectional = m_Bidirectional,
+                area = m_Area,
+                agentTypeID = m_AgentTypeID
+            };
             m_LinkInstance = NavMesh.AddLink(link, transform.position, transform.rotation);
             if (m_LinkInstance.valid)
                 m_LinkInstance.owner = this;

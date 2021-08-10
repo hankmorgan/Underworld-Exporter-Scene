@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Leggings : Armour {
+﻿public class Leggings : Armour
+{
 
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class TileInfo : Loader
 {
@@ -31,10 +30,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr]);
-            val = val & 0xF0;
-            val = val | (value & 0xF);
-            map.lev_ark_block.Data[Ptr] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr];
+            val &= 0xF0;
+            val |= (value & 0xF);
+            map.lev_ark_block.Data[Ptr] = (byte)val;
         }
     }
 
@@ -49,10 +48,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr]);
-            val = val & 0x0F;
-            val = val | (((value / 2) & 0xF) << 4);
-            map.lev_ark_block.Data[Ptr] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr];
+            val &= 0x0F;
+            val |= (((value / 2) & 0xF) << 4);
+            map.lev_ark_block.Data[Ptr] = (byte)val;
         }
     }
 
@@ -73,10 +72,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0xC3;
-            val = val | ((value & 0xF) << 2);
-            map.lev_ark_block.Data[Ptr + 1] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr + 1];
+            val &= 0xC3;
+            val |= ((value & 0xF) << 2);
+            map.lev_ark_block.Data[Ptr + 1] = (byte)val;
         }
     }
 
@@ -91,10 +90,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr + 2]);
-            val = val & 0xC0;
-            val = val | ((value & 0x3F));
-            map.lev_ark_block.Data[Ptr + 2] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr + 2];
+            val &= 0xC0;
+            val |= ((value & 0x3F));
+            map.lev_ark_block.Data[Ptr + 2] = (byte)val;
         }
     }
 
@@ -105,13 +104,13 @@ public class TileInfo : Loader
     {
         get
         {
-             return (short)(getValAtAddress(map.lev_ark_block.Data, Ptr + 2, 16)>>6);
+            return (short)(getValAtAddress(map.lev_ark_block.Data, Ptr + 2, 16) >> 6);
         }
         set
         {
             int val = ((value & 0x3FF) << 6) | (wallTexture & 0x3F);
-            map.lev_ark_block.Data[Ptr + 2] = (char)(val & 0xFF);
-            map.lev_ark_block.Data[Ptr + 3] = (char)((val >> 8) & 0xFF);
+            map.lev_ark_block.Data[Ptr + 2] = (byte)(val & 0xFF);
+            map.lev_ark_block.Data[Ptr + 3] = (byte)((val >> 8) & 0xFF);
         }
     }
 
@@ -126,10 +125,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0x7F;
-            val = val | ((value & 0x1) << 7);
-            map.lev_ark_block.Data[Ptr + 1] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr + 1];
+            val &= 0x7F;
+            val |= ((value & 0x1) << 7);
+            map.lev_ark_block.Data[Ptr + 1] = (byte)val;
         }
     }
     /// <summary>
@@ -139,7 +138,7 @@ public class TileInfo : Loader
     /// <summary>
     /// If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
     /// </summary>
-    public bool Render=true;
+    public bool Render = true;
     /// <summary>
     ///  The dimensions on the x-axis of this tile. 1 for a regular tile.
     /// </summary>
@@ -151,7 +150,7 @@ public class TileInfo : Loader
     /// <summary>
     /// indicates the tile is a child of a group pareted by a tile of DimX>1 or DimY>1
     /// </summary>
-    public bool Grouped=false;
+    public bool Grouped = false;
     /// <summary>
     /// Which faces are visible on a tile. Used to reduce mesh complexity.
     /// </summary>
@@ -184,8 +183,8 @@ public class TileInfo : Loader
     {
         get
         {
-            return ! ( (isWater) || (isLava) || (isNothing) );
-        }       
+            return !((isWater) || (isLava) || (isNothing));
+        }
     }
 
     /// <summary>
@@ -208,7 +207,7 @@ public class TileInfo : Loader
             return TileMap.isTerrainIce(terrain);
         }
     }
-    
+
     /// <summary>
     /// Check if the tile on on lava
     /// </summary>
@@ -231,7 +230,7 @@ public class TileInfo : Loader
     /// Index to the contigous room area that the tile is part of.
     /// </summary>
     /// Used for AI decision making
-    public short roomRegion;  
+    public short roomRegion;
     /// <summary>
     /// The x position of this tile
     /// </summary>
@@ -252,10 +251,10 @@ public class TileInfo : Loader
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr+1]);
-            val = val & 0xFC;
-            val = val | (value & 0x3);
-            map.lev_ark_block.Data[Ptr+1] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr + 1];
+            val &= 0xFC;
+            val |= (value & 0x3);
+            map.lev_ark_block.Data[Ptr + 1] = (byte)val;
         }
     }
 
@@ -268,14 +267,14 @@ public class TileInfo : Loader
     {
         get
         {
-            return (short)((map.lev_ark_block.Data[Ptr + 1]>>6) & 0x01);
+            return (short)((map.lev_ark_block.Data[Ptr + 1] >> 6) & 0x01);
         }
         set
         {
-            int val = (short)(map.lev_ark_block.Data[Ptr + 1]);
-            val = val & 0xBF;
-            val = val | ((value & 0x1)<<6);
-            map.lev_ark_block.Data[Ptr + 1] = (char)val;
+            int val = map.lev_ark_block.Data[Ptr + 1];
+            val &= 0xBF;
+            val |= ((value & 0x1) << 6);
+            map.lev_ark_block.Data[Ptr + 1] = (byte)val;
         }
     }
 
@@ -288,7 +287,7 @@ public class TileInfo : Loader
     {
         get
         {
-            switch(_RES)
+            switch (_RES)
             {
                 case GAME_SHOCK:
                     return _shockTileSlopeSteepness;
@@ -312,7 +311,7 @@ public class TileInfo : Loader
                     break;
                 default:
                     //do nothing read only.
-                    break;  
+                    break;
             }
         }
     }
@@ -346,7 +345,7 @@ public class TileInfo : Loader
     public short PressureTriggerIndex = 0;
 
     //The terrain on the tile. Result will change when the floor texture is updated.
-   // private int _terrain;
+    // private int _terrain;
     public int terrain
     {
         get
@@ -358,7 +357,7 @@ public class TileInfo : Loader
                 case GAME_UW1:
                     return GameWorldController.instance.terrainData.Terrain[46 + map.texture_map[floorTexture + 48]];
                 case GAME_UW2:
-                    return  GameWorldController.instance.terrainData.Terrain[map.texture_map[floorTexture]];
+                    return GameWorldController.instance.terrainData.Terrain[map.texture_map[floorTexture]];
                 default:
                     return 0;
             }
@@ -389,14 +388,14 @@ public class TileInfo : Loader
         West = wallTexture;
     }
 
-    public TileInfo(TileMap tm, short X, short Y, short newtileType, 
+    public TileInfo(TileMap tm, short X, short Y, short newtileType,
             short newfloorHeight, short newceilingHeight,
-            short newfloorTexture, short newwallTexture, short newceilTexture, 
+            short newfloorTexture, short newwallTexture, short newceilTexture,
             short newFlags, short newnoMagic, short newdoorBit, int newindexObjectList)
     {
-        InitTileInfo(tm, X, Y, newtileType, 
+        InitTileInfo(tm, X, Y, newtileType,
             newfloorHeight, newceilingHeight,
-            newfloorTexture, newwallTexture, newceilTexture, 
+            newfloorTexture, newwallTexture, newceilTexture,
             newFlags, newnoMagic, newdoorBit, newindexObjectList);
     }
 
@@ -415,12 +414,12 @@ public class TileInfo : Loader
         //floorHeight = newfloorHeight;
         ceilingHeight = newceilingHeight;
         //floorTexture = newfloorTexture;
-       // wallTexture = newwallTexture;
+        // wallTexture = newwallTexture;
         shockCeilingTexture = newceilTexture;
-       // flags = newFlags;
+        // flags = newFlags;
         //noMagic = newnoMagic;
         //doorBit = newdoorBit;
-       // indexObjectList = newindexObjectList;
+        // indexObjectList = newindexObjectList;
 
         //Grouped = false;
 
@@ -466,7 +465,7 @@ public class TileInfo : Loader
         {
             TileSlopeSteepness = 2;
             //shockSteep = 1;
-           // shockSteep = (short)(((shockSteep << 3) >> 2) * 8 >> 3);    //Shift copied from shock
+            // shockSteep = (short)(((shockSteep << 3) >> 2) * 8 >> 3);    //Shift copied from shock
         }
 
         //Different textures on solid tiles faces

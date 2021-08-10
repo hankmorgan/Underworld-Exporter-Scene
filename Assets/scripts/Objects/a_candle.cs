@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// lightsource variant for UW2 which can be eaten!
 /// </summary>
 public class a_candle : LightSource

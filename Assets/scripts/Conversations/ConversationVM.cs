@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Implementation of the conversation virtual machine
@@ -170,13 +170,13 @@ public class ConversationVM : UWEBase
 
     public void InitConvVM()
     {
-        
+
         switch (_RES)
         {
             case GAME_UW2:
                 LoadCnvArkUW2(Path.Combine(Loader.BasePath, "DATA", "CNV.ARK")); break;
             default:
-                LoadCnvArk(Path.Combine(Loader.BasePath, "DATA","CNV.ARK")); break;
+                LoadCnvArk(Path.Combine(Loader.BasePath, "DATA", "CNV.ARK")); break;
         }
         VMLoaded = true;
     }
@@ -196,14 +196,13 @@ public class ConversationVM : UWEBase
     /// <param name="cnv_ark_path">Cnv ark path.</param>
     public void LoadCnvArk(string cnv_ark_path)
     {
-        char[] cnv_ark;
-        if (DataLoader.ReadStreamFile(cnv_ark_path, out cnv_ark))
+        if (Loader.ReadStreamFile(cnv_ark_path, out byte[] cnv_ark))
         {
-            int NoOfConversations = (int)DataLoader.getValAtAddress(cnv_ark, 0, 16);
+            int NoOfConversations = (int)Loader.getValAtAddress(cnv_ark, 0, 16);
             conv = new cnvHeader[NoOfConversations];
             for (int i = 0; i < NoOfConversations; i++)
             {
-                int add_ptr = (int)DataLoader.getValAtAddress(cnv_ark, 2 + i * 4, 32);
+                int add_ptr = (int)Loader.getValAtAddress(cnv_ark, 2 + i * 4, 32);
                 if (add_ptr != 0)
                 {
                     /*
@@ -217,10 +216,10 @@ public class ConversationVM : UWEBase
 000E   Int16   number of imported globals (functions + variables)
 0010           start of imported functions list
 */
-                    conv[i].CodeSize = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
-                    conv[i].StringBlock = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
-                    conv[i].NoOfMemorySlots = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
-                    conv[i].NoOfImportedGlobals = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
+                    conv[i].CodeSize = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
+                    conv[i].StringBlock = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
+                    conv[i].NoOfMemorySlots = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
+                    conv[i].NoOfImportedGlobals = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
                     conv[i].functions = new ImportedFunctions[conv[i].NoOfImportedGlobals];
                     int funcptr = add_ptr + 0x10;
                     for (int f = 0; f < conv[i].NoOfImportedGlobals; f++)
@@ -232,21 +231,21 @@ n+02   Int16   ID (imported func.) / memory address (variable)
 n+04   Int16   unknown, always seems to be 1
 n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
 n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
-                        int len = (int)DataLoader.getValAtAddress(cnv_ark, funcptr, 16);
+                        int len = (int)Loader.getValAtAddress(cnv_ark, funcptr, 16);
                         for (int j = 0; j < len; j++)
                         {
-                            conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
+                            conv[i].functions[f].functionName += (char)Loader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
                         }
-                        conv[i].functions[f].ID_or_Address = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
-                        conv[i].functions[f].import_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
-                        conv[i].functions[f].return_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
+                        conv[i].functions[f].ID_or_Address = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
+                        conv[i].functions[f].import_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
+                        conv[i].functions[f].return_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
                         funcptr += len + 10;
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
-                    for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
+                    for (int c = 0; c < conv[i].CodeSize * 2; c += 2)
                     {
-                        conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+                        conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
                 }
             }
@@ -262,29 +261,28 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="cnv_ark_path">Cnv ark path.</param>
     public void LoadCnvArkUW2(string cnv_ark_path)
     {
-        char[] tmp_ark;
         int address_pointer = 2;
-        if (!DataLoader.ReadStreamFile(cnv_ark_path, out tmp_ark))
+        if (!Loader.ReadStreamFile(cnv_ark_path, out byte[] tmp_ark))
         {
             Debug.Log("unable to load uw2 conv ark");
             return;
         }
 
-        int NoOfConversations = (int)DataLoader.getValAtAddress(tmp_ark, 0, 32);
+        int NoOfConversations = (int)Loader.getValAtAddress(tmp_ark, 0, 32);
 
         conv = new cnvHeader[NoOfConversations];
 
         for (int i = 0; i < NoOfConversations; i++)
         {
-            int compressionFlag = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer + (NoOfConversations * 4), 32);
+            int compressionFlag = (int)Loader.getValAtAddress(tmp_ark, address_pointer + (NoOfConversations * 4), 32);
             int isCompressed = (compressionFlag >> 1) & 0x01;
-            long add_ptr = DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+            long add_ptr = Loader.getValAtAddress(tmp_ark, address_pointer, 32);
             if (add_ptr != 0)
             {
                 if (isCompressed == 1)
                 {
                     long datalen = 0;
-                    char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
+                    byte[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
                     add_ptr = 0;
                     /*
    0000   Int16   unknown, always seems to be 0x0828, or 28 08
@@ -297,10 +295,10 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
    000E   Int16   number of imported globals (functions + variables)
    0010           start of imported functions list
     */
-                    conv[i].CodeSize = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
-                    conv[i].StringBlock = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
-                    conv[i].NoOfMemorySlots = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
-                    conv[i].NoOfImportedGlobals = (int)DataLoader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
+                    conv[i].CodeSize = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0x4, 16);
+                    conv[i].StringBlock = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xA, 16);
+                    conv[i].NoOfMemorySlots = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xC, 16);
+                    conv[i].NoOfImportedGlobals = (int)Loader.getValAtAddress(cnv_ark, add_ptr + 0xE, 16);
                     conv[i].functions = new ImportedFunctions[conv[i].NoOfImportedGlobals];
                     long funcptr = add_ptr + 0x10;
                     for (int f = 0; f < conv[i].NoOfImportedGlobals; f++)
@@ -313,21 +311,21 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
         n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)
         */
-                        int len = (int)DataLoader.getValAtAddress(cnv_ark, funcptr, 16);
+                        int len = (int)Loader.getValAtAddress(cnv_ark, funcptr, 16);
                         for (int j = 0; j < len; j++)
                         {
-                            conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
+                            conv[i].functions[f].functionName += (char)Loader.getValAtAddress(cnv_ark, funcptr + 2 + j, 8);
                         }
-                        conv[i].functions[f].ID_or_Address = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
-                        conv[i].functions[f].import_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
-                        conv[i].functions[f].return_type = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
+                        conv[i].functions[f].ID_or_Address = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 2, 16);
+                        conv[i].functions[f].import_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 6, 16);
+                        conv[i].functions[f].return_type = (int)Loader.getValAtAddress(cnv_ark, funcptr + len + 8, 16);
                         funcptr += len + 10;
                     }
                     conv[i].instuctions = new short[conv[i].CodeSize];
                     int counter = 0;
-                    for (int c = 0; c < conv[i].CodeSize * 2; c = c + 2)
+                    for (int c = 0; c < conv[i].CodeSize * 2; c += 2)
                     {
-                        conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+                        conv[i].instuctions[counter++] = (short)Loader.getValAtAddress(cnv_ark, funcptr + c, 16);
                     }
 
 
@@ -337,7 +335,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     Debug.Log("uncompressed flag in cnv.ark");
                 }
             }
-            address_pointer = address_pointer + 4;
+            address_pointer += 4;
         }
 
     }
@@ -347,9 +345,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// </summary>
     public void DisplayInstructionSet()
     {
-        string result = "";
-
-        result = "String Block = " + conv[currConv].StringBlock + "\n";
+        string result = "String Block = " + conv[currConv].StringBlock + "\n";
         result += "Code Size = " + conv[currConv].CodeSize + "\n";
 
         //Display the properties of the conversation
@@ -465,7 +461,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     public void RunConversation(NPC npc)
     {
         string npcname = "";
-        if (!ConversationVM.VMLoaded)
+        if (!VMLoaded)
         {
             InitConvVM();
             if (_RES == GAME_UW2)
@@ -527,9 +523,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
 
 
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeInConversation;//Set converation mode.
-        ConversationVM.CurrentConversation = npc.npc_whoami;//To make obsolete
-        ConversationVM.InConversation = true;
+        Character.InteractionMode = Character.InteractionModeInConversation;//Set converation mode.
+        CurrentConversation = npc.npc_whoami;//To make obsolete
+        InConversation = true;
 
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
         UWHUD.instance.Conversation_tl.Clear();
@@ -650,7 +646,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     {
         //basep = 0;
         //stack.result_register = 1;//Set a default value
-        
+
         bool finished = false;
         stack = new CnvStack(4096);
         stack.set_stackp(200);//Skip over imported memory for the moment
@@ -1142,7 +1138,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         for (int c = 0; c <= GameWorldController.instance.bGlobals.GetUpperBound(0); c++)
         {
-            if (ConversationVM.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
+            if (CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
             {
                 GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex] = 1;
                 for (int x = 0; x <= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0); x++)
@@ -1254,19 +1250,19 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         //yield return new WaitForSeconds(8f);
         yield return StartCoroutine(WaitForMore());
         yield return new WaitForSeconds(0.5f);
-        ConversationVM.InConversation = false;
+        InConversation = false;
         //npc.npc_talkedto=1;
         UWHUD.instance.Conversation_tl.Clear();
         UWHUD.instance.MessageScroll.Clear();
 
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeTalk;
+        Character.InteractionMode = Character.InteractionModeTalk;
         if (MusicController.instance != null)
         {
             MusicController.instance.InMap = false;
         }
         if (CurrentObjectInHand != null)
         {
-            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+            Character.InteractionMode = Character.InteractionModePickup;
         }
         StopAllCoroutines();
 
@@ -1290,9 +1286,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             if (TeleportLevel == GameWorldController.instance.LevelNo)
             {//stay on this level
-                float targetX = (float)TeleportTileX * 1.2f + 0.6f;
-                float targetY = (float)TeleportTileY * 1.2f + 0.6f;
-                float Height = ((float)(CurrentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY))) * 0.15f;
+                float targetX = TeleportTileX * 1.2f + 0.6f;
+                float targetY = TeleportTileY * 1.2f + 0.6f;
+                float Height = CurrentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY) * 0.15f;
                 UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
                 UWCharacter.Instance.TeleportPosition = UWCharacter.Instance.transform.position;
             }
@@ -1451,7 +1447,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
                 for (int i = 0; i <= Paragraphs.GetUpperBound(0); i++)
                 {
-                    string Markup = "";
+                    string Markup;
                     switch (PrintType)
                     {
                         case PC_SAY:
@@ -1461,8 +1457,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         default:
                             Markup = "<color=black>"; break;//[00FF00]
                     }
-                   // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
-                    UWHUD.instance.Conversation_tl.Add(Paragraphs[i],Markup); //\n	
+                    // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
+                    UWHUD.instance.Conversation_tl.Add(Paragraphs[i], Markup); //\n	
                     if (i < Paragraphs.GetUpperBound(0))
                     {
                         //UWHUD.instance.Conversation_tl.Add("<color=white>MORE</color>");
@@ -1504,9 +1500,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             {
                 string ReplacementType = "";
                 int ReplacementValue = 0;
-                string OffsetType = "";
                 int OffsetValue = 0;
-                string formatting = "";
                 string FoundString = "";
 
                 for (int sg = 0; sg < matches[sm].Groups.Count; sg++)
@@ -1519,8 +1513,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                 ReplacementType = matches[sm].Groups[sg].Value; break;
                             case 2: //Replacement value
                                 {
-                                    int val = 0;
-                                    if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+                                    if (int.TryParse(matches[sm].Groups[sg].Value, out int val))
                                     {
                                         ReplacementValue = val;
                                     }
@@ -1531,11 +1524,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                     break;
                                 }
                             case 3: //Offset Type (should only be SI?)
-                                OffsetType = matches[sm].Groups[sg].Value; break;
+                                string OffsetType = matches[sm].Groups[sg].Value;
+                                break;
                             case 4: //Offset value
                                 {
-                                    int val = 0;
-                                    if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+                                    if (int.TryParse(matches[sm].Groups[sg].Value, out int val))
                                     {
                                         OffsetValue = val;
                                     }
@@ -1546,7 +1539,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                                     break;
                                 }
                             case 5: //formatting specifier (unimplemented
-                                formatting = matches[sm].Groups[sg].Value; break;
+                                string formatting = matches[sm].Groups[sg].Value;
+                                break;
                         }
                     }
 
@@ -2314,7 +2308,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <returns></returns>
     public IEnumerator pause(int waittime)
     {
-        yield return new WaitForSecondsRealtime((float)waittime);
+        yield return new WaitForSecondsRealtime(waittime);
     }
 
 
@@ -2401,7 +2395,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
                     bablf_array[j - 1] = stack.at(i);
                     //tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
-                   // UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
+                    // UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
                     UWHUD.instance.ConversationOptions[j - 1].SetText(j + "." + TextLine + "");
                     UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j - 1], true);
                     j++;
@@ -2430,7 +2424,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         PlayerTypedAnswer = "";
         //tl_input.Set(">");
         //PlayerInput.text = ">";
-        for (int j=0; j <= UWHUD.instance.ConversationOptions.GetUpperBound(0);j++)
+        for (int j = 0; j <= UWHUD.instance.ConversationOptions.GetUpperBound(0); j++)
         {
             UWHUD.instance.ConversationOptions[j].SetText("");
         }
@@ -2728,7 +2722,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     //GameWorldController.MoveToWorld(demanded);//ok
                     objsGiven[i] = demanded;//These have to be moved to world after this function ends or else the master list will get messed up
                     demanded.transform.position = GameWorldController.instance.InventoryMarker.transform.position;
-                    SomethingGiven = true;
                     cn.AddItemToContainer(demanded);
                     //pcSlot.clear ();
                 }
@@ -2810,7 +2803,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (cn.GetItemAt(i) != null)
                 {
                     ObjectInteraction objInt = cn.GetItemAt(i);//cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-                                                                                                        //lastObjectTraded=objInt;
+                                                               //lastObjectTraded=objInt;
                     if (objInt != null)
                     {
                         if (objInt.item_id == arg1)
@@ -2832,7 +2825,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (cn.GetItemAt(i) != null)
                 {
                     ObjectInteraction objInt = cn.GetItemAt(i);// cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-                                                                                                        //lastObjectTraded=objInt;
+                                                               //lastObjectTraded=objInt;
                     if (
                             ((arg1 >= 1000) && (objInt.item_id >= rangeS) && (objInt.item_id <= rangeE))
                             ||
@@ -2849,7 +2842,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
     static int TakeItemFromNPCCOntainer(NPC npc, Container PlayerContainer, int index)
     {
-                //Give to PC
+        //Give to PC
         ObjectInteraction demanded = npc.GetComponent<Container>().GetItemAt((short)index);
         if (Container.GetFreeSlot(PlayerContainer) != -1)//Is there space in the container.
         {
@@ -3326,6 +3319,8 @@ return value appears to have something to do with if the door is broken or not.
 
     public void x_obj_stuff(int arg1, int arg2, int arg3, int link, int arg5, int owner, int quality, int item_id, int pos)
     {
+        pos = stack.at(pos);
+
         //Debug.Log("x_obj_stuff");		
         //id=002f name="x_obj_stuff" ret_type=void
         //	parameters:   arg1: not used in uw1
@@ -3343,35 +3338,30 @@ return value appears to have something to do with if the door is broken or not.
         //If -1 then it returns the value in the array?
         /*This may be implemented wrongly*/
 
-        ObjectInteraction obj = null;
-
-
-        pos = stack.at(pos);
-
         /*	if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
-    {
-        pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
-        pos--;
-        if (pos<0)
-        {
-            return;
-        }
-        if (pos<=3)
-        {//Item is in players trade area.
-            obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
+{
+pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
+pos--;
+if (pos<0)
+{
+    return;
+}
+if (pos<=3)
+{//Item is in players trade area.
+    obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
 
-        }
-        else if (pos <=7)
-        {//item in npc trade area
-            obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
-        }	
-    }
-    else
-    {//Item is in the object masterlist
-        obj = CurrentObjectList().objInfo[pos].instance;
-    }	*/
+}
+else if (pos <=7)
+{//item in npc trade area
+    obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
+}	
+}
+else
+{//Item is in the object masterlist
+obj = CurrentObjectList().objInfo[pos].instance;
+}	*/
 
-        obj = FindObjectInteractionInObjectList(pos);
+        ObjectInteraction obj = FindObjectInteractionInObjectList(pos);
 
         if (obj == null)
         {
@@ -3556,7 +3546,7 @@ return value appears to have something to do with if the door is broken or not.
             int qty = objInt.GetQty();
             if (pStrPtr >= 0)
             {
-                string objName = "";
+                string objName;
                 if (objInt.GetComponent<enchantment_base>())
                 {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for deadly seeker
                     //string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
@@ -3567,7 +3557,7 @@ return value appears to have something to do with if the door is broken or not.
                 {
                     objName = StringController.instance.GetSimpleObjectNameUW(objInt);
                 }
-                
+
                 //Add temporary string to string controller
                 stack.Set(
                         pStrPtr,
@@ -3605,7 +3595,7 @@ return value appears to have something to do with if the door is broken or not.
         {
             return 0;//no cheating...
         }
-        if (StringToSearch.ToUpper().Contains(StringToFind.ToUpper())) 
+        if (StringToSearch.ToUpper().Contains(StringToFind.ToUpper()))
         {
             return 1;
         }
@@ -3892,13 +3882,13 @@ return value: none
             return 2;
         }
         ObjectInteraction objInt = CurrentObjectList().objInfo[index].instance;
-        int playerHasSpace = 1;
         Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
         //Container npcContainer = npc.GetComponent<Container>();
 
         //GameObject obj = GameObject.Find(ItemName);
         if (objInt == null) { return 1; }
 
+        int playerHasSpace;
         //Give to PC
         if (Container.GetFreeSlot(playerContainer) != -1)//Is there space in the container.
         {
@@ -3914,7 +3904,7 @@ return value: none
                 {
                     ObjectInteraction containerItem = cn.GetItemAt(i);
                     if (containerItem != null)
-                    {    
+                    {
                         npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
                         containerItem.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
                         GameWorldController.MoveToInventory(containerItem);
@@ -3941,7 +3931,7 @@ return value: none
                 {
                     ObjectInteraction containerItem = cn.GetItemAt(i);
                     if (containerItem != null)
-                    {                        
+                    {
                         if (containerItem != null)
                         {
                             npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
@@ -4071,21 +4061,6 @@ return value: none
     /// keep a number of found slots.
     public int find_barter_total(int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id)//TODO:I swapped ptrslot around with ptrcount.
     {
-        /*
-id=0032 name="find_barter_total" ret_type=int
-parameters:   s[0]: ???
-         s[1]: pointer to number of found items
-         s[2]: pointer to
-         s[3]: pointer to
-         s[4]: pointer to item ID to find
-description:  searches for item in barter area
-return value: 1 when found (?)
-
-*/
-
-
-
-        ObjectInteraction objInt = null;
         int slotFoundCounter = 0;
         stack.Set(ptrNoOfSlots, 0);
         stack.Set(ptrCount, 0);
@@ -4094,7 +4069,21 @@ return value: 1 when found (?)
         {
             if (UWHUD.instance.playerTrade[i].isSelected())
             {
-                objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+                /*
+        id=0032 name="find_barter_total" ret_type=int
+        parameters:   s[0]: ???
+                 s[1]: pointer to number of found items
+                 s[2]: pointer to
+                 s[3]: pointer to
+                 s[4]: pointer to item ID to find
+        description:  searches for item in barter area
+        return value: 1 when found (?)
+
+        */
+
+
+
+                ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 
                 if (objInt != null)
                 {
@@ -4135,7 +4124,7 @@ return value: 1 when found (?)
         newobjt.is_quant = 1;
         ObjectInteraction myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
-        ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
+        BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj);
         return myObj.GetComponent<ObjectInteraction>().BaseObjectData.index;
 
@@ -4199,7 +4188,7 @@ description:  places a generated object in underworld
                 //GameObject itemObj = GameObject.Find(Item);
                 //if (itemObj != null)
                 //{
-                    Item.consumeObject();
+                Item.consumeObject();
                 //}
             }
         }
@@ -4508,7 +4497,7 @@ description:  places a generated object in underworld
     static ObjectInteraction FindObjectInteractionInObjectList(int index)
     {
         ObjectInteraction obj = FindGameObjectInObjectList(index);
-        return obj; 
+        return obj;
     }
 
     static ObjectInteraction FindGameObjectInObjectList(int index)
@@ -4537,7 +4526,7 @@ description:  places a generated object in underworld
         if (objName == "") { return null; }
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
-            if (UWHUD.instance.playerTrade[i].objectInSlot!=null)
+            if (UWHUD.instance.playerTrade[i].objectInSlot != null)
             {
                 if (UWHUD.instance.playerTrade[i].objectInSlot.name == objName)
                 {
@@ -4547,7 +4536,7 @@ description:  places a generated object in underworld
         }
         for (int i = 0; i <= UWHUD.instance.npcTrade.GetUpperBound(0); i++)
         {
-            if (UWHUD.instance.npcTrade[i].objectInSlot !=null)
+            if (UWHUD.instance.npcTrade[i].objectInSlot != null)
             {
                 if (UWHUD.instance.npcTrade[i].objectInSlot.name == objName)
                 {

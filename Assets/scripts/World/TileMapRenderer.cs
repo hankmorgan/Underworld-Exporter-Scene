@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Linq; // used for Sum of array
+﻿using System.Linq; // used for Sum of array
+using UnityEngine;
 
 /// <summary>
 /// Tile map renderer.
@@ -8,7 +7,7 @@ using System.Linq; // used for Sum of array
 /// Renders the tile map in 3d
 public class TileMapRenderer : Loader
 {
-    static bool debugtextures = false;
+    static readonly bool debugtextures = false;
     const int TILE_SOLID = 0;
     const int TILE_OPEN = 1;
 
@@ -98,11 +97,11 @@ public class TileMapRenderer : Loader
             //Clear out the children in the transform
             foreach (Transform child in parent.transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
             foreach (Transform child in sceneryParent.transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
         }
 
@@ -138,7 +137,7 @@ public class TileMapRenderer : Loader
         {
             if (!UpdateOnly)
             {
-                GameObject output = RenderCeiling(parent, 0, 0, CEILING_HEIGHT, CEILING_HEIGHT + CEIL_ADJ,Level.UWCeilingTexture, "CEILING");
+                GameObject output = RenderCeiling(parent, 0, 0, CEILING_HEIGHT, CEILING_HEIGHT + CEIL_ADJ, Level.UWCeilingTexture, "CEILING");
             }
         }
         if (!UpdateOnly)
@@ -155,7 +154,7 @@ public class TileMapRenderer : Loader
             }
 
         }
-        if ((GameWorldController.EditorMode) && (UpdateOnly))
+        if ((UWEBase.EditorMode) && (UpdateOnly))
         {
             UWHUD.instance.editor.RefreshTileMap();
         }
@@ -194,16 +193,16 @@ public class TileMapRenderer : Loader
     /// <param name="i"></param>
     public static void RenderDoor(GameObject Parent, TileMap level, ObjectLoader objList, int i)
     {
-        if ((objList.objInfo[i].ObjectTileX>=64) || (objList.objInfo[i].ObjectTileY >= 64))
+        if ((objList.objInfo[i].ObjectTileX >= 64) || (objList.objInfo[i].ObjectTileY >= 64))
         {//door is off map!
-            return; 
+            return;
         }
 
 
 
         if (level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].tileType != TILE_SOLID)
         {
-            float floorheight = (float)level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].floorHeight * 0.15f;
+            float floorheight = level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].floorHeight * 0.15f;
             int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList.objInfo, objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY, ObjectInteraction.BRIDGE);
             if (BridgeIndex != -1)
             {//Take into account if the door is over a bridge.
@@ -228,7 +227,6 @@ public class TileMapRenderer : Loader
         {
             MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
-        //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 
         //Uv ratios across the x axis of the door
         float uvXPos1 = 0f;
@@ -251,11 +249,9 @@ public class TileMapRenderer : Loader
                 break;
         }
 
-
-        //float y0 = 0f;//+doorthickness /2f;
         float y1 = 0f;//-doorthickness /2f;
         float x0 = -doorframewidth / 2f;
-        float x1 = +doorframewidth / 2f;
+        float x1;// = +doorframewidth / 2f;
         float z0 = 0f;
         float z1 = CEILING_HEIGHT * 0.15f;
 
@@ -291,13 +287,11 @@ public class TileMapRenderer : Loader
         GameObject tile = RenderCuboid(Parent, leftHand, UVs, position, MatsToUse, 1, "rear_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
         tile.transform.Rotate(new Vector3(0f, 0f, -180f));
 
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorwidth / 2f;
         x1 = +doorwidth / 2f;
         z0 = 0f + floorHeight + doorheight;
         z1 = CEILING_HEIGHT * 0.15f;
-        //1.2
+
         Vector3[] overHead = new Vector3[4];
         switch (currDoor.heading * 45)
         {
@@ -318,12 +312,9 @@ public class TileMapRenderer : Loader
                 break;
         }
 
-
         float dist = (z0) / 0.15f;//Get back to steps.
-        dist = dist / 8f;
+        dist /= 8f;
 
-
-        //Vector2[] UVs = new Vector2[4];
         UVs[0] = new Vector2(uvXPos2, dist);
         UVs[1] = new Vector2(uvXPos2, CEILING_HEIGHT / 8f);
         UVs[2] = new Vector2(uvXPos3, CEILING_HEIGHT / 8f);
@@ -335,10 +326,8 @@ public class TileMapRenderer : Loader
         {//Special case for possible map bug
             tile.layer = LayerMask.NameToLayer("UWObjects");
         }
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorframewidth / 2f;
-        x1 = +doorframewidth / 2f;
+        //x1 = +doorframewidth / 2f;
         z0 = 0f;
         z1 = CEILING_HEIGHT * 0.15f;
         //My vertex tris
@@ -371,7 +360,6 @@ public class TileMapRenderer : Loader
 
         tile = RenderCuboid(Parent, rightHand, UVs, position, MatsToUse, 1, "rear_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
         tile.transform.Rotate(new Vector3(0f, 0f, -180f));
-
     }
 
 
@@ -390,27 +378,14 @@ public class TileMapRenderer : Loader
         {
             MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
-        //Door params
-        //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-        //if (level.Tiles[currDoor.tileX,currDoor.tileY].hasBridge)
-        //{						
-        /*						int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList.objInfo, currDoor.tileX, currDoor.tileY, ObjectInteraction.BRIDGE);
-                                if (BridgeIndex!=-1)
-                                {
-                                        floorheight = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, BridgeIndex, currDoor.tileX,currDoor.tileY,0).y;		
-                                }*/
 
-        //}
         //Uv ratios across the x axis of the door
         float uvXPos1 = 0f;
         float uvXPos2 = uvXPos1 + doorSideWidth / 1.2f;
         float uvXPos3 = uvXPos2 + doorwidth / 1.2f;
         float uvXPos4 = 1f; // or 1.2f/1.2f
 
-        //Vector3 doorposition;
-        //positions
         Vector3 position = ObjectLoader.CalcObjectXYZ(currDoor.index, 0);
-        //doorposition=position;
         //center in the tile and at the bottom of the map.
         switch (currDoor.heading * 45)
         {
@@ -427,12 +402,10 @@ public class TileMapRenderer : Loader
         float y0 = 0f;//+doorthickness /2f;
                       //float y1 = 0f;//-doorthickness /2f;
         float x0 = -doorframewidth / 2f;
-        float x1 = +doorframewidth / 2f;
         float z0 = 0f;
         float z1 = CEILING_HEIGHT * 0.15f;
 
         //My vertex tris
-
         Vector3[] leftHand = new Vector3[4];
 
         switch (currDoor.heading * 45)
@@ -454,28 +427,18 @@ public class TileMapRenderer : Loader
                 break;
         }
         Vector2[] UVs = new Vector2[4];
-        //UVs[0]= new Vector2(0f,0f);
-        //UVs[1]= new Vector2(0f,4);
-        //UVs[2]= new Vector2(doorSideWidth,4);
-        //UVs[3]= new Vector2(doorSideWidth,0f);
-
         UVs[0] = new Vector2(uvXPos1, 0f);
         UVs[1] = new Vector2(uvXPos1, 4);
         UVs[2] = new Vector2(uvXPos2, 4);
         UVs[3] = new Vector2(uvXPos2, 0f);
 
-
         RenderCuboid(Parent, leftHand, UVs, position, MatsToUse, 1, "front_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 
-
-
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorwidth / 2f;
-        x1 = +doorwidth / 2f;
+        float x1 = +doorwidth / 2f;
         z0 = 0f + floorHeight + doorheight;
         z1 = CEILING_HEIGHT * 0.15f;
-        //1.2
+
         Vector3[] overHead = new Vector3[4];
 
         switch (currDoor.heading * 45)
@@ -497,14 +460,8 @@ public class TileMapRenderer : Loader
                 break;
         }
         float dist = (z0) / 0.15f;//Get back to steps.
-        dist = dist / 8f;
+        dist /= 8f;
 
-
-        //Vector2[] UVs = new Vector2[4];
-        //UVs[0]= new Vector2(0+doorSideWidth, dist);
-        //UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
-        //UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
-        //UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
         UVs[0] = new Vector2(uvXPos2, dist);
         UVs[1] = new Vector2(uvXPos2, CEILING_HEIGHT / 8f);
         UVs[2] = new Vector2(uvXPos3, CEILING_HEIGHT / 8f);
@@ -517,10 +474,7 @@ public class TileMapRenderer : Loader
             tile.layer = LayerMask.NameToLayer("UWObjects");
         }
 
-        //y0 = +doorthickness /2f;
-        //y1 = -doorthickness /2f;
         x0 = -doorframewidth / 2f;
-        x1 = +doorframewidth / 2f;
         z0 = 0f;
         z1 = CEILING_HEIGHT * 0.15f;
         //My vertex tris
@@ -545,11 +499,6 @@ public class TileMapRenderer : Loader
                 break;
         }
         UVs = new Vector2[4];
-        //UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
-        //UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
-        //UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
-        //UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
-
         UVs[0] = new Vector2(uvXPos3, 0f);
         UVs[1] = new Vector2(uvXPos3, 4);
         UVs[2] = new Vector2(uvXPos4, 4);
@@ -559,7 +508,6 @@ public class TileMapRenderer : Loader
 
         //Some filler
         Vector3[] filler = new Vector3[12];
-        int v = 0;
         position = new Vector3(position.x, floorHeight, position.z);
         UVs = new Vector2[12];
         UVs[0] = new Vector2(0, 0f);
@@ -575,7 +523,7 @@ public class TileMapRenderer : Loader
         UVs[10] = new Vector2(1, 1);
         UVs[11] = new Vector2(1, 0f);
 
-
+        int v;
         switch (currDoor.heading * 45)
         {
             case EAST:
@@ -638,9 +586,6 @@ public class TileMapRenderer : Loader
                 RenderCuboid(Parent, filler, UVs, position, MatsToUse, 1, "side2_filler_" + ObjectLoader.UniqueObjectName(currDoor));
                 break;
         }
-
-
-
         RenderCuboid(Parent, filler, UVs, position, MatsToUse, 3, "front_filler_" + ObjectLoader.UniqueObjectName(currDoor));
     }
 
@@ -656,7 +601,6 @@ public class TileMapRenderer : Loader
         {
             return;
         }
-
         for (int i = 0; i <= objList.objInfo.GetUpperBound(0); i++)
         {
             if (objList.objInfo[i] != null)
@@ -1337,8 +1281,10 @@ public class TileMapRenderer : Loader
         MeshFilter mf = Tile.AddComponent<MeshFilter>();
         MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         Material[] MatsToUse = new Material[NumberOfVisibleFaces];
         //Now allocate the visible faces to triangles.
@@ -1346,11 +1292,11 @@ public class TileMapRenderer : Loader
         float PolySize = Top - Bottom;
         float uv0 = (float)(Bottom * 0.125f);
         float uv1 = (PolySize / 8.0f) + (uv0);
-        float offset = 0f;
         for (int i = 0; i < 6; i++)
         {
             if (t.VisibleFaces[i] == true)
             {
+                float offset;
                 switch (i)
                 {
                     case vTOP:
@@ -1533,8 +1479,10 @@ public class TileMapRenderer : Loader
         float baseHeight = (float)(Bottom * 0.15f);
 
         //Now create the mesh
-        GameObject Tile = new GameObject(TileName);
-        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        GameObject Tile = new GameObject(TileName)
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
         Tile.transform.parent = parent.transform;
         Tile.transform.position = new Vector3(x * 1.2f, 0.0f, y * 1.2f);
 
@@ -1542,8 +1490,10 @@ public class TileMapRenderer : Loader
         MeshFilter mf = Tile.AddComponent<MeshFilter>();
         MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         Material[] MatsToUse = new Material[NumberOfVisibleFaces];
         //Now allocate the visible faces to triangles.
@@ -1551,7 +1501,7 @@ public class TileMapRenderer : Loader
         float PolySize = Top - Bottom;
         float uv0 = (float)(Bottom * 0.125f);
         float uv1 = (PolySize / 8.0f) + (uv0);
-       // float offset = 0f;
+        // float offset = 0f;
 
         //bottom wall vertices
         MatsToUse[FaceCounter] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CeilingTexture]];
@@ -1579,8 +1529,6 @@ public class TileMapRenderer : Loader
         tris[4] = 2 + (4 * FaceCounter);
         tris[5] = 3 + (4 * FaceCounter);
         mesh.SetTriangles(tris, FaceCounter);
-        FaceCounter++;
-
         mr.materials = MatsToUse;//mats;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
@@ -1620,10 +1568,12 @@ public class TileMapRenderer : Loader
         MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         //mc.sharedMesh=null;
-        Mesh mesh = new Mesh();
-        mesh.vertices = verts;
-        mesh.uv = uvs;
-        mesh.subMeshCount = NoOfFaces;//VisibleFaces.GetUpperBound(0)+1;
+        Mesh mesh = new Mesh
+        {
+            vertices = verts,
+            uv = uvs,
+            subMeshCount = NoOfFaces//VisibleFaces.GetUpperBound(0)+1;
+        };
 
         int FaceCounter = 0;
         int[] tris = new int[6];
@@ -1700,8 +1650,10 @@ public class TileMapRenderer : Loader
         MeshFilter mf = Tile.AddComponent<MeshFilter>();
         MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         Material[] MatsToUse = new Material[NumberOfVisibleFaces];
         //Now allocate the visible faces to triangles.
@@ -1709,12 +1661,12 @@ public class TileMapRenderer : Loader
         float PolySize = Top - Bottom;
         float uv0 = (float)(Bottom * 0.125f);
         float uv1 = (PolySize / 8.0f) + (uv0);
-        float offset = 0f;
         //int vertCountOffset=0;
         for (int i = 0; i < 6; i++)
         {
             if (t.VisibleFaces[i] == true)
             {
+                float offset;
                 switch (i)
                 {
                     case vTOP:
@@ -1943,9 +1895,9 @@ public class TileMapRenderer : Loader
     {
         if (t.Render == true)
         {
-            string TileName = "";
             if (t.isWater == Water)
             {
+                string TileName;
                 if (invert == false)
                 {
                     //Bottom face 
@@ -1993,9 +1945,9 @@ public class TileMapRenderer : Loader
     {
         if (t.Render == true)
         {
-            string TileName = "";
             if (t.isWater == Water)
             {
+                string TileName;
                 if (invert == false)
                 {
                     //Bottom face 
@@ -2042,7 +1994,6 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderDiagSETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         //int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
 
         if (t.Render == true)
@@ -2053,7 +2004,7 @@ public class TileMapRenderer : Loader
                 if (Water != true)
                 {
                     //the wall part
-                    TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
+                    string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
                     RenderDiagSEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
                 }
                 if (t.isWater == Water)
@@ -2093,7 +2044,6 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderDiagSWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
             if (invert == false)
@@ -2101,7 +2051,7 @@ public class TileMapRenderer : Loader
                 if (Water != true)
                 {
                     //Its wall
-                    TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
+                    string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
                     RenderDiagSWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
                 }
                 if (t.isWater == Water)
@@ -2143,14 +2093,13 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderDiagNETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
             if (invert == false)
             {
                 if (Water != true)
                 {
-                    TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
+                    string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
                     RenderDiagNEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
                 }
                 if (t.isWater == Water)
@@ -2191,7 +2140,6 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderDiagNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
             if (invert == false)
@@ -2199,7 +2147,7 @@ public class TileMapRenderer : Loader
                 if (Water != true)
                 {
                     //It's wall.
-                    TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
+                    string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
                     RenderDiagNWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
                 }
 
@@ -2239,9 +2187,9 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderSlopeNTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
+            string TileName;
             if (invert == false)
             {
                 if (t.isWater == Water)
@@ -2278,9 +2226,9 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderSlopeSTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
+            string TileName;
             if (invert == false)
             {
                 if (t.isWater == Water)
@@ -2317,9 +2265,9 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderSlopeWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
+            string TileName;
             if (invert == false)
             {
                 if (t.isWater == Water)
@@ -2356,9 +2304,9 @@ public class TileMapRenderer : Loader
     /// <param name="invert">If set to <c>true</c> invert.</param>
     static void RenderSlopeETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
     {
-        string TileName = "";
         if (t.Render == true)
         {
+            string TileName;
             if (invert == false)
             {
                 if (t.isWater == Water)
@@ -2703,15 +2651,16 @@ public class TileMapRenderer : Loader
         Material[] MatsToUse = new Material[NumberOfVisibleFaces];
         Vector3[] verts = new Vector3[NumberOfVisibleFaces * 4];
         Vector2[] uvs = new Vector2[NumberOfVisibleFaces * 4];
-        float offset = 0f;
         float floorHeight = (float)(Top * 0.15f);
         float baseHeight = (float)(Bottom * 0.15f);
         //float dimX = t.DimX;
         //float dimY = t.DimY;
 
         //Now create the mesh
-        GameObject Tile = new GameObject(TileName);
-        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        GameObject Tile = new GameObject(TileName)
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
         Tile.transform.parent = parent.transform;
         Tile.transform.position = new Vector3(t.tileX * 1.2f, 0.0f, t.tileY * 1.2f);
 
@@ -2721,8 +2670,10 @@ public class TileMapRenderer : Loader
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         ///mc.sharedMesh=null;
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         //Now allocate the visible faces to triangles.
         int FaceCounter = 0;//Tracks which number face we are now on.
@@ -2747,6 +2698,7 @@ public class TileMapRenderer : Loader
         {
             if ((t.VisibleFaces[i] == true) && ((i == vNORTH) || (i == vWEST)))
             {//Will only render north or west if needed.
+                float offset;
                 switch (i)
                 {
                     case vNORTH:
@@ -2867,10 +2819,11 @@ public class TileMapRenderer : Loader
         float baseHeight = (float)(Bottom * 0.15f);
         float dimX = t.DimX;
         float dimY = t.DimY;
-        float offset = 0f;
         //Now create the mesh
-        GameObject Tile = new GameObject(TileName);
-        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        GameObject Tile = new GameObject(TileName)
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
         Tile.transform.parent = parent.transform;
         Tile.transform.position = new Vector3(t.tileX * 1.2f, 0.0f, t.tileY * 1.2f);
 
@@ -2880,8 +2833,10 @@ public class TileMapRenderer : Loader
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         //mc.sharedMesh=null;
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         //Now allocate the visible faces to triangles.
         int FaceCounter = 0;//Tracks which number face we are now on.
@@ -2907,6 +2862,7 @@ public class TileMapRenderer : Loader
         {
             if ((t.VisibleFaces[i] == true) && ((i == vNORTH) || (i == vEAST)))
             {//Will only render north or west if needed.
+                float offset;
                 switch (i)
                 {
                     case vNORTH:
@@ -3030,11 +2986,12 @@ public class TileMapRenderer : Loader
         float baseHeight = (float)(Bottom * 0.15f);
         float dimX = t.DimX;
         float dimY = t.DimY;
-        float offset = 0f;
 
         //Now create the mesh
-        GameObject Tile = new GameObject(TileName);
-        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        GameObject Tile = new GameObject(TileName)
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
         Tile.transform.parent = parent.transform;
         Tile.transform.position = new Vector3(t.tileX * 1.2f, 0.0f, t.tileY * 1.2f);
 
@@ -3044,9 +3001,11 @@ public class TileMapRenderer : Loader
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         //mc.sharedMesh=null;
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
-                                                 //Now allocate the visible faces to triangles.
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
+        //Now allocate the visible faces to triangles.
         int FaceCounter = 0;//Tracks which number face we are now on.
         float PolySize = Top - Bottom;
         float uv0 = (float)(Bottom * 0.125f);
@@ -3069,6 +3028,7 @@ public class TileMapRenderer : Loader
         {
             if ((t.VisibleFaces[i] == true) && ((i == vSOUTH) || (i == vEAST)))
             {//Will only render north or west if needed.
+                float offset;
                 switch (i)
                 {
                     case vEAST:
@@ -3191,11 +3151,11 @@ public class TileMapRenderer : Loader
         float floorHeight = (float)(Top * 0.15f);
         float baseHeight = (float)(Bottom * 0.15f);
         float dimX = t.DimX;
-        //float dimY = t.DimY;
-        float offset = 0f;
         //Now create the mesh
-        GameObject Tile = new GameObject(TileName);
-        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        GameObject Tile = new GameObject(TileName)
+        {
+            layer = LayerMask.NameToLayer("MapMesh")
+        };
         Tile.transform.parent = parent.transform;
         Tile.transform.position = new Vector3(t.tileX * 1.2f, 0.0f, t.tileY * 1.2f);
 
@@ -3205,8 +3165,10 @@ public class TileMapRenderer : Loader
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         //mc.sharedMesh=null;
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces//Should be no of visible faces
+        };
 
         //Now allocate the visible faces to triangles.
         int FaceCounter = 0;//Tracks which number face we are now on.
@@ -3230,6 +3192,8 @@ public class TileMapRenderer : Loader
         {
             if ((t.VisibleFaces[i] == true) && ((i == vSOUTH) || (i == vWEST)))
             {//Will only render north or west if needed.
+             //float dimY = t.DimY;
+                float offset;
                 switch (i)
                 {
                     case vSOUTH:
@@ -3435,13 +3399,13 @@ public class TileMapRenderer : Loader
             switch (face)
             {
                 case fEAST:
-                    ceilOffset = (int)t.shockEastCeilHeight; break;
+                    ceilOffset = t.shockEastCeilHeight; break;
                 case fWEST:
-                    ceilOffset = (int)t.shockWestCeilHeight; break;
+                    ceilOffset = t.shockWestCeilHeight; break;
                 case fSOUTH:
-                    ceilOffset = (int)t.shockSouthCeilHeight; break;
+                    ceilOffset = t.shockSouthCeilHeight; break;
                 case fNORTH:
-                    ceilOffset = (int)t.shockNorthCeilHeight; break;
+                    ceilOffset = t.shockNorthCeilHeight; break;
             }
             float shock_ceil = CurrentTileMap().SHOCK_CEILING_HEIGHT;
             float floorOffset = shock_ceil - ceilOffset - 8;  //The floor of the tile if it is 1 texture tall.
@@ -3651,49 +3615,49 @@ public class TileMapRenderer : Loader
             switch (SlopeDir)
             {
                 case TILE_SLOPE_N:
-                    AdjustUpperNorth = (float)Steepness * 0.15f;
+                    AdjustUpperNorth = Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_S:
-                    AdjustUpperSouth = (float)Steepness * 0.15f;
+                    AdjustUpperSouth = Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_E:
-                    AdjustUpperEast = (float)Steepness * 0.15f;
+                    AdjustUpperEast = Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_W:
-                    AdjustUpperWest = (float)Steepness * 0.15f;
+                    AdjustUpperWest = Steepness * 0.15f;
                     break;
 
                 case TILE_VALLEY_NE:
-                    AdjustUpperNorthEast = +(float)Steepness * 0.15f;
-                    AdjustUpperNorthWest = +(float)Steepness * 0.15f;
-                    AdjustUpperSouthEast = +(float)Steepness * 0.15f;
+                    AdjustUpperNorthEast = +Steepness * 0.15f;
+                    AdjustUpperNorthWest = +Steepness * 0.15f;
+                    AdjustUpperSouthEast = +Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_SE:
-                    AdjustUpperSouthEast = +(float)Steepness * 0.15f;
-                    AdjustUpperSouthWest = +(float)Steepness * 0.15f;
-                    AdjustUpperNorthEast = +(float)Steepness * 0.15f;
+                    AdjustUpperSouthEast = +Steepness * 0.15f;
+                    AdjustUpperSouthWest = +Steepness * 0.15f;
+                    AdjustUpperNorthEast = +Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_NW:
-                    AdjustUpperNorthWest = +(float)Steepness * 0.15f;
-                    AdjustUpperNorthEast = +(float)Steepness * 0.15f;
-                    AdjustUpperSouthWest = +(float)Steepness * 0.15f;
+                    AdjustUpperNorthWest = +Steepness * 0.15f;
+                    AdjustUpperNorthEast = +Steepness * 0.15f;
+                    AdjustUpperSouthWest = +Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_SW:
-                    AdjustUpperSouthWest = +(float)Steepness * 0.15f;
-                    AdjustUpperSouthEast = +(float)Steepness * 0.15f;
-                    AdjustUpperNorthWest = +(float)Steepness * 0.15f;
+                    AdjustUpperSouthWest = +Steepness * 0.15f;
+                    AdjustUpperSouthEast = +Steepness * 0.15f;
+                    AdjustUpperNorthWest = +Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_NE:
-                    AdjustUpperNorthEast = (float)Steepness * 0.15f;
+                    AdjustUpperNorthEast = Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_SE:
-                    AdjustUpperSouthEast = (float)Steepness * 0.15f;
+                    AdjustUpperSouthEast = Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_NW:
-                    AdjustUpperNorthWest = (float)Steepness * 0.15f;
+                    AdjustUpperNorthWest = Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_SW:
-                    AdjustUpperSouthWest = (float)Steepness * 0.15f;
+                    AdjustUpperSouthWest = Steepness * 0.15f;
                     break;
             }
         }
@@ -3702,48 +3666,48 @@ public class TileMapRenderer : Loader
             switch (SlopeDir)
             {
                 case TILE_SLOPE_N:
-                    AdjustLowerNorth = -(float)Steepness * 0.15f;
+                    AdjustLowerNorth = -Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_S:
-                    AdjustLowerSouth = -(float)Steepness * 0.15f;
+                    AdjustLowerSouth = -Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_E:
-                    AdjustLowerEast = -(float)Steepness * 0.15f;
+                    AdjustLowerEast = -Steepness * 0.15f;
                     break;
                 case TILE_SLOPE_W:
-                    AdjustLowerWest = -(float)Steepness * 0.15f;
+                    AdjustLowerWest = -Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_NE:
-                    AdjustLowerSouthWest = -(float)Steepness * 0.15f;
+                    AdjustLowerSouthWest = -Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_SE:
-                    AdjustLowerNorthWest = -(float)Steepness * 0.15f;
+                    AdjustLowerNorthWest = -Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_NW:
-                    AdjustLowerSouthEast = -(float)Steepness * 0.15f;
+                    AdjustLowerSouthEast = -Steepness * 0.15f;
                     break;
                 case TILE_VALLEY_SW:
-                    AdjustLowerNorthEast = -(float)Steepness * 0.15f;
+                    AdjustLowerNorthEast = -Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_NE:
-                    AdjustLowerNorthWest = -(float)Steepness * 0.15f;
-                    AdjustLowerSouthEast = -(float)Steepness * 0.15f;
-                    AdjustLowerSouthWest = -(float)Steepness * 0.15f;
+                    AdjustLowerNorthWest = -Steepness * 0.15f;
+                    AdjustLowerSouthEast = -Steepness * 0.15f;
+                    AdjustLowerSouthWest = -Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_SE:
-                    AdjustLowerNorthWest = -(float)Steepness * 0.15f;
-                    AdjustLowerSouthWest = -(float)Steepness * 0.15f;
-                    AdjustLowerNorthEast = -(float)Steepness * 0.15f;
+                    AdjustLowerNorthWest = -Steepness * 0.15f;
+                    AdjustLowerSouthWest = -Steepness * 0.15f;
+                    AdjustLowerNorthEast = -Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_NW:
-                    AdjustLowerSouthWest = -(float)Steepness * 0.15f;
-                    AdjustLowerSouthEast = -(float)Steepness * 0.15f;
-                    AdjustLowerNorthEast = -(float)Steepness * 0.15f;
+                    AdjustLowerSouthWest = -Steepness * 0.15f;
+                    AdjustLowerSouthEast = -Steepness * 0.15f;
+                    AdjustLowerNorthEast = -Steepness * 0.15f;
                     break;
                 case TILE_RIDGE_SW:
-                    AdjustLowerNorthWest = -(float)Steepness * 0.15f;
-                    AdjustLowerSouthEast = -(float)Steepness * 0.15f;
-                    AdjustLowerNorthEast = -(float)Steepness * 0.15f;
+                    AdjustLowerNorthWest = -Steepness * 0.15f;
+                    AdjustLowerSouthEast = -Steepness * 0.15f;
+                    AdjustLowerNorthEast = -Steepness * 0.15f;
                     break;
 
             }
@@ -3772,10 +3736,8 @@ public class TileMapRenderer : Loader
         Material[] MatsToUse = new Material[NumberOfVisibleFaces + NumberOfSlopedFaces];
         Vector3[] verts = new Vector3[NumberOfVisibleFaces * 4 + +NumberOfSlopedFaces * 3];
         Vector2[] uvs = new Vector2[NumberOfVisibleFaces * 4 + NumberOfSlopedFaces * 3];
-        float offset = 0f;
         float floorHeight = (float)(Top * 0.15f);
         float baseHeight = (float)(Bottom * 0.15f);
-        float slopeHeight = 0;
         float dimX = t.DimX;
         float dimY = t.DimY;
 
@@ -3793,18 +3755,19 @@ public class TileMapRenderer : Loader
         //MeshCollider mc = Tile.AddComponent<MeshCollider>();
         //mc.sharedMesh=null;
 
-        Mesh mesh = new Mesh();
-        mesh.subMeshCount = NumberOfVisibleFaces + NumberOfSlopedFaces;//Should be no of visible faces
-                                                                       //Now allocate the visible faces to triangles.
+        Mesh mesh = new Mesh
+        {
+            subMeshCount = NumberOfVisibleFaces + NumberOfSlopedFaces//Should be no of visible faces
+        };
+        //Now allocate the visible faces to triangles.
         int FaceCounter = 0;//Tracks which number face we are now on.
                             //float PolySize= Top-Bottom;
                             //float uv0= (float)(Bottom*0.125f);
                             //float uv1=(PolySize / 8.0f) + (uv0);
-        float uv0 = 0f;
-        float uv1 = 0f;
-        CalcUV(Top, Bottom, out uv0, out uv1);
-        float uv0Slope = 0f;
-        float uv1Slope = 1f;
+        CalcUV(Top, Bottom, out float uv0, out float uv1);
+        float slopeHeight;
+        float uv0Slope;
+        float uv1Slope;
         if (Floor == 1)
         {
             CalcUV(Top + Steepness, Bottom, out uv0Slope, out uv1Slope);
@@ -3821,6 +3784,7 @@ public class TileMapRenderer : Loader
         {
             if (t.VisibleFaces[i] == true)
             {
+                float offset;
                 switch (i)
                 {
                     case vTOP:
@@ -3917,14 +3881,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(-1.2f * dimX, 1.2f * dimY, slopeHeight + AdjustLowerSouth + AdjustLowerWest);
                                             verts[index + 1] = new Vector3(-1.2f * dimX, 1.2f * dimY, slopeHeight + AdjustUpperNorth + AdjustUpperEast);
                                             verts[index + 2] = new Vector3(0f, 1.2f * dimY, slopeHeight + AdjustUpperNorth + AdjustUpperWest);
-
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -3932,8 +3897,8 @@ public class TileMapRenderer : Loader
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
-                                                uvs[index + 2] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);   //1, vertical alignment	
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 2] = new Vector2(1, uvToUse + Steepness * 0.125f);   //1, vertical alignment	
                                             }
                                             break;
                                         }
@@ -3947,14 +3912,16 @@ public class TileMapRenderer : Loader
                                             //uvs[index+0]= new Vector2(0,0);
                                             //uvs[index+1]= new Vector2(1,1);
                                             //uvs[index+2]= new Vector2(1,0);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge = 0;
+                                            float uvToUse;
                                             if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
+                                            float uv1edge;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -3964,16 +3931,14 @@ public class TileMapRenderer : Loader
                                                                                                                              //uvs[index+0]= new Vector2(0,0);//0, vertical alignment
                                                                                                                              //uvs[index+1]= new Vector2(1,  (float)Steepness*0.125f); //vertical + scale
                                                                                                                              //uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
-                                                uvs[index + 0] = new Vector2(0, uvToUse + (float)Steepness * 0.125f);
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);
+                                                uvs[index + 0] = new Vector2(0, uvToUse + Steepness * 0.125f);
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f);
                                                 uvs[index + 2] = new Vector2(1, uvToUse);
                                             }
                                             break;
                                         }
 
                                 }
-                                SlopeDir = origSlopeDir;
-
 
                                 SlopesAdded++;
                             }
@@ -4044,13 +4009,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(0f, 0f, slopeHeight + AdjustLowerNorth + AdjustLowerEast);
                                             verts[index + 1] = new Vector3(0f, 0f, slopeHeight + AdjustUpperSouth + AdjustUpperWest);
                                             verts[index + 2] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustUpperSouth + AdjustUpperEast);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -4058,8 +4025,8 @@ public class TileMapRenderer : Loader
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
-                                                uvs[index + 2] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);   //1, vertical alignment	
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 2] = new Vector2(1, uvToUse + Steepness * 0.125f);   //1, vertical alignment	
                                             }
                                             break;
                                         }
@@ -4070,13 +4037,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(0f, 0f, slopeHeight + AdjustLowerNorth + AdjustLowerEast);
                                             verts[index + 1] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustUpperSouth + AdjustUpperEast);
                                             verts[index + 2] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustLowerNorth + AdjustLowerWest);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -4086,16 +4055,14 @@ public class TileMapRenderer : Loader
                                                 //uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
-                                                uvs[index + 0] = new Vector2(0, uvToUse + (float)Steepness * 0.125f);
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);
+                                                uvs[index + 0] = new Vector2(0, uvToUse + Steepness * 0.125f);
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f);
                                                 uvs[index + 2] = new Vector2(1, uvToUse);
                                             }
                                             break;
                                         }
 
                                 }
-                                SlopeDir = origSlopeDir;
-
 
                                 SlopesAdded++;
                             }
@@ -4165,13 +4132,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(0f, 1.2f * dimY, slopeHeight + AdjustLowerEast + AdjustLowerSouth);
                                             verts[index + 1] = new Vector3(0f, 1.2f * dimY, slopeHeight + AdjustUpperWest + AdjustUpperNorth);
                                             verts[index + 2] = new Vector3(0f, 0f, slopeHeight + AdjustUpperWest + AdjustUpperSouth);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment		
                                             }
                                             else
@@ -4179,8 +4148,8 @@ public class TileMapRenderer : Loader
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
-                                                uvs[index + 2] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);   //1, vertical alignment	
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 2] = new Vector2(1, uvToUse + Steepness * 0.125f);   //1, vertical alignment	
                                             }
 
 
@@ -4193,14 +4162,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(0f, 1.2f * dimY, slopeHeight + AdjustUpperWest + AdjustUpperNorth);
                                             verts[index + 1] = new Vector3(0f, 0f, slopeHeight + AdjustUpperWest + AdjustUpperSouth);
                                             verts[index + 2] = new Vector3(0f, 0f, slopeHeight + AdjustLowerEast + AdjustLowerNorth);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
-
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -4210,16 +4180,14 @@ public class TileMapRenderer : Loader
                                                 //uvs[index+2]= new Vector2(1, (float)Steepness*0.125f);	//1, vertical alignment	
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
-                                                uvs[index + 0] = new Vector2(0, uvToUse + (float)Steepness * 0.125f);
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);
+                                                uvs[index + 0] = new Vector2(0, uvToUse + Steepness * 0.125f);
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f);
                                                 uvs[index + 2] = new Vector2(1, uvToUse);
                                             }
                                             break;
                                         }
 
                                 }
-                                SlopeDir = origSlopeDir;
-
 
                                 SlopesAdded++;
                             }
@@ -4290,13 +4258,15 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustLowerWest + AdjustLowerNorth);
                                             verts[index + 1] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustUpperEast + AdjustUpperSouth);
                                             verts[index + 2] = new Vector3(-1.2f * dimX, 1.2f * dimY, slopeHeight + AdjustUpperEast + AdjustUpperNorth);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             if (Floor == 1)
                                             {
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
@@ -4304,8 +4274,8 @@ public class TileMapRenderer : Loader
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(0, uvToUse + (float)Steepness * 0.125f); //vertical + scale
-                                                uvs[index + 2] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);   //1, vertical alignment	
+                                                uvs[index + 1] = new Vector2(0, uvToUse + Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 2] = new Vector2(1, uvToUse + Steepness * 0.125f);   //1, vertical alignment	
                                             }
                                             break;
                                         }
@@ -4316,8 +4286,9 @@ public class TileMapRenderer : Loader
                                             verts[index + 0] = new Vector3(-1.2f * dimX, 0f, slopeHeight + AdjustUpperEast + AdjustUpperSouth);
                                             verts[index + 1] = new Vector3(-1.2f * dimX, 1.2f * dimY, slopeHeight + AdjustUpperEast + AdjustUpperNorth);
                                             verts[index + 2] = new Vector3(-1.2f * dimX, 1.2f * dimY, slopeHeight + AdjustLowerWest + AdjustLowerSouth);
-                                            float uv0edge = 0; float uv1edge = 0; float uvToUse = 0;
-
+                                            float uv0edge;
+                                            float uv1edge;
+                                            float uvToUse;
                                             //if (t.shockEastOffset==0){uvToUse=+uv1edge;}else{uvToUse=-uv0edge;}
                                             //uvToUse=uv0edge;
                                             if (Floor == 1)
@@ -4325,15 +4296,15 @@ public class TileMapRenderer : Loader
                                                 CalcUV(Top + Steepness, Top, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }
                                                 uvs[index + 0] = new Vector2(0, uvToUse);//0, vertical alignment
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f); //vertical + scale
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f); //vertical + scale
                                                 uvs[index + 2] = new Vector2(1, uvToUse);   //1, vertical alignment	
                                             }
                                             else
                                             {
                                                 CalcUV(Bottom, Bottom - Steepness, out uv0edge, out uv1edge);
                                                 if (offset == 0) { uvToUse = +uv0edge; } else { uvToUse = uv0edge - offset; }//Ceil
-                                                uvs[index + 0] = new Vector2(0, uvToUse + (float)Steepness * 0.125f);
-                                                uvs[index + 1] = new Vector2(1, uvToUse + (float)Steepness * 0.125f);
+                                                uvs[index + 0] = new Vector2(0, uvToUse + Steepness * 0.125f);
+                                                uvs[index + 1] = new Vector2(1, uvToUse + Steepness * 0.125f);
                                                 uvs[index + 2] = new Vector2(1, uvToUse);
                                             }
                                             break;
@@ -4341,7 +4312,6 @@ public class TileMapRenderer : Loader
 
 
                                 }
-                                SlopeDir = origSlopeDir;
 
                                 SlopesAdded++;
                             }
@@ -4466,12 +4436,7 @@ public class TileMapRenderer : Loader
     /// <param name="RenderImmediate">If set to <c>true</c> render immediately. Otherwise wait for next frame.</param>
     public static void UpdateTile(int TileX, int TileY, short NewTileType, short NewFloorHeight, short NewFloorTexture, short NewWallTexture, bool RenderImmediate)
     {
-        //GameObject tileSelected;
         bool ReRenderNeighbours = false;
-        //= GameWorldController.FindTile(TileX,TileX,TileMap.SURFACE_FLOOR);
-        //Update entered info
-        //TileInfo tileToChange= CurrentTileMap().Tiles[TileX,TileY];
-
         if (RenderImmediate)
         {
             DestroyTile(TileX, TileY);
@@ -4487,17 +4452,8 @@ public class TileMapRenderer : Loader
         }
 
         CurrentTileMap().Tiles[TileX, TileY].tileType = NewTileType;
-        //int FloorHeight=0;
-        //if (int.TryParse(TileHeightDetails.text,out FloorHeight))
-        //{
         CurrentTileMap().Tiles[TileX, TileY].floorHeight = NewFloorHeight; //FloorHeight*2;	
-                                                                           //}
-
         CurrentTileMap().Tiles[TileX, TileY].floorTexture = NewFloorTexture;
-        //int ActualTextureIndex= CurrentTileMap().texture_map[FloorTextureSelect.value+48];
-        //CurrentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
-        //CurrentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
-        //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],CurrentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
 
         if (CurrentTileMap().Tiles[TileX, TileY].wallTexture != NewWallTexture)
         {
@@ -4512,49 +4468,33 @@ public class TileMapRenderer : Loader
 
             if (TileY > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX, TileY - 1].North = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX, TileY + 1].South = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileX > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX - 1, TileY].East = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (CurrentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
-             //{
                 CurrentTileMap().Tiles[TileX + 1, TileY].West = NewWallTexture;
                 ReRenderNeighbours = true;
-                //}
             }
-
         }
-
 
         if (RenderImmediate)
         {
-            //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],true,false,false,true);
-            TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, CurrentTileMap().Tiles[TileX, TileY], false, false, false, true);
+            RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, CurrentTileMap().Tiles[TileX, TileY], false, false, false, true);
         }
-
 
         if (ReRenderNeighbours)
         {
@@ -4571,24 +4511,15 @@ public class TileMapRenderer : Loader
                                 if (RenderImmediate)
                                 {
                                     DestroyTile(x + TileX, y + TileY);
-                                    //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,CurrentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
-                                    TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, CurrentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
+                                    RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, CurrentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
                                 }
                             }
                         }
                     }
                 }
-
             }
-
         }
-
-
-        //RefreshTileMap();
-
     }
-
-
 
     /// <summary>
     /// Destroys the tile at the specified location
@@ -4605,8 +4536,8 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
             case TileMap.TILE_DIAG_NE:
@@ -4617,15 +4548,15 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 tileSelected = GameWorldController.FindTile(x, y, TileMap.SURFACE_WALL);
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
             default:
@@ -4633,8 +4564,8 @@ public class TileMapRenderer : Loader
                 if (tileSelected != null)
                 {
                     tileSelected.gameObject.transform.position = GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
-                    tileSelected.name = tileSelected.name + "_destroyed";
-                    GameObject.DestroyImmediate(tileSelected);
+                    tileSelected.name += "_destroyed";
+                    Object.DestroyImmediate(tileSelected);
                 }
                 break;
         }
@@ -4680,8 +4611,6 @@ public class TileMapRenderer : Loader
         }
     }
 
-
-
     /// <summary>
     /// Renders a Terra Nova map using the Unity Terrain System
     /// </summary>
@@ -4689,15 +4618,14 @@ public class TileMapRenderer : Loader
     /// <param name="data"></param>
     /// Limit of 32 textures in a terrain so rotation is not implemented.
     /// <returns></returns>
-    public static bool RenderTNovaMapTerrain(Transform parent, char[] data)
+    public static bool RenderTNovaMapTerrain(Transform parent, byte[] data)
     {
         //Load the heights from tnova data
         float[,] height = GameWorldController.instance.TNovaTerrain.terrainData.GetHeights(0, 0, 513, 513); //new float[513, 513];
         short[,] texture = new short[513, 513];
         short[,] rotation = new short[513, 513];
-        long address_pointer = 0;
         int[] textureCounter = new int[64];
-        address_pointer = 0;
+        long address_pointer = 0;
         int meshcount = 1;
         float maxHeight = 0; float minHeight = 0;
 
@@ -4706,16 +4634,16 @@ public class TileMapRenderer : Loader
             for (int y = 0; y <= height.GetUpperBound(1); y++)
             {
                 meshcount++;
-                int byte0 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Texture
-                int byte1 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
-                int byte2 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Object object list index?
+                int byte0 = (int)getValAtAddress(data, address_pointer++, 8);//Texture
+                int byte1 = (int)getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
+                int byte2 = (int)getValAtAddress(data, address_pointer++, 8);//Object object list index?
 
                 if (byte0 > 191)
-                    byte0 = byte0 - 64;
+                    byte0 -= 64;
                 if (byte0 > 127)
-                    byte0 = byte0 - 128;
+                    byte0 -= 128;
                 if (byte0 > 63)
-                    byte0 = byte0 - 64;
+                    byte0 -= 64;
 
                 texture[x, y] = (short)byte0;
                 textureCounter[byte0]++;
@@ -4725,22 +4653,22 @@ public class TileMapRenderer : Loader
                 //UNITY has a limit of 32 textures in terrains. ignore rotation for the moment.
                 rotation[x, y] = (short)((byte1 & 0x0F) >> 2);
 
-                height[x, y] = (float)((byte2 << 4) | ((byte1 & 0xF0) >> 4));
+                height[x, y] = (byte2 << 4) | ((byte1 & 0xF0) >> 4);
                 if (byte2 > 0x7F)            //negative height
-                { height[x, y] = (float)(height[x, y] - 4096); }
+                { height[x, y] = height[x, y] - 4096; }
                 //height[x,y] =height[x,y] + 2048;
                 if ((x == 0) && (y == 0))
                 {
-                    maxHeight = (float)height[x, y];
-                    minHeight = (float)height[x, y];
+                    maxHeight = height[x, y];
+                    minHeight = height[x, y];
                 }
                 if (height[x, y] > maxHeight)
                 {
-                    maxHeight = (float)height[x, y];
+                    maxHeight = height[x, y];
                 }
                 if (height[x, y] < minHeight)
                 {
-                    minHeight = (float)height[x, y];
+                    minHeight = height[x, y];
                 }
 
             }
@@ -4797,9 +4725,11 @@ public class TileMapRenderer : Loader
         SplatPrototype[] tex = new SplatPrototype[totaltextures + 1];
         for (int i = 0; i <= textureMap.GetUpperBound(0); i++)
         {
-            tex[i] = new SplatPrototype();
-            tex[i].texture = (Texture2D)Resources.Load("Nova/Textures/" + textureMap[i]);   //Sets the texture
-            tex[i].tileSize = new Vector2(1, 1);    //Sets the size of the texture            
+            tex[i] = new SplatPrototype
+            {
+                texture = (Texture2D)Resources.Load("Nova/Textures/" + textureMap[i]),   //Sets the texture
+                tileSize = new Vector2(1, 1)    //Sets the size of the texture            
+            };
         }
         terrainData.splatPrototypes = tex;
 
@@ -4851,46 +4781,46 @@ public class TileMapRenderer : Loader
         return true;
     }
 
-    private static Texture2D TNovaMegaTexure(short[,] texture, short[,] rotation, Texture2D[] alltext , int SizeX, int SizeY ,int offsetX, int offsetY)
-    {
-       // Texture2D[] alltext = GetTNovaTextures();
-        Texture2D test = new Texture2D(SizeX * 64, SizeY * 64);
-        for (int x = 0; x < SizeX; x++)
-        {
-            for (int y = 0; y < SizeY; y++)
-            {
-                test.SetPixels(x * 64, y * 64, 64, 64, alltext[texture[x + offsetX, y + offsetY] + ((rotation[x + offsetX , y + offsetY]) * 64)].GetPixels());
-            }
-        }
-        test.Apply();
-        return test;
-        //UWHUD.instance.test.texture = test;
-    }
+    //private static Texture2D TNovaMegaTexure(short[,] texture, short[,] rotation, Texture2D[] alltext , int SizeX, int SizeY ,int offsetX, int offsetY)
+    //{
+    //   // Texture2D[] alltext = GetTNovaTextures();
+    //    Texture2D test = new Texture2D(SizeX * 64, SizeY * 64);
+    //    for (int x = 0; x < SizeX; x++)
+    //    {
+    //        for (int y = 0; y < SizeY; y++)
+    //        {
+    //            test.SetPixels(x * 64, y * 64, 64, 64, alltext[texture[x + offsetX, y + offsetY] + ((rotation[x + offsetX , y + offsetY]) * 64)].GetPixels());
+    //        }
+    //    }
+    //    test.Apply();
+    //    return test;
+    //    //UWHUD.instance.test.texture = test;
+    //}
 
-    private static Texture2D[] GetTNovaTextures()
-    {
-        Texture2D[] alltext = new Texture2D[64 * 4];
-        for (int i = 0; i < 64; i++)
-        {//rot =0
-            alltext[i] = ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + i), false);
-        }
-        for (int i = 64; i < 128; i++)
-        {//rot =1
-            alltext[i] = (Texture2D)Resources.Load("Nova/Textures/" + (i - 64));
-        }
+    //private static Texture2D[] GetTNovaTextures()
+    //{
+    //    Texture2D[] alltext = new Texture2D[64 * 4];
+    //    for (int i = 0; i < 64; i++)
+    //    {//rot =0
+    //        alltext[i] = ArtLoader.RotateTexture((Texture2D)Resources.Load("Nova/Textures/" + i), false);
+    //    }
+    //    for (int i = 64; i < 128; i++)
+    //    {//rot =1
+    //        alltext[i] = (Texture2D)Resources.Load("Nova/Textures/" + (i - 64));
+    //    }
 
-        for (int i = 128; i < 192; i++)
-        {//rot =2
-            alltext[i] = ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 128)), true);
-        }
+    //    for (int i = 128; i < 192; i++)
+    //    {//rot =2
+    //        alltext[i] = ArtLoader.RotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 128)), true);
+    //    }
 
-        for (int i = 192; i < 256; i++)
-        {//rot =3
-            alltext[i] = ArtLoader.rotateTexture(ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 192)), true), true);
-        }
+    //    for (int i = 192; i < 256; i++)
+    //    {//rot =3
+    //        alltext[i] = ArtLoader.RotateTexture(ArtLoader.RotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 192)), true), true);
+    //    }
 
-        return alltext;
-    }
+    //    return alltext;
+    //}
 
 
 
@@ -4900,10 +4830,10 @@ public class TileMapRenderer : Loader
     /// <param name="parent"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public static bool RenderTNovaMap(Transform parent, char[] data)
+    public static bool RenderTNovaMap(Transform parent, byte[] data)
     {
 
-//BlockSize * No of Blocks must equal 512, setting values too extremely may cause performance issues!
+        //BlockSize * No of Blocks must equal 512, setting values too extremely may cause performance issues!
         const int NoOfBlocks = 8;
         const int BlockSize = 64;
 
@@ -4919,7 +4849,6 @@ public class TileMapRenderer : Loader
         float brushSize = 12f;
 
         long address_pointer = 0;
-        address_pointer = 0;
         int meshcount = 1;
         short maxHeight = 0; short minHeight = 0;
         for (int x = 0; x <= height.GetUpperBound(0); x++)
@@ -4927,16 +4856,16 @@ public class TileMapRenderer : Loader
             for (int y = 0; y <= height.GetUpperBound(1); y++)
             {
                 meshcount++;
-                int byte0 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Texture
-                int byte1 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
-                int byte2 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Object object list index?
+                int byte0 = (int)getValAtAddress(data, address_pointer++, 8);//Texture
+                int byte1 = (int)getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
+                int byte2 = (int)getValAtAddress(data, address_pointer++, 8);//Object object list index?
 
                 if (byte0 > 191)
-                    byte0 = byte0 - 64;
+                    byte0 -= 64;
                 if (byte0 > 127)
-                    byte0 = byte0 - 128;
+                    byte0 -= 128;
                 if (byte0 > 63)
-                    byte0 = byte0 - 64;
+                    byte0 -= 64;
 
                 texture[x, y] = (short)byte0;
 
@@ -5006,8 +4935,10 @@ public class TileMapRenderer : Loader
 
                 //  MeshCollider mc = Tile.AddComponent<MeshCollider>();
                 // mc.sharedMesh=null;
-                Mesh mesh = new Mesh();
-                mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+                Mesh mesh = new Mesh
+                {
+                    indexFormat = UnityEngine.Rendering.IndexFormat.UInt32
+                };
                 meshcount = BlockSize * BlockSize;
                 mesh.subMeshCount = textureUsageCounter;
                 Vector3[] verts = new Vector3[meshcount * 4];
@@ -5020,15 +4951,15 @@ public class TileMapRenderer : Loader
                     {
                         // textureCount[texture[x,y]]++;//Tracks how many of each texture there is
                         float[] heights = new float[4];
-                        heights[0] = (float)-height[x, y];
-                        heights[1] = (float)-height[x, y + 1];
-                        heights[2] = (float)-height[x + 1, y + 1];
-                        heights[3] = (float)-height[x + 1, y];
+                        heights[0] = -height[x, y];
+                        heights[1] = -height[x, y + 1];
+                        heights[2] = -height[x + 1, y + 1];
+                        heights[3] = -height[x + 1, y];
 
                         //Allocate enough verticea and UVs for the faces
 
-                        float cornerX = (float)x * brushSize;
-                        float cornerY = (float)y * brushSize;
+                        float cornerX = x * brushSize;
+                        float cornerY = y * brushSize;
 
                         verts[0 + (4 * FaceCounter)] = new Vector3(cornerX + 0.0f, cornerY + 0.0f, heights[0]);
                         verts[1 + (4 * FaceCounter)] = new Vector3(cornerX + 0.0f, cornerY + brushSize, heights[1]);
@@ -5118,10 +5049,8 @@ public class TileMapRenderer : Loader
                 mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
                 mf.mesh = mesh;
-
             }
         }
-
         return true;
     }
 
@@ -5133,13 +5062,13 @@ public class TileMapRenderer : Loader
     /// <param name="t"></param>
     static void AddWaterContact(GameObject tile, TileInfo t)
     {
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
-            if (FloorTexture(fTOP, t) ==193)
+            if (FloorTexture(fTOP, t) == 193)
             {
                 tile.AddComponent<TileContactMud>();
                 return;
-            }           
+            }
         }
         tile.AddComponent<TileContactWater>();
     }

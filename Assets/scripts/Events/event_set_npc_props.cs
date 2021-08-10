@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class event_set_npc_props : event_base
 {
@@ -12,8 +11,9 @@ public class event_set_npc_props : event_base
         base.ExecuteEvent();
         int whoAmI = RawData[5];
         int newGoal = RawData[3];
-        int homeX = 0; int homeY = 0;
         NPC[] npc;
+        int homeX;
+        int homeY;
         if (whoAmI == 0)
         {
             //WhoAmI is in a different offset and this needs to process differently

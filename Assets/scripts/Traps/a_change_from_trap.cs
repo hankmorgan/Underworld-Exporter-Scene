@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class a_change_from_trap : trap_base
+﻿public class a_change_from_trap : trap_base
 {
     //Theory. Untested 
     //This is used to change the tile type &  wall/floor texture on all tiles in a level.
@@ -27,9 +24,9 @@ public class a_change_from_trap : trap_base
             return;
         }
 
-        short NewTileFloorTexture = (short)(ChangeTo.heading | (((ChangeTo.zpos >> 4) & 0x1) << 3));
+        short NewTileFloorTexture = (short)((int)ChangeTo.heading | (((ChangeTo.zpos >> 4) & 0x1) << 3));
 
-        short tileFloorCriteria = (short)(heading | (((zpos >> 4) & 0x1) << 3));
+        short tileFloorCriteria = (short)((int)heading | (((zpos >> 4) & 0x1) << 3));
 
         for (int x = 0; x <= 63; x++)
         {
@@ -39,7 +36,7 @@ public class a_change_from_trap : trap_base
                 if (quality == CurrentTileMap().Tiles[x, y].wallTexture)
                 {//This is probably a seperate test to the floor texture test above.
 
-                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality; 
+                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality;
                 }
 
                 if (CurrentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)
@@ -56,7 +53,7 @@ public class a_change_from_trap : trap_base
                     CurrentTileMap().Tiles[x, y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
                     if (ChangeTo.owner < 10)
                     {
-                        CurrentTileMap().Tiles[x, y].tileType = (short)ChangeTo.owner;
+                        CurrentTileMap().Tiles[x, y].tileType = ChangeTo.owner;
                     }
                     if (ChangeTo.zpos < 15)
                     {

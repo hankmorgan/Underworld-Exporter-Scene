@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Controls throwing objects into water
 /// </summary>
-public class TileContactWater : TileContact {
+public class TileContactWater : TileContact
+{
 
-    protected override void TileContactEvent (ObjectInteraction obj, Vector3 position)
-	{
+    protected override void TileContactEvent(ObjectInteraction obj, Vector3 position)
+    {
         switch (obj.item_id)
         {
             case 453://A water splash
-                return;              
+                return;
         }
         ObjectHitsWater(obj, position);
     }
@@ -20,8 +20,8 @@ public class TileContactWater : TileContact {
     {
         if (IsObjectDestroyable(obj))
         {
-            GameObject splash = Impact.SpawnHitImpact(453,position, splashanimstart(), splashanimstart()+4);
-            if (splash!=null)
+            GameObject splash = Impact.SpawnHitImpact(453, position, splashanimstart(), splashanimstart() + 4);
+            if (splash != null)
             {
                 if (ObjectInteraction.PlaySoundEffects)
                 {
@@ -39,7 +39,7 @@ public class TileContactWater : TileContact {
     /// <returns></returns>
     int splashanimstart()
     {
-        switch(_RES)
+        switch (_RES)
         {
             case GAME_UW2:
                 return 34;

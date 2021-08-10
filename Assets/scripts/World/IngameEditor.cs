@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class IngameEditor : GuiBase_Draggable
@@ -152,7 +151,7 @@ public class IngameEditor : GuiBase_Draggable
         FloorTextureMapSelect.ClearOptions();
         foreach (Transform child in FloorTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
 
         switch (_RES)
@@ -214,7 +213,7 @@ public class IngameEditor : GuiBase_Draggable
         WallTextureMapSelect.ClearOptions();
         foreach (Transform child in WallTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
         switch (_RES)
         {
@@ -275,7 +274,7 @@ public class IngameEditor : GuiBase_Draggable
         DoorTextureMapSelect.ClearOptions();
         foreach (Transform child in DoorTextureMapDisplay.transform)
         {//Remove the texture maps loaded in the controls
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
         switch (_RES)
         {
@@ -327,8 +326,7 @@ public class IngameEditor : GuiBase_Draggable
 
     public void ChangeLevel()
     {
-        int levelnotoload = 0;
-        if (int.TryParse(LevelNoToLoad.text, out levelnotoload))
+        if (int.TryParse(LevelNoToLoad.text, out int levelnotoload))
         {
             if (levelnotoload <= GameWorldController.instance.Tilemaps.GetUpperBound(0))
             {
@@ -387,7 +385,7 @@ public class IngameEditor : GuiBase_Draggable
         TileDetails.text = "X=" + TileX + " Y=" + TileY;
         TileTypeSelect.value = CurrentTileMap().Tiles[TileX, TileY].tileType;
 
-        TileHeightDetails.text = ((float)CurrentTileMap().Tiles[TileX, TileY].floorHeight / 2f).ToString();
+        TileHeightDetails.text = (CurrentTileMap().Tiles[TileX, TileY].floorHeight / 2f).ToString();
         FloorTextureSelect.value = CurrentTileMap().Tiles[TileX, TileY].floorTexture;
         WallTextureSelect.value = CurrentTileMap().Tiles[TileX, TileY].wallTexture;
         RefreshTileMap();
@@ -396,12 +394,10 @@ public class IngameEditor : GuiBase_Draggable
 
     public void UpdateTile()
     {
-        int DimX = 0; int DimY = 0;
-        int FloorHeight = 0;
         int WallTexture = WallTextureSelect.value;
         int FloorTexture = FloorTextureSelect.value;
         int TileTypeSelected = TileTypeSelect.value;
-        int.TryParse(TileHeightDetails.text, out FloorHeight);
+        int.TryParse(TileHeightDetails.text, out int FloorHeight);
 
         if (LockTileHeight.isOn)
         {
@@ -420,11 +416,11 @@ public class IngameEditor : GuiBase_Draggable
             WallTexture = -1;
         }
 
-        if (!int.TryParse(TileRangeX.text, out DimX))
+        if (!int.TryParse(TileRangeX.text, out int DimX))
         {
             DimX = 0;
         }
-        if (!int.TryParse(TileRangeY.text, out DimY))
+        if (!int.TryParse(TileRangeY.text, out int DimY))
         {
             DimY = 0;
         }
@@ -477,7 +473,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes up to this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimX) * -1));
+                            HeightToSet += (Mathf.Abs(DimX) * -1);
                         }
                         //else
                         //{//slopes up from this point
@@ -514,7 +510,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes down this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimX) * +1));
+                            HeightToSet += (Mathf.Abs(DimX) * +1);
                         }
                         //else
                         //{//slopes down from this point
@@ -551,7 +547,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinY < TileY)
                         {//Slopes up to this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimY) * -1));
+                            HeightToSet += (Mathf.Abs(DimY) * -1);
                         }
                         //else
                         //{//slopes up from this point
@@ -587,7 +583,7 @@ public class IngameEditor : GuiBase_Draggable
                         int HeightToSet = FloorHeight;
                         if (MinX < TileX)
                         {//Slopes down this point
-                            HeightToSet = (HeightToSet + (Mathf.Abs(DimY) * +1));
+                            HeightToSet += (Mathf.Abs(DimY) * +1);
                         }
                         //else
                         //{//slopes down from this point
@@ -809,22 +805,22 @@ public class IngameEditor : GuiBase_Draggable
     public void Teleport()
     {
 
-        float targetX = (float)TileX * 1.2f + 0.6f;
-        float targetY = (float)TileY * 1.2f + 0.6f;
+        float targetX = TileX * 1.2f + 0.6f;
+        float targetY = TileY * 1.2f + 0.6f;
         if (ObjectDetailsPanel.gameObject.activeInHierarchy)
         {
             if (currObj.ObjectTileX != 99)
             {
-                targetX = (float)currObj.ObjectTileX * 1.2f + 0.6f;
+                targetX = currObj.ObjectTileX * 1.2f + 0.6f;
             }
             if (currObj.ObjectTileY != 99)
             {
-                targetY = (float)currObj.ObjectTileY * 1.2f + 0.6f;
+                targetY = currObj.ObjectTileY * 1.2f + 0.6f;
             }
 
         }
 
-        float Height = ((float)(CurrentTileMap().GetFloorHeight(TileX, TileY))) * 0.15f;
+        float Height = CurrentTileMap().GetFloorHeight(TileX, TileY) * 0.15f;
         UWCharacter.Instance.gameObject.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
     }
 
@@ -931,11 +927,10 @@ public class IngameEditor : GuiBase_Draggable
     public static void UpdateFollowMeMode(int tileX, int tileY)
     {
         //int DimX=0;int DimY=0;
-        int FloorHeight = 0;
         int WallTexture = instance.WallTextureSelect.value;
         int FloorTexture = instance.FloorTextureSelect.value;
         int TileTypeSelected = instance.TileTypeSelect.value;
-        int.TryParse(instance.TileHeightDetails.text, out FloorHeight);
+        int.TryParse(instance.TileHeightDetails.text, out int FloorHeight);
 
         if (instance.LockTileHeight.isOn)
         {
@@ -954,7 +949,7 @@ public class IngameEditor : GuiBase_Draggable
             WallTexture = -1;
         }
         CurrentTileMap().Tiles[tileX, tileY].VisibleFaces[TileMap.vTOP] = true;
-        IngameEditor.instance.UpdateTile(tileX, tileY, TileTypeSelected, FloorTexture, WallTexture, FloorHeight);
+        instance.UpdateTile(tileX, tileY, TileTypeSelected, FloorTexture, WallTexture, FloorHeight);
     }
 
 
@@ -996,8 +991,7 @@ public class IngameEditor : GuiBase_Draggable
         {
             currObj.enchantment = 0;
         }
-        int val = 0;
-        if (int.TryParse(ObjectFlagValue.text, out val))
+        if (int.TryParse(ObjectFlagValue.text, out int val))
         {
             currObj.flags = (short)(val & 0x7);
             ObjectFlagValue.text = currObj.flags.ToString();
@@ -1118,7 +1112,7 @@ public class IngameEditor : GuiBase_Draggable
 
         if (currObj.instance != null)
         {
-           // Destroy(currObj.instance.gameObject);
+            // Destroy(currObj.instance.gameObject);
             ObjectInteraction.DestroyObjectFromUW(currObj.instance);
             Vector3 pos = ObjectLoader.CalcObjectXYZ(currObj.index, 0);
             ObjectInteraction.CreateNewObject(CurrentTileMap(),
@@ -1214,17 +1208,16 @@ public class IngameEditor : GuiBase_Draggable
 
     public void GenerateRandomLevel()
     {
-        int levelseed = 0;
-        if (int.TryParse(seed.text, out levelseed))
+        if (int.TryParse(seed.text, out int levelseed))
         {
             UnderworldGenerator.instance.GenerateLevel(levelseed);
             UnderworldGenerator.instance.RoomsToTileMap(CurrentTileMap(), CurrentTileMap().Tiles);
             GameWorldController.WorldReRenderPending = true;
             GameWorldController.FullReRender = true;
 
-            float targetX = (float)UnderworldGenerator.instance.startX * 1.2f + 0.6f;
-            float targetY = (float)UnderworldGenerator.instance.startY * 1.2f + 0.6f;
-            float Height = ((float)(CurrentTileMap().GetFloorHeight(UnderworldGenerator.instance.startX, UnderworldGenerator.instance.startY))) * 0.15f;
+            float targetX = UnderworldGenerator.instance.startX * 1.2f + 0.6f;
+            float targetY = UnderworldGenerator.instance.startY * 1.2f + 0.6f;
+            float Height = CurrentTileMap().GetFloorHeight(UnderworldGenerator.instance.startX, UnderworldGenerator.instance.startY) * 0.15f;
             UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
         }
     }

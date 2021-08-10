@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
+﻿using System.Collections;
 using System.IO;
+using System.Text;
 
 /// <summary>
 /// Class for holding game strings and returning formatted strings and text
@@ -566,17 +565,16 @@ public class StringController : UWEBase
         long address_pointer = 0;
         huffman_node[] hman;
         block_dir[] blocks;
-        char[] Buffer;
         string Key = "";
         GameStrings = new Hashtable();
         EntryCounts = new Hashtable();
 
-        if (DataLoader.ReadStreamFile(path, out Buffer))
+        if (Loader.ReadStreamFile(path, out byte[] Buffer))
         {
-            long NoOfNodes = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
+            long NoOfNodes = Loader.getValAtAddress(Buffer, address_pointer, 16);
             int i = 0;
             hman = new huffman_node[NoOfNodes];
-            address_pointer = address_pointer + 2;
+            address_pointer += 2;
             while (i < NoOfNodes)
             {
                 hman[i].symbol = System.Convert.ToChar(Buffer[address_pointer + 0]);
@@ -584,20 +582,20 @@ public class StringController : UWEBase
                 hman[i].left = Buffer[address_pointer + 2];
                 hman[i].right = Buffer[address_pointer + 3];
                 i++;
-                address_pointer = address_pointer + 4;
+                address_pointer += 4;
             }
 
-            long NoOfStringBlocks = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
+            long NoOfStringBlocks = Loader.getValAtAddress(Buffer, address_pointer, 16);
             blocks = new block_dir[NoOfStringBlocks];
-            address_pointer = address_pointer + 2;
+            address_pointer += 2;
             i = 0;
             while (i < NoOfStringBlocks)
             {
-                blocks[i].block_no = DataLoader.getValAtAddress(Buffer, address_pointer, 16);
-                address_pointer = address_pointer + 2;
-                blocks[i].address = DataLoader.getValAtAddress(Buffer, address_pointer, 32);
-                address_pointer = address_pointer + 4;
-                blocks[i].NoOfEntries = DataLoader.getValAtAddress(Buffer, blocks[i].address, 16);  //look ahead and get no of entries.
+                blocks[i].block_no = Loader.getValAtAddress(Buffer, address_pointer, 16);
+                address_pointer += 2;
+                blocks[i].address = Loader.getValAtAddress(Buffer, address_pointer, 32);
+                address_pointer += 4;
+                blocks[i].NoOfEntries = Loader.getValAtAddress(Buffer, blocks[i].address, 16);  //look ahead and get no of entries.
                 EntryCounts["_" + blocks[i].block_no] = blocks[i].NoOfEntries.ToString();
                 i++;
             }
@@ -616,8 +614,7 @@ public class StringController : UWEBase
 
                     int bit = 0;
                     int raw = 0;
-                    long node = 0;
-
+                    long node;
                     do
                     {
                         node = NoOfNodes - 1; // starting node
@@ -677,7 +674,6 @@ public class StringController : UWEBase
             if ((Result.Length > 0) && (Key.Length > 0))
             {//I still have the very last value to keep.
                 GameStrings[Key] = Result;
-                Result = "";
             }
         }
 
@@ -769,7 +765,7 @@ public class StringController : UWEBase
                     output = output.Replace("a_", objInt.link + "_");
                     output = output.Replace("an_", objInt.link + "_");
                     output = output.Replace("some_", objInt.link + "_");
-                    output = output + "s";
+                    output += "s";
                 }
             }
         }

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
 
 public class ObjectDatLoader : Loader
 {
@@ -151,23 +149,22 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 
     public ObjectDatLoader()
     {
-        char[] obj_dat;
         int add_ptr;
-        if (DataLoader.ReadStreamFile(Path.Combine(BasePath,"DATA" , "OBJECTS.DAT"), out obj_dat))
+        if (ReadStreamFile(Path.Combine(BasePath, "DATA", "OBJECTS.DAT"), out byte[] obj_dat))
         {
             add_ptr = 2;
             int j = 0;
             for (int i = 0; i < 16; i++)
             {
-                weaponStats[j].Slash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                weaponStats[j].Bash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
-                weaponStats[j].Stab = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 2, 8);
-                weaponStats[j].MinCharge = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 3, 8);
-                weaponStats[j].WeaponSpeed = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 8);
-                weaponStats[j].MaxCharge = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 5, 8);
-                weaponStats[j].Skill = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);
-                weaponStats[j].Durability = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 7, 8);
-                add_ptr = add_ptr + 8;
+                weaponStats[j].Slash = (short)getValAtAddress(obj_dat, add_ptr, 8);
+                weaponStats[j].Bash = (short)getValAtAddress(obj_dat, add_ptr + 1, 8);
+                weaponStats[j].Stab = (short)getValAtAddress(obj_dat, add_ptr + 2, 8);
+                weaponStats[j].MinCharge = (short)getValAtAddress(obj_dat, add_ptr + 3, 8);
+                weaponStats[j].WeaponSpeed = (short)getValAtAddress(obj_dat, add_ptr + 4, 8);
+                weaponStats[j].MaxCharge = (short)getValAtAddress(obj_dat, add_ptr + 5, 8);
+                weaponStats[j].Skill = (short)getValAtAddress(obj_dat, add_ptr + 6, 8);
+                weaponStats[j].Durability = (short)getValAtAddress(obj_dat, add_ptr + 7, 8);
+                add_ptr += 8;
                 j++;
             }
 
@@ -176,8 +173,8 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 8; i++)
             {//ranged weapon damage stats.
-                rangedStats[j].damage = (int)((DataLoader.getValAtAddress(obj_dat, add_ptr, 16) >> 9) & 0x7f);
-                add_ptr = add_ptr + 3;
+                rangedStats[j].damage = (int)((getValAtAddress(obj_dat, add_ptr, 16) >> 9) & 0x7f);
+                add_ptr += 3;
                 j++;
             }
             j = 0;
@@ -187,9 +184,9 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
              //rangedStats[j].ammo=0x10 + ((((int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) >> 9) & 0x7F));
              //rangedStats[j].ammo= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) ;
              //rangedStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8);
-                rangedStats[j].damage = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                rangedStats[j].ammo = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 2, 8) + 16;//an index into the ranged table+16;
-                add_ptr = add_ptr + 3;
+                rangedStats[j].damage = (int)getValAtAddress(obj_dat, add_ptr, 8);
+                rangedStats[j].ammo = (int)getValAtAddress(obj_dat, add_ptr + 2, 8) + 16;//an index into the ranged table+16;
+                add_ptr += 3;
                 j++;
             }
 
@@ -197,10 +194,10 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 32; i++)
             {
-                armourStats[j].protection = (short)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                armourStats[j].durability = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
-                armourStats[j].category = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 3, 8);
-                add_ptr = add_ptr + 4;
+                armourStats[j].protection = (short)getValAtAddress(obj_dat, add_ptr, 8);
+                armourStats[j].durability = (short)getValAtAddress(obj_dat, add_ptr + 1, 8);
+                armourStats[j].category = (short)getValAtAddress(obj_dat, add_ptr + 3, 8);
+                add_ptr += 4;
                 j++;
             }
 
@@ -209,10 +206,10 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 16; i++)
             {
-                containerStats[i].capacity = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                containerStats[i].objectsMask = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
-                containerStats[i].slots = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 2, 8);
-                add_ptr = add_ptr + 3;
+                containerStats[i].capacity = (int)getValAtAddress(obj_dat, add_ptr, 8);
+                containerStats[i].objectsMask = (int)getValAtAddress(obj_dat, add_ptr + 1, 8);
+                containerStats[i].slots = (int)getValAtAddress(obj_dat, add_ptr + 2, 8);
+                add_ptr += 3;
                 j++;
             }
 
@@ -221,9 +218,9 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 8; i++)
             {//Light sources
-                lightSourceStats[j].duration = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                lightSourceStats[j].brightness = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
-                add_ptr = add_ptr + 2;
+                lightSourceStats[j].duration = (int)getValAtAddress(obj_dat, add_ptr, 8);
+                lightSourceStats[j].brightness = (int)getValAtAddress(obj_dat, add_ptr + 1, 8);
+                add_ptr += 2;
                 j++;
             }
 
@@ -231,8 +228,8 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 16; i++)
             {//Nutrition stats
-                nutritionStats[j].FoodValue = (int)(sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-                add_ptr = add_ptr + 1;
+                nutritionStats[j].FoodValue = (sbyte)getValAtAddress(obj_dat, add_ptr, 8);
+                add_ptr++;
                 j++;
             }
 
@@ -241,65 +238,65 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 64; i++)
             {//Critters
-                critterStats[j].Level = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
-                critterStats[j].AvgHit = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 8);//Average Hitpoints - changed from uint16 to uint8
+                critterStats[j].Level = (int)getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
+                critterStats[j].AvgHit = (short)getValAtAddress(obj_dat, add_ptr + 4, 8);//Average Hitpoints - changed from uint16 to uint8
 
-                critterStats[j].Strength = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 5, 8); //Base damage calculations
-                critterStats[j].Dexterity = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);// attackscore calculations
-                critterStats[j].Intelligence = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 7, 8); //need to id usages. probably magic spell attacks
+                critterStats[j].Strength = (int)getValAtAddress(obj_dat, add_ptr + 5, 8); //Base damage calculations
+                critterStats[j].Dexterity = (int)getValAtAddress(obj_dat, add_ptr + 6, 8);// attackscore calculations
+                critterStats[j].Intelligence = (int)getValAtAddress(obj_dat, add_ptr + 7, 8); //need to id usages. probably magic spell attacks
 
-                critterStats[j].Remains = (int)((DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0xF0) >> 4);//Remains body
-                critterStats[j].Blood = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
+                critterStats[j].Remains = (int)((getValAtAddress(obj_dat, add_ptr + 8, 8) & 0xF0) >> 4);//Remains body
+                critterStats[j].Blood = (int)getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
 
-                critterStats[j].Race = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//Uwformats calls this General Type
+                critterStats[j].Race = (int)getValAtAddress(obj_dat, add_ptr + 9, 8);//Uwformats calls this General Type
 
-                critterStats[j].Passive = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
-                critterStats[j].Defence = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
-                critterStats[j].Speed = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
-                critterStats[j].Poison = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8) & 0xF;//Poison Damage
-                critterStats[j].Category = (int)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8));//& 0x1F);//Category
-                critterStats[j].EquipDamage = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
+                critterStats[j].Passive = (int)getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
+                critterStats[j].Defence = (int)getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
+                critterStats[j].Speed = (int)getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
+                critterStats[j].Poison = (int)getValAtAddress(obj_dat, add_ptr + 0xF, 8) & 0xF;//Poison Damage
+                critterStats[j].Category = (int)(getValAtAddress(obj_dat, add_ptr + 0x10, 8));//& 0x1F);//Category
+                critterStats[j].EquipDamage = (int)getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
 
                 critterStats[j].AttackChanceToHit = new int[3];
                 critterStats[j].AttackDamage = new int[3];
                 critterStats[j].AttackProbability = new int[3];
 
-                critterStats[j].AttackChanceToHit[0] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x13, 8);
-                critterStats[j].AttackDamage[0] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x14, 8);
-                critterStats[j].AttackProbability[0] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x15, 8);
+                critterStats[j].AttackChanceToHit[0] = (int)getValAtAddress(obj_dat, add_ptr + 0x13, 8);
+                critterStats[j].AttackDamage[0] = (int)getValAtAddress(obj_dat, add_ptr + 0x14, 8);
+                critterStats[j].AttackProbability[0] = (int)getValAtAddress(obj_dat, add_ptr + 0x15, 8);
 
-                critterStats[j].AttackChanceToHit[1] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x16, 8);
-                critterStats[j].AttackDamage[1] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x17, 8);
-                critterStats[j].AttackProbability[1] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x18, 8);
+                critterStats[j].AttackChanceToHit[1] = (int)getValAtAddress(obj_dat, add_ptr + 0x16, 8);
+                critterStats[j].AttackDamage[1] = (int)getValAtAddress(obj_dat, add_ptr + 0x17, 8);
+                critterStats[j].AttackProbability[1] = (int)getValAtAddress(obj_dat, add_ptr + 0x18, 8);
 
-                critterStats[j].AttackChanceToHit[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x19, 8);
-                critterStats[j].AttackDamage[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1A, 8);
-                critterStats[j].AttackProbability[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);
+                critterStats[j].AttackChanceToHit[2] = (int)getValAtAddress(obj_dat, add_ptr + 0x19, 8);
+                critterStats[j].AttackDamage[2] = (int)getValAtAddress(obj_dat, add_ptr + 0x1A, 8);
+                critterStats[j].AttackProbability[2] = (int)getValAtAddress(obj_dat, add_ptr + 0x1B, 8);
 
-                critterStats[j].Exp = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp
+                critterStats[j].Exp = (int)getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp
 
                 critterStats[j].Loot = new int[4];
                 critterStats[j].Loot[0] = -1; critterStats[j].Loot[1] = -1; critterStats[j].Loot[2] = -1; critterStats[j].Loot[3] = -1;
 
-                int byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20, 8);
+                int byte1 = (int)getValAtAddress(obj_dat, add_ptr + 0x20, 8);
                 if ((byte1 & 0x1) == 1)
                 {
                     critterStats[j].Loot[0] = byte1 >> 1;
                 }
 
-                byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 + 1, 8);
+                byte1 = (int)getValAtAddress(obj_dat, add_ptr + 0x20 + 1, 8);
                 if ((byte1 & 0x1) == 1)
                 {
                     critterStats[j].Loot[1] = byte1 >> 1;
                 }
 
-                byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 + 2, 16);
+                byte1 = (int)getValAtAddress(obj_dat, add_ptr + 0x20 + 2, 16);
                 if (byte1 != 0)
                 {
                     critterStats[j].Loot[2] = (byte1 >> 4);
                 }
 
-                byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 + 4, 16);
+                byte1 = (int)getValAtAddress(obj_dat, add_ptr + 0x20 + 4, 16);
                 if (byte1 != 0)
                 {
                     critterStats[j].Loot[3] = (byte1 >> 4);
@@ -311,8 +308,8 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 // critterStats[j].Spell0 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a, 8);
                 // critterStats[j].Spell1 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2b, 8);
                 // critterStats[j].Spell2 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2c, 8);
-                critterStats[j].Unk2D = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2d, 8));
-                critterStats[j].Unk2E = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2e, 8));
+                critterStats[j].Unk2D = (byte)(getValAtAddress(obj_dat, add_ptr + 0x2d, 8));
+                critterStats[j].Unk2E = (byte)(getValAtAddress(obj_dat, add_ptr + 0x2e, 8));
 
 
 
@@ -320,7 +317,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 // for (int k =0; k<= critterStats[j].Spells.GetUpperBound(0); k++)
                 for (int k = 0; k < 3; k++)
                 {//First 3 spells are stored in the critter data.
-                    critterStats[j].Spells[k] = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a + k, 8);
+                    critterStats[j].Spells[k] = (sbyte)getValAtAddress(obj_dat, add_ptr + 0x2a + k, 8);
                 }
                 //if (_RES == GAME_UW2)
                 //{//The remainder are retrieved when needded
@@ -350,7 +347,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 //}
 
 
-                add_ptr = add_ptr + 48;
+                add_ptr += 48;
                 j++;
             }
         }

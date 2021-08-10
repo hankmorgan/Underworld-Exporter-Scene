@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
@@ -13,10 +12,10 @@ public class a_proximity_trap : trap_base
     protected Vector3 boxCenter = Vector3.zero;
     private BoxCollider box;
 
-    protected override void Start ()
-	{
-	    boxDimensions= new Vector3(quality * 1.2f,0.2f,owner*1.2f);
-	    boxCenter = new Vector3(quality * 0.6f,0f,owner*0.6f);
+    protected override void Start()
+    {
+        boxDimensions = new Vector3(quality * 1.2f, 0.2f, owner * 1.2f);
+        boxCenter = new Vector3(quality * 0.6f, 0f, owner * 0.6f);
         box = this.gameObject.GetComponent<BoxCollider>();
         if (box == null)
         {
@@ -25,8 +24,8 @@ public class a_proximity_trap : trap_base
         box.size = boxDimensions;
         box.center = boxCenter;
         box.isTrigger = true;
-        base.Start ();
-	}
+        base.Start();
+    }
 
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
@@ -66,7 +65,7 @@ public class a_proximity_trap : trap_base
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld == false))
+        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld == false))
         {
             //Activate(other.gameObject);
             ExecuteTrap(this, owner, quality, flags);

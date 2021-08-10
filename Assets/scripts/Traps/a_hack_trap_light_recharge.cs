@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_hack_trap_light_recharge : a_hack_trap
 {

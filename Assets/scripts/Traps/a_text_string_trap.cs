@@ -1,31 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class a_text_string_trap : trap_base {
-/*
- 0190  a_text string trap
- causes the player to get a text message when it is set off. The
- "owner" field specifies string number per level, in game strings
- block 0009. The actual string number printed is (64*level + "owner")
+public class a_text_string_trap : trap_base
+{
+    /*
+     0190  a_text string trap
+     causes the player to get a text message when it is set off. The
+     "owner" field specifies string number per level, in game strings
+     block 0009. The actual string number printed is (64*level + "owner")
 
-*/
+    */
 
-	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
-	{
-		int StringNo=0;
+    public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
+    {
+        int StringNo;
+        switch (_RES)
+        {
+            case GAME_UW2:
+                StringNo = (32 * quality + owner);//I hope.
+                break;
+            default:
+                StringNo = (64 * GameWorldController.instance.LevelNo) + owner;
+                break;
+        }
 
-		switch (_RES)
-		{
-		case GAME_UW2:
-			StringNo=(32*quality + owner);//I hope.
-			break;
-		default:
-			StringNo=(64*GameWorldController.instance.LevelNo)+owner;	
-			break;
-		}
-
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9,StringNo));
-	}
+        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, StringNo));
+    }
 
 
     public override void PostActivate(object_base src)

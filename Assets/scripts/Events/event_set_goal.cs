@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class event_set_goal : event_always
+﻿public class event_set_goal : event_always
 {
 
     //Event that sets the goal for an NPC or a race
@@ -13,7 +10,7 @@ public class event_set_goal : event_always
         int WhoAmIorRace = RawData[4];
         int newGoal = RawData[5];
         int gtarg = RawData[6];
-        NPC[] npcs = null;
+        NPC[] npcs;
         if (isNPC)
         {
             npcs = findNPC(WhoAmIorRace);
@@ -53,6 +50,6 @@ public class event_set_goal : event_always
         else
         {
             return base.summary() + "\n\t\tRace=" + (int)RawData[4] + ",Goal=" + (int)RawData[5] + ",GTarg=" + (int)RawData[6];
-        }       
+        }
     }
 }

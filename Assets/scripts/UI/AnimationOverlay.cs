@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public class AnimationOverlay : UWEBase {
+public class AnimationOverlay : UWEBase
+{
     /*
     Animation overlay for special objects (eg water fountain sprays) that have animated frames.
 
@@ -22,12 +23,12 @@ public class AnimationOverlay : UWEBase {
                link1's most significant 10 bits contain a link into the master object
                list, to the object that should get an animation overlay.
 	 */
-    public int StartFrame=0;
-	public int FrameNo =0;
-	public int NoOfFrames=5;
-	public bool Active=true;
-	SpriteRenderer image;
-    public int OverlayIndex=0;
+    public int StartFrame = 0;
+    public int FrameNo = 0;
+    public int NoOfFrames = 5;
+    public bool Active = true;
+    SpriteRenderer image;
+    public int OverlayIndex = 0;
     public int StartingDuration = 65535;
 
     public int Duration
@@ -42,11 +43,11 @@ public class AnimationOverlay : UWEBase {
         }
     }
 
-	public bool Looping  //=true;//TODO: Make this refer to the animation overlay control
+    public bool Looping  //=true;//TODO: Make this refer to the animation overlay control
     {
         get
         {
-            if (CurrentTileMap().Overlays[OverlayIndex].duration<65535)
+            if (CurrentTileMap().Overlays[OverlayIndex].duration < 65535)
             {
                 return false;
             }
@@ -63,7 +64,7 @@ public class AnimationOverlay : UWEBase {
         TileMap.Overlay[] overlays = CurrentTileMap().Overlays;
         for (int i = 0; i <= overlays.GetUpperBound(0); i++)
         {
-        if ( overlays[i].link == 0)
+            if (overlays[i].link == 0)
             {
                 overlays[i].link = link;
                 overlays[i].tileX = tileX;
@@ -76,11 +77,12 @@ public class AnimationOverlay : UWEBase {
         return 0;
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         TileMap.Overlay[] overlays = CurrentTileMap().Overlays;
         int thislink = this.GetComponent<ObjectInteraction>().BaseObjectData.index;
-        for (int i=0; i<=overlays.GetUpperBound(0);i++)
+        for (int i = 0; i <= overlays.GetUpperBound(0); i++)
         {
             if (overlays[i].link == thislink)
             {
@@ -88,84 +90,84 @@ public class AnimationOverlay : UWEBase {
                 break;
             }
         }
-        if (OverlayIndex==0)
+        if (OverlayIndex == 0)
         {
             OverlayIndex = CreateOverlayEntry(thislink, this.GetComponent<ObjectInteraction>().ObjectTileX, this.GetComponent<ObjectInteraction>().ObjectTileY, StartingDuration);
         }
-		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-	
-		Go ();
-	}
+        image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 
-	public void Go()
-	{
-		FrameNo=StartFrame;
+        Go();
+    }
+
+    public void Go()
+    {
+        FrameNo = StartFrame;
         LoadAnimo(StartFrame);
-        StartCoroutine (Animate());
-	}
+        StartCoroutine(Animate());
+    }
 
-	public void Stop()
-	{
-		Active=false;
-	}
+    public void Stop()
+    {
+        Active = false;
+    }
 
-	void LoadAnimo(int index)
-	{
-		if (image==null)
-		{
-			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-		}
+    void LoadAnimo(int index)
+    {
+        if (image == null)
+        {
+            image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        }
 
-        if (image!=null)
-            {
-                image.sprite = GameWorldController.instance.TmAnimo.RequestSprite(index);//sprites[index];
-            }
-		
-	}
-	
-	public IEnumerator Animate()
-	{//Note is it likely that the owner value in the object is the animation frame we are on.
-        LoadAnimo (FrameNo);
-		//the count down of the sad butterfly like existance of an impact.
-		while (Active==true)
-		{
+        if (image != null)
+        {
+            image.sprite = GameWorldController.instance.TmAnimo.RequestSprite(index);//sprites[index];
+        }
+
+    }
+
+    public IEnumerator Animate()
+    {//Note is it likely that the owner value in the object is the animation frame we are on.
+        LoadAnimo(FrameNo);
+        //the count down of the sad butterfly like existance of an impact.
+        while (Active == true)
+        {
             bool HasEnded = false;
-			yield return new WaitForSeconds(0.2f);
-			if (Active==false)
-			{
-				yield break;
-			}
-			FrameNo++;
+            yield return new WaitForSeconds(0.2f);
+            if (Active == false)
+            {
+                yield break;
+            }
+            FrameNo++;
             if (!Looping)
             {
                 Duration--;
                 if (Duration <= 0)
                 {
                     EndAnimation();
-                    HasEnded = true;                    
+                    HasEnded = true;
                 }
-            }  
-			if (FrameNo>=StartFrame+NoOfFrames)
-			{
-				if (Looping==true)
-				{
-					FrameNo=StartFrame;
-					LoadAnimo (FrameNo);	
-				}
-				else
+            }
+            if (FrameNo >= StartFrame + NoOfFrames)
+            {
+                if (Looping == true)
+                {
+                    FrameNo = StartFrame;
+                    LoadAnimo(FrameNo);
+                }
+                else
                 {
                     if (!HasEnded)
                     {
                         EndAnimation();
-                    }                    
+                    }
                 }
             }
-			else
-			{//Loads the next animation fram;
-				LoadAnimo (FrameNo);
-			}
-		}
-	}
+            else
+            {//Loads the next animation fram;
+                LoadAnimo(FrameNo);
+            }
+        }
+    }
 
     private void EndAnimation()
     {

@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ApplyPaths : GuiBase
-    {
+{
     public void SetPaths()
     {
         GameWorldController.instance.config.paths.PATH_UW1 = UWHUD.instance.InputPathUW1.text;

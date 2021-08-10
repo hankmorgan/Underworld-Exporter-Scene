@@ -1,30 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using TMPro;
 using UnityEngine.UI;
-using TMPro;
 
-public class ScrollController : GuiBase {
-/*
- * API for controlling how text is displayed on the ui scroll
- * Controls splitting of strings, new lines, [more] 
- */
+public class ScrollController : GuiBase
+{
+    /*
+     * API for controlling how text is displayed on the ui scroll
+     * Controls splitting of strings, new lines, [more] 
+     */
 
-	public int LineWidth = 65;//No of characters in a line
+    public int LineWidth = 65;//No of characters in a line
 
-	public string[]txtToDisplay = new string[5];
+    public string[] txtToDisplay = new string[5];
 
-	//public UITextList uiIn;
-	public Text NewUIOUt;
+    //public UITextList uiIn;
+    public Text NewUIOUt;
     public TextMeshProUGUI TextOutput;
-	public int ptr;
-	public int MaxEntries;
-    
+    public int ptr;
+    public int MaxEntries;
+
     /// <summary>
     /// The input ctrl to include with this text box
     /// </summary>
     public InputField InputCtrl;
 
-	public bool useDragon;
+    public bool useDragon;
 
     /// <summary>
     /// Add a string to the list in a specified colour.
@@ -37,7 +36,7 @@ public class ScrollController : GuiBase {
 
         for (int i = 0; i <= Paragraphs.GetUpperBound(0); i++)
         {
-            ListAdd(ColourToUse+ Paragraphs[i] + "</color>");
+            ListAdd(ColourToUse + Paragraphs[i] + "</color>");
         }
         PrintList();
     }
@@ -71,65 +70,65 @@ public class ScrollController : GuiBase {
     }
 
     public void Set(string text)
-	{//Clears all text and sets the only text on the control
-		Clear();
-		Add(text);
-		PrintList();
-	}
+    {//Clears all text and sets the only text on the control
+        Clear();
+        Add(text);
+        PrintList();
+    }
 
-	public void DirectSet(string text)
-	{
-        if (NewUIOUt !=null)
+    public void DirectSet(string text)
+    {
+        if (NewUIOUt != null)
         {
             NewUIOUt.text = text;
         }
-		if (TextOutput!=null)
+        if (TextOutput != null)
         {
             TextOutput.text = text;
         }
-	}
+    }
 
-	public void Clear()
-	{
-		for (int i=0;i<=txtToDisplay.GetUpperBound(0);i++)
-		{
-			txtToDisplay[i] ="";
-		}
-		ptr=0;
-        DirectSet("");			
-	}
-
-
+    public void Clear()
+    {
+        for (int i = 0; i <= txtToDisplay.GetUpperBound(0); i++)
+        {
+            txtToDisplay[i] = "";
+        }
+        ptr = 0;
+        DirectSet("");
+    }
 
 
-	public void ListAdd(string text)
-	{			
-		if (ptr==MaxEntries)		
-		{			
-			for (int i=0;i<txtToDisplay.GetUpperBound(0);i++)
-			{//push the items up the list.
-					txtToDisplay[i] = txtToDisplay[i+1];
-			}	
-			txtToDisplay[ptr-1] = text;
-		}
-		else
-		{
-			txtToDisplay[ptr++] = text;		
-		}		
-	}
 
-	public void PrintList()
-	{
-		string result="";
+
+    public void ListAdd(string text)
+    {
+        if (ptr == MaxEntries)
+        {
+            for (int i = 0; i < txtToDisplay.GetUpperBound(0); i++)
+            {//push the items up the list.
+                txtToDisplay[i] = txtToDisplay[i + 1];
+            }
+            txtToDisplay[ptr - 1] = text;
+        }
+        else
+        {
+            txtToDisplay[ptr++] = text;
+        }
+    }
+
+    public void PrintList()
+    {
+        string result = "";
         string input = "";
-        if ((InputCtrl !=null))
+        if ((InputCtrl != null))
         {
             input = InputCtrl.text;
             if (InputCtrl.gameObject.GetComponent<InputHandler>() != null)
             {
                 if (InputCtrl.gameObject.GetComponent<InputHandler>().currentInputMode == InputHandler.InputAnvil)//limit value to Y/N
                 {
-                    if (input.Length>=1)
+                    if (input.Length >= 1)
                     {
                         string lastChar = input.Substring(input.Length - 1);
                         if (lastChar.ToUpper() == "Y")
@@ -148,13 +147,13 @@ public class ScrollController : GuiBase {
                         input = "No";
                         InputCtrl.text = "N";
                     }
-                }                  
+                }
             }
         }
 
-        for (int i=0;i<ptr;i++)
-		{
-            if (i==ptr-1)
+        for (int i = 0; i < ptr; i++)
+        {
+            if (i == ptr - 1)
             {
                 result = result + txtToDisplay[i] + " " + input + "\n";
             }
@@ -162,14 +161,14 @@ public class ScrollController : GuiBase {
             {
                 result = result + txtToDisplay[i] + "\n";
             }
-			
-		}
+
+        }
         DirectSet(result);
-		if (useDragon)
-		{
-			Dragons.MoveScroll();
-		}
-	}
+        if (useDragon)
+        {
+            Dragons.MoveScroll();
+        }
+    }
 
     /// <summary>
     /// Split text up into additional lines if they go over the line width of the controller
@@ -178,7 +177,7 @@ public class ScrollController : GuiBase {
     /// <returns></returns>
     string SplitText(string text)
     {
-        if (text.Length<=LineWidth)
+        if (text.Length <= LineWidth)
         {
             return text;
         }
@@ -187,7 +186,7 @@ public class ScrollController : GuiBase {
             //Find the last whitespace in the string before linewidth
             int index = text.Substring(0, LineWidth).LastIndexOf(" ");
             char[] chars = text.ToCharArray();
-            chars[index] =  '\n';
+            chars[index] = '\n';
             text = new string(chars);
             if (text.Length - LineWidth > LineWidth)
             {

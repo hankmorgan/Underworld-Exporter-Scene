@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Object loader info.
@@ -14,7 +13,7 @@ public class ObjectLoaderInfo : UWClass
     public int index;
 
     //Inventory Data. inventory data is not stored in a block of memory until write back so temp data is used here.
-    public char[] InventoryData;
+    public byte[] InventoryData;
 
     public bool IsInventory
     {//= false;
@@ -26,15 +25,15 @@ public class ObjectLoaderInfo : UWClass
     /// <summary>
     /// Referernce to the raw data for this item.
     /// </summary>
-    public char[] DataBuffer
+    public byte[] DataBuffer
     {
         get
         {
             if (IsInventory)
             {
-                if (InventoryData==null)
+                if (InventoryData == null)
                 {
-                    InventoryData = new char[8]; //8 bytes of static data.
+                    InventoryData = new byte[8]; //8 bytes of static data.
                 }
                 //return a ref to the players inventory buffer
                 return InventoryData;
@@ -54,20 +53,20 @@ public class ObjectLoaderInfo : UWClass
     {//0-8
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
-            return (int)DataLoader.ExtractBits(val, 0, 0x1FF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
+            return DataLoader.ExtractBits(val, 0, 0x1FF);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x1FF; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xFE00;
-            val = val | (value & 0x1ff);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (origItemID != item_id)
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xFE00;
+            val |= (value & 0x1ff);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
+            if ((origItemID != item_id) &&  (item_id !=0))
             {
-                Debug.Log("ItemID has changed");
+               Debug.Log("ItemID + for " + index + " has changed from " + origItemID + " to " + item_id);
             }
         }
     }
@@ -79,17 +78,17 @@ public class ObjectLoaderInfo : UWClass
     {//; //9-11
         get
         {// (short)(ExtractBits(Vals[0], 9, 0x7));
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 9, 0x7);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x7; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xF1FF;
-            val = val | ((value & 0x7) << 9);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xF1FF;
+            val |= ((value & 0x7) << 9);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
             if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
@@ -104,17 +103,17 @@ public class ObjectLoaderInfo : UWClass
     {//;   //12  (short)(ExtractBits(Vals[0], 12, 1));
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 12, 1);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xEFFF;
-            val = val | ((value & 0x1) << 12);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xEFFF;
+            val |= ((value & 0x1) << 12);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
             if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
@@ -127,17 +126,17 @@ public class ObjectLoaderInfo : UWClass
     {//;   //13 // (short)(ExtractBits(Vals[0], 13, 1))
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 13, 1);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xDFFF;
-            val = val | ((value & 0x1) << 13);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xDFFF;
+            val |= ((value & 0x1) << 13);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
             if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
@@ -148,18 +147,18 @@ public class ObjectLoaderInfo : UWClass
     public short invis     //14
     {//(short)(ExtractBits(Vals[0], 14, 1));
         get
-        {           
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
+        {
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 14, 1);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xBFFF;
-            val = val | ((value & 0x1) << 14);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0xBFFF;
+            val |= ((value & 0x1) << 14);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
             if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
@@ -171,18 +170,18 @@ public class ObjectLoaderInfo : UWClass
     {
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 15, 1);
         }
         set
         {
             int origItemID = item_id;
             value &= 0x1; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0x7FFF;
-            val = val | ((value & 0x1) << 15);
-            DataBuffer[PTR] = (char)(val & 0xFF);
-            DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (origItemID!=item_id)
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR, 16) & 0x7FFF;
+            val |= ((value & 0x1) << 15);
+            DataBuffer[PTR] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
+            if (origItemID != item_id)
             {
                 Debug.Log("ItemID has changed");
             }
@@ -199,16 +198,16 @@ public class ObjectLoaderInfo : UWClass
     {//; (short)(ExtractBits(Vals[1], 0, 0x7f)); 
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16);
             return (short)DataLoader.ExtractBits(val, 0, 0x7f);
         }
         set
         {
             value &= 0x7F; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFF80;
-            val = val | ((value & 0x7f));
-            DataBuffer[PTR + 2] = (char)(val & 0xFF);
-            DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFF80;
+            val |= ((value & 0x7f));
+            DataBuffer[PTR + 2] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 3] = (byte)((val >> 8) & 0xFF);
             if (zpos != value)
             {
                 Debug.Log("zpos!=newValue");
@@ -220,16 +219,16 @@ public class ObjectLoaderInfo : UWClass
     {//;(short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16);
             return (short)DataLoader.ExtractBits(val, 7, 0x7);
         }
         set
         {
             value &= 0x7; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFC7F;
-            val = val | ((value & 0x7) << 7);
-            DataBuffer[PTR + 2] = (char)(val & 0xFF);
-            DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xFC7F;
+            val |= ((value & 0x7) << 7);
+            DataBuffer[PTR + 2] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 3] = (byte)((val >> 8) & 0xFF);
             if (heading != value)
             {
                 Debug.Log("heading!=newValue");
@@ -242,16 +241,16 @@ public class ObjectLoaderInfo : UWClass
     {//(short)(ExtractBits(Vals[1], 10, 0x7));
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16);
             return (short)DataLoader.ExtractBits(val, 10, 0x7);
         }
         set
         {
             value &= 0x7; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xE3FF;
-            val = val | ((value & 0x7) << 10);
-            DataBuffer[PTR + 2] = (char)(val & 0xFF);
-            DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0xE3FF;
+            val |= ((value & 0x7) << 10);
+            DataBuffer[PTR + 2] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 3] = (byte)((val >> 8) & 0xFF);
             if (ypos != value)
             {
                 Debug.Log("ypos!=newValue");
@@ -264,16 +263,16 @@ public class ObjectLoaderInfo : UWClass
     {// (short)(ExtractBits(Vals[1], 13, 0x7));
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16);
             return (short)DataLoader.ExtractBits(val, 13, 0x7);
         }
         set
         {
             value &= 0x7; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0x1FFF;
-            val = val | ((value & 0x7) << 13);
-            DataBuffer[PTR + 2] = (char)(val & 0xFF);
-            DataBuffer[PTR + 3] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 2, 16) & 0x1FFF;
+            val |= ((value & 0x7) << 13);
+            DataBuffer[PTR + 2] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 3] = (byte)((val >> 8) & 0xFF);
             if (xpos != value)
             {
                 Debug.Log("xpos!=newValue");
@@ -286,16 +285,16 @@ public class ObjectLoaderInfo : UWClass
     { // (short)(ExtractBits(Vals[2], 0, 0x3f))
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 4, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16);
             return (short)DataLoader.ExtractBits(val, 0, 0x3f);
         }
         set
         {
             value &= 0x3F; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0xFFC0;
-            val = val | ((value & 0x3f));
-            DataBuffer[PTR + 4] = (char)(val & 0xFF);
-            DataBuffer[PTR + 5] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0xFFC0;
+            val |= ((value & 0x3f));
+            DataBuffer[PTR + 4] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 5] = (byte)((val >> 8) & 0xFF);
             if (quality != value)
             {
                 Debug.Log("quality!=newValue");
@@ -307,16 +306,16 @@ public class ObjectLoaderInfo : UWClass
     {//(short)(ExtractBits(Vals[2], 6, 0x3ff));
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 4, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16);
             return (short)DataLoader.ExtractBits(val, 6, 0x3ff);
         }
         set
         {
             value &= 0x3FF; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0x003F;
-            val = val | ((value & 0x3ff) << 6);
-            DataBuffer[PTR + 4] = (char)(val & 0xFF);
-            DataBuffer[PTR + 5] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 4, 16) & 0x003F;
+            val |= ((value & 0x3ff) << 6);
+            DataBuffer[PTR + 4] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 5] = (byte)((val >> 8) & 0xFF);
             if (next != value)
             {
                 Debug.Log("next!=newValue");
@@ -329,16 +328,16 @@ public class ObjectLoaderInfo : UWClass
     { // (short)(ExtractBits(Vals[2], 0, 0x3f))
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 6, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16);
             return (short)DataLoader.ExtractBits(val, 0, 0x3f);
         }
         set
         {
             value &= 0x3F; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0xFFC0;
-            val = val | ((value & 0x3f));
-            DataBuffer[PTR + 6] = (char)(val & 0xFF);
-            DataBuffer[PTR + 7] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0xFFC0;
+            val |= ((value & 0x3f));
+            DataBuffer[PTR + 6] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 7] = (byte)((val >> 8) & 0xFF);
             if (owner != value)
             {
                 Debug.Log("owner!=newValue");
@@ -350,16 +349,16 @@ public class ObjectLoaderInfo : UWClass
     {//(short)(ExtractBits(Vals[2], 6, 0x3ff));
         get
         {
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 6, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16);
             return (short)DataLoader.ExtractBits(val, 6, 0x3ff);
         }
         set
         {
             value &= 0x3FF; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0x003F;
-            val = val | ((value & 0x3ff) << 6);
-            DataBuffer[PTR + 6] = (char)(val & 0xFF);
-            DataBuffer[PTR + 7] = (char)((val >> 8) & 0xFF);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 6, 16) & 0x003F;
+            val |= ((value & 0x3ff) << 6);
+            DataBuffer[PTR + 6] = (byte)(val & 0xFF);
+            DataBuffer[PTR + 7] = (byte)((val >> 8) & 0xFF);
             if (link != value)
             {
                 Debug.Log("link!=newValue");
@@ -386,14 +385,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)(DataLoader.getValAtAddress(DataBuffer, PTR + 0x8, 8));
+            return (short)(Loader.getValAtAddress(DataBuffer, PTR + 0x8, 8));
         }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0x8] = (char)(value);
+                DataBuffer[PTR + 0x8] = (byte)(value);
                 if (npc_hp != value)
                 {
                     Debug.Log("npc_hp!=newvalue");
@@ -407,14 +406,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)DataLoader.getValAtAddress(DataBuffer, PTR + 0x9, 8);
-         }
+            return (short)Loader.getValAtAddress(DataBuffer, PTR + 0x9, 8);
+        }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0x9] = (char)value;
+                DataBuffer[PTR + 0x9] = (byte)value;
             }
         }
     }
@@ -433,8 +432,8 @@ public class ObjectLoaderInfo : UWClass
     //        if (!IsStatic)
     //        {
     //            value &= 0x1F; //Keep value in range;
-    //            int val = (char)(ProjectileHeadingMajor << 5) | (value & 0x1F);
-    //            DataBuffer[PTR + 0x9] = (char)val;
+    //            int val = (byte)(ProjectileHeadingMajor << 5) | (value & 0x1F);
+    //            DataBuffer[PTR + 0x9] = (byte)val;
     //        }
     //    }
 
@@ -453,8 +452,8 @@ public class ObjectLoaderInfo : UWClass
     //        if (!IsStatic)
     //        {
     //            value &= 0x7; //Keep value in range;
-    //            int val = (char)((value & 0x7) << 5) | (ProjectileHeadingMinor & 0x1F);
-    //            DataBuffer[PTR + 0x9] = (char)val;
+    //            int val = (byte)((value & 0x7) << 5) | (ProjectileHeadingMinor & 0x1F);
+    //            DataBuffer[PTR + 0x9] = (byte)val;
     //        }
     //    }
     //}
@@ -464,14 +463,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)(DataLoader.getValAtAddress(DataBuffer, PTR + 0xa, 8));
+            return (short)(Loader.getValAtAddress(DataBuffer, PTR + 0xa, 8));
         }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0xa] = (char)(value);
+                DataBuffer[PTR + 0xa] = (byte)(value);
             }
         }
     }
@@ -481,7 +480,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
             return (short)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
@@ -491,8 +490,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xF; //Keep value in range;
                 //unk << 12 | gtarg << 4 | goal
                 int val = (MobileUnk_0xB_12_F << 12) | (npc_gtarg << 4) | (value & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -502,7 +501,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
             return (short)(DataLoader.ExtractBits(val, 4, 0xFF));
         }
         set
@@ -513,9 +512,9 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xFF; //Keep value in range;
                 //unk << 12 | gtarg << 4 | goal
                 int val = (MobileUnk_0xB_12_F << 12) | (value << 4) | (npc_goal & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
-                if (npc_gtarg !=value)
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
+                if (npc_gtarg != value)
                 {
                     Debug.Log("Npc_Gtarg!=value");
                 }
@@ -528,7 +527,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xb, 16);
             return (short)(DataLoader.ExtractBits(val, 12, 0xF));
         }
         set
@@ -538,8 +537,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xF; //Keep value in range;
                 //unk << 12 | gtarg << 4 | goal
                 int val = (value << 12) | (npc_gtarg << 4) | (npc_goal & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -549,7 +548,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
@@ -559,8 +558,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xF; //Keep value in range;
                 //attitude << 13  | talkedto << 12 | d12_1 << 11 | 4FF << 4 | npc_level
                 int val = (npc_attitude << 13) | (npc_talkedto << 12) | (MobileUnk_0xD_12_1 << 11) | (MobileUnk_0xD_4_FF << 4) | (value & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
 
         }
@@ -571,7 +570,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 4, 0xff));
         }
         set
@@ -581,8 +580,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xFF; //Keep value in range;
                 //attitude << 13  | talkedto << 12 | d12_1 << 11 | 4FF << 4 | npc_level
                 int val = (npc_attitude << 13) | (npc_talkedto << 12) | (MobileUnk_0xD_12_1 << 11) | (value << 4) | (npc_level & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -592,7 +591,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 0xA, 1));
         }
     }
@@ -602,7 +601,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 12, 1));
         }
         set
@@ -612,8 +611,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x1; //Keep value in range;
                 //attitude << 13  | talkedto << 12 | d12_1 << 11 | 4FF << 4 | npc_level
                 int val = (npc_attitude << 13) | (npc_talkedto << 12) | (value << 11) | (MobileUnk_0xD_4_FF << 4) | (npc_level & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -623,7 +622,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 13, 1));
         }
         set
@@ -633,8 +632,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x1; //Keep value in range;
                 //attitude << 13  | talkedto << 12 | d12_1 << 11 | 4FF << 4 | npc_level
                 int val = (npc_attitude << 13) | ((value & 0x1) << 12) | (MobileUnk_0xD_12_1 << 11) | (MobileUnk_0xD_4_FF << 4) | (npc_level & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -644,7 +643,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
             return (short)(DataLoader.ExtractBits(val, 14, 0x3));
         }
         set
@@ -654,12 +653,12 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x3; //Keep value in range;
                 //attitude << 13  | talkedto << 12 | d12_1 << 11 | 4FF << 4 | npc_level
                 int val = (value << 13) | (npc_talkedto << 12) | (MobileUnk_0xD_12_1 << 11) | (MobileUnk_0xD_4_FF << 4) | (npc_level & 0xF);
-                DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xB] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0xC] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
-    
+
 
 
     public short MobileUnk_0xF_0_3F
@@ -667,7 +666,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
             return (short)(DataLoader.ExtractBits(val, 0, 0x3F));
         }
         set
@@ -677,8 +676,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x3F; //Keep value in range;
                 //unkFCF<<12 | npc_height <<6 | unkf03f
                 int val = (MobileUnk_0xF_C_F << 12) | (npc_height << 6) | (value & 0x3F);
-                DataBuffer[PTR + 0xf] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x10] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xf] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x10] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -688,7 +687,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
             return (short)(DataLoader.ExtractBits(val, 6, 0x3F));
         }
         set
@@ -698,8 +697,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x3f; //Keep value in range;
                 //unkFCF<<12 | npc_height <<6 | unkf03f
                 int val = (value << 12) | (npc_height << 6) | (MobileUnk_0xF_0_3F & 0x3f);
-                DataBuffer[PTR + 0xf] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x10] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xf] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x10] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -709,7 +708,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0xf, 16);
             return (short)(DataLoader.ExtractBits(val, 0xC, 0xF));
         }
         set
@@ -719,8 +718,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0x3f; //Keep value in range;
                 //unkFCF<<12 | npc_height <<6 | unkf03f
                 int val = (MobileUnk_0xF_C_F << 12) | (value << 6) | (MobileUnk_0xF_0_3F & 0x3f);
-                DataBuffer[PTR + 0xf] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x10] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0xf] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x10] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -731,14 +730,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)(DataLoader.getValAtAddress(DataBuffer, PTR + 0x11, 8));
+            return (short)(Loader.getValAtAddress(DataBuffer, PTR + 0x11, 8));
         }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0x11] = (char)(value);
+                DataBuffer[PTR + 0x11] = (byte)(value);
             }
         }
     }
@@ -748,14 +747,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)(DataLoader.getValAtAddress(DataBuffer, PTR + 0x12, 8));
+            return (short)(Loader.getValAtAddress(DataBuffer, PTR + 0x12, 8));
         }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0x12] = (char)(value);
+                DataBuffer[PTR + 0x12] = (byte)(value);
             }
         }
     }
@@ -765,14 +764,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)(DataLoader.getValAtAddress(DataBuffer, PTR + 0x13, 8));
+            return (short)(Loader.getValAtAddress(DataBuffer, PTR + 0x13, 8));
         }
         set
         {
             if (!IsStatic)
             {
                 value &= 0xFF; //Keep value in range;
-                DataBuffer[PTR + 0x13] = (char)(value);
+                DataBuffer[PTR + 0x13] = (byte)(value);
             }
         }
     }
@@ -782,7 +781,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x14, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x14, 8);
             return (short)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
@@ -790,7 +789,7 @@ public class ObjectLoaderInfo : UWClass
             value &= 0xF; //Keep value in range;
             //pitch<<4 | speed
             int val = (Projectile_Pitch << 4) | (value & 0xF);
-            DataBuffer[PTR + 0x14] = (char)(val);
+            DataBuffer[PTR + 0x14] = (byte)(val);
         }
     }
 
@@ -799,15 +798,15 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x14, 8);
-            return (short)(DataLoader.ExtractBits(val, 4, 0xF));           
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x14, 8);
+            return (short)(DataLoader.ExtractBits(val, 4, 0xF));
         }
         set
         {
             value &= 0xF; //Keep value in range;
             //pitch<<4 | speed
             int val = (value << 4) | (Projectile_Speed & 0xF);
-            DataBuffer[PTR + 0x14] = (char)(val);
+            DataBuffer[PTR + 0x14] = (byte)(val);
         }
     }
 
@@ -818,14 +817,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x15, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x15, 8);
             return (short)(DataLoader.ExtractBits(val, 0, 0x7));
         }
         set
         {
             value &= 0x7;//Keep in range
             int val = (MobileUnk_0x15_4_1F << 3) | (value & 0x7);
-            DataBuffer[PTR + 0x15] = (char)(val);
+            DataBuffer[PTR + 0x15] = (byte)(val);
         }
     }
 
@@ -834,14 +833,14 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x15, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x15, 8);
             return (short)(DataLoader.ExtractBits(val, 4, 0x1F));
         }
         set
         {
             value &= 0x1F;//Keep in range
             int val = (value << 3) | (npc_voidanim & 0x7);
-            DataBuffer[PTR + 0x15] = (char)(val);
+            DataBuffer[PTR + 0x15] = (byte)(val);
         }
     }
 
@@ -850,7 +849,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
             return (short)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
@@ -860,8 +859,8 @@ public class ObjectLoaderInfo : UWClass
                 value &= 0xf; //Keep value in range;
                               //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
                 int val = (npc_xhome << 9) | (npc_yhome << 4) | (value & 0xF);
-                DataBuffer[PTR + 0x16] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x17] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0x16] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x17] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -871,7 +870,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
             return (short)(DataLoader.ExtractBits(val, 4, 0x3F));
         }
         set
@@ -879,10 +878,10 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 value &= 0x3f; //Keep value in range;
-                              //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
+                               //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
                 int val = (npc_xhome << 9) | (value << 4) | (MobileUnk_0xF_0_3F & 0xF);
-                DataBuffer[PTR + 0x16] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x17] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0x16] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x17] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -892,7 +891,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
+            int val = (int)Loader.getValAtAddress(DataBuffer, PTR + 0x16, 16);
             return (short)(DataLoader.ExtractBits(val, 10, 0x3F));
         }
         set
@@ -900,10 +899,10 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 value &= 0x3f; //Keep value in range;
-                              //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
+                               //xhome<<9 | yhome << 4 | MobileUnk_0xF_0_3F
                 int val = (value << 9) | (npc_yhome << 4) | (MobileUnk_0xF_0_3F & 0xF);
-                DataBuffer[PTR + 0x16] = (char)(val & 0xFF);
-                DataBuffer[PTR + 0x17] = (char)((val >> 8) & 0xFF);
+                DataBuffer[PTR + 0x16] = (byte)(val & 0xFF);
+                DataBuffer[PTR + 0x17] = (byte)((val >> 8) & 0xFF);
             }
         }
     }
@@ -912,7 +911,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x18, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x18, 8);
             return (short)(DataLoader.ExtractBits(val, 0, 0x1F));
         }
         set
@@ -920,7 +919,7 @@ public class ObjectLoaderInfo : UWClass
             value &= 0x1F;//Keep in range
             //MobileUnk_0x18_5_7<<5 | npc_heading
             int val = (MobileUnk_0x18_5_7 << 5) | (value & 0x1F);
-            DataBuffer[PTR + 0x18] = (char)(val);
+            DataBuffer[PTR + 0x18] = (byte)(val);
         }
     }
 
@@ -929,7 +928,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x18, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x18, 8);
             return (short)(DataLoader.ExtractBits(val, 5, 0x7));
         }
         set
@@ -937,7 +936,7 @@ public class ObjectLoaderInfo : UWClass
             value &= 0x7;//Keep in range
             //MobileUnk_0x18_5_7<<5 | npc_heading
             int val = (value << 5) | (npc_heading & 0x1F);
-            DataBuffer[PTR + 0x18] = (char)(val);
+            DataBuffer[PTR + 0x18] = (byte)(val);
         }
     }
 
@@ -946,7 +945,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x19, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x19, 8);
             return (short)(DataLoader.ExtractBits(val, 0, 0x3F));
         }
         set
@@ -954,7 +953,7 @@ public class ObjectLoaderInfo : UWClass
             value &= 0x3F;//Keep in range
             //MobileUnk_0x19_6_3<<6 | npc_hunger
             int val = (MobileUnk_0x19_6_3 << 6) | (value & 0x1F);
-            DataBuffer[PTR + 0x19] = (char)(val);
+            DataBuffer[PTR + 0x19] = (byte)(val);
         }
     }
 
@@ -963,7 +962,7 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x19, 8);
+            int val = (int)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x19, 8);
             return (short)(DataLoader.ExtractBits(val, 6, 0x3));
         }
         set
@@ -971,7 +970,7 @@ public class ObjectLoaderInfo : UWClass
             value &= 0x3;//Keep in range
             //MobileUnk_0x19_6_3<<6 | npc_hunger
             int val = (value << 6) | (npc_hunger & 0x1F);
-            DataBuffer[PTR + 0x19] = (char)(val);
+            DataBuffer[PTR + 0x19] = (byte)(val);
         }
     }
 
@@ -981,13 +980,13 @@ public class ObjectLoaderInfo : UWClass
         get
         {
             if (IsStatic) { return 0; }
-            return (short)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x1a, 8);            
+            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0x1a, 8);
         }
         set
         {
             value &= 0xFF;//Keep in range
             //MobileUnk_0x19_6_3<<6 | npc_hunger
-            DataBuffer[PTR + 0x1a] = (char)value;
+            DataBuffer[PTR + 0x1a] = (byte)value;
         }
     }
 
@@ -1000,7 +999,7 @@ public class ObjectLoaderInfo : UWClass
     {
         get
         {
-            return (short)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xb, 16);
+            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xb, 16);
         }
         //Set using function SetCoordinateX as value is made up of multiple parameters
     }
@@ -1014,7 +1013,7 @@ public class ObjectLoaderInfo : UWClass
     {
         get
         {
-            return (short)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xc, 16);
+            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xc, 16);
         }
     }
 
@@ -1023,7 +1022,7 @@ public class ObjectLoaderInfo : UWClass
     {//(zpos<<3) + 0xFh is stored here
         get
         {
-            return (short)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xf, 16);
+            return (short)Loader.getValAtAddress(map.lev_ark_block.Data, PTR + 0xf, 16);
         }
     }
 
@@ -1037,8 +1036,8 @@ public class ObjectLoaderInfo : UWClass
     //My additions
     public short InUseFlag//Based on values and no of values in the mobile and static free lists.
     {
-    get{return 1;}
-    set{}
+        get { return 1; }
+        set { }
     }
 
 
@@ -1129,10 +1128,10 @@ public class ObjectLoaderInfo : UWClass
     {
         index = _index;
         map = _map;
-        guid=System.Guid.NewGuid();
+        guid = System.Guid.NewGuid();
         if (isWorldObject)
         {
-            parentList = GameWorldController.CurrentObjectList();
+            parentList = UWEBase.CurrentObjectList();
         }
         else
         {
@@ -1209,6 +1208,6 @@ public class ObjectLoaderInfo : UWClass
     {
         return GameWorldController.instance.objectMaster.objProp[item_id].startFrame;
     }
-     
+
 }
 

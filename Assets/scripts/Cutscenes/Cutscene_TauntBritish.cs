@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Cutscene_TauntBritish : Cuts {
+﻿public class Cutscene_TauntBritish : Cuts
+{
 
     //CS040.N01
     public override void Awake()

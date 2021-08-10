@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 
 public class WindowDetectUW : WindowDetect
@@ -50,7 +49,7 @@ public class WindowDetectUW : WindowDetect
         }
         if (JustClicked == true)
         {//Wait until the timer has gone down before allowing further clicks
-            WindowWaitCount = WindowWaitCount - Time.deltaTime;
+            WindowWaitCount -= Time.deltaTime;
             if (WindowWaitCount <= 0)
             {
                 JustClicked = false;
@@ -59,9 +58,9 @@ public class WindowDetectUW : WindowDetect
         }
 
         //Choose what actions to take.
-        switch (UWCharacter.InteractionMode)
+        switch (Character.InteractionMode)
         {
-            case UWCharacter.InteractionModeAttack:
+            case Character.InteractionModeAttack:
                 {
                     if (UWCharacter.Instance.PlayerMagic.ReadiedSpell != "")
                     {//Player has spell to fire off first
@@ -71,7 +70,7 @@ public class WindowDetectUW : WindowDetect
                     {//No attacks can be started while executing the last one.
                         return;
                     }
-                    if ((WindowDetectUW.CursorInMainWindow == false))
+                    if ((CursorInMainWindow == false))
                     {
                         MouseHeldDown = false;
                         UWCharacter.Instance.PlayerCombat.AttackCharging = false;
@@ -186,9 +185,9 @@ public class WindowDetectUW : WindowDetect
         {
             return;
         }
-        switch (UWCharacter.InteractionMode)
+        switch (Character.InteractionMode)
         {
-            case UWCharacter.InteractionModePickup:
+            case Character.InteractionModePickup:
                 ClickEvent(PtrID);
                 break;
             default:
@@ -223,9 +222,9 @@ public class WindowDetectUW : WindowDetect
                 return;
             }
         }
-        switch (UWCharacter.InteractionMode)
+        switch (Character.InteractionMode)
         {
-            case UWCharacter.InteractionModePickup:
+            case Character.InteractionModePickup:
                 break;
             default:
                 ClickEvent(ptrID);
@@ -249,26 +248,26 @@ public class WindowDetectUW : WindowDetect
         {//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
             if ((object_base.UseAvail) && (ptrID == -1))//Use on left click
             {
-                UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
+                Character.InteractionMode = Character.InteractionModeUse;
             }
             if ((object_base.PickAvail) && (ptrID == -2))//Pickup on right click
             {
-                UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+                Character.InteractionMode = Character.InteractionModePickup;
             }
             if ((object_base.TalkAvail) && (ptrID == -1))//Talk on left click
             {
-                UWCharacter.InteractionMode = UWCharacter.InteractionModeTalk;
+                Character.InteractionMode = Character.InteractionModeTalk;
             }
         }
         InteractionModeControl.UpdateNow = true;
-        switch (UWCharacter.InteractionMode)
+        switch (Character.InteractionMode)
         {
-            case UWCharacter.InteractionModeOptions://Options mode
+            case Character.InteractionModeOptions://Options mode
                 return;//do nothing
-            case UWCharacter.InteractionModeTalk://Talk
+            case Character.InteractionModeTalk://Talk
                 UWCharacter.Instance.TalkMode();
                 break;
-            case UWCharacter.InteractionModePickup://Pickup
+            case Character.InteractionModePickup://Pickup
                 if (CurrentObjectInHand != null)
                 {
                     UWWindowWait(1.0f);
@@ -279,12 +278,12 @@ public class WindowDetectUW : WindowDetect
                     UWCharacter.Instance.PickupMode(ptrID);
                 }
                 break;
-            case UWCharacter.InteractionModeLook://look
+            case Character.InteractionModeLook://look
                 UWCharacter.Instance.LookMode();//do nothing
                 break;
-            case UWCharacter.InteractionModeAttack: //attack
+            case Character.InteractionModeAttack: //attack
                 break;
-            case UWCharacter.InteractionModeUse://Use
+            case Character.InteractionModeUse://Use
                 if (CurrentObjectInHand != null)
                 {
                     UWCharacter.Instance.UseMode();
@@ -449,7 +448,7 @@ public class WindowDetectUW : WindowDetect
         }
         else
         {
-            if (WindowDetect.InMap == false)
+            if (InMap == false)
             {
                 //if ((Event.current.Equals(Event.KeyboardEvent("f")) && (WaitingForInput==false)))
                 if ((Event.current.keyCode == GameWorldController.instance.config.ToggleFullScreen) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
@@ -474,7 +473,7 @@ public class WindowDetectUW : WindowDetect
                 //if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
                 if ((Event.current.keyCode == GameWorldController.instance.config.ToggleMouseLook) && (WaitingForInput == false) && (Event.current.type == EventType.KeyDown))
                 {
-                    if (UWCharacter.InteractionMode != UWCharacter.InteractionModeOptions)
+                    if (Character.InteractionMode != Character.InteractionModeOptions)
                     {
                         if (UWCharacter.Instance.MouseLookEnabled == false)
                         {//Switch to mouse look.
@@ -492,7 +491,7 @@ public class WindowDetectUW : WindowDetect
             if (UWCharacter.Instance.MouseLookEnabled == false)
             {
                 //DrawCursor();
-               // UWHUD.instance.MessageScroll.Add(Time.time.ToString());
+                // UWHUD.instance.MessageScroll.Add(Time.time.ToString());
             }
             else
             {
@@ -504,7 +503,7 @@ public class WindowDetectUW : WindowDetect
                 //Added due to unity bug where mouse is offscreen!!!!
                 //UGH!!!
                 //WHen not in combat or with a readied spell.
-                if ((UWCharacter.InteractionMode != UWCharacter.InteractionModeAttack) && (UWCharacter.Instance.PlayerMagic.ReadiedSpell == ""))
+                if ((Character.InteractionMode != Character.InteractionModeAttack) && (UWCharacter.Instance.PlayerMagic.ReadiedSpell == ""))
                 {
                     if (JustClicked == false)
                     {
@@ -595,7 +594,7 @@ public class WindowDetectUW : WindowDetect
         UWCharacter.Instance.XAxis.enabled = true;
         UWCharacter.Instance.MouseLookEnabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;        
+        Cursor.visible = false;
         UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIcon;
     }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 //Taken and adapted from https://gist.github.com/ftvs/5822103
 public class CameraShake : UWEBase
 {
@@ -12,9 +11,9 @@ public class CameraShake : UWEBase
 
     // Amplitude of the shake. A larger value shakes the camera harder.
     private float shakeAmount = 0.7f;
-    private float decreaseFactor = 1.0f;
+    private readonly float decreaseFactor = 1.0f;
 
-    public static Vector3 CurrentShake= Vector3.zero;
+    public static Vector3 CurrentShake = Vector3.zero;
 
     public bool shaking = false;
     public static CameraShake instance;
@@ -42,10 +41,10 @@ public class CameraShake : UWEBase
         shakeDuration = duration;
     }
 
-   // void OnEnable()
+    // void OnEnable()
     //{
-       // originalPos = camTransform.localPosition;
-   // }
+    // originalPos = camTransform.localPosition;
+    // }
 
     void Update()
     {

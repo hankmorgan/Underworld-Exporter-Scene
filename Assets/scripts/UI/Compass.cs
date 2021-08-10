@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 public class Compass : GuiBase_Draggable
 {
@@ -27,7 +26,7 @@ public class Compass : GuiBase_Draggable
     private RawImage comp;
     public RawImage[] NorthIndicators = new RawImage[16];
 
-    private Texture2D[] CompassPoles = new Texture2D[4];
+    private readonly Texture2D[] CompassPoles = new Texture2D[4];
 
     public override void Start()
     {
@@ -73,17 +72,17 @@ public class Compass : GuiBase_Draggable
             //return "North";
             Offset = 0;
         }
-        else   if ((angle > 112.5) && (angle <= +157.5))
+        else if ((angle > 112.5) && (angle <= +157.5))
         {
             //return "NorthWest";		
             Offset = 7;
         }
-        else  if ((angle > 157.5) && (angle <= +180.0))
+        else if ((angle > 157.5) && (angle <= +180.0))
         {
             //return "West";	
             Offset = 6;
         }
-        else  if ((angle > -180.0) && (angle <= -157.5))
+        else if ((angle > -180.0) && (angle <= -157.5))
         {
             //return "West";	
             Offset = 5;
@@ -93,7 +92,7 @@ public class Compass : GuiBase_Draggable
             //return "southwest";	
             Offset = 5;
         }
-        else  if ((angle > -112.5) && (angle <= -67.5))
+        else if ((angle > -112.5) && (angle <= -67.5))
         {
             //return "south";		
             Offset = 4;
@@ -118,7 +117,7 @@ public class Compass : GuiBase_Draggable
 
     public static string getCompassHeading(GameObject src, GameObject dst)
     {//String representation of the above.
-        int Offset = Compass.getCompassHeadingOffset(src, dst);
+        int Offset = getCompassHeadingOffset(src, dst);
 
         return StringController.instance.GetString(1, StringController.str_to_the_north + Offset);  //36	
     }
@@ -182,14 +181,14 @@ public class Compass : GuiBase_Draggable
     public void OnClick()
     {
         if (Dragging == true) { return; }
-        if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) { return; }
+        if ((WindowDetect.WaitingForInput) || (ConversationVM.InConversation)) { return; }
         UWHUD.instance.MessageScroll.Clear();
         switch (_RES)
         {
             case GAME_UW2:
                 StatusStringForUW2(); break;
             default:
-                StatusStringForUW1();break;
+                StatusStringForUW1(); break;
         }
 
     }
@@ -227,7 +226,7 @@ public class Compass : GuiBase_Draggable
     private static void GetLabyrinthOfWorldsLevel()
     {
         GameWorldController.Worlds world = GameWorldController.GetWorld(GameWorldController.instance.LevelNo);
-        switch(world)
+        switch (world)
         {
             case GameWorldController.Worlds.Britannia:
                 //TODO: At start of game the fact your are in Britannia is not printed.
@@ -236,21 +235,21 @@ public class Compass : GuiBase_Draggable
                     + StringController.instance.GetString(1, 75));
                 break;
             case GameWorldController.Worlds.PrisonTower:
-                GetWorldKnowledgeString(0,76);break;
+                GetWorldKnowledgeString(0, 76); break;
             case GameWorldController.Worlds.Killorn:
-                GetWorldKnowledgeString(1,77); break;
+                GetWorldKnowledgeString(1, 77); break;
             case GameWorldController.Worlds.Ice:
-                GetWorldKnowledgeString(2,78); break;
+                GetWorldKnowledgeString(2, 78); break;
             case GameWorldController.Worlds.Talorus:
-                GetWorldKnowledgeString(3,79); break;
+                GetWorldKnowledgeString(3, 79); break;
             case GameWorldController.Worlds.Academy:
-                GetWorldKnowledgeString(4,80); break;
+                GetWorldKnowledgeString(4, 80); break;
             case GameWorldController.Worlds.Pits:
-                GetWorldKnowledgeString(5,82); break;
+                GetWorldKnowledgeString(5, 82); break;
             case GameWorldController.Worlds.Tomb:
-                GetWorldKnowledgeString(6,81); break;
+                GetWorldKnowledgeString(6, 81); break;
             case GameWorldController.Worlds.Ethereal:
-                GetWorldKnowledgeString(7,83); break;
+                GetWorldKnowledgeString(7, 83); break;
         }
     }
 
@@ -271,7 +270,7 @@ public class Compass : GuiBase_Draggable
     {
         int questval = Quest.instance.QuestVariables[131];
         questval = (questval >> index) & 0x1;
-        if (questval ==1)
+        if (questval == 1)
         {
             UWHUD.instance.MessageScroll.Add(
                 StringController.instance.GetString(1, 73) + StringController.instance.GetString(1, stringNo));
@@ -279,7 +278,7 @@ public class Compass : GuiBase_Draggable
         else
         {//Unknown alternate dimension
             UWHUD.instance.MessageScroll.Add(
-                StringController.instance.GetString(1, 73) 
+                StringController.instance.GetString(1, 73)
                 + StringController.instance.GetString(1, 74)
                 );
         }

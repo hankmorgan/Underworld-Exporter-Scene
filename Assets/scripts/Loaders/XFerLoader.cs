@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
+﻿using System.IO;
 
-public class XFerLoader : Loader {
-    public char[] auxPalVal; //= //new char[5,32];
-       //When aux pal is the following
-    //  0xf0   fade to red
-     // 0xf4   fade to blue
-     // 0xf8   fade to green 
-     // ????   fade to white   
-      //????   fade to black
+public class XFerLoader : Loader
+{
+    public byte[] auxPalVal; //= //new byte[5,32];
+                             //When aux pal is the following
+                             //  0xf0   fade to red
+                             // 0xf4   fade to blue
+                             // 0xf8   fade to green 
+                             // ????   fade to white   
+                             //????   fade to black
 
     //   0x0080      fade to red
     // 0x0100      fade to green
@@ -20,15 +18,15 @@ public class XFerLoader : Loader {
 
     public XFerLoader()
     {
-       // char[] pal_file;
-        filePath = Path.Combine(Loader.BasePath, "data\\xfer.dat");
-        if (DataLoader.ReadStreamFile(filePath, out auxPalVal))
+        // byte[] pal_file;
+        filePath = Path.Combine(BasePath, "data\\xfer.dat");
+        if (ReadStreamFile(filePath, out auxPalVal))
         {
             /*for (int a = 0; a <= auxPalVal.GetUpperBound(0); a++)
             {
                 for (int i = 0; i < 32; i++)
                 {
-                    //auxPalVal[a, i] = (char)DataLoader.getValAtAddress(pal_file, 0x80 + a * 32 + i, 8);
+                    //auxPalVal[a, i] = (byte)DataLoader.getValAtAddress(pal_file, 0x80 + a * 32 + i, 8);
                 }
             }*/
         }

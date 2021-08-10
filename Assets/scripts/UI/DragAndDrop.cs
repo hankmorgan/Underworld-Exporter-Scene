@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class DragAndDrop : MonoBehaviour
-{  
-	/*
+{
+    /*
 	 * unused test code
 	private bool _mouseState;
 	//private GameObject target;

@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Helm : Armour {
+﻿public class Helm : Armour
+{
 
     public override int GetActualSpellIndex()
     {
@@ -12,7 +10,7 @@ public class Helm : Armour {
         else
         {
             return link - 512;
-        }		
-	}
+        }
+    }
 
 }

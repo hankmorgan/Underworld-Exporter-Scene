@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class a_hack_trap_class_item : a_hack_trap
 {
     //Turns the item at index 995 in britannia castle into a specific item based on the skills of the player
 
 
-        //TODO: disassembly has shown this is actually based on skills not class. FIX
-        //Also probably the next item rather than specifically 995
-        
+    //TODO: disassembly has shown this is actually based on skills not class. FIX
+    //Also probably the next item rather than specifically 995
+
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        if (this.next ==0)
+        if (this.next == 0)
         {
             Debug.Log("Hack Trap Class Item has no next!");
             return;
@@ -25,17 +24,17 @@ public class a_hack_trap_class_item : a_hack_trap
         }
         Destroy(obj.GetComponent<object_base>());//Remove object base from the existing item so it can be changed further on.
 
-        
+
         //Get max magic skill score
         int MaxMagicSkillScore = Mathf.Max(UWCharacter.Instance.PlayerSkills.Casting, UWCharacter.Instance.PlayerSkills.ManaSkill);
 
         int MaxCombatSkillScore = 0;
         byte CombatSkillType = 0; //0=none, 1=sword, 2=axe, 3=mace; 4=missile, 5=unarmed.
-        if ( UWCharacter.Instance.PlayerSkills.Sword>MaxCombatSkillScore)
-            {
+        if (UWCharacter.Instance.PlayerSkills.Sword > MaxCombatSkillScore)
+        {
             MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Sword;
             CombatSkillType = 1;
-            }
+        }
         if (UWCharacter.Instance.PlayerSkills.Axe > MaxCombatSkillScore)
         {
             MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Axe;
@@ -46,7 +45,7 @@ public class a_hack_trap_class_item : a_hack_trap
             MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Mace;
             CombatSkillType = 3;
         }
-        if (UWCharacter.Instance.PlayerSkills.Missile> MaxCombatSkillScore)
+        if (UWCharacter.Instance.PlayerSkills.Missile > MaxCombatSkillScore)
         {
             MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Missile;
             CombatSkillType = 4;
@@ -57,12 +56,12 @@ public class a_hack_trap_class_item : a_hack_trap
             CombatSkillType = 5;
         }
 
-        if ((MaxMagicSkillScore==0) && (MaxCombatSkillScore==0))
+        if ((MaxMagicSkillScore == 0) && (MaxCombatSkillScore == 0))
         {//Both scores are zero. Give a shield - they will need it!
             obj.item_id = 60;
             obj.WorldDisplayIndex = 60;
             obj.InvDisplayIndex = 60;
-            obj.gameObject.AddComponent<Shield>();          
+            obj.gameObject.AddComponent<Shield>();
         }
         else
         {

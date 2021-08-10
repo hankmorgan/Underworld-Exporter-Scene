@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class InventorySlot : GuiBase
 {
     /*The slots containing items on the Inventory display*/
@@ -24,7 +24,7 @@ public class InventorySlot : GuiBase
 
     public void BeginDrag()
     {
-        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (UWCharacter.InteractionMode == UWCharacter.InteractionModeOptions))
+        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
         {//No inventory use
             return;
         }
@@ -32,7 +32,7 @@ public class InventorySlot : GuiBase
         {
             if (!ConversationVM.InConversation)
             {
-                UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+                Character.InteractionMode = Character.InteractionModePickup;
                 InteractionModeControl.UpdateNow = true;
             }
             ClickEvent(-2);
@@ -94,7 +94,7 @@ public class InventorySlot : GuiBase
     /// <param name="pointerID"></param>
     void ClickEvent(int pointerID)
     {
-        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (UWCharacter.InteractionMode == UWCharacter.InteractionModeOptions))
+        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
         {//No inventory use while using wizard eye.
             return;
         }
@@ -105,9 +105,9 @@ public class InventorySlot : GuiBase
         }
         if (UWCharacter.Instance.PlayerMagic.ReadiedSpell == "")
         {
-            switch (UWCharacter.InteractionMode)
+            switch (Character.InteractionMode)
             {
-                case UWCharacter.InteractionModeTalk://talk
+                case Character.InteractionModeTalk://talk
                     if (leftClick)
                     {//Left Click
                         UseFromSlot();
@@ -117,7 +117,7 @@ public class InventorySlot : GuiBase
                         LookFromSlot();
                     }
                     break;
-                case UWCharacter.InteractionModePickup://pickup
+                case Character.InteractionModePickup://pickup
                     if (leftClick)
                     {
                         LeftClickPickup();
@@ -127,7 +127,7 @@ public class InventorySlot : GuiBase
                         RightClickPickup();
                     }
                     break;
-                case UWCharacter.InteractionModeLook://look
+                case Character.InteractionModeLook://look
                     if (leftClick)
                     {//Left Click
                         UseFromSlot();
@@ -137,7 +137,7 @@ public class InventorySlot : GuiBase
                         LookFromSlot();
                     }
                     break;
-                case UWCharacter.InteractionModeAttack://attack
+                case Character.InteractionModeAttack://attack
                     if (leftClick)
                     {//Left Click
                         UseFromSlot();
@@ -147,7 +147,7 @@ public class InventorySlot : GuiBase
                         LookFromSlot();
                     }
                     break;
-                case UWCharacter.InteractionModeUse://use
+                case Character.InteractionModeUse://use
                     if ((WindowDetect.ContextUIEnabled) && (WindowDetect.ContextUIUse))
                     {
                         if ((leftClick) || (CurrentObjectInHand != null))
@@ -157,7 +157,7 @@ public class InventorySlot : GuiBase
                         else
                         {
                             RightClickPickup();
-                            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+                            Character.InteractionMode = Character.InteractionModePickup;
                             InteractionModeControl.UpdateNow = true;
                         }
                     }
@@ -167,7 +167,7 @@ public class InventorySlot : GuiBase
                     }
 
                     break;
-                case UWCharacter.InteractionModeInConversation:
+                case Character.InteractionModeInConversation:
                     ConversationClick(leftClick);
                     break;
             }
@@ -178,7 +178,7 @@ public class InventorySlot : GuiBase
             if (UWCharacter.Instance.PlayerMagic.InventorySpell == true)
             {
                 UWCharacter.Instance.PlayerMagic.ObjectInSlot = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(slotIndex);
-                UWCharacter.Instance.PlayerMagic.castSpell(this.gameObject, UWCharacter.Instance.PlayerMagic.ReadiedSpell, false);
+                UWCharacter.Instance.PlayerMagic.CastSpell(this.gameObject, UWCharacter.Instance.PlayerMagic.ReadiedSpell, false);
                 UWCharacter.Instance.PlayerMagic.SpellCost = 0;
                 UWHUD.instance.window.UWWindowWait(1.0f);
             }
@@ -228,9 +228,8 @@ public class InventorySlot : GuiBase
             //Special case Eating food dropped on helm slot
             if (SlotCategory == HELM)
             {
-                if(CurrentObjectInHand.Eat())
+                if (CurrentObjectInHand.Eat())
                 {//True is returned if some eating action has taken place.
-                    DoNotPickup = true;
                     return;
                 }
             }
@@ -255,7 +254,7 @@ public class InventorySlot : GuiBase
             }
         }
 
-       
+
         if (ObjectUsedOn == null)//No object in slot -> add to the slot
         {
             if (DoNotPickup == false)
@@ -315,7 +314,6 @@ public class InventorySlot : GuiBase
                 if (CurrentObjectInHand.GetItemType() == ObjectInteraction.FOOD)
                 {
                     CurrentObjectInHand.Use();
-                    DoNotPickup = true;
                     return;
                 }
             }
@@ -465,7 +463,7 @@ public class InventorySlot : GuiBase
         {
             UWHUD.instance.ConversationButtonParent.SetActive(true);
             UWHUD.instance.MessageScroll.Set("");
-           // UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
+            // UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
         }
 
         if (quant == 0)
@@ -487,7 +485,7 @@ public class InventorySlot : GuiBase
             {
                 //split the obj. 
                 ObjectInteraction objI = QuantityObj.GetComponent<ObjectInteraction>();
-                objI.link = objI.link - quant;
+                objI.link -= quant;
                 ObjectLoaderInfo newObj = ObjectLoader.newWorldObject(objI.item_id, objI.quality, objI.owner, quant, -1);
                 newObj.is_quant = 1;
                 ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(CurrentTileMap(), newObj, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker, GameWorldController.instance.InventoryMarker.transform.position);
@@ -508,14 +506,14 @@ public class InventorySlot : GuiBase
 
     void TemporaryLookAt()
     {/*For looking at items temporarily in conversations where I need to restore the original log text*/
-        if (InventorySlot.LookingAt == true)
+        if (LookingAt == true)
         { return; }//Only look at one thing at a time.
 
         ObjectInteraction objInt = GetGameObjectInteration();
         if (objInt != null)
         {
-            InventorySlot.LookingAt = true;
-            InventorySlot.TempLookAt = UWHUD.instance.MessageScroll.NewUIOUt.text;
+            LookingAt = true;
+            TempLookAt = UWHUD.instance.MessageScroll.NewUIOUt.text;
             StartCoroutine(ClearTempLookAt());
             UWHUD.instance.MessageScroll.DirectSet(StringController.instance.GetFormattedObjectNameUW(objInt));
         }
@@ -526,7 +524,7 @@ public class InventorySlot : GuiBase
 
         Time.timeScale = 0.1f;
         yield return new WaitForSeconds(0.1f);
-        InventorySlot.LookingAt = false;
+        LookingAt = false;
         if (ConversationVM.InConversation == true)
         {
             Time.timeScale = 0.00f;
@@ -535,7 +533,7 @@ public class InventorySlot : GuiBase
         {
             Time.timeScale = 1.0f;//just in case a conversation is ended while looking.
         }
-        UWHUD.instance.MessageScroll.DirectSet(InventorySlot.TempLookAt);
+        UWHUD.instance.MessageScroll.DirectSet(TempLookAt);
     }
 
     /// <summary>
@@ -549,20 +547,19 @@ public class InventorySlot : GuiBase
 
         if (objInt != null)
         {
-            string ObjectName = "";
             string UseString = "";
-            ObjectName = objInt.GetComponent<object_base>().ContextMenuDesc(objInt.item_id);
+            string ObjectName = objInt.GetComponent<object_base>().ContextMenuDesc(objInt.item_id);
             if (CurrentObjectInHand == null)
             {
-                switch (UWCharacter.InteractionMode)
+                switch (Character.InteractionMode)
                 {
-                    case UWCharacter.InteractionModeUse:
+                    case Character.InteractionModeUse:
                         UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.PickupVerb();
                         break;
-                    case UWCharacter.InteractionModeLook:
+                    case Character.InteractionModeLook:
                         UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.ExamineVerb();
                         break;
-                    case UWCharacter.InteractionModePickup:
+                    case Character.InteractionModePickup:
                         UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.PickupVerb();
                         break;
 

@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Cutscene_SeeThyFuture : Cutscene_GuardianTaunts {
+﻿public class Cutscene_SeeThyFuture : Cutscene_GuardianTaunts
+{
 
     public override void Awake()
     {

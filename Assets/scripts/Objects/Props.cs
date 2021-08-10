@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
+﻿/// <summary>
 /// Base class for properties files
 /// </summary>
-public class Props : UWClass   {
+public class Props : UWClass
+{
 
-		//public string _RES="UW1";
+    //public string _RES="UW1";
 }

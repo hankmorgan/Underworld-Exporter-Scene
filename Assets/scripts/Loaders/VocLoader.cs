@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Class for loading VOC audio files
 /// </summary>
-public class VocLoader : Loader {
+public class VocLoader : Loader
+{
 
     public AudioClip Audio;
     public int DataSize;
@@ -16,8 +15,7 @@ public class VocLoader : Loader {
 
     public VocLoader(string clipPath, string clipName)
     {
-        char[] VocData;
-        if (ReadStreamFile(clipPath, out VocData))
+        if (ReadStreamFile(clipPath, out byte[] VocData))
         {
             ProcessAudioBytes(VocData, clipName);
         }
@@ -28,18 +26,18 @@ public class VocLoader : Loader {
     }
 
 
-    public VocLoader(char[] VocData, string clipName)
+    public VocLoader(byte[] VocData, string clipName)
     {
         ProcessAudioBytes(VocData, clipName);
     }
 
-    private void ProcessAudioBytes(char[] VocData, string clipName)
+    private void ProcessAudioBytes(byte[] VocData, string clipName)
     {
         string Header = "";
         //Check file header
         for (int i = 0; i < 19; i++)
         {
-            Header = Header + VocData[i];
+            Header += VocData[i];
         }
         if (Header == "Creative Voice File")
         {
@@ -55,7 +53,7 @@ public class VocLoader : Loader {
                 {
                     if (i + 32 <= VocData.GetUpperBound(0))
                     {
-                        samples[i] = (float)(VocData[i + 32] / 255f);
+                        samples[i] = VocData[i + 32] / 255f;
                     }
                 }
                 Audio = AudioClip.Create(clipName, DataSize, 1, Hertz, false);

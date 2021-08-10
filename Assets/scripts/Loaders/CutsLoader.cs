@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 public class CutsLoader : ArtLoader
 {
 
     public Texture2D[] ImageCache = new Texture2D[1];
-    char[] dstImage; //repeating buffer
+    byte[] dstImage; //repeating buffer
 
 
     struct lpHeader
@@ -30,7 +29,7 @@ public class CutsLoader : ArtLoader
 
     public CutsLoader(string File)
     {
-        filePath =Path.Combine(BasePath, "CUTS", File.ToUpper());
+        filePath = Path.Combine(BasePath, "CUTS", File.ToUpper());
         if (LoadImageFile())
         {
             ReadCutsFile(ref ImageFileData, UseAlpha(File), UseErrorHandling(File));
@@ -71,7 +70,7 @@ public class CutsLoader : ArtLoader
     /// Reads the cuts file.
     /// </summary>
     /// <param name="cutsFile">Cuts file.</param>
-    public void ReadCutsFile(ref char[] cutsFile, bool Alpha, bool ErrorHandling)
+    public void ReadCutsFile(ref byte[] cutsFile, bool Alpha, bool ErrorHandling)
     {
         long addptr = 0;
         int imagecount = 0;
@@ -93,23 +92,23 @@ The whole header is 128 bytes long. After the header color cycling info
 follows (which also is 128 bytes long), which is not used in uw1. Then
 comes the color palette:*/
         lpHeader lpH;
-        lpH.NoOfPages = (int)DataLoader.getValAtAddress(cutsFile, 0x6, 16);
-        lpH.NoOfRecords = (int)DataLoader.getValAtAddress(cutsFile, 0x8, 32);
-        lpH.width = (int)DataLoader.getValAtAddress(cutsFile, 0x14, 16);
-        lpH.height = (int)DataLoader.getValAtAddress(cutsFile, 0x16, 16);
-        lpH.nFrames = (int)DataLoader.getValAtAddress(cutsFile, 0x40, 16);
+        lpH.NoOfPages = (int)getValAtAddress(cutsFile, 0x6, 16);
+        lpH.NoOfRecords = (int)getValAtAddress(cutsFile, 0x8, 32);
+        lpH.width = (int)getValAtAddress(cutsFile, 0x14, 16);
+        lpH.height = (int)getValAtAddress(cutsFile, 0x16, 16);
+        lpH.nFrames = (int)getValAtAddress(cutsFile, 0x40, 16);
         addptr += 128;//past header.
         addptr += 128;//colour cycling info.
 
         //Init the buffer
-        dstImage = new char[lpH.height * lpH.width + 4000];
+        dstImage = new byte[lpH.height * lpH.width + 4000];
 
         //Read in the palette
         for (int i = 0; i < 256; i++)
         {
-            pal.blue[i] = (byte)DataLoader.getValAtAddress(cutsFile, addptr++, 8);
-            pal.green[i] = (byte)DataLoader.getValAtAddress(cutsFile, addptr++, 8);
-            pal.red[i] = (byte)DataLoader.getValAtAddress(cutsFile, addptr++, 8);
+            pal.blue[i] = (byte)getValAtAddress(cutsFile, addptr++, 8);
+            pal.green[i] = (byte)getValAtAddress(cutsFile, addptr++, 8);
+            pal.red[i] = (byte)getValAtAddress(cutsFile, addptr++, 8);
             addptr++;//skip reserved.
                      //pal.reserved = fgetc(fd);
         }
@@ -118,12 +117,12 @@ comes the color palette:*/
         lp_descriptor[] lpd = new lp_descriptor[256];
         for (int i = 0; i < lpd.GetUpperBound(0); i++)
         {
-            lpd[i].baseRecord = (int)DataLoader.getValAtAddress(cutsFile, addptr, 16);
-            lpd[i].nRecords = (int)DataLoader.getValAtAddress(cutsFile, addptr + 2, 16);
-            lpd[i].nBytes = (int)DataLoader.getValAtAddress(cutsFile, addptr + 4, 16);
-            addptr = addptr + 6;
+            lpd[i].baseRecord = (int)getValAtAddress(cutsFile, addptr, 16);
+            lpd[i].nRecords = (int)getValAtAddress(cutsFile, addptr + 2, 16);
+            lpd[i].nBytes = (int)getValAtAddress(cutsFile, addptr + 4, 16);
+            addptr += 6;
         }
-        char[] pages = new char[cutsFile.GetUpperBound(0) - 2816 + 1];
+        byte[] pages = new byte[cutsFile.GetUpperBound(0) - 2816 + 1];
         for (int i = 0; i <= pages.GetUpperBound(0); i++)
         {
             pages[i] = cutsFile[i + 2816];
@@ -144,9 +143,9 @@ comes the color palette:*/
             long curlp = addptr;
             //long page= addptr;
             lp_descriptor curl;
-            curl.baseRecord = (int)DataLoader.getValAtAddress(pages, curlp + 0, 16);
-            curl.nRecords = (int)DataLoader.getValAtAddress(pages, curlp + 2, 16);
-            curl.nBytes = (int)DataLoader.getValAtAddress(pages, curlp + 4, 16);
+            curl.baseRecord = (int)getValAtAddress(pages, curlp + 0, 16);
+            curl.nRecords = (int)getValAtAddress(pages, curlp + 2, 16);
+            curl.nBytes = (int)getValAtAddress(pages, curlp + 4, 16);
             long thepage = curlp + 6 + 2;//reinterpret_cast<Uint8*>(curlp)+sizeof(lp_descriptor)+2 ;
                                          //long thepage = curlp;
             int destframe = framenumber - curl.baseRecord;
@@ -155,7 +154,7 @@ comes the color palette:*/
             long pagepointer = thepage;
             for (int k = 0; k < destframe; k++)
             {
-                offset += (int)DataLoader.getValAtAddress(pages, pagepointer + (k * 2), 16);
+                offset += (int)getValAtAddress(pages, pagepointer + (k * 2), 16);
             }
             //offset+= (int)cutsFile[k+pagepointer];//offset += pagepointer[i];
             //offset += (int)DataLoader.getValAtAddress(cutsFile,thepage,16);
@@ -171,7 +170,7 @@ comes the color palette:*/
             {
                 ppointer += 4;
             }
-            //	char[] imgOut ;//= //new char[lpH.height*lpH.width+ 4000];
+            //	byte[] imgOut ;//= //new byte[lpH.height*lpH.width+ 4000];
             myPlayRunSkipDump(ppointer, pages);//Stores in the global memory
                                                //output.texture= 
             ImageCache[imagecount++] = Image(dstImage, 0, lpH.width, lpH.height, "name here", pal, Alpha);
@@ -187,11 +186,11 @@ comes the color palette:*/
     /// </summary>
     /// <param name="inptr">Inptr.</param>
     /// <param name="srcData">Source data.</param>
-    void myPlayRunSkipDump(long inptr, char[] srcData)
+    void myPlayRunSkipDump(long inptr, byte[] srcData)
     {//From an implemtation by Underworld Adventures (hacking tools)
         long outPtr = 0;
 
-        //dstImage = new char[size];
+        //dstImage = new byte[size];
         while (true)
         {
             int sgn = (srcData[inptr] & 0x80) >> 7;//try and get the sign.
@@ -221,7 +220,7 @@ comes the color palette:*/
                 //Uint8 wordCnt = *srcP++;
                 int wordCnt = srcData[inptr++];
                 //Uint8 pixel = *srcP++;
-                char pixel = srcData[inptr++];
+                byte pixel = srcData[inptr++];
                 while (wordCnt > 0)
                 {
                     //*dstP++ = pixel;
@@ -242,8 +241,8 @@ comes the color palette:*/
                 {
                     // longOp
                     //Uint16 wordCnt = *((Uint16*)srcP);
-                    int wordCnt = (int)DataLoader.getValAtAddress(srcData, inptr, 16);//srcData[inptr];
-                                                                                      //srcP += 2;
+                    int wordCnt = (int)getValAtAddress(srcData, inptr, 16);//srcData[inptr];
+                                                                           //srcP += 2;
                     inptr += 2;
                     int wordcntSign = (wordCnt & 0x8000) >> 15;//try and get the sign.
                     if (wordcntSign == 1)
@@ -268,7 +267,7 @@ comes the color palette:*/
                             // longRun
                             wordCnt -= 0x4000; // Clear "longRun" bit
                                                //Uint8 pixel = *srcP++;
-                            char pixel = srcData[inptr++];
+                            byte pixel = srcData[inptr++];
                             while (wordCnt > 0)
                             {
                                 //*dstP++ = pixel;

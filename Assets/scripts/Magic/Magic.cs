@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 /// <summary>
 /// Magic spell casting code
 /// </summary>
@@ -44,7 +43,7 @@ public class Magic : UWEBase
     }
 
     ///How much mana the player can have
-   [SerializeField]
+    [SerializeField]
     private int _MaxMana;
     public int MaxMana
     {
@@ -74,7 +73,7 @@ public class Magic : UWEBase
     }
     ///The true max mana the character has when their mana is drained.
     public int TrueMaxMana;
-    
+
     ///The mana cost of the next spell the player will cast
     public int SpellCost;
 
@@ -84,7 +83,7 @@ public class Magic : UWEBase
     public bool InventorySpell;
 
     /// String names for the runes. 
-    string[] Runes = new string[]{"An","Bet","Corp","Des",
+    readonly string[] Runes = new string[]{"An","Bet","Corp","Des",
                 "Ex","Flam","Grav","Hur",
                 "In","Jux","Kal","Lor",
                 "Mani","Nox","Ort","Por",
@@ -117,7 +116,7 @@ public class Magic : UWEBase
     /// </summary>
     public void ApplySpellCost()
     {
-        CurMana = CurMana - SpellCost;
+        CurMana -= SpellCost;
         SpellCost = 0;
     }
 
@@ -255,7 +254,7 @@ public class Magic : UWEBase
                 }
         }//magicwords
 
-        if (_RES==GAME_UW2)
+        if (_RES == GAME_UW2)
         {
             TestSpellLevel--;//UW2 seems to have different rules here. To confirm
         }
@@ -282,7 +281,7 @@ public class Magic : UWEBase
                     case 2:
                     case 3: //backfire
                         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_spell_backfires_));
-                        casterUW.CurVIT = casterUW.CurVIT - 3;
+                        casterUW.CurVIT -= 3;
                         break;
                     default:
                         //000~001~213~Casting was not successful.
@@ -304,7 +303,7 @@ public class Magic : UWEBase
     /// </summary>
     /// <param name="caster">Caster.</param>
     /// Cast using An An An as the runes
-    public void TestSpell(GameObject caster)
+    public void TestSpell()
     {
         //	SpellEffectMazeNavigation sep = caster.AddComponent<SpellEffectMazeNavigation>();
         // sep.counter=2;
@@ -355,13 +354,13 @@ public class Magic : UWEBase
     /// <param name="caster">Caster.</param>
     /// <param name="MagicWords">Magic words.</param>
     /// <param name="ready">If set to <c>true</c> then the spell is being readied (for targetted spells), false for immediate cast</param>
-    public void castSpell(GameObject caster, string MagicWords, bool ready)
+    public void CastSpell(GameObject caster, string MagicWords, bool ready)
     {
         switch (MagicWords)
         {
             case "An An An":
                 {
-                    TestSpell(caster);
+                    TestSpell();
                     break;
                 }
 
@@ -1082,12 +1081,11 @@ public class Magic : UWEBase
     /// <param name="Rune1">Rune1.</param>
     /// <param name="Rune2">Rune2.</param>
     /// <param name="Rune3">Rune3.</param>
-    public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
+    public void CastSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
     {
-        string MagicWords = "";
         //Construct the spell words based on selected runes
-        MagicWords = TranslateSpellRune(Rune1, Rune2, Rune3);
-        castSpell(caster, MagicWords, ready);
+        string MagicWords = TranslateSpellRune(Rune1, Rune2, Rune3);
+        CastSpell(caster, MagicWords, ready);
     }
 
     /// <summary>
@@ -1107,7 +1105,7 @@ public class Magic : UWEBase
         {
             SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
             spOJ.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spOJ);
+            CastProjectile(caster, spOJ);
         }
     }
 
@@ -1129,7 +1127,7 @@ public class Magic : UWEBase
         {
             SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
             spOG.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spOG);
+            CastProjectile(caster, spOG);
         }
     }
 
@@ -1151,7 +1149,7 @@ public class Magic : UWEBase
         {
             SpellProp_Acid spAc = new SpellProp_Acid();
             spAc.init(EffectID, caster);
-            CastProjectile(caster, (SpellProp)spAc);
+            CastProjectile(caster, spAc);
         }
     }
 
@@ -1174,7 +1172,7 @@ public class Magic : UWEBase
             SpellProp_Fireball spPF = new SpellProp_Fireball();
             spPF.init(EffectID, caster);
             spPF.caster = caster;
-            CastProjectile(caster, (SpellProp)spPF);
+            CastProjectile(caster, spPF);
         }
     }
 
@@ -1188,7 +1186,7 @@ public class Magic : UWEBase
         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
         spFH.init(EffectID, caster);
         spFH.caster = caster;
-        CastProjectile(caster, (SpellProp)spFH);
+        CastProjectile(caster, spFH);
     }
 
     /// <summary>
@@ -1201,7 +1199,7 @@ public class Magic : UWEBase
         SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
         spVOG.init(EffectID, caster);
         spVOG.CastRaySource = CastFromWindow;
-        CastProjectile(caster, (SpellProp)spVOG);
+        CastProjectile(caster, spVOG);
     }
 
 
@@ -1223,7 +1221,7 @@ public class Magic : UWEBase
             SpellProp_Homing spPF = new SpellProp_Homing();
             spPF.init(EffectID, caster);
             spPF.caster = caster;
-            CastProjectile(caster, (SpellProp)spPF);
+            CastProjectile(caster, spPF);
         }
     }
 
@@ -1246,10 +1244,10 @@ public class Magic : UWEBase
         {
             UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
             UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-            Ray ray = getRay(caster);
-            RaycastHit hit = new RaycastHit();
+            Ray ray = GetRay(caster);
+            //= new RaycastHit();
             float dropRange = UWCharacter.Instance.GetUseRange();
-            if (Physics.Raycast(ray, out hit, dropRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, dropRange))
             {//The spell has hit something
                 DoorControl dc = hit.transform.gameObject.GetComponent<DoorControl>();
                 if (dc != null)
@@ -1281,10 +1279,10 @@ public class Magic : UWEBase
         {
             UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
             UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-            Ray ray = getRay(caster);
-            RaycastHit hit = new RaycastHit();
+            Ray ray = GetRay(caster);
+            //= new RaycastHit();
             float dropRange = UWCharacter.Instance.GetUseRange();
-            if (Physics.Raycast(ray, out hit, dropRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, dropRange))
             {//The spell has hit something
                 DoorControl dc = hit.transform.gameObject.GetComponent<DoorControl>();
                 if (dc != null)
@@ -1414,9 +1412,9 @@ public class Magic : UWEBase
     void Cast_InManiYlem(GameObject caster, int EffectID)
     {//Create food
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit = new RaycastHit();
+        // = new RaycastHit();
         float dropRange = 1.2f;
-        if (!Physics.Raycast(ray, out hit, dropRange))
+        if (!Physics.Raycast(ray, out _, dropRange))
         {//No object interferes with the spellcast
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(176 + Random.Range(0, 7), 40, 0, 1, 256);
             newobjt.is_quant = 1;
@@ -1433,9 +1431,9 @@ public class Magic : UWEBase
     void Cast_KalMani(GameObject caster, int EffectID)
     {//Summon monster
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit = new RaycastHit();
+        //= new RaycastHit();
         float dropRange = 1.2f;
-        if (!Physics.Raycast(ray, out hit, dropRange))
+        if (!Physics.Raycast(ray, out RaycastHit hit, dropRange))
         {//No object interferes with the spellcast
 
             //First determine the target ai to attack
@@ -1507,7 +1505,7 @@ public class Magic : UWEBase
     /// <param name="EffectID">Effect ID of the spell</param>
     void Cast_VasKalCorp(GameObject caster, int EffectID)
     {//Armageddon//Destroys almost everything!
-        GameObject[] allGameObj = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+        GameObject[] allGameObj = FindObjectsOfType(typeof(GameObject)) as GameObject[];
         for (int i = 0; i <= allGameObj.GetUpperBound(0); i++)
         {
             if ((allGameObj[i].layer == LayerMask.NameToLayer("UWObjects"))
@@ -1521,7 +1519,7 @@ public class Magic : UWEBase
                 {//Only deactivate top level items
                     //allGameObj[i].SetActive(false);
                     ObjectInteraction objI = allGameObj[i].GetComponent<ObjectInteraction>();
-                    if (objI!=null)
+                    if (objI != null)
                     {
                         ObjectInteraction.DestroyObjectFromUW(objI);
                     }
@@ -1584,7 +1582,7 @@ public class Magic : UWEBase
             poison.init(EffectID, caster);
             //Apply a impact effect to the npc
             Impact.SpawnHitImpact(Impact.ImpactMagic(), npc.GetImpactPoint(), poison.impactFrameStart, poison.impactFrameEnd);
-            npc.ApplyAttack((short)((poison.BaseDamage / poison.counter)),caster);
+            npc.ApplyAttack((short)((poison.BaseDamage / poison.counter)), caster);
 
             //int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
             //if (EffectSlot != -1)
@@ -1964,7 +1962,7 @@ public class Magic : UWEBase
     {
         SpellProp_Mind mind = new SpellProp_Mind();
         mind.init(EffectID, caster);
-        Skills.TrackMonsters(caster, (float)mind.BaseDamage, true);
+        Skills.TrackMonsters(caster, mind.BaseDamage, true);
     }
 
 
@@ -1986,10 +1984,10 @@ public class Magic : UWEBase
             {
                 UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
                 UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                Ray ray = getRay(caster);
-                RaycastHit hit = new RaycastHit();
+                Ray ray = GetRay(caster);
+                //= new RaycastHit();
                 float dropRange = UWCharacter.Instance.GetUseRange();
-                if (Physics.Raycast(ray, out hit, dropRange))
+                if (Physics.Raycast(ray, out RaycastHit hit, dropRange))
                 {//The spell has hit something
                     NPC npc = hit.transform.gameObject.GetComponent<NPC>();
                     if (npc != null)
@@ -2023,10 +2021,10 @@ public class Magic : UWEBase
             {
                 UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
                 UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                Ray ray = getRay(caster);
-                RaycastHit hit = new RaycastHit();
+                Ray ray = GetRay(caster);
+                // = new RaycastHit();
                 float dropRange = UWCharacter.Instance.GetUseRange();
-                if (Physics.Raycast(ray, out hit, dropRange))
+                if (Physics.Raycast(ray, out RaycastHit hit, dropRange))
                 {//The spell has hit something
                     ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
                     if (objInt != null)
@@ -2075,10 +2073,10 @@ public class Magic : UWEBase
             {
                 UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
                 UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                Ray ray = getRay(caster);
-                RaycastHit hit = new RaycastHit();
+                Ray ray = GetRay(caster);
+                //= new RaycastHit();
                 float dropRange = UWCharacter.Instance.GetUseRange();
-                if (Physics.Raycast(ray, out hit, dropRange))
+                if (Physics.Raycast(ray, out RaycastHit hit, dropRange))
                 {//The spell has hit something
                     ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
                     if (objInt != null)
@@ -2111,12 +2109,12 @@ public class Magic : UWEBase
     void EnchantObject(ObjectInteraction obj)
     {
 
-        if (obj.link==0)
+        if (obj.link == 0)
         {
             InitialEnchantObject(obj);
             return;
         }
-        if (obj.enchantment ==1)
+        if (obj.enchantment == 1)
         {
             IncreaseEnchantment(obj);
         }
@@ -2129,16 +2127,16 @@ public class Magic : UWEBase
     /// <param name="obj"></param>
     void InitialEnchantObject(ObjectInteraction obj)
     {
-        int enchant = 0;
-        switch(obj.GetItemType())
+        int enchant;
+        switch (obj.GetItemType())
         {
             case ObjectInteraction.ARMOUR:
             case ObjectInteraction.HELM:
             case ObjectInteraction.GLOVES:
             case ObjectInteraction.SHIELD:
-                if (Random.Range(0,2)==0)
+                if (Random.Range(0, 2) == 0)
                 {
-                    enchant = 464 + 240;                    
+                    enchant = 464 + 240;
                 }
                 else
                 {
@@ -2154,14 +2152,14 @@ public class Magic : UWEBase
                 {
                     enchant = 456 + 240;
                 }
-                 break;
+                break;
             default:
                 //000~001~300~You cannot enchant that. \n
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
                 return;
         }
 
-        if (obj.link>0)
+        if (obj.link > 0)
         {
             //000~001~300~You cannot enchant that. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
@@ -2175,7 +2173,7 @@ public class Magic : UWEBase
             {
                 obj.GetComponent<Equipment>().SetDisplayEnchantment();
             }
-            
+
             //000~001~301~You have enchanted the
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 301) + StringController.instance.GetObjectNounUW(obj));
         }
@@ -2187,8 +2185,8 @@ public class Magic : UWEBase
     /// <param name="obj"></param>
     void IncreaseEnchantment(ObjectInteraction obj)
     {
-        if((obj.link>=464+240) && (obj.link <=479+240))
-            {
+        if ((obj.link >= 464 + 240) && (obj.link <= 479 + 240))
+        {
             bool safetoenchant = false;
             if ((obj.link >= 464 + 240) && (obj.link < 464 + 240 + 2))
             {//is between minor and additional
@@ -2244,17 +2242,17 @@ public class Magic : UWEBase
             if (tm.ValidTile(pos))
             {
                 pos.Set(pos.x, 4.5f, pos.z); //Put it on the roof.
-                                             /*
-                                 GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
-                                 myObj.layer=LayerMask.NameToLayer("UWObjects");
-                                 myObj.transform.position=pos;
-                                 myObj.transform.Rotate(-90,0,0);
-                                 myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                                 GameWorldController.MoveToWorld(myObj);
-                                 ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
-                                 ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
-                                 a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
-                                 */
+                /*
+    GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
+    myObj.layer=LayerMask.NameToLayer("UWObjects");
+    myObj.transform.position=pos;
+    myObj.transform.Rotate(-90,0,0);
+    myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
+    GameWorldController.MoveToWorld(myObj);
+    ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
+    ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+    a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
+    */
                 ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(386, 40, 0, 0, 256);
                 GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
                 myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(), 0, 0, 0);
@@ -2310,7 +2308,7 @@ public class Magic : UWEBase
         SpellProp_Heal healing = new SpellProp_Heal();
         healing.init(EffectID, caster);
         int HP = healing.BaseDamage;
-        UWCharacter.Instance.CurVIT = UWCharacter.Instance.CurVIT + HP;
+        UWCharacter.Instance.CurVIT += HP;
         if (UWCharacter.Instance.CurVIT > UWCharacter.Instance.MaxVIT)
         {
             UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
@@ -2381,7 +2379,7 @@ public class Magic : UWEBase
         SpellProp_Mana mn = new SpellProp_Mana();
         mn.init(EffectID, caster);
         int MP = mn.BaseDamage;
-        UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.CurMana + MP;
+        UWCharacter.Instance.PlayerMagic.CurMana += MP;
         if (UWCharacter.Instance.PlayerMagic.CurMana > UWCharacter.Instance.PlayerMagic.MaxMana)
         {
             UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
@@ -2563,10 +2561,10 @@ public class Magic : UWEBase
             if (Col.gameObject.GetComponent<ObjectInteraction>() != null)
             {
                 ObjectInteraction objint = Col.gameObject.GetComponent<ObjectInteraction>();
-                if(objint.isquant==0 && objint.link>0)
+                if (objint.isquant == 0 && objint.link > 0)
                 {
                     ObjectInteraction objLink = ObjectLoader.getObjectIntAt(objint.link);
-                    if (objLink.GetItemType()==ObjectInteraction.A_LOOK_TRIGGER)
+                    if (objLink.GetItemType() == ObjectInteraction.A_LOOK_TRIGGER)
                     {
                         objLink.GetComponent<a_look_trigger>().ForceActivate(objLink.gameObject);
                     }
@@ -2797,10 +2795,10 @@ public class Magic : UWEBase
 
     public void Cast_StoneStrike(GameObject caster, GameObject target, int effectID)
     {
-        if (Random.Range(1,6)> 4)
+        if (Random.Range(1, 6) > 4)
         {//1 in 5 hits will cast
             SpellEffectPetrified sep = target.AddComponent<SpellEffectPetrified>();
-            sep.counter = (short)Random.Range(5,15);
+            sep.counter = (short)Random.Range(5, 15);
             sep.Go();
         }
     }
@@ -3212,7 +3210,7 @@ public class Magic : UWEBase
                         case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectRoamingSight>();
                             break;
-                        case SpellEffect.UW2_Spell_Effect_Curse:                       
+                        case SpellEffect.UW2_Spell_Effect_Curse:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectLucky>();
                             break;
                         case SpellEffect.UW2_Spell_Effect_Cursed:
@@ -3568,9 +3566,9 @@ public class Magic : UWEBase
         if (playerUWLocal != null)
         {
             Ray ray = getRay(caster, spellprop.CastRaySource);
-            RaycastHit hit = new RaycastHit();
+            // = new RaycastHit();
             float dropRange = 0.5f;
-            if (!Physics.Raycast(ray, out hit, dropRange))
+            if (!Physics.Raycast(ray, out _, dropRange))
             {//No object interferes with the spellcast
              //float force = 200.0f;
                 ReadiedSpell = "";
@@ -3618,52 +3616,52 @@ public class Magic : UWEBase
         }
     }
 
-    /// <summary>
-    /// Casts the projectile at the target
-    /// </summary>
-    /// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
-    /// <param name="caster">Caster.</param>
-    /// <param name="target">Target.</param>
-    /// <param name="spellprop">Properties for the projectile.</param>
-    bool CastProjectile(GameObject caster, GameObject target, SpellProp spellprop)
-    {//Fires off the projectile at a gameobject.
-        GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
-        Vector3 direction;
-        if (spellprop.spread == 0)
-        {
-            direction = (target.transform.position - caster.transform.position);
-            direction.Normalize();
-            //LaunchMagicProjectile(projectile,spellprop.Force,direction);	
-        }
-        else
-        {
-            //From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
-            //Start
+    ///// <summary>
+    ///// Casts the projectile at the target
+    ///// </summary>
+    ///// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
+    ///// <param name="caster">Caster.</param>
+    ///// <param name="target">Target.</param>
+    ///// <param name="spellprop">Properties for the projectile.</param>
+    //bool CastProjectile(GameObject caster, GameObject target, SpellProp spellprop)
+    //{//Fires off the projectile at a gameobject.
+    //    GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
+    //    Vector3 direction;
+    //    if (spellprop.spread == 0)
+    //    {
+    //        direction = (target.transform.position - caster.transform.position);
+    //        direction.Normalize();
+    //        //LaunchMagicProjectile(projectile,spellprop.Force,direction);	
+    //    }
+    //    else
+    //    {
+    //        //From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
+    //        //Start
 
-            //  Try this one first, before using the second one
-            //  The Ray-hits will form a ring
-            //float randomRadius = spellprop.spread;            
-            //  The Ray-hits will be in a circular area
-            float randomRadius = Random.Range(0, spellprop.spread);
+    //        //  Try this one first, before using the second one
+    //        //  The Ray-hits will form a ring
+    //        //float randomRadius = spellprop.spread;            
+    //        //  The Ray-hits will be in a circular area
+    //        float randomRadius = Random.Range(0, spellprop.spread);
 
-            float randomAngle = Random.Range(0, 2 * Mathf.PI);
+    //        float randomAngle = Random.Range(0, 2 * Mathf.PI);
 
-            //Calculating the raycast direction
-            direction = new Vector3(
-                    randomRadius * Mathf.Cos(randomAngle),
-                    randomRadius * Mathf.Sin(randomAngle),
-                    10f
-            );
+    //        //Calculating the raycast direction
+    //        direction = new Vector3(
+    //                randomRadius * Mathf.Cos(randomAngle),
+    //                randomRadius * Mathf.Sin(randomAngle),
+    //                10f
+    //        );
 
-            //Make the direction match the transform
-            //It is like converting the Vector3.forward to transform.forward
-            direction = projectile.transform.TransformDirection(direction.normalized);
-            //End	
-        }
-        projectile.transform.rotation = Quaternion.LookRotation(direction);
-        LaunchMagicProjectile(projectile, spellprop.spread);
-        return true;
-    }
+    //        //Make the direction match the transform
+    //        //It is like converting the Vector3.forward to transform.forward
+    //        direction = projectile.transform.TransformDirection(direction.normalized);
+    //        //End	
+    //    }
+    //    projectile.transform.rotation = Quaternion.LookRotation(direction);
+    //    LaunchMagicProjectile(projectile, spellprop.spread);
+    //    return true;
+    //}
 
     /// <summary>
     /// Casts the projectile along a vector
@@ -3702,7 +3700,7 @@ public class Magic : UWEBase
                 {
                     if (!spellprop.silent)
                     {
-                        if (caster.GetComponent<AudioSource>()!=null)
+                        if (caster.GetComponent<AudioSource>() != null)
                         {
                             caster.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
                             caster.GetComponent<AudioSource>().Play();
@@ -3731,10 +3729,9 @@ public class Magic : UWEBase
     /// <param name="spellprop">Properties for the projectile.</param>
     GameObject CreateMagicProjectile(Vector3 Location, GameObject Caster, SpellProp spellprop)
     {//Creates the projectile.
-        int index;
         //Create an object info
         //CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
-        if(CurrentObjectList().GetFreeMobileObject(out index))
+        if (CurrentObjectList().GetFreeMobileObject(out int index))
         {
             ObjectLoaderInfo oli = CurrentObjectList().objInfo[index];
             //oli.guid = System.Guid.NewGuid();
@@ -3819,7 +3816,7 @@ public class Magic : UWEBase
 
         direction = projectile.transform.TransformDirection(direction.normalized);
         projectile.transform.rotation = Quaternion.identity;
-        float projectileAngle = Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0f, direction.z), Vector3.up);
+        //float projectileAngle = Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0f, direction.z), Vector3.up);
 
         MagicProjectile mgp = projectile.GetComponent<MagicProjectile>();
         if (mgp != null)
@@ -3838,7 +3835,7 @@ public class Magic : UWEBase
                 mgp.Projectile_Pitch |= 0x8;  //Set bit 3
             }
 
-            mgp.ProjectileHeading =  (short)(this.transform.eulerAngles.y * (255f / 360f));
+            mgp.ProjectileHeading = (short)(this.transform.eulerAngles.y * (255f / 360f));
 
             ////////if ((projectileAngle >= 0) && (projectileAngle < 45))
             ////////{
@@ -3922,7 +3919,7 @@ public class Magic : UWEBase
     /// </summary>
     void OnGUI()
     {
-        if ((WindowDetectUW.InMap == true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) { return; }
+        if ((WindowDetect.InMap == true) || (WindowDetect.WaitingForInput) || (ConversationVM.InConversation)) { return; }
         if (
                 (Event.current.keyCode == GameWorldController.instance.config.CastSpell)
                 &&
@@ -3937,7 +3934,7 @@ public class Magic : UWEBase
             {
                 if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(), ActiveRunes[0], ActiveRunes[1], ActiveRunes[2]))
                 {
-                    castSpell(this.gameObject, ActiveRunes[0], ActiveRunes[1], ActiveRunes[2], true);
+                    CastSpell(this.gameObject, ActiveRunes[0], ActiveRunes[1], ActiveRunes[2], true);
                     ApplySpellCost();
                 }
             }
@@ -3949,7 +3946,7 @@ public class Magic : UWEBase
     /// </summary>
     /// <returns>The ray</returns>
     /// <param name="caster">Caster.</param>
-    Ray getRay(GameObject caster)
+    Ray GetRay(GameObject caster)
     {
         Ray ray;
         if (caster.GetComponent<UWCharacter>().MouseLookEnabled == true)
@@ -3972,7 +3969,7 @@ public class Magic : UWEBase
     {
         if (!castFromWindow)
         {
-            return getRay(caster);
+            return GetRay(caster);
         }
         else
         {
@@ -4704,7 +4701,7 @@ public class Magic : UWEBase
                 {
                     SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
                     spVOG.init(EffectID, caster);
-                    CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spVOG);
+                    CastProjectile(caster, GetBestSpellVector(caster), spVOG);
                 }
                 SpellResultType = SpellResultNone;
                 break;
@@ -4733,7 +4730,7 @@ public class Magic : UWEBase
                 {
                     SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
                     spOJ.init(EffectID, caster);
-                    CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOJ);
+                    CastProjectile(caster, GetBestSpellVector(caster), spOJ);
                 }
                 SpellResultType = SpellResultNone;
                 break;
@@ -4748,7 +4745,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_Acid spAc = new SpellProp_Acid();
                         spAc.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spAc);
+                        CastProjectile(caster, GetBestSpellVector(caster), spAc);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4764,7 +4761,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
                         spOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4781,7 +4778,7 @@ public class Magic : UWEBase
                         SpellProp_Fireball spPF = new SpellProp_Fireball();
                         spPF.init(EffectID, caster);
                         spPF.caster = caster;
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                        CastProjectile(caster, GetBestSpellVector(caster), spPF);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -4798,7 +4795,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
                         spFH.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spFH);
+                        CastProjectile(caster, GetBestSpellVector(caster), spFH);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5190,7 +5187,7 @@ public class Magic : UWEBase
                             SpellProp_Homing spPF = new SpellProp_Homing();
                             spPF.init(EffectID, caster);
                             spPF.caster = caster;
-                            CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                            CastProjectile(caster, GetBestSpellVector(caster), spPF);
                         }
                         SpellResultType = SpellResultNone;
                         break;
@@ -5532,7 +5529,7 @@ public class Magic : UWEBase
 
 
             case SpellEffect.UW2_Spell_Effect_NameEnchantment:
-            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:            
+            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:
                 {
                     Cast_NameEnchantment(caster, ready, EffectID);
                     SpellResultType = SpellResultNone;
@@ -5562,7 +5559,7 @@ public class Magic : UWEBase
                         case SpellRule_Equipable:
                             if (PassiveArrayIndex != -1)
                             {
-                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex,UWCharacter.LuckState.Lucky);
+                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex, UWCharacter.LuckState.Lucky);
                             }
                             SpellResultType = SpellResultPassive;
                             break;
@@ -5837,7 +5834,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_MagicArrow spOJ = new SpellProp_MagicArrow();
                         spOJ.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOJ);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOJ);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5855,7 +5852,7 @@ public class Magic : UWEBase
                         SpellProp_Fireball spPF = new SpellProp_Fireball();
                         spPF.init(EffectID, caster);
                         spPF.caster = caster;
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spPF);
+                        CastProjectile(caster, GetBestSpellVector(caster), spPF);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5888,7 +5885,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_ElectricBolt spOG = new SpellProp_ElectricBolt();
                         spOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5904,7 +5901,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_SheetLightning spVOG = new SpellProp_SheetLightning();
                         spVOG.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spVOG);
+                        CastProjectile(caster, GetBestSpellVector(caster), spVOG);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -5921,7 +5918,7 @@ public class Magic : UWEBase
                     {
                         SpellProp_FlameWind spFH = new SpellProp_FlameWind();
                         spFH.init(EffectID, caster);
-                        CastProjectile(caster, GetBestSpellVector(caster), (SpellProp)spFH);
+                        CastProjectile(caster, GetBestSpellVector(caster), spFH);
                     }
                     SpellResultType = SpellResultNone;
                     break;
@@ -6043,7 +6040,7 @@ public class Magic : UWEBase
                 }
             case SpellEffect.UW2_Spell_Effect_StoneStrike:
                 {
-                    Cast_StoneStrike(caster,target, EffectID);
+                    Cast_StoneStrike(caster, target, EffectID);
                     SpellResultType = SpellResultNone;
                     break;
                 }
@@ -6227,7 +6224,7 @@ public class Magic : UWEBase
     /// </summary>
     void IronFleshXClock()
     {
-        if (Quest.instance.x_clocks[3]==4)
+        if (Quest.instance.x_clocks[3] == 4)
         {
             Quest.instance.x_clocks[3] = 5;
             //000~001~335~The baked mud hardens into a clear glaze. \n

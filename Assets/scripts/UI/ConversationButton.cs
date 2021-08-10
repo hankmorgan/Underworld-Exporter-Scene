@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using TMPro;
 
-public class ConversationButton : GuiBase{
+public class ConversationButton : GuiBase
+{
 
     public int option;
 

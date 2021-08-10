@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class a_delete_object_trap : trap_base {
+public class a_delete_object_trap : trap_base
+{
 
-	/*
+    /*
 Per Uw-formats.txt
    018b  a_delete object trap
          deletes an object when set off. "owner" and "quality" of the trap
@@ -15,31 +15,31 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 
 	 */
 
-	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
-	{
-		//Do what it needs to do.
-		ExecuteTrap(this, triggerX,triggerY, State);
+    public override bool Activate(object_base src, int triggerX, int triggerY, int State)
+    {
+        //Do what it needs to do.
+        ExecuteTrap(this, triggerX, triggerY, State);
 
-		//Delete object traps are always the end of the line so no more activations.
+        //Delete object traps are always the end of the line so no more activations.
 
-		PostActivate(src);
-		return true;
-	}
+        PostActivate(src);
+        return true;
+    }
 
 
-	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
-	{
-		GameObject triggerObj = ObjectLoader.getGameObjectAt(link); 
-		if (triggerObj!=null)
-		{
-			triggerObj.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag=0;
-			if (triggerObj.GetComponent<map_object>()!=null)
-			{
-				Destroy(triggerObj.GetComponent<map_object>().ModelInstance);	
-			}
-			Debug.Log (this.name + " deleting in ExecuteTrap() " + triggerObj.name);
-			//Destroy(triggerObj);
+    public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
+    {
+        GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
+        if (triggerObj != null)
+        {
+            triggerObj.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag = 0;
+            if (triggerObj.GetComponent<map_object>() != null)
+            {
+                Destroy(triggerObj.GetComponent<map_object>().ModelInstance);
+            }
+            Debug.Log(this.name + " deleting in ExecuteTrap() " + triggerObj.name);
+            //Destroy(triggerObj);
             ObjectInteraction.DestroyObjectFromUW(triggerObj.GetComponent<ObjectInteraction>());
         }
-	}
+    }
 }

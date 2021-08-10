@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpellProp_Luck : SpellProp {
+public class SpellProp_Luck : SpellProp
+{
 
-		public override void init (int effectId, GameObject SpellCaster)
-		{
-			counter=5;
-		}
+    public override void init(int effectId, GameObject SpellCaster)
+    {
+        counter = 5;
+    }
 }

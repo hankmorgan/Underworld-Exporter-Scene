@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 /// <summary>
@@ -106,12 +105,12 @@ public class ContainerOpened : GuiBase_Draggable
             }
             for (short i = 0; i < 8; i++)
             {
-               UWCharacter.Instance.playerInventory.SetObjectAtSlot((short)(i + 11), DestinationContainer.GetItemAt(i));      
+                UWCharacter.Instance.playerInventory.SetObjectAtSlot((short)(i + 11), DestinationContainer.GetItemAt(i));
             }
         }
         else
         {
-            if (UWCharacter.InteractionMode != UWCharacter.InteractionModePickup)
+            if (Character.InteractionMode != Character.InteractionModePickup)
             {//Only allow this to happen when in pickup mode.
                 return;
             }

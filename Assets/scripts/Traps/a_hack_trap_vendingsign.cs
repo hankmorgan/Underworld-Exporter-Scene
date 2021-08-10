@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Used to control what is displayed on the sign at vending machines
@@ -8,10 +7,10 @@ public class a_hack_trap_vendingsign : a_hack_trap
 {
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        int ItemStringIndex = 0;
-        int Price = 0;
         string ObjectName;
 
+        int ItemStringIndex;
+        int Price;
         switch (Quest.instance.variables[owner])
         {
             case 0://fish

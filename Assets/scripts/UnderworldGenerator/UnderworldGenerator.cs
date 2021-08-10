@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
 
-public class UnderworldGenerator : UWEBase {
+public class UnderworldGenerator : UWEBase
+{
 
-    public static int RegionIndex=0;
+    public static int RegionIndex = 0;
     public GeneratorMap[,] mappings;
 
     public int startX = 0; public int startY = 0;
@@ -15,8 +14,8 @@ public class UnderworldGenerator : UWEBase {
     public static UnderworldGenerator instance;
     //private int ConnectorCount = 1;
 
-   // Room[] rooms;
-   // List<Connector> Connectors = new List<Connector>();
+    // Room[] rooms;
+    // List<Connector> Connectors = new List<Connector>();
     public int NoOfRooms = 4;
     public int sizeForCaveX = 64;
     public int sizeForCaveY = 64;
@@ -24,7 +23,7 @@ public class UnderworldGenerator : UWEBase {
     void Start()
     {
         instance = this;
-        
+
     }
 
     /// <summary>
@@ -38,77 +37,77 @@ public class UnderworldGenerator : UWEBase {
         mappings = new GeneratorMap[64, 64];
         Random.InitState(levelseed);
 
-        Region newMap = new Region(RegionIndex++, 0, 0, 0, 64, 64, Random.Range(3,26),null); //Top layer starts off with a single large region and a number of sub regions
+        Region newMap = new Region(RegionIndex++, 0, 0, 0, 64, 64, Random.Range(3, 26), null); //Top layer starts off with a single large region and a number of sub regions
         mappings = newMap.GetEntireMap();
     }
 
-   /* private void GenerateCaveMap()
-    {
-        CaveRegion mp = new CaveRegion(64, 64, IterationsForGenerator);
-        for (int x=0; x<=63;x++)
-        {
-            for (int y = 0; y <= 63; y++)
-            {
-                mappings[x, y].TileLayoutMap = mp.Map[x, y];
-            }
-        }
-        PlaceCorners();
-    }*/
+    /* private void GenerateCaveMap()
+     {
+         CaveRegion mp = new CaveRegion(64, 64, IterationsForGenerator);
+         for (int x=0; x<=63;x++)
+         {
+             for (int y = 0; y <= 63; y++)
+             {
+                 mappings[x, y].TileLayoutMap = mp.Map[x, y];
+             }
+         }
+         PlaceCorners();
+     }*/
 
     /// <summary>
     /// Create a map consisting of rooms connected to each other.
     /// </summary>
-  /*  private void GenerateConnectedRoomsMap()
-    {
-        Connectors = new List<Connector>();
-        
-        NoOfRooms = Random.Range(1, 26);
+    /*  private void GenerateConnectedRoomsMap()
+      {
+          Connectors = new List<Connector>();
 
-        int validRooms = CreateRooms();
-        ConnectAllRooms(validRooms); //make sure all rooms on the map are connected in some way
+          NoOfRooms = Random.Range(1, 26);
 
-        //Init the player start tile
-        startX = rooms[1].x;
-        startY = rooms[1].y;
+          int validRooms = CreateRooms();
+          ConnectAllRooms(validRooms); //make sure all rooms on the map are connected in some way
 
-        for (int i = 1; i <= rooms.GetUpperBound(0); i++)
-        {
-            rooms[i].StyleArea();//Fill room contents
-        }
+          //Init the player start tile
+          startX = rooms[1].x;
+          startY = rooms[1].y;
 
-        PlaceConnectors();//Place corridors on the map. Not all calculated connectors will be placed
-        
-        for (int i = 0; i < Connectors.Count; i++)
-        {
-            Connectors[i].StyleArea();//Fill room contents
-        }
+          for (int i = 1; i <= rooms.GetUpperBound(0); i++)
+          {
+              rooms[i].StyleArea();//Fill room contents
+          }
 
-        for (int x = 2; x < 62; x++)
-        {
-            for (int y = 2; y < 62; y++)
-            {
-                //Set up diagonal tiles
-                if (mappings[x, y].isDiag)
-                {
-                    PlaceDiagonal(x, y);
-                }
-            }
-        }
+          PlaceConnectors();//Place corridors on the map. Not all calculated connectors will be placed
 
-        for (int x = 2; x < 62; x++)
-        {
-            for (int y = 2; y < 62; y++)
-            {
-                //Set up sloped tiles
-                if (mappings[x, y].isSlope)
-                {
-                    PlaceSlope(x, y);
-                }
-            }
-        }
+          for (int i = 0; i < Connectors.Count; i++)
+          {
+              Connectors[i].StyleArea();//Fill room contents
+          }
 
-        StyleJunctions();//Make some junctions look nice.
-    }*/
+          for (int x = 2; x < 62; x++)
+          {
+              for (int y = 2; y < 62; y++)
+              {
+                  //Set up diagonal tiles
+                  if (mappings[x, y].isDiag)
+                  {
+                      PlaceDiagonal(x, y);
+                  }
+              }
+          }
+
+          for (int x = 2; x < 62; x++)
+          {
+              for (int y = 2; y < 62; y++)
+              {
+                  //Set up sloped tiles
+                  if (mappings[x, y].isSlope)
+                  {
+                      PlaceSlope(x, y);
+                  }
+              }
+          }
+
+          StyleJunctions();//Make some junctions look nice.
+      }*/
 
     /// <summary>
     /// Create a random number of rooms and attempt to place them on the map.
@@ -162,33 +161,33 @@ public class UnderworldGenerator : UWEBase {
 
 
 
-  /*  bool DoesRoomCollide(Room candidate)
-    {
-        for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= 63; x++)
-        {
-            for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= 63; y++)
-            {
-                if (mappings[x, y].RoomMap != 0)
-                {//Space already contains a room.
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
+    /*  bool DoesRoomCollide(Room candidate)
+      {
+          for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= 63; x++)
+          {
+              for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= 63; y++)
+              {
+                  if (mappings[x, y].RoomMap != 0)
+                  {//Space already contains a room.
+                      return true;
+                  }
+              }
+          }
+          return false;
+      }*/
 
- /*   void PlaceRoom(Room candidate)
-    {
-        for (int x = candidate.x; x < candidate.x + candidate.dimX && x <= 63; x++)
-        {
-            for (int y = candidate.y; y < candidate.y + candidate.dimY && y <= 63; y++)
-            {
-                mappings[x, y].RoomMap = candidate.index;
-                mappings[x, y].TileLayoutMap = TileMap.TILE_OPEN;
-                mappings[x, y].FloorHeight = candidate.BaseHeight;
-            }
-        }
-    }*/
+    /*   void PlaceRoom(Room candidate)
+       {
+           for (int x = candidate.x; x < candidate.x + candidate.dimX && x <= 63; x++)
+           {
+               for (int y = candidate.y; y < candidate.y + candidate.dimY && y <= 63; y++)
+               {
+                   mappings[x, y].RoomMap = candidate.index;
+                   mappings[x, y].TileLayoutMap = TileMap.TILE_OPEN;
+                   mappings[x, y].FloorHeight = candidate.BaseHeight;
+               }
+           }
+       }*/
 
     //void PrintRooms()
     //{
@@ -597,8 +596,10 @@ public class UnderworldGenerator : UWEBase {
     /// <returns></returns>
     public TileMap CreateTileMap(short levelNo)
     {
-        TileMap tm = new TileMap(levelNo);
-        tm.texture_map = new short[TileMap.UW1_TEXTUREMAPSIZE];
+        TileMap tm = new TileMap(levelNo)
+        {
+            texture_map = new short[TileMap.UW1_TEXTUREMAPSIZE]
+        };
         for (short t = 0; t <= tm.texture_map.GetUpperBound(0); t++)
         {//Some quick and dirty values
             if (t <= 57)
@@ -625,31 +626,31 @@ public class UnderworldGenerator : UWEBase {
     /// <param name="Tiles"></param>
     public void RoomsToTileMap(TileMap tm, TileInfo[,] Tiles)
     {
-       // PrintRooms();
+        // PrintRooms();
         for (short x = 0; x <= 63; x++)
         {
             for (short y = 0; y <= 63; y++)
             {
                 short newtiletype = (short)mappings[x, y].TileLayoutMap;
                 short newfloorHeight = 30;
-                short newfloorTexture=1;
-                short newwallTexture=1;
+                short newfloorTexture = 1;
+                short newwallTexture = 1;
                 short newceilingHeight = 0;
-                short newFlags=0;
-                short newnoMagic=0;
-                short newdoorBit=0;
+                short newFlags = 0;
+                short newnoMagic = 0;
+                short newdoorBit = 0;
                 int newindexObjectList = 0;
 
                 if (mappings[x, y].TileLayoutMap != TileMap.TILE_SOLID)
                 {
                     newfloorHeight = (short)mappings[x, y].FloorHeight; //16;
-                    newfloorTexture = (short)Mathf.Min(Mathf.Abs(mappings[x, y].RoomMap), 10);        
+                    newfloorTexture = (short)Mathf.Min(Mathf.Abs(mappings[x, y].RoomMap), 10);
                 }
 
-                Tiles[x, y] = new TileInfo(tm, x, y, newtiletype, 
-                    newfloorHeight, newceilingHeight, 
-                    newfloorTexture,newwallTexture,0,
-                    newFlags,newnoMagic,newdoorBit,newindexObjectList);
+                Tiles[x, y] = new TileInfo(tm, x, y, newtiletype,
+                    newfloorHeight, newceilingHeight,
+                    newfloorTexture, newwallTexture, 0,
+                    newFlags, newnoMagic, newdoorBit, newindexObjectList);
             }
         }
         tm.SetTileMapWallFacesUW();//Update so walls display correctly
@@ -771,27 +772,27 @@ public class UnderworldGenerator : UWEBase {
 
     void PlaceSlope(int x, int y)
     {
-        bool[] OpenTiles =new bool[4];
+        bool[] OpenTiles = new bool[4];
         OpenTiles[0] = isTileWideOpen(x + 1, y);//east
-        OpenTiles[1] = isTileWideOpen(x -1, y);//west
-        OpenTiles[2] = isTileWideOpen(x , y +1);//north
-        OpenTiles[3] = isTileWideOpen(x, y-1);//south
+        OpenTiles[1] = isTileWideOpen(x - 1, y);//west
+        OpenTiles[2] = isTileWideOpen(x, y + 1);//north
+        OpenTiles[3] = isTileWideOpen(x, y - 1);//south
         int[] heights = new int[4];
         int thisHeight = getHeight(x, y);
         heights[0] = thisHeight - getHeight(x + 1, y);
-        heights[1] = thisHeight - getHeight(x -1, y);
-        heights[2] = thisHeight - getHeight(x , y + 1);
-        heights[3] = thisHeight - getHeight(x , y - 1);
-        if (x==27 && y==61)
+        heights[1] = thisHeight - getHeight(x - 1, y);
+        heights[2] = thisHeight - getHeight(x, y + 1);
+        heights[3] = thisHeight - getHeight(x, y - 1);
+        if (x == 27 && y == 61)
         {
             Debug.Log("Here");
         }
 
         if (OpenTiles[0] && OpenTiles[1])
         {//test east west scenarios.
-            if ((heights[0] == -2) && (heights[1]== +2))
+            if ((heights[0] == -2) && (heights[1] == +2))
             {
-               // Debug.Log("1-" + x + "," + y);
+                // Debug.Log("1-" + x + "," + y);
                 mappings[x, y].TileLayoutMap = TileMap.TILE_SLOPE_E;
                 return;
             }
@@ -807,7 +808,7 @@ public class UnderworldGenerator : UWEBase {
         {//test north south scenarios.
             if ((heights[2] == -2) && (heights[3] == +2))
             {
-               // Debug.Log("3-" + x + "," + y);
+                // Debug.Log("3-" + x + "," + y);
                 mappings[x, y].TileLayoutMap = TileMap.TILE_SLOPE_N;
                 return;
             }
@@ -840,7 +841,7 @@ public class UnderworldGenerator : UWEBase {
 
     int getHeight(int x, int y)
     {
-      
+
         return mappings[x, y].FloorHeight;
     }
 
@@ -851,13 +852,13 @@ public class UnderworldGenerator : UWEBase {
 
     void PlaceCorners()
     {
-        for (int x=1; x<=62;x++)
+        for (int x = 1; x <= 62; x++)
         {
             for (int y = 1; y <= 62; y++)
             {
-                if (getTileType(x,y) == TileMap.TILE_OPEN)
+                if (getTileType(x, y) == TileMap.TILE_OPEN)
                 {
-                    if ((getTileType(x+1, y) == TileMap.TILE_SOLID) && (getTileType(x, y+1) == TileMap.TILE_SOLID))
+                    if ((getTileType(x + 1, y) == TileMap.TILE_SOLID) && (getTileType(x, y + 1) == TileMap.TILE_SOLID))
                     {
                         mappings[x, y].TileLayoutMap = TileMap.TILE_DIAG_SW;
                     }

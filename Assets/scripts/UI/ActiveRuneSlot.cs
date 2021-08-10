@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class ActiveRuneSlot : GuiBase_Draggable
@@ -7,7 +6,7 @@ public class ActiveRuneSlot : GuiBase_Draggable
     /*GUI element for displaying the select spell runes and for casting those selected runes.*/
     private RawImage thisRune;
 
-    private static Texture2D[] runes = new Texture2D[24];
+    private static readonly Texture2D[] runes = new Texture2D[24];
     private static Texture2D blank;
 
     public override void Start()
@@ -55,13 +54,13 @@ public class ActiveRuneSlot : GuiBase_Draggable
         {
             return;
         }
-        if ((WindowDetectUW.InMap == true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation) || (UWCharacter.InteractionMode == UWCharacter.InteractionModeOptions)) { return; }
+        if ((WindowDetect.InMap == true) || (WindowDetect.WaitingForInput) || (ConversationVM.InConversation) || (Character.InteractionMode == Character.InteractionModeOptions)) { return; }
 
         if (UWCharacter.Instance.PlayerMagic.ReadiedSpell == "")
         {
             if (UWCharacter.Instance.PlayerMagic.TestSpellCast(UWCharacter.Instance, UWCharacter.Instance.PlayerMagic.ActiveRunes[0], UWCharacter.Instance.PlayerMagic.ActiveRunes[1], UWCharacter.Instance.PlayerMagic.ActiveRunes[2]))
             {
-                UWCharacter.Instance.PlayerMagic.castSpell(UWCharacter.Instance.gameObject, UWCharacter.Instance.PlayerMagic.ActiveRunes[0], UWCharacter.Instance.PlayerMagic.ActiveRunes[1], UWCharacter.Instance.PlayerMagic.ActiveRunes[2], true);
+                UWCharacter.Instance.PlayerMagic.CastSpell(UWCharacter.Instance.gameObject, UWCharacter.Instance.PlayerMagic.ActiveRunes[0], UWCharacter.Instance.PlayerMagic.ActiveRunes[1], UWCharacter.Instance.PlayerMagic.ActiveRunes[2], true);
                 UWCharacter.Instance.PlayerMagic.ApplySpellCost();
             }
         }

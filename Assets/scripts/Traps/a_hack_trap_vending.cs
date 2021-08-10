@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// spawns vending selection
@@ -10,9 +9,8 @@ public class a_hack_trap_vending : a_hack_trap
     {
         Vector3 spawn = CurrentTileMap().getTileVector(ObjectTileX, ObjectTileY);
         spawn = new Vector3(spawn.x, 4.4f, spawn.z);
-        int ItemStringIndex = 0;
-        int Price = 0;
-
+        int ItemStringIndex;
+        int Price;
         //Pick the item to sell and get its price
         switch (Quest.instance.variables[owner])
         {
@@ -93,7 +91,7 @@ public class a_hack_trap_vending : a_hack_trap
         }
         return false;
     }
-    
+
     public override void PostActivate(object_base src)
     {
         Debug.Log("Overridden PostActivate to test " + this.name);

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System.Collections;
 using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CutsAnimator : GuiBase
 {
@@ -107,15 +107,15 @@ public class CutsAnimator : GuiBase
                 //Clear out game objects
                 foreach (Transform child in GameWorldController.instance.LevelModel.transform)
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 foreach (Transform child in GameWorldController.instance.DynamicObjectMarker())
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 foreach (Transform child in GameWorldController.instance.SceneryModel.transform)
                 {
-                    GameObject.Destroy(child.gameObject);
+                    Destroy(child.gameObject);
                 }
                 for (int x = 0; x <= GameWorldController.instance.Tilemaps.GetUpperBound(0); x++)
                 {
@@ -156,7 +156,7 @@ public class CutsAnimator : GuiBase
             case "uw2resurrecttransition"://UW2 death by ally or in alternate dimension
                 TargetControl.material = UI_UNLIT;
                 TargetControl.texture = black;
-                mode = false;looping = false;
+                mode = false; looping = false;
                 StartCoroutine(CutsceneWait(0.5f));
                 break;
             case "fadetoblacksleep":
@@ -172,25 +172,25 @@ public class CutsAnimator : GuiBase
                 break;
             case "splashlookingglass":
                 TargetControl.material = UI_UNLIT;
-                TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(7);
+                TargetControl.texture = GameWorldController.instance.bytloader.LoadImageAt(7);
                 break;
             case "splashoriginea":
                 TargetControl.material = UI_UNLIT;
-                TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(6);
+                TargetControl.texture = GameWorldController.instance.bytloader.LoadImageAt(6);
                 break;
             case "splashorigin":
             case "pres1_0000":
                 TargetControl.material = UI_UNLIT;
-                TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);
+                TargetControl.texture = GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);
                 break;
             case "splashbluesky":
             case "pres2_0000":
                 TargetControl.material = UI_UNLIT;
-                TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
+                TargetControl.texture = GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
                 break;
             case "splashorigindemo":
                 TargetControl.material = UI_UNLIT;
-                TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRESD_BYT);
+                TargetControl.texture = GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRESD_BYT);
                 break;
             case "almricsitting"://special case
                 TargetControl.material = UI_UNLIT;

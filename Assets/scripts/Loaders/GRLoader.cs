@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Loads data from various GR Files.
@@ -47,7 +46,7 @@ public class GRLoader : ArtLoader
     public const int GEMPT_GR = 32;
     public const int GHED_GR = 33;
 
-    private string[] pathGR ={
+    private readonly string[] pathGR ={
                 "3DWIN.GR",
                 "ANIMO.GR",
                 "ARMOR_F.GR",
@@ -84,9 +83,9 @@ public class GRLoader : ArtLoader
                 "GHED.GR"
         };
 
-    private string AuxPalPath = "ALLPALS.DAT";
-    bool useOverrideAuxPalIndex = false;
-    int OverrideAuxPalIndex = 0;
+    private readonly string AuxPalPath = "ALLPALS.DAT";
+    readonly bool useOverrideAuxPalIndex = false;
+    readonly int OverrideAuxPalIndex = 0;
 
     public int FileToLoad;
     private bool ImageFileDataLoaded;
@@ -96,7 +95,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File, int PalToUse)
     {
-       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+        // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -107,7 +106,7 @@ public class GRLoader : ArtLoader
 
     public GRLoader(int File)
     {
-       // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+        // AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         FileToLoad = File;
@@ -120,15 +119,14 @@ public class GRLoader : ArtLoader
         useOverrideAuxPalIndex = false;
         OverrideAuxPalIndex = 0;
         var toLoad = Path.Combine(BasePath, FileName);
-        if (!DataLoader.ReadStreamFile(toLoad, out ImageFileData))
+        if (!ReadStreamFile(toLoad, out ImageFileData))
         {
             Debug.Log("Unable to load " + toLoad);
             return;
         }
         else
         {
-            DataLoader.Chunk art_ark;
-            DataLoader.LoadChunk(ImageFileData, ChunkNo, out art_ark);
+            DataLoader.LoadChunk(ImageFileData, ChunkNo, out DataLoader.Chunk art_ark);
 
             switch (art_ark.chunkContentType)
             {
@@ -136,16 +134,16 @@ public class GRLoader : ArtLoader
                     break;
                 case 2:
                 case 17:
-                    NoOfImages = (int)DataLoader.getValAtAddress(art_ark.data, 0, 16);
+                    NoOfImages = (int)getValAtAddress(art_ark.data, 0, 16);
                     ImageCache = new Texture2D[NoOfImages];
                     //HotSpot=new Vector2[NoOfImages];
                     ImageFileDataLoaded = true;
                     for (int i = 0; i < NoOfImages; i++)
                     {
-                        long textureOffset = (int)DataLoader.getValAtAddress(art_ark.data, 2 + (i * 4), 32);
-                        int CompressionType = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 4, 16);
-                        int Width = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 8, 16);
-                        int Height = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 10, 16);
+                        long textureOffset = (int)getValAtAddress(art_ark.data, 2 + (i * 4), 32);
+                        int CompressionType = (int)getValAtAddress(art_ark.data, textureOffset + 4, 16);
+                        int Width = (int)getValAtAddress(art_ark.data, textureOffset + 8, 16);
+                        int Height = (int)getValAtAddress(art_ark.data, textureOffset + 10, 16);
                         //int x1=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+0xE,8);
                         //int y1=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+0xF,8);
                         //x1 = 1<<x1;
@@ -161,14 +159,13 @@ public class GRLoader : ArtLoader
                         {
                             if (CompressionType == 4)
                             {//compressed
-                                char[] outputImg;
                                 //  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
-                                UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out outputImg, Height * Width);
-                                ImageCache[i] = ArtLoader.Image(outputImg, 0, Width, Height, "namehere", GameWorldController.instance.palLoader.Palettes[PaletteNo], true, xfer);
+                                UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out byte[] outputImg, Height * Width);
+                                ImageCache[i] = Image(outputImg, 0, Width, Height, "namehere", GameWorldController.instance.palLoader.Palettes[PaletteNo], true, xfer);
                             }
                             else
                             {//Uncompressed
-                                ImageCache[i] = ArtLoader.Image(art_ark.data, textureOffset + BitMapHeaderSize, Width, Height, "namehere", GameWorldController.instance.palLoader.Palettes[PaletteNo], true, xfer);
+                                ImageCache[i] = Image(art_ark.data, textureOffset + BitMapHeaderSize, Width, Height, "namehere", GameWorldController.instance.palLoader.Palettes[PaletteNo], true, xfer);
                             }
                         }
                     }
@@ -182,20 +179,20 @@ public class GRLoader : ArtLoader
 
     public override bool LoadImageFile()
     {
-        string ModPath = Path.Combine(BasePath, pathGR[FileToLoad].Replace(".","_"));// BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
+        string ModPath = Path.Combine(BasePath, pathGR[FileToLoad].Replace(".", "_"));// BasePath + pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".", "_");
         if (Directory.Exists(ModPath))
         {
             LoadMod = true;
         }
         var toLoad = Path.Combine(BasePath, "DATA", pathGR[FileToLoad]);
-        if (!DataLoader.ReadStreamFile(toLoad, out ImageFileData))
+        if (!ReadStreamFile(toLoad, out ImageFileData))
         {
             Debug.Log("Unable to LoadImageFile() " + toLoad);
             return false;
         }
         else
         {
-            NoOfImages = (int)DataLoader.getValAtAddress(ImageFileData, 1, 16);
+            NoOfImages = (int)getValAtAddress(ImageFileData, 1, 16);
             ImageCache = new Texture2D[NoOfImages];
             if (LoadMod)
             {//Load up modded image data at the path
@@ -237,25 +234,25 @@ public class GRLoader : ArtLoader
         }
 
 
-        long imageOffset = DataLoader.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
+        long imageOffset = getValAtAddress(ImageFileData, (index * 4) + 3, 32);
         if (imageOffset >= ImageFileData.GetUpperBound(0))
         {//Image out of range
             return base.LoadImageAt(index);
         }
-        int BitMapWidth = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 1, 8);
-        int BitMapHeight = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 2, 8);
+        int BitMapWidth = (int)getValAtAddress(ImageFileData, imageOffset + 1, 8);
+        int BitMapHeight = (int)getValAtAddress(ImageFileData, imageOffset + 2, 8);
         int datalen;
         Palette auxpal;
         int auxPalIndex;
-        char[] imgNibbles;
-        char[] outputImg;
+        byte[] imgNibbles;
+        byte[] outputImg;
 
 
-        switch (DataLoader.getValAtAddress(ImageFileData, imageOffset, 8))//File type
+        switch (getValAtAddress(ImageFileData, imageOffset, 8))//File type
         {
             case 0x4://8 bit uncompressed
                 {
-                    imageOffset = imageOffset + 5;
+                    imageOffset += 5;
                     ImageCache[index] = Image(ImageFileData, imageOffset, BitMapWidth, BitMapHeight, "name_goes_here", GameWorldController.instance.palLoader.Palettes[PaletteNo], Alpha, xfer);
                     return ImageCache[index];
                 }
@@ -263,18 +260,18 @@ public class GRLoader : ArtLoader
                 {
                     if (!useOverrideAuxPalIndex)
                     {
-                        auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);
+                        auxPalIndex = (int)getValAtAddress(ImageFileData, imageOffset + 3, 8);
                     }
                     else
                     {
                         auxPalIndex = OverrideAuxPalIndex;
                     }
-                    datalen = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 4, 16);
-                    imgNibbles = new char[Mathf.Max(BitMapWidth * BitMapHeight * 2, (datalen + 5) * 2)];
-                    imageOffset = imageOffset + 6;  //Start of raw data.
+                    datalen = (int)getValAtAddress(ImageFileData, imageOffset + 4, 16);
+                    imgNibbles = new byte[Mathf.Max(BitMapWidth * BitMapHeight * 2, (datalen + 5) * 2)];
+                    imageOffset += 6;  //Start of raw data.
                     copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
                     //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-                    int[] aux = PaletteLoader.LoadAuxilaryPalIndices(Path.Combine(Loader.BasePath,"DATA", AuxPalPath), auxPalIndex);
+                    int[] aux = PaletteLoader.LoadAuxilaryPalIndices(Path.Combine(BasePath, "DATA", AuxPalPath), auxPalIndex);
                     outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4, aux);
                     ImageCache[index] = Image(outputImg, 0, BitMapWidth, BitMapHeight, "name_goes_here", GameWorldController.instance.palLoader.Palettes[PaletteNo], Alpha, xfer);
                     return ImageCache[index];
@@ -283,17 +280,17 @@ public class GRLoader : ArtLoader
                 {
                     if (!useOverrideAuxPalIndex)
                     {
-                        auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);
+                        auxPalIndex = (int)getValAtAddress(ImageFileData, imageOffset + 3, 8);
                     }
                     else
                     {
                         auxPalIndex = OverrideAuxPalIndex;
                     }
-                    datalen = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 4, 16);
-                    imgNibbles = new char[Mathf.Max(BitMapWidth * BitMapHeight * 2, (5 + datalen) * 2)];
-                    imageOffset = imageOffset + 6;  //Start of raw data.
+                    datalen = (int)getValAtAddress(ImageFileData, imageOffset + 4, 16);
+                    imgNibbles = new byte[Mathf.Max(BitMapWidth * BitMapHeight * 2, (5 + datalen) * 2)];
+                    imageOffset += 6;  //Start of raw data.
                     copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-                    auxpal = PaletteLoader.LoadAuxilaryPal(Path.Combine(BasePath,"DATA",AuxPalPath), GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
+                    auxpal = PaletteLoader.LoadAuxilaryPal(Path.Combine(BasePath, "DATA", AuxPalPath), GameWorldController.instance.palLoader.Palettes[PaletteNo], auxPalIndex);
                     ImageCache[index] = Image(imgNibbles, 0, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha, xfer);
                     return ImageCache[index];
                 }
@@ -309,7 +306,7 @@ public class GRLoader : ArtLoader
                         BitMapWidth = 79;
                         BitMapHeight = 112;
                     }
-                    imageOffset = DataLoader.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
+                    imageOffset = getValAtAddress(ImageFileData, (index * 4) + 3, 32);
                     ImageCache[index] = Image(ImageFileData, imageOffset, BitMapWidth, BitMapHeight, "name_goes_here", GameWorldController.instance.palLoader.Palettes[PaletteNo], Alpha, xfer);
                     return ImageCache[index];
                 }
@@ -327,25 +324,25 @@ public class GRLoader : ArtLoader
     /// <param name="NoOfNibbles">No of nibbles.</param>
     /// <param name="add_ptr">Add ptr.</param>
     /// This code from underworld adventures
-    protected void copyNibbles(char[] InputData, ref char[] OutputData, int NoOfNibbles, long add_ptr)
+    protected void copyNibbles(byte[] InputData, ref byte[] OutputData, int NoOfNibbles, long add_ptr)
     {
         //Split the data up into it's nibbles.
         int i = 0;
-        NoOfNibbles = NoOfNibbles * 2;
+        NoOfNibbles *= 2;
         while (NoOfNibbles > 1)
         {
             if (add_ptr <= InputData.GetUpperBound(0))
             {
-                OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);        //High nibble
-                OutputData[i + 1] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8)) & 0xf);  //Low nibble							
+                OutputData[i] = (byte)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);        //High nibble
+                OutputData[i + 1] = (byte)((getValAtAddress(InputData, add_ptr, 8)) & 0xf);  //Low nibble							
             }
-            i = i + 2;
+            i += 2;
             add_ptr++;
-            NoOfNibbles = NoOfNibbles - 2;
+            NoOfNibbles -= 2;
         }
         if (NoOfNibbles == 1)
         {   //Odd nibble out.
-            OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
+            OutputData[i] = (byte)((getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);
         }
     }
 
@@ -360,15 +357,15 @@ public class GRLoader : ArtLoader
     /// <param name="imageHeight">Image height.</param>
     /// <param name="BitSize">Bit size.</param>
     /// This code from underworld adventures
-    char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize, int[] auxpal)
+    byte[] DecodeRLEBitmap(byte[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize, int[] auxpal)
     //, palette *auxpal, int index, int BitSize, char OutFileName[255])
     {
-        char[] outputImg = new char[imageWidth * imageHeight];
+        byte[] outputImg = new byte[imageWidth * imageHeight];
         int state = 0;
         int curr_pxl = 0;
         int count = 0;
         int repeatcount = 0;
-        char nibble;
+        byte nibble;
 
         int add_ptr = 0;
 
@@ -396,7 +393,7 @@ public class GRLoader : ArtLoader
                     }
                 case repeat_record:
                     {
-                        nibble = getNibble(imageData, ref add_ptr);
+                        nibble = GetNibble(imageData, ref add_ptr);
                         //for count times copy the palette data to the image at the output pointer
                         if (imageWidth * imageHeight - curr_pxl < count)
                         {
@@ -404,7 +401,7 @@ public class GRLoader : ArtLoader
                         }
                         for (int i = 0; i < count; i++)
                         {
-                            outputImg[curr_pxl++] = (char)auxpal[nibble];
+                            outputImg[curr_pxl++] = (byte)auxpal[nibble];
                         }
                         if (repeatcount == 0)
                         {
@@ -429,8 +426,8 @@ public class GRLoader : ArtLoader
                         for (int i = 0; i < count; i++)
                         {
                             //get nibble for the palette;
-                            nibble = getNibble(imageData, ref add_ptr);
-                            outputImg[curr_pxl++] = (char)auxpal[nibble];
+                            nibble = GetNibble(imageData, ref add_ptr);
+                            outputImg[curr_pxl++] = (byte)auxpal[nibble];
                         }
                         state = repeat_record_start;
                         break;
@@ -449,27 +446,24 @@ public class GRLoader : ArtLoader
     /// <param name="addr_ptr">Address ptr.</param>
     /// <param name="size">Size.</param>
     /// This code from underworld adventures
-    int getcount(char[] nibbles, ref int addr_ptr, int size)
+    int getcount(byte[] nibbles, ref int addr_ptr, int size)
     {
         int n1;
         int n2;
         int n3;
-        int count = 0;
-
-        n1 = getNibble(nibbles, ref addr_ptr);
-        count = n1;
-
+        n1 = GetNibble(nibbles, ref addr_ptr);
+        int count = n1;
         if (count == 0)
         {
-            n1 = getNibble(nibbles, ref addr_ptr);
-            n2 = getNibble(nibbles, ref addr_ptr);
+            n1 = GetNibble(nibbles, ref addr_ptr);
+            n2 = GetNibble(nibbles, ref addr_ptr);
             count = (n1 << size) | n2;
         }
         if (count == 0)
         {
-            n1 = getNibble(nibbles, ref addr_ptr);
-            n2 = getNibble(nibbles, ref addr_ptr);
-            n3 = getNibble(nibbles, ref addr_ptr);
+            n1 = GetNibble(nibbles, ref addr_ptr);
+            n2 = GetNibble(nibbles, ref addr_ptr);
+            n3 = GetNibble(nibbles, ref addr_ptr);
             count = (((n1 << size) | n2) << size) | n3;
         }
         return count;
@@ -482,10 +476,10 @@ public class GRLoader : ArtLoader
     /// <param name="nibbles">Nibbles.</param>
     /// <param name="addr_ptr">Address ptr.</param>
     /// This code from underworld adventures
-    char getNibble(char[] nibbles, ref int addr_ptr)
+    byte GetNibble(byte[] nibbles, ref int addr_ptr)
     {
-        char n1 = nibbles[addr_ptr];
-        addr_ptr = addr_ptr + 1;
+        byte n1 = nibbles[addr_ptr];
+        addr_ptr++;
         return n1;
     }
 

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class MapWorldSelect : GuiBase {
+public class MapWorldSelect : GuiBase
+{
     public GameWorldController.Worlds world;
 
     public Texture2D ButtonOff;
@@ -18,7 +17,7 @@ public class MapWorldSelect : GuiBase {
 
     public void SetOn()
     {
-       this.GetComponent<RawImage>().texture = ButtonOn;
+        this.GetComponent<RawImage>().texture = ButtonOn;
     }
 
     public void SetOff()

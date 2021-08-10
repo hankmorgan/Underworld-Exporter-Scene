@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class a_hack_trap : trap_base {
+public class a_hack_trap : trap_base
+{
     //Hack trap is the term for a do_trap in UW2
     //qual=5 is a trespass trap.
     //qual=10  is probably the awarding of class specific items at the start fof the game
@@ -40,20 +40,20 @@ public class a_hack_trap : trap_base {
     //      The britannia traps link to LBs index and the avatars index "1" (maybe used to manipulate the player/npc in certain scenarios)
     //      In the kilorn and the prison tower the move triggers that call it are disabled. THey are linked to one of the humans
 
-    public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
-	{
-		Debug.Log ("Hack Trap " + objInt().BaseObjectData.index + " qual = " + quality + " triggers:" + triggerX + "," + triggerY);
-	}
+    public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
+    {
+        Debug.Log("Hack Trap " + objInt().BaseObjectData.index + " qual = " + quality + " triggers:" + triggerX + "," + triggerY);
+    }
 
     protected override void Start()
     {
-        if( 
-            ((GameWorldController.instance.LevelNo!=0)  && (GameWorldController.instance.LevelNo != 16))
-            && (quality==62)
+        if (
+            ((GameWorldController.instance.LevelNo != 0) && (GameWorldController.instance.LevelNo != 16))
+            && (quality == 62)
             )
         {
             Debug.Log("oh hey another instance of that hack trap I'm trying to figure out");
         }
-         
+
     }
 }

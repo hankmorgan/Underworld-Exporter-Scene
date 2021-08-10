@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 //using Polenter.Serialization;
 
@@ -10,7 +9,7 @@ using System.IO;
 /// </summary>
 public class OptionsMenuControl : GuiBase_Draggable
 {
-    string[] saveNames = { "", "", "", "" };
+    readonly string[] saveNames = { "", "", "", "" };
     public GameObject test;
 
     private const int SAVE = 0;
@@ -407,9 +406,9 @@ public class OptionsMenuControl : GuiBase_Draggable
     private void ReturnToGame()
     {
         InteractionMenu.gameObject.SetActive(true);
-        UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
+        Character.InteractionMode = Character.InteractionModeUse;
         InteractionModeControl.UpdateNow = true;
-        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject,false);
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject, false);
         this.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
     }
@@ -461,15 +460,21 @@ public class OptionsMenuControl : GuiBase_Draggable
 
         for (int i = 1; i <= 4; i++)
         {
-            char[] fileDesc;
-            if (DataLoader.ReadStreamFile(Path.Combine(Loader.BasePath,"SAVE" + i , "DESC"), out fileDesc))
+            string toLoad = Path.Combine(Loader.BasePath, "SAVE" + i, "DESC");
+            if (File.Exists(toLoad))
             {
-                saveNames[i - 1] = new string(fileDesc);
+                var fileDesc = File.ReadAllBytes(toLoad);
+                saveNames[i - 1] = System.Text.Encoding.Default.GetString(fileDesc);
             }
             else
             {
                 saveNames[i - 1] = "";
             }
+            //if (Loader.ReadStreamFile(Path.Combine(Loader.BasePath, "SAVE" + i, "DESC"), out byte[] fileDesc))
+            //{
+            //    saveNames[i - 1] = System.Text.Encoding.Default.GetString(result); //  new string(fileDesc);
+            //}
+
         }
         for (int i = 0; i <= saveNames.GetUpperBound(0); i++)
         {
@@ -574,17 +579,17 @@ public class OptionsMenuControl : GuiBase_Draggable
     {
         //if (_RES==GAME_UW2)
         //{
-            UWHUD.instance.MessageScroll.Add("Saving Disabled for the moment.");
-            return;
-            //}
+        UWHUD.instance.MessageScroll.Add("Saving Disabled for the moment.");
+        return;
+        //}
 
-            //000~001~159~Impossible, you are between worlds. \n
-            if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
+        //000~001~159~Impossible, you are between worlds. \n
+        if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
         {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_impossible_you_are_between_worlds_));
             return;
         }
-        if (!Directory.Exists(Path.Combine(Loader.BasePath , "SAVE" + (SlotNo + 1))))
+        if (!Directory.Exists(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1))))
         {
             Directory.CreateDirectory(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1)));
         }
@@ -597,7 +602,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Write bglobals.dat
             GameWorldController.instance.WriteBGlobals(SlotNo + 1);
             //Write a desc file
-            File.WriteAllText( Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1) , "DESC"), SaveGame.SaveGameName(SlotNo + 1));
+            File.WriteAllText(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1), "DESC"), SaveGame.SaveGameName(SlotNo + 1));
             //Write player.dat
             SaveGame.WritePlayerDatUW2(SlotNo + 1);
             //TODO:Write scd.ark
@@ -609,7 +614,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Write bglobals.dat
             GameWorldController.instance.WriteBGlobals(SlotNo + 1);
             //Write a desc file
-            File.WriteAllText( Path.Combine( Loader.BasePath, "SAVE" + (SlotNo + 1), "DESC"), SaveGame.SaveGameName(SlotNo + 1));
+            File.WriteAllText(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1), "DESC"), SaveGame.SaveGameName(SlotNo + 1));
             //Write player.dat
             SaveGame.WritePlayerDatUW1(SlotNo + 1);
             //	SaveGame.WritePlayerDatOriginal(SlotNo+1);	

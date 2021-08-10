@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class a_splash : object_base {
+public class a_splash : object_base
+{
 
     //public AudioSource aud;
-	// Use this for initialization
+    // Use this for initialization
 
     public override void InitSound()
     {

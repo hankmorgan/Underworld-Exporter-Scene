@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
 /// Spoils your potion of cure poison and replaces it with a poisoning damage trap
 /// </summary>
-public class a_hack_trap_spoil_potion : a_hack_trap {
+public class a_hack_trap_spoil_potion : a_hack_trap
+{
 
     //Change bottle type of the potion and link it to a damage trap.
 
@@ -14,12 +13,12 @@ public class a_hack_trap_spoil_potion : a_hack_trap {
     {
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
-            if (child.gameObject.GetComponent<ObjectInteraction>()!=null)
+            if (child.gameObject.GetComponent<ObjectInteraction>() != null)
             {
                 ObjectInteraction obj = child.gameObject.GetComponent<ObjectInteraction>();
-                if (obj.GetItemType()==ObjectInteraction.POTIONS)
+                if (obj.GetItemType() == ObjectInteraction.POTIONS)
                 {
-                    if ((obj.link == 529) && (obj.enchantment ==1) && (obj.GetComponent<Potion>().linked == null))
+                    if ((obj.link == 529) && (obj.enchantment == 1) && (obj.GetComponent<Potion>().linked == null))
                     {
                         SpoilPotion(obj);
                     }

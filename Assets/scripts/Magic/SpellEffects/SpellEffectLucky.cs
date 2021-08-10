@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SpellEffectLucky : SpellEffect
+﻿public class SpellEffectLucky : SpellEffect
 {
     public UWCharacter.LuckState NewState;
 

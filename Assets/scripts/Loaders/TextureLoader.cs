@@ -1,29 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Loads textures.
 /// </summary>
-public class TextureLoader : ArtLoader {
+public class TextureLoader : ArtLoader
+{
 
-    private string pathTexW_UW0 = "DW64.TR";
-    private string pathTexF_UW0 = "DF32.TR";
+    private readonly string pathTexW_UW0 = "DW64.TR";
+    private readonly string pathTexF_UW0 = "DF32.TR";
     private string pathTexW_UW1 = "W64.TR";
     private string pathTexF_UW1 = "F32.TR";
-    private string pathTex_UW2 = "T64.TR";
-    private string pathTex_SS1 = "Texture.res";
+    private readonly string pathTex_UW2 = "T64.TR";
+    private readonly string pathTex_SS1 = "Texture.res";
 
-    char[] texturebufferW;
-    char[] texturebufferF;
-    char[] texturebufferT;
+    byte[] texturebufferW;
+    byte[] texturebufferF;
+    byte[] texturebufferT;
 
     public bool texturesWLoaded;
     public bool texturesFLoaded;
     private int TextureSplit = 210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
     private int FloorDim = 32;
-    private string ModPathW;
-    private string ModPathF;
+    private readonly string ModPathW;
+    private readonly string ModPathF;
 
     public const float BumpMapStrength = 1f;
 
@@ -58,7 +58,7 @@ public class TextureLoader : ArtLoader {
                 {
                     LoadMod = true;
                 }
-                ModPathF =  Path.Combine(BasePath, "DATA", pathTexF_UW1.Replace(".", "_"));
+                ModPathF = Path.Combine(BasePath, "DATA", pathTexF_UW1.Replace(".", "_"));
                 if (Directory.Exists(ModPathF))
                 {
                     LoadMod = true;
@@ -79,7 +79,7 @@ public class TextureLoader : ArtLoader {
             case 1: // Palette cycled
                 return LoadImageAt(index, GameWorldController.instance.palLoader.GreyScale);
             case 2://normal map                
-                return TGALoader.LoadTGA(Path.Combine(ModPathW,index.ToString("d3") + "_normal.tga"));
+                return TGALoader.LoadTGA(Path.Combine(ModPathW, index.ToString("d3") + "_normal.tga"));
             default:
                 return LoadImageAt(index, GameWorldController.instance.palLoader.Palettes[0]);
         }
@@ -117,7 +117,7 @@ public class TextureLoader : ArtLoader {
                 {
                     if (texturesFLoaded == false)
                     {
-                        if (!DataLoader.ReadStreamFile(Path.Combine(BasePath,"RES", "DATA", pathTex_SS1), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath, "RES", "DATA", pathTex_SS1), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -128,26 +128,24 @@ public class TextureLoader : ArtLoader {
                     }
                     //Load the chunk requested
                     //For textures this is index + 1000
-                    DataLoader.Chunk art_ark;
-                    if (DataLoader.LoadChunk(texturebufferT, index + 1000, out art_ark))
+                    if (DataLoader.LoadChunk(texturebufferT, index + 1000, out DataLoader.Chunk art_ark))
                     {
                         switch (art_ark.chunkContentType)
                         {
                             case 2:
                             case 17:
                                 {
-                                    long textureOffset = (int)DataLoader.getValAtAddress(art_ark.data, 2 + (0 * 4), 32);
-                                    int CompressionType = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 4, 16);
-                                    int Width = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 8, 16);
-                                    int Height = (int)DataLoader.getValAtAddress(art_ark.data, textureOffset + 10, 16);
+                                    long textureOffset = (int)getValAtAddress(art_ark.data, 2 + (0 * 4), 32);
+                                    int CompressionType = (int)getValAtAddress(art_ark.data, textureOffset + 4, 16);
+                                    int Width = (int)getValAtAddress(art_ark.data, textureOffset + 8, 16);
+                                    int Height = (int)getValAtAddress(art_ark.data, textureOffset + 10, 16);
                                     if ((Width > 0) && (Height > 0))
                                     {
 
                                         if (CompressionType == 4)
                                         {//compressed
-                                            char[] outputImg;
                                             //  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
-                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out outputImg, Height * Width);
+                                            UncompressBitmap(art_ark.data, textureOffset + BitMapHeaderSize, out byte[] outputImg, Height * Width);
                                             return Image(outputImg, 0, Width, Height, "namehere", palToUse, true);
                                         }
                                         else
@@ -179,7 +177,7 @@ public class TextureLoader : ArtLoader {
                     }
                     if (texturesFLoaded == false)
                     {
-                        if (!DataLoader.ReadStreamFile(Path.Combine(BasePath,"DATA", pathTex_UW2), out texturebufferT))
+                        if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTex_UW2), out texturebufferT))
                         {
                             return base.LoadImageAt(index);
                         }
@@ -188,7 +186,7 @@ public class TextureLoader : ArtLoader {
                             texturesFLoaded = true;
                         }
                     }
-                    long textureOffset = DataLoader.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
+                    long textureOffset = getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
                     return Image(texturebufferT, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
                 }
 
@@ -201,7 +199,7 @@ public class TextureLoader : ArtLoader {
                     {//Wall textures
                         if (texturesWLoaded == false)
                         {
-                            if (!DataLoader.ReadStreamFile(Path.Combine(BasePath ,"DATA", pathTexW_UW1), out texturebufferW))
+                            if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexW_UW1), out texturebufferW))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -218,14 +216,14 @@ public class TextureLoader : ArtLoader {
                                 return TGALoader.LoadTGA(toLoadMod);
                             }
                         }
-                        long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
+                        long textureOffset = getValAtAddress(texturebufferW, (index * 4) + 4, 32);
                         return Image(texturebufferW, textureOffset, 64, 64, "name_goes_here", palToUse, false);
                     }
                     else
                     {//Floor textures (to match my list of textures)
                         if (texturesFLoaded == false)
                         {
-                            if (!DataLoader.ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexF_UW1), out texturebufferF))
+                            if (!ReadStreamFile(Path.Combine(BasePath, "DATA", pathTexF_UW1), out texturebufferF))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -242,7 +240,7 @@ public class TextureLoader : ArtLoader {
                                 return TGALoader.LoadTGA(toLoadMod);
                             }
                         }
-                        long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
+                        long textureOffset = getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                         return Image(texturebufferF, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
                     }
                 }//end switch	
@@ -258,7 +256,8 @@ public class TextureLoader : ArtLoader {
     /// <param name="source">Source.</param>
     /// <param name="strength">Strength.</param>
     /// Sourced from http://jon-martin.com/?p=123
-    public static Texture2D NormalMap(Texture2D source, float strength) {
+    public static Texture2D NormalMap(Texture2D source, float strength)
+    {
         strength = Mathf.Clamp(strength, 0.0F, 10.0F);
         Texture2D result;
         float xLeft;
@@ -268,8 +267,10 @@ public class TextureLoader : ArtLoader {
         float yDelta;
         float xDelta;
         result = new Texture2D(source.width, source.height, TextureFormat.ARGB32, true);
-        for (int by = 0; by < result.height; by++) {
-            for (int bx = 0; bx < result.width; bx++) {
+        for (int by = 0; by < result.height; by++)
+        {
+            for (int bx = 0; bx < result.width; bx++)
+            {
                 xLeft = source.GetPixel(bx - 1, by).grayscale * strength;
                 xRight = source.GetPixel(bx + 1, by).grayscale * strength;
                 yUp = source.GetPixel(bx, by - 1).grayscale * strength;
