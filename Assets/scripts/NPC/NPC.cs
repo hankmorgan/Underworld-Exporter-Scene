@@ -2140,7 +2140,7 @@ public class NPC : MobileObject
                 myObjChild.transform.parent = launchedItem.transform;
                 ///Appends ProjectileDamage to the projectile to act as the damage delivery method.
                 ProjectileDamage pd = myObjChild.AddComponent<ProjectileDamage>();
-                pd.Source = this.gameObject;
+                pd.Source = this.gameObject;//This should be a property of the mobile object data
                 pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[projectiletype - 16].damage;//sling damage.
                 pd.AttackCharge = 100f;
                 pd.AttackScore = Dexterity;//Assuming there is no special ranged attack score?

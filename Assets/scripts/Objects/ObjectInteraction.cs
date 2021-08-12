@@ -560,6 +560,8 @@ public class ObjectInteraction : UWEBase
     {
         animationStarted = false;
         startPos = this.transform.position;
+        ObjectTileX = (short)Mathf.FloorToInt(this.transform.localPosition.x / 1.2f);
+        ObjectTileY = (short)Mathf.FloorToInt(this.transform.localPosition.z / 1.2f);
         if (ObjectSprite != null)
         {
             ObjectSprite.gameObject.SetActive(invis == 0);
@@ -1327,9 +1329,6 @@ public class ObjectInteraction : UWEBase
             objInteract.rg.angularDrag = 0.0f;
             FreezeMovement(myObj);
         }
-
-        //  objInteract.isquant = (short)currObj.is_quant;
-        //objInteract.enchantment = (short)currObj.enchantment;
 
         if ((PlaySoundEffects) && (!ObjectLoader.isTrap(currObj) && (!ObjectLoader.isTrigger(currObj))))
         {
