@@ -458,10 +458,11 @@ public class MainMenuHud : GuiBase
                     {
                         Quest.instance.QuestVariables[i] = 0;
                     }
-                    for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
-                    {
-                        UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
-                    }
+                    //Obsolete
+                    //for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
+                    //{
+                    //    UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
+                    //}
                     switch (_RES)
                     {
                         case GAME_UW1:

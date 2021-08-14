@@ -2349,79 +2349,79 @@ public class SaveGame : Loader
     /// Loads the skills from a save file for UW1 & 2
     /// </summary>
     /// <param name="buffer">Buffer.</param>
-    static void LoadStats(byte[] buffer)
-    {
-        return;
-        for (int i = 1; i <= 0x3E; i++)
-        {
-            switch (i)
-            {
-                case 0x1F://Strength
-                   // UWCharacter.Instance.PlayerSkills.STR = buffer[i];
-                   // GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
-                    break;
-                case 0x20://Dex
-                    UWCharacter.Instance.PlayerSkills.DEX = buffer[i]; break;
-                case 0x21: ///    Intelligence
-                    UWCharacter.Instance.PlayerSkills.INT = buffer[i]; break;
-                case 0x22: ///    Attack
-                    UWCharacter.Instance.PlayerSkills.Attack = buffer[i]; break;
-                case 0x23: ///    Defense
-                    UWCharacter.Instance.PlayerSkills.Defense = buffer[i]; break;
-                case 0x24: ///    Unarmed
-                    UWCharacter.Instance.PlayerSkills.Unarmed = buffer[i]; break;
-                case 0x25: ///    Sword
-                    UWCharacter.Instance.PlayerSkills.Sword = buffer[i]; break;
-                case 0x26: ///    Axe
-                    UWCharacter.Instance.PlayerSkills.Axe = buffer[i]; break;
-                case 0x27: ///    Mace
-                    UWCharacter.Instance.PlayerSkills.Mace = buffer[i]; break;
-                case 0x28: ///    Missile
-                    UWCharacter.Instance.PlayerSkills.Missile = buffer[i]; break;
-                case 0x29: ///    Mana
-                    UWCharacter.Instance.PlayerSkills.ManaSkill = buffer[i]; break;
-                case 0x2A: ///    Lore
-                    UWCharacter.Instance.PlayerSkills.Lore = buffer[i]; break;
-                case 0x2B: ///    Casting
-                    UWCharacter.Instance.PlayerSkills.Casting = buffer[i]; break;
-                case 0x2C: ///    Traps
-                    UWCharacter.Instance.PlayerSkills.Traps = buffer[i]; break;
-                case 0x2D: ///    Search
-                    UWCharacter.Instance.PlayerSkills.Search = buffer[i]; break;
-                case 0x2E: ///    Track
-                    UWCharacter.Instance.PlayerSkills.Track = buffer[i]; break;
-                case 0x2F: ///    Sneak
-                    UWCharacter.Instance.PlayerSkills.Sneak = buffer[i]; break;
-                case 0x30: ///    Repair
-                    UWCharacter.Instance.PlayerSkills.Repair = buffer[i]; break;
-                case 0x31: ///    Charm
-                    UWCharacter.Instance.PlayerSkills.Charm = buffer[i]; break;
-                case 0x32: ///    Picklock
-                    UWCharacter.Instance.PlayerSkills.PickLock = buffer[i]; break;
-                case 0x33: ///    Acrobat
-                    UWCharacter.Instance.PlayerSkills.Acrobat = buffer[i]; break;
-                case 0x34: ///    Appraise
-                    UWCharacter.Instance.PlayerSkills.Appraise = buffer[i]; break;
-                case 0x35: ///    Swimming
-                    UWCharacter.Instance.PlayerSkills.Swimming = buffer[i]; break;
-                case 0x36://Curvit
-                    UWCharacter.Instance.CurVIT = buffer[i]; break;
-                case 0x37: ///    max. vitality
-                    UWCharacter.Instance.MaxVIT = buffer[i]; break;
-                case 0x38: ///    current mana, (play_mana)
-                    UWCharacter.Instance.PlayerMagic.CurMana = buffer[i]; break;
-                case 0x39: ///    max. mana  (see also true max mana)
-                    UWCharacter.Instance.PlayerMagic.MaxMana = buffer[i]; break;
-                case 0x3A: ///    hunger, play_hunger
-                    UWCharacter.Instance.FoodLevel = buffer[i]; break;
-                case 0x3B:
-                    //Unknown. Observed values 0 and 64?//Fatigue???
-                    break;
-                case 0x3E: ///    character level (play_level)
-                    UWCharacter.Instance.CharLevel = buffer[i]; break;
-            }
-        }
-    }
+    //static void LoadStats(byte[] buffer)
+    //{
+    //    return;
+    //    for (int i = 1; i <= 0x3E; i++)
+    //    {
+    //        switch (i)
+    //        {
+    //            case 0x1F://Strength
+    //               // UWCharacter.Instance.PlayerSkills.STR = buffer[i];
+    //               // GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
+    //                break;
+    //            case 0x20://Dex
+    //                UWCharacter.Instance.PlayerSkills.DEX = buffer[i]; break;
+    //            case 0x21: ///    Intelligence
+    //                UWCharacter.Instance.PlayerSkills.INT = buffer[i]; break;
+    //            case 0x22: ///    Attack
+    //                UWCharacter.Instance.PlayerSkills.Attack = buffer[i]; break;
+    //            case 0x23: ///    Defense
+    //                UWCharacter.Instance.PlayerSkills.Defense = buffer[i]; break;
+    //            case 0x24: ///    Unarmed
+    //                UWCharacter.Instance.PlayerSkills.Unarmed = buffer[i]; break;
+    //            case 0x25: ///    Sword
+    //                UWCharacter.Instance.PlayerSkills.Sword = buffer[i]; break;
+    //            case 0x26: ///    Axe
+    //                UWCharacter.Instance.PlayerSkills.Axe = buffer[i]; break;
+    //            case 0x27: ///    Mace
+    //                UWCharacter.Instance.PlayerSkills.Mace = buffer[i]; break;
+    //            case 0x28: ///    Missile
+    //                UWCharacter.Instance.PlayerSkills.Missile = buffer[i]; break;
+    //            case 0x29: ///    Mana
+    //                UWCharacter.Instance.PlayerSkills.ManaSkill = buffer[i]; break;
+    //            case 0x2A: ///    Lore
+    //                UWCharacter.Instance.PlayerSkills.Lore = buffer[i]; break;
+    //            case 0x2B: ///    Casting
+    //                UWCharacter.Instance.PlayerSkills.Casting = buffer[i]; break;
+    //            case 0x2C: ///    Traps
+    //                UWCharacter.Instance.PlayerSkills.Traps = buffer[i]; break;
+    //            case 0x2D: ///    Search
+    //                UWCharacter.Instance.PlayerSkills.Search = buffer[i]; break;
+    //            case 0x2E: ///    Track
+    //                UWCharacter.Instance.PlayerSkills.Track = buffer[i]; break;
+    //            case 0x2F: ///    Sneak
+    //                UWCharacter.Instance.PlayerSkills.Sneak = buffer[i]; break;
+    //            case 0x30: ///    Repair
+    //                UWCharacter.Instance.PlayerSkills.Repair = buffer[i]; break;
+    //            case 0x31: ///    Charm
+    //                UWCharacter.Instance.PlayerSkills.Charm = buffer[i]; break;
+    //            case 0x32: ///    Picklock
+    //                UWCharacter.Instance.PlayerSkills.PickLock = buffer[i]; break;
+    //            case 0x33: ///    Acrobat
+    //                UWCharacter.Instance.PlayerSkills.Acrobat = buffer[i]; break;
+    //            case 0x34: ///    Appraise
+    //                UWCharacter.Instance.PlayerSkills.Appraise = buffer[i]; break;
+    //            case 0x35: ///    Swimming
+    //                UWCharacter.Instance.PlayerSkills.Swimming = buffer[i]; break;
+    //            case 0x36://Curvit
+    //                UWCharacter.Instance.CurVIT = buffer[i]; break;
+    //            case 0x37: ///    max. vitality
+    //                UWCharacter.Instance.MaxVIT = buffer[i]; break;
+    //            case 0x38: ///    current mana, (play_mana)
+    //                UWCharacter.Instance.PlayerMagic.CurMana = buffer[i]; break;
+    //            case 0x39: ///    max. mana  (see also true max mana)
+    //                UWCharacter.Instance.PlayerMagic.MaxMana = buffer[i]; break;
+    //            case 0x3A: ///    hunger, play_hunger
+    //                UWCharacter.Instance.FoodLevel = buffer[i]; break;
+    //            case 0x3B:
+    //                //Unknown. Observed values 0 and 64?//Fatigue???
+    //                break;
+    //            case 0x3E: ///    character level (play_level)
+    //                UWCharacter.Instance.CharLevel = buffer[i]; break;
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// Inits the player position.
@@ -2466,23 +2466,33 @@ public class SaveGame : Loader
     /// <param name="StartOffset">Start offset.</param>
     static void LoadRunes(byte[] buffer)
     {
-        int StartOffset = 0x45;
-        int runeOffset = 0;
-        for (int i = 0; i < 3; i++)
-        {
-            for (int r = 7; r >= 0; r--)
-            {
-                if (((buffer[StartOffset + i] >> r) & 0x1) == 1)
-                {
-                    UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] = true;
-                }
-                else
-                {
-                    UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] = false;
-                }
-            }
-            runeOffset += 8;
-        }
+        //int StartOffset = 0x45;
+        //int runeOffset = 0;
+        //int debugrune = 0;
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    for (int r = 7; r >= 0; r--)
+        //    {
+        //        if (((buffer[StartOffset + i] >> r) & 0x1) == 1)
+        //        {
+        //            UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] = true;
+        //            if(UWCharacter.Instance.PlayerMagic.GetRune(debugrune)==false)
+        //            {
+        //                Debug.Log("It is wrong");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] = false;
+        //            if (UWCharacter.Instance.PlayerMagic.GetRune(debugrune) == true)
+        //            {
+        //                Debug.Log("It is wrong");
+        //            }
+        //        }
+        //        debugrune++;
+        //    }
+        //    runeOffset += 8;
+        //}
 
         SetActiveRuneSlots(0, buffer[0x48]);
         SetActiveRuneSlots(1, buffer[0x49]);
@@ -2994,35 +3004,35 @@ public class SaveGame : Loader
     /// <param name="writer">Writer.</param>
     static void WriteRunes(BinaryWriter writer)
     {
+        return;
+        //int runeOffset = 0;
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    int RuneByte = 0;
+        //    for (int r = 7; r >= 0; r--)
+        //    {
+        //        if (UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] == true)
+        //        {
+        //            RuneByte |= (1 << r);
+        //        }
+        //    }
 
-        int runeOffset = 0;
-        for (int i = 0; i < 3; i++)
-        {
-            int RuneByte = 0;
-            for (int r = 7; r >= 0; r--)
-            {
-                if (UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] == true)
-                {
-                    RuneByte |= (1 << r);
-                }
-            }
-
-            DataLoader.WriteInt8(writer, RuneByte);
-            runeOffset += 8;
-        }
+        //    DataLoader.WriteInt8(writer, RuneByte);
+        //    runeOffset += 8;
+        //}
 
 
-        for (int i = 0; i < 3; i++)
-        {
-            if (UWCharacter.Instance.PlayerMagic.ActiveRunes[i] == -1)
-            {
-                DataLoader.WriteInt8(writer, 24);   //no rune.
-            }
-            else
-            {
-                DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[i]);
-            }
-        }
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    if (UWCharacter.Instance.PlayerMagic.ActiveRunes[i] == -1)
+        //    {
+        //        DataLoader.WriteInt8(writer, 24);   //no rune.
+        //    }
+        //    else
+        //    {
+        //        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[i]);
+        //    }
+        //}
     }
 
     /// <summary>

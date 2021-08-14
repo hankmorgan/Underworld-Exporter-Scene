@@ -33,7 +33,7 @@ static string[] Runes=new string[]{"An","Bet","Corp","Des",
             {
                 UWHUD.instance.runes[i].thisRune = UWHUD.instance.runes[i].gameObject.GetComponent<RawImage>();
             }
-            if ((UWCharacter.Instance.PlayerMagic.PlayerRunes[i] != false))
+            if ((UWCharacter.Instance.PlayerMagic.GetRune(i) != false))
             {
                 UWHUD.instance.runes[i].thisRune.texture = GameWorldController.instance.ObjectArt.LoadImageAt(232 + i);
                 UWHUD.instance.runes[i].isSet = true;
@@ -57,7 +57,7 @@ static string[] Runes=new string[]{"An","Bet","Corp","Des",
     public void ClickEvent(int ptrID)
     {
 
-        if (UWCharacter.Instance.PlayerMagic.PlayerRunes[SlotNumber] == false)
+        if (UWCharacter.Instance.PlayerMagic.GetRune(SlotNumber) == false)
         {
             return;//Slot is unfilled
         }

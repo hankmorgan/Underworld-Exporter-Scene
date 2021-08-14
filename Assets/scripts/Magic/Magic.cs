@@ -32,7 +32,39 @@ public class Magic : UWEBase
     public string ReadiedSpell;
 
     ///Runes that the character has picked up
-    public bool[] PlayerRunes = new bool[24];
+  //  public bool[] PlayerRunes = new bool[24];
+
+
+    /// <summary>
+    /// Returns true if the player has this rune
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public bool GetRune(int index)
+    {
+        int RuneSet = index / 8;
+        int bit = 7-(index % 8);
+        return( ( (SaveGame.GetAt(0x45+RuneSet) >> bit) & 0x1) == 1);
+    }
+    public void SetRune(int index, bool newValue)
+    {
+        int RuneSet = index / 8;
+        int bit = 7 - (index % 8);
+        byte mask;
+        byte existingValue = SaveGame.GetAt(0x45 + RuneSet);
+        mask = (byte)(1 << bit);
+        if (newValue==true)
+        {
+            mask = (byte)(1<<bit);
+            existingValue |= mask;
+        }
+        else
+        {//clear runes. Should only happen at chargen. Possibly redundant due to initsavegame function
+            existingValue = (byte)(existingValue & (~mask));
+        }
+        SaveGame.SetAt(0x45 + RuneSet, existingValue);
+    }
+
     ///Runes that the player has selected
     public int[] ActiveRunes = new int[3];
 
