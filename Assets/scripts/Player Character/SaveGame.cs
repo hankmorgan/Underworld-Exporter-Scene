@@ -157,9 +157,9 @@ public class SaveGame : Loader
             //Load some common items for uw1/2
             //LoadName(buffer);
             //LoadStats(buffer);
-            int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
+            int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);//To Convert
             LoadRunes(buffer);
-            LoadPlayerClass(buffer, 0x65);
+            LoadPlayerBody(buffer, 0x65);
             LoadGameOptions(buffer, 0xB6);
 
             for (int i = 0x4B; i <= 221; i++)
@@ -1677,16 +1677,6 @@ public class SaveGame : Loader
                 output.Close();
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
-            /*for (int c=0; c<=pDat.GetUpperBound(0);c++)
-            {
-                    if (recodetest[c]!=pDat[c])
-                    {
-                            Debug.Log("File difference at " + c);
-                            break;
-                    }
-            }*/
-
-            //File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
             if (UWCharacter.Instance.recode)
             {
                 if (UWCharacter.Instance.recode_cheat)
@@ -1712,12 +1702,19 @@ public class SaveGame : Loader
             }
 
 
+
+            //Copy decoded data to main buffer.
+            for (int i = 0; i <= PlayerDat.GetUpperBound(0); i++)
+            {
+                PlayerDat[i] = buffer[i];
+            }
+
             //Load some common items for uw1/2
             //LoadName(buffer);
-           // LoadStats(buffer);
+            // LoadStats(buffer);
             int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
-            LoadPlayerClass(buffer, 0x66);
+            LoadPlayerBody(buffer, 0x66);
             LoadGameOptions(buffer, 0x303);
 
             for (int i = 0x4D; i <= 930; i++)
@@ -2504,31 +2501,40 @@ public class SaveGame : Loader
     /// </summary>
     /// <param name="buffer">Buffer.</param>
     /// <param name="i">The index.</param>
-    static void LoadPlayerClass(byte[] buffer, int i)
+    static void LoadPlayerBody(byte[] buffer, int i)
     {
         //bit 1 = hand left/right
         //bit 2-5 = gender & body
         //bit 6-8 = class
         GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
-        UWCharacter.Instance.isLefty = ((buffer[i] & 0x1) == 0);
-        int bodyval = (buffer[i] >> 1) & 0xf;
-        if (bodyval % 2 == 0)
+        //UWCharacter.Instance.isLefty = ((buffer[i] & 0x1) == 0);
+        int body = UWCharacter.Instance.Body;
+        if (UWCharacter.Instance.isFemale)
         {
-            //male 0,2,4,6,8
-            UWCharacter.Instance.isFemale = false;
-            //Body
-            UWCharacter.Instance.Body = bodyval / 2;
-            UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(0 + (bodyval / 2));
+            UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(5 + body);
         }
         else
         {
-            //female=1,3,5,7,9
-            UWCharacter.Instance.isFemale = true;
-            UWCharacter.Instance.Body = (bodyval - 1) / 2;
-            UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(5 + ((bodyval - 1) / 2));
+            UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(body);
         }
-        //class
-        UWCharacter.Instance.CharClass = buffer[i] >> 5;
+        //int bodyval = (buffer[i] >> 1) & 0xf;
+        //if (bodyval % 2 == 0)
+        //{
+        //    //male 0,2,4,6,8
+        //   // UWCharacter.Instance.isFemale = false;
+        //    //Body
+        //    UWCharacter.Instance.Body = bodyval / 2;
+        //    UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(0 + (bodyval / 2));
+        //}
+        //else
+        //{
+        //    //female=1,3,5,7,9
+        //    //UWCharacter.Instance.isFemale = true;
+        //    UWCharacter.Instance.Body = (bodyval - 1) / 2;
+        //    UWHUD.instance.playerBody.texture = chrBdy.LoadImageAt(5 + ((bodyval - 1) / 2));
+        //}
+        ////class
+        //UWCharacter.Instance.CharClass = buffer[i] >> 5;
     }
 
     /// <summary>
@@ -3082,6 +3088,7 @@ public class SaveGame : Loader
     /// <param name="writer">Writer.</param>
     static void WritePlayerClass(BinaryWriter writer)
     {
+        return;
         //bit 1 = hand left/right
         //bit 2-5 = gender & body
         //bit 6-8 = class

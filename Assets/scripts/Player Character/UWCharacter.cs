@@ -258,20 +258,107 @@ public class UWCharacter : Character
 
 
 
-    [Header("Character Details")]
+  
     //Character related info
     //Character Details
-    public int Body;//Which body/portrait this character has 
-    public int CharClass;
+    public int Body//Which body/portrait this character has 
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return (SaveGame.GetAt(offset) >> 2) & 0x7 ;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            existingValue = (byte)(existingValue & 0xE3); //mask out body.
+            value = value << 2;
+            existingValue = (byte)(existingValue | value);
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+
+    public int CharClass
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return (SaveGame.GetAt(offset) >> 5) & 0x7;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            existingValue = (byte)(existingValue & 0x1F); //mask out charclass
+            value = value << 5;
+            existingValue = (byte)(existingValue | value);
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+
     public int CharLevel
     {
         get { return SaveGame.GetAt(0x3E); }
         set { SaveGame.SetAt(0x3E, (byte)value); }
     }
+    [Header("Character Details")]
     public int EXP;
     public int TrainingPoints;
-    public bool isFemale;
-    public bool isLefty;
+    public bool isFemale
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return ((int)(SaveGame.GetAt(offset) >> 1 ) & 0x1) == 0x1;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1 << 1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+    public bool isLefty
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return ((int)(SaveGame.GetAt(offset)) & 0x1) == 0x0;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
 
 
     [Header("Speeds")]

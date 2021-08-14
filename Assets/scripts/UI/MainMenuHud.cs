@@ -457,8 +457,8 @@ public class MainMenuHud : GuiBase
                 {
                     //Start a new game
                     UWCharacter.Instance.EXP = 50;
+                    UWCharacter.Instance.CharLevel = 1;
                     UWCharacter.Instance.TrainingPoints = 1;
-                    //UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
                     UWCharacter.Instance.PlayerMagic.MaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;

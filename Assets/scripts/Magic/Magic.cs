@@ -54,8 +54,7 @@ public class Magic : UWEBase
         byte existingValue = SaveGame.GetAt(0x45 + RuneSet);
         mask = (byte)(1 << bit);
         if (newValue==true)
-        {
-            mask = (byte)(1<<bit);
+        {//Set rune
             existingValue |= mask;
         }
         else
