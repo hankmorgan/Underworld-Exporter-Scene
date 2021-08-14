@@ -519,7 +519,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             UWHUD.instance.NPCName.text = npcname;
         }
 
-        UWHUD.instance.PCName.text = UWCharacter.Instance.CharName;
+        UWHUD.instance.PCName.text = SaveGame.CharName; ;
 
 
 
@@ -1387,7 +1387,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "play_poison":
                         stack.Set(address, UWCharacter.Instance.play_poison); break;
                     case "play_name":
-                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, UWCharacter.Instance.CharName)); break;
+                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, SaveGame.CharName)); break;
                     //case "new_player_exp":
                     case "play_level":
                         stack.Set(address, UWCharacter.Instance.CharLevel); break;

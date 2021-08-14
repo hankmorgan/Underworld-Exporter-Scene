@@ -43,31 +43,35 @@ public class Magic : UWEBase
     }
 
     ///How much mana the player can have
-    [SerializeField]
-    private int _MaxMana;
     public int MaxMana
     {
         get
         {
-            return _MaxMana;
+            return SaveGame.GetAt(0x39);
         }
         set
         {
-            _MaxMana = value;
+            SaveGame.SetAt(0x39, (byte)value);
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }
-    ///How much mana the player currently has
-    private int _CurMana;
     public int CurMana
     {
         get
         {
-            return _CurMana;
+            return SaveGame.GetAt(0x38);
         }
         set
         {
-            _CurMana = value;
+            if (value > MaxMana)
+            {
+                value = MaxMana;
+            }
+            if (value < 0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x38, (byte)value);
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }

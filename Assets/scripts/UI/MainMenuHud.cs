@@ -514,7 +514,7 @@ public class MainMenuHud : GuiBase
             EnterCharName.text = "Avatar";
         }
         CharName.text = EnterCharName.text;
-        UWCharacter.Instance.CharName = EnterCharName.text;
+        SaveGame.CharName = EnterCharName.text;
         EnterCharName.gameObject.SetActive(false);
         ChargenClick(0);
     }

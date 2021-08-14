@@ -648,7 +648,7 @@ public class GameWorldController : UWEBase
         LoadPath(res);
         _RES = res;//game;
         UWClass._RES = res;//game;
-        //keybinds.ApplyBindings();//Applies keybinds to certain controls
+        SaveGame.InitEmptySaveGame();
 
         //Set some layers for the AI to use to detect walls and doors.
         MapMeshLayerMask = 1 << LevelModel.layer;

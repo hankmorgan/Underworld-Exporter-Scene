@@ -4,6 +4,67 @@ using UnityEngine.UI;
 
 public class SaveGame : Loader
 {
+    private static byte[] PlayerDat;
+    public static void InitEmptySaveGame()
+    {
+        switch(_RES)
+        {
+            case GAME_UW2:
+                PlayerDat = new byte[994]; break;
+            default:
+                PlayerDat = new byte[312];break;
+        }
+    }
+
+    //Get and set methods for player properties
+    
+    /// <summary>
+    /// Player name bytes 1 to 14 in both files
+    /// </summary>
+    public static string CharName
+    {
+        get
+        {
+            var _charname = "";
+            for (int i = 1; i < 14; i++)
+            {
+                if (PlayerDat[i].ToString() != "\0")
+                {
+                    _charname += (char)PlayerDat[i];
+                }
+            }
+            return _charname;
+        }
+        set
+        {
+            var _chararray = value.ToCharArray();
+            for (int i = 1; i < 14; i++)
+            {                
+                if (i - 1 < value.Length)
+                {
+                    PlayerDat[i] = (byte)_chararray[i - 1];
+                }
+                else
+                {
+                    PlayerDat[i] = (byte)0;
+                }
+            }
+        }
+    }
+       
+
+    //Generic get and set for stats, quests and other values
+    public static byte GetAt(int index)
+    {
+        return PlayerDat[index];
+    }
+
+    public static void SetAt(int index, byte value)
+    {
+        PlayerDat[index] = value;
+    }
+
+
     public enum InventorySlotsOffsets
     {
         UW1Helm = 248,
@@ -47,13 +108,7 @@ public class SaveGame : Loader
         UW2Backpack7 = 967
 
     };
-
-    /// <summary>
-    /// Array for storing inventory data.
-    /// </summary>
-    // public static byte[] InventoryData = new byte[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
-
-
+     
     /// <summary>
     /// Ratio of UNITY co-ordinates to Tile co-ordinates
     /// </summary>
@@ -70,8 +125,7 @@ public class SaveGame : Loader
     /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW1(int slotNo)
     {
-        //File data
-
+        InitEmptySaveGame();
         int[] ActiveEffectIds = new int[3]; //array of spell effects currently applied to the player.
         short[] ActiveEffectStability = new short[3];
         ResetUI();
@@ -93,9 +147,16 @@ public class SaveGame : Loader
                 incrnum += 3;
             }
 
+            //Copy decoded data to main buffer.
+           for (int i=0;i<=PlayerDat.GetUpperBound(0);i++)
+            {
+                PlayerDat[i] = buffer[i];
+            }
+
+            
             //Load some common items for uw1/2
-            LoadName(buffer);
-            LoadStats(buffer);
+            //LoadName(buffer);
+            //LoadStats(buffer);
             int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
             LoadPlayerClass(buffer, 0x65);
@@ -368,7 +429,7 @@ public class SaveGame : Loader
     {
         //float Ratio=213f;
         //float VertAdjust = 0.3543672f;
-
+        return;
         //I'm lazy. I'm going to write a temp file and then re-encode using the key.
         FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
         BinaryWriter writer = new BinaryWriter(file);
@@ -382,7 +443,7 @@ public class SaveGame : Loader
         DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
 
         //Common uw1/uw2 save game data
-        WriteName(writer);//1 to 14
+        //WriteName(writer);//1 to 14
         WriteSpace(writer, 17);
         WriteSkills(writer);
         WriteSpellEffects(writer);
@@ -756,7 +817,7 @@ public class SaveGame : Loader
         DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
 
         //Common uw1/uw2 save game data
-        WriteName(writer);//1 to 14
+        //WriteName(writer);//1 to 14
         WriteSpace(writer, 17);
         WriteSkills(writer);
         WriteSpellEffects(writer);
@@ -1574,7 +1635,7 @@ public class SaveGame : Loader
     /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW2(int slotNo)
     {
-        UWCharacter.Instance.CharName = "";
+        //UWCharacter.Instance.CharName = "";
         //int x_position=0;
         //int y_position=0;
 
@@ -1652,8 +1713,8 @@ public class SaveGame : Loader
 
 
             //Load some common items for uw1/2
-            LoadName(buffer);
-            LoadStats(buffer);
+            //LoadName(buffer);
+           // LoadStats(buffer);
             int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
             LoadPlayerClass(buffer, 0x66);
@@ -2270,17 +2331,17 @@ public class SaveGame : Loader
     /// <summary>
     /// Loads the player name
     /// </summary>
-    static void LoadName(byte[] buffer)
-    {
-        UWCharacter.Instance.CharName = "";
-        for (int i = 1; i < 14; i++)
-        {
-            if (buffer[i].ToString() != "\0")
-            {
-                UWCharacter.Instance.CharName += buffer[i];
-            }
-        }
-    }
+    //static void LoadName(byte[] buffer)
+    //{
+    //    UWCharacter.Instance.CharName = "";
+    //    for (int i = 1; i < 14; i++)
+    //    {
+    //        if (buffer[i].ToString() != "\0")
+    //        {
+    //            UWCharacter.Instance.CharName += buffer[i];
+    //        }
+    //    }
+    //}
 
 
 
@@ -2290,13 +2351,14 @@ public class SaveGame : Loader
     /// <param name="buffer">Buffer.</param>
     static void LoadStats(byte[] buffer)
     {
+        return;
         for (int i = 1; i <= 0x3E; i++)
         {
             switch (i)
             {
                 case 0x1F://Strength
-                    UWCharacter.Instance.PlayerSkills.STR = buffer[i];
-                    GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
+                   // UWCharacter.Instance.PlayerSkills.STR = buffer[i];
+                   // GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
                     break;
                 case 0x20://Dex
                     UWCharacter.Instance.PlayerSkills.DEX = buffer[i]; break;
@@ -2817,29 +2879,30 @@ public class SaveGame : Loader
         }
     }
 
-    /// <summary>
-    /// Writes the player name to a save file
-    /// </summary>
-    /// <param name="writer">Writer.</param>
-    static void WriteName(BinaryWriter writer)
-    {
-        for (int i = 1; i < 14; i++)
-        {
-            if (i - 1 < UWCharacter.Instance.CharName.Length)
-            {
-                char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
-                DataLoader.WriteInt8(writer, alpha);
-            }
-            else
-            {
-                DataLoader.WriteInt8(writer, 0);
-            }
-        }
-    }
+    ///// <summary>
+    ///// Writes the player name to a save file
+    ///// </summary>
+    ///// <param name="writer">Writer.</param>
+    //static void WriteName(BinaryWriter writer)
+    //{
+    //    for (int i = 1; i < 14; i++)
+    //    {
+    //        if (i - 1 < UWCharacter.Instance.CharName.Length)
+    //        {
+    //            char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
+    //            DataLoader.WriteInt8(writer, alpha);
+    //        }
+    //        else
+    //        {
+    //            DataLoader.WriteInt8(writer, 0);
+    //        }
+    //    }
+    //}
 
 
     static void WriteSkills(BinaryWriter writer)
     {
+        return;
         for (int i = 0x1F; i <= 0x3E; i++)
         {
             switch (i)
@@ -3112,655 +3175,655 @@ public class SaveGame : Loader
     /// Writes the player dat file based on the current character
     /// </summary>
     /// <param name="slotNo">Slot no.</param>
-    public static void WritePlayerDatOriginal(int slotNo)
-    {
-        //float Ratio=213f;
-        //float VertAdjust = 0.3543672f;
+    //public static void WritePlayerDatOriginal(int slotNo)
+    //{
+    //    //float Ratio=213f;
+    //    //float VertAdjust = 0.3543672f;
 
-        //****Hardcoded values
-        //	int[] hardcoded = {
-        //		16,	16,	16,	16,	16,	240,	240,	240,	240,	240,	240,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	37,	24,	16,	16,	16,	16,	143,	112,	112,	112,	112,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	48,	16,	16,	16,	50,	33,	251,	241,	118,	122,	2,	160,	227,	22,	137,	140,	143,	0,	34,	0,	0,	0,	48,	0,	0,	0,	0,	0,	0,	0,	0,	44,	32,	128,	0,	0,	253,	0,	0,	0,	0,	0,	0,	0,	0
-        //};
-
-
-        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
-        BinaryWriter writer = new BinaryWriter(file);
-        int NoOfActiveEffects = 0;
-        int runeOffset = 0;
-
-        //update inventory linking
-        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
-
-        //Write the XOR Key
-        DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
-        //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        for (int i = 1; i < 312; i++)
-        {//non inventory data 
-
-            if (i < 14)
-            {
-                if (i - 1 < UWCharacter.Instance.CharName.Length)
-                {
-                    char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
-                    DataLoader.WriteInt8(writer, alpha);
-                }
-                else
-                {
-                    DataLoader.WriteInt8(writer, 0);
-                }
-            }
-            else
-            {
-
-                switch (i)
-                {
-                    case 0x1F://Strength
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.STR); break;
-                    case 0x20://Dex
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.DEX); break;
-                    case 0x21: ///    Intelligence
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.INT); break;
-                    case 0x22: ///    Attack
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Attack); break;
-                    case 0x23: ///    Defense
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Defense); break;
-                    case 0x24: ///    Unarmed
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Unarmed); break;
-                    case 0x25: ///    Sword
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sword); break;
-                    case 0x26: ///    Axe
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Axe); break;
-                    case 0x27: ///    Mace
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Mace); break;
-                    case 0x28: ///    Missile
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Missile); break;
-                    case 0x29: ///    Mana
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.ManaSkill); break;
-                    case 0x2A: ///    Lore
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Lore); break;
-                    case 0x2B: ///    Casting
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Casting); break;
-                    case 0x2C: ///    Traps
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Traps); break;
-                    case 0x2D: ///    Search
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Search); break;
-                    case 0x2E: ///    Track
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Track); break;
-                    case 0x2F: ///    Sneak
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sneak); break;
-                    case 0x30: ///    Repair
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Repair); break;
-                    case 0x31: ///    Charm
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Charm); break;
-                    case 0x32: ///    Picklock
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.PickLock); break;
-                    case 0x33: ///    Acrobat
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Acrobat); break;
-                    case 0x34: ///    Appraise
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Appraise); break;
-                    case 0x35: ///    Swimming
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Swimming); break;
-                    case 0x36://Curvit
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
-                    case 0x37: ///    max. vitality
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.MaxVIT); break;
-                    case 0x38: ///    current mana, (play_mana)
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.CurMana); break;
-                    case 0x39: ///    max. mana
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.MaxMana); break;
-                    case 0x3A: ///    hunger, play_hunger
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.FoodLevel); break;
-
-                    case 0x3B://Unknown s
-                    case 0x3C:
-                        DataLoader.WriteInt8(writer, 64); break;
-                    case 0x3E: ///    character level (play_level)
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.CharLevel); break;
-                    case 0x3F:
-                        //Active spell effect
-                        {
-                            for (int e = 0; e < 3; e++)
-                            {
-                                if (UWCharacter.Instance.ActiveSpell[e] != null)
-                                {
-                                    int effectId;
-                                    switch (UWCharacter.Instance.ActiveSpell[e].EffectID)
-                                    {//Fix spell effects that do not work with the nibble swap 
-                                        case SpellEffect.UW1_Spell_Effect_Speed:
-                                            effectId = 178; break;
-                                        case SpellEffect.UW1_Spell_Effect_Telekinesis:
-                                            effectId = 179; break;
-                                        case SpellEffect.UW1_Spell_Effect_FreezeTime:
-                                            effectId = 176; break;
-                                        case SpellEffect.UW1_Spell_Effect_RoamingSight://Should not appear in a save game
-                                            effectId = 183; break;
-                                        default:
-                                            effectId = UWCharacter.Instance.ActiveSpell[e].EffectID;
-                                            break;
-                                    }
-                                    int stability = UWCharacter.Instance.ActiveSpell[e].counter;
-                                    int byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
-
-                                    //int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
-
-                                    DataLoader.WriteInt16(writer, byteToWrite);
-                                    NoOfActiveEffects++;
-                                }
-                                else
-                                {//No effect leave empty
-                                    DataLoader.WriteInt16(writer, 0);
-                                }
-
-                            }
-                            break;
-                        }
-
-                    case 0x41:
-                    case 0x43:
-                    case 0x3F + 1:
-                    case 0x41 + 1:
-                    case 0x43 + 1://Active spell effect. Addl. byte do nothing here.
-                        break;
-                    case 0x45://Runebits
-                    case 0x46://Runebits
-                    case 0x47://Runebits
-                        {
-                            int RuneByte = 0;
-                            for (int r = 7; r >= 0; r--)
-                            {
-                                if (UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] == true)
-                                {
-                                    RuneByte |= (1 << r);
-                                }
-                            }
-                            DataLoader.WriteInt8(writer, RuneByte);
-                            runeOffset += 8;
-                            break;
-                        }
-                    case 0x48:
-                        if (UWCharacter.Instance.PlayerMagic.ActiveRunes[0] == -1)
-                        {
-                            DataLoader.WriteInt8(writer, 24);
-                        }
-                        else
-                        {
-                            DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[0]);
-                        }
-                        break;
-                    case 0x49:
-                        if (UWCharacter.Instance.PlayerMagic.ActiveRunes[1] == -1)
-                        {
-                            DataLoader.WriteInt8(writer, 24);
-                        }
-                        else
-                        {
-                            DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[1]);
-                        }
-                        break;
-                    case 0x4A:
-                        if (UWCharacter.Instance.PlayerMagic.ActiveRunes[2] == -1)
-                        {
-                            DataLoader.WriteInt8(writer, 24);
-                        }
-                        else
-                        {
-                            DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[2]);
-                        }
-                        break;
-                    case 0x4B:
-                        {//No of inventory items?
-                            DataLoader.WriteInt8(writer, (inventoryObjects.GetUpperBound(0) + 1) << 2);
-                            break;
-                        }
-
-                    case 0x4D: ///   weight in 0.1 stones
-                        //Or STR * 2; 
-                        DataLoader.WriteInt16(writer, UWCharacter.Instance.PlayerSkills.STR * 2 * 10);
-                        break;
-                    case 0x4D + 1://2nd Byte of weight. Ignore
-                        break;
-                    case 0x4F: ///   experience in 0.1 points
-                        DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP); break;
-                    case 0x4F + 1:
-                    case 0x4F + 2:
-                    case 0x4F + 3:
-                        break;
-                    case 0x53: // skillpoints available to spend
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.TrainingPoints); break;
-                    case 0x55: ///   x-position in level
-                        int x_position = (int)(UWCharacter.Instance.transform.position.x * Ratio);
-                        DataLoader.WriteInt16(writer, x_position);
-                        break;
-                    case 0x57: ///   y-position
-                        int y_position = (int)(UWCharacter.Instance.transform.position.z * Ratio);
-                        DataLoader.WriteInt16(writer, y_position);
-                        break;
-                    case 0x59: ///   z-position
-                        int z_position = (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio));
-                        DataLoader.WriteInt16(writer, z_position);
-                        break;
-                    case 0x55 + 1: ///   x-position in level
-                    case 0x57 + 1: ///   y-position
-                    case 0x59 + 1: ///   z-position
-                        //Skip over int 16
-                        break;
-                    case 0x5C: ///   heading
-                        {
-                            //float heading = UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f);
-                            DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull); break;
-                            //break;
-                        }
-                    case 0x5D: ///   dungeon level										
-                        DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1); break;
-                    case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
-                        {
-                            int val = (UWCharacter.Instance.ResurrectLevel & 0xf) << 4 | (UWCharacter.Instance.MoonGateLevel & 0xf);
-                            DataLoader.WriteInt8(writer, val);
-                            break;
-                        }
-                    case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
-                        DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.instance.IncenseDream & 0x3));
-
-                        break;
-                    case 0x61:
-                        {
-                            int val = 0;
-                            if (Quest.instance.isOrbDestroyed)
-                            {
-                                val = 32;//bit 5
-                            }
-                            if (Quest.instance.isCupFound)
-                            {
-                                val |= 64;     // bit 6 is the cup found.
-                            }
-
-                            DataLoader.WriteInt8(writer, val);
-                            break;
-                        }
-                    case 0x63: //Is garamon buried
-                        {
-                            if (Quest.instance.isGaramonBuried)
-                            {
-                                DataLoader.WriteInt8(writer, 28);
-                            }
-                            else
-                            {//Default value Unknown meaning.
-                                DataLoader.WriteInt8(writer, 16);
-                            }
-                            break;
-                        }
-                    case 0x65: // hand, Gender & body, and class
-                        {
-                            //bit 1 = hand left/right
-                            //bit 2-5 = gender & body
-                            //bit 6-8 = class
-                            int val = 0;
-                            if (!UWCharacter.Instance.isLefty)
-                            {
-                                val |= 1;
-                            }
-                            if (UWCharacter.Instance.isFemale)
-                            {
-                                val |= ((UWCharacter.Instance.Body * 2) + 1) << 1;
-                            }
-                            else
-                            {
-                                val |= ((UWCharacter.Instance.Body * 2)) << 1;
-                            }
-                            val |= UWCharacter.Instance.CharClass << 5;
-                            DataLoader.WriteInt8(writer, val); break;
-                            //break;
-                        }
-                    case 0x66://Quest flags
-                        {
-                            int val = 0;
-                            for (int b = 0; b < 32; b++)
-                            {
-                                val |= (Quest.instance.QuestVariables[b] & 0x1) << b;
-                            }
-                            DataLoader.WriteInt32(writer, val);
-                            break;
-                        }
-
-                    case 0x66 + 1://Quest flags ignore
-                    case 0x66 + 2://Quest flags ignore
-                    case 0x66 + 3://Quest flags ignore
-                        break;
-
-                    case 0x6A:
-                        DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[32]); break;
-                    case 0x6B:
-                        DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[33]); break;
-                    case 0x6C:
-                        DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[34]); break;
-                    case 0x6D:
-                        DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[35]); break;
-                    case 0x6E://No of talismans still to destory
-                        DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
-                    case 0x6F://Garamon dream related?
-                        DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
-                    case 0x71://Game variables
-                    case 0x72:
-                    case 0x73:
-                    case 0x74:
-                    case 0x75:
-                    case 0x76:
-                    case 0x77:
-                    case 0x78:
-                    case 0x79:
-                    case 0x7A:
-                    case 0x7B:
-                    case 0x7C:
-                    case 0x7D:
-                    case 0x7E:
-                    case 0x7F:
-                    case 0x80:
-                    case 0x81:
-                    case 0x82:
-                    case 0x83:
-                    case 0x84:
-                    case 0x85:
-                    case 0x86:
-                    case 0x87:
-                    case 0x88:
-                    case 0x89:
-                    case 0x8A:
-                    case 0x8B:
-                    case 0x8C:
-                    case 0x8D:
-                    case 0x8E:
-                    case 0x8F:
-                    case 0x90:
-
-                    case 0x91:
-                    case 0x92:
-                    case 0x93:
-                    case 0x94:
-                    case 0x95:
-                    case 0x96:
-                    case 0x97:
-                    case 0x98:
-                    case 0x99:
-                    case 0x9A:
-                    case 0x9B:
-                    case 0x9C:
-                    case 0x9D:
-                    case 0x9E:
-                    case 0x9F:
-                    case 0xA0:
-                    case 0xA1:
-                    case 0xA2:
-                    case 0xA3:
-                    case 0xA4:
-                    case 0xA5:
-                    case 0xA6:
-                    case 0xA7:
-                    case 0xA8:
-                    case 0xA9:
-                    case 0xAA:
-                    case 0xAB:
-                    case 0xAC:
-                    case 0xAD:
-                    case 0xAE:
-                    case 0xAF:
-                    case 0xB0:
+    //    //****Hardcoded values
+    //    //	int[] hardcoded = {
+    //    //		16,	16,	16,	16,	16,	240,	240,	240,	240,	240,	240,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	37,	24,	16,	16,	16,	16,	143,	112,	112,	112,	112,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	48,	16,	16,	16,	50,	33,	251,	241,	118,	122,	2,	160,	227,	22,	137,	140,	143,	0,	34,	0,	0,	0,	48,	0,	0,	0,	0,	0,	0,	0,	0,	44,	32,	128,	0,	0,	253,	0,	0,	0,	0,	0,	0,	0,	0
+    //    //};
 
 
-                        {
-                            DataLoader.WriteInt8(writer, Quest.instance.variables[i - 0x71]);
-                            break;
-                        }
-                    case 0xB1://The max mana the player has when their mana is drained by the magic orb.
-                        {
-                            DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.TrueMaxMana);
-                            break;
-                        }
-                    case 0xBC:
-                        //Unknown
-                        DataLoader.WriteInt8(writer, 0xFF);
-                        break;
-                    case 0xb5://difficulty
-                        DataLoader.WriteInt8(writer, GameWorldController.instance.difficulty); break;
+    //    FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
+    //    BinaryWriter writer = new BinaryWriter(file);
+    //    int NoOfActiveEffects = 0;
+    //    int runeOffset = 0;
 
-                    case 0xB6: //UW Game options TODO: Implement these
-                               //high nibble is detail level.
-                               //bit 0 of low nibble is sound
-                               //bit 3 of low nibble is music
-                        {
-                            int valToWrite = 0x30;//High detail	
-                            if (ObjectInteraction.PlaySoundEffects)
-                            {
-                                valToWrite |= 0x1;
-                            }
-                            if (MusicController.PlayMusic)
-                            {
-                                valToWrite |= 0x4;
-                            }
-                            DataLoader.WriteInt8(writer, valToWrite);
-                        }
-                        break;
-                    case 0xB7://Unknown. Always 8
-                        DataLoader.WriteInt8(writer, 0x8);
-                        break;
-                    case 0xCF: ///   game time
-                        //DataLoader.WriteInt32(writer,UWCharacter.Instance.game_time);break;
-                        DataLoader.WriteInt8(writer, 0); break;//Write zero since I don't track milliseconds
-                                                               //break;
-                    case 0xD0:
-                        DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
-                    case 0xD1:
-                        DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
-                    case 0xD2:
-                        DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
-                    case 0xD3://No of inventory items + 1.
-                        DataLoader.WriteInt16(writer, inventoryObjects.GetUpperBound(0) + 1 + 1);
-                        //Debug.Log("No of inventory " + inventoryObjects.GetUpperBound(0));
-                        break;
-                    case 0xD4://Skip prev
-                        break;
-                    case 0xD5:
-                        {//7F 20
-                            DataLoader.WriteInt8(writer, 0x7F); break;
-                            //break;	
-                        }
-                    case 0xD6:
-                        {//The mysterious clip through bridges on a second jump byte.
-                            DataLoader.WriteInt8(writer, 0x20); break;
-                            //break;
-                        }
-                    case 0xDB:
-                        if (GameWorldController.instance.InventoryMarker.transform.childCount > 0)
-                        {//player has inventory. Not sure where these values come from
-                            DataLoader.WriteInt8(writer, 0x40); break;
-                        }
-                        else
-                        {
-                            DataLoader.WriteInt8(writer, 0x0); break;
-                        }
-                    //break;
-                    case 0xDD://Duplicate curvit
-                        DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
-                    //break;
+    //    //update inventory linking
+    //    string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
 
-                    case 0xF8: // Helm (all of these subsequent values are indices into the object list at offset 312
-                        WriteInventoryIndex(writer, inventoryObjects, 0); break;
-                    case 0xF9: // Helm ignore
-                        break;
-                    case 0xFA: // Chest
-                        WriteInventoryIndex(writer, inventoryObjects, 1); break;
-                    case 0xFB: // Chest ignore
-                        break;
-                    case 0xFC: // Gloves
-                        WriteInventoryIndex(writer, inventoryObjects, 4); break;
-                    case 0xFD: // Gloves ignore
-                        break;
-                    case 0xFE: // Leggings
-                        WriteInventoryIndex(writer, inventoryObjects, 2); break;
-                    case 0xFF: // Leggings ignore
-                        break;
-                    case 0x100: // Boots
-                        WriteInventoryIndex(writer, inventoryObjects, 3); break;
-                    case 0x101: // Boots ignore
-                        break;
-                    case 0x102: // TopRightShoulder
-                        WriteInventoryIndex(writer, inventoryObjects, 5); break;
-                    case 0x103: // TopRightShoulder ignore
-                        break;
-                    case 0x104: // TopLeftShoulder
-                        WriteInventoryIndex(writer, inventoryObjects, 6); break;
-                    case 0x105: // TopLeftShoulder ignore
-                        break;
-                    case 0x106: // Righthand
-                        WriteInventoryIndex(writer, inventoryObjects, 7); break;
-                    case 0x107: // Righthand ignore
-                        break;
-                    case 0x108: // LeftHand
-                        WriteInventoryIndex(writer, inventoryObjects, 8); break;
-                    case 0x109: // LeftHand ignore
-                        break;
-                    case 0x10A: // leftRing
-                        WriteInventoryIndex(writer, inventoryObjects, 9); break;
-                    case 0x10B: // leftRing ignore
-                        break;
-                    case 0x10C: // rightRing
-                        WriteInventoryIndex(writer, inventoryObjects, 10); break;
-                    case 0x10D: // rightRing ignore
-                        break;
-                    case 0x10E: // Backpack0
-                        WriteInventoryIndex(writer, inventoryObjects, 11); break;
-                    case 0x10F: // Backpack0 ignore
-                        break;
-                    case 0x110: // Backpack1
-                        WriteInventoryIndex(writer, inventoryObjects, 12); break;
-                    case 0x111: // Backpack1 ignore
-                        break;
-                    case 0x112: // Backpack2
-                        WriteInventoryIndex(writer, inventoryObjects, 13); break;
-                    case 0x113: // Backpack2 ignore
-                        break;
-                    case 0x114: // Backpack3
-                        WriteInventoryIndex(writer, inventoryObjects, 14); break;
-                    case 0x115: // Backpack3 ignore
-                        break;
-                    case 0x116: // Backpack4
-                        WriteInventoryIndex(writer, inventoryObjects, 15); break;
-                    case 0x117: // Backpack4 ignore
-                        break;
-                    case 0x118: // Backpack5
-                        WriteInventoryIndex(writer, inventoryObjects, 16); break;
-                    case 0x119: // Backpack5 ignore
-                        break;
-                    case 0x11A: // Backpack6
-                        WriteInventoryIndex(writer, inventoryObjects, 17); break;
-                    case 0x11B: // Backpack6 ignore
-                        break;
-                    case 0x11C: // Backpack7
-                        WriteInventoryIndex(writer, inventoryObjects, 18); break;
-                    case 0x11D: // Backpack7 ignore
-                        break;
+    //    //Write the XOR Key
+    //    DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
+    //    //I'm lazy. I'm going to write a temp file and then re-encode using the key.
+    //    for (int i = 1; i < 312; i++)
+    //    {//non inventory data 
 
-                    default://No value. Write 0	or hardcoded values
-                            //if ((i>=0xA1) || (i<=0xF7))
-                            //{//Unknown Hardcoded values
-                            //		DataLoader.WriteInt8(writer,hardcoded[i-161])	;
-                            //}
-                            //else
-                            //{
-                        DataLoader.WriteInt8(writer, 0); break;
-                        //}
+    //        if (i < 14)
+    //        {
+    //            if (i - 1 < UWCharacter.Instance.CharName.Length)
+    //            {
+    //                char alpha = UWCharacter.Instance.CharName.ToCharArray()[i - 1];
+    //                DataLoader.WriteInt8(writer, alpha);
+    //            }
+    //            else
+    //            {
+    //                DataLoader.WriteInt8(writer, 0);
+    //            }
+    //        }
+    //        else
+    //        {
+
+    //            switch (i)
+    //            {
+    //                case 0x1F://Strength
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.STR); break;
+    //                case 0x20://Dex
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.DEX); break;
+    //                case 0x21: ///    Intelligence
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.INT); break;
+    //                case 0x22: ///    Attack
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Attack); break;
+    //                case 0x23: ///    Defense
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Defense); break;
+    //                case 0x24: ///    Unarmed
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Unarmed); break;
+    //                case 0x25: ///    Sword
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sword); break;
+    //                case 0x26: ///    Axe
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Axe); break;
+    //                case 0x27: ///    Mace
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Mace); break;
+    //                case 0x28: ///    Missile
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Missile); break;
+    //                case 0x29: ///    Mana
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.ManaSkill); break;
+    //                case 0x2A: ///    Lore
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Lore); break;
+    //                case 0x2B: ///    Casting
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Casting); break;
+    //                case 0x2C: ///    Traps
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Traps); break;
+    //                case 0x2D: ///    Search
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Search); break;
+    //                case 0x2E: ///    Track
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Track); break;
+    //                case 0x2F: ///    Sneak
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sneak); break;
+    //                case 0x30: ///    Repair
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Repair); break;
+    //                case 0x31: ///    Charm
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Charm); break;
+    //                case 0x32: ///    Picklock
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.PickLock); break;
+    //                case 0x33: ///    Acrobat
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Acrobat); break;
+    //                case 0x34: ///    Appraise
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Appraise); break;
+    //                case 0x35: ///    Swimming
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Swimming); break;
+    //                case 0x36://Curvit
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
+    //                case 0x37: ///    max. vitality
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.MaxVIT); break;
+    //                case 0x38: ///    current mana, (play_mana)
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.CurMana); break;
+    //                case 0x39: ///    max. mana
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.MaxMana); break;
+    //                case 0x3A: ///    hunger, play_hunger
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.FoodLevel); break;
+
+    //                case 0x3B://Unknown s
+    //                case 0x3C:
+    //                    DataLoader.WriteInt8(writer, 64); break;
+    //                case 0x3E: ///    character level (play_level)
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.CharLevel); break;
+    //                case 0x3F:
+    //                    //Active spell effect
+    //                    {
+    //                        for (int e = 0; e < 3; e++)
+    //                        {
+    //                            if (UWCharacter.Instance.ActiveSpell[e] != null)
+    //                            {
+    //                                int effectId;
+    //                                switch (UWCharacter.Instance.ActiveSpell[e].EffectID)
+    //                                {//Fix spell effects that do not work with the nibble swap 
+    //                                    case SpellEffect.UW1_Spell_Effect_Speed:
+    //                                        effectId = 178; break;
+    //                                    case SpellEffect.UW1_Spell_Effect_Telekinesis:
+    //                                        effectId = 179; break;
+    //                                    case SpellEffect.UW1_Spell_Effect_FreezeTime:
+    //                                        effectId = 176; break;
+    //                                    case SpellEffect.UW1_Spell_Effect_RoamingSight://Should not appear in a save game
+    //                                        effectId = 183; break;
+    //                                    default:
+    //                                        effectId = UWCharacter.Instance.ActiveSpell[e].EffectID;
+    //                                        break;
+    //                                }
+    //                                int stability = UWCharacter.Instance.ActiveSpell[e].counter;
+    //                                int byteToWrite = (stability << 8) | ((effectId & 0xf0) >> 4) | ((effectId & 0xf) << 4);
+
+    //                                //int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
+
+    //                                DataLoader.WriteInt16(writer, byteToWrite);
+    //                                NoOfActiveEffects++;
+    //                            }
+    //                            else
+    //                            {//No effect leave empty
+    //                                DataLoader.WriteInt16(writer, 0);
+    //                            }
+
+    //                        }
+    //                        break;
+    //                    }
+
+    //                case 0x41:
+    //                case 0x43:
+    //                case 0x3F + 1:
+    //                case 0x41 + 1:
+    //                case 0x43 + 1://Active spell effect. Addl. byte do nothing here.
+    //                    break;
+    //                case 0x45://Runebits
+    //                case 0x46://Runebits
+    //                case 0x47://Runebits
+    //                    {
+    //                        int RuneByte = 0;
+    //                        for (int r = 7; r >= 0; r--)
+    //                        {
+    //                            if (UWCharacter.Instance.PlayerMagic.PlayerRunes[7 - r + runeOffset] == true)
+    //                            {
+    //                                RuneByte |= (1 << r);
+    //                            }
+    //                        }
+    //                        DataLoader.WriteInt8(writer, RuneByte);
+    //                        runeOffset += 8;
+    //                        break;
+    //                    }
+    //                case 0x48:
+    //                    if (UWCharacter.Instance.PlayerMagic.ActiveRunes[0] == -1)
+    //                    {
+    //                        DataLoader.WriteInt8(writer, 24);
+    //                    }
+    //                    else
+    //                    {
+    //                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[0]);
+    //                    }
+    //                    break;
+    //                case 0x49:
+    //                    if (UWCharacter.Instance.PlayerMagic.ActiveRunes[1] == -1)
+    //                    {
+    //                        DataLoader.WriteInt8(writer, 24);
+    //                    }
+    //                    else
+    //                    {
+    //                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[1]);
+    //                    }
+    //                    break;
+    //                case 0x4A:
+    //                    if (UWCharacter.Instance.PlayerMagic.ActiveRunes[2] == -1)
+    //                    {
+    //                        DataLoader.WriteInt8(writer, 24);
+    //                    }
+    //                    else
+    //                    {
+    //                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.ActiveRunes[2]);
+    //                    }
+    //                    break;
+    //                case 0x4B:
+    //                    {//No of inventory items?
+    //                        DataLoader.WriteInt8(writer, (inventoryObjects.GetUpperBound(0) + 1) << 2);
+    //                        break;
+    //                    }
+
+    //                case 0x4D: ///   weight in 0.1 stones
+    //                    //Or STR * 2; 
+    //                    DataLoader.WriteInt16(writer, UWCharacter.Instance.PlayerSkills.STR * 2 * 10);
+    //                    break;
+    //                case 0x4D + 1://2nd Byte of weight. Ignore
+    //                    break;
+    //                case 0x4F: ///   experience in 0.1 points
+    //                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP); break;
+    //                case 0x4F + 1:
+    //                case 0x4F + 2:
+    //                case 0x4F + 3:
+    //                    break;
+    //                case 0x53: // skillpoints available to spend
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.TrainingPoints); break;
+    //                case 0x55: ///   x-position in level
+    //                    int x_position = (int)(UWCharacter.Instance.transform.position.x * Ratio);
+    //                    DataLoader.WriteInt16(writer, x_position);
+    //                    break;
+    //                case 0x57: ///   y-position
+    //                    int y_position = (int)(UWCharacter.Instance.transform.position.z * Ratio);
+    //                    DataLoader.WriteInt16(writer, y_position);
+    //                    break;
+    //                case 0x59: ///   z-position
+    //                    int z_position = (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio));
+    //                    DataLoader.WriteInt16(writer, z_position);
+    //                    break;
+    //                case 0x55 + 1: ///   x-position in level
+    //                case 0x57 + 1: ///   y-position
+    //                case 0x59 + 1: ///   z-position
+    //                    //Skip over int 16
+    //                    break;
+    //                case 0x5C: ///   heading
+    //                    {
+    //                        //float heading = UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f);
+    //                        DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull); break;
+    //                        //break;
+    //                    }
+    //                case 0x5D: ///   dungeon level										
+    //                    DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1); break;
+    //                case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
+    //                    {
+    //                        int val = (UWCharacter.Instance.ResurrectLevel & 0xf) << 4 | (UWCharacter.Instance.MoonGateLevel & 0xf);
+    //                        DataLoader.WriteInt8(writer, val);
+    //                        break;
+    //                    }
+    //                case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
+    //                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.instance.IncenseDream & 0x3));
+
+    //                    break;
+    //                case 0x61:
+    //                    {
+    //                        int val = 0;
+    //                        if (Quest.instance.isOrbDestroyed)
+    //                        {
+    //                            val = 32;//bit 5
+    //                        }
+    //                        if (Quest.instance.isCupFound)
+    //                        {
+    //                            val |= 64;     // bit 6 is the cup found.
+    //                        }
+
+    //                        DataLoader.WriteInt8(writer, val);
+    //                        break;
+    //                    }
+    //                case 0x63: //Is garamon buried
+    //                    {
+    //                        if (Quest.instance.isGaramonBuried)
+    //                        {
+    //                            DataLoader.WriteInt8(writer, 28);
+    //                        }
+    //                        else
+    //                        {//Default value Unknown meaning.
+    //                            DataLoader.WriteInt8(writer, 16);
+    //                        }
+    //                        break;
+    //                    }
+    //                case 0x65: // hand, Gender & body, and class
+    //                    {
+    //                        //bit 1 = hand left/right
+    //                        //bit 2-5 = gender & body
+    //                        //bit 6-8 = class
+    //                        int val = 0;
+    //                        if (!UWCharacter.Instance.isLefty)
+    //                        {
+    //                            val |= 1;
+    //                        }
+    //                        if (UWCharacter.Instance.isFemale)
+    //                        {
+    //                            val |= ((UWCharacter.Instance.Body * 2) + 1) << 1;
+    //                        }
+    //                        else
+    //                        {
+    //                            val |= ((UWCharacter.Instance.Body * 2)) << 1;
+    //                        }
+    //                        val |= UWCharacter.Instance.CharClass << 5;
+    //                        DataLoader.WriteInt8(writer, val); break;
+    //                        //break;
+    //                    }
+    //                case 0x66://Quest flags
+    //                    {
+    //                        int val = 0;
+    //                        for (int b = 0; b < 32; b++)
+    //                        {
+    //                            val |= (Quest.instance.QuestVariables[b] & 0x1) << b;
+    //                        }
+    //                        DataLoader.WriteInt32(writer, val);
+    //                        break;
+    //                    }
+
+    //                case 0x66 + 1://Quest flags ignore
+    //                case 0x66 + 2://Quest flags ignore
+    //                case 0x66 + 3://Quest flags ignore
+    //                    break;
+
+    //                case 0x6A:
+    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[32]); break;
+    //                case 0x6B:
+    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[33]); break;
+    //                case 0x6C:
+    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[34]); break;
+    //                case 0x6D:
+    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[35]); break;
+    //                case 0x6E://No of talismans still to destory
+    //                    DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
+    //                case 0x6F://Garamon dream related?
+    //                    DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
+    //                case 0x71://Game variables
+    //                case 0x72:
+    //                case 0x73:
+    //                case 0x74:
+    //                case 0x75:
+    //                case 0x76:
+    //                case 0x77:
+    //                case 0x78:
+    //                case 0x79:
+    //                case 0x7A:
+    //                case 0x7B:
+    //                case 0x7C:
+    //                case 0x7D:
+    //                case 0x7E:
+    //                case 0x7F:
+    //                case 0x80:
+    //                case 0x81:
+    //                case 0x82:
+    //                case 0x83:
+    //                case 0x84:
+    //                case 0x85:
+    //                case 0x86:
+    //                case 0x87:
+    //                case 0x88:
+    //                case 0x89:
+    //                case 0x8A:
+    //                case 0x8B:
+    //                case 0x8C:
+    //                case 0x8D:
+    //                case 0x8E:
+    //                case 0x8F:
+    //                case 0x90:
+
+    //                case 0x91:
+    //                case 0x92:
+    //                case 0x93:
+    //                case 0x94:
+    //                case 0x95:
+    //                case 0x96:
+    //                case 0x97:
+    //                case 0x98:
+    //                case 0x99:
+    //                case 0x9A:
+    //                case 0x9B:
+    //                case 0x9C:
+    //                case 0x9D:
+    //                case 0x9E:
+    //                case 0x9F:
+    //                case 0xA0:
+    //                case 0xA1:
+    //                case 0xA2:
+    //                case 0xA3:
+    //                case 0xA4:
+    //                case 0xA5:
+    //                case 0xA6:
+    //                case 0xA7:
+    //                case 0xA8:
+    //                case 0xA9:
+    //                case 0xAA:
+    //                case 0xAB:
+    //                case 0xAC:
+    //                case 0xAD:
+    //                case 0xAE:
+    //                case 0xAF:
+    //                case 0xB0:
 
 
-                        //break;
+    //                    {
+    //                        DataLoader.WriteInt8(writer, Quest.instance.variables[i - 0x71]);
+    //                        break;
+    //                    }
+    //                case 0xB1://The max mana the player has when their mana is drained by the magic orb.
+    //                    {
+    //                        DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerMagic.TrueMaxMana);
+    //                        break;
+    //                    }
+    //                case 0xBC:
+    //                    //Unknown
+    //                    DataLoader.WriteInt8(writer, 0xFF);
+    //                    break;
+    //                case 0xb5://difficulty
+    //                    DataLoader.WriteInt8(writer, GameWorldController.instance.difficulty); break;
 
-                }   //endswitch
+    //                case 0xB6: //UW Game options TODO: Implement these
+    //                           //high nibble is detail level.
+    //                           //bit 0 of low nibble is sound
+    //                           //bit 3 of low nibble is music
+    //                    {
+    //                        int valToWrite = 0x30;//High detail	
+    //                        if (ObjectInteraction.PlaySoundEffects)
+    //                        {
+    //                            valToWrite |= 0x1;
+    //                        }
+    //                        if (MusicController.PlayMusic)
+    //                        {
+    //                            valToWrite |= 0x4;
+    //                        }
+    //                        DataLoader.WriteInt8(writer, valToWrite);
+    //                    }
+    //                    break;
+    //                case 0xB7://Unknown. Always 8
+    //                    DataLoader.WriteInt8(writer, 0x8);
+    //                    break;
+    //                case 0xCF: ///   game time
+    //                    //DataLoader.WriteInt32(writer,UWCharacter.Instance.game_time);break;
+    //                    DataLoader.WriteInt8(writer, 0); break;//Write zero since I don't track milliseconds
+    //                                                           //break;
+    //                case 0xD0:
+    //                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
+    //                case 0xD1:
+    //                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
+    //                case 0xD2:
+    //                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
+    //                case 0xD3://No of inventory items + 1.
+    //                    DataLoader.WriteInt16(writer, inventoryObjects.GetUpperBound(0) + 1 + 1);
+    //                    //Debug.Log("No of inventory " + inventoryObjects.GetUpperBound(0));
+    //                    break;
+    //                case 0xD4://Skip prev
+    //                    break;
+    //                case 0xD5:
+    //                    {//7F 20
+    //                        DataLoader.WriteInt8(writer, 0x7F); break;
+    //                        //break;	
+    //                    }
+    //                case 0xD6:
+    //                    {//The mysterious clip through bridges on a second jump byte.
+    //                        DataLoader.WriteInt8(writer, 0x20); break;
+    //                        //break;
+    //                    }
+    //                case 0xDB:
+    //                    if (GameWorldController.instance.InventoryMarker.transform.childCount > 0)
+    //                    {//player has inventory. Not sure where these values come from
+    //                        DataLoader.WriteInt8(writer, 0x40); break;
+    //                    }
+    //                    else
+    //                    {
+    //                        DataLoader.WriteInt8(writer, 0x0); break;
+    //                    }
+    //                //break;
+    //                case 0xDD://Duplicate curvit
+    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
+    //                //break;
+
+    //                case 0xF8: // Helm (all of these subsequent values are indices into the object list at offset 312
+    //                    WriteInventoryIndex(writer, inventoryObjects, 0); break;
+    //                case 0xF9: // Helm ignore
+    //                    break;
+    //                case 0xFA: // Chest
+    //                    WriteInventoryIndex(writer, inventoryObjects, 1); break;
+    //                case 0xFB: // Chest ignore
+    //                    break;
+    //                case 0xFC: // Gloves
+    //                    WriteInventoryIndex(writer, inventoryObjects, 4); break;
+    //                case 0xFD: // Gloves ignore
+    //                    break;
+    //                case 0xFE: // Leggings
+    //                    WriteInventoryIndex(writer, inventoryObjects, 2); break;
+    //                case 0xFF: // Leggings ignore
+    //                    break;
+    //                case 0x100: // Boots
+    //                    WriteInventoryIndex(writer, inventoryObjects, 3); break;
+    //                case 0x101: // Boots ignore
+    //                    break;
+    //                case 0x102: // TopRightShoulder
+    //                    WriteInventoryIndex(writer, inventoryObjects, 5); break;
+    //                case 0x103: // TopRightShoulder ignore
+    //                    break;
+    //                case 0x104: // TopLeftShoulder
+    //                    WriteInventoryIndex(writer, inventoryObjects, 6); break;
+    //                case 0x105: // TopLeftShoulder ignore
+    //                    break;
+    //                case 0x106: // Righthand
+    //                    WriteInventoryIndex(writer, inventoryObjects, 7); break;
+    //                case 0x107: // Righthand ignore
+    //                    break;
+    //                case 0x108: // LeftHand
+    //                    WriteInventoryIndex(writer, inventoryObjects, 8); break;
+    //                case 0x109: // LeftHand ignore
+    //                    break;
+    //                case 0x10A: // leftRing
+    //                    WriteInventoryIndex(writer, inventoryObjects, 9); break;
+    //                case 0x10B: // leftRing ignore
+    //                    break;
+    //                case 0x10C: // rightRing
+    //                    WriteInventoryIndex(writer, inventoryObjects, 10); break;
+    //                case 0x10D: // rightRing ignore
+    //                    break;
+    //                case 0x10E: // Backpack0
+    //                    WriteInventoryIndex(writer, inventoryObjects, 11); break;
+    //                case 0x10F: // Backpack0 ignore
+    //                    break;
+    //                case 0x110: // Backpack1
+    //                    WriteInventoryIndex(writer, inventoryObjects, 12); break;
+    //                case 0x111: // Backpack1 ignore
+    //                    break;
+    //                case 0x112: // Backpack2
+    //                    WriteInventoryIndex(writer, inventoryObjects, 13); break;
+    //                case 0x113: // Backpack2 ignore
+    //                    break;
+    //                case 0x114: // Backpack3
+    //                    WriteInventoryIndex(writer, inventoryObjects, 14); break;
+    //                case 0x115: // Backpack3 ignore
+    //                    break;
+    //                case 0x116: // Backpack4
+    //                    WriteInventoryIndex(writer, inventoryObjects, 15); break;
+    //                case 0x117: // Backpack4 ignore
+    //                    break;
+    //                case 0x118: // Backpack5
+    //                    WriteInventoryIndex(writer, inventoryObjects, 16); break;
+    //                case 0x119: // Backpack5 ignore
+    //                    break;
+    //                case 0x11A: // Backpack6
+    //                    WriteInventoryIndex(writer, inventoryObjects, 17); break;
+    //                case 0x11B: // Backpack6 ignore
+    //                    break;
+    //                case 0x11C: // Backpack7
+    //                    WriteInventoryIndex(writer, inventoryObjects, 18); break;
+    //                case 0x11D: // Backpack7 ignore
+    //                    break;
+
+    //                default://No value. Write 0	or hardcoded values
+    //                        //if ((i>=0xA1) || (i<=0xF7))
+    //                        //{//Unknown Hardcoded values
+    //                        //		DataLoader.WriteInt8(writer,hardcoded[i-161])	;
+    //                        //}
+    //                        //else
+    //                        //{
+    //                    DataLoader.WriteInt8(writer, 0); break;
+    //                    //}
 
 
-            }
+    //                    //break;
 
-        }
-
-        //ALl things going well I should be at byte no 312 where I can write the inventory info.
+    //            }   //endswitch
 
 
-        for (int o = 0; o <= inventoryObjects.GetUpperBound(0); o++)
-        {
-            GameObject obj = GameObject.Find(inventoryObjects[o]);
-            if (obj != null)
-            {
-                ObjectInteraction currobj = obj.GetComponent<ObjectInteraction>();
-                if (currobj.GetItemType() == ObjectInteraction.WAND)
-                {
-                    if (currobj.GetComponent<Wand>() != null)
-                    {
-                        if (currobj.GetComponent<Wand>().linkedspell != null)
-                        {//This is a wand with a linked spell object.
-                            string link = currobj.GetComponent<Wand>().linkedspell.name;
-                            //For the index of the linked object in the list
-                            for (int z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
-                            {
-                                if (link == inventoryObjects[z])
-                                {
-                                    currobj.link = z + 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                int ByteToWrite = (currobj.isquant << 15) |
-                        (currobj.invis << 14) |
-                        (currobj.doordir << 13) |
-                        (currobj.enchantment << 12) |
-                        ((currobj.flags & 0x07) << 9) |
-                        (currobj.item_id & 0x1FF);
+    //        }
 
-                DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
-                DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
+    //    }
 
-                ByteToWrite = ((currobj.xpos & 0x7) << 13) |
-                        ((currobj.ypos & 0x7) << 10) |
-                        ((currobj.heading & 0x7) << 7) |
-                        ((currobj.zpos & 0x7F));
-                DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
-                DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
-
-                ByteToWrite = ((currobj.next & 0x3FF) << 6) |
-                        (currobj.quality & 0x3F);
-                DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
-                DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
-
-                ByteToWrite = ((currobj.link & 0x3FF) << 6) |
-                        (currobj.owner & 0x3F);
-                DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
-                DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
-            }
-        }
+    //    //ALl things going well I should be at byte no 312 where I can write the inventory info.
 
 
-        writer.Close();//The file now saved is un-encrypted
+    //    for (int o = 0; o <= inventoryObjects.GetUpperBound(0); o++)
+    //    {
+    //        GameObject obj = GameObject.Find(inventoryObjects[o]);
+    //        if (obj != null)
+    //        {
+    //            ObjectInteraction currobj = obj.GetComponent<ObjectInteraction>();
+    //            if (currobj.GetItemType() == ObjectInteraction.WAND)
+    //            {
+    //                if (currobj.GetComponent<Wand>() != null)
+    //                {
+    //                    if (currobj.GetComponent<Wand>().linkedspell != null)
+    //                    {//This is a wand with a linked spell object.
+    //                        string link = currobj.GetComponent<Wand>().linkedspell.name;
+    //                        //For the index of the linked object in the list
+    //                        for (int z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
+    //                        {
+    //                            if (link == inventoryObjects[z])
+    //                            {
+    //                                currobj.link = z + 1;
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            int ByteToWrite = (currobj.isquant << 15) |
+    //                    (currobj.invis << 14) |
+    //                    (currobj.doordir << 13) |
+    //                    (currobj.enchantment << 12) |
+    //                    ((currobj.flags & 0x07) << 9) |
+    //                    (currobj.item_id & 0x1FF);
 
-        //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
-        {
-            int xOrValue = buffer[0];
-            int incrnum = 3;
-            for (int i = 1; i <= NoOfEncryptedBytes; i++)
-            {
-                if ((i == 81) | (i == 161))
-                {
-                    incrnum = 3;
-                }
-                buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
-                incrnum += 3;
-            }
+    //            DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
+    //            DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
 
-            byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
-            for (long i = 0; i <= buffer.GetUpperBound(0); i++)
-            {
-                dataToWrite[i] = buffer[i];
-            }
-            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
+    //            ByteToWrite = ((currobj.xpos & 0x7) << 13) |
+    //                    ((currobj.ypos & 0x7) << 10) |
+    //                    ((currobj.heading & 0x7) << 7) |
+    //                    ((currobj.zpos & 0x7F));
+    //            DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
+    //            DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
 
-        }
-    }
+    //            ByteToWrite = ((currobj.next & 0x3FF) << 6) |
+    //                    (currobj.quality & 0x3F);
+    //            DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
+    //            DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
+
+    //            ByteToWrite = ((currobj.link & 0x3FF) << 6) |
+    //                    (currobj.owner & 0x3F);
+    //            DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
+    //            DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
+    //        }
+    //    }
+
+
+    //    writer.Close();//The file now saved is un-encrypted
+
+    //    //Reopen and encrypt the file
+    //    if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
+    //    {
+    //        int xOrValue = buffer[0];
+    //        int incrnum = 3;
+    //        for (int i = 1; i <= NoOfEncryptedBytes; i++)
+    //        {
+    //            if ((i == 81) | (i == 161))
+    //            {
+    //                incrnum = 3;
+    //            }
+    //            buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
+    //            incrnum += 3;
+    //        }
+
+    //        byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
+    //        for (long i = 0; i <= buffer.GetUpperBound(0); i++)
+    //        {
+    //            dataToWrite[i] = buffer[i];
+    //        }
+    //        File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
+
+    //    }
+    //}
 }

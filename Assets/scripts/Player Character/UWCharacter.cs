@@ -156,10 +156,48 @@ public class UWCharacter : Character
     }
     public bool isBouncy;
 
-    [Header("Player Health Status")]
+
     //Character Status
-    public int FoodLevel; //0-255 range.
-    public int Fatigue;   //0-29 range
+    public int FoodLevel //0-255 range.
+    {
+        get
+        {
+            return SaveGame.GetAt(0x3a);
+        }
+        set
+        {
+            if (value>255)
+            {
+                value = 255;
+            }
+            if (value<0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x3a,(byte)value);
+        }
+    }
+    public int Fatigue   //0-29 range
+    {
+        get
+        {
+            return SaveGame.GetAt(0x3b);
+        }
+        set
+        {
+            if (value > 255)
+            {
+                value = 255;
+            }
+            if (value < 0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x3b, (byte)value);
+        }
+    }
+
+    [Header("Player Health Status")]
     public int Intoxication; //0-63 range
 
     [SerializeField]
@@ -225,7 +263,11 @@ public class UWCharacter : Character
     //Character Details
     public int Body;//Which body/portrait this character has 
     public int CharClass;
-    public int CharLevel;
+    public int CharLevel
+    {
+        get { return SaveGame.GetAt(0x3E); }
+        set { SaveGame.SetAt(0x3E, (byte)value); }
+    }
     public int EXP;
     public int TrainingPoints;
     public bool isFemale;
@@ -671,6 +713,7 @@ public class UWCharacter : Character
     // Update is called once per frame
     public override void Update()
     {
+        if (GameWorldController.instance.AtMainMenu) { return; }
         if ((_RES == GAME_SHOCK) || (_RES == GAME_TNOVA))
         {
             if (isFlying)
