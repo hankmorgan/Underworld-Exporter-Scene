@@ -36,7 +36,8 @@ public class RuneBag : object_base
         //Test for a valid rune being used on the bag and if so add the rune to the players inventory.
         if (ObjectUsed.GetComponent<RuneStone>() != null)
         {
-            UWCharacter.Instance.PlayerMagic.PlayerRunes[ObjectUsed.item_id - 232] = true;
+            //UWCharacter.Instance.PlayerMagic.PlayerRunes[ObjectUsed.item_id - 232] = true;
+            UWCharacter.Instance.PlayerMagic.SetRune(ObjectUsed.item_id - 232, true);
             //Add rune to rune bag and destroy the original object.
             ObjectUsed.consumeObject();
             CurrentObjectInHand = null;

@@ -39,32 +39,264 @@ public class Skills : UWEBase
     public const int SkillSwimming = 20;
 
     //Character attributes
-    public int STR;
-    public int DEX;
-    public int INT;
+    public int STR
+    {
+        get
+        {
+            int value = (int)SaveGame.GetAt(0x1F);
+            GameWorldController.instance.objDat.critterStats[63].Strength = value;
+            return value;
+        }
+        set
+        {            
+            GameWorldController.instance.objDat.critterStats[63].Strength = value;
+            SaveGame.SetAt(0x1F, (byte)(value));
+        }
+    }
+    public int DEX
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x20);
+        }
+        set
+        {
+            SaveGame.SetAt(0x20, (byte)(value));
+        }
+    }
+    public int INT
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x21);
+        }
+        set
+        {
+            SaveGame.SetAt(0x21, (byte)(value));
+        }
+    }
 
     //Character skills
-    public int Attack;
-    public int Defense;
-    public int Unarmed;
-    public int Sword;
-    public int Axe;
-    public int Mace;
-    public int Missile;
-    public int ManaSkill;
-    public int Lore;
-    public int Casting;
-    public int Traps;
-    public int Search;
-    public int Track;
-    public int Sneak;
-    public int Repair;
-    public int Charm;
-    public int PickLock;
-    public int Acrobat;
-    public int Appraise;
-    public int Swimming;
-
+    public int Attack
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x22);
+        }
+        set
+        {
+            SaveGame.SetAt(0x22, (byte)(value));
+        }
+    }
+    public int Defense
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x23);
+        }
+        set
+        {
+            SaveGame.SetAt(0x23, (byte)(value));
+        }
+    }
+    public int Unarmed
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x24);
+        }
+        set
+        {
+            SaveGame.SetAt(0x24, (byte)(value));
+        }
+    }
+    public int Sword
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x25);
+        }
+        set
+        {
+            SaveGame.SetAt(0x25, (byte)(value));
+        }
+    }
+    public int Axe
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x26);
+        }
+        set
+        {
+            SaveGame.SetAt(0x26, (byte)(value));
+        }
+    }
+    public int Mace
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x27);
+        }
+        set
+        {
+            SaveGame.SetAt(0x27, (byte)(value));
+        }
+    }
+    public int Missile
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x28);
+        }
+        set
+        {
+            SaveGame.SetAt(0x28, (byte)(value));
+        }
+    }
+    public int ManaSkill
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x29);
+        }
+        set
+        {
+            SaveGame.SetAt(0x29, (byte)(value));
+        }
+    }
+    public int Lore
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2A);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2A, (byte)(value));
+        }
+    }
+    public int Casting
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2B);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2B, (byte)(value));
+        }
+    }
+    public int Traps
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2C);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2C, (byte)(value));
+        }
+    }
+    public int Search
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2D);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2D, (byte)(value));
+        }
+    }
+    public int Track
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2E);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2E, (byte)(value));
+        }
+    }
+    public int Sneak
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x2F);
+        }
+        set
+        {
+            SaveGame.SetAt(0x2F, (byte)(value));
+        }
+    }
+    public int Repair
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x30);
+        }
+        set
+        {
+            SaveGame.SetAt(0x30, (byte)(value));
+        }
+    }
+    public int Charm
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x31);
+        }
+        set
+        {
+            SaveGame.SetAt(0x31, (byte)(value));
+        }
+    }
+    public int PickLock
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x32);
+        }
+        set
+        {
+            SaveGame.SetAt(0x32, (byte)(value));
+        }
+    }
+    public int Acrobat
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x33);
+        }
+        set
+        {
+            SaveGame.SetAt(0x33, (byte)(value));
+        }
+    }
+    public int Appraise
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x34);
+        }
+        set
+        {
+            SaveGame.SetAt(0x34, (byte)(value));
+        }
+    }
+    public int Swimming
+    {
+        get
+        {
+            return (int)SaveGame.GetAt(0x35);
+        }
+        set
+        {
+            SaveGame.SetAt(0x35, (byte)(value));
+        }
+    }
 
 
     //private string[] Skillnames = {"","ATTACK","DEFENSE","UNARMED","SWORD","AXE","MACE","MISSILE",

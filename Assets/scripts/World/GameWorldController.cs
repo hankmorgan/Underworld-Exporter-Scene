@@ -429,7 +429,31 @@ public class GameWorldController : UWEBase
     //public WeaponAnimationPlayer WeaponAnim;
     public WeaponsLoader weapongr;
 
-    public int difficulty = 1; //1=standard, 0=easy.
+    public int difficulty  //1=standard, 0=easy.
+    {
+        get
+        {
+            int offset = 0xB5;
+            if (_RES == GAME_UW2) { offset = 0x302; }
+            return (SaveGame.GetAt(offset)) & 0x1 ;
+        }
+        set
+        {
+            int offset = 0xB5;
+            if (_RES == GAME_UW2) { offset = 0x302; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1);
+            if (value==1)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
 
     public static bool LoadingObjects = false;
 
@@ -648,7 +672,7 @@ public class GameWorldController : UWEBase
         LoadPath(res);
         _RES = res;//game;
         UWClass._RES = res;//game;
-        //keybinds.ApplyBindings();//Applies keybinds to certain controls
+        SaveGame.InitEmptySaveGame();
 
         //Set some layers for the AI to use to detect walls and doors.
         MapMeshLayerMask = 1 << LevelModel.layer;

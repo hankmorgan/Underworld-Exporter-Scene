@@ -156,10 +156,48 @@ public class UWCharacter : Character
     }
     public bool isBouncy;
 
-    [Header("Player Health Status")]
+
     //Character Status
-    public int FoodLevel; //0-255 range.
-    public int Fatigue;   //0-29 range
+    public int FoodLevel //0-255 range.
+    {
+        get
+        {
+            return SaveGame.GetAt(0x3a);
+        }
+        set
+        {
+            if (value>255)
+            {
+                value = 255;
+            }
+            if (value<0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x3a,(byte)value);
+        }
+    }
+    public int Fatigue   //0-29 range
+    {
+        get
+        {
+            return SaveGame.GetAt(0x3b);
+        }
+        set
+        {
+            if (value > 255)
+            {
+                value = 255;
+            }
+            if (value < 0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x3b, (byte)value);
+        }
+    }
+
+    [Header("Player Health Status")]
     public int Intoxication; //0-63 range
 
     [SerializeField]
@@ -220,16 +258,121 @@ public class UWCharacter : Character
 
 
 
-    [Header("Character Details")]
+  
     //Character related info
     //Character Details
-    public int Body;//Which body/portrait this character has 
-    public int CharClass;
-    public int CharLevel;
-    public int EXP;
-    public int TrainingPoints;
-    public bool isFemale;
-    public bool isLefty;
+    public int Body//Which body/portrait this character has 
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return (SaveGame.GetAt(offset) >> 2) & 0x7 ;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            existingValue = (byte)(existingValue & 0xE3); //mask out body.
+            value = value << 2;
+            existingValue = (byte)(existingValue | value);
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+
+    public int CharClass
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return (SaveGame.GetAt(offset) >> 5) & 0x7;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            existingValue = (byte)(existingValue & 0x1F); //mask out charclass
+            value = value << 5;
+            existingValue = (byte)(existingValue | value);
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+
+    public int CharLevel
+    {
+        get { return SaveGame.GetAt(0x3E); }
+        set { SaveGame.SetAt(0x3E, (byte)value); }
+    }
+ 
+    public int EXP
+    {
+        get
+        {
+            return (int)SaveGame.GetAt32(0x4F)/10;
+        }
+        set
+        {
+            SaveGame.SetAt32(0x4F, value*10);
+        }
+    }
+    public int TrainingPoints
+    {
+        get { return SaveGame.GetAt(0x53); }
+        set { SaveGame.SetAt(0x53, (byte)value); }
+    }
+    public bool isFemale
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return ((int)(SaveGame.GetAt(offset) >> 1 ) & 0x1) == 0x1;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1 << 1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
+    public bool isLefty
+    {
+        get
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            return ((int)(SaveGame.GetAt(offset)) & 0x1) == 0x0;
+        }
+        set
+        {
+            int offset = 0x65;
+            if (_RES == GAME_UW2) { offset = 0x66; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
 
 
     [Header("Speeds")]
@@ -671,6 +814,7 @@ public class UWCharacter : Character
     // Update is called once per frame
     public override void Update()
     {
+        if (GameWorldController.instance.AtMainMenu) { return; }
         if ((_RES == GAME_SHOCK) || (_RES == GAME_TNOVA))
         {
             if (isFlying)

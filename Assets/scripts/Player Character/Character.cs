@@ -44,35 +44,38 @@ public class Character : UWEBase
     public AudioSource footsteps;
     public bool step = true;
 
-    [Header("Health")]
-    [SerializeField]
-    private int _MaxVit;
     /// <summary>
-    /// Get or Set Player vitality.
+    /// Get or Set Player vitality stats
     /// </summary>
     public int MaxVIT
     {
         get
         {
-            return _MaxVit;
+            return (int)SaveGame.GetAt(0x37);
         }
         set
         {
-            _MaxVit = value;
+            SaveGame.SetAt(0x37, (byte)value);
             UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }
     }
-    [SerializeField]
-    private int _CurVit;
     public int CurVIT
     {
         get
         {
-            return _CurVit;
+            return (int)SaveGame.GetAt(0x36);
         }
         set
         {
-            _CurVit = value;
+            if (value>MaxVIT)
+            {
+                value = MaxVIT;
+            }
+            if(value<0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x36, (byte)value);
             UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }
     }

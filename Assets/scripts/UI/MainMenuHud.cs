@@ -262,8 +262,18 @@ public class MainMenuHud : GuiBase
             GameClock.instance._day = 0;
             GameClock.instance._minute = 51;
             GameClock.instance._second = 15;
-            UWCharacter.Instance.CurVIT = 255;
             UWCharacter.Instance.MaxVIT = 255;
+            UWCharacter.Instance.CurVIT = 255;
+            UWCharacter.Instance.PlayerSkills.STR = 30;
+            UWCharacter.Instance.PlayerSkills.DEX = 30;
+            UWCharacter.Instance.PlayerSkills.INT= 30;
+            UWCharacter.Instance.CharName = "Speedstart";
+            UWCharacter.Instance.PlayerSkills.Unarmed = 30;
+            UWCharacter.Instance.PlayerSkills.Attack = 30;
+            UWCharacter.Instance.PlayerSkills.Defense = 30;
+            UWCharacter.Instance.PlayerSkills.Casting = 30;
+            UWCharacter.Instance.PlayerSkills.ManaSkill = 30;
+            UWCharacter.Instance.PlayerSkills.Acrobat= 30;
             JourneyOnwards();
             return;
         }
@@ -447,8 +457,8 @@ public class MainMenuHud : GuiBase
                 {
                     //Start a new game
                     UWCharacter.Instance.EXP = 50;
+                    UWCharacter.Instance.CharLevel = 1;
                     UWCharacter.Instance.TrainingPoints = 1;
-                    //UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
                     UWCharacter.Instance.PlayerMagic.MaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
@@ -458,10 +468,11 @@ public class MainMenuHud : GuiBase
                     {
                         Quest.instance.QuestVariables[i] = 0;
                     }
-                    for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
-                    {
-                        UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
-                    }
+                    //Obsolete
+                    //for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
+                    //{
+                    //    UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
+                    //}
                     switch (_RES)
                     {
                         case GAME_UW1:
@@ -514,7 +525,7 @@ public class MainMenuHud : GuiBase
             EnterCharName.text = "Avatar";
         }
         CharName.text = EnterCharName.text;
-        UWCharacter.Instance.CharName = EnterCharName.text;
+        SaveGame.CharName = EnterCharName.text;
         EnterCharName.gameObject.SetActive(false);
         ChargenClick(0);
     }

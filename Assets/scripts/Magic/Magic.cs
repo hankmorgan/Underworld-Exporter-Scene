@@ -32,9 +32,66 @@ public class Magic : UWEBase
     public string ReadiedSpell;
 
     ///Runes that the character has picked up
-    public bool[] PlayerRunes = new bool[24];
+  //  public bool[] PlayerRunes = new bool[24];
+
+
+    /// <summary>
+    /// Returns true if the player has this rune
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public bool GetRune(int index)
+    {
+        int RuneSet = index / 8;
+        int bit = 7-(index % 8);
+        return( ( (SaveGame.GetAt(0x45+RuneSet) >> bit) & 0x1) == 1);
+    }
+    public void SetRune(int index, bool newValue)
+    {
+        int RuneSet = index / 8;
+        int bit = 7 - (index % 8);
+        byte mask;
+        byte existingValue = SaveGame.GetAt(0x45 + RuneSet);
+        mask = (byte)(1 << bit);
+        if (newValue==true)
+        {//Set rune
+            existingValue |= mask;
+        }
+        else
+        {//clear runes. Should only happen at chargen. Possibly redundant due to initsavegame function
+            existingValue = (byte)(existingValue & (~mask));
+        }
+        SaveGame.SetAt(0x45 + RuneSet, existingValue);
+    }
+
     ///Runes that the player has selected
-    public int[] ActiveRunes = new int[3];
+  //  public int[] ActiveRunes = new int[3];
+    public int GetActiveRune(int index)
+    {
+        int rune = SaveGame.GetAt(0x48 + index);       
+        if (rune < 24)
+        {
+           return rune;
+        }
+        else
+        {
+           return -1;
+        }
+    }
+
+    public void SetActiveRune(int index, int rune)
+    {
+        if(rune==-1)
+        {
+            SaveGame.SetAt(0x48 + index, 0x24);
+        }
+        else
+        {
+            SaveGame.SetAt(0x48 + index, (byte)rune);
+        }
+        ActiveRuneSlot.UpdateRuneSlots();
+    }
+
 
     ///The player has unlimited mana
     public static bool InfiniteMana
@@ -43,31 +100,35 @@ public class Magic : UWEBase
     }
 
     ///How much mana the player can have
-    [SerializeField]
-    private int _MaxMana;
     public int MaxMana
     {
         get
         {
-            return _MaxMana;
+            return SaveGame.GetAt(0x39);
         }
         set
         {
-            _MaxMana = value;
+            SaveGame.SetAt(0x39, (byte)value);
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }
-    ///How much mana the player currently has
-    private int _CurMana;
     public int CurMana
     {
         get
         {
-            return _CurMana;
+            return SaveGame.GetAt(0x38);
         }
         set
         {
-            _CurMana = value;
+            if (value > MaxMana)
+            {
+                value = MaxMana;
+            }
+            if (value < 0)
+            {
+                value = 0;
+            }
+            SaveGame.SetAt(0x38, (byte)value);
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }
@@ -3932,9 +3993,9 @@ public class Magic : UWEBase
         {//Cast a spell or readies it.
             if (ReadiedSpell == "")
             {
-                if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(), ActiveRunes[0], ActiveRunes[1], ActiveRunes[2]))
+                if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(), GetActiveRune(0), GetActiveRune(1), GetActiveRune(2)))
                 {
-                    CastSpell(this.gameObject, ActiveRunes[0], ActiveRunes[1], ActiveRunes[2], true);
+                    CastSpell(this.gameObject, GetActiveRune(0), GetActiveRune(1), GetActiveRune(2), true);
                     ApplySpellCost();
                 }
             }

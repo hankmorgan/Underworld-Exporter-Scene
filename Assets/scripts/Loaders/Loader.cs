@@ -97,6 +97,33 @@ public class Loader : UWClass
         }
     }
 
-
+    public static void setValAtAddress(byte[] buffer, long address, int size, int val)
+    {
+        byte valOut;
+        switch (size)
+        {
+            case 8:
+                valOut = (byte)(val & 0xff);
+                buffer[address] = valOut;
+                break;
+            case 16:
+                valOut = (byte)(val & 0xff);
+                buffer[address] = valOut;
+                valOut = (byte)(val >> 8 & 0xff);
+                buffer[address + 1] = valOut;
+                break;
+            case 24: break;
+            case 32:
+                valOut = (byte)(val & 0xff);
+                buffer[address] = valOut;
+                valOut = (byte)(val >> 8 & 0xff);
+                buffer[address + 1] = valOut;
+                valOut = (byte)(val >> 16 & 0xff);
+                buffer[address + 2] = valOut;
+                valOut = (byte)(val >> 24 & 0xff);
+                buffer[address + 3] = valOut;
+                break;
+        }
+    }
 
 }
