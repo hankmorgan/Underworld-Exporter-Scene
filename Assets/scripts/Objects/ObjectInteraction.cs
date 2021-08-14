@@ -9,7 +9,31 @@ public class ObjectInteraction : UWEBase
 
     public static long LinkEventCtr = 0;
 
-    public static bool PlaySoundEffects = true;
+    public static bool PlaySoundEffects
+    {
+        get
+        {
+            int offset = 0xB6;
+            if (_RES == GAME_UW2) { offset = 0x303; }
+            return ((SaveGame.GetAt(offset) & 0x1) == 1);
+        }
+        set
+        {
+            int offset = 0xB6;
+            if (_RES == GAME_UW2) { offset = 0x303; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
 
     public const int NPC_TYPE = 0;
     public const int WEAPON = 1;

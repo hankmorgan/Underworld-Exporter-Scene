@@ -85,7 +85,31 @@ public class MusicController : UWEBase
     public const int SOUND_EFFECT_GUARDIAN_LAUGH_1 = 49;
     public const int SOUND_EFFECT_GUARDIAN_LAUGH_2 = 50;
 
-    public static bool PlayMusic = true;
+    public static bool PlayMusic
+    {
+        get
+        {
+            int offset = 0xB6;
+            if (_RES == GAME_UW2) { offset = 0x303; }
+            return (((SaveGame.GetAt(offset) >> 2) & 0x1) == 1);
+        }
+        set
+        {
+            int offset = 0xB6;
+            if (_RES == GAME_UW2) { offset = 0x303; }
+            byte existingValue = SaveGame.GetAt(offset);
+            byte mask = (1<<2);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(offset, existingValue);
+        }
+    }
 
     //Music modes
     private const int MUS_DEATH = 10;

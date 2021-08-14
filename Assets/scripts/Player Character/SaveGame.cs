@@ -14,6 +14,9 @@ public class SaveGame : Loader
             default:
                 PlayerDat = new byte[312];break;
         }
+        MusicController.PlayMusic = true;
+        ObjectInteraction.PlaySoundEffects = true;
+        GameWorldController.instance.difficulty = 1;
     }
 
     //Get and set methods for player properties
@@ -59,11 +62,21 @@ public class SaveGame : Loader
         return PlayerDat[index];
     }
 
+    public static long GetAt32(int index)
+    {
+        return  DataLoader.getValAtAddress(PlayerDat,index,32);
+    }
+
     public static void SetAt(int index, byte value)
     {
         PlayerDat[index] = value;
     }
 
+
+    public static void SetAt32(int index, int value)
+    {
+        DataLoader.setValAtAddress(PlayerDat, index, 32, value);
+    }
 
     public enum InventorySlotsOffsets
     {
@@ -160,7 +173,7 @@ public class SaveGame : Loader
             int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);//To Convert
             LoadRunes(buffer);
             LoadPlayerBody(buffer, 0x65);
-            LoadGameOptions(buffer, 0xB6);
+            //LoadGameOptions(buffer, 0xB6);
 
             for (int i = 0x4B; i <= 221; i++)
             {
@@ -173,9 +186,9 @@ public class SaveGame : Loader
                         //Or STR * 2; safe to ignore?
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)getValAtAddress(buffer, i, 32); break;
+                       // UWCharacter.Instance.EXP = (int)getValAtAddress(buffer, i, 32); break;
                     case 0x53: // skillpoints available to spend
-                        UWCharacter.Instance.TrainingPoints = buffer[i]; break;
+                        //UWCharacter.Instance.TrainingPoints = buffer[i]; break;
                     case 0x55:
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
@@ -1715,7 +1728,7 @@ public class SaveGame : Loader
             int effectCounter = LoadSpellEffects(buffer, ref ActiveEffectIds, ref ActiveEffectStability);
             LoadRunes(buffer);
             LoadPlayerBody(buffer, 0x66);
-            LoadGameOptions(buffer, 0x303);
+            //LoadGameOptions(buffer, 0x303);
 
             for (int i = 0x4D; i <= 930; i++)
             {
@@ -1724,12 +1737,12 @@ public class SaveGame : Loader
                     case 0x4D: ///   weight in 0.1 stones
                         //Or STR * 2; safe to ignore?
                         //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-                        Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
+                        //Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) * 0.1f); break;
+                       // UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) * 0.1f); break;
                     case 0x53: // skillpoints available to spend
-                        UWCharacter.Instance.TrainingPoints = buffer[i]; break;
+                        //UWCharacter.Instance.TrainingPoints = buffer[i]; break;
                     case 0x55: ///   x-position in level
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
@@ -2542,13 +2555,13 @@ public class SaveGame : Loader
     /// </summary>
     /// <param name="buffer">Buffer.</param>
     /// <param name="i">The index.</param>
-    static void LoadGameOptions(byte[] buffer, int i)
-    {
-        int val = (int)getValAtAddress(buffer, i, 8);
-        ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
-        MusicController.PlayMusic = (((val >> 2) & 0x1) == 1);
-        GameWorldController.instance.difficulty = (int)getValAtAddress(buffer, i - 1, 8) & 0x1;
-    }
+    //static void LoadGameOptions(byte[] buffer, int i)
+    //{
+    //    int val = (int)getValAtAddress(buffer, i, 8);
+    //    //ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
+    //    //MusicController.PlayMusic = (((val >> 2) & 0x1) == 1);
+    //   // GameWorldController.instance.difficulty = (int)getValAtAddress(buffer, i - 1, 8) & 0x1;
+    //}
 
     /// <summary>
     /// Applies the spell effects.

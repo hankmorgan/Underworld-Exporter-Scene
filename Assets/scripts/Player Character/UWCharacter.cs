@@ -306,9 +306,23 @@ public class UWCharacter : Character
         get { return SaveGame.GetAt(0x3E); }
         set { SaveGame.SetAt(0x3E, (byte)value); }
     }
-    [Header("Character Details")]
-    public int EXP;
-    public int TrainingPoints;
+ 
+    public int EXP
+    {
+        get
+        {
+            return (int)SaveGame.GetAt32(0x4F)/10;
+        }
+        set
+        {
+            SaveGame.SetAt32(0x4F, value*10);
+        }
+    }
+    public int TrainingPoints
+    {
+        get { return SaveGame.GetAt(0x53); }
+        set { SaveGame.SetAt(0x53, (byte)value; }
+    }
     public bool isFemale
     {
         get
