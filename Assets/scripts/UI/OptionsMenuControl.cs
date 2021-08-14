@@ -584,7 +584,7 @@ public class OptionsMenuControl : GuiBase_Draggable
         //}
 
         //000~001~159~Impossible, you are between worlds. \n
-        if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
+        if ((_RES == GAME_UW1) && (GameWorldController.instance.dungeon_level == 8))
         {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_impossible_you_are_between_worlds_));
             return;
@@ -638,7 +638,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Load a save file
             //Set the level file
             GameWorldController.LoadingGame = true;
-            GameWorldController.instance.LevelNo = -1;
+            GameWorldController.instance.dungeon_level = -1;
             GameWorldController.instance.AtMainMenu = true;
             GameWorldController.instance.Lev_Ark_File_Selected = Path.Combine("SAVE" + (SlotNo + 1), "LEV.ARK");
             GameWorldController.instance.SCD_Ark_File_Selected = Path.Combine("SAVE" + (SlotNo + 1), "SCD.ARK");

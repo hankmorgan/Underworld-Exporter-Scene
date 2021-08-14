@@ -130,7 +130,7 @@ public class CutsAnimator : GuiBase
                 UWHUD.instance.mainmenu.OpScr.SetActive(true);
                 UWHUD.instance.mainmenu.CharGen.SetActive(false);
                 UWHUD.instance.mainmenu.ButtonClickMainMenu(4);//reset menu
-                GameWorldController.instance.LevelNo = -1;
+                GameWorldController.instance.dungeon_level = -1;
                 WindowDetectUW.SwitchFromMouseLook();
                 break;
             default:

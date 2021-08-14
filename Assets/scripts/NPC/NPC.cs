@@ -717,7 +717,7 @@ public class NPC : MobileObject
 
             case GAME_UW2:
                 {
-                    if (GameWorldController.instance.LevelNo == 3)
+                    if (GameWorldController.instance.dungeon_level == 3)
                     {
                         if (item_id == 78)//Blood worms on level 3 of britannia. This is a quest for the friendly goblins
                         {
@@ -899,7 +899,7 @@ public class NPC : MobileObject
         if (_RES == GAME_UW2)
         {
             if (npc_whoami == 142) //Lord British
-                if (GameWorldController.instance.LevelNo == 0)
+                if (GameWorldController.instance.dungeon_level == 0)
                 {
                     if (Quest.instance.QuestVariables[112] == 1)//Avatar has been fighting
                     {//Make sure I move to the correct location to talk to the avatar.
@@ -956,7 +956,7 @@ public class NPC : MobileObject
                         //gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
                     }
                 }
-                if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
+                if ((_RES == GAME_UW1) && (GameWorldController.instance.dungeon_level == 8))
                 {
                     //slasher of veils in the void needs to get rowdy. Otherwise he is passive when this level loas
                     if (item_id == 124)

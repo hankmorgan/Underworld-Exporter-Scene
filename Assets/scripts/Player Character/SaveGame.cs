@@ -21,50 +21,20 @@ public class SaveGame : Loader
 
     //Get and set methods for player properties
     
-    /// <summary>
-    /// Player name bytes 1 to 14 in both files
-    /// </summary>
-    public static string CharName
-    {
-        get
-        {
-            var _charname = "";
-            for (int i = 1; i < 14; i++)
-            {
-                if (PlayerDat[i].ToString() != "\0")
-                {
-                    _charname += (char)PlayerDat[i];
-                }
-            }
-            return _charname;
-        }
-        set
-        {
-            var _chararray = value.ToCharArray();
-            for (int i = 1; i < 14; i++)
-            {                
-                if (i - 1 < value.Length)
-                {
-                    PlayerDat[i] = (byte)_chararray[i - 1];
-                }
-                else
-                {
-                    PlayerDat[i] = (byte)0;
-                }
-            }
-        }
-    }
-       
-
     //Generic get and set for stats, quests and other values
     public static byte GetAt(int index)
     {
         return PlayerDat[index];
     }
 
-    public static long GetAt32(int index)
+    public static int GetAt16(int index)
     {
-        return  DataLoader.getValAtAddress(PlayerDat,index,32);
+        return (int)DataLoader.getValAtAddress(PlayerDat, index, 16);
+    }
+
+    public static int GetAt32(int index)
+    {
+        return  (int)DataLoader.getValAtAddress(PlayerDat,index,32);
     }
 
     public static void SetAt(int index, byte value)
@@ -72,6 +42,10 @@ public class SaveGame : Loader
         PlayerDat[index] = value;
     }
 
+    public static void SetAt16(int index, int value)
+    {
+        DataLoader.setValAtAddress(PlayerDat, index, 16, value);
+    }
 
     public static void SetAt32(int index, int value)
     {
@@ -125,10 +99,10 @@ public class SaveGame : Loader
     /// <summary>
     /// Ratio of UNITY co-ordinates to Tile co-ordinates
     /// </summary>
-    private const float Ratio = 213f;
+    public const float Ratio = 213f;
 
     //Adjustment of players vertial postion in Unity to UW co-ordinates
-    private const float VertAdjust = 0.3543672f;
+    public const float VertAdjust = 0.3543672f;
 
     private const int NoOfEncryptedBytes = 0xD2;//218;		//219
 
@@ -2324,11 +2298,11 @@ public class SaveGame : Loader
     {
         if (_RES == GAME_UW2)
         {
-            return "Level " + GameWorldController.instance.LevelNo + " " + System.DateTime.Now;
+            return "Level " + GameWorldController.instance.dungeon_level + " " + System.DateTime.Now;
         }
         else
         {
-            return UW1LevelName(GameWorldController.instance.LevelNo) + " " + System.DateTime.Now;
+            return UW1LevelName(GameWorldController.instance.dungeon_level) + " " + System.DateTime.Now;
         }
     }
 
@@ -2432,18 +2406,6 @@ public class SaveGame : Loader
     //        }
     //    }
     //}
-
-    /// <summary>
-    /// Inits the player position.
-    /// </summary>
-    /// <param name="x_position">X position.</param>
-    /// <param name="y_position">Y position.</param>
-    /// <param name="z_position">Z position.</param>
-    static void InitPlayerPosition(int x_position, int y_position, int z_position)
-    {
-        GameWorldController.instance.StartPos = new Vector3(x_position / Ratio, z_position / Ratio + VertAdjust, y_position / Ratio);
-    }
-
 
     static int LoadSpellEffects(byte[] buffer, ref int[] ActiveEffectIds, ref short[] ActiveEffectStability)
     {
@@ -3163,17 +3125,23 @@ public class SaveGame : Loader
     static void LoadPosition(byte[] buffer)
     {
         //   x-position in level
-        int x_position = (int)getValAtAddress(buffer, 0x55, 16);
+       // int x_position = (int)getValAtAddress(buffer, 0x55, 16);
         //   y-position
-        int y_position = (int)getValAtAddress(buffer, 0x57, 16);
+       // int y_position = (int)getValAtAddress(buffer, 0x57, 16);
         //   z-position
-        int z_position = (int)getValAtAddress(buffer, 0x59, 16);
-        float heading = getValAtAddress(buffer, 0x5c, 8);
-        Debug.Log("Player heading is " + heading);
-        UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, heading * (360f / 255f), 0f);
+       // int z_position = (int)getValAtAddress(buffer, 0x59, 16);
+        //float heading = getValAtAddress(buffer, 0x5c, 8);
+        //Debug.Log("Player heading is " + heading);
+        UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, (float)UWCharacter.Instance.heading * (360f / 255f), 0f);
         UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
-        GameWorldController.instance.startLevel = (short)(getValAtAddress(buffer, 0x5d, 16) - 1);
-        InitPlayerPosition(x_position, y_position, z_position);
+        GameWorldController.instance.startLevel = (short)(GameWorldController.instance.dungeon_level - 1); //(short)(getValAtAddress(buffer, 0x5d, 16) - 1);
+        Debug.Log("Starting on level " + (short)(GameWorldController.instance.dungeon_level-1));
+
+        //Debug.Log("Old code would look for " + (short)(getValAtAddress(buffer, 0x5d, 16) - 1));
+        //InitPlayerPosition(UWCharacter.Instance.x_position, UWCharacter.Instance.y_position, UWCharacter.Instance.z_position);
+        //Debug.Log("Start at " + UWCharacter.Instance.x_position + "," + UWCharacter.Instance.z_position + "," + +UWCharacter.Instance.y_position);
+        GameWorldController.instance.StartPos = new Vector3(UWCharacter.Instance.x_position / Ratio, UWCharacter.Instance.z_position / Ratio + VertAdjust, UWCharacter.Instance.y_position / Ratio);
+
     }
 
 
@@ -3183,13 +3151,14 @@ public class SaveGame : Loader
     /// <param name="writer">Writer.</param>
     static void WritePosition(BinaryWriter writer)
     {
-        DataLoader.WriteInt16(writer, (int)(UWCharacter.Instance.transform.position.x * Ratio));
-        DataLoader.WriteInt16(writer, (int)(UWCharacter.Instance.transform.position.z * Ratio));
-        DataLoader.WriteInt16(writer, (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio)));
-        DataLoader.WriteInt8(writer, 0);
-        // DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f)));
-        DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull);
-        DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1);
+        return;
+        //////DataLoader.WriteInt16(writer, (int)(UWCharacter.Instance.transform.position.x * Ratio));
+        //////DataLoader.WriteInt16(writer, (int)(UWCharacter.Instance.transform.position.z * Ratio));
+        //////DataLoader.WriteInt16(writer, (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio)));
+        //////DataLoader.WriteInt8(writer, 0);
+        //////// DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f)));
+        //////DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull);
+        //////DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1);
     }
 
 

@@ -311,7 +311,7 @@ public class Shrine : Model3D
                 locHeading = StringController.instance.GetString(1, 43); break;
         }
         string locLevel;
-        switch (GameWorldController.instance.LevelNo)
+        switch (GameWorldController.instance.dungeon_level)
         {
             case 0:
                 locLevel = "and " + StringController.instance.GetString(1, 47); break;

@@ -146,7 +146,7 @@ public class a_hack_trap_qbert : a_hack_trap
             case 3: TeleportToLocation(68, 46, 23); break;
             case 4:
             default:
-                if (GameWorldController.instance.LevelNo != 64)
+                if (GameWorldController.instance.dungeon_level != 64)
                 {
                     TeleportToLocation(64, 44, 56);//To Red hell
                 }
@@ -169,7 +169,7 @@ public class a_hack_trap_qbert : a_hack_trap
             case 3: TeleportToLocation(68, 12, 6); break;
             case 4:
             default:
-                if (GameWorldController.instance.LevelNo != 64)
+                if (GameWorldController.instance.dungeon_level != 64)
                 {
                     TeleportToLocation(64, 10, 60);//To jumpland
                 }
@@ -191,7 +191,7 @@ public class a_hack_trap_qbert : a_hack_trap
             case 3: TeleportToLocation(68, 24, 38); break;
             case 4:
             default:
-                if (GameWorldController.instance.LevelNo != 67)
+                if (GameWorldController.instance.dungeon_level != 67)
                 {
                     TeleportToLocation(67, 2, 20);//To annoying maze
                 }
@@ -214,7 +214,7 @@ public class a_hack_trap_qbert : a_hack_trap
             case 3: TeleportToLocation(68, 21, 34); break;
             case 4:
             default:
-                if (GameWorldController.instance.LevelNo != 64)
+                if (GameWorldController.instance.dungeon_level != 64)
                 {
                     TeleportToLocation(64, 26, 13);//To sliding land					
                 }
@@ -563,7 +563,7 @@ public class a_hack_trap_qbert : a_hack_trap
 
     void TeleportToLocation(int levelNo, int tileX, int tileY)
     {
-        if (GameWorldController.instance.LevelNo != levelNo)
+        if (GameWorldController.instance.dungeon_level != levelNo)
         {
             UWCharacter.Instance.playerMotor.movement.velocity = Vector3.zero;
             GameWorldController.instance.SwitchLevel((short)levelNo, (short)tileX, (short)tileY);

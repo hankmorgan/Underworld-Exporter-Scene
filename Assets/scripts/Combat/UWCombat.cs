@@ -601,7 +601,7 @@ public class UWCombat : Combat
         {
             //recalc position to get the correct heading for the flanking bonus
             npc.objInt().UpdatePosition();
-            flankingbonus = CalcFlankingBonus(playerUW.currentHeading, npc.objInt().heading);
+            flankingbonus = CalcFlankingBonus(playerUW.HeadingForCompass, npc.objInt().heading);
         }
 
 
@@ -735,7 +735,7 @@ public class UWCombat : Combat
     /// <param name="npc">Npc.</param>
     public static void NPC_Hits_PC(UWCharacter playerUW, NPC npc)
     {
-        int flankingbonus = CalcFlankingBonus(npc.objInt().heading, playerUW.currentHeading);
+        int flankingbonus = CalcFlankingBonus(npc.objInt().heading, playerUW.HeadingForCompass);
         int attackScore = npc.CurrentAttackScore + (npc.EquipDamage >> 1) + Random.Range(0, 5) + 7 + flankingbonus; //+Maybe Npc Level
 
         //Player defence

@@ -5,7 +5,7 @@
     protected override void Start()
     {
         base.Start();
-        if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 6))
+        if ((_RES == GAME_UW1) && (GameWorldController.instance.dungeon_level == 6))
         {
             if (Quest.instance.isOrbDestroyed == false)
             {
@@ -68,7 +68,7 @@
             {
                 case ObjectInteraction.AN_ORB_ROCK:
                     {
-                        if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 6))
+                        if ((_RES == GAME_UW1) && (GameWorldController.instance.dungeon_level == 6))
                         {
                             //UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
                             CurrentObjectInHand = null;

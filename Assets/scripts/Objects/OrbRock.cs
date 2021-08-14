@@ -20,7 +20,7 @@ public class OrbRock : object_base
     {//	
         if (objInt().PickedUp == false)
         {
-            if ((GameWorldController.instance.LevelNo == 6) && (_RES == GAME_UW1))
+            if ((GameWorldController.instance.dungeon_level == 6) && (_RES == GAME_UW1))
             {
                 if (collision.gameObject.name.Contains("orb"))
                 {

@@ -115,13 +115,13 @@ public class UWEBase : MonoBehaviour
     /// <returns>The object list.</returns>
     public static ObjectLoader CurrentObjectList()
     {
-        if (GameWorldController.instance.LevelNo == -1)
+        if (GameWorldController.instance.dungeon_level == -1)
         {
             return null;
         }
         else
         {
-            return GameWorldController.instance.objectList[GameWorldController.instance.LevelNo];
+            return GameWorldController.instance.objectList[GameWorldController.instance.dungeon_level];
         }
     }
 
@@ -131,26 +131,26 @@ public class UWEBase : MonoBehaviour
     /// <returns>The tile map.</returns>
     public static TileMap CurrentTileMap()
     {
-        if (GameWorldController.instance.LevelNo == -1)
+        if (GameWorldController.instance.dungeon_level == -1)
         {
             return null;
         }
         else
         {
-            return GameWorldController.instance.Tilemaps[GameWorldController.instance.LevelNo];
+            return GameWorldController.instance.Tilemaps[GameWorldController.instance.dungeon_level];
         }
 
     }
 
     public static AutoMap CurrentAutoMap()
     {
-        if (GameWorldController.instance.LevelNo == -1)
+        if (GameWorldController.instance.dungeon_level == -1)
         {
             return null;
         }
         else
         {
-            return GameWorldController.instance.AutoMaps[GameWorldController.instance.LevelNo];
+            return GameWorldController.instance.AutoMaps[GameWorldController.instance.dungeon_level];
         }
     }
 

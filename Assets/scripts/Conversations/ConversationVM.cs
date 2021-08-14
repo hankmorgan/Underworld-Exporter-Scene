@@ -519,7 +519,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             UWHUD.instance.NPCName.text = npcname;
         }
 
-        UWHUD.instance.PCName.text = SaveGame.CharName; ;
+        UWHUD.instance.PCName.text = UWCharacter.Instance.CharName; ;
 
 
 
@@ -1284,7 +1284,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         if (Teleport)
         {
-            if (TeleportLevel == GameWorldController.instance.LevelNo)
+            if (TeleportLevel == GameWorldController.instance.dungeon_level)
             {//stay on this level
                 float targetX = TeleportTileX * 1.2f + 0.6f;
                 float targetY = TeleportTileY * 1.2f + 0.6f;
@@ -1340,7 +1340,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "riddlecounter":
                         stack.Set(address, 0); break;
                     case "dungeon_level":
-                        stack.Set(address, GameWorldController.instance.LevelNo + 1); break;
+                        stack.Set(address, GameWorldController.instance.dungeon_level + 1); break;
                     case "npc_name":
                         stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, StringController.instance.GetString(7, npc.npc_whoami + 16))); break;
                     case "npc_level":
@@ -1387,7 +1387,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "play_poison":
                         stack.Set(address, UWCharacter.Instance.play_poison); break;
                     case "play_name":
-                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, SaveGame.CharName)); break;
+                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, UWCharacter.Instance.CharName)); break;
                     //case "new_player_exp":
                     case "play_level":
                         stack.Set(address, UWCharacter.Instance.CharLevel); break;

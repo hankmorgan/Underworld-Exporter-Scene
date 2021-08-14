@@ -128,11 +128,11 @@ public class Compass : GuiBase_Draggable
     public override void Update()
     {
         base.Update();
-        if (PreviousHeading != UWCharacter.Instance.currentHeading)
+        if (PreviousHeading != UWCharacter.Instance.HeadingForCompass)
         {
             UpdateNorthIndicator();
-            PreviousHeading = UWCharacter.Instance.currentHeading;
-            switch (UWCharacter.Instance.currentHeading)
+            PreviousHeading = UWCharacter.Instance.HeadingForCompass;
+            switch (UWCharacter.Instance.HeadingForCompass)
             {
                 case NORTH:
                 case SOUTH:
@@ -163,7 +163,6 @@ public class Compass : GuiBase_Draggable
                         comp.texture = CompassPoles[3];
                         break;
                     }
-
             }
         }
     }
@@ -172,7 +171,7 @@ public class Compass : GuiBase_Draggable
     {
         for (int i = 0; i < 16; i++)
         {
-            NorthIndicators[i].enabled = (i == UWCharacter.Instance.currentHeading);
+            NorthIndicators[i].enabled = (i == UWCharacter.Instance.HeadingForCompass);
         }
     }
 
@@ -216,7 +215,7 @@ public class Compass : GuiBase_Draggable
     private static void GetAbyssLevel()
     {
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_are_on_the_)
-                + StringController.instance.GetString(1, 411 + GameWorldController.instance.LevelNo)
+                + StringController.instance.GetString(1, 411 + GameWorldController.instance.dungeon_level)
                 + StringController.instance.GetString(1, StringController.str__level_of_the_abyss_));
     }
 
@@ -225,7 +224,7 @@ public class Compass : GuiBase_Draggable
     /// </summary>
     private static void GetLabyrinthOfWorldsLevel()
     {
-        GameWorldController.Worlds world = GameWorldController.GetWorld(GameWorldController.instance.LevelNo);
+        GameWorldController.Worlds world = GameWorldController.GetWorld(GameWorldController.instance.dungeon_level);
         switch (world)
         {
             case GameWorldController.Worlds.Britannia:

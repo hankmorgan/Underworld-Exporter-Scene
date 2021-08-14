@@ -501,7 +501,7 @@ public class AutoMap : Loader
 
 
         //Only displays the player if they are on the same map as the one being rendered
-        if (thisLevelNo == GameWorldController.instance.LevelNo)
+        if (thisLevelNo == GameWorldController.instance.dungeon_level)
         {
             Color[] defaultColour = playerPosIcon.GetPixels();
             if (UWEBase.EditorMode)

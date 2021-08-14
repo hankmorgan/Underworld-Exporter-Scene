@@ -176,12 +176,20 @@ public class GameWorldController : UWEBase
     /// </summary>
     public GameObject InventoryMarker;
 
-    [Header("Level")]
+    
     /// <summary>
     /// What level number we are currently on.
     /// </summary>	
-    public short LevelNo;
+    public short dungeon_level
+    {
+        get { return (short)SaveGame.GetAt16(0x5d); }
+        set { 
+            Debug.Log("Setting level no to " + value);
+            SaveGame.SetAt16(0x5d, (byte)value);
+            }
+    }
 
+    [Header("Level")]
     public static bool LoadingGame = false;
     public static bool NavMeshReady = false;
     public bool[] NavMeshesReady = new bool[4];
@@ -952,7 +960,8 @@ public class GameWorldController : UWEBase
     {
         if (newLevelNo != -1)
         {
-            if (LevelNo == -1)
+            if (GameWorldController.instance.AtMainMenu)
+            //if (LevelNo == -1)
             {//I'm at the main menu. Load up the file data now.
                 critsLoader = new CritLoader[64];//Clear out npc animations
                 //Initialise various objects as appropiate for the current game.
@@ -1035,7 +1044,7 @@ public class GameWorldController : UWEBase
                 }
             }
 
-            if ((_RES != GAME_SHOCK) && (LevelNo != -1))
+            if ((_RES != GAME_SHOCK) && (dungeon_level != -1))
             {
                 //Call special events for inventory objects on level transition out of the current level.
                 foreach (Transform t in instance.InventoryMarker.transform)
@@ -1047,7 +1056,7 @@ public class GameWorldController : UWEBase
                 }
             }
 
-            if (LevelNo != -1)
+            if (dungeon_level != -1)
             {//When changing from a level that has already loaded
                 if (EditorMode == false)
                 {
@@ -1056,7 +1065,7 @@ public class GameWorldController : UWEBase
             }
 
             //Tell the game we are now using the new level no.
-            LevelNo = newLevelNo;
+            dungeon_level = newLevelNo;
 
             switch (_RES)
             {
@@ -1107,7 +1116,7 @@ public class GameWorldController : UWEBase
                 LevelSignature = newSignature;
             }
 
-            if ((LevelNo == 7) && (_RES == GAME_UW1))
+            if ((dungeon_level == 7) && (_RES == GAME_UW1))
             {//Create the special lava for the UW1 endgame.
                 CreateShrineLava();
             }
@@ -1266,7 +1275,12 @@ public class GameWorldController : UWEBase
         }
         TileMap.visitTileX = (short)(UWCharacter.Instance.transform.position.x / 1.2f);
         TileMap.visitTileY = (short)(UWCharacter.Instance.transform.position.z / 1.2f);
-        //UWCharacter.Instance.room = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
+
+        UWCharacter.Instance.x_position = (int)(UWCharacter.Instance.transform.position.x * SaveGame.Ratio);
+        UWCharacter.Instance.y_position = (int)(UWCharacter.Instance.transform.position.z * SaveGame.Ratio);
+        UWCharacter.Instance.z_position = (int)((UWCharacter.Instance.transform.position.y - SaveGame.VertAdjust) * SaveGame.Ratio);
+        UWCharacter.Instance.heading = (int)(this.transform.eulerAngles.y * (255f / 360f));
+
 
         if (EditorMode)
         {

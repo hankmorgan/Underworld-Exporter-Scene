@@ -22,7 +22,7 @@
 
                 //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
                 UWCharacter.Instance.ResurrectPosition = UWCharacter.Instance.transform.position;
-                UWCharacter.Instance.ResurrectLevel = (short)(GameWorldController.instance.LevelNo + 1);
+                UWCharacter.Instance.ResurrectLevel = (short)(GameWorldController.instance.dungeon_level + 1);
                 objInt().consumeObject();
                 return true;
             }

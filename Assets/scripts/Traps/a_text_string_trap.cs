@@ -19,7 +19,7 @@ public class a_text_string_trap : trap_base
                 StringNo = (32 * quality + owner);//I hope.
                 break;
             default:
-                StringNo = (64 * GameWorldController.instance.LevelNo) + owner;
+                StringNo = (64 * GameWorldController.instance.dungeon_level) + owner;
                 break;
         }
 
