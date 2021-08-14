@@ -36,9 +36,10 @@ public class ActiveRuneSlot : GuiBase_Draggable
         /*Checks the set value on the player and if different display the new rune.*/
         for (int i = 0; i < 3; i++)
         {
-            if (UWCharacter.Instance.PlayerMagic.ActiveRunes[i] != -1)
+            int rune = UWCharacter.Instance.PlayerMagic.GetActiveRune(i);
+            if (rune != -1)
             {
-                UWHUD.instance.activeRunes[i].thisRune.texture = runes[UWCharacter.Instance.PlayerMagic.ActiveRunes[i]];
+                UWHUD.instance.activeRunes[i].thisRune.texture = runes[rune];
             }
             else
             {
@@ -58,9 +59,9 @@ public class ActiveRuneSlot : GuiBase_Draggable
 
         if (UWCharacter.Instance.PlayerMagic.ReadiedSpell == "")
         {
-            if (UWCharacter.Instance.PlayerMagic.TestSpellCast(UWCharacter.Instance, UWCharacter.Instance.PlayerMagic.ActiveRunes[0], UWCharacter.Instance.PlayerMagic.ActiveRunes[1], UWCharacter.Instance.PlayerMagic.ActiveRunes[2]))
+            if (UWCharacter.Instance.PlayerMagic.TestSpellCast(UWCharacter.Instance, UWCharacter.Instance.PlayerMagic.GetActiveRune(0), UWCharacter.Instance.PlayerMagic.GetActiveRune(1), UWCharacter.Instance.PlayerMagic.GetActiveRune(2)))
             {
-                UWCharacter.Instance.PlayerMagic.CastSpell(UWCharacter.Instance.gameObject, UWCharacter.Instance.PlayerMagic.ActiveRunes[0], UWCharacter.Instance.PlayerMagic.ActiveRunes[1], UWCharacter.Instance.PlayerMagic.ActiveRunes[2], true);
+                UWCharacter.Instance.PlayerMagic.CastSpell(UWCharacter.Instance.gameObject, UWCharacter.Instance.PlayerMagic.GetActiveRune(0), UWCharacter.Instance.PlayerMagic.GetActiveRune(1), UWCharacter.Instance.PlayerMagic.GetActiveRune(2), true);
                 UWCharacter.Instance.PlayerMagic.ApplySpellCost();
             }
         }

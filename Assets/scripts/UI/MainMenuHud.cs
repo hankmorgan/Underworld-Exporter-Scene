@@ -262,8 +262,18 @@ public class MainMenuHud : GuiBase
             GameClock.instance._day = 0;
             GameClock.instance._minute = 51;
             GameClock.instance._second = 15;
-            UWCharacter.Instance.CurVIT = 255;
             UWCharacter.Instance.MaxVIT = 255;
+            UWCharacter.Instance.CurVIT = 255;
+            UWCharacter.Instance.PlayerSkills.STR = 30;
+            UWCharacter.Instance.PlayerSkills.DEX = 30;
+            UWCharacter.Instance.PlayerSkills.INT= 30;
+            UWCharacter.Instance.CharName = "Speedstart";
+            UWCharacter.Instance.PlayerSkills.Unarmed = 30;
+            UWCharacter.Instance.PlayerSkills.Attack = 30;
+            UWCharacter.Instance.PlayerSkills.Defense = 30;
+            UWCharacter.Instance.PlayerSkills.Casting = 30;
+            UWCharacter.Instance.PlayerSkills.ManaSkill = 30;
+            UWCharacter.Instance.PlayerSkills.Acrobat= 30;
             JourneyOnwards();
             return;
         }

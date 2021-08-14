@@ -410,14 +410,14 @@ public class SaveGame : Loader
     /// <param name="rune">Rune.</param>
     static void SetActiveRuneSlots(int slotNo, int rune)
     {
-        if (rune < 24)
-        {
-            UWCharacter.Instance.PlayerMagic.ActiveRunes[slotNo] = rune;
-        }
-        else
-        {
-            UWCharacter.Instance.PlayerMagic.ActiveRunes[slotNo] = -1;
-        }
+        //if (rune < 24)
+        //{
+        //    UWCharacter.Instance.PlayerMagic.ActiveRunes[slotNo] = rune;
+        //}
+        //else
+        //{
+        //    UWCharacter.Instance.PlayerMagic.ActiveRunes[slotNo] = -1;
+        //}
         ActiveRuneSlot.UpdateRuneSlots();
     }
 

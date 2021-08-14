@@ -67,23 +67,23 @@ static string[] Runes=new string[]{"An","Bet","Corp","Des",
             {//left click select the rune.
              //add the rune to the first available active slot.
              //If all the slots are in use then push the stack down.
-                if (UWCharacter.Instance.PlayerMagic.ActiveRunes[0] == -1)
+                if (UWCharacter.Instance.PlayerMagic.GetActiveRune(0) == -1)
                 {
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[0] = SlotNumber;
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(0, SlotNumber);
                 }
-                else if (UWCharacter.Instance.PlayerMagic.ActiveRunes[1] == -1)
+                else if (UWCharacter.Instance.PlayerMagic.GetActiveRune(1) == -1)
                 {
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[1] = SlotNumber;
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(1, SlotNumber);
                 }
-                else if (UWCharacter.Instance.PlayerMagic.ActiveRunes[2] == -1)
+                else if (UWCharacter.Instance.PlayerMagic.GetActiveRune(2) == -1)
                 {
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[2] = SlotNumber;
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(2, SlotNumber);
                 }
                 else
                 {//No free slot. Push everything down.
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[0] = UWCharacter.Instance.PlayerMagic.ActiveRunes[1];
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[1] = UWCharacter.Instance.PlayerMagic.ActiveRunes[2];
-                    UWCharacter.Instance.PlayerMagic.ActiveRunes[2] = SlotNumber;
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(0, UWCharacter.Instance.PlayerMagic.GetActiveRune(1));
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(1, UWCharacter.Instance.PlayerMagic.GetActiveRune(2));
+                    UWCharacter.Instance.PlayerMagic.SetActiveRune(2, SlotNumber);
                 }
                 ActiveRuneSlot.UpdateRuneSlots();
             }

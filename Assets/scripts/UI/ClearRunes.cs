@@ -6,9 +6,9 @@
         if (UWCharacter.Instance != null)
         {
             //Debug.Log("Clearing Runes");
-            UWCharacter.Instance.PlayerMagic.ActiveRunes[0] = -1;
-            UWCharacter.Instance.PlayerMagic.ActiveRunes[1] = -1;
-            UWCharacter.Instance.PlayerMagic.ActiveRunes[2] = -1;
+            UWCharacter.Instance.PlayerMagic.SetActiveRune(0, -1);
+            UWCharacter.Instance.PlayerMagic.SetActiveRune(1, -1);
+            UWCharacter.Instance.PlayerMagic.SetActiveRune(2, -1);
             ActiveRuneSlot.UpdateRuneSlots();
         }
     }

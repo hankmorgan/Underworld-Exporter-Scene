@@ -66,7 +66,33 @@ public class Magic : UWEBase
     }
 
     ///Runes that the player has selected
-    public int[] ActiveRunes = new int[3];
+  //  public int[] ActiveRunes = new int[3];
+    public int GetActiveRune(int index)
+    {
+        int rune = SaveGame.GetAt(0x48 + index);       
+        if (rune < 24)
+        {
+           return rune;
+        }
+        else
+        {
+           return -1;
+        }
+    }
+
+    public void SetActiveRune(int index, int rune)
+    {
+        if(rune==-1)
+        {
+            SaveGame.SetAt(0x48 + index, 0x24);
+        }
+        else
+        {
+            SaveGame.SetAt(0x48 + index, (byte)rune);
+        }
+        ActiveRuneSlot.UpdateRuneSlots();
+    }
+
 
     ///The player has unlimited mana
     public static bool InfiniteMana
@@ -3968,9 +3994,9 @@ public class Magic : UWEBase
         {//Cast a spell or readies it.
             if (ReadiedSpell == "")
             {
-                if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(), ActiveRunes[0], ActiveRunes[1], ActiveRunes[2]))
+                if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(), GetActiveRune(0), GetActiveRune(1), GetActiveRune(2)))
                 {
-                    CastSpell(this.gameObject, ActiveRunes[0], ActiveRunes[1], ActiveRunes[2], true);
+                    CastSpell(this.gameObject, GetActiveRune(0), GetActiveRune(1), GetActiveRune(2), true);
                     ApplySpellCost();
                 }
             }
