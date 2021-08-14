@@ -321,7 +321,7 @@ public class UWCharacter : Character
     public int TrainingPoints
     {
         get { return SaveGame.GetAt(0x53); }
-        set { SaveGame.SetAt(0x53, (byte)value; }
+        set { SaveGame.SetAt(0x53, (byte)value); }
     }
     public bool isFemale
     {
