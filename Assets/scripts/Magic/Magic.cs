@@ -132,8 +132,12 @@ public class Magic : UWEBase
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }
-    ///The true max mana the character has when their mana is drained.
-    public int TrueMaxMana;
+    ///The true max mana the character had when their mana is drained by the orb
+    public int TrueMaxMana
+    {
+        get { return SaveGame.GetAt(0xB1); }
+        set { SaveGame.SetAt(0xB1, (byte)value); }
+    }
 
     ///The mana cost of the next spell the player will cast
     public int SpellCost;
@@ -6286,9 +6290,10 @@ public class Magic : UWEBase
     /// </summary>
     void IronFleshXClock()
     {
-        if (Quest.x_clocks[3] == 4)
+        if (Quest.GetX_Clock(3) == 4)
         {
-            Quest.x_clocks[3] = 5;
+            //Quest.x_clocks[3] = 5;
+            Quest.SetX_Clock(3, 5);
             //000~001~335~The baked mud hardens into a clear glaze. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 335));
         }

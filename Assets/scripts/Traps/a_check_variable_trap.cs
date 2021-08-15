@@ -64,7 +64,7 @@ the left, right, center button combination on Level3.
                             {
                                 if (zpos - 16 >= 0)
                                 {
-                                    result = Check_Variables(Quest.x_clocks, zpos - 16, heading, this, "xclocks");
+                                    result = Check_Variables(Quest.GetX_Clock(zpos - 16), heading, this, "xclocks");
                                 }
                                 else
                                 {
@@ -73,7 +73,8 @@ the left, right, center button combination on Level3.
                                 break;
                             }
                         case 4://A game var list
-                            result = Check_Variables(Quest.variables, zpos, heading, this, "gamevars");
+                            //result = Check_Variables(Quest.variables, zpos, heading, this, "gamevars");
+                            result = Check_Variables(Quest.GetVariable(zpos), heading, this, "questvars");
                             break;
                         case 5://A bit field list
                             result = Check_Variables(Quest.BitVariables, zpos, heading, this, "bitvars");
@@ -90,7 +91,8 @@ the left, right, center button combination on Level3.
                 }
             default:
                 {
-                    result = Check_Variables(Quest.variables, zpos, heading, this, "gamevars");
+                    //result = Check_Variables(Quest.variables, zpos, heading, this, "gamevars");
+                    result = Check_Variables(Quest.GetVariable(zpos), heading, this, "gamevars");
                     break;
                 }
         }
@@ -135,12 +137,14 @@ the left, right, center button combination on Level3.
         {
             if (xpos != 0)
             {
-                cmp += Quest.variables[i];
+                //cmp += Quest.variables[i];
+                cmp += Quest.GetVariable(i);
             }
             else
             {
                 cmp <<= 3;
-                cmp |= (Quest.variables[i] & 0x7);
+                //cmp |= (Quest.variables[i] & 0x7);
+                cmp |= (Quest.GetVariable(i) & 0x7);
             }
         }
         return cmp;

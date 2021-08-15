@@ -16,7 +16,7 @@ public class LargeBlackrockGem : Model3D
         //Initialise the gem face
         for (int i = 0; i <= 7; i++)
         {
-            if (i == Quest.variables[6])
+            if (i == Quest.GetVariable(6))
             {
                 this.GetComponent<MeshRenderer>().materials[i].SetColor("_Color", Color.white);
             }
@@ -50,13 +50,14 @@ public class LargeBlackrockGem : Model3D
                 {
                     int thisGemIndex = ObjectUsed.item_id - 280;
                     int bitField = (1 << thisGemIndex);
-                    Quest.x_clocks[2]++;
+                    //Quest.x_clocks[2]++;
+                    Quest.IncrementXClock(2);
                     //Quest.QuestVariablesOBSOLETE[130] |= bitField;
                     int existingvalue = Quest.GetQuestVariable(130) | bitField;
                     Quest.SetQuestVariable(130, existingvalue);
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 338));
-                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 338 + Quest.x_clocks[2]));
-                    CameraShake.instance.ShakeEarthQuake(Quest.x_clocks[2] * 0.2f);
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 338 + Quest.GetX_Clock(2)));
+                    CameraShake.instance.ShakeEarthQuake(Quest.GetX_Clock(2) * 0.2f);
                     ObjectUsed.consumeObject();
                 }
                 else

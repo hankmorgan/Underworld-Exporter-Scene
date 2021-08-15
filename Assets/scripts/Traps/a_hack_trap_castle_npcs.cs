@@ -49,7 +49,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        switch (Quest.x_clocks[0])
+        switch (Quest.GetX_Clock(0))
         {
             case 0:
                 EventsAtXClock0();

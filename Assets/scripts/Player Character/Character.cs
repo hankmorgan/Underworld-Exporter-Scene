@@ -75,6 +75,11 @@ public class Character : UWEBase
             {
                 value = 0;
             }
+            //Set the duplicate cur vit value as well
+            if (_RES != GAME_UW2) 
+            { 
+                SaveGame.SetAt(0xDD, (byte)value); 
+            }
             SaveGame.SetAt(0x36, (byte)value);
             UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }

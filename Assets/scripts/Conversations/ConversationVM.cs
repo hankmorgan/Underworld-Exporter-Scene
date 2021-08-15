@@ -4210,11 +4210,14 @@ description:  places a generated object in underworld
     public int x_traps(int VariableValue, int VariableIndex)
     {
         Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
-        if (VariableValue <= Quest.variables.GetUpperBound(0))
-        {
-            Quest.variables[VariableIndex] = VariableValue;
-        }
-        return Quest.variables[VariableIndex];
+        //if (VariableValue <= Quest.variables.GetUpperBound(0))
+        //{
+        //    Quest.variables[VariableIndex] = VariableValue;
+        //}
+        //return Quest.variables[VariableIndex];
+
+        Quest.SetVariable(VariableIndex,VariableValue);
+        return Quest.GetVariable(VariableIndex);
     }
 
 
@@ -4247,13 +4250,14 @@ description:  places a generated object in underworld
         //Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
         if (unk1 == 10001)
         {
-            Debug.Log("x_clock returning: " + Quest.x_clocks[unk2] + " from " + unk2);
-            stack.result_register = Quest.x_clocks[unk2];
+            Debug.Log("x_clock returning: " + Quest.GetX_Clock(unk2) + " from " + unk2);
+            stack.result_register = Quest.GetX_Clock(unk2);
         }
         else
         {//Should this be an increment???
             Debug.Log("x_clock setting: " + (unk2) + " to " + unk1);
-            Quest.x_clocks[unk2] = unk1;
+            // Quest.x_clocks[unk2] = unk1;
+            Quest.SetX_Clock(unk2, unk1);
         }
     }
 

@@ -5,7 +5,7 @@
     {
         base.Awake();
         noOfImages = 2;
-        switch (Quest.getIncenseDream())
+        switch (Quest.IncenseDream)
         {
             case 0:
                 ImageFrames[0] = "cs013_n01";
@@ -17,6 +17,7 @@
                 ImageFrames[0] = "cs015_n01";
                 break;
         }
+        Quest.IncenseDream++;
         ImageTimes[0] = 0f;
         ImageLoops[0] = -1;
 

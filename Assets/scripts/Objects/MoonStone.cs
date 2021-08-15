@@ -8,8 +8,11 @@ public class MoonStone : object_base
     protected override void Start()
     {
         base.Start();
-        UWCharacter.Instance.MoonGateLevel = (short)(GameWorldController.instance.dungeon_level + 1);
-        UWCharacter.Instance.MoonGatePosition = this.transform.position;
+        if ((objInt().ObjectTileX<=64) && (objInt().ObjectTileY <= 64))
+        {
+            UWCharacter.Instance.MoonGateLevel = (short)(GameWorldController.instance.dungeon_level + 1);
+            UWCharacter.Instance.MoonGatePosition = this.transform.position;
+        }
     }
 
     /// <summary>
@@ -20,16 +23,32 @@ public class MoonStone : object_base
     public override void Update()
     {
         base.Update();
-        if (objInt().PickedUp == false)
+        //if (objInt().PickedUp == false)
+        //{
+        //    UWCharacter.Instance.MoonGateLevel = (short)(GameWorldController.instance.dungeon_level + 1);
+        //    UWCharacter.Instance.MoonGatePosition = this.transform.position;
+        //}
+        //else
+        //{
+        //    UWCharacter.Instance.MoonGatePosition = Vector3.zero;
+        //}
+    }
+
+    public override bool DropEvent()
+    {
+        if ((objInt().ObjectTileX <= 64) && (objInt().ObjectTileY <= 64))
         {
             UWCharacter.Instance.MoonGateLevel = (short)(GameWorldController.instance.dungeon_level + 1);
             UWCharacter.Instance.MoonGatePosition = this.transform.position;
         }
-        else
-        {
-            UWCharacter.Instance.MoonGatePosition = Vector3.zero;
-        }
+        return base.DropEvent();
     }
 
+    public override bool PickupEvent()
+    {
+        UWCharacter.Instance.MoonGateLevel = 0;
+        UWCharacter.Instance.MoonGatePosition = Vector3.zero;
+        return base.PickupEvent();
+    }
 
 }

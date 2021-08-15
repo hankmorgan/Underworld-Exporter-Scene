@@ -463,17 +463,7 @@ public class MainMenuHud : GuiBase
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     GameWorldController.instance.InitBGlobals(0);
-                    //Reset quest variables
-                    //Obsolete.
-                    //for (int i = 0; i <= Quest.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
-                    //{
-                    //    Quest.QuestVariablesOBSOLETE[i] = 0;
-                    //}
-                    //Obsolete
-                    //for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
-                    //{
-                    //    UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
-                    //}
+
                     switch (_RES)
                     {
                         case GAME_UW1:
@@ -487,12 +477,19 @@ public class MainMenuHud : GuiBase
                             Quest.isCupFound = false;
                             break;
                         case GAME_UW2:
-                            Quest.variables[101] = 255;
-                            Quest.variables[102] = 255;
-                            Quest.variables[103] = 255;
-                            Quest.variables[104] = 255;
-                            Quest.variables[105] = 255;
-                            Quest.variables[106] = 255;
+                            //Why am I setting these!!!
+                            //Quest.variables[101] = 255;                            
+                            //Quest.variables[102] = 255;
+                            //Quest.variables[103] = 255;
+                            //Quest.variables[104] = 255;
+                            //Quest.variables[105] = 255;
+                            //Quest.variables[106] = 255;
+                            Quest.SetVariable(101, 255);
+                            Quest.SetVariable(102, 255);
+                            Quest.SetVariable(103, 255);
+                            Quest.SetVariable(104, 255);
+                            Quest.SetVariable(105, 255);
+                            Quest.SetVariable(106, 255);
                             break;
                     }
                     GameClock.instance._day = 0;

@@ -76,9 +76,9 @@
 			<Position>
 				<ObjectTileX>99</ObjectTileX>
 				<ObjectTileY>99</ObjectTileY>
-				<heading>1</heading>
-				<xpos>7</xpos>
-				<ypos>3</ypos>
+				<heading>2</heading>
+				<xpos>2</xpos>
+				<ypos>2</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>0</Quality>
@@ -87,14 +87,14 @@
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>64</npc_hp>
-			<ProjectileHeading>192</ProjectileHeading>
+			<npc_hp>42</npc_hp>
+			<ProjectileHeading>96</ProjectileHeading>
 			<MobileUnk_0xA>0</MobileUnk_0xA>
 			<npc_goal>0</npc_goal>
 			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4096</CoOrdinateX>
-			<CoOrdinateY>4096</CoOrdinateY>
+			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8192</CoOrdinateX>
+			<CoOrdinateY>8192</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -105,16 +105,16 @@
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
-			<ProjectileSourceID>233</ProjectileSourceID>
+			<ProjectileSourceID>220</ProjectileSourceID>
 			<MobileUnk_0x13>5</MobileUnk_0x13>
 			<Projectile_Speed>0</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>4</npc_voidanim>
 			<MobileUnk_0x15_4_1F>10</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>18</npc_yhome>
-			<npc_xhome>44</npc_xhome>
-			<npc_heading>28</npc_heading>
+			<npc_yhome>8</npc_yhome>
+			<npc_xhome>5</npc_xhome>
+			<npc_heading>2</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
@@ -10871,27 +10871,27 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>42</ObjectTileX>
+				<ObjectTileX>43</ObjectTileX>
 				<ObjectTileY>38</ObjectTileY>
-				<heading>4</heading>
-				<xpos>2</xpos>
-				<ypos>2</ypos>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>43</Quality>
-			<Next>908</Next>
+			<Next>0</Next>
 			<Owner>38</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>39</npc_hp>
-			<ProjectileHeading>154</ProjectileHeading>
-			<MobileUnk_0xA>140</MobileUnk_0xA>
-			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4116</CoOrdinateX>
-			<CoOrdinateY>4116</CoOrdinateY>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>136</MobileUnk_0xA>
+			<npc_goal>8</npc_goal>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -10904,15 +10904,15 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>38</npc_yhome>
-			<npc_xhome>42</npc_xhome>
-			<npc_heading>26</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_xhome>43</npc_xhome>
+			<npc_heading>18</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -10954,11 +10954,11 @@
 			<CoOrdinateX>8</CoOrdinateX>
 			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
+			<CoOrdinateY>0</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -11015,11 +11015,11 @@
 			<CoOrdinateX>8</CoOrdinateX>
 			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
+			<CoOrdinateY>0</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -11076,11 +11076,11 @@
 			<CoOrdinateX>2</CoOrdinateX>
 			<CoOrdinateY>2</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
+			<CoOrdinateY>0</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -11137,11 +11137,11 @@
 			<CoOrdinateX>2</CoOrdinateX>
 			<CoOrdinateY>2</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
+			<CoOrdinateY>0</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -11177,10 +11177,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>29</ObjectTileX>
-				<ObjectTileY>22</ObjectTileY>
-				<heading>2</heading>
-				<xpos>6</xpos>
-				<ypos>5</ypos>
+				<ObjectTileY>21</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>29</Quality>
@@ -11190,13 +11190,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>34</npc_hp>
-			<ProjectileHeading>64</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
+			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>20</CoOrdinateX>
-			<CoOrdinateY>20</CoOrdinateY>
+			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -11209,17 +11209,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>22</npc_yhome>
+			<npc_yhome>21</npc_yhome>
 			<npc_xhome>29</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_heading>20</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -11237,35 +11237,35 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>15</ObjectTileX>
-				<ObjectTileY>24</ObjectTileY>
-				<heading>0</heading>
-				<xpos>0</xpos>
-				<ypos>4</ypos>
+				<ObjectTileX>13</ObjectTileX>
+				<ObjectTileY>23</ObjectTileY>
+				<heading>1</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>13</Quality>
-			<Next>750</Next>
+			<Next>0</Next>
 			<Owner>23</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>20</npc_hp>
-			<ProjectileHeading>30</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>134</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>20</CoOrdinateX>
 			<CoOrdinateY>20</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>9</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>192</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>23</MobileUnk_0xF_0_3F>
-			<npc_height>24</npc_height>
+			<CoOrdinateY>144</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>4</MobileUnk_0xF_0_3F>
+			<npc_height>22</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>17</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -11275,9 +11275,9 @@
 			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>24</npc_yhome>
-			<npc_xhome>15</npc_xhome>
-			<npc_heading>30</npc_heading>
+			<npc_yhome>23</npc_yhome>
+			<npc_xhome>13</npc_xhome>
+			<npc_heading>24</npc_heading>
 			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
@@ -11298,22 +11298,22 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>11</ObjectTileX>
+				<ObjectTileX>12</ObjectTileX>
 				<ObjectTileY>26</ObjectTileY>
-				<heading>6</heading>
-				<xpos>7</xpos>
-				<ypos>5</ypos>
+				<heading>0</heading>
+				<xpos>2</xpos>
+				<ypos>4</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>10</Quality>
-			<Next>0</Next>
+			<Next>186</Next>
 			<Owner>26</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>19</npc_hp>
-			<ProjectileHeading>192</ProjectileHeading>
-			<MobileUnk_0xA>142</MobileUnk_0xA>
+			<ProjectileHeading>24</ProjectileHeading>
+			<MobileUnk_0xA>134</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -11330,18 +11330,18 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<MobileUnk_0x13>3</MobileUnk_0x13>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>26</npc_yhome>
-			<npc_xhome>11</npc_xhome>
-			<npc_heading>0</npc_heading>
+			<npc_xhome>12</npc_xhome>
+			<npc_heading>24</npc_heading>
 			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -11359,11 +11359,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>14</ObjectTileX>
+				<ObjectTileX>12</ObjectTileX>
 				<ObjectTileY>26</ObjectTileY>
-				<heading>0</heading>
-				<xpos>4</xpos>
-				<ypos>5</ypos>
+				<heading>2</heading>
+				<xpos>7</xpos>
+				<ypos>4</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>12</Quality>
@@ -11373,21 +11373,21 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>16</npc_hp>
-			<ProjectileHeading>22</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
+			<ProjectileHeading>74</ProjectileHeading>
+			<MobileUnk_0xA>136</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
 			<CoOrdinateX>20</CoOrdinateX>
 			<CoOrdinateY>20</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>2240</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>21</MobileUnk_0xF_0_3F>
-			<npc_height>29</npc_height>
+			<CoOrdinateY>2048</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -11398,9 +11398,9 @@
 			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>26</npc_yhome>
-			<npc_xhome>14</npc_xhome>
-			<npc_heading>22</npc_heading>
-			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_xhome>12</npc_xhome>
+			<npc_heading>11</npc_heading>
+			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -11420,12 +11420,12 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>25</ObjectTileX>
-				<ObjectTileY>45</ObjectTileY>
+				<ObjectTileX>24</ObjectTileX>
+				<ObjectTileY>44</ObjectTileY>
 				<heading>1</heading>
-				<xpos>2</xpos>
-				<ypos>0</ypos>
-				<zpos>110</zpos>
+				<xpos>5</xpos>
+				<ypos>4</ypos>
+				<zpos>109</zpos>
 			</Position>
 			<Quality>24</Quality>
 			<Next>0</Next>
@@ -11435,7 +11435,7 @@
 		<MobileProperties>
 			<npc_hp>30</npc_hp>
 			<ProjectileHeading>38</ProjectileHeading>
-			<MobileUnk_0xA>204</MobileUnk_0xA>
+			<MobileUnk_0xA>200</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -11454,16 +11454,16 @@
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>3</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
-			<Projectile_Pitch>8</Projectile_Pitch>
+			<Projectile_Pitch>9</Projectile_Pitch>
 			<npc_voidanim>4</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>45</npc_yhome>
-			<npc_xhome>25</npc_xhome>
+			<npc_yhome>44</npc_yhome>
+			<npc_xhome>24</npc_xhome>
 			<npc_heading>6</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -11481,11 +11481,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>28</ObjectTileX>
-				<ObjectTileY>6</ObjectTileY>
-				<heading>5</heading>
-				<xpos>7</xpos>
-				<ypos>5</ypos>
+				<ObjectTileX>27</ObjectTileX>
+				<ObjectTileY>9</ObjectTileY>
+				<heading>3</heading>
+				<xpos>3</xpos>
+				<ypos>4</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>29</Quality>
@@ -11495,13 +11495,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>42</npc_hp>
-			<ProjectileHeading>161</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<ProjectileHeading>98</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4120</CoOrdinateX>
-			<CoOrdinateY>4120</CoOrdinateY>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12312</CoOrdinateX>
+			<CoOrdinateY>12312</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11513,15 +11513,15 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>4</MobileUnk_0x13>
-			<Projectile_Speed>4</Projectile_Speed>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
+			<Projectile_Speed>6</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>6</npc_yhome>
-			<npc_xhome>28</npc_xhome>
-			<npc_heading>1</npc_heading>
+			<npc_yhome>9</npc_yhome>
+			<npc_xhome>27</npc_xhome>
+			<npc_heading>2</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
@@ -11564,11 +11564,11 @@
 			<CoOrdinateX>2</CoOrdinateX>
 			<CoOrdinateY>2</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>2304</CoOrdinateY>
+			<CoOrdinateY>2048</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -11604,10 +11604,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>20</ObjectTileX>
-				<ObjectTileY>40</ObjectTileY>
-				<heading>4</heading>
+				<ObjectTileY>41</ObjectTileY>
+				<heading>1</heading>
 				<xpos>3</xpos>
-				<ypos>7</ypos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>20</Quality>
@@ -11617,35 +11617,35 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>47</npc_hp>
-			<ProjectileHeading>139</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>20</CoOrdinateX>
-			<CoOrdinateY>20</CoOrdinateY>
+			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4116</CoOrdinateX>
+			<CoOrdinateY>4116</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>7</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>192</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>27</MobileUnk_0xF_0_3F>
-			<npc_height>33</npc_height>
+			<CoOrdinateY>112</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>12</MobileUnk_0xF_0_3F>
+			<npc_height>45</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>4</MobileUnk_0x13>
-			<Projectile_Speed>4</Projectile_Speed>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
+			<Projectile_Speed>6</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>40</npc_yhome>
+			<npc_yhome>41</npc_yhome>
 			<npc_xhome>20</npc_xhome>
-			<npc_heading>11</npc_heading>
-			<MobileUnk_0x18_5_7>3</MobileUnk_0x18_5_7>
-			<npc_hunger>2</npc_hunger>
+			<npc_heading>18</npc_heading>
+			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>112</npc_whoami>
 		</MobileProperties>
@@ -11679,7 +11679,7 @@
 		<MobileProperties>
 			<npc_hp>45</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>192</MobileUnk_0xA>
+			<MobileUnk_0xA>200</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
@@ -11787,10 +11787,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>37</ObjectTileX>
-				<ObjectTileY>5</ObjectTileY>
-				<heading>3</heading>
-				<xpos>5</xpos>
-				<ypos>2</ypos>
+				<ObjectTileY>6</ObjectTileY>
+				<heading>4</heading>
+				<xpos>2</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>36</Quality>
@@ -11800,13 +11800,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>80</npc_hp>
-			<ProjectileHeading>128</ProjectileHeading>
-			<MobileUnk_0xA>2</MobileUnk_0xA>
+			<ProjectileHeading>139</ProjectileHeading>
+			<MobileUnk_0xA>8</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8216</CoOrdinateX>
-			<CoOrdinateY>8216</CoOrdinateY>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12312</CoOrdinateX>
+			<CoOrdinateY>12312</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -11818,15 +11818,15 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
+			<MobileUnk_0x13>4</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>4</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>5</npc_yhome>
+			<npc_yhome>6</npc_yhome>
 			<npc_xhome>37</npc_xhome>
-			<npc_heading>27</npc_heading>
+			<npc_heading>11</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
@@ -11848,10 +11848,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>40</ObjectTileX>
-				<ObjectTileY>42</ObjectTileY>
+				<ObjectTileY>40</ObjectTileY>
 				<heading>0</heading>
-				<xpos>2</xpos>
-				<ypos>0</ypos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>40</Quality>
@@ -11862,33 +11862,33 @@
 		<MobileProperties>
 			<npc_hp>14</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>130</MobileUnk_0xA>
-			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8212</CoOrdinateX>
-			<CoOrdinateY>8212</CoOrdinateY>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
+			<npc_goal>8</npc_goal>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>128</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>39</MobileUnk_0xF_0_3F>
-			<npc_height>31</npc_height>
+			<CoOrdinateY>0</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
+			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>42</npc_yhome>
+			<npc_yhome>40</npc_yhome>
 			<npc_xhome>40</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_heading>4</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>12</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -12228,7 +12228,7 @@
 		<MobileProperties>
 			<npc_hp>21</npc_hp>
 			<ProjectileHeading>192</ProjectileHeading>
-			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
 			<npc_goal>5</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -12275,10 +12275,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>20</ObjectTileX>
-				<ObjectTileY>10</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>0</ypos>
+				<ObjectTileY>9</ObjectTileY>
+				<heading>4</heading>
+				<xpos>2</xpos>
+				<ypos>5</ypos>
 				<zpos>64</zpos>
 			</Position>
 			<Quality>20</Quality>
@@ -12288,21 +12288,21 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>23</npc_hp>
-			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>158</MobileUnk_0xA>
-			<npc_goal>5</npc_goal>
+			<ProjectileHeading>128</ProjectileHeading>
+			<MobileUnk_0xA>152</MobileUnk_0xA>
+			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8213</CoOrdinateX>
-			<CoOrdinateY>8213</CoOrdinateY>
-			<npc_level>4</npc_level>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12308</CoOrdinateX>
+			<CoOrdinateY>12308</CoOrdinateY>
+			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>196</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>28</MobileUnk_0xF_0_3F>
-			<npc_height>3</npc_height>
+			<CoOrdinateY>192</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>11</MobileUnk_0xF_0_3F>
+			<npc_height>5</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -12312,11 +12312,11 @@
 			<npc_voidanim>4</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>10</npc_yhome>
+			<npc_yhome>9</npc_yhome>
 			<npc_xhome>20</npc_xhome>
 			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
-			<npc_hunger>1</npc_hunger>
+			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_hunger>2</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
@@ -12378,7 +12378,7 @@
 			<npc_heading>14</npc_heading>
 			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12398,7 +12398,7 @@
 			<Position>
 				<ObjectTileX>47</ObjectTileX>
 				<ObjectTileY>4</ObjectTileY>
-				<heading>7</heading>
+				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
 				<zpos>32</zpos>
@@ -12410,13 +12410,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>15</npc_hp>
-			<ProjectileHeading>15</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
-			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>136</MobileUnk_0xA>
+			<npc_goal>8</npc_goal>
+			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>20</CoOrdinateX>
-			<CoOrdinateY>20</CoOrdinateY>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -12429,17 +12429,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>4</npc_yhome>
 			<npc_xhome>47</npc_xhome>
-			<npc_heading>15</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_heading>11</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12533,7 +12533,7 @@
 		<MobileProperties>
 			<npc_hp>87</npc_hp>
 			<ProjectileHeading>192</ProjectileHeading>
-			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -12561,7 +12561,7 @@
 			<npc_heading>0</npc_heading>
 			<MobileUnk_0x18_5_7>3</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12594,7 +12594,7 @@
 		<MobileProperties>
 			<npc_hp>65</npc_hp>
 			<ProjectileHeading>117</ProjectileHeading>
-			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
@@ -12655,7 +12655,7 @@
 		<MobileProperties>
 			<npc_hp>90</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>144</MobileUnk_0xA>
+			<MobileUnk_0xA>152</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
@@ -12683,7 +12683,7 @@
 			<npc_heading>9</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12744,7 +12744,7 @@
 			<npc_heading>23</npc_heading>
 			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12838,7 +12838,7 @@
 		<MobileProperties>
 			<npc_hp>40</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>130</MobileUnk_0xA>
+			<MobileUnk_0xA>138</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
@@ -12866,7 +12866,7 @@
 			<npc_heading>15</npc_heading>
 			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12899,7 +12899,7 @@
 		<MobileProperties>
 			<npc_hp>101</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>142</MobileUnk_0xA>
+			<MobileUnk_0xA>134</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
@@ -12927,7 +12927,7 @@
 			<npc_heading>30</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -12988,7 +12988,7 @@
 			<npc_heading>6</npc_heading>
 			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13006,27 +13006,27 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>42</ObjectTileX>
-				<ObjectTileY>25</ObjectTileY>
-				<heading>6</heading>
+				<ObjectTileX>41</ObjectTileX>
+				<ObjectTileY>23</ObjectTileY>
+				<heading>0</heading>
 				<xpos>3</xpos>
-				<ypos>1</ypos>
+				<ypos>3</ypos>
 				<zpos>64</zpos>
 			</Position>
 			<Quality>41</Quality>
-			<Next>595</Next>
+			<Next>0</Next>
 			<Owner>23</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>31</npc_hp>
-			<ProjectileHeading>196</ProjectileHeading>
-			<MobileUnk_0xA>14</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13039,17 +13039,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>25</npc_yhome>
-			<npc_xhome>42</npc_xhome>
+			<npc_yhome>23</npc_yhome>
+			<npc_xhome>41</npc_xhome>
 			<npc_heading>4</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13128,11 +13128,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>20</ObjectTileX>
-				<ObjectTileY>31</ObjectTileY>
-				<heading>1</heading>
+				<ObjectTileX>18</ObjectTileX>
+				<ObjectTileY>34</ObjectTileY>
+				<heading>2</heading>
 				<xpos>7</xpos>
-				<ypos>4</ypos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>18</Quality>
@@ -13142,33 +13142,33 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>23</npc_hp>
-			<ProjectileHeading>93</ProjectileHeading>
-			<MobileUnk_0xA>142</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4116</CoOrdinateX>
-			<CoOrdinateY>4116</CoOrdinateY>
-			<npc_level>4</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
+			<npc_level>0</npc_level>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>196</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>27</MobileUnk_0xF_0_3F>
-			<npc_height>24</npc_height>
+			<CoOrdinateY>0</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>3</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
+			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>31</npc_yhome>
-			<npc_xhome>20</npc_xhome>
-			<npc_heading>28</npc_heading>
+			<npc_yhome>34</npc_yhome>
+			<npc_xhome>18</npc_xhome>
+			<npc_heading>22</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
@@ -13189,11 +13189,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>45</ObjectTileX>
+				<ObjectTileX>44</ObjectTileX>
 				<ObjectTileY>29</ObjectTileY>
 				<heading>0</heading>
 				<xpos>3</xpos>
-				<ypos>5</ypos>
+				<ypos>3</ypos>
 				<zpos>64</zpos>
 			</Position>
 			<Quality>44</Quality>
@@ -13203,13 +13203,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>35</npc_hp>
-			<ProjectileHeading>24</ProjectileHeading>
-			<MobileUnk_0xA>14</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8216</CoOrdinateX>
-			<CoOrdinateY>8216</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13222,17 +13222,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>29</npc_yhome>
-			<npc_xhome>45</npc_xhome>
-			<npc_heading>24</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_xhome>44</npc_xhome>
+			<npc_heading>23</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13298,11 +13298,11 @@
 		</MobileProperties>
 	</Object>
 	<Object>
-		<ObjectName>a goblin_0218</ObjectName>
+		<ObjectName>a cave bat_0218</ObjectName>
 		<Index>218</Index>
 		<Address>86316</Address>
 		<StaticProperties>
-			<ItemID>78</ItemID>
+			<ItemID>66</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -13311,50 +13311,50 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>35</ObjectTileX>
-				<ObjectTileY>62</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>3</heading>
+				<xpos>2</xpos>
+				<ypos>4</ypos>
+				<zpos>79</zpos>
 			</Position>
-			<Quality>35</Quality>
+			<Quality>2</Quality>
 			<Next>0</Next>
-			<Owner>62</Owner>
+			<Owner>21</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>28</npc_hp>
-			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
-			<npc_goal>2</npc_goal>
-			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>2</CoOrdinateX>
-			<CoOrdinateY>2</CoOrdinateY>
-			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<npc_hp>0</npc_hp>
+			<ProjectileHeading>96</ProjectileHeading>
+			<MobileUnk_0xA>196</MobileUnk_0xA>
+			<npc_goal>9</npc_goal>
+			<npc_gtarg>1</npc_gtarg>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12313</CoOrdinateX>
+			<CoOrdinateY>12313</CoOrdinateY>
+			<npc_level>4</npc_level>
+			<MobileUnk_0xD_4_FF>9</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
-			<npc_height>0</npc_height>
-			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
-			<MobileUnk_0x11>0</MobileUnk_0x11>
-			<ProjectileSourceID>0</ProjectileSourceID>
+			<CoOrdinateY>2196</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>2</MobileUnk_0xF_0_3F>
+			<npc_height>21</npc_height>
+			<MobileUnk_0xF_C_F>13</MobileUnk_0xF_C_F>
+			<MobileUnk_0x11>11</MobileUnk_0x11>
+			<ProjectileSourceID>1</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
-			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<Projectile_Pitch>7</Projectile_Pitch>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>62</npc_yhome>
-			<npc_xhome>35</npc_xhome>
-			<npc_heading>7</npc_heading>
-			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
-			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<npc_yhome>24</npc_yhome>
+			<npc_xhome>1</npc_xhome>
+			<npc_heading>17</npc_heading>
+			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
+			<npc_hunger>17</npc_hunger>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13373,26 +13373,26 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>41</ObjectTileX>
-				<ObjectTileY>30</ObjectTileY>
-				<heading>7</heading>
-				<xpos>2</xpos>
-				<ypos>4</ypos>
-				<zpos>72</zpos>
+				<ObjectTileY>29</ObjectTileY>
+				<heading>3</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>64</zpos>
 			</Position>
 			<Quality>41</Quality>
-			<Next>570</Next>
+			<Next>0</Next>
 			<Owner>29</Owner>
 			<Link>784</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>48</npc_hp>
-			<ProjectileHeading>241</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13405,26 +13405,26 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>30</npc_yhome>
+			<npc_yhome>29</npc_yhome>
 			<npc_xhome>41</npc_xhome>
-			<npc_heading>17</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_heading>5</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>114</npc_whoami>
 		</MobileProperties>
 	</Object>
 	<Object>
-		<ObjectName>a fighter_0220</ObjectName>
+		<ObjectName>a giant rat_0220</ObjectName>
 		<Index>220</Index>
 		<Address>86370</Address>
 		<StaticProperties>
-			<ItemID>93</ItemID>
+			<ItemID>72</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -13433,50 +13433,50 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>3</ObjectTileX>
-				<ObjectTileY>9</ObjectTileY>
-				<heading>4</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>6</heading>
+				<xpos>0</xpos>
+				<ypos>5</ypos>
 				<zpos>96</zpos>
 			</Position>
-			<Quality>3</Quality>
+			<Quality>21</Quality>
 			<Next>0</Next>
-			<Owner>9</Owner>
+			<Owner>3</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>37</npc_hp>
-			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
-			<npc_goal>8</npc_goal>
-			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8</CoOrdinateX>
-			<CoOrdinateY>8</CoOrdinateY>
-			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<npc_hp>0</npc_hp>
+			<ProjectileHeading>192</ProjectileHeading>
+			<MobileUnk_0xA>132</MobileUnk_0xA>
+			<npc_goal>5</npc_goal>
+			<npc_gtarg>1</npc_gtarg>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12309</CoOrdinateX>
+			<CoOrdinateY>12309</CoOrdinateY>
+			<npc_level>4</npc_level>
+			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
-			<npc_height>0</npc_height>
-			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
-			<MobileUnk_0x11>0</MobileUnk_0x11>
-			<ProjectileSourceID>0</ProjectileSourceID>
+			<CoOrdinateY>2244</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>23</MobileUnk_0xF_0_3F>
+			<npc_height>3</npc_height>
+			<MobileUnk_0xF_C_F>1</MobileUnk_0xF_C_F>
+			<MobileUnk_0x11>4</MobileUnk_0x11>
+			<ProjectileSourceID>1</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>9</npc_yhome>
-			<npc_xhome>3</npc_xhome>
-			<npc_heading>13</npc_heading>
-			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
-			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<npc_yhome>3</npc_yhome>
+			<npc_xhome>24</npc_xhome>
+			<npc_heading>0</npc_heading>
+			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_hunger>3</npc_hunger>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13495,10 +13495,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>32</ObjectTileX>
-				<ObjectTileY>12</ObjectTileY>
-				<heading>2</heading>
+				<ObjectTileY>13</ObjectTileY>
+				<heading>3</heading>
 				<xpos>3</xpos>
-				<ypos>5</ypos>
+				<ypos>0</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>33</Quality>
@@ -13508,21 +13508,21 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>49</npc_hp>
-			<ProjectileHeading>64</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<ProjectileHeading>116</ProjectileHeading>
+			<MobileUnk_0xA>6</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4120</CoOrdinateX>
-			<CoOrdinateY>4120</CoOrdinateY>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>24</CoOrdinateX>
+			<CoOrdinateY>24</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>1</npc_attitude>
-			<CoOrdinateY>10432</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>33</MobileUnk_0xF_0_3F>
-			<npc_height>12</npc_height>
+			<CoOrdinateY>10240</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -13532,10 +13532,10 @@
 			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>12</npc_yhome>
+			<npc_yhome>13</npc_yhome>
 			<npc_xhome>32</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
+			<npc_heading>20</npc_heading>
+			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>112</npc_whoami>
@@ -13570,12 +13570,12 @@
 		<MobileProperties>
 			<npc_hp>45</npc_hp>
 			<ProjectileHeading>62</ProjectileHeading>
-			<MobileUnk_0xA>130</MobileUnk_0xA>
+			<MobileUnk_0xA>134</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8216</CoOrdinateX>
-			<CoOrdinateY>8216</CoOrdinateY>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>24</CoOrdinateX>
+			<CoOrdinateY>24</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -13598,7 +13598,7 @@
 			<npc_heading>30</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13802,7 +13802,7 @@
 				<ObjectTileX>17</ObjectTileX>
 				<ObjectTileY>7</ObjectTileY>
 				<heading>2</heading>
-				<xpos>1</xpos>
+				<xpos>0</xpos>
 				<ypos>2</ypos>
 				<zpos>96</zpos>
 			</Position>
@@ -13813,8 +13813,8 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>37</npc_hp>
-			<ProjectileHeading>76</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<ProjectileHeading>64</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -13831,18 +13831,18 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>7</npc_yhome>
 			<npc_xhome>17</npc_xhome>
-			<npc_heading>12</npc_heading>
+			<npc_heading>0</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>16</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -13875,7 +13875,7 @@
 		<MobileProperties>
 			<npc_hp>16</npc_hp>
 			<ProjectileHeading>27</ProjectileHeading>
-			<MobileUnk_0xA>144</MobileUnk_0xA>
+			<MobileUnk_0xA>152</MobileUnk_0xA>
 			<npc_goal>5</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
@@ -13908,11 +13908,11 @@
 		</MobileProperties>
 	</Object>
 	<Object>
-		<ObjectName>a vampire bat_0228</ObjectName>
+		<ObjectName>a giant rat_0228</ObjectName>
 		<Index>228</Index>
 		<Address>86586</Address>
 		<StaticProperties>
-			<ItemID>73</ItemID>
+			<ItemID>67</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -13921,49 +13921,49 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>32</ObjectTileX>
-				<ObjectTileY>3</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>104</zpos>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>2</heading>
+				<xpos>4</xpos>
+				<ypos>4</ypos>
+				<zpos>96</zpos>
 			</Position>
-			<Quality>32</Quality>
+			<Quality>21</Quality>
 			<Next>0</Next>
-			<Owner>3</Owner>
+			<Owner>2</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>15</npc_hp>
-			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
-			<npc_goal>8</npc_goal>
-			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8</CoOrdinateX>
-			<CoOrdinateY>8</CoOrdinateY>
-			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<npc_hp>0</npc_hp>
+			<ProjectileHeading>64</ProjectileHeading>
+			<MobileUnk_0xA>130</MobileUnk_0xA>
+			<npc_goal>9</npc_goal>
+			<npc_gtarg>1</npc_gtarg>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12313</CoOrdinateX>
+			<CoOrdinateY>12313</CoOrdinateY>
+			<npc_level>4</npc_level>
+			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
-			<npc_height>0</npc_height>
-			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
-			<MobileUnk_0x11>0</MobileUnk_0x11>
-			<ProjectileSourceID>0</ProjectileSourceID>
+			<CoOrdinateY>2244</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>31</MobileUnk_0xF_0_3F>
+			<npc_height>4</npc_height>
+			<MobileUnk_0xF_C_F>2</MobileUnk_0xF_C_F>
+			<MobileUnk_0x11>6</MobileUnk_0x11>
+			<ProjectileSourceID>1</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>3</npc_yhome>
-			<npc_xhome>32</npc_xhome>
-			<npc_heading>28</npc_heading>
-			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
-			<npc_hunger>0</npc_hunger>
+			<npc_xhome>30</npc_xhome>
+			<npc_heading>0</npc_heading>
+			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
+			<npc_hunger>17</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
@@ -13997,7 +13997,7 @@
 		<MobileProperties>
 			<npc_hp>16</npc_hp>
 			<ProjectileHeading>224</ProjectileHeading>
-			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
@@ -14058,7 +14058,7 @@
 		<MobileProperties>
 			<npc_hp>16</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>158</MobileUnk_0xA>
+			<MobileUnk_0xA>150</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
@@ -14181,11 +14181,11 @@
 			<npc_hp>16</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
 			<MobileUnk_0xA>156</MobileUnk_0xA>
-			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4116</CoOrdinateX>
-			<CoOrdinateY>4116</CoOrdinateY>
+			<npc_goal>8</npc_goal>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14197,18 +14197,18 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>2</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>22</npc_yhome>
 			<npc_xhome>52</npc_xhome>
-			<npc_heading>0</npc_heading>
+			<npc_heading>17</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
-			<npc_hunger>2</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<npc_hunger>0</npc_hunger>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -14226,10 +14226,10 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
+				<ObjectTileX>35</ObjectTileX>
+				<ObjectTileY>17</ObjectTileY>
 				<heading>4</heading>
-				<xpos>3</xpos>
+				<xpos>6</xpos>
 				<ypos>3</ypos>
 				<zpos>88</zpos>
 			</Position>
@@ -14239,36 +14239,36 @@
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>0</npc_hp>
-			<ProjectileHeading>128</ProjectileHeading>
-			<MobileUnk_0xA>148</MobileUnk_0xA>
-			<npc_goal>5</npc_goal>
+			<npc_hp>16</npc_hp>
+			<ProjectileHeading>158</ProjectileHeading>
+			<MobileUnk_0xA>156</MobileUnk_0xA>
+			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12309</CoOrdinateX>
-			<CoOrdinateY>12309</CoOrdinateY>
-			<npc_level>4</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
+			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4116</CoOrdinateX>
+			<CoOrdinateY>4116</CoOrdinateY>
+			<npc_level>0</npc_level>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>2244</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>33</MobileUnk_0xF_0_3F>
-			<npc_height>15</npc_height>
+			<CoOrdinateY>0</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
-			<MobileUnk_0x11>6</MobileUnk_0x11>
-			<ProjectileSourceID>1</ProjectileSourceID>
+			<MobileUnk_0x11>0</MobileUnk_0x11>
+			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>4</Projectile_Speed>
+			<Projectile_Speed>6</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>16</npc_yhome>
-			<npc_xhome>33</npc_xhome>
-			<npc_heading>0</npc_heading>
+			<npc_yhome>17</npc_yhome>
+			<npc_xhome>35</npc_xhome>
+			<npc_heading>30</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
-			<npc_hunger>1</npc_hunger>
+			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
@@ -14309,11 +14309,11 @@
 			<CoOrdinateX>8</CoOrdinateX>
 			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
+			<CoOrdinateY>0</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
@@ -14349,10 +14349,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>5</ObjectTileX>
-				<ObjectTileY>15</ObjectTileY>
-				<heading>3</heading>
-				<xpos>2</xpos>
-				<ypos>2</ypos>
+				<ObjectTileY>19</ObjectTileY>
+				<heading>0</heading>
+				<xpos>4</xpos>
+				<ypos>7</ypos>
 				<zpos>64</zpos>
 			</Position>
 			<Quality>7</Quality>
@@ -14362,21 +14362,21 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>20</npc_hp>
-			<ProjectileHeading>113</ProjectileHeading>
-			<MobileUnk_0xA>144</MobileUnk_0xA>
-			<npc_goal>4</npc_goal>
+			<ProjectileHeading>32</ProjectileHeading>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
+			<npc_goal>5</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>20</CoOrdinateX>
-			<CoOrdinateY>20</CoOrdinateY>
-			<npc_level>0</npc_level>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12309</CoOrdinateX>
+			<CoOrdinateY>12309</CoOrdinateY>
+			<npc_level>4</npc_level>
 			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>192</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>7</MobileUnk_0xF_0_3F>
-			<npc_height>6</npc_height>
+			<CoOrdinateY>196</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>3</MobileUnk_0xF_0_3F>
+			<npc_height>10</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -14384,14 +14384,14 @@
 			<Projectile_Speed>6</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>15</npc_yhome>
+			<npc_yhome>19</npc_yhome>
 			<npc_xhome>5</npc_xhome>
-			<npc_heading>17</npc_heading>
-			<MobileUnk_0x18_5_7>3</MobileUnk_0x18_5_7>
+			<npc_heading>6</npc_heading>
+			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
 			<npc_hunger>1</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -14485,7 +14485,7 @@
 		<MobileProperties>
 			<npc_hp>20</npc_hp>
 			<ProjectileHeading>64</ProjectileHeading>
-			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<MobileUnk_0xA>154</MobileUnk_0xA>
 			<npc_goal>5</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
@@ -14506,7 +14506,7 @@
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>10</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>35</npc_yhome>
 			<npc_xhome>7</npc_xhome>
@@ -14531,12 +14531,12 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>13</ObjectTileX>
+				<ObjectTileX>14</ObjectTileX>
 				<ObjectTileY>10</ObjectTileY>
-				<heading>7</heading>
-				<xpos>5</xpos>
-				<ypos>3</ypos>
-				<zpos>88</zpos>
+				<heading>2</heading>
+				<xpos>3</xpos>
+				<ypos>5</ypos>
+				<zpos>93</zpos>
 			</Position>
 			<Quality>10</Quality>
 			<Next>0</Next>
@@ -14545,13 +14545,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>45</npc_hp>
-			<ProjectileHeading>254</ProjectileHeading>
-			<MobileUnk_0xA>2</MobileUnk_0xA>
+			<ProjectileHeading>64</ProjectileHeading>
+			<MobileUnk_0xA>8</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>24</CoOrdinateX>
-			<CoOrdinateY>24</CoOrdinateY>
+			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8216</CoOrdinateX>
+			<CoOrdinateY>8216</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14563,15 +14563,15 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>10</npc_yhome>
-			<npc_xhome>13</npc_xhome>
-			<npc_heading>30</npc_heading>
+			<npc_xhome>14</npc_xhome>
+			<npc_heading>0</npc_heading>
 			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
@@ -14594,9 +14594,9 @@
 			<Position>
 				<ObjectTileX>11</ObjectTileX>
 				<ObjectTileY>8</ObjectTileY>
-				<heading>7</heading>
+				<heading>1</heading>
 				<xpos>5</xpos>
-				<ypos>0</ypos>
+				<ypos>1</ypos>
 				<zpos>88</zpos>
 			</Position>
 			<Quality>11</Quality>
@@ -14606,8 +14606,8 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>45</npc_hp>
-			<ProjectileHeading>253</ProjectileHeading>
-			<MobileUnk_0xA>2</MobileUnk_0xA>
+			<ProjectileHeading>43</ProjectileHeading>
+			<MobileUnk_0xA>8</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
@@ -14624,15 +14624,15 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>8</npc_yhome>
 			<npc_xhome>11</npc_xhome>
-			<npc_heading>29</npc_heading>
+			<npc_heading>11</npc_heading>
 			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
@@ -14640,11 +14640,11 @@
 		</MobileProperties>
 	</Object>
 	<Object>
-		<ObjectName>a giant spider_0240</ObjectName>
+		<ObjectName>a lurker_0240</ObjectName>
 		<Index>240</Index>
 		<Address>86910</Address>
 		<StaticProperties>
-			<ItemID>68</ItemID>
+			<ItemID>87</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -14653,50 +14653,50 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>58</ObjectTileX>
-				<ObjectTileY>12</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>4</heading>
+				<xpos>6</xpos>
+				<ypos>2</ypos>
+				<zpos>64</zpos>
 			</Position>
-			<Quality>58</Quality>
+			<Quality>1</Quality>
 			<Next>0</Next>
-			<Owner>12</Owner>
+			<Owner>26</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
-			<npc_hp>35</npc_hp>
-			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>128</MobileUnk_0xA>
-			<npc_goal>8</npc_goal>
-			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8</CoOrdinateX>
-			<CoOrdinateY>8</CoOrdinateY>
+			<npc_hp>0</npc_hp>
+			<ProjectileHeading>128</ProjectileHeading>
+			<MobileUnk_0xA>146</MobileUnk_0xA>
+			<npc_goal>5</npc_goal>
+			<npc_gtarg>1</npc_gtarg>
+			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
+			<CoOrdinateX>12309</CoOrdinateX>
+			<CoOrdinateY>12309</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>16</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<MobileUnk_0xD_4_FF>9</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>256</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
-			<npc_height>0</npc_height>
+			<CoOrdinateY>2192</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>2</MobileUnk_0xF_0_3F>
+			<npc_height>24</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
-			<MobileUnk_0x11>0</MobileUnk_0x11>
-			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>0</MobileUnk_0x13>
+			<MobileUnk_0x11>9</MobileUnk_0x11>
+			<ProjectileSourceID>1</ProjectileSourceID>
+			<MobileUnk_0x13>2</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
-			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>12</npc_yhome>
-			<npc_xhome>58</npc_xhome>
-			<npc_heading>6</npc_heading>
-			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
-			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<npc_voidanim>4</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x16_0_F>1</MobileUnk_0x16_0_F>
+			<npc_yhome>26</npc_yhome>
+			<npc_xhome>1</npc_xhome>
+			<npc_heading>0</npc_heading>
+			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_hunger>33</npc_hunger>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -14775,50 +14775,50 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>36</ObjectTileX>
-				<ObjectTileY>38</ObjectTileY>
-				<heading>1</heading>
+				<ObjectTileX>35</ObjectTileX>
+				<ObjectTileY>40</ObjectTileY>
+				<heading>4</heading>
 				<xpos>1</xpos>
-				<ypos>7</ypos>
+				<ypos>1</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>35</Quality>
-			<Next>0</Next>
+			<Next>703</Next>
 			<Owner>40</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>24</npc_hp>
-			<ProjectileHeading>47</ProjectileHeading>
-			<MobileUnk_0xA>130</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8212</CoOrdinateX>
-			<CoOrdinateY>8212</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>128</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>39</MobileUnk_0xF_0_3F>
-			<npc_height>31</npc_height>
+			<CoOrdinateY>0</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>38</npc_yhome>
-			<npc_xhome>36</npc_xhome>
+			<npc_yhome>40</npc_yhome>
+			<npc_xhome>35</npc_xhome>
 			<npc_heading>15</npc_heading>
-			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -14836,11 +14836,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>36</ObjectTileX>
+				<ObjectTileX>35</ObjectTileX>
 				<ObjectTileY>39</ObjectTileY>
-				<heading>2</heading>
-				<xpos>4</xpos>
-				<ypos>6</ypos>
+				<heading>1</heading>
+				<xpos>7</xpos>
+				<ypos>2</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>35</Quality>
@@ -14850,21 +14850,21 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>27</npc_hp>
-			<ProjectileHeading>75</ProjectileHeading>
-			<MobileUnk_0xA>140</MobileUnk_0xA>
+			<ProjectileHeading>68</ProjectileHeading>
+			<MobileUnk_0xA>134</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8212</CoOrdinateX>
-			<CoOrdinateY>8212</CoOrdinateY>
+			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4116</CoOrdinateX>
+			<CoOrdinateY>4116</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
-			<CoOrdinateY>128</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>38</MobileUnk_0xF_0_3F>
-			<npc_height>31</npc_height>
+			<CoOrdinateY>0</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -14872,12 +14872,12 @@
 			<Projectile_Speed>6</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>39</npc_yhome>
-			<npc_xhome>36</npc_xhome>
-			<npc_heading>11</npc_heading>
-			<MobileUnk_0x18_5_7>2</MobileUnk_0x18_5_7>
+			<npc_xhome>35</npc_xhome>
+			<npc_heading>4</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -14897,22 +14897,22 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>22</ObjectTileX>
+				<ObjectTileX>23</ObjectTileX>
 				<ObjectTileY>6</ObjectTileY>
 				<heading>6</heading>
-				<xpos>6</xpos>
-				<ypos>2</ypos>
+				<xpos>0</xpos>
+				<ypos>4</ypos>
 				<zpos>72</zpos>
 			</Position>
 			<Quality>23</Quality>
-			<Next>773</Next>
+			<Next>911</Next>
 			<Owner>7</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>10</npc_hp>
-			<ProjectileHeading>192</ProjectileHeading>
-			<MobileUnk_0xA>140</MobileUnk_0xA>
+			<ProjectileHeading>221</ProjectileHeading>
+			<MobileUnk_0xA>136</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
 			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
@@ -14924,8 +14924,8 @@
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>0</npc_attitude>
 			<CoOrdinateY>192</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>31</MobileUnk_0xF_0_3F>
-			<npc_height>10</npc_height>
+			<MobileUnk_0xF_0_3F>13</MobileUnk_0xF_0_3F>
+			<npc_height>5</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
@@ -14936,11 +14936,11 @@
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>6</npc_yhome>
-			<npc_xhome>22</npc_xhome>
-			<npc_heading>0</npc_heading>
+			<npc_xhome>23</npc_xhome>
+			<npc_heading>29</npc_heading>
 			<MobileUnk_0x18_5_7>3</MobileUnk_0x18_5_7>
 			<npc_hunger>2</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -14960,9 +14960,9 @@
 			<Position>
 				<ObjectTileX>38</ObjectTileX>
 				<ObjectTileY>31</ObjectTileY>
-				<heading>4</heading>
-				<xpos>2</xpos>
-				<ypos>4</ypos>
+				<heading>7</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>64</zpos>
 			</Position>
 			<Quality>38</Quality>
@@ -14972,13 +14972,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>30</npc_hp>
-			<ProjectileHeading>96</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -14991,15 +14991,15 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>31</npc_yhome>
 			<npc_xhome>38</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_heading>21</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -15019,12 +15019,12 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>38</ObjectTileX>
-				<ObjectTileY>28</ObjectTileY>
-				<heading>4</heading>
-				<xpos>4</xpos>
-				<ypos>5</ypos>
-				<zpos>76</zpos>
+				<ObjectTileX>36</ObjectTileX>
+				<ObjectTileY>31</ObjectTileY>
+				<heading>3</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>64</zpos>
 			</Position>
 			<Quality>36</Quality>
 			<Next>0</Next>
@@ -15033,34 +15033,34 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>35</npc_hp>
-			<ProjectileHeading>141</ProjectileHeading>
-			<MobileUnk_0xA>2</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>8</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
 			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>1</npc_attitude>
-			<CoOrdinateY>8320</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>36</MobileUnk_0xF_0_3F>
-			<npc_height>31</npc_height>
+			<CoOrdinateY>8192</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>129</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>28</npc_yhome>
-			<npc_xhome>38</npc_xhome>
-			<npc_heading>13</npc_heading>
-			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
+			<npc_yhome>31</npc_yhome>
+			<npc_xhome>36</npc_xhome>
+			<npc_heading>3</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -15095,12 +15095,12 @@
 		<MobileProperties>
 			<npc_hp>38</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>14</MobileUnk_0xA>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>7</npc_goal>
 			<npc_gtarg>0</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8199</CoOrdinateX>
-			<CoOrdinateY>8199</CoOrdinateY>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>7</CoOrdinateX>
+			<CoOrdinateY>7</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15113,17 +15113,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>32</npc_yhome>
 			<npc_xhome>37</npc_xhome>
 			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -15141,48 +15141,48 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>36</ObjectTileX>
-				<ObjectTileY>28</ObjectTileY>
-				<heading>4</heading>
-				<xpos>2</xpos>
-				<ypos>6</ypos>
-				<zpos>75</zpos>
+				<ObjectTileX>34</ObjectTileX>
+				<ObjectTileY>24</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
 			</Position>
 			<Quality>34</Quality>
 			<Next>0</Next>
 			<Owner>24</Owner>
-			<Link>782</Link>
+			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>32</npc_hp>
-			<ProjectileHeading>128</ProjectileHeading>
-			<MobileUnk_0xA>2</MobileUnk_0xA>
+			<ProjectileHeading>0</ProjectileHeading>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
+			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
-			<CoOrdinateX>24</CoOrdinateX>
-			<CoOrdinateY>24</CoOrdinateY>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
-			<MobileUnk_0xD_4_FF>12</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
-			<npc_talkedto>1</npc_talkedto>
+			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
+			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>1</npc_attitude>
-			<CoOrdinateY>14528</CoOrdinateY>
-			<MobileUnk_0xF_0_3F>34</MobileUnk_0xF_0_3F>
-			<npc_height>24</npc_height>
+			<CoOrdinateY>8192</CoOrdinateY>
+			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
+			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>28</npc_yhome>
-			<npc_xhome>36</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>4</MobileUnk_0x18_5_7>
+			<npc_yhome>24</npc_yhome>
+			<npc_xhome>34</npc_xhome>
+			<npc_heading>9</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -15202,11 +15202,11 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>32</ObjectTileX>
+				<ObjectTileX>33</ObjectTileX>
 				<ObjectTileY>28</ObjectTileY>
 				<heading>0</heading>
-				<xpos>2</xpos>
-				<ypos>1</ypos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>33</Quality>
@@ -15217,12 +15217,12 @@
 		<MobileProperties>
 			<npc_hp>34</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>0</MobileUnk_0xA>
+			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15234,18 +15234,18 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>3</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>28</npc_yhome>
-			<npc_xhome>32</npc_xhome>
-			<npc_heading>0</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_xhome>33</npc_xhome>
+			<npc_heading>14</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -15263,27 +15263,27 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>30</ObjectTileX>
-				<ObjectTileY>27</ObjectTileY>
-				<heading>6</heading>
-				<xpos>0</xpos>
-				<ypos>2</ypos>
+				<ObjectTileX>29</ObjectTileX>
+				<ObjectTileY>28</ObjectTileY>
+				<heading>4</heading>
+				<xpos>4</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>29</Quality>
-			<Next>557</Next>
+			<Next>0</Next>
 			<Owner>28</Owner>
 			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>47</npc_hp>
-			<ProjectileHeading>193</ProjectileHeading>
+			<ProjectileHeading>0</ProjectileHeading>
 			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4120</CoOrdinateX>
-			<CoOrdinateY>4120</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>8</CoOrdinateX>
+			<CoOrdinateY>8</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15296,17 +15296,17 @@
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
-			<MobileUnk_0x15_4_1F>6</MobileUnk_0x15_4_1F>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>27</npc_yhome>
-			<npc_xhome>30</npc_xhome>
-			<npc_heading>1</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_yhome>28</npc_yhome>
+			<npc_xhome>29</npc_xhome>
+			<npc_heading>5</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
-			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
+			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
 		</MobileProperties>
 	</Object>
@@ -15324,27 +15324,27 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>25</ObjectTileX>
+				<ObjectTileX>23</ObjectTileX>
 				<ObjectTileY>28</ObjectTileY>
-				<heading>2</heading>
-				<xpos>3</xpos>
-				<ypos>5</ypos>
+				<heading>3</heading>
+				<xpos>4</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>23</Quality>
-			<Next>772</Next>
+			<Next>0</Next>
 			<Owner>28</Owner>
 			<Link>860</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>30</npc_hp>
-			<ProjectileHeading>81</ProjectileHeading>
+			<ProjectileHeading>0</ProjectileHeading>
 			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>8</npc_goal>
 			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>3</MobileUnk_0xB_12_F>
-			<CoOrdinateX>12312</CoOrdinateX>
-			<CoOrdinateY>12312</CoOrdinateY>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>24</CoOrdinateX>
+			<CoOrdinateY>24</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
@@ -15356,16 +15356,16 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>3</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>28</npc_yhome>
-			<npc_xhome>25</npc_xhome>
-			<npc_heading>17</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_xhome>23</npc_xhome>
+			<npc_heading>7</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>0</MobileUnk_0x19_6_3>
 			<npc_whoami>0</npc_whoami>
@@ -15395,12 +15395,12 @@
 			<Quality>27</Quality>
 			<Next>863</Next>
 			<Owner>22</Owner>
-			<Link>503</Link>
+			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>39</npc_hp>
 			<ProjectileHeading>0</ProjectileHeading>
-			<MobileUnk_0xA>142</MobileUnk_0xA>
+			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>7</npc_goal>
 			<npc_gtarg>0</npc_gtarg>
 			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
@@ -15409,16 +15409,16 @@
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
-			<npc_talkedto>1</npc_talkedto>
-			<npc_attitude>3</npc_attitude>
-			<CoOrdinateY>30720</CoOrdinateY>
+			<npc_talkedto>0</npc_talkedto>
+			<npc_attitude>2</npc_attitude>
+			<CoOrdinateY>18432</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
 			<MobileUnk_0x13>0</MobileUnk_0x13>
-			<Projectile_Speed>6</Projectile_Speed>
+			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
 			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
@@ -15446,48 +15446,48 @@
 			<IsQuant>0</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>24</ObjectTileX>
+				<ObjectTileX>25</ObjectTileX>
 				<ObjectTileY>21</ObjectTileY>
-				<heading>5</heading>
-				<xpos>0</xpos>
-				<ypos>2</ypos>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>25</Quality>
 			<Next>0</Next>
 			<Owner>21</Owner>
-			<Link>615</Link>
+			<Link>0</Link>
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>30</npc_hp>
-			<ProjectileHeading>184</ProjectileHeading>
+			<ProjectileHeading>0</ProjectileHeading>
 			<MobileUnk_0xA>12</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>1</MobileUnk_0xB_12_F>
-			<CoOrdinateX>4116</CoOrdinateX>
-			<CoOrdinateY>4116</CoOrdinateY>
-			<npc_level>4</npc_level>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
+			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>64</MobileUnk_0xD_4_FF>
-			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
-			<npc_talkedto>1</npc_talkedto>
+			<MobileUnk_0xD_12_1>0</MobileUnk_0xD_12_1>
+			<npc_talkedto>0</npc_talkedto>
 			<npc_attitude>2</npc_attitude>
-			<CoOrdinateY>23556</CoOrdinateY>
+			<CoOrdinateY>17408</CoOrdinateY>
 			<MobileUnk_0xF_0_3F>0</MobileUnk_0xF_0_3F>
 			<npc_height>0</npc_height>
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>3</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
+			<npc_voidanim>0</npc_voidanim>
 			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
 			<npc_yhome>21</npc_yhome>
-			<npc_xhome>24</npc_xhome>
-			<npc_heading>24</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_xhome>25</npc_xhome>
+			<npc_heading>2</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>15</npc_whoami>
@@ -15508,10 +15508,10 @@
 			<Texture>0</Texture>
 			<Position>
 				<ObjectTileX>47</ObjectTileX>
-				<ObjectTileY>39</ObjectTileY>
+				<ObjectTileY>38</ObjectTileY>
 				<heading>0</heading>
-				<xpos>1</xpos>
-				<ypos>0</ypos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
 				<zpos>96</zpos>
 			</Position>
 			<Quality>47</Quality>
@@ -15521,13 +15521,13 @@
 		</StaticProperties>
 		<MobileProperties>
 			<npc_hp>61</npc_hp>
-			<ProjectileHeading>5</ProjectileHeading>
+			<ProjectileHeading>0</ProjectileHeading>
 			<MobileUnk_0xA>140</MobileUnk_0xA>
 			<npc_goal>4</npc_goal>
-			<npc_gtarg>1</npc_gtarg>
-			<MobileUnk_0xB_12_F>2</MobileUnk_0xB_12_F>
-			<CoOrdinateX>8212</CoOrdinateX>
-			<CoOrdinateY>8212</CoOrdinateY>
+			<npc_gtarg>0</npc_gtarg>
+			<MobileUnk_0xB_12_F>0</MobileUnk_0xB_12_F>
+			<CoOrdinateX>4</CoOrdinateX>
+			<CoOrdinateY>4</CoOrdinateY>
 			<npc_level>0</npc_level>
 			<MobileUnk_0xD_4_FF>0</MobileUnk_0xD_4_FF>
 			<MobileUnk_0xD_12_1>1</MobileUnk_0xD_12_1>
@@ -15539,16 +15539,16 @@
 			<MobileUnk_0xF_C_F>0</MobileUnk_0xF_C_F>
 			<MobileUnk_0x11>0</MobileUnk_0x11>
 			<ProjectileSourceID>0</ProjectileSourceID>
-			<MobileUnk_0x13>4</MobileUnk_0x13>
+			<MobileUnk_0x13>0</MobileUnk_0x13>
 			<Projectile_Speed>4</Projectile_Speed>
 			<Projectile_Pitch>8</Projectile_Pitch>
-			<npc_voidanim>4</npc_voidanim>
-			<MobileUnk_0x15_4_1F>2</MobileUnk_0x15_4_1F>
+			<npc_voidanim>0</npc_voidanim>
+			<MobileUnk_0x15_4_1F>0</MobileUnk_0x15_4_1F>
 			<MobileUnk_0x16_0_F>0</MobileUnk_0x16_0_F>
-			<npc_yhome>39</npc_yhome>
+			<npc_yhome>38</npc_yhome>
 			<npc_xhome>47</npc_xhome>
-			<npc_heading>5</npc_heading>
-			<MobileUnk_0x18_5_7>0</MobileUnk_0x18_5_7>
+			<npc_heading>2</npc_heading>
+			<MobileUnk_0x18_5_7>1</MobileUnk_0x18_5_7>
 			<npc_hunger>0</npc_hunger>
 			<MobileUnk_0x19_6_3>2</MobileUnk_0x19_6_3>
 			<npc_whoami>28</npc_whoami>
@@ -21745,954 +21745,9 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a map_0483</ObjectName>
+		<ObjectName>a pack_0483</ObjectName>
 		<Index>483</Index>
 		<Address>89158</Address>
-		<StaticProperties>
-			<ItemID>315</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>1</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>512</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>leather gloves_0484</ObjectName>
-		<Index>484</Index>
-		<Address>89166</Address>
-		<StaticProperties>
-			<ItemID>38</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>6</heading>
-				<xpos>1</xpos>
-				<ypos>2</ypos>
-				<zpos>88</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a battle axe_0485</ObjectName>
-		<Index>485</Index>
-		<Address>89174</Address>
-		<StaticProperties>
-			<ItemID>1</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>32</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a longsword_0486</ObjectName>
-		<Index>486</Index>
-		<Address>89182</Address>
-		<StaticProperties>
-			<ItemID>5</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>5</xpos>
-				<ypos>2</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>26</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a silver seed_0487</ObjectName>
-		<Index>487</Index>
-		<Address>89190</Address>
-		<StaticProperties>
-			<ItemID>290</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>1</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>0</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a sling stone_0488</ObjectName>
-		<Index>488</Index>
-		<Address>89198</Address>
-		<StaticProperties>
-			<ItemID>16</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>7</ypos>
-				<zpos>39</zpos>
-			</Position>
-			<Quality>35</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>19</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>leather leggings_0489</ObjectName>
-		<Index>489</Index>
-		<Address>89206</Address>
-		<StaticProperties>
-			<ItemID>35</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>26</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a sack_0490</ObjectName>
-		<Index>490</Index>
-		<Address>89214</Address>
-		<StaticProperties>
-			<ItemID>128</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>5</xpos>
-				<ypos>6</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a flask of port_0491</ObjectName>
-		<Index>491</Index>
-		<Address>89222</Address>
-		<StaticProperties>
-			<ItemID>190</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>6</xpos>
-				<ypos>4</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a bottle of ale_0492</ObjectName>
-		<Index>492</Index>
-		<Address>89230</Address>
-		<StaticProperties>
-			<ItemID>186</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>6</xpos>
-				<ypos>4</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a key_0493</ObjectName>
-		<Index>493</Index>
-		<Address>89238</Address>
-		<StaticProperties>
-			<ItemID>262</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>1</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a leather vest_0494</ObjectName>
-		<Index>494</Index>
-		<Address>89246</Address>
-		<StaticProperties>
-			<ItemID>32</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>4</xpos>
-				<ypos>6</ypos>
-				<zpos>88</zpos>
-			</Position>
-			<Quality>57</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a sling_0495</ObjectName>
-		<Index>495</Index>
-		<Address>89254</Address>
-		<StaticProperties>
-			<ItemID>24</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a chain cowl_0496</ObjectName>
-		<Index>496</Index>
-		<Address>89262</Address>
-		<StaticProperties>
-			<ItemID>45</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>37</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a spell_0497</ObjectName>
-		<Index>497</Index>
-		<Address>89270</Address>
-		<StaticProperties>
-			<ItemID>288</ItemID>
-			<InUse>1</InUse>
-			<Flags>4</Flags>
-			<Enchant>1</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>0</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>563</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a sceptre_0498</ObjectName>
-		<Index>498</Index>
-		<Address>89278</Address>
-		<StaticProperties>
-			<ItemID>170</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>6</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a mace_0499</ObjectName>
-		<Index>499</Index>
-		<Address>89286</Address>
-		<StaticProperties>
-			<ItemID>9</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>7</xpos>
-				<ypos>5</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>50</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a dead rotworm_0500</ObjectName>
-		<Index>500</Index>
-		<Address>89294</Address>
-		<StaticProperties>
-			<ItemID>217</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>4</xpos>
-				<ypos>5</ypos>
-				<zpos>40</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a mushroom_0501</ObjectName>
-		<Index>501</Index>
-		<Address>89302</Address>
-		<StaticProperties>
-			<ItemID>184</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>an apple_0502</ObjectName>
-		<Index>502</Index>
-		<Address>89310</Address>
-		<StaticProperties>
-			<ItemID>179</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a loaf of bread_0503</ObjectName>
-		<Index>503</Index>
-		<Address>89318</Address>
-		<StaticProperties>
-			<ItemID>177</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a piece of cheese_0504</ObjectName>
-		<Index>504</Index>
-		<Address>89326</Address>
-		<StaticProperties>
-			<ItemID>178</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>6</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a piece of meat_0505</ObjectName>
-		<Index>505</Index>
-		<Address>89334</Address>
-		<StaticProperties>
-			<ItemID>176</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a toadstool_0506</ObjectName>
-		<Index>506</Index>
-		<Address>89342</Address>
-		<StaticProperties>
-			<ItemID>185</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>5</xpos>
-				<ypos>1</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>2</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a fish_0507</ObjectName>
-		<Index>507</Index>
-		<Address>89350</Address>
-		<StaticProperties>
-			<ItemID>182</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a box_0508</ObjectName>
-		<Index>508</Index>
-		<Address>89358</Address>
-		<StaticProperties>
-			<ItemID>132</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>2</xpos>
-				<ypos>6</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a red potion_0509</ObjectName>
-		<Index>509</Index>
-		<Address>89366</Address>
-		<StaticProperties>
-			<ItemID>187</ItemID>
-			<InUse>1</InUse>
-			<Flags>4</Flags>
-			<Enchant>1</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>7</xpos>
-				<ypos>6</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>541</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a key_0510</ObjectName>
-		<Index>510</Index>
-		<Address>89374</Address>
-		<StaticProperties>
-			<ItemID>258</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>2</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a lit lantern_0511</ObjectName>
-		<Index>511</Index>
-		<Address>89382</Address>
-		<StaticProperties>
-			<ItemID>148</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>6</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>30</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a small shield_0512</ObjectName>
-		<Index>512</Index>
-		<Address>89390</Address>
-		<StaticProperties>
-			<ItemID>61</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>5</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>31</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a green potion_0513</ObjectName>
-		<Index>513</Index>
-		<Address>89398</Address>
-		<StaticProperties>
-			<ItemID>188</ItemID>
-			<InUse>1</InUse>
-			<Flags>4</Flags>
-			<Enchant>1</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>5</xpos>
-				<ypos>4</ypos>
-				<zpos>56</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>563</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a candle_0514</ObjectName>
-		<Index>514</Index>
-		<Address>89406</Address>
-		<StaticProperties>
-			<ItemID>146</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>6</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>24</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>2</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a scroll_0515</ObjectName>
-		<Index>515</Index>
-		<Address>89414</Address>
-		<StaticProperties>
-			<ItemID>318</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>5</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>769</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a pole_0516</ObjectName>
-		<Index>516</Index>
-		<Address>89422</Address>
-		<StaticProperties>
-			<ItemID>216</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>80</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>an oil flask_0517</ObjectName>
-		<Index>517</Index>
-		<Address>89430</Address>
-		<StaticProperties>
-			<ItemID>301</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>5</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>9</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a pack_0518</ObjectName>
-		<Index>518</Index>
-		<Address>89438</Address>
 		<StaticProperties>
 			<ItemID>130</ItemID>
 			<InUse>1</InUse>
@@ -22717,225 +21772,9 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>some leeches_0519</ObjectName>
-		<Index>519</Index>
-		<Address>89446</Address>
-		<StaticProperties>
-			<ItemID>293</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>7</xpos>
-				<ypos>4</ypos>
-				<zpos>64</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>3</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a plant_0520</ObjectName>
-		<Index>520</Index>
-		<Address>89454</Address>
-		<StaticProperties>
-			<ItemID>206</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>0</ypos>
-				<zpos>56</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>2</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>chain boots_0521</ObjectName>
-		<Index>521</Index>
-		<Address>89462</Address>
-		<StaticProperties>
-			<ItemID>42</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>0</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>7</xpos>
-				<ypos>5</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>27</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>0</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a fishing pole_0522</ObjectName>
-		<Index>522</Index>
-		<Address>89470</Address>
-		<StaticProperties>
-			<ItemID>299</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>0</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a torch_0523</ObjectName>
-		<Index>523</Index>
-		<Address>89478</Address>
-		<StaticProperties>
-			<ItemID>145</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>6</ypos>
-				<zpos>72</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>4</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a rock hammer_0524</ObjectName>
-		<Index>524</Index>
-		<Address>89486</Address>
-		<StaticProperties>
-			<ItemID>296</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>0</heading>
-				<xpos>6</xpos>
-				<ypos>5</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a key_0525</ObjectName>
-		<Index>525</Index>
-		<Address>89494</Address>
-		<StaticProperties>
-			<ItemID>267</ItemID>
-			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>6</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>72</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>6</Owner>
-			<Link>1</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a green potion_0526</ObjectName>
-		<Index>526</Index>
-		<Address>89502</Address>
-		<StaticProperties>
-			<ItemID>188</ItemID>
-			<InUse>1</InUse>
-			<Flags>4</Flags>
-			<Enchant>1</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
-			<IsQuant>1</IsQuant>
-			<Texture>0</Texture>
-			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
-				<heading>7</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>96</zpos>
-			</Position>
-			<Quality>40</Quality>
-			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>548</Link>
-		</StaticProperties>
-	</Object>
-	<Object>
-		<ObjectName>a key_0527</ObjectName>
-		<Index>527</Index>
-		<Address>89510</Address>
+		<ObjectName>a key_0484</ObjectName>
+		<Index>484</Index>
+		<Address>89166</Address>
 		<StaticProperties>
 			<ItemID>265</ItemID>
 			<InUse>1</InUse>
@@ -22960,9 +21799,36 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a ruby_0528</ObjectName>
-		<Index>528</Index>
-		<Address>89518</Address>
+		<ObjectName>a green potion_0485</ObjectName>
+		<Index>485</Index>
+		<Address>89174</Address>
+		<StaticProperties>
+			<ItemID>188</ItemID>
+			<InUse>1</InUse>
+			<Flags>4</Flags>
+			<Enchant>1</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>7</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>548</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a ruby_0486</ObjectName>
+		<Index>486</Index>
+		<Address>89182</Address>
 		<StaticProperties>
 			<ItemID>162</ItemID>
 			<InUse>1</InUse>
@@ -22984,6 +21850,1140 @@
 			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a coin_0487</ObjectName>
+		<Index>487</Index>
+		<Address>89190</Address>
+		<StaticProperties>
+			<ItemID>160</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>2</xpos>
+				<ypos>5</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>23</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a rock hammer_0488</ObjectName>
+		<Index>488</Index>
+		<Address>89198</Address>
+		<StaticProperties>
+			<ItemID>296</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>5</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>an oil flask_0489</ObjectName>
+		<Index>489</Index>
+		<Address>89206</Address>
+		<StaticProperties>
+			<ItemID>301</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>5</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>9</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a key_0490</ObjectName>
+		<Index>490</Index>
+		<Address>89214</Address>
+		<StaticProperties>
+			<ItemID>267</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>6</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>72</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>6</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>some popcorn_0491</ObjectName>
+		<Index>491</Index>
+		<Address>89222</Address>
+		<StaticProperties>
+			<ItemID>183</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>0</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a plant_0492</ObjectName>
+		<Index>492</Index>
+		<Address>89230</Address>
+		<StaticProperties>
+			<ItemID>206</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>0</ypos>
+				<zpos>56</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>2</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>chain boots_0493</ObjectName>
+		<Index>493</Index>
+		<Address>89238</Address>
+		<StaticProperties>
+			<ItemID>42</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>7</xpos>
+				<ypos>5</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>26</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>some strong thread_0494</ObjectName>
+		<Index>494</Index>
+		<Address>89246</Address>
+		<StaticProperties>
+			<ItemID>284</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>0</xpos>
+				<ypos>4</ypos>
+				<zpos>72</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a green potion_0495</ObjectName>
+		<Index>495</Index>
+		<Address>89254</Address>
+		<StaticProperties>
+			<ItemID>188</ItemID>
+			<InUse>1</InUse>
+			<Flags>4</Flags>
+			<Enchant>1</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>5</xpos>
+				<ypos>4</ypos>
+				<zpos>56</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>563</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a candle_0496</ObjectName>
+		<Index>496</Index>
+		<Address>89262</Address>
+		<StaticProperties>
+			<ItemID>146</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>6</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>24</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>2</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a scroll_0497</ObjectName>
+		<Index>497</Index>
+		<Address>89270</Address>
+		<StaticProperties>
+			<ItemID>318</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>769</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a pole_0498</ObjectName>
+		<Index>498</Index>
+		<Address>89278</Address>
+		<StaticProperties>
+			<ItemID>216</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a fishing pole_0499</ObjectName>
+		<Index>499</Index>
+		<Address>89286</Address>
+		<StaticProperties>
+			<ItemID>299</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>0</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>an apple_0500</ObjectName>
+		<Index>500</Index>
+		<Address>89294</Address>
+		<StaticProperties>
+			<ItemID>179</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a loaf of bread_0501</ObjectName>
+		<Index>501</Index>
+		<Address>89302</Address>
+		<StaticProperties>
+			<ItemID>177</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a piece of cheese_0502</ObjectName>
+		<Index>502</Index>
+		<Address>89310</Address>
+		<StaticProperties>
+			<ItemID>178</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>6</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a piece of meat_0503</ObjectName>
+		<Index>503</Index>
+		<Address>89318</Address>
+		<StaticProperties>
+			<ItemID>176</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a toadstool_0504</ObjectName>
+		<Index>504</Index>
+		<Address>89326</Address>
+		<StaticProperties>
+			<ItemID>185</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>5</xpos>
+				<ypos>1</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>2</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a fish_0505</ObjectName>
+		<Index>505</Index>
+		<Address>89334</Address>
+		<StaticProperties>
+			<ItemID>182</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a box_0506</ObjectName>
+		<Index>506</Index>
+		<Address>89342</Address>
+		<StaticProperties>
+			<ItemID>132</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>2</xpos>
+				<ypos>6</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a red potion_0507</ObjectName>
+		<Index>507</Index>
+		<Address>89350</Address>
+		<StaticProperties>
+			<ItemID>187</ItemID>
+			<InUse>1</InUse>
+			<Flags>4</Flags>
+			<Enchant>1</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>7</xpos>
+				<ypos>6</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>541</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a key_0508</ObjectName>
+		<Index>508</Index>
+		<Address>89358</Address>
+		<StaticProperties>
+			<ItemID>258</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>2</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a lit lantern_0509</ObjectName>
+		<Index>509</Index>
+		<Address>89366</Address>
+		<StaticProperties>
+			<ItemID>148</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>6</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>32</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a small shield_0510</ObjectName>
+		<Index>510</Index>
+		<Address>89374</Address>
+		<StaticProperties>
+			<ItemID>61</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>5</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>31</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a bedroll_0511</ObjectName>
+		<Index>511</Index>
+		<Address>89382</Address>
+		<StaticProperties>
+			<ItemID>289</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>some leeches_0512</ObjectName>
+		<Index>512</Index>
+		<Address>89390</Address>
+		<StaticProperties>
+			<ItemID>293</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>7</xpos>
+				<ypos>4</ypos>
+				<zpos>64</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>3</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a sling stone_0513</ObjectName>
+		<Index>513</Index>
+		<Address>89398</Address>
+		<StaticProperties>
+			<ItemID>16</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>7</ypos>
+				<zpos>39</zpos>
+			</Position>
+			<Quality>35</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>19</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a sack_0514</ObjectName>
+		<Index>514</Index>
+		<Address>89406</Address>
+		<StaticProperties>
+			<ItemID>128</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>5</xpos>
+				<ypos>6</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>leather leggings_0515</ObjectName>
+		<Index>515</Index>
+		<Address>89414</Address>
+		<StaticProperties>
+			<ItemID>35</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>26</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a flask of port_0516</ObjectName>
+		<Index>516</Index>
+		<Address>89422</Address>
+		<StaticProperties>
+			<ItemID>190</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>6</xpos>
+				<ypos>4</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a bottle of ale_0517</ObjectName>
+		<Index>517</Index>
+		<Address>89430</Address>
+		<StaticProperties>
+			<ItemID>186</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>6</xpos>
+				<ypos>4</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a key_0518</ObjectName>
+		<Index>518</Index>
+		<Address>89438</Address>
+		<StaticProperties>
+			<ItemID>262</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>1</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a battle axe_0519</ObjectName>
+		<Index>519</Index>
+		<Address>89446</Address>
+		<StaticProperties>
+			<ItemID>1</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>32</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a mushroom_0520</ObjectName>
+		<Index>520</Index>
+		<Address>89454</Address>
+		<StaticProperties>
+			<ItemID>184</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>1</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a torch_0521</ObjectName>
+		<Index>521</Index>
+		<Address>89462</Address>
+		<StaticProperties>
+			<ItemID>145</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>1</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>6</xpos>
+				<ypos>6</ypos>
+				<zpos>72</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>4</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>leather gloves_0522</ObjectName>
+		<Index>522</Index>
+		<Address>89470</Address>
+		<StaticProperties>
+			<ItemID>38</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>6</heading>
+				<xpos>1</xpos>
+				<ypos>2</ypos>
+				<zpos>88</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a longsword_0523</ObjectName>
+		<Index>523</Index>
+		<Address>89478</Address>
+		<StaticProperties>
+			<ItemID>5</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>5</xpos>
+				<ypos>2</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>26</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a sceptre_0524</ObjectName>
+		<Index>524</Index>
+		<Address>89486</Address>
+		<StaticProperties>
+			<ItemID>170</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>6</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a mace_0525</ObjectName>
+		<Index>525</Index>
+		<Address>89494</Address>
+		<StaticProperties>
+			<ItemID>9</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>7</xpos>
+				<ypos>5</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>50</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a sling_0526</ObjectName>
+		<Index>526</Index>
+		<Address>89502</Address>
+		<StaticProperties>
+			<ItemID>24</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
+			</Position>
+			<Quality>40</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a leather vest_0527</ObjectName>
+		<Index>527</Index>
+		<Address>89510</Address>
+		<StaticProperties>
+			<ItemID>32</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>0</heading>
+				<xpos>4</xpos>
+				<ypos>6</ypos>
+				<zpos>88</zpos>
+			</Position>
+			<Quality>57</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
+		</StaticProperties>
+	</Object>
+	<Object>
+		<ObjectName>a chain cowl_0528</ObjectName>
+		<Index>528</Index>
+		<Address>89518</Address>
+		<StaticProperties>
+			<ItemID>45</ItemID>
+			<InUse>1</InUse>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
+			<DoorDir>0</DoorDir>
+			<Invis>0</Invis>
+			<IsQuant>0</IsQuant>
+			<Texture>0</Texture>
+			<Position>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
+				<heading>5</heading>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
+			</Position>
+			<Quality>37</Quality>
+			<Next>0</Next>
+			<Owner>0</Owner>
+			<Link>0</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -23014,14 +23014,14 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a coin_0530</ObjectName>
+		<ObjectName>a spell_0530</ObjectName>
 		<Index>530</Index>
 		<Address>89534</Address>
 		<StaticProperties>
-			<ItemID>160</ItemID>
+			<ItemID>288</ItemID>
 			<InUse>1</InUse>
-			<Flags>0</Flags>
-			<Enchant>0</Enchant>
+			<Flags>4</Flags>
+			<Enchant>1</Enchant>
 			<DoorDir>0</DoorDir>
 			<Invis>0</Invis>
 			<IsQuant>1</IsQuant>
@@ -23030,14 +23030,14 @@
 				<ObjectTileX>99</ObjectTileX>
 				<ObjectTileY>99</ObjectTileY>
 				<heading>0</heading>
-				<xpos>2</xpos>
-				<ypos>5</ypos>
-				<zpos>96</zpos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>80</zpos>
 			</Position>
-			<Quality>40</Quality>
+			<Quality>0</Quality>
 			<Next>0</Next>
 			<Owner>0</Owner>
-			<Link>23</Link>
+			<Link>563</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -23095,15 +23095,15 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a bedroll_0533</ObjectName>
+		<ObjectName>a silver seed_0533</ObjectName>
 		<Index>533</Index>
 		<Address>89558</Address>
 		<StaticProperties>
-			<ItemID>289</ItemID>
+			<ItemID>290</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
+			<DoorDir>1</DoorDir>
 			<Invis>0</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
@@ -23113,7 +23113,7 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
-				<zpos>96</zpos>
+				<zpos>0</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
@@ -23149,11 +23149,11 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>some popcorn_0535</ObjectName>
+		<ObjectName>a dead rotworm_0535</ObjectName>
 		<Index>535</Index>
 		<Address>89574</Address>
 		<StaticProperties>
-			<ItemID>183</ItemID>
+			<ItemID>217</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -23165,9 +23165,9 @@
 				<ObjectTileX>99</ObjectTileX>
 				<ObjectTileY>99</ObjectTileY>
 				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>0</zpos>
+				<xpos>4</xpos>
+				<ypos>5</ypos>
+				<zpos>40</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
@@ -23468,7 +23468,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>19</Owner>
+			<Owner>17</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -23738,7 +23738,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -25309,16 +25309,16 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a fish_0615</ObjectName>
+		<ObjectName>a move trigger_0615</ObjectName>
 		<Index>615</Index>
 		<Address>90214</Address>
 		<StaticProperties>
-			<ItemID>182</ItemID>
+			<ItemID>416</ItemID>
 			<InUse>1</InUse>
-			<Flags>0</Flags>
+			<Flags>4</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
+			<DoorDir>1</DoorDir>
+			<Invis>1</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
@@ -25327,12 +25327,12 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
-				<zpos>0</zpos>
+				<zpos>64</zpos>
 			</Position>
-			<Quality>57</Quality>
-			<Next>833</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
+			<Quality>39</Quality>
+			<Next>0</Next>
+			<Owner>53</Owner>
+			<Link>0</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -25385,7 +25385,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>613</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -25492,7 +25492,7 @@
 				<zpos>96</zpos>
 			</Position>
 			<Quality>19</Quality>
-			<Next>0</Next>
+			<Next>215</Next>
 			<Owner>0</Owner>
 			<Link>713</Link>
 		</StaticProperties>
@@ -25735,7 +25735,7 @@
 				<zpos>96</zpos>
 			</Position>
 			<Quality>35</Quality>
-			<Next>220</Next>
+			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>234</Link>
 		</StaticProperties>
@@ -25876,16 +25876,16 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a coin_0636</ObjectName>
+		<ObjectName>a move trigger_0636</ObjectName>
 		<Index>636</Index>
 		<Address>90382</Address>
 		<StaticProperties>
-			<ItemID>160</ItemID>
+			<ItemID>416</ItemID>
 			<InUse>1</InUse>
-			<Flags>0</Flags>
+			<Flags>4</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
+			<DoorDir>1</DoorDir>
+			<Invis>1</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
@@ -25894,12 +25894,12 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
-				<zpos>0</zpos>
+				<zpos>72</zpos>
 			</Position>
-			<Quality>40</Quality>
+			<Quality>39</Quality>
 			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>3</Link>
+			<Owner>53</Owner>
+			<Link>0</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -25925,7 +25925,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>988</Next>
-			<Owner>38</Owner>
+			<Owner>36</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -26335,15 +26335,15 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>some strong thread_0653</ObjectName>
+		<ObjectName>a map_0653</ObjectName>
 		<Index>653</Index>
 		<Address>90518</Address>
 		<StaticProperties>
-			<ItemID>284</ItemID>
+			<ItemID>315</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
+			<DoorDir>1</DoorDir>
 			<Invis>0</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
@@ -26351,14 +26351,14 @@
 				<ObjectTileX>99</ObjectTileX>
 				<ObjectTileY>99</ObjectTileY>
 				<heading>0</heading>
-				<xpos>0</xpos>
-				<ypos>4</ypos>
-				<zpos>72</zpos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>96</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
 			<Owner>0</Owner>
-			<Link>1</Link>
+			<Link>512</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -26486,13 +26486,13 @@
 				<ObjectTileX>99</ObjectTileX>
 				<ObjectTileY>99</ObjectTileY>
 				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>93</zpos>
+				<xpos>1</xpos>
+				<ypos>4</ypos>
+				<zpos>101</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>2</Owner>
+			<Owner>3</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -26762,7 +26762,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -26897,7 +26897,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -27113,7 +27113,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>20</Owner>
+			<Owner>18</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -27329,7 +27329,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -29818,11 +29818,11 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a piece of meat_0782</ObjectName>
+		<ObjectName>a blood stain_0782</ObjectName>
 		<Index>782</Index>
 		<Address>91550</Address>
 		<StaticProperties>
-			<ItemID>176</ItemID>
+			<ItemID>222</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -29831,14 +29831,14 @@
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>99</ObjectTileX>
-				<ObjectTileY>99</ObjectTileY>
+				<ObjectTileX>30</ObjectTileX>
+				<ObjectTileY>3</ObjectTileY>
 				<heading>0</heading>
-				<xpos>3</xpos>
-				<ypos>3</ypos>
-				<zpos>0</zpos>
+				<xpos>4</xpos>
+				<ypos>4</ypos>
+				<zpos>96</zpos>
 			</Position>
-			<Quality>58</Quality>
+			<Quality>40</Quality>
 			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>1</Link>
@@ -29975,7 +29975,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>19</Owner>
+			<Owner>17</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -30353,7 +30353,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -30569,7 +30569,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>807</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -31195,16 +31195,16 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a bottle of water_0833</ObjectName>
+		<ObjectName>a move trigger_0833</ObjectName>
 		<Index>833</Index>
 		<Address>91958</Address>
 		<StaticProperties>
-			<ItemID>189</ItemID>
+			<ItemID>416</ItemID>
 			<InUse>1</InUse>
-			<Flags>0</Flags>
+			<Flags>4</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
+			<DoorDir>1</DoorDir>
+			<Invis>1</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
@@ -31213,12 +31213,12 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
-				<zpos>0</zpos>
+				<zpos>96</zpos>
 			</Position>
-			<Quality>40</Quality>
-			<Next>636</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
+			<Quality>39</Quality>
+			<Next>0</Next>
+			<Owner>53</Owner>
+			<Link>0</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -31357,30 +31357,30 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>a blood stain_0839</ObjectName>
+		<ObjectName>a move trigger_0839</ObjectName>
 		<Index>839</Index>
 		<Address>92006</Address>
 		<StaticProperties>
-			<ItemID>222</ItemID>
+			<ItemID>416</ItemID>
 			<InUse>1</InUse>
-			<Flags>0</Flags>
+			<Flags>4</Flags>
 			<Enchant>0</Enchant>
-			<DoorDir>0</DoorDir>
-			<Invis>0</Invis>
+			<DoorDir>1</DoorDir>
+			<Invis>1</Invis>
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>20</ObjectTileX>
-				<ObjectTileY>2</ObjectTileY>
+				<ObjectTileX>99</ObjectTileX>
+				<ObjectTileY>99</ObjectTileY>
 				<heading>0</heading>
-				<xpos>5</xpos>
-				<ypos>2</ypos>
-				<zpos>96</zpos>
+				<xpos>3</xpos>
+				<ypos>3</ypos>
+				<zpos>56</zpos>
 			</Position>
-			<Quality>40</Quality>
+			<Quality>39</Quality>
 			<Next>0</Next>
-			<Owner>0</Owner>
-			<Link>1</Link>
+			<Owner>53</Owner>
+			<Link>0</Link>
 		</StaticProperties>
 	</Object>
 	<Object>
@@ -32140,14 +32140,14 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>an open door_0868</ObjectName>
+		<ObjectName>a door_0868</ObjectName>
 		<Index>868</Index>
 		<Address>92238</Address>
 		<StaticProperties>
-			<ItemID>332</ItemID>
+			<ItemID>324</ItemID>
 			<InUse>1</InUse>
-			<Flags>5</Flags>
-			<Enchant>1</Enchant>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
 			<DoorDir>1</DoorDir>
 			<Invis>0</Invis>
 			<IsQuant>0</IsQuant>
@@ -32158,7 +32158,7 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>6</ypos>
-				<zpos>120</zpos>
+				<zpos>96</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
@@ -32545,14 +32545,14 @@
 		</StaticProperties>
 	</Object>
 	<Object>
-		<ObjectName>an open door_0883</ObjectName>
+		<ObjectName>a door_0883</ObjectName>
 		<Index>883</Index>
 		<Address>92358</Address>
 		<StaticProperties>
-			<ItemID>332</ItemID>
+			<ItemID>324</ItemID>
 			<InUse>1</InUse>
-			<Flags>5</Flags>
-			<Enchant>1</Enchant>
+			<Flags>0</Flags>
+			<Enchant>0</Enchant>
 			<DoorDir>0</DoorDir>
 			<Invis>0</Invis>
 			<IsQuant>0</IsQuant>
@@ -32563,7 +32563,7 @@
 				<heading>0</heading>
 				<xpos>3</xpos>
 				<ypos>3</ypos>
-				<zpos>120</zpos>
+				<zpos>96</zpos>
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
@@ -32792,7 +32792,7 @@
 		<Index>892</Index>
 		<Address>92430</Address>
 		<StaticProperties>
-			<ItemID>383</ItemID>
+			<ItemID>375</ItemID>
 			<InUse>1</InUse>
 			<Flags>0</Flags>
 			<Enchant>0</Enchant>
@@ -33107,7 +33107,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>17</Owner>
+			<Owner>19</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -33430,7 +33430,7 @@
 				<zpos>96</zpos>
 			</Position>
 			<Quality>35</Quality>
-			<Next>240</Next>
+			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>179</Link>
 		</StaticProperties>
@@ -33537,8 +33537,8 @@
 				<ypos>0</ypos>
 				<zpos>96</zpos>
 			</Position>
-			<Quality>29</Quality>
-			<Next>228</Next>
+			<Quality>1</Quality>
+			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>180</Link>
 		</StaticProperties>
@@ -33592,7 +33592,7 @@
 				<zpos>96</zpos>
 			</Position>
 			<Quality>54</Quality>
-			<Next>218</Next>
+			<Next>0</Next>
 			<Owner>0</Owner>
 			<Link>181</Link>
 		</StaticProperties>
@@ -33800,10 +33800,10 @@
 			<IsQuant>1</IsQuant>
 			<Texture>0</Texture>
 			<Position>
-				<ObjectTileX>19</ObjectTileX>
+				<ObjectTileX>24</ObjectTileX>
 				<ObjectTileY>3</ObjectTileY>
 				<heading>0</heading>
-				<xpos>4</xpos>
+				<xpos>0</xpos>
 				<ypos>5</ypos>
 				<zpos>96</zpos>
 			</Position>
@@ -34754,7 +34754,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>37</Owner>
+			<Owner>39</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35105,7 +35105,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>631</Next>
-			<Owner>7</Owner>
+			<Owner>5</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35132,7 +35132,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>36</Owner>
+			<Owner>38</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35159,7 +35159,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>39</Owner>
+			<Owner>37</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35186,7 +35186,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>37</Owner>
+			<Owner>39</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35348,7 +35348,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>980</Next>
-			<Owner>37</Owner>
+			<Owner>39</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35402,7 +35402,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>39</Owner>
+			<Owner>37</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>
@@ -35429,7 +35429,7 @@
 			</Position>
 			<Quality>40</Quality>
 			<Next>0</Next>
-			<Owner>37</Owner>
+			<Owner>39</Owner>
 			<Link>1</Link>
 		</StaticProperties>
 	</Object>

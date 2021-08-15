@@ -220,8 +220,6 @@ public class Quest : UWClass
         }
     }
 
-
-
     /// <summary>
     /// The quest variable integers
     /// </summary>
@@ -232,7 +230,34 @@ public class Quest : UWClass
     /// The game Variables for the check/set variable traps
     /// </summary>
     /// Typically these are used for traps/triggers/switches.
-    public static int[] variables = new int[128];
+    /// In UW1 64 x 1 byte variables.
+    /// In UW2 128 x 2 byte variables.
+    //public static int[] variables = new int[128];
+
+    public static int GetVariable(int variableno)
+    {
+        if (_RES==GAME_UW2)
+        {
+            return SaveGame.GetAt16(0xFA + (variableno * 2));
+        }
+        else
+        {
+            return SaveGame.GetAt(0x71 + variableno);
+        }
+    }
+
+    public static void SetVariable(int variableno, int newvalue)
+    {
+        if (_RES == GAME_UW2)
+        {
+            SaveGame.SetAt16(0xFA + (variableno * 2), (byte)newvalue);
+        }
+        else
+        {
+           SaveGame.SetAt(0x71 + variableno,(byte)newvalue);
+        }
+    }
+
 
     /// <summary>
     /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
@@ -268,8 +293,27 @@ public class Quest : UWClass
     ///     6 = djinn captured in body
     /// 14=Tracks no of enemies killed in pits. Does things like update graffiti.
     /// 15=Used in multiple convos. Possibly tells the game to process a change when updated?
-    public static int[] x_clocks = new int[16];
+    //public static int[] x_clocks = new int[16];
+    public static int GetX_Clock(int x_clock)
+    {
+        Debug.Log("Getting XClock " + x_clock + " = " + SaveGame.GetAt(0x36E));
+        return SaveGame.GetAt(0x36E);
+    }
 
+    public static void SetX_Clock(int x_clock, int value)
+    {
+        Debug.Log("Setting XClock " + x_clock + " to " + value);
+        SaveGame.SetAt(0x36E + x_clock, (byte)value);
+    }
+
+    /// <summary>
+    /// Increase the specified xclock by 1.
+    /// </summary>
+    /// <param name="x_clock"></param>
+    public static void IncrementXClock(int x_clock)
+    {
+       SetX_Clock(x_clock, SaveGame.GetAt(0x36E)+1);
+    }
 
     /// <summary>
     /// Item ID for the sword of justice
@@ -308,17 +352,38 @@ public class Quest : UWClass
     /// <summary>
     /// The no of talismans to still be cast into abyss in order to complete the game.
     /// </summary>
-    public static int TalismansRemaining; //= new bool[8];
+    public static int TalismansRemaining
+    {
+        get { return GetQuestVariable(36); }
+        set { SetQuestVariable(36, value); }
+    }
 
     /// <summary>
     /// Tracks which garamon dream we are at.
     /// </summary>
-    public static int GaramonDream;//The next dream to play
+    public static int GaramonDream//The next dream to play
+    {
+        get { return GetQuestVariable(37); }
+        set { SetQuestVariable(37, value); }
+    }
 
     /// <summary>
     /// Tracks which incense dream we are at
     /// </summary>
-    public static int IncenseDream;
+    public static int IncenseDream
+    {
+        get 
+        { 
+            return SaveGame.GetAt(0x60) & 0x3; 
+        }
+        set 
+        {
+            if (value >= 3) { value = 0; }//Wrap around on increase.
+            byte existingValue = (byte)(SaveGame.GetAt(0x60) & 0xFC);
+            existingValue = (byte)((value & 0x3) | existingValue);
+            SaveGame.SetAt(0x60, existingValue);
+        }
+    }
 
     /// <summary>
     /// Tracks the last day that there was a garamon dream.
@@ -381,16 +446,16 @@ public class Quest : UWClass
     //}
 
 
-    /// <summary>
-    /// Gets the next incense dream
-    /// </summary>
-    /// <returns>The incense dream.</returns>
-    public static int getIncenseDream()
-    {
-        if (IncenseDream >= 3)
-        {//Loop around
-            IncenseDream = 0;
-        }
-        return IncenseDream++;
-    }
+//    /// <summary>
+//    /// Gets the next incense dream
+//    /// </summary>
+//    /// <returns>The incense dream.</returns>
+//    public static int getIncenseDream()
+//    {
+//        if (IncenseDream >= 3)
+//        {//Loop around
+//            IncenseDream = 0;
+//        }
+//        return IncenseDream++;
+//    }
 }
