@@ -77,7 +77,8 @@ the left, right, center button combination on Level3.
                             result = Check_Variables(Quest.GetVariable(zpos), heading, this, "questvars");
                             break;
                         case 5://A bit field list
-                            result = Check_Variables(Quest.BitVariables, zpos, heading, this, "bitvars");
+                            //result = Check_Variables(Quest.BitVariables, zpos, heading, this, "bitvars");
+                            result = Check_Variables(Quest.GetBitVariable(zpos), heading, this, "bitvars");
                             break;
                         case 6://A quest flag list
                             //result = Check_Variables(Quest.QuestVariablesOBSOLETE, zpos, heading, this, "questvars");

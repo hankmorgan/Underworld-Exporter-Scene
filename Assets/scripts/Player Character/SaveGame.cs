@@ -17,6 +17,7 @@ public class SaveGame : Loader
                 //Special values needed to resolve weird bugs with clipping and interaction
                 SaveGame.SetAt(0xD5, 0x7f);
                 SaveGame.SetAt(0xD6, 0x20);
+                UWCharacter.Instance.MoonGateLevel = 2;//mountainman domain.
                 break;
         }
         MusicController.PlayMusic = true;
@@ -127,7 +128,6 @@ public class SaveGame : Loader
             int xOrValue = buffer[0];
             UWCharacter.Instance.XorKey = xOrValue;
             int incrnum = 3;
-
             for (int i = 1; i <= NoOfEncryptedBytes; i++)
             {
                 if ((i == 81) | (i == 161))
@@ -135,7 +135,6 @@ public class SaveGame : Loader
                     incrnum = 3;
                 }
                 buffer[i] ^= (byte)((xOrValue + incrnum) & 0xFF);
-
                 incrnum += 3;
             }
 
@@ -150,9 +149,6 @@ public class SaveGame : Loader
             InitPlayerBody();
             LoadPosition();
             ActiveRuneSlot.UpdateRuneSlots();
-
-            Debug.Log("Moongate is on " + UWCharacter.Instance.MoonGateLevel);
-            Debug.Log("Silver Tree is on " + UWCharacter.Instance.ResurrectLevel);
 
             for (int i = 0x4B; i <= 221; i++)
             {
@@ -170,27 +166,6 @@ public class SaveGame : Loader
                         //UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
-                    //case 0x61:
-                    //    {
-                    //        //Quest.IsTybalsOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
-                    //        //Quest.IsCUpOfWonderFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
-                    //        break;
-                    //    }
-                    //case 0x62://intoxication and is garamon buried.
-                    //    {
-                    //        //int val = ((int)getValAtAddress(buffer, i, 16));
-                    //        //UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
-                    //        //Quest.IsGaramonBuried = ((val >> 10) & 0x3) == 3;
-                    //        break;
-                    //    }
-                    //case 0xCF: ///   game time
-                    //    GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
-                    //case 0xD0:
-                    //    GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
-                    //case 0xD1:
-                    //    GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
-                    //case 0xD2:
-                    //    GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
                 }
             }
 
@@ -1475,23 +1450,12 @@ public class SaveGame : Loader
     /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW2(int slotNo)
     {
-        //UWCharacter.Instance.CharName = "";
-        //int x_position=0;
-        //int y_position=0;
-
         int x_position_dream = 0;
         int y_position_dream = 0;
 
-        //int z_position=0;
-        int x_clock = 1;
-
-
-        //int[] gametimevals=new int[3];
         int[] ActiveEffectIds = new int[3];
         short[] ActiveEffectStability = new short[3];
-        int QuestCounter = 0;
-        int VariableCounter = 0;
-        int BitVariableCounter = 0;
+
         int arena = 0;
 
         ResetUI();
@@ -1518,32 +1482,6 @@ public class SaveGame : Loader
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
 
-            //if (UWCharacter.Instance.recode)
-            //{
-            //    if (UWCharacter.Instance.recode_cheat)
-            //    {
-            //        for (int r = 31; r <= 53; r++)
-            //        {
-            //            buffer[r] = 0;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        buffer[UWCharacter.Instance.IndexToRecode] = (byte)UWCharacter.Instance.ValueToRecode;
-            //    }
-
-            //    byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
-
-            //    byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
-            //    for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
-            //    {
-            //        dataToWrite[i] = recodetest[i];
-            //    }
-            //    File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
-            //}
-
-
-
             //Copy decoded data to main buffer.
             for (int i = 0; i <= PlayerDat.GetUpperBound(0); i++)
             {
@@ -1562,12 +1500,8 @@ public class SaveGame : Loader
                 {
                     case 0x4D: ///   weight in 0.1 stones
                         //Or STR * 2; safe to ignore?
-                        //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-                        //Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + Skills.STR);
                         break;
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
-                       // UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);
-                       // UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x62://alco
@@ -1579,277 +1513,12 @@ public class SaveGame : Loader
                         Quest.FightingInArena = (1 == ((buffer[i] >> 2) & 0x1));
                         UWCharacter.Instance.DreamWorldTimer = 30f;
                         break;
-                    //Bit Variables
-                    case 0x1FA:
-                    case 0x1FC:
-                    case 0x1FE:
-                    case 0x200:
-                    case 0x202:
-                    case 0x204:
-                    case 0x206:
-                    case 0x208:
-                    case 0x20A:
-                    case 0x20C:
-                    case 0x20E:
-                    case 0x210:
-                    case 0x212:
-                    case 0x214:
-                    case 0x216:
-                    case 0x218:
-                    case 0x21A:
-                    case 0x21C:
-                    case 0x21E:
-                    case 0x220:
-                    case 0x222:
-                    case 0x224:
-                    case 0x226:
-                    case 0x228:
-                    case 0x22A:
-                    case 0x22C:
-                    case 0x22E:
-                    case 0x230:
-                    case 0x232:
-                    case 0x234:
-                    case 0x236:
-                    case 0x238:
-                    case 0x23A:
-                    case 0x23C:
-                    case 0x23E:
-                    case 0x240:
-                    case 0x242:
-                    case 0x244:
-                    case 0x246:
-                    case 0x248:
-                    case 0x24A:
-                    case 0x24C:
-                    case 0x24E:
-                    case 0x250:
-                    case 0x252:
-                    case 0x254:
-                    case 0x256:
-                    case 0x258:
-                    case 0x25A:
-                    case 0x25C:
-                    case 0x25E:
-                    case 0x260:
-                    case 0x262:
-                    case 0x264:
-                    case 0x266:
-                    case 0x268:
-                    case 0x26A:
-                    case 0x26C:
-                    case 0x26E:
-                    case 0x270:
-                    case 0x272:
-                    case 0x274:
-                    case 0x276:
-                    case 0x278:
-                    case 0x27A:
-                    case 0x27C:
-                    case 0x27E:
-                    case 0x280:
-                    case 0x282:
-                    case 0x284:
-                    case 0x286:
-                    case 0x288:
-                    case 0x28A:
-                    case 0x28C:
-                    case 0x28E:
-                    case 0x290:
-                    case 0x292:
-                    case 0x294:
-                    case 0x296:
-                    case 0x298:
-                    case 0x29A:
-                    case 0x29C:
-                    case 0x29E:
-                    case 0x2A0:
-                    case 0x2A2:
-                    case 0x2A4:
-                    case 0x2A6:
-                    case 0x2A8:
-                    case 0x2AA:
-                    case 0x2AC:
-                    case 0x2AE:
-                    case 0x2B0:
-                    case 0x2B2:
-                    case 0x2B4:
-                    case 0x2B6:
-                    case 0x2B8:
-                    case 0x2BA:
-                    case 0x2BC:
-                    case 0x2BE:
-                    case 0x2C0:
-                    case 0x2C2:
-                    case 0x2C4:
-                    case 0x2C6:
-                    case 0x2C8:
-                    case 0x2CA:
-                    case 0x2CC:
-                    case 0x2CE:
-                    case 0x2D0:
-                    case 0x2D2:
-                    case 0x2D4:
-                    case 0x2D6:
-                    case 0x2D8:
-                    case 0x2DA:
-                    case 0x2DC:
-                    case 0x2DE:
-                    case 0x2E0:
-                    case 0x2E2:
-                    case 0x2E4:
-                    case 0x2E6:
-                    case 0x2E8:
-                    case 0x2EA:
-                    case 0x2EC:
-                    case 0x2EE:
-                    case 0x2F0:
-                    case 0x2F2:
-                    case 0x2F4:
-                    case 0x2F6:
-                    case 0x2F8://end bit variables
-                        {
-                            Quest.BitVariables[BitVariableCounter++] = (int)getValAtAddress(buffer, i, 16);
-                            break;
-                        }
-                    //Skip for bit variables
-                    case 0x1FA + 1:
-                    case 0x1FC + 1:
-                    case 0x1FE + 1:
-                    case 0x200 + 1:
-                    case 0x202 + 1:
-                    case 0x204 + 1:
-                    case 0x206 + 1:
-                    case 0x208 + 1:
-                    case 0x20A + 1:
-                    case 0x20C + 1:
-                    case 0x20E + 1:
-                    case 0x210 + 1:
-                    case 0x212 + 1:
-                    case 0x214 + 1:
-                    case 0x216 + 1:
-                    case 0x218 + 1:
-                    case 0x21A + 1:
-                    case 0x21C + 1:
-                    case 0x21E + 1:
-                    case 0x220 + 1:
-                    case 0x222 + 1:
-                    case 0x224 + 1:
-                    case 0x226 + 1:
-                    case 0x228 + 1:
-                    case 0x22A + 1:
-                    case 0x22C + 1:
-                    case 0x22E + 1:
-                    case 0x230 + 1:
-                    case 0x232 + 1:
-                    case 0x234 + 1:
-                    case 0x236 + 1:
-                    case 0x238 + 1:
-                    case 0x23A + 1:
-                    case 0x23C + 1:
-                    case 0x23E + 1:
-                    case 0x240 + 1:
-                    case 0x242 + 1:
-                    case 0x244 + 1:
-                    case 0x246 + 1:
-                    case 0x248 + 1:
-                    case 0x24A + 1:
-                    case 0x24C + 1:
-                    case 0x24E + 1:
-                    case 0x250 + 1:
-                    case 0x252 + 1:
-                    case 0x254 + 1:
-                    case 0x256 + 1:
-                    case 0x258 + 1:
-                    case 0x25A + 1:
-                    case 0x25C + 1:
-                    case 0x25E + 1:
-                    case 0x260 + 1:
-                    case 0x262 + 1:
-                    case 0x264 + 1:
-                    case 0x266 + 1:
-                    case 0x268 + 1:
-                    case 0x26A + 1:
-                    case 0x26C + 1:
-                    case 0x26E + 1:
-                    case 0x270 + 1:
-                    case 0x272 + 1:
-                    case 0x274 + 1:
-                    case 0x276 + 1:
-                    case 0x278 + 1:
-                    case 0x27A + 1:
-                    case 0x27C + 1:
-                    case 0x27E + 1:
-                    case 0x280 + 1:
-                    case 0x282 + 1:
-                    case 0x284 + 1:
-                    case 0x286 + 1:
-                    case 0x288 + 1:
-                    case 0x28A + 1:
-                    case 0x28C + 1:
-                    case 0x28E + 1:
-                    case 0x290 + 1:
-                    case 0x292 + 1:
-                    case 0x294 + 1:
-                    case 0x296 + 1:
-                    case 0x298 + 1:
-                    case 0x29A + 1:
-                    case 0x29C + 1:
-                    case 0x29E + 1:
-                    case 0x2A0 + 1:
-                    case 0x2A2 + 1:
-                    case 0x2A4 + 1:
-                    case 0x2A6 + 1:
-                    case 0x2A8 + 1:
-                    case 0x2AA + 1:
-                    case 0x2AC + 1:
-                    case 0x2AE + 1:
-                    case 0x2B0 + 1:
-                    case 0x2B2 + 1:
-                    case 0x2B4 + 1:
-                    case 0x2B6 + 1:
-                    case 0x2B8 + 1:
-                    case 0x2BA + 1:
-                    case 0x2BC + 1:
-                    case 0x2BE + 1:
-                    case 0x2C0 + 1:
-                    case 0x2C2 + 1:
-                    case 0x2C4 + 1:
-                    case 0x2C6 + 1:
-                    case 0x2C8 + 1:
-                    case 0x2CA + 1:
-                    case 0x2CC + 1:
-                    case 0x2CE + 1:
-                    case 0x2D0 + 1:
-                    case 0x2D2 + 1:
-                    case 0x2D4 + 1:
-                    case 0x2D6 + 1:
-                    case 0x2D8 + 1:
-                    case 0x2DA + 1:
-                    case 0x2DC + 1:
-                    case 0x2DE + 1:
-                    case 0x2E0 + 1:
-                    case 0x2E2 + 1:
-                    case 0x2E4 + 1:
-                    case 0x2E6 + 1:
-                    case 0x2E8 + 1:
-                    case 0x2EA + 1:
-                    case 0x2EC + 1:
-                    case 0x2EE + 1:
-                    case 0x2F0 + 1:
-                    case 0x2F2 + 1:
-                    case 0x2F4 + 1:
-                    case 0x2F6 + 1:
-                    case 0x2F8 + 1:
-                        {//end skip for bit variables
-                            break;
-                        }
                     case 0x2fb: ///   x-position in level
                         x_position_dream = (int)getValAtAddress(buffer, i, 16); break;
                     case 0x2fd: ///   y-position
                         y_position_dream = (int)getValAtAddress(buffer, i, 16); break;
-                    case 0x301:
-                        UWCharacter.Instance.DreamReturnLevel = (short)(getValAtAddress(buffer, i, 8) - 1); break;
+                    //case 0x301:
+                       // UWCharacter.Instance.DreamReturnLevel = (short)(getValAtAddress(buffer, i, 8) - 1); break;
                     case 0x306:
                         {//Timer for paralyzed effect
                             UWCharacter.Instance.ParalyzeTimer = (short)(getValAtAddress(buffer, i, 8));
@@ -1864,22 +1533,11 @@ public class SaveGame : Loader
                             Quest.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
-                    //x_clocks
-                    //case 0x36a: ///   game time
-                    //    GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
-                    //case 0x36b:
-                    //    GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
-                    //case 0x36c:
-                    //    GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
-                    //case 0x36d:
-                    //    GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
                  }
             }
 
 
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
-
-            //GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
 
             ResetInventory();
 

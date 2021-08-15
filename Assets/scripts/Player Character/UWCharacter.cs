@@ -539,7 +539,18 @@ public class UWCharacter : Character
     /// <summary>
     /// The dream return level when you are dreaming in the void.
     /// </summary>
-    public short DreamReturnLevel = 0;
+    /// Offset by -1 for actual level. 0 is no valid return level
+    public short DreamReturnLevel
+    {//0x301:
+        get
+        {
+            return SaveGame.GetAt(0x301);
+        }
+        set
+        {
+            SaveGame.SetAt(0x301, (byte)value);
+        }
+    }
     public float DreamWorldTimer = 30f;//Not sure what values controls the time spent in dream world
     public Vector3 TeleportPosition;
 
@@ -2070,7 +2081,7 @@ public class UWCharacter : Character
         Quest.DreamPlantEaten = false;
         DreamReturnTileX = TileMap.visitTileX;
         DreamReturnTileY = TileMap.visitTileY;
-        DreamReturnLevel = GameWorldController.instance.dungeon_level;
+        DreamReturnLevel = (short)(GameWorldController.instance.dungeon_level+1);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 24));
         GameWorldController.instance.SwitchLevel(68, 32, 27);//TODO:implement other destinations.
         Quest.InDreamWorld = true;
@@ -2086,7 +2097,7 @@ public class UWCharacter : Character
     {
         Quest.InDreamWorld = false;
         isFlying = false;
-        GameWorldController.instance.SwitchLevel(DreamReturnLevel, DreamReturnTileX, DreamReturnTileY);
+        GameWorldController.instance.SwitchLevel((short)(DreamReturnLevel-1), DreamReturnTileX, DreamReturnTileY);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 25));
     }
 

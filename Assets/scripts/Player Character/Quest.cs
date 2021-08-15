@@ -258,7 +258,17 @@ public class Quest : UWClass
     /// <summary>
     /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
     /// </summary>
-    public static int[] BitVariables = new int[128];
+   // public static int[] BitVariables = new int[128];
+
+    public static int GetBitVariable(int variableno)
+    {
+        return SaveGame.GetAt16(0x1fa + variableno);
+    }
+
+    public static void SetBitVariable(int variableno, int value)
+    {
+        SaveGame.SetAt16(0x1fa + variableno,value);
+    }
 
     /// <summary>
     /// The x clocks tracks progress during the game and is used in firing events.
