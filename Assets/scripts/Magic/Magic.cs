@@ -3049,7 +3049,7 @@ public class Magic : UWEBase
             {
                 UWHUD.instance.MessageScroll.Add("Imagine the screen is shaking now");
                 BitState = 1 << WorldBit;//Get the bit that needs to be set.
-                //Quest.instance.QuestVariablesOBSOLETE[128] |= BitState;//Set the bit
+                //Quest.QuestVariablesOBSOLETE[128] |= BitState;//Set the bit
                 BitState = Quest.GetQuestVariable(128) | BitState;
                 Quest.SetQuestVariable(128, BitState);
                 return;
@@ -6286,9 +6286,9 @@ public class Magic : UWEBase
     /// </summary>
     void IronFleshXClock()
     {
-        if (Quest.instance.x_clocks[3] == 4)
+        if (Quest.x_clocks[3] == 4)
         {
-            Quest.instance.x_clocks[3] = 5;
+            Quest.x_clocks[3] = 5;
             //000~001~335~The baked mud hardens into a clear glaze. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 335));
         }

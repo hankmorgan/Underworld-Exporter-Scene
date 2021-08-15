@@ -109,7 +109,7 @@ public class a_hack_trap_qbert : a_hack_trap
         }
         if (!ColourFound)
         {
-            Quest.instance.variables[101 + colourSequence.GetUpperBound(0)] = colourToAdd;
+            Quest.variables[101 + colourSequence.GetUpperBound(0)] = colourToAdd;
         }
     }
 
@@ -243,7 +243,7 @@ public class a_hack_trap_qbert : a_hack_trap
     void LeaveArea()
     {
         TeleportWhite();
-        Quest.instance.variables[107] = 0;//Flags that you have left the pyramid area
+        Quest.variables[107] = 0;//Flags that you have left the pyramid area
     }
 
     /// <summary>
@@ -254,7 +254,7 @@ public class a_hack_trap_qbert : a_hack_trap
     void BeginQbertPyramid()
     {
         //Initalises the pyramid. 
-        Quest.instance.variables[107] = 1;
+        Quest.variables[107] = 1;
     }
 
     /// <summary>
@@ -325,7 +325,7 @@ public class a_hack_trap_qbert : a_hack_trap
             }
             if (ColourSequence.GetUpperBound(0) >= 4)
             {//All normal sequences found and the pyramid has been solved at least once. Allow access to the orange pyramid
-                Quest.instance.variables[105] = 5;
+                Quest.variables[105] = 5;
                 CurrentObjectList().objInfo[666].instance.setInvis(0); //my code is evil...
             }
         }
@@ -459,14 +459,14 @@ public class a_hack_trap_qbert : a_hack_trap
     /// <param name="tileY">Tile y.</param>
     void getPreviousTileXY(out int tileX, out int tileY)
     {
-        int gamevar = Quest.instance.variables[108];
+        int gamevar = Quest.variables[108];
         tileX = gamevar & 0x3f;
         tileY = (gamevar >> 6) & 0x3f;
     }
 
     void setPreviousTileXY(int tileX, int tileY)
     {
-        Quest.instance.variables[108] = (tileY << 6) | (tileX);
+        Quest.variables[108] = (tileY << 6) | (tileX);
     }
 
 
@@ -480,9 +480,9 @@ public class a_hack_trap_qbert : a_hack_trap
         int target = 1;
         for (int i = 101; i <= 105; i++)
         {
-            if (Quest.instance.variables[i] != 0xFF)
+            if (Quest.variables[i] != 0xFF)
             {
-                target = Quest.instance.variables[i];
+                target = Quest.variables[i];
             }
             else
             {
@@ -540,7 +540,7 @@ public class a_hack_trap_qbert : a_hack_trap
         int noOfColours = 0;
         for (int i = 101; i <= 105; i++)
         {
-            if (Quest.instance.variables[i] != 0xFF)
+            if (Quest.variables[i] != 0xFF)
             {
                 noOfColours++;
             }
@@ -549,9 +549,9 @@ public class a_hack_trap_qbert : a_hack_trap
         Sequence[noOfColours] = QbertColourWhite;
         for (int i = 101; i <= 105; i++)
         {
-            if (Quest.instance.variables[i] != 0xFF)
+            if (Quest.variables[i] != 0xFF)
             {
-                Sequence[i - 101] = Quest.instance.variables[i];
+                Sequence[i - 101] = Quest.variables[i];
             }
             else
             {

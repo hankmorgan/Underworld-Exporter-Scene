@@ -201,7 +201,7 @@ public class event_processor : UWClass
                                                             //{
                                                             if (events_blocks[b].event_actions[r].event_isQuest)
                                                             {//Test a quest variable
-                                                                    test=(1 ==  Quest.instance.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
+                                                                    test=(1 ==  Quest.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
                                                                     if (test)
                                                                     {
                                                                             Debug.Log("matched on quest " + events_blocks[b].event_actions[r].event_variable);
@@ -209,7 +209,7 @@ public class event_processor : UWClass
                                                             }
                                                             else
                                                             {//test a game variable
-                                                                    test=(1 ==  Quest.instance.variables[events_blocks[b].event_actions[r].event_variable])	;
+                                                                    test=(1 ==  Quest.variables[events_blocks[b].event_actions[r].event_variable])	;
                                                                     if (test)
                                                                     {
                                                                             Debug.Log("matched on variable " + events_blocks[b].event_actions[r].event_variable);

@@ -89,7 +89,7 @@ public class Grave : Model3D
                         link++;//Update the grave description
                         ObjectUsed.consumeObject();
                         trigObj.GetComponent<trigger_base>().Activate(this.gameObject);
-                        Quest.instance.isGaramonBuried = true;
+                        Quest.isGaramonBuried = true;
                         CurrentObjectInHand = null;
                         //Garamon does not initiate conversation normally so I force the conversation.
                         GameObject garamon = GameObject.Find(a_create_object_trap.LastObjectCreated);

@@ -8,8 +8,8 @@ public class a_hack_trap_scintpuzzlereset : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        //Quest.instance.ScintLvl5Switches=0;
-        Quest.instance.BitVariables[zpos] = 0;
+        //Quest.ScintLvl5Switches=0;
+        Quest.BitVariables[zpos] = 0;
     }
 
     public override void PostActivate(object_base src)

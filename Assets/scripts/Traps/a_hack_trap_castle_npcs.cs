@@ -49,7 +49,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        switch (Quest.instance.x_clocks[0])
+        switch (Quest.x_clocks[0])
         {
             case 0:
                 EventsAtXClock0();
@@ -69,7 +69,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
         UWHUD.instance.CutScenesFull.Begin();
 
         //Move NPCS at Xclock 0
-        //Debug.Log("Moving everyone Xclock is " + Quest.instance.x_clocks[1]);
+        //Debug.Log("Moving everyone Xclock is " + Quest.x_clocks[1]);
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Nell), 43, 49, NPC.npc_goals.npc_goal_wander_2);
         NPC.SetNPCLocation(227, 42, 35, NPC.npc_goals.npc_goal_wander_2);//a guard
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Charles), 36, 51, NPC.npc_goals.npc_goal_wander_2);

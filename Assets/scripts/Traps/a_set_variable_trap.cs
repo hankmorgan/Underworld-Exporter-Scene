@@ -51,19 +51,19 @@ public class a_set_variable_trap : a_variable_trap
             switch (xpos)
             {
                 case 1://Bit Variables
-                    Set_Variables(Quest.instance.BitVariables, zpos, heading, this, "bitvars");
+                    Set_Variables(Quest.BitVariables, zpos, heading, this, "bitvars");
                     break;
                 case 0://game variables 
-                    Set_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
+                    Set_Variables(Quest.variables, zpos, heading, this, "gamevars");
                     break;
                 case 2://quest vars
-                    //Set_Variables(Quest.instance.QuestVariablesOBSOLETE, zpos, heading, this, "questvars");
+                    //Set_Variables(Quest.QuestVariablesOBSOLETE, zpos, heading, this, "questvars");
                     Set_VariablesQuest(zpos, heading, this, "questvars");
                     break;
                 case 3://xclock  
                     if (zpos - 16 >= 0)
                     {
-                        Set_Variables(Quest.instance.x_clocks, zpos - 16, heading, this, "xclocks");
+                        Set_Variables(Quest.x_clocks, zpos - 16, heading, this, "xclocks");
                     }
                     else
                     {
@@ -77,7 +77,7 @@ public class a_set_variable_trap : a_variable_trap
         }
         else
         {
-            Set_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
+            Set_Variables(Quest.variables, zpos, heading, this, "gamevars");
         }
     }
 

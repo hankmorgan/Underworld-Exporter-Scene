@@ -75,7 +75,7 @@ public class a_move_trigger : trigger_base
     {
         if (playerStartedInTrigger != true)
         {
-            if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld == false))
+            if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.InDreamWorld == false))
             {
                 Activate(other.gameObject);
             }
@@ -84,7 +84,7 @@ public class a_move_trigger : trigger_base
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.instance.InDreamWorld == false))
+        if (((other.name == UWCharacter.Instance.name) || (other.name == "Feet")) && (!EditorMode) && (Quest.InDreamWorld == false))
         {
             playerStartedInTrigger = false;
         }

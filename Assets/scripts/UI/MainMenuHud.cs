@@ -465,9 +465,9 @@ public class MainMenuHud : GuiBase
                     GameWorldController.instance.InitBGlobals(0);
                     //Reset quest variables
                     //Obsolete.
-                    //for (int i = 0; i <= Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
+                    //for (int i = 0; i <= Quest.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
                     //{
-                    //    Quest.instance.QuestVariablesOBSOLETE[i] = 0;
+                    //    Quest.QuestVariablesOBSOLETE[i] = 0;
                     //}
                     //Obsolete
                     //for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
@@ -478,21 +478,21 @@ public class MainMenuHud : GuiBase
                     {
                         case GAME_UW1:
                         case GAME_UWDEMO:
-                            Quest.instance.TalismansRemaining = 8;
-                            Quest.instance.DayGaramonDream = 0;
-                            Quest.instance.GaramonDream = 0;
-                            Quest.instance.IncenseDream = 0;
-                            Quest.instance.isGaramonBuried = false;
-                            Quest.instance.isOrbDestroyed = false;
-                            Quest.instance.isCupFound = false;
+                            Quest.TalismansRemaining = 8;
+                            Quest.DayGaramonDream = 0;
+                            Quest.GaramonDream = 0;
+                            Quest.IncenseDream = 0;
+                            Quest.isGaramonBuried = false;
+                            Quest.isOrbDestroyed = false;
+                            Quest.isCupFound = false;
                             break;
                         case GAME_UW2:
-                            Quest.instance.variables[101] = 255;
-                            Quest.instance.variables[102] = 255;
-                            Quest.instance.variables[103] = 255;
-                            Quest.instance.variables[104] = 255;
-                            Quest.instance.variables[105] = 255;
-                            Quest.instance.variables[106] = 255;
+                            Quest.variables[101] = 255;
+                            Quest.variables[102] = 255;
+                            Quest.variables[103] = 255;
+                            Quest.variables[104] = 255;
+                            Quest.variables[105] = 255;
+                            Quest.variables[106] = 255;
                             break;
                     }
                     GameClock.instance._day = 0;

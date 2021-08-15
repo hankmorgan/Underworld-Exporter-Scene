@@ -52,7 +52,7 @@ public class ContainerOpened : GuiBase_Draggable
     public void OnClick()
     {
         if (Dragging == true) { return; }
-        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld))
+        if ((UWCharacter.Instance.isRoaming == true) || (Quest.InDreamWorld))
         {//No inventory use while using wizard eye.
             return;
         }
