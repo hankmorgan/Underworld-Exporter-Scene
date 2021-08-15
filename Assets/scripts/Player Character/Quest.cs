@@ -362,7 +362,20 @@ public class Quest : UWClass
     /// <summary>
     /// Tracks which incense dream we are at
     /// </summary>
-    public static int IncenseDream;
+    public static int IncenseDream
+    {
+        get 
+        { 
+            return SaveGame.GetAt(0x60) & 0x3; 
+        }
+        set 
+        {
+            if (value >= 3) { value = 0; }//Wrap around on increase.
+            byte existingValue = (byte)(SaveGame.GetAt(0x60) & 0xFC);
+            existingValue = (byte)((value & 0x3) | existingValue);
+            SaveGame.SetAt(0x60, existingValue);
+        }
+    }
 
     /// <summary>
     /// Tracks the last day that there was a garamon dream.
@@ -425,16 +438,16 @@ public class Quest : UWClass
     //}
 
 
-    /// <summary>
-    /// Gets the next incense dream
-    /// </summary>
-    /// <returns>The incense dream.</returns>
-    public static int getIncenseDream()
-    {
-        if (IncenseDream >= 3)
-        {//Loop around
-            IncenseDream = 0;
-        }
-        return IncenseDream++;
-    }
+//    /// <summary>
+//    /// Gets the next incense dream
+//    /// </summary>
+//    /// <returns>The incense dream.</returns>
+//    public static int getIncenseDream()
+//    {
+//        if (IncenseDream >= 3)
+//        {//Loop around
+//            IncenseDream = 0;
+//        }
+//        return IncenseDream++;
+//    }
 }

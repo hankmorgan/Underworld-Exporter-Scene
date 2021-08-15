@@ -463,17 +463,7 @@ public class MainMenuHud : GuiBase
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     GameWorldController.instance.InitBGlobals(0);
-                    //Reset quest variables
-                    //Obsolete.
-                    //for (int i = 0; i <= Quest.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
-                    //{
-                    //    Quest.QuestVariablesOBSOLETE[i] = 0;
-                    //}
-                    //Obsolete
-                    //for (int i = 0; i <= UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0); i++)
-                    //{
-                    //    UWCharacter.Instance.PlayerMagic.PlayerRunes[i] = false;
-                    //}
+
                     switch (_RES)
                     {
                         case GAME_UW1:
