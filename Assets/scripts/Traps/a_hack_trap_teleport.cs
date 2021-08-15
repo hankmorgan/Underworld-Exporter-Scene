@@ -29,19 +29,19 @@
     {
         base.Start();
         instance = this;
-        if (Quest.x_clocks[1] < 4)
+        if (Quest.GetX_Clock(1) < 4)
         {
             availableWorlds[PrisonTower] = true;
             NoOfWorlds = 0;
         }
-        else if (Quest.x_clocks[1] < 8)
+        else if (Quest.GetX_Clock(1) < 8)
         {
             availableWorlds[PrisonTower] = true;
             availableWorlds[Killorn] = true;
             availableWorlds[IceCaverns] = true;
             NoOfWorlds = 2;
         }
-        else if (Quest.x_clocks[1] < 13)
+        else if (Quest.GetX_Clock(1) < 13)
         {
             availableWorlds[PrisonTower] = true;
             availableWorlds[Killorn] = true;

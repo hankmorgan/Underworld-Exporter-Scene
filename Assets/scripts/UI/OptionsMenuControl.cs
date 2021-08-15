@@ -604,7 +604,7 @@ public class OptionsMenuControl : GuiBase_Draggable
             //Write a desc file
             File.WriteAllText(Path.Combine(Loader.BasePath, "SAVE" + (SlotNo + 1), "DESC"), SaveGame.SaveGameName(SlotNo + 1));
             //Write player.dat
-            SaveGame.WritePlayerDatUW2(SlotNo + 1);
+           // SaveGame.WritePlayerDatUW2(SlotNo + 1);
             //TODO:Write scd.ark
         }
         else

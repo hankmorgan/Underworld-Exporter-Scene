@@ -6286,9 +6286,10 @@ public class Magic : UWEBase
     /// </summary>
     void IronFleshXClock()
     {
-        if (Quest.x_clocks[3] == 4)
+        if (Quest.GetX_Clock(3) == 4)
         {
-            Quest.x_clocks[3] = 5;
+            //Quest.x_clocks[3] = 5;
+            Quest.SetX_Clock(3, 5);
             //000~001~335~The baked mud hardens into a clear glaze. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 335));
         }

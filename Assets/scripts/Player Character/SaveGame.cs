@@ -229,73 +229,73 @@ public class SaveGame : Loader
 
                     case 0x6F://Garamon dream related?
                         Quest.GaramonDream = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0x71://Game variables
-                    case 0x72:
-                    case 0x73:
-                    case 0x74:
-                    case 0x75:
-                    case 0x76:
-                    case 0x77:
-                    case 0x78:
-                    case 0x79:
-                    case 0x7A:
-                    case 0x7B:
-                    case 0x7C:
-                    case 0x7D:
-                    case 0x7E:
-                    case 0x7F:
-                    case 0x80:
-                    case 0x81:
-                    case 0x82:
-                    case 0x83:
-                    case 0x84:
-                    case 0x85:
-                    case 0x86:
-                    case 0x87:
-                    case 0x88:
-                    case 0x89:
-                    case 0x8A:
-                    case 0x8B:
-                    case 0x8C:
-                    case 0x8D:
-                    case 0x8E:
-                    case 0x8F:
-                    case 0x90:
-                    case 0x91:
-                    case 0x92:
-                    case 0x93:
-                    case 0x94:
-                    case 0x95:
-                    case 0x96:
-                    case 0x97:
-                    case 0x98:
-                    case 0x99:
-                    case 0x9A:
-                    case 0x9B:
-                    case 0x9C:
-                    case 0x9D:
-                    case 0x9E:
-                    case 0x9F:
-                    case 0xA0:
-                    case 0xA1:
-                    case 0xA2:
-                    case 0xA3:
-                    case 0xA4:
-                    case 0xA5:
-                    case 0xA6:
-                    case 0xA7:
-                    case 0xA8:
-                    case 0xA9:
-                    case 0xAA:
-                    case 0xAB:
-                    case 0xAC:
-                    case 0xAD:
-                    case 0xAE:
-                    case 0xAF:
-                    case 0xB0:  //quest vars											
-                        {
-                            Quest.variables[i - 0x71] = (int)getValAtAddress(buffer, i, 8); break;
-                        }
+                    //case 0x71://Game variables
+                    //case 0x72:
+                    //case 0x73:
+                    //case 0x74:
+                    //case 0x75:
+                    //case 0x76:
+                    //case 0x77:
+                    //case 0x78:
+                    //case 0x79:
+                    //case 0x7A:
+                    //case 0x7B:
+                    //case 0x7C:
+                    //case 0x7D:
+                    //case 0x7E:
+                    //case 0x7F:
+                    //case 0x80:
+                    //case 0x81:
+                    //case 0x82:
+                    //case 0x83:
+                    //case 0x84:
+                    //case 0x85:
+                    //case 0x86:
+                    //case 0x87:
+                    //case 0x88:
+                    //case 0x89:
+                    //case 0x8A:
+                    //case 0x8B:
+                    //case 0x8C:
+                    //case 0x8D:
+                    //case 0x8E:
+                    //case 0x8F:
+                    //case 0x90:
+                    //case 0x91:
+                    //case 0x92:
+                    //case 0x93:
+                    //case 0x94:
+                    //case 0x95:
+                    //case 0x96:
+                    //case 0x97:
+                    //case 0x98:
+                    //case 0x99:
+                    //case 0x9A:
+                    //case 0x9B:
+                    //case 0x9C:
+                    //case 0x9D:
+                    //case 0x9E:
+                    //case 0x9F:
+                    //case 0xA0:
+                    //case 0xA1:
+                    //case 0xA2:
+                    //case 0xA3:
+                    //case 0xA4:
+                    //case 0xA5:
+                    //case 0xA6:
+                    //case 0xA7:
+                    //case 0xA8:
+                    //case 0xA9:
+                    //case 0xAA:
+                    //case 0xAB:
+                    //case 0xAC:
+                    //case 0xAD:
+                    //case 0xAE:
+                    //case 0xAF:
+                    //case 0xB0:  //quest vars											
+                    //    {
+                    //       // Quest.variables[i - 0x71] = (int)getValAtAddress(buffer, i, 8); break;
+                    //    }
                     case 0xB1:  //The true max mana of the character. Used with the orb on level 7
                         UWCharacter.Instance.PlayerMagic.TrueMaxMana = (int)getValAtAddress(buffer, i, 8);
                         break;
@@ -624,7 +624,7 @@ public class SaveGame : Loader
                 case 0xAF:
                 case 0xB0:
                     {
-                        DataLoader.WriteInt8(writer, Quest.variables[i - 0x71]);
+                        //DataLoader.WriteInt8(writer, Quest.variables[i - 0x71]);
                         break;
                     }
                 case 0xB1://The max mana the player has when their mana is drained by the magic orb.
@@ -801,759 +801,759 @@ public class SaveGame : Loader
     /// Writes the player dat file based on the current character
     /// </summary>
     /// <param name="slotNo">Slot no.</param>
-    public static void WritePlayerDatUW2(int slotNo)
-    {
-        //I'm lazy. I'm going to write a temp file and then re-encode using the key.
-        FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
-        BinaryWriter writer = new BinaryWriter(file);
-        int NoOfActiveEffects = 0;
-        //int runeOffset=0;
-        int QuestCounter = 0;
-        int variableCounter = 0;
-        int bitVariableCounter = 0;
-        //update inventory linking
-        string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
-        Vector3 dreamReturn = CurrentTileMap().getTileVector(UWCharacter.Instance.DreamReturnTileX, UWCharacter.Instance.DreamReturnTileY);
+    //public static void WritePlayerDatUW2(int slotNo)
+    //{
+    //    //I'm lazy. I'm going to write a temp file and then re-encode using the key.
+    //    FileStream file = File.Open(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), FileMode.Create);
+    //    BinaryWriter writer = new BinaryWriter(file);
+    //    int NoOfActiveEffects = 0;
+    //    //int runeOffset=0;
+    //    int QuestCounter = 0;
+    //    int variableCounter = 0;
+    //    int bitVariableCounter = 0;
+    //    //update inventory linking
+    //    string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out int NoOfInventoryItems);
+    //    Vector3 dreamReturn = CurrentTileMap().getTileVector(UWCharacter.Instance.DreamReturnTileX, UWCharacter.Instance.DreamReturnTileY);
 
-        //Write the MS Key
-        DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
+    //    //Write the MS Key
+    //    DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
 
-        //Common uw1/uw2 save game data
-        //WriteName(writer);//1 to 14
-        WriteSpace(writer, 17);
-        WriteSkills(writer);
-        WriteSpellEffects(writer);
-        WriteRunes(writer);
-
-
-        for (int i = 0x4B; i < 0x3E3; i++)
-        {//non inventory data 
-            switch (i)
-            {
-                case 0x4B:
-                    {//No of inventory items?
-                        if (NoOfInventoryItems > 0)
-                        {
-                            DataLoader.WriteInt8(writer, (inventoryObjects.GetUpperBound(0) + 3) << 2);
-                        }
-                        else
-                        {
-                            DataLoader.WriteInt8(writer, 0);
-                        }
-                        break;
-                    }
-                case 0x4D: ///   weight in 0.1 stones
-                    //Or STR * 2; 
-                    DataLoader.WriteInt16(writer, Skills.STR * 2 * 10);
-                    break;
-                case 0x4D + 1:
-                    break;
-                case 0x4F: ///   experience in 0.1 points
-                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP * 10); break;
-                case 0x4F + 1:
-                case 0x4F + 2:
-                case 0x4F + 3:
-                    break;
-                case 0x53: // skillpoints available to spend
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.TrainingPoints); break;
-                case 0x55: ///  position in level										
-                    WritePosition(writer);
-                    break;
-                case 0x56: ///   x-position in level
-                case 0x57: ///   y-position	
-                case 0x58: ///   y-position
-                case 0x59: ///   z-position
-                case 0x5A: ///   z-position	
-                case 0x5B:
-                case 0x5C: ///   heading								
-                case 0x5D: ///   dungeon level										
-                    break;//Skip over int 16s for position
-                //case 0x5F:///
-                //    {
-                //        //Low nibble is moongate level + 1
-                //        //int val = (UWCharacter.Instance.MoonGateLevel & 0xf);
-                //        //DataLoader.WriteInt8(writer, val);
-                //        //break;
-                //    }
-                case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)//This differs from uw1 so it needs to be tested properly
-                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 5)) | (UWCharacter.Instance.play_poison << 1));
-                    break;
-                case 0x62:
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.Intoxication << 6);
-                    break;
-                case 0x64:
-                    {
-                        int val = 0;
-                        if (Quest.DreamPlantEaten)
-                        {
-                            val |= 1;
-                        }
-                        if (Quest.InDreamWorld)
-                        {
-                            val |= 2;
-                        }
-                        if (Quest.FightingInArena)
-                        {
-                            val |= 4;
-                        }
-                        DataLoader.WriteInt8(writer, val);
-                        break;
-                    }
-                case 0x66: // hand, Gender & body, and class
-                    {
-                        WritePlayerClass(writer);
-                        break;
-                    }
-
-                case 0x67:  //Quests 0 to 3
-                case 0x6B:  //Quests 4 to 7
-                case 0x6F:  //Quests 8 to 11
-                case 0x73:  //Quests 12 to 15
-                case 0x77:  //Quests 16 to 19
-                case 0x7B:  //Quests 20 to 23
-                case 0x7F:  //Quests 24 to 27
-                case 0x83:  //Quests 28 to 31
-                case 0x87:  //Quests 32 to 35
-                case 0x8B:  //Quests 36 to 39
-                case 0x8F:  //Quests 40 to 43
-                case 0x93:  //Quests 44 to 47
-                case 0x97:  //Quests 48 to 51
-                case 0x9B:  //Quests 52 to 55
-                case 0x9F:  //Quests 56 to 59
-                case 0xA3:  //Quests 60 to 63
-                case 0xA7:  //Quests 64 to 67
-                case 0xAB:  //Quests 68 to 71
-                case 0xAF:  //Quests 72 to 75
-                case 0xB3:  //Quests 76 to 79
-                case 0xB7:  //Quests 80 to 83
-                case 0xBB:  //Quests 84 to 87
-                case 0xBF:  //Quests 88 to 91
-                case 0xC3:  //Quests 92 to 95
-                case 0xC7:  //Quests 96 to 99
-                case 0xCB:  //Quests 100 to 103
-                case 0xCF:  //Quests 104 to 107
-                case 0xD3:  //Quests 108 to 111
-                case 0xD7:  //Quests 112 to 115
-                case 0xDB:  //Quests 116 to 119
-                case 0xDF:  //Quests 120 to 123
-                case 0xE3:  //Quests 124 to 127
-                    {//The first 4 bits of each of these is the quest flags.
-                        int val = 0;
-                        for (int q = 0; q < 4; q++)
-                        {
-                         //   val |= (Quest.QuestVariablesOBSOLETE[QuestCounter + q] & 0x1) << q;
-                        }
-                        QuestCounter += 4;
-                        DataLoader.WriteInt8(writer, val);
-                        break;
-                    }
-                case 0xE7:  //Quest 128 - Where the lines of power have been cut
-                case 0xE8:  //Quest 129
-                case 0xE9:  //Quest 130
-                case 0xEA:  //Quest 131
-                case 0xEB:  //Quest 132
-                case 0xEC:  //Quest 133
-                case 0xED:  //Quest 134
-                case 0xEE:  //Quest 135
-                case 0xEF:  //Quest 136
-                case 0xF0:  //Quest 137
-                case 0xF1:  //Quest 138
-                            //Additional quests
-                case 0xF2:  //Quest 139
-                case 0xF3:  //Quest 140
-                case 0xF4:  //Quest 141
-                case 0xF5:  //Quest 142
-                case 0xF6:  //Quest 143
-                case 0xF7:  //Quest 144
-                case 0xF8:  //Quest 145
-                //case 0xF9:  //Quest 146
-
-                //    {//TODO:These quests are not tested.
-                //        DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[128 + (i - 0xE7)]);
-                //        break;
-                //    }
-                case 0xFA:  //Variable0
-                case 0xFC:  //Variable1
-                case 0xFE:  //Variable2
-                case 0x100:  //Variable3
-                case 0x102:  //Variable4
-                case 0x104:  //Variable5
-                case 0x106:  //Treated gems used/ Variable6
-                case 0x108:  //Variable7
-                case 0x10A:  //Variable8
-                case 0x10C:  //Variable9
-                case 0x10E:  //Variable10
-                case 0x110:  //Variable11
-                case 0x112:  //Variable12
-                case 0x114:  //Variable13
-                case 0x116:  //Variable14
-                case 0x118:  //Variable15
-                case 0x11A:  //Variable16
-                case 0x11C:  //Variable17
-                case 0x11E:  //Variable18
-                case 0x120:  //Variable19
-                case 0x122:  //Variable20
-                case 0x124:  //Variable21
-                case 0x126:  //Variable22
-                case 0x128:  //Variable23
-                case 0x12A:  //Variable24
-                case 0x12C:  //Variable25
-                case 0x12E:  //Variable26
-                case 0x130:  //Variable27
-                case 0x132:  //Variable28
-                case 0x134:  //Variable29
-                case 0x136:  //Variable30
-                case 0x138:  //Variable31
-                case 0x13A:  //Variable32
-                case 0x13C:  //Variable33
-                case 0x13E:  //Variable34
-                case 0x140:  //Variable35
-                case 0x142:  //Variable36
-                case 0x144:  //Variable37
-                case 0x146:  //Variable38
-                case 0x148:  //Variable39
-                case 0x14A:  //Variable40
-                case 0x14C:  //Variable41
-                case 0x14E:  //Variable42
-                case 0x150:  //Variable43
-                case 0x152:  //Variable44
-                case 0x154:  //Variable45
-                case 0x156:  //Variable46
-                case 0x158:  //Variable47
-                case 0x15A:  //Variable48
-                case 0x15C:  //Variable49
-                case 0x15E:  //Variable50
-                case 0x160:  //Variable 51
-                case 0x162:  //Variable 52
-                case 0x164:  //Variable 53 
-                case 0x166:  //54
-                case 0x168:  //55
-                case 0x16A:  //56
-                case 0x16C:  //57
-                case 0x16E:  //58
-                case 0x170:  //59
-                case 0x172:  //60
-                case 0x174:  //61
-                case 0x176:  //62
-                case 0x178:  //63
-                case 0x17A:  //64
-                case 0x17C:  //65
-                case 0x17E:  //66
-                case 0x180:  //67
-                case 0x182:  //68
-                case 0x184:  //69
-                case 0x186:  //70
-                case 0x188:  //71
-                case 0x18A:  //72
-                case 0x18C:  //73
-                case 0x18E:  //74
-                case 0x190:  //75
-                case 0x192:  //76
-                case 0x194:  //77
-                case 0x196:  //78
-                case 0x198:  //79
-                case 0x19A:  //80
-                case 0x19C:  //81
-                case 0x19E:  //82
-                case 0x1A0:  //83
-                case 0x1A2:  //84
-                case 0x1A4:  //85
-                case 0x1A6:  //86
-                case 0x1A8:  //87
-                case 0x1AA:  //88
-                case 0x1AC:  //89
-                case 0x1AE:  //90
-                case 0x1B0:  //91
-                case 0x1B2:  //92
-                case 0x1B4:  //93
-                case 0x1B6:  //94
-                case 0x1B8:  //95
-                case 0x1BA:  //96
-                case 0x1BC:  //97
-                case 0x1BE:  //98
-                case 0x1C0:  //99
-                case 0x1C2:  //100
-                case 0x1C4:  //Variable 101
-                case 0x1C6:  //102
-                case 0x1C8:  //103
-                case 0x1CA:  //104
-                case 0x1CC:  //105
-                case 0x1CE:  //106
-                case 0x1D0:  //107
-                    {//Split here due to qbert variable
-                        DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
-                        break;
-                    }
-                case 0x1D4:  //109
-                case 0x1D6:  //110
-                case 0x1D8:  //111
-                case 0x1DA:  //112
-                case 0x1DC:  //Variable 113
-                case 0x1DE:  //Variable 114 (duplicate with below!!!)
-                case 0x1E0:  //Variable 115
-                case 0x1E2:  //116
-                case 0x1E4:  //117
-                case 0x1E6:  //118
-                case 0x1E8:  //119
-                case 0x1EA:  //120
-                case 0x1EC:  //121
-                case 0x1EE:  //122
-                case 0x1F0:  //123
-                case 0x1F2:  //124
-                case 0x1F4:  //125
-                case 0x1F6:  //126
-                case 0x1F8:  //Variable 127
-                    {
-                        DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
-                        break;
-                    }
-                case 0x1D2:  //Variable 108 //Int 16 used in qbert
-                    {
-                        DataLoader.WriteInt16(writer, Quest.variables[variableCounter++]);
-                        break;
-                    }
-                case 0x1D2 + 1:
-                    break;
-                //Bit variables 0 to 127
-                case 0x1FA:
-                case 0x1FC:
-                case 0x1FE:
-                case 0x200:
-                case 0x202:
-                case 0x204:
-                case 0x206:
-                case 0x208:
-                case 0x20A:
-                case 0x20C:
-                case 0x20E:
-                case 0x210:
-                case 0x212:
-                case 0x214:
-                case 0x216:
-                case 0x218:
-                case 0x21A:
-                case 0x21C:
-                case 0x21E:
-                case 0x220:
-                case 0x222:
-                case 0x224:
-                case 0x226:
-                case 0x228:
-                case 0x22A:
-                case 0x22C:
-                case 0x22E:
-                case 0x230:
-                case 0x232:
-                case 0x234:
-                case 0x236:
-                case 0x238:
-                case 0x23A:
-                case 0x23C:
-                case 0x23E:
-                case 0x240:
-                case 0x242:
-                case 0x244:
-                case 0x246:
-                case 0x248:
-                case 0x24A:
-                case 0x24C:
-                case 0x24E:
-                case 0x250:
-                case 0x252:
-                case 0x254:
-                case 0x256:
-                case 0x258:
-                case 0x25A:
-                case 0x25C:
-                case 0x25E:
-                case 0x260:
-                case 0x262:
-                case 0x264:
-                case 0x266:
-                case 0x268:
-                case 0x26A:
-                case 0x26C:
-                case 0x26E:
-                case 0x270:
-                case 0x272:
-                case 0x274:
-                case 0x276:
-                case 0x278:
-                case 0x27A:
-                case 0x27C:
-                case 0x27E:
-                case 0x280:
-                case 0x282:
-                case 0x284:
-                case 0x286:
-                case 0x288:
-                case 0x28A:
-                case 0x28C:
-                case 0x28E:
-                case 0x290:
-                case 0x292:
-                case 0x294:
-                case 0x296:
-                case 0x298:
-                case 0x29A:
-                case 0x29C:
-                case 0x29E:
-                case 0x2A0:
-                case 0x2A2:
-                case 0x2A4:
-                case 0x2A6:
-                case 0x2A8:
-                case 0x2AA:
-                case 0x2AC:
-                case 0x2AE:
-                case 0x2B0:
-                case 0x2B2:
-                case 0x2B4:
-                case 0x2B6:
-                case 0x2B8:
-                case 0x2BA:
-                case 0x2BC:
-                case 0x2BE:
-                case 0x2C0:
-                case 0x2C2:
-                case 0x2C4:
-                case 0x2C6:
-                case 0x2C8:
-                case 0x2CA:
-                case 0x2CC:
-                case 0x2CE:
-                case 0x2D0:
-                case 0x2D2:
-                case 0x2D4:
-                case 0x2D6:
-                case 0x2D8:
-                case 0x2DA:
-                case 0x2DC:
-                case 0x2DE:
-                case 0x2E0:
-                case 0x2E2:
-                case 0x2E4:
-                case 0x2E6:
-                case 0x2E8:
-                case 0x2EA:
-                case 0x2EC:
-                case 0x2EE:
-                case 0x2F0:
-                case 0x2F2:
-                case 0x2F4:
-                case 0x2F6:
-                case 0x2F8://end bit variables
-
-                    DataLoader.WriteInt8(writer, Quest.BitVariables[bitVariableCounter++]);
-                    break;
-                //Skip over for bit vars
-                case 0x1FA + 1:
-                case 0x1FC + 1:
-                case 0x1FE + 1:
-                case 0x200 + 1:
-                case 0x202 + 1:
-                case 0x204 + 1:
-                case 0x206 + 1:
-                case 0x208 + 1:
-                case 0x20A + 1:
-                case 0x20C + 1:
-                case 0x20E + 1:
-                case 0x210 + 1:
-                case 0x212 + 1:
-                case 0x214 + 1:
-                case 0x216 + 1:
-                case 0x218 + 1:
-                case 0x21A + 1:
-                case 0x21C + 1:
-                case 0x21E + 1:
-                case 0x220 + 1:
-                case 0x222 + 1:
-                case 0x224 + 1:
-                case 0x226 + 1:
-                case 0x228 + 1:
-                case 0x22A + 1:
-                case 0x22C + 1:
-                case 0x22E + 1:
-                case 0x230 + 1:
-                case 0x232 + 1:
-                case 0x234 + 1:
-                case 0x236 + 1:
-                case 0x238 + 1:
-                case 0x23A + 1:
-                case 0x23C + 1:
-                case 0x23E + 1:
-                case 0x240 + 1:
-                case 0x242 + 1:
-                case 0x244 + 1:
-                case 0x246 + 1:
-                case 0x248 + 1:
-                case 0x24A + 1:
-                case 0x24C + 1:
-                case 0x24E + 1:
-                case 0x250 + 1:
-                case 0x252 + 1:
-                case 0x254 + 1:
-                case 0x256 + 1:
-                case 0x258 + 1:
-                case 0x25A + 1:
-                case 0x25C + 1:
-                case 0x25E + 1:
-                case 0x260 + 1:
-                case 0x262 + 1:
-                case 0x264 + 1:
-                case 0x266 + 1:
-                case 0x268 + 1:
-                case 0x26A + 1:
-                case 0x26C + 1:
-                case 0x26E + 1:
-                case 0x270 + 1:
-                case 0x272 + 1:
-                case 0x274 + 1:
-                case 0x276 + 1:
-                case 0x278 + 1:
-                case 0x27A + 1:
-                case 0x27C + 1:
-                case 0x27E + 1:
-                case 0x280 + 1:
-                case 0x282 + 1:
-                case 0x284 + 1:
-                case 0x286 + 1:
-                case 0x288 + 1:
-                case 0x28A + 1:
-                case 0x28C + 1:
-                case 0x28E + 1:
-                case 0x290 + 1:
-                case 0x292 + 1:
-                case 0x294 + 1:
-                case 0x296 + 1:
-                case 0x298 + 1:
-                case 0x29A + 1:
-                case 0x29C + 1:
-                case 0x29E + 1:
-                case 0x2A0 + 1:
-                case 0x2A2 + 1:
-                case 0x2A4 + 1:
-                case 0x2A6 + 1:
-                case 0x2A8 + 1:
-                case 0x2AA + 1:
-                case 0x2AC + 1:
-                case 0x2AE + 1:
-                case 0x2B0 + 1:
-                case 0x2B2 + 1:
-                case 0x2B4 + 1:
-                case 0x2B6 + 1:
-                case 0x2B8 + 1:
-                case 0x2BA + 1:
-                case 0x2BC + 1:
-                case 0x2BE + 1:
-                case 0x2C0 + 1:
-                case 0x2C2 + 1:
-                case 0x2C4 + 1:
-                case 0x2C6 + 1:
-                case 0x2C8 + 1:
-                case 0x2CA + 1:
-                case 0x2CC + 1:
-                case 0x2CE + 1:
-                case 0x2D0 + 1:
-                case 0x2D2 + 1:
-                case 0x2D4 + 1:
-                case 0x2D6 + 1:
-                case 0x2D8 + 1:
-                case 0x2DA + 1:
-                case 0x2DC + 1:
-                case 0x2DE + 1:
-                case 0x2E0 + 1:
-                case 0x2E2 + 1:
-                case 0x2E4 + 1:
-                case 0x2E6 + 1:
-                case 0x2E8 + 1:
-                case 0x2EA + 1:
-                case 0x2EC + 1:
-                case 0x2EE + 1:
-                case 0x2F0 + 1:
-                case 0x2F2 + 1:
-                case 0x2F4 + 1:
-                case 0x2F6 + 1:
-                case 0x2F8 + 1:
-                    {
-                        //End skip over for bit vars
-                        break;
-
-                    }
-                case 0x2fb: //dream return position x
-                    DataLoader.WriteInt16(writer, (int)(dreamReturn.x * Ratio));
-                    break;
-                case 0x2fb + 1: break;
-                case 0x2fd: /// dream return  y-position
-                    DataLoader.WriteInt16(writer, (int)(dreamReturn.z * Ratio));
-                    break;
-                case 0x2fd + 1: break;
-                case 0x301:
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.DreamReturnLevel);
-                    break;
-                case 0x303:
-                    //{//Game options high nibble is graphic detail
-                    WriteGameOptions(writer);
-                    break;
-                //}
-                case 0x306://paralyze timer
-                    DataLoader.WriteInt8(writer, (int)UWCharacter.Instance.ParalyzeTimer);
-                    break;
-                case 0x361://Item Ids of arena warriors.
-                case 0x362:
-                case 0x363:
-                case 0x364:
-                case 0x365:
-                    {
-                        DataLoader.WriteInt8(writer, Quest.ArenaOpponents[i - 0x361]);
-                        break;
-                    }
-                case 0x36a: ///   game time
-                    DataLoader.WriteInt8(writer, 0); break;
-                case 0x36b:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
-                case 0x36c:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
-                case 0x36d:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
-                case 0x36f://1 Castle events
-                case 0x370://2
-                case 0x371://3 DjinnCapture
-                case 0x372://4
-                case 0x373://5
-                case 0x374://6
-                case 0x375://7
-                case 0x376://8
-                case 0x377://9
-                case 0x378://10
-                case 0x379://11
-                case 0x37a://12
-                case 0x37b://13
-                case 0x37c://14
-                           //case 0x37d://15 -- This could be wrong.
-                    {//The mysterious x_clocks
-                        DataLoader.WriteInt8(writer, Quest.x_clocks[1 + i - 0x36f]); break;
-                    }
-                case 0x3A3: // Helm (all of these subsequent values are indices into the object list 
-                    WriteInventoryIndex(writer, inventoryObjects, 0); break;
-                case 0x3A4: // Helm ignore
-                    break;
-                case 0x3A5: // Chest
-                    WriteInventoryIndex(writer, inventoryObjects, 1); break;
-                case 0x3A6: // Chest ignore
-                    break;
-                case 0x3A7: // Gloves
-                    WriteInventoryIndex(writer, inventoryObjects, 4); break;
-                case 0x3A8: // Gloves ignore
-                    break;
-                case 0x3A9: // Leggings
-                    WriteInventoryIndex(writer, inventoryObjects, 2); break;
-                case 0x3AA: // Leggings ignore
-                    break;
-                case 0x3AB: // Boots
-                    WriteInventoryIndex(writer, inventoryObjects, 3); break;
-                case 0x3AC: // Boots ignore
-                    break;
-                case 0x3AD: // TopRightShoulder
-                    WriteInventoryIndex(writer, inventoryObjects, 5); break;
-                case 0x3AE: // TopRightShoulder ignore
-                    break;
-                case 0x3AF: // TopLeftShoulder
-                    WriteInventoryIndex(writer, inventoryObjects, 6); break;
-                case 0x3B0: // TopLeftShoulder ignore
-                    break;
-                case 0x3B1: // Righthand
-                    WriteInventoryIndex(writer, inventoryObjects, 7); break;
-                case 0x3B2: // Righthand ignore
-                    break;
-                case 0x3B3: // LeftHand
-                    WriteInventoryIndex(writer, inventoryObjects, 8); break;
-                case 0x3B4: // LeftHand ignore
-                    break;
-                case 0x3B5: // Ring
-                    WriteInventoryIndex(writer, inventoryObjects, 9); break;
-                case 0x3B6: // Ring ignore
-                    break;
-                case 0x3B7: // Ring
-                    WriteInventoryIndex(writer, inventoryObjects, 10); break;
-                case 0x3B8: // Ring ignore
-                    break;
-                case 0x3B9: // Backpack0
-                    WriteInventoryIndex(writer, inventoryObjects, 11); break;
-                case 0x3BA: // Backpack0 ignore
-                    break;
-                case 0x3BB: // Backpack1
-                    WriteInventoryIndex(writer, inventoryObjects, 12); break;
-                case 0x3BC: // Backpack1 ignore
-                    break;
-                case 0x3BD: // Backpack2
-                    WriteInventoryIndex(writer, inventoryObjects, 13); break;
-                case 0x3BE: // Backpack2 ignore
-                    break;
-                case 0x3BF: // Backpack3
-                    WriteInventoryIndex(writer, inventoryObjects, 14); break;
-                case 0x3C0: // Backpack3 ignore
-                    break;
-                case 0x3C1: // Backpack4
-                    WriteInventoryIndex(writer, inventoryObjects, 15); break;
-                case 0x3C2: // Backpack4 ignore
-                    break;
-                case 0x3C3: // Backpack5
-                    WriteInventoryIndex(writer, inventoryObjects, 16); break;
-                case 0x3C4: // Backpack5 ignore
-                    break;
-                case 0x3C5: // Backpack6
-                    WriteInventoryIndex(writer, inventoryObjects, 17); break;
-                case 0x3C6: // Backpack6 ignore
-                    break;
-                case 0x3C7: // Backpack7
-                    WriteInventoryIndex(writer, inventoryObjects, 18); break;
-                case 0x3C8: // Backpack7 ignore
-                    break;
-                case 0x388://Curvit as well?Kills HE player if not properly set
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
-                //Weird hard coded values that the inventory won't work without
-                //F3 02 00 7F 20 60 F3 00 00 40
-                case 0x37d: DataLoader.WriteInt8(writer, 0xF3); break;
-                case 0x37e: //No of inventory items+1
-                    DataLoader.WriteInt8(writer, NoOfInventoryItems + 1);
-                    break;
-                //DataLoader.WriteInt8(writer,0x02);break;
-                //case 0x37f:	DataLoader.WriteInt8(writer,0x00);break;
-                case 0x380: DataLoader.WriteInt8(writer, 0x7f); break;
-                case 0x381: DataLoader.WriteInt8(writer, 0x20); break;
-                case 0x382: DataLoader.WriteInt8(writer, 0x60); break;
-                case 0x383: DataLoader.WriteInt8(writer, 0xF3); break;
-                //case 0x384:	DataLoader.WriteInt8(writer,0x00);break;
-                //case 0x385:	DataLoader.WriteInt8(writer,0x00);break;
-                case 0x386: DataLoader.WriteInt8(writer, 0x40); break;
+    //    //Common uw1/uw2 save game data
+    //    //WriteName(writer);//1 to 14
+    //    WriteSpace(writer, 17);
+    //    WriteSkills(writer);
+    //    WriteSpellEffects(writer);
+    //    WriteRunes(writer);
 
 
+    //    for (int i = 0x4B; i < 0x3E3; i++)
+    //    {//non inventory data 
+    //        switch (i)
+    //        {
+    //            case 0x4B:
+    //                {//No of inventory items?
+    //                    if (NoOfInventoryItems > 0)
+    //                    {
+    //                        DataLoader.WriteInt8(writer, (inventoryObjects.GetUpperBound(0) + 3) << 2);
+    //                    }
+    //                    else
+    //                    {
+    //                        DataLoader.WriteInt8(writer, 0);
+    //                    }
+    //                    break;
+    //                }
+    //            case 0x4D: ///   weight in 0.1 stones
+    //                //Or STR * 2; 
+    //                DataLoader.WriteInt16(writer, Skills.STR * 2 * 10);
+    //                break;
+    //            case 0x4D + 1:
+    //                break;
+    //            case 0x4F: ///   experience in 0.1 points
+    //                DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP * 10); break;
+    //            case 0x4F + 1:
+    //            case 0x4F + 2:
+    //            case 0x4F + 3:
+    //                break;
+    //            case 0x53: // skillpoints available to spend
+    //                DataLoader.WriteInt8(writer, UWCharacter.Instance.TrainingPoints); break;
+    //            case 0x55: ///  position in level										
+    //                WritePosition(writer);
+    //                break;
+    //            case 0x56: ///   x-position in level
+    //            case 0x57: ///   y-position	
+    //            case 0x58: ///   y-position
+    //            case 0x59: ///   z-position
+    //            case 0x5A: ///   z-position	
+    //            case 0x5B:
+    //            case 0x5C: ///   heading								
+    //            case 0x5D: ///   dungeon level										
+    //                break;//Skip over int 16s for position
+    //            //case 0x5F:///
+    //            //    {
+    //            //        //Low nibble is moongate level + 1
+    //            //        //int val = (UWCharacter.Instance.MoonGateLevel & 0xf);
+    //            //        //DataLoader.WriteInt8(writer, val);
+    //            //        //break;
+    //            //    }
+    //            case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)//This differs from uw1 so it needs to be tested properly
+    //                DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 5)) | (UWCharacter.Instance.play_poison << 1));
+    //                break;
+    //            case 0x62:
+    //                DataLoader.WriteInt8(writer, UWCharacter.Instance.Intoxication << 6);
+    //                break;
+    //            case 0x64:
+    //                {
+    //                    int val = 0;
+    //                    if (Quest.DreamPlantEaten)
+    //                    {
+    //                        val |= 1;
+    //                    }
+    //                    if (Quest.InDreamWorld)
+    //                    {
+    //                        val |= 2;
+    //                    }
+    //                    if (Quest.FightingInArena)
+    //                    {
+    //                        val |= 4;
+    //                    }
+    //                    DataLoader.WriteInt8(writer, val);
+    //                    break;
+    //                }
+    //            case 0x66: // hand, Gender & body, and class
+    //                {
+    //                    WritePlayerClass(writer);
+    //                    break;
+    //                }
 
-                default://No value. Write 0	
-                    DataLoader.WriteInt8(writer, 0); break;
-            }
-        }
+    //            //case 0x67:  //Quests 0 to 3
+    //            //case 0x6B:  //Quests 4 to 7
+    //            //case 0x6F:  //Quests 8 to 11
+    //            //case 0x73:  //Quests 12 to 15
+    //            //case 0x77:  //Quests 16 to 19
+    //            //case 0x7B:  //Quests 20 to 23
+    //            //case 0x7F:  //Quests 24 to 27
+    //            //case 0x83:  //Quests 28 to 31
+    //            //case 0x87:  //Quests 32 to 35
+    //            //case 0x8B:  //Quests 36 to 39
+    //            //case 0x8F:  //Quests 40 to 43
+    //            //case 0x93:  //Quests 44 to 47
+    //            //case 0x97:  //Quests 48 to 51
+    //            //case 0x9B:  //Quests 52 to 55
+    //            //case 0x9F:  //Quests 56 to 59
+    //            //case 0xA3:  //Quests 60 to 63
+    //            //case 0xA7:  //Quests 64 to 67
+    //            //case 0xAB:  //Quests 68 to 71
+    //            //case 0xAF:  //Quests 72 to 75
+    //            //case 0xB3:  //Quests 76 to 79
+    //            //case 0xB7:  //Quests 80 to 83
+    //            //case 0xBB:  //Quests 84 to 87
+    //            //case 0xBF:  //Quests 88 to 91
+    //            //case 0xC3:  //Quests 92 to 95
+    //            //case 0xC7:  //Quests 96 to 99
+    //            //case 0xCB:  //Quests 100 to 103
+    //            //case 0xCF:  //Quests 104 to 107
+    //            //case 0xD3:  //Quests 108 to 111
+    //            //case 0xD7:  //Quests 112 to 115
+    //            //case 0xDB:  //Quests 116 to 119
+    //            //case 0xDF:  //Quests 120 to 123
+    //            //case 0xE3:  //Quests 124 to 127
+    //            //    {//The first 4 bits of each of these is the quest flags.
+    //            //        int val = 0;
+    //            //        for (int q = 0; q < 4; q++)
+    //            //        {
+    //            //         //   val |= (Quest.QuestVariablesOBSOLETE[QuestCounter + q] & 0x1) << q;
+    //            //        }
+    //            //        QuestCounter += 4;
+    //            //        DataLoader.WriteInt8(writer, val);
+    //            //        break;
+    //            //    }
+    //            //case 0xE7:  //Quest 128 - Where the lines of power have been cut
+    //            //case 0xE8:  //Quest 129
+    //            //case 0xE9:  //Quest 130
+    //            //case 0xEA:  //Quest 131
+    //            //case 0xEB:  //Quest 132
+    //            //case 0xEC:  //Quest 133
+    //            //case 0xED:  //Quest 134
+    //            //case 0xEE:  //Quest 135
+    //            //case 0xEF:  //Quest 136
+    //            //case 0xF0:  //Quest 137
+    //            //case 0xF1:  //Quest 138
+    //            //            //Additional quests
+    //            //case 0xF2:  //Quest 139
+    //            //case 0xF3:  //Quest 140
+    //            //case 0xF4:  //Quest 141
+    //            //case 0xF5:  //Quest 142
+    //            //case 0xF6:  //Quest 143
+    //            //case 0xF7:  //Quest 144
+    //            //case 0xF8:  //Quest 145
+    //            ////case 0xF9:  //Quest 146
 
-        //ALl things going well I should be at byte no 0x3e3 where I can write the inventory info.
-        WriteInventory(writer, inventoryObjects);
+    //            ////    {//TODO:These quests are not tested.
+    //            ////        DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[128 + (i - 0xE7)]);
+    //            ////        break;
+    //            ////    }
+    //            //case 0xFA:  //Variable0
+    //            //case 0xFC:  //Variable1
+    //            //case 0xFE:  //Variable2
+    //            //case 0x100:  //Variable3
+    //            //case 0x102:  //Variable4
+    //            //case 0x104:  //Variable5
+    //            //case 0x106:  //Treated gems used/ Variable6
+    //            //case 0x108:  //Variable7
+    //            //case 0x10A:  //Variable8
+    //            //case 0x10C:  //Variable9
+    //            //case 0x10E:  //Variable10
+    //            //case 0x110:  //Variable11
+    //            //case 0x112:  //Variable12
+    //            //case 0x114:  //Variable13
+    //            //case 0x116:  //Variable14
+    //            //case 0x118:  //Variable15
+    //            //case 0x11A:  //Variable16
+    //            //case 0x11C:  //Variable17
+    //            //case 0x11E:  //Variable18
+    //            //case 0x120:  //Variable19
+    //            //case 0x122:  //Variable20
+    //            //case 0x124:  //Variable21
+    //            //case 0x126:  //Variable22
+    //            //case 0x128:  //Variable23
+    //            //case 0x12A:  //Variable24
+    //            //case 0x12C:  //Variable25
+    //            //case 0x12E:  //Variable26
+    //            //case 0x130:  //Variable27
+    //            //case 0x132:  //Variable28
+    //            //case 0x134:  //Variable29
+    //            //case 0x136:  //Variable30
+    //            //case 0x138:  //Variable31
+    //            //case 0x13A:  //Variable32
+    //            //case 0x13C:  //Variable33
+    //            //case 0x13E:  //Variable34
+    //            //case 0x140:  //Variable35
+    //            //case 0x142:  //Variable36
+    //            //case 0x144:  //Variable37
+    //            //case 0x146:  //Variable38
+    //            //case 0x148:  //Variable39
+    //            //case 0x14A:  //Variable40
+    //            //case 0x14C:  //Variable41
+    //            //case 0x14E:  //Variable42
+    //            //case 0x150:  //Variable43
+    //            //case 0x152:  //Variable44
+    //            //case 0x154:  //Variable45
+    //            //case 0x156:  //Variable46
+    //            //case 0x158:  //Variable47
+    //            //case 0x15A:  //Variable48
+    //            //case 0x15C:  //Variable49
+    //            //case 0x15E:  //Variable50
+    //            //case 0x160:  //Variable 51
+    //            //case 0x162:  //Variable 52
+    //            //case 0x164:  //Variable 53 
+    //            //case 0x166:  //54
+    //            //case 0x168:  //55
+    //            //case 0x16A:  //56
+    //            //case 0x16C:  //57
+    //            //case 0x16E:  //58
+    //            //case 0x170:  //59
+    //            //case 0x172:  //60
+    //            //case 0x174:  //61
+    //            //case 0x176:  //62
+    //            //case 0x178:  //63
+    //            //case 0x17A:  //64
+    //            //case 0x17C:  //65
+    //            //case 0x17E:  //66
+    //            //case 0x180:  //67
+    //            //case 0x182:  //68
+    //            //case 0x184:  //69
+    //            //case 0x186:  //70
+    //            //case 0x188:  //71
+    //            //case 0x18A:  //72
+    //            //case 0x18C:  //73
+    //            //case 0x18E:  //74
+    //            //case 0x190:  //75
+    //            //case 0x192:  //76
+    //            //case 0x194:  //77
+    //            //case 0x196:  //78
+    //            //case 0x198:  //79
+    //            //case 0x19A:  //80
+    //            //case 0x19C:  //81
+    //            //case 0x19E:  //82
+    //            //case 0x1A0:  //83
+    //            //case 0x1A2:  //84
+    //            //case 0x1A4:  //85
+    //            //case 0x1A6:  //86
+    //            //case 0x1A8:  //87
+    //            //case 0x1AA:  //88
+    //            //case 0x1AC:  //89
+    //            //case 0x1AE:  //90
+    //            //case 0x1B0:  //91
+    //            //case 0x1B2:  //92
+    //            //case 0x1B4:  //93
+    //            //case 0x1B6:  //94
+    //            //case 0x1B8:  //95
+    //            //case 0x1BA:  //96
+    //            //case 0x1BC:  //97
+    //            //case 0x1BE:  //98
+    //            //case 0x1C0:  //99
+    //            //case 0x1C2:  //100
+    //            //case 0x1C4:  //Variable 101
+    //            //case 0x1C6:  //102
+    //            //case 0x1C8:  //103
+    //            //case 0x1CA:  //104
+    //            //case 0x1CC:  //105
+    //            //case 0x1CE:  //106
+    //            //case 0x1D0:  //107
+    //            //    {//Split here due to qbert variable
+    //            //        //DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
+    //            //        //break;
+    //            //    }
+    //            case 0x1D4:  //109
+    //            case 0x1D6:  //110
+    //            case 0x1D8:  //111
+    //            case 0x1DA:  //112
+    //            case 0x1DC:  //Variable 113
+    //            case 0x1DE:  //Variable 114 (duplicate with below!!!)
+    //            case 0x1E0:  //Variable 115
+    //            case 0x1E2:  //116
+    //            case 0x1E4:  //117
+    //            case 0x1E6:  //118
+    //            case 0x1E8:  //119
+    //            case 0x1EA:  //120
+    //            case 0x1EC:  //121
+    //            case 0x1EE:  //122
+    //            case 0x1F0:  //123
+    //            case 0x1F2:  //124
+    //            case 0x1F4:  //125
+    //            case 0x1F6:  //126
+    //            case 0x1F8:  //Variable 127
+    //                {
+    //                    DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
+    //                    break;
+    //                }
+    //            case 0x1D2:  //Variable 108 //Int 16 used in qbert
+    //                {
+    //                    DataLoader.WriteInt16(writer, Quest.variables[variableCounter++]);
+    //                    break;
+    //                }
+    //            case 0x1D2 + 1:
+    //                break;
+    //            //Bit variables 0 to 127
+    //            case 0x1FA:
+    //            case 0x1FC:
+    //            case 0x1FE:
+    //            case 0x200:
+    //            case 0x202:
+    //            case 0x204:
+    //            case 0x206:
+    //            case 0x208:
+    //            case 0x20A:
+    //            case 0x20C:
+    //            case 0x20E:
+    //            case 0x210:
+    //            case 0x212:
+    //            case 0x214:
+    //            case 0x216:
+    //            case 0x218:
+    //            case 0x21A:
+    //            case 0x21C:
+    //            case 0x21E:
+    //            case 0x220:
+    //            case 0x222:
+    //            case 0x224:
+    //            case 0x226:
+    //            case 0x228:
+    //            case 0x22A:
+    //            case 0x22C:
+    //            case 0x22E:
+    //            case 0x230:
+    //            case 0x232:
+    //            case 0x234:
+    //            case 0x236:
+    //            case 0x238:
+    //            case 0x23A:
+    //            case 0x23C:
+    //            case 0x23E:
+    //            case 0x240:
+    //            case 0x242:
+    //            case 0x244:
+    //            case 0x246:
+    //            case 0x248:
+    //            case 0x24A:
+    //            case 0x24C:
+    //            case 0x24E:
+    //            case 0x250:
+    //            case 0x252:
+    //            case 0x254:
+    //            case 0x256:
+    //            case 0x258:
+    //            case 0x25A:
+    //            case 0x25C:
+    //            case 0x25E:
+    //            case 0x260:
+    //            case 0x262:
+    //            case 0x264:
+    //            case 0x266:
+    //            case 0x268:
+    //            case 0x26A:
+    //            case 0x26C:
+    //            case 0x26E:
+    //            case 0x270:
+    //            case 0x272:
+    //            case 0x274:
+    //            case 0x276:
+    //            case 0x278:
+    //            case 0x27A:
+    //            case 0x27C:
+    //            case 0x27E:
+    //            case 0x280:
+    //            case 0x282:
+    //            case 0x284:
+    //            case 0x286:
+    //            case 0x288:
+    //            case 0x28A:
+    //            case 0x28C:
+    //            case 0x28E:
+    //            case 0x290:
+    //            case 0x292:
+    //            case 0x294:
+    //            case 0x296:
+    //            case 0x298:
+    //            case 0x29A:
+    //            case 0x29C:
+    //            case 0x29E:
+    //            case 0x2A0:
+    //            case 0x2A2:
+    //            case 0x2A4:
+    //            case 0x2A6:
+    //            case 0x2A8:
+    //            case 0x2AA:
+    //            case 0x2AC:
+    //            case 0x2AE:
+    //            case 0x2B0:
+    //            case 0x2B2:
+    //            case 0x2B4:
+    //            case 0x2B6:
+    //            case 0x2B8:
+    //            case 0x2BA:
+    //            case 0x2BC:
+    //            case 0x2BE:
+    //            case 0x2C0:
+    //            case 0x2C2:
+    //            case 0x2C4:
+    //            case 0x2C6:
+    //            case 0x2C8:
+    //            case 0x2CA:
+    //            case 0x2CC:
+    //            case 0x2CE:
+    //            case 0x2D0:
+    //            case 0x2D2:
+    //            case 0x2D4:
+    //            case 0x2D6:
+    //            case 0x2D8:
+    //            case 0x2DA:
+    //            case 0x2DC:
+    //            case 0x2DE:
+    //            case 0x2E0:
+    //            case 0x2E2:
+    //            case 0x2E4:
+    //            case 0x2E6:
+    //            case 0x2E8:
+    //            case 0x2EA:
+    //            case 0x2EC:
+    //            case 0x2EE:
+    //            case 0x2F0:
+    //            case 0x2F2:
+    //            case 0x2F4:
+    //            case 0x2F6:
+    //            case 0x2F8://end bit variables
 
-        writer.Close();//The file now saved is un-encrypted
+    //                DataLoader.WriteInt8(writer, Quest.BitVariables[bitVariableCounter++]);
+    //                break;
+    //            //Skip over for bit vars
+    //            case 0x1FA + 1:
+    //            case 0x1FC + 1:
+    //            case 0x1FE + 1:
+    //            case 0x200 + 1:
+    //            case 0x202 + 1:
+    //            case 0x204 + 1:
+    //            case 0x206 + 1:
+    //            case 0x208 + 1:
+    //            case 0x20A + 1:
+    //            case 0x20C + 1:
+    //            case 0x20E + 1:
+    //            case 0x210 + 1:
+    //            case 0x212 + 1:
+    //            case 0x214 + 1:
+    //            case 0x216 + 1:
+    //            case 0x218 + 1:
+    //            case 0x21A + 1:
+    //            case 0x21C + 1:
+    //            case 0x21E + 1:
+    //            case 0x220 + 1:
+    //            case 0x222 + 1:
+    //            case 0x224 + 1:
+    //            case 0x226 + 1:
+    //            case 0x228 + 1:
+    //            case 0x22A + 1:
+    //            case 0x22C + 1:
+    //            case 0x22E + 1:
+    //            case 0x230 + 1:
+    //            case 0x232 + 1:
+    //            case 0x234 + 1:
+    //            case 0x236 + 1:
+    //            case 0x238 + 1:
+    //            case 0x23A + 1:
+    //            case 0x23C + 1:
+    //            case 0x23E + 1:
+    //            case 0x240 + 1:
+    //            case 0x242 + 1:
+    //            case 0x244 + 1:
+    //            case 0x246 + 1:
+    //            case 0x248 + 1:
+    //            case 0x24A + 1:
+    //            case 0x24C + 1:
+    //            case 0x24E + 1:
+    //            case 0x250 + 1:
+    //            case 0x252 + 1:
+    //            case 0x254 + 1:
+    //            case 0x256 + 1:
+    //            case 0x258 + 1:
+    //            case 0x25A + 1:
+    //            case 0x25C + 1:
+    //            case 0x25E + 1:
+    //            case 0x260 + 1:
+    //            case 0x262 + 1:
+    //            case 0x264 + 1:
+    //            case 0x266 + 1:
+    //            case 0x268 + 1:
+    //            case 0x26A + 1:
+    //            case 0x26C + 1:
+    //            case 0x26E + 1:
+    //            case 0x270 + 1:
+    //            case 0x272 + 1:
+    //            case 0x274 + 1:
+    //            case 0x276 + 1:
+    //            case 0x278 + 1:
+    //            case 0x27A + 1:
+    //            case 0x27C + 1:
+    //            case 0x27E + 1:
+    //            case 0x280 + 1:
+    //            case 0x282 + 1:
+    //            case 0x284 + 1:
+    //            case 0x286 + 1:
+    //            case 0x288 + 1:
+    //            case 0x28A + 1:
+    //            case 0x28C + 1:
+    //            case 0x28E + 1:
+    //            case 0x290 + 1:
+    //            case 0x292 + 1:
+    //            case 0x294 + 1:
+    //            case 0x296 + 1:
+    //            case 0x298 + 1:
+    //            case 0x29A + 1:
+    //            case 0x29C + 1:
+    //            case 0x29E + 1:
+    //            case 0x2A0 + 1:
+    //            case 0x2A2 + 1:
+    //            case 0x2A4 + 1:
+    //            case 0x2A6 + 1:
+    //            case 0x2A8 + 1:
+    //            case 0x2AA + 1:
+    //            case 0x2AC + 1:
+    //            case 0x2AE + 1:
+    //            case 0x2B0 + 1:
+    //            case 0x2B2 + 1:
+    //            case 0x2B4 + 1:
+    //            case 0x2B6 + 1:
+    //            case 0x2B8 + 1:
+    //            case 0x2BA + 1:
+    //            case 0x2BC + 1:
+    //            case 0x2BE + 1:
+    //            case 0x2C0 + 1:
+    //            case 0x2C2 + 1:
+    //            case 0x2C4 + 1:
+    //            case 0x2C6 + 1:
+    //            case 0x2C8 + 1:
+    //            case 0x2CA + 1:
+    //            case 0x2CC + 1:
+    //            case 0x2CE + 1:
+    //            case 0x2D0 + 1:
+    //            case 0x2D2 + 1:
+    //            case 0x2D4 + 1:
+    //            case 0x2D6 + 1:
+    //            case 0x2D8 + 1:
+    //            case 0x2DA + 1:
+    //            case 0x2DC + 1:
+    //            case 0x2DE + 1:
+    //            case 0x2E0 + 1:
+    //            case 0x2E2 + 1:
+    //            case 0x2E4 + 1:
+    //            case 0x2E6 + 1:
+    //            case 0x2E8 + 1:
+    //            case 0x2EA + 1:
+    //            case 0x2EC + 1:
+    //            case 0x2EE + 1:
+    //            case 0x2F0 + 1:
+    //            case 0x2F2 + 1:
+    //            case 0x2F4 + 1:
+    //            case 0x2F6 + 1:
+    //            case 0x2F8 + 1:
+    //                {
+    //                    //End skip over for bit vars
+    //                    break;
+
+    //                }
+    //            case 0x2fb: //dream return position x
+    //                DataLoader.WriteInt16(writer, (int)(dreamReturn.x * Ratio));
+    //                break;
+    //            case 0x2fb + 1: break;
+    //            case 0x2fd: /// dream return  y-position
+    //                DataLoader.WriteInt16(writer, (int)(dreamReturn.z * Ratio));
+    //                break;
+    //            case 0x2fd + 1: break;
+    //            case 0x301:
+    //                DataLoader.WriteInt8(writer, UWCharacter.Instance.DreamReturnLevel);
+    //                break;
+    //            case 0x303:
+    //                //{//Game options high nibble is graphic detail
+    //                WriteGameOptions(writer);
+    //                break;
+    //            //}
+    //            case 0x306://paralyze timer
+    //                DataLoader.WriteInt8(writer, (int)UWCharacter.Instance.ParalyzeTimer);
+    //                break;
+    //            case 0x361://Item Ids of arena warriors.
+    //            case 0x362:
+    //            case 0x363:
+    //            case 0x364:
+    //            case 0x365:
+    //                {
+    //                    DataLoader.WriteInt8(writer, Quest.ArenaOpponents[i - 0x361]);
+    //                    break;
+    //                }
+    //            case 0x36a: ///   game time
+    //                DataLoader.WriteInt8(writer, 0); break;
+    //            case 0x36b:
+    //                DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
+    //            case 0x36c:
+    //                DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
+    //            case 0x36d:
+    //                DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
+    //            case 0x36f://1 Castle events
+    //            case 0x370://2
+    //            case 0x371://3 DjinnCapture
+    //            case 0x372://4
+    //            case 0x373://5
+    //            case 0x374://6
+    //            case 0x375://7
+    //            case 0x376://8
+    //            case 0x377://9
+    //            case 0x378://10
+    //            case 0x379://11
+    //            case 0x37a://12
+    //            case 0x37b://13
+    //            case 0x37c://14
+    //                       //case 0x37d://15 -- This could be wrong.
+    //                {//The mysterious x_clocks
+    //                    DataLoader.WriteInt8(writer, Quest.x_clocks[1 + i - 0x36f]); break;
+    //                }
+    //            case 0x3A3: // Helm (all of these subsequent values are indices into the object list 
+    //                WriteInventoryIndex(writer, inventoryObjects, 0); break;
+    //            case 0x3A4: // Helm ignore
+    //                break;
+    //            case 0x3A5: // Chest
+    //                WriteInventoryIndex(writer, inventoryObjects, 1); break;
+    //            case 0x3A6: // Chest ignore
+    //                break;
+    //            case 0x3A7: // Gloves
+    //                WriteInventoryIndex(writer, inventoryObjects, 4); break;
+    //            case 0x3A8: // Gloves ignore
+    //                break;
+    //            case 0x3A9: // Leggings
+    //                WriteInventoryIndex(writer, inventoryObjects, 2); break;
+    //            case 0x3AA: // Leggings ignore
+    //                break;
+    //            case 0x3AB: // Boots
+    //                WriteInventoryIndex(writer, inventoryObjects, 3); break;
+    //            case 0x3AC: // Boots ignore
+    //                break;
+    //            case 0x3AD: // TopRightShoulder
+    //                WriteInventoryIndex(writer, inventoryObjects, 5); break;
+    //            case 0x3AE: // TopRightShoulder ignore
+    //                break;
+    //            case 0x3AF: // TopLeftShoulder
+    //                WriteInventoryIndex(writer, inventoryObjects, 6); break;
+    //            case 0x3B0: // TopLeftShoulder ignore
+    //                break;
+    //            case 0x3B1: // Righthand
+    //                WriteInventoryIndex(writer, inventoryObjects, 7); break;
+    //            case 0x3B2: // Righthand ignore
+    //                break;
+    //            case 0x3B3: // LeftHand
+    //                WriteInventoryIndex(writer, inventoryObjects, 8); break;
+    //            case 0x3B4: // LeftHand ignore
+    //                break;
+    //            case 0x3B5: // Ring
+    //                WriteInventoryIndex(writer, inventoryObjects, 9); break;
+    //            case 0x3B6: // Ring ignore
+    //                break;
+    //            case 0x3B7: // Ring
+    //                WriteInventoryIndex(writer, inventoryObjects, 10); break;
+    //            case 0x3B8: // Ring ignore
+    //                break;
+    //            case 0x3B9: // Backpack0
+    //                WriteInventoryIndex(writer, inventoryObjects, 11); break;
+    //            case 0x3BA: // Backpack0 ignore
+    //                break;
+    //            case 0x3BB: // Backpack1
+    //                WriteInventoryIndex(writer, inventoryObjects, 12); break;
+    //            case 0x3BC: // Backpack1 ignore
+    //                break;
+    //            case 0x3BD: // Backpack2
+    //                WriteInventoryIndex(writer, inventoryObjects, 13); break;
+    //            case 0x3BE: // Backpack2 ignore
+    //                break;
+    //            case 0x3BF: // Backpack3
+    //                WriteInventoryIndex(writer, inventoryObjects, 14); break;
+    //            case 0x3C0: // Backpack3 ignore
+    //                break;
+    //            case 0x3C1: // Backpack4
+    //                WriteInventoryIndex(writer, inventoryObjects, 15); break;
+    //            case 0x3C2: // Backpack4 ignore
+    //                break;
+    //            case 0x3C3: // Backpack5
+    //                WriteInventoryIndex(writer, inventoryObjects, 16); break;
+    //            case 0x3C4: // Backpack5 ignore
+    //                break;
+    //            case 0x3C5: // Backpack6
+    //                WriteInventoryIndex(writer, inventoryObjects, 17); break;
+    //            case 0x3C6: // Backpack6 ignore
+    //                break;
+    //            case 0x3C7: // Backpack7
+    //                WriteInventoryIndex(writer, inventoryObjects, 18); break;
+    //            case 0x3C8: // Backpack7 ignore
+    //                break;
+    //            case 0x388://Curvit as well?Kills HE player if not properly set
+    //                DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
+    //            //Weird hard coded values that the inventory won't work without
+    //            //F3 02 00 7F 20 60 F3 00 00 40
+    //            case 0x37d: DataLoader.WriteInt8(writer, 0xF3); break;
+    //            case 0x37e: //No of inventory items+1
+    //                DataLoader.WriteInt8(writer, NoOfInventoryItems + 1);
+    //                break;
+    //            //DataLoader.WriteInt8(writer,0x02);break;
+    //            //case 0x37f:	DataLoader.WriteInt8(writer,0x00);break;
+    //            case 0x380: DataLoader.WriteInt8(writer, 0x7f); break;
+    //            case 0x381: DataLoader.WriteInt8(writer, 0x20); break;
+    //            case 0x382: DataLoader.WriteInt8(writer, 0x60); break;
+    //            case 0x383: DataLoader.WriteInt8(writer, 0xF3); break;
+    //            //case 0x384:	DataLoader.WriteInt8(writer,0x00);break;
+    //            //case 0x385:	DataLoader.WriteInt8(writer,0x00);break;
+    //            case 0x386: DataLoader.WriteInt8(writer, 0x40); break;
 
 
-        //Reopen and encrypt the file
-        if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
-        {
-            byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
 
-            byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
-            for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
-            {
-                dataToWrite[i] = recodetest[i];
-            }
-            File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
-        }
-    }
+    //            default://No value. Write 0	
+    //                DataLoader.WriteInt8(writer, 0); break;
+    //        }
+    //    }
+
+    //    //ALl things going well I should be at byte no 0x3e3 where I can write the inventory info.
+    //    WriteInventory(writer, inventoryObjects);
+
+    //    writer.Close();//The file now saved is un-encrypted
+
+
+    //    //Reopen and encrypt the file
+    //    if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "playertmp.dat"), out byte[] buffer))
+    //    {
+    //        byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, (byte)UWCharacter.Instance.XorKey);
+
+    //        byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
+    //        for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
+    //        {
+    //            dataToWrite[i] = recodetest[i];
+    //        }
+    //        File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), dataToWrite);
+    //    }
+    //}
 
 
     static byte[] DecodeEncodeUW2PlayerDat(byte[] pDat, byte MS)
@@ -1824,143 +1824,143 @@ public class SaveGame : Loader
                     //        //Quest.QuestVariablesOBSOLETE[i - 103] = (int)getValAtAddress(buffer, i, 8);
                     //        break;
                     //    }
-                    case 0xFA:  //Variable0
-                    case 0xFC:  //Variable1
-                    case 0xFE:  //Variable2
-                    case 0x100:  //Variable3
-                    case 0x102:  //Variable4
-                    case 0x104:  //Variable5
-                    case 0x106:  //Treated gems used/ Variable6
-                    case 0x108:  //Variable7
-                    case 0x10A:  //Variable8
-                    case 0x10C:  //Variable9
-                    case 0x10E:  //Variable10
-                    case 0x110:  //Variable11
-                    case 0x112:  //Variable12
-                    case 0x114:  //Variable13
-                    case 0x116:  //Variable14
-                    case 0x118:  //Variable15
-                    case 0x11A:  //Variable16
-                    case 0x11C:  //Variable17
-                    case 0x11E:  //Variable18
-                    case 0x120:  //Variable19
-                    case 0x122:  //Variable20
-                    case 0x124:  //Variable21
-                    case 0x126:  //Variable22
-                    case 0x128:  //Variable23
-                    case 0x12A:  //Variable24
-                    case 0x12C:  //Variable25
-                    case 0x12E:  //Variable26
-                    case 0x130:  //Variable27
-                    case 0x132:  //Variable28
-                    case 0x134:  //Variable29
-                    case 0x136:  //Variable30
-                    case 0x138:  //Variable31
-                    case 0x13A:  //Variable32
-                    case 0x13C:  //Variable33
-                    case 0x13E:  //Variable34
-                    case 0x140:  //Variable35
-                    case 0x142:  //Variable36
-                    case 0x144:  //Variable37
-                    case 0x146:  //Variable38
-                    case 0x148:  //Variable39
-                    case 0x14A:  //Variable40
-                    case 0x14C:  //Variable41
-                    case 0x14E:  //Variable42
-                    case 0x150:  //Variable43
-                    case 0x152:  //Variable44
-                    case 0x154:  //Variable45
-                    case 0x156:  //Variable46
-                    case 0x158:  //Variable47
-                    case 0x15A:  //Variable48
-                    case 0x15C:  //Variable49
-                    case 0x15E:  //Variable50
-                    case 0x160:  //Variable 51
-                    case 0x162:  //Variable 52
-                    case 0x164:  //Variable 53 
-                    case 0x166:  //54
-                    case 0x168:  //55
-                    case 0x16A:  //56
-                    case 0x16C:  //57
-                    case 0x16E:  //58
-                    case 0x170:  //59
-                    case 0x172:  //60
-                    case 0x174:  //61
-                    case 0x176:  //62
-                    case 0x178:  //63
-                    case 0x17A:  //64
-                    case 0x17C:  //65
-                    case 0x17E:  //66
-                    case 0x180:  //67
-                    case 0x182:  //68
-                    case 0x184:  //69
-                    case 0x186:  //70
-                    case 0x188:  //71
-                    case 0x18A:  //72
-                    case 0x18C:  //73
-                    case 0x18E:  //74
-                    case 0x190:  //75
-                    case 0x192:  //76
-                    case 0x194:  //77
-                    case 0x196:  //78
-                    case 0x198:  //79
-                    case 0x19A:  //80
-                    case 0x19C:  //81
-                    case 0x19E:  //82
-                    case 0x1A0:  //83
-                    case 0x1A2:  //84
-                    case 0x1A4:  //85
-                    case 0x1A6:  //86
-                    case 0x1A8:  //87
-                    case 0x1AA:  //88
-                    case 0x1AC:  //89
-                    case 0x1AE:  //90
-                    case 0x1B0:  //91
-                    case 0x1B2:  //92
-                    case 0x1B4:  //93
-                    case 0x1B6:  //94
-                    case 0x1B8:  //95
-                    case 0x1BA:  //96
-                    case 0x1BC:  //97
-                    case 0x1BE:  //98
-                    case 0x1C0:  //99
-                    case 0x1C2:  //100
-                    case 0x1C4:  //Variable 101
-                    case 0x1C6:  //102
-                    case 0x1C8:  //103
-                    case 0x1CA:  //104
-                    case 0x1CC:  //105
-                    case 0x1CE:  //106
-                    case 0x1D0:  //107
+                    //case 0xFA:  //Variable0
+                    //case 0xFC:  //Variable1
+                    //case 0xFE:  //Variable2
+                    //case 0x100:  //Variable3
+                    //case 0x102:  //Variable4
+                    //case 0x104:  //Variable5
+                    //case 0x106:  //Treated gems used/ Variable6
+                    //case 0x108:  //Variable7
+                    //case 0x10A:  //Variable8
+                    //case 0x10C:  //Variable9
+                    //case 0x10E:  //Variable10
+                    //case 0x110:  //Variable11
+                    //case 0x112:  //Variable12
+                    //case 0x114:  //Variable13
+                    //case 0x116:  //Variable14
+                    //case 0x118:  //Variable15
+                    //case 0x11A:  //Variable16
+                    //case 0x11C:  //Variable17
+                    //case 0x11E:  //Variable18
+                    //case 0x120:  //Variable19
+                    //case 0x122:  //Variable20
+                    //case 0x124:  //Variable21
+                    //case 0x126:  //Variable22
+                    //case 0x128:  //Variable23
+                    //case 0x12A:  //Variable24
+                    //case 0x12C:  //Variable25
+                    //case 0x12E:  //Variable26
+                    //case 0x130:  //Variable27
+                    //case 0x132:  //Variable28
+                    //case 0x134:  //Variable29
+                    //case 0x136:  //Variable30
+                    //case 0x138:  //Variable31
+                    //case 0x13A:  //Variable32
+                    //case 0x13C:  //Variable33
+                    //case 0x13E:  //Variable34
+                    //case 0x140:  //Variable35
+                    //case 0x142:  //Variable36
+                    //case 0x144:  //Variable37
+                    //case 0x146:  //Variable38
+                    //case 0x148:  //Variable39
+                    //case 0x14A:  //Variable40
+                    //case 0x14C:  //Variable41
+                    //case 0x14E:  //Variable42
+                    //case 0x150:  //Variable43
+                    //case 0x152:  //Variable44
+                    //case 0x154:  //Variable45
+                    //case 0x156:  //Variable46
+                    //case 0x158:  //Variable47
+                    //case 0x15A:  //Variable48
+                    //case 0x15C:  //Variable49
+                    //case 0x15E:  //Variable50
+                    //case 0x160:  //Variable 51
+                    //case 0x162:  //Variable 52
+                    //case 0x164:  //Variable 53 
+                    //case 0x166:  //54
+                    //case 0x168:  //55
+                    //case 0x16A:  //56
+                    //case 0x16C:  //57
+                    //case 0x16E:  //58
+                    //case 0x170:  //59
+                    //case 0x172:  //60
+                    //case 0x174:  //61
+                    //case 0x176:  //62
+                    //case 0x178:  //63
+                    //case 0x17A:  //64
+                    //case 0x17C:  //65
+                    //case 0x17E:  //66
+                    //case 0x180:  //67
+                    //case 0x182:  //68
+                    //case 0x184:  //69
+                    //case 0x186:  //70
+                    //case 0x188:  //71
+                    //case 0x18A:  //72
+                    //case 0x18C:  //73
+                    //case 0x18E:  //74
+                    //case 0x190:  //75
+                    //case 0x192:  //76
+                    //case 0x194:  //77
+                    //case 0x196:  //78
+                    //case 0x198:  //79
+                    //case 0x19A:  //80
+                    //case 0x19C:  //81
+                    //case 0x19E:  //82
+                    //case 0x1A0:  //83
+                    //case 0x1A2:  //84
+                    //case 0x1A4:  //85
+                    //case 0x1A6:  //86
+                    //case 0x1A8:  //87
+                    //case 0x1AA:  //88
+                    //case 0x1AC:  //89
+                    //case 0x1AE:  //90
+                    //case 0x1B0:  //91
+                    //case 0x1B2:  //92
+                    //case 0x1B4:  //93
+                    //case 0x1B6:  //94
+                    //case 0x1B8:  //95
+                    //case 0x1BA:  //96
+                    //case 0x1BC:  //97
+                    //case 0x1BE:  //98
+                    //case 0x1C0:  //99
+                    //case 0x1C2:  //100
+                    //case 0x1C4:  //Variable 101
+                    //case 0x1C6:  //102
+                    //case 0x1C8:  //103
+                    //case 0x1CA:  //104
+                    //case 0x1CC:  //105
+                    //case 0x1CE:  //106
+                    //case 0x1D0:  //107
 
-                    case 0x1D4:  //109
-                    case 0x1D6:  //110
-                    case 0x1D8:  //111
-                    case 0x1DA:  //112
-                    case 0x1DC:  //Variable 113
-                    case 0x1DE:  //Variable 114 (duplicate with below!!!)
-                    case 0x1E0:  //Variable 115
-                    case 0x1E2:  //116
-                    case 0x1E4:  //117
-                    case 0x1E6:  //118
-                    case 0x1E8:  //119
-                    case 0x1EA:  //120
-                    case 0x1EC:  //121
-                    case 0x1EE:  //122
-                    case 0x1F0:  //123
-                    case 0x1F2:  //124
-                    case 0x1F4:  //125
-                    case 0x1F6:  //126
-                    case 0x1F8:  //Variable 127
-                        {
-                            Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 8);
-                            break;
-                        }
-                    case 0x1D2:  //Variable 108 //Int 16 used in qbert
-                        {
-                            Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 16);
-                            break;
-                        }
+                    //case 0x1D4:  //109
+                    //case 0x1D6:  //110
+                    //case 0x1D8:  //111
+                    //case 0x1DA:  //112
+                    //case 0x1DC:  //Variable 113
+                    //case 0x1DE:  //Variable 114 (duplicate with below!!!)
+                    //case 0x1E0:  //Variable 115
+                    //case 0x1E2:  //116
+                    //case 0x1E4:  //117
+                    //case 0x1E6:  //118
+                    //case 0x1E8:  //119
+                    //case 0x1EA:  //120
+                    //case 0x1EC:  //121
+                    //case 0x1EE:  //122
+                    //case 0x1F0:  //123
+                    //case 0x1F2:  //124
+                    //case 0x1F4:  //125
+                    //case 0x1F6:  //126
+                    //case 0x1F8:  //Variable 127
+                    //    {
+                    //        Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 8);
+                    //        break;
+                    //    }
+                    //case 0x1D2:  //Variable 108 //Int 16 used in qbert
+                    //    {
+                    //        Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 16);
+                    //        break;
+                    //    }
 
 
                     //Bit Variables
@@ -2264,25 +2264,25 @@ public class SaveGame : Loader
                         GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x36d:
                         GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0x36f://1 Castle events
-                    case 0x370://2
-                    case 0x371://3 DjinnCapture
-                    case 0x372://4
-                    case 0x373://5
-                    case 0x374://6
-                    case 0x375://7
-                    case 0x376://8
-                    case 0x377://9
-                    case 0x378://10
-                    case 0x379://11
-                    case 0x37a://12
-                    case 0x37b://13
-                    case 0x37c://14
-                               //case 0x37d://15 -- This could be wrong.
-                        {//The mysterious x_clocks
-                            Quest.x_clocks[x_clock++] = (int)getValAtAddress(buffer, i, 8);
-                            break;
-                        }
+                    //case 0x36f://1 Castle events
+                    //case 0x370://2
+                    //case 0x371://3 DjinnCapture
+                    //case 0x372://4
+                    //case 0x373://5
+                    //case 0x374://6
+                    //case 0x375://7
+                    //case 0x376://8
+                    //case 0x377://9
+                    //case 0x378://10
+                    //case 0x379://11
+                    //case 0x37a://12
+                    //case 0x37b://13
+                    //case 0x37c://14
+                    //           //case 0x37d://15 -- This could be wrong.
+                    //    {//The mysterious x_clocks
+                    //        Quest.x_clocks[x_clock++] = (int)getValAtAddress(buffer, i, 8);
+                    //        break;
+                    //    }
                 }
             }
 

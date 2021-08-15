@@ -1181,9 +1181,10 @@ public class UWCharacter : Character
         }
         if (_RES == GAME_UW2)
         {//Stepped in Lava after covering in basilisk oil.
-            if (Quest.x_clocks[3] == 3)
+            if (Quest.GetX_Clock(3) == 3)
             {
-                Quest.x_clocks[3] = 4;
+                Quest.SetX_Clock(3, 4);
+                //Quest.x_clocks[3] = 4;
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 334));
             }
         }

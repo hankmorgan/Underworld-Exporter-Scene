@@ -589,7 +589,8 @@ public class NPC : MobileObject
                         Quest.ArenaOpponents[i] = 0;
                         //Quest.QuestVariablesOBSOLETE[129] = Mathf.Min(255, Quest.QuestVariablesOBSOLETE[129] + 1);
                         Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));
-                        Quest.x_clocks[14] = Mathf.Min(255, Quest.x_clocks[14] + 1);
+                        //Quest.x_clocks[14] = Mathf.Min(255, Quest.x_clocks[14] + 1);
+                        Quest.IncrementXClock(14);        
                         //Quest.QuestVariablesOBSOLETE[24] = 1;//You have won a fight.
                         Quest.SetQuestVariable(24, 1);
                     }
@@ -794,7 +795,8 @@ public class NPC : MobileObject
                         case 145://The listener under the castle
                             //Quest.QuestVariablesOBSOLETE[11] = 1;
                             Quest.SetQuestVariable(11, 1);
-                            Quest.x_clocks[1]++;//Confirm this behaviour!
+                            //Quest.x_clocks[1]++;//Confirm this behaviour!
+                            Quest.IncrementXClock(1);
                             return false;
                         case 152://Bliy Scup Ductosnore
                             {
