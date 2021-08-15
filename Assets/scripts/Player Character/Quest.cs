@@ -114,8 +114,7 @@ using UnityEngine;
 /// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWClass
-{//TODO Change this to a class rather than a monobehaviour
-
+{
     /// <summary>
     /// Returns the quest variable at the specified index
     /// </summary>
@@ -232,8 +231,6 @@ public class Quest : UWClass
     /// Typically these are used for traps/triggers/switches.
     /// In UW1 64 x 1 byte variables.
     /// In UW2 128 x 2 byte variables.
-    //public static int[] variables = new int[128];
-
     public static int GetVariable(int variableno)
     {
         if (_RES==GAME_UW2)
@@ -257,7 +254,6 @@ public class Quest : UWClass
            SaveGame.SetAt(0x71 + variableno,(byte)newvalue);
         }
     }
-
 
     /// <summary>
     /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
@@ -393,17 +389,77 @@ public class Quest : UWClass
     /// <summary>
     /// Is the orb on tybals level destroyed.
     /// </summary>
-    public static bool isOrbDestroyed;
+    /// Original save loading code had this flagged at bit 6??
+    public static bool IsTybalsOrbDestroyed
+    {
+        get
+        {
+            return (int)((SaveGame.GetAt(0x61) >> 5) & 0x1) == 1;
+        }
+        set
+        {
+            byte existingValue = SaveGame.GetAt(0x61);
+            byte mask = (1 << 5);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(0x61, existingValue);
+        }
+    }
 
     /// <summary>
     /// Has Garamon been buried. If so talismans can now be sacrificed.
     /// </summary>
-    public static bool isGaramonBuried;
+    public static bool IsGaramonBuried
+    {
+        get 
+        {
+            return (int)((SaveGame.GetAt16(0x62) >> 10) & 0x3)==3;
+        }
+        set
+        {
+            int toSet = 0;
+            if(value)
+            {
+                toSet = 3;
+            }
+            int ExistingVal = SaveGame.GetAt16(0x62);
+            ExistingVal &= 0xF3FF;
+            ExistingVal |= ((toSet & 0x3) << 4);
+            SaveGame.SetAt16(0x62, ExistingVal);
+        }
+    }
 
     /// <summary>
     /// Is the cup of wonder found.
     /// </summary>
-    public static bool isCupFound;
+    public static bool IsCupOfWonderFound
+    {
+        get
+        {
+            return (int)((SaveGame.GetAt(0x61) >> 6) & 0x1) == 1;
+        }
+        set
+        {
+            byte existingValue = SaveGame.GetAt(0x61);
+            byte mask = (1 << 6);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(0x61, existingValue);
+        }
+
+    }
 
     /// <summary>
     /// Is the player fighting in arena.

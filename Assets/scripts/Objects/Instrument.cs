@@ -95,7 +95,7 @@ public class Instrument : object_base
                 if ((NoteRecord == "354237875") && (item_id == 292))//Flute only
                 {
                     //UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-                    if ((GameWorldController.instance.dungeon_level == 2) && (Quest.isCupFound == false) && (item_id == 292))
+                    if ((GameWorldController.instance.dungeon_level == 2) && (Quest.IsCupOfWonderFound == false) && (item_id == 292))
                     {
                         int tileX = TileMap.visitTileX;
                         int tileY = TileMap.visitTileY;
@@ -110,7 +110,7 @@ public class Instrument : object_base
                             CurrentObjectInHand = myObjInt;
                             Character.InteractionMode = Character.InteractionModePickup;
                             InteractionModeControl.UpdateNow = true;
-                            Quest.isCupFound = true;
+                            Quest.IsCupOfWonderFound = true;
                             //An object appears in the air and falls into your hands
                             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 136));
 

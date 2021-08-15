@@ -7,7 +7,7 @@ public class OrbRock : object_base
     {
         //Spawn an impact
         Impact.SpawnHitImpact(Impact.ImpactDamage(), orbToDestroy.GetImpactPoint(), 46, 50);
-        Quest.isOrbDestroyed = true;
+        Quest.IsTybalsOrbDestroyed = true;
         UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerMagic.TrueMaxMana;
         UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
         //000-001-133 The orb is destroyed

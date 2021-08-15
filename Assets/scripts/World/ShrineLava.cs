@@ -15,7 +15,7 @@ public class ShrineLava : UWEBase
     {
         if (other.gameObject.GetComponent<ObjectInteraction>() != null)
         {
-            if (Quest.isGaramonBuried == false)
+            if (Quest.IsGaramonBuried == false)
             {
                 return;
             }

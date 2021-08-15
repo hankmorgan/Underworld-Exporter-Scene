@@ -50,7 +50,6 @@ public class UWCharacter : Character
     //    }
     //}
 
-
     [Header("Player Movement Status")]
     public SpellEffect[] ActiveSpell = new SpellEffect[3];      //What effects and enchantments (eg from items are equipped on the player)
     public SpellEffect[] PassiveSpell = new SpellEffect[10];
@@ -156,7 +155,6 @@ public class UWCharacter : Character
     }
     public bool isBouncy;
 
-
     //Character Status
     public int FoodLevel //0-255 range.
     {
@@ -197,8 +195,28 @@ public class UWCharacter : Character
         }
     }
 
-    [Header("Player Health Status")]
-    public int Intoxication; //0-63 range
+    public int Intoxication //0-63 range
+    {
+        get
+        {
+            if (_RES==GAME_UW2)
+            {
+                Debug.Log("Intoxication in UW2");
+            }
+            return (SaveGame.GetAt16(0x62) >> 4) & 0x3f;
+        }
+        set
+        {
+            if (_RES == GAME_UW2)
+            {
+                Debug.Log("Intoxication in UW2");
+            }
+            int ExistingVal = SaveGame.GetAt16(0x62);
+            ExistingVal &= 0xFC0F;
+            ExistingVal |= ((value & 0x3f) << 4);
+            SaveGame.SetAt16(0x62, ExistingVal);
+        }
+    }
 
     /// <summary>
     /// How badly poisoned is the player. The higher the value the longer poison ticks down for.
@@ -225,7 +243,6 @@ public class UWCharacter : Character
             }
             else if (currentVal != 0 && value == 0)
             {//Sets poisoning on the flask
-                UWCharacter.Instance.poison_timer = 30f;//Starts the timer for poison
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
             }
             switch(_RES)
@@ -249,7 +266,6 @@ public class UWCharacter : Character
         }
     }
 
-    public float poison_timer = 30f;
     public float lavaDamageTimer;//How long before applying lava damage
     private bool InventoryReady = false;
     /// <summary>
@@ -526,7 +542,6 @@ public class UWCharacter : Character
     public short DreamReturnLevel = 0;
     public float DreamWorldTimer = 30f;//Not sure what values controls the time spent in dream world
     public Vector3 TeleportPosition;
-
 
     public void Awake()
     {
@@ -832,7 +847,6 @@ public class UWCharacter : Character
         }
     }
 
-
     public override float GetPickupRange()
     {
         if (isTelekinetic == true)
@@ -864,7 +878,6 @@ public class UWCharacter : Character
             this.GetComponent<CharacterController>().Move(new Vector3(0, -0.2f * Time.deltaTime * speedMultiplier, 0));
         }
     }
-
 
     /// <summary>
     /// Management of the character when in water.
@@ -924,7 +937,6 @@ public class UWCharacter : Character
         }
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         if (GameWorldController.instance.AtMainMenu) { return; }
@@ -984,10 +996,10 @@ public class UWCharacter : Character
         {
             SwimUpdate();
         }
-        if (play_poison > 0)
-        {
-            PoisonUpdate();
-        }
+        //if (play_poison > 0)
+        //{
+        //    PoisonUpdate();
+        //}
 
         playerMotor.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
 
@@ -1228,12 +1240,10 @@ public class UWCharacter : Character
         }
     }
 
-    private void PoisonUpdate()
+    public void PoisonUpdate()
     {
-        poison_timer -= Time.deltaTime;
-        if (poison_timer <= 0)
+        if (play_poison > 0)
         {
-            poison_timer = 30f;
             CurVIT -= 3;
             play_poison--;
         }
@@ -1336,7 +1346,6 @@ public class UWCharacter : Character
             UWHUD.instance.window.UWWindowWait(1.0f);
         }
     }
-
 
     /// <summary>
     /// Processes a pickup of quantity event
@@ -1525,7 +1534,6 @@ public class UWCharacter : Character
         }
     }
 
-
     public override void PickupMode(int ptrId)
     {
         //Picks up the clicked object in the view.
@@ -1604,11 +1612,6 @@ public class UWCharacter : Character
             }
         }
     }
-
-    //public Quest quest()
-    //{
-    //    return this.GetComponent<Quest>();
-    //}
 
     public void onLanding(float fallSpeed)
     {
@@ -1754,7 +1757,7 @@ public class UWCharacter : Character
             switch (_RES)
             {//TODO:max these properties?
                 case GAME_UW1:
-                    if ((GameWorldController.instance.dungeon_level == 6) && (!Quest.isOrbDestroyed))
+                    if ((GameWorldController.instance.dungeon_level == 6) && (!Quest.IsTybalsOrbDestroyed))
                     {
                         Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
                     }
@@ -1937,12 +1940,10 @@ public class UWCharacter : Character
         }
     }
 
-
     public int GetBaseStealthLevel()
     {
         return Skills.GetSkill(Skills.SkillSneak);
     }
-
 
     public void Sleep()
     {
@@ -2047,7 +2048,6 @@ public class UWCharacter : Character
         }
     }
 
-
     /// <summary>
     /// Play the dream that happens when you sleep after sniffing incense.
     /// </summary>
@@ -2060,7 +2060,6 @@ public class UWCharacter : Character
         UWHUD.instance.CutScenesFull.cs = d;
         UWHUD.instance.CutScenesFull.Begin();
     }
-
 
     /// <summary>
     /// Special dream after taking a dream plant that teleports you to the dreamworld.
@@ -2148,7 +2147,6 @@ public class UWCharacter : Character
         return false;
     }
 
-
     /// <summary>
     /// CHecks if we are due for a dream from garamon.
     /// </summary>
@@ -2165,7 +2163,7 @@ public class UWCharacter : Character
             return true;//Tybal is dead. Time to play a special dream to refflect that.
         }
 
-        if (GameClock.day() >= Quest.DayGaramonDream)
+        if (GameClock.Day >= Quest.DayGaramonDream)
         {
             return true;
         }
@@ -2247,7 +2245,7 @@ public class UWCharacter : Character
                 break;
         }
 
-        Quest.DayGaramonDream = GameClock.day() + DaysToWait;
+        Quest.DayGaramonDream = GameClock.Day + DaysToWait;
     }
 
     /// <summary>
@@ -2293,7 +2291,6 @@ public class UWCharacter : Character
         UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject, false);
     }
 
-
     /// <summary>
     /// Resets the true mana to handle the magic drain effect in tybals layer of UW1
     /// </summary>
@@ -2308,7 +2305,6 @@ public class UWCharacter : Character
             }
         }
     }
-
 
     /// <summary>
     /// Checks if the player is poison resistant
@@ -2336,8 +2332,6 @@ public class UWCharacter : Character
     {
         return (this.gameObject.GetComponent<SpellEffectMagicResistant>() != null);
     }
-
-
 
     /// <summary>
     /// Gets the spell reduction of damage for magic spell types
@@ -2475,7 +2469,6 @@ public class UWCharacter : Character
         return false;
     }
 
-
     /// <summary>
     /// Checks the players fall speed to see if they have fallen from a height
     /// </summary>
@@ -2504,7 +2497,6 @@ public class UWCharacter : Character
         }
         currYVelocity = playerMotor.movement.velocity.y;
     }
-
 
     /// <summary>
     /// Plays sound effects for foot steps.

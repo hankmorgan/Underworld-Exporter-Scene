@@ -7,7 +7,7 @@
         base.Start();
         if ((_RES == GAME_UW1) && (GameWorldController.instance.dungeon_level == 6))
         {
-            if (Quest.isOrbDestroyed == false)
+            if (Quest.IsTybalsOrbDestroyed == false)
             {
                 UWCharacter.Instance.PlayerMagic.CurMana = 0;
                 UWCharacter.Instance.PlayerMagic.MaxMana = 0;
