@@ -78,7 +78,7 @@ public class Equipment : object_base
                         }
                         else
                         {
-                            int estimate = RepairDifficulty - UWCharacter.Instance.PlayerSkills.Repair + 0xF;
+                            int estimate = RepairDifficulty - Skills.Repair + 0xF;
                             if (estimate >= 0x1E)
                             {
                                 estimate = 4;
@@ -148,13 +148,13 @@ public class Equipment : object_base
 
             int RepairDifficulty = repairEstimate();
 
-            Skills.SkillRollResult result = Skills.SkillRoll(UWCharacter.Instance.PlayerSkills.Repair, RepairDifficulty);
+            Skills.SkillRollResult result = Skills.SkillRoll(Skills.Repair, RepairDifficulty);
 
             switch (result)
             {
                 case Skills.SkillRollResult.CriticalFailure://attempt fails. dice roll of 0-63. If repair skill is lower than result damage item by another roll (0-7)+4;
                     {
-                        if (Random.Range(0, 64) >= UWCharacter.Instance.PlayerSkills.Repair)
+                        if (Random.Range(0, 64) >= Skills.Repair)
                         {
                             int damage = Random.Range(0, 7) + 4;
                             quality = (short)(quality - (short)damage);
@@ -169,7 +169,7 @@ public class Equipment : object_base
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id));
                     break;
                 case Skills.SkillRollResult.Success://repair up to (repair skill/5+3)
-                    int newQuality = (UWCharacter.Instance.PlayerSkills.Repair / 5 + 3);
+                    int newQuality = (Skills.Repair / 5 + 3);
                     if (quality >= newQuality)
                     {
                         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetObjectNounUW(item_id));
@@ -226,7 +226,7 @@ public class Equipment : object_base
                 case ObjectInteraction.IdentificationFlags.Unidentified:
                 case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
                     //Try and re-id using lore skill
-                    if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+                    if (Skills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
                     {
                         heading = 7;
                         UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(), GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6, GetActualSpellIndex()) + OwnershipString());

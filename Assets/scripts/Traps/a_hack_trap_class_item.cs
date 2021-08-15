@@ -26,33 +26,33 @@ public class a_hack_trap_class_item : a_hack_trap
 
 
         //Get max magic skill score
-        int MaxMagicSkillScore = Mathf.Max(UWCharacter.Instance.PlayerSkills.Casting, UWCharacter.Instance.PlayerSkills.ManaSkill);
+        int MaxMagicSkillScore = Mathf.Max(Skills.Casting, Skills.ManaSkill);
 
         int MaxCombatSkillScore = 0;
         byte CombatSkillType = 0; //0=none, 1=sword, 2=axe, 3=mace; 4=missile, 5=unarmed.
-        if (UWCharacter.Instance.PlayerSkills.Sword > MaxCombatSkillScore)
+        if (Skills.Sword > MaxCombatSkillScore)
         {
-            MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Sword;
+            MaxCombatSkillScore = Skills.Sword;
             CombatSkillType = 1;
         }
-        if (UWCharacter.Instance.PlayerSkills.Axe > MaxCombatSkillScore)
+        if (Skills.Axe > MaxCombatSkillScore)
         {
-            MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Axe;
+            MaxCombatSkillScore = Skills.Axe;
             CombatSkillType = 2;
         }
-        if (UWCharacter.Instance.PlayerSkills.Mace > MaxCombatSkillScore)
+        if (Skills.Mace > MaxCombatSkillScore)
         {
-            MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Mace;
+            MaxCombatSkillScore = Skills.Mace;
             CombatSkillType = 3;
         }
-        if (UWCharacter.Instance.PlayerSkills.Missile > MaxCombatSkillScore)
+        if (Skills.Missile > MaxCombatSkillScore)
         {
-            MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Missile;
+            MaxCombatSkillScore = Skills.Missile;
             CombatSkillType = 4;
         }
-        if (UWCharacter.Instance.PlayerSkills.Unarmed > MaxCombatSkillScore)
+        if (Skills.Unarmed > MaxCombatSkillScore)
         {
-            MaxCombatSkillScore = UWCharacter.Instance.PlayerSkills.Unarmed;
+            MaxCombatSkillScore = Skills.Unarmed;
             CombatSkillType = 5;
         }
 

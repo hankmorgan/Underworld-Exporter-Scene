@@ -1156,10 +1156,10 @@ public class PlayerInventory : UWEBase
         {
             case GAME_UW2:
                 //IN UW2 Weight is calcuated based on the a base carry weight of 300  + str * 13. In units of 0.1 stones
-                CarryWeight = (300f + (playerUW.PlayerSkills.STR * 13f)) * 0.1f;//estimate
+                CarryWeight = (300f + (Skills.STR * 13f)) * 0.1f;//estimate
                 break;
             default:
-                CarryWeight = playerUW.PlayerSkills.STR * 2.0f;
+                CarryWeight = Skills.STR * 2.0f;
                 break;
         }
 

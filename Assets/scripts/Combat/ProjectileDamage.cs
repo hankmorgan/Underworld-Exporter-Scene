@@ -75,7 +75,7 @@ public class ProjectileDamage : UWEBase
             int otherDefenceScore;
             if (other == UWCharacter.Instance.gameObject) //.name=="_Gronk")
             {
-                otherDefenceScore = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillDefense) + (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile) / 2);
+                otherDefenceScore = Skills.GetSkill(Skills.SkillDefense) + (Skills.GetSkill(Skills.SkillMissile) / 2);
                 DamageReduction = UWCharacter.Instance.playerInventory.ArmourProtection;
             }
             else if (other.GetComponent<NPC>() != null)

@@ -514,7 +514,7 @@ public class UWCombat : Combat
                 pd.Source = UWCharacter.Instance.gameObject;
                 pd.Damage = (short)currWeaponRanged.Damage(); //   (short)(10.0f*(Charge/100.0f));
                 pd.AttackCharge = charge;
-                pd.AttackScore = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillAttack) / 2 + UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile);
+                pd.AttackScore = Skills.GetSkill(Skills.SkillAttack) / 2 + Skills.GetSkill(Skills.SkillMissile);
                 return true;
             }
             else
@@ -609,7 +609,7 @@ public class UWCombat : Combat
         int attackScore;
         if (currentWeapon != null)
         {
-            attackScore = (playerUW.PlayerSkills.GetSkill(Skills.SkillAttack) >> 1) + playerUW.PlayerSkills.GetSkill(currentWeapon.GetSkill()) + (playerUW.PlayerSkills.DEX / 7) + magicbonus + flankingbonus;
+            attackScore = (Skills.GetSkill(Skills.SkillAttack) >> 1) + Skills.GetSkill(currentWeapon.GetSkill()) + (Skills.DEX / 7) + magicbonus + flankingbonus;
             if (GameWorldController.instance.difficulty == 0)
             {//bonus of 7 for easy difficulty
                 attackScore += 7;
@@ -623,7 +623,7 @@ public class UWCombat : Combat
         {
 
             //use the unarmed calculations
-            attackScore = (playerUW.PlayerSkills.GetSkill(Skills.SkillAttack) >> 1) + playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) + (playerUW.PlayerSkills.DEX / 7) + magicbonus + flankingbonus;
+            attackScore = (Skills.GetSkill(Skills.SkillAttack) >> 1) + Skills.GetSkill(Skills.SkillUnarmed) + (Skills.DEX / 7) + magicbonus + flankingbonus;
             if (GameWorldController.instance.difficulty == 0)
             {//bonus of 7 for easy difficulty
                 attackScore += 7;
@@ -644,7 +644,7 @@ public class UWCombat : Combat
         else
         {//unarmed
             basePower = (short)(GameWorldController.instance.objDat.critterStats[63].Strength / 6); //the player is actually a critter so power in this case is their STR.
-            basePower += (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) / 5);
+            basePower += (Skills.GetSkill(Skills.SkillUnarmed) / 5);
         }
 
 
@@ -740,14 +740,14 @@ public class UWCombat : Combat
 
         //Player defence
         //defence skill + sum of all armour+(skill with current weapon >>1) + unknownbonus(stored in critterdata)
-        int DefenderScore = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + playerUW.playerInventory.ArmourProtection;
+        int DefenderScore = Skills.GetSkill(Skills.SkillDefense) + playerUW.playerInventory.ArmourProtection;
         if (playerUW.PlayerCombat.currWeapon != null)
         {
-            DefenderScore += (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill()) >> 1);
+            DefenderScore += (Skills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill()) >> 1);
         }
         else
         {
-            DefenderScore += (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) >> 1);
+            DefenderScore += (Skills.GetSkill(Skills.SkillUnarmed) >> 1);
         }
 
         Skills.SkillRollResult rollresult = Skills.SkillRoll(attackScore, DefenderScore);
@@ -798,11 +798,11 @@ public class UWCombat : Combat
         ////////    int PlayerDefence = 0;
         ////////    if (playerUW.PlayerCombat.currWeapon != null)
         ////////    {
-        ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill() + 1) / 2);
+        ////////        PlayerDefence = Skills.GetSkill(Skills.SkillDefense) + (Skills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill() + 1) / 2);
         ////////    }
         ////////    else
         ////////    {
-        ////////        PlayerDefence = playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) / 2);
+        ////////        PlayerDefence = Skills.GetSkill(Skills.SkillDefense) + (Skills.GetSkill(Skills.SkillUnarmed) / 2);
         ////////    }
         ////////    int toHit = Mathf.Max(PlayerDefence - npc.Dexterity, 0);
         ////////    int roll = Random.Range(-1, 31);

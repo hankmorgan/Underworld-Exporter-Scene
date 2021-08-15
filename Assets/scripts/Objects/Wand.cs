@@ -115,7 +115,7 @@ public class Wand : enchantment_base
                 break;
             case ObjectInteraction.IdentificationFlags.Unidentified:
             case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
-                if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+                if (Skills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
                 {
                     heading = 7;
                     FormattedName = StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6, GetActualSpellIndex());

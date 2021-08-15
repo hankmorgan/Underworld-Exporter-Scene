@@ -43,7 +43,7 @@ public class FishingPole : object_base
                     //I think the (track skill plus 7) / 8  must beat the random roll 0 to 4 to catch a fish
                     //The below is almost the vanilla behaviour except I don't know what the random roll range is.
 
-                    if (Random.Range(0, 5) <= (UWCharacter.Instance.PlayerSkills.Track + 7) / 8)
+                    if (Random.Range(0, 5) <= (Skills.Track + 7) / 8)
                     {//catch something and test for encumerance
                      //000~001~099~You catch a lovely fish.
                         if ((GameWorldController.instance.commonObject.properties[182].mass * 0.1f) <= UWCharacter.Instance.playerInventory.getEncumberance())

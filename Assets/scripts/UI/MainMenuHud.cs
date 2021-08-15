@@ -264,16 +264,16 @@ public class MainMenuHud : GuiBase
             GameClock.instance._second = 15;
             UWCharacter.Instance.MaxVIT = 255;
             UWCharacter.Instance.CurVIT = 255;
-            UWCharacter.Instance.PlayerSkills.STR = 30;
-            UWCharacter.Instance.PlayerSkills.DEX = 30;
-            UWCharacter.Instance.PlayerSkills.INT= 30;
+            Skills.STR = 30;
+            Skills.DEX = 30;
+            Skills.INT= 30;
             UWCharacter.Instance.CharName = "Speedstart";
-            UWCharacter.Instance.PlayerSkills.Unarmed = 30;
-            UWCharacter.Instance.PlayerSkills.Attack = 30;
-            UWCharacter.Instance.PlayerSkills.Defense = 30;
-            UWCharacter.Instance.PlayerSkills.Casting = 30;
-            UWCharacter.Instance.PlayerSkills.ManaSkill = 30;
-            UWCharacter.Instance.PlayerSkills.Acrobat= 30;
+            Skills.Unarmed = 30;
+            Skills.Attack = 30;
+            Skills.Defense = 30;
+            Skills.Casting = 30;
+            Skills.ManaSkill = 30;
+            Skills.Acrobat= 30;
             JourneyOnwards();
             return;
         }
@@ -321,7 +321,7 @@ public class MainMenuHud : GuiBase
         {
             case Chargen.STAGE_GENDER:
                 //Gender
-                UWCharacter.Instance.PlayerSkills.InitSkills();//Set all skills to zero
+                Skills.InitSkills();//Set all skills to zero
 
                 if (option == 0)
                 {
@@ -356,16 +356,16 @@ public class MainMenuHud : GuiBase
                 SkillSeed = Chargen.getSeed(option);
                 //Set str, int and dex here.
                 //Max attribute is 30. Min is 12.
-                UWCharacter.Instance.PlayerSkills.STR = Mathf.Min(Mathf.Max(Chargen.getBaseSTR(option) + Random.Range(1, SkillSeed), 12), 30);
-                UWCharacter.Instance.PlayerSkills.INT = Mathf.Min(Mathf.Max(Chargen.getBaseINT(option) + Random.Range(1, SkillSeed), 12), 30);
-                UWCharacter.Instance.PlayerSkills.DEX = Mathf.Min(Mathf.Max(Chargen.getBaseDEX(option) + Random.Range(1, SkillSeed), 12), 30);
-                CharStr.text = "Str:   " + UWCharacter.Instance.PlayerSkills.STR.ToString();
-                CharInt.text = "Int:   " + UWCharacter.Instance.PlayerSkills.INT.ToString();
-                CharDex.text = "Dex:   " + UWCharacter.Instance.PlayerSkills.DEX.ToString();
+                Skills.STR = Mathf.Min(Mathf.Max(Chargen.getBaseSTR(option) + Random.Range(1, SkillSeed), 12), 30);
+                Skills.INT = Mathf.Min(Mathf.Max(Chargen.getBaseINT(option) + Random.Range(1, SkillSeed), 12), 30);
+                Skills.DEX = Mathf.Min(Mathf.Max(Chargen.getBaseDEX(option) + Random.Range(1, SkillSeed), 12), 30);
+                CharStr.text = "Str:   " + Skills.STR.ToString();
+                CharInt.text = "Int:   " + Skills.INT.ToString();
+                CharDex.text = "Dex:   " + Skills.DEX.ToString();
                 CharClass.text = getClass(UWCharacter.Instance.CharClass);
-                // UWCharacter.Instance.MaxVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
-                //UWCharacter.Instance.CurVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
-                UWCharacter.Instance.MaxVIT = 30 + ((UWCharacter.Instance.PlayerSkills.STR * 1) / 5);
+                // UWCharacter.Instance.MaxVIT = (Skills.STR * 2);
+                //UWCharacter.Instance.CurVIT = (Skills.STR * 2);
+                UWCharacter.Instance.MaxVIT = 30 + ((Skills.STR * 1) / 5);
                 UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
 
                 CharVit.text = "Vit:   " + UWCharacter.Instance.MaxVIT.ToString();
@@ -459,7 +459,7 @@ public class MainMenuHud : GuiBase
                     UWCharacter.Instance.EXP = 50;
                     UWCharacter.Instance.CharLevel = 1;
                     UWCharacter.Instance.TrainingPoints = 1;
-                    UWCharacter.Instance.PlayerMagic.MaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
+                    UWCharacter.Instance.PlayerMagic.MaxMana = (Skills.INT * Skills.ManaSkill) >> 3;
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     GameWorldController.instance.InitBGlobals(0);
@@ -537,19 +537,19 @@ public class MainMenuHud : GuiBase
                                                                                   //actualSkillNo++;
                                                                                   //Increase the skill by up to (no more than the skill seed) Apply the attibute bonus if needed.
         int SkillScore = Mathf.Min(Random.Range(1, SkillSeed) + Skills.getSkillAttributeBonus(actualSkillNo), SkillSeed);
-        UWCharacter.Instance.PlayerSkills.AdvanceSkill(actualSkillNo, SkillScore);
+        Skills.AdvanceSkill(actualSkillNo, SkillScore);
         string skillname = StringController.instance.GetString(2, Chargen.GetChoices(Stage, CharClassAns)[option]);
         for (int i = 0; i < 5; i++)//Update the display
         {
             if (CharSkillName[i].text == "")
             {//First free slot
                 CharSkillName[i].text = skillname;
-                CharSkillVal[i].text = UWCharacter.Instance.PlayerSkills.GetSkill(actualSkillNo).ToString();
+                CharSkillVal[i].text = Skills.GetSkill(actualSkillNo).ToString();
                 return;
             }
             else if (CharSkillName[i].text == skillname)
             {//Skill found add to it.
-                CharSkillVal[i].text = UWCharacter.Instance.PlayerSkills.GetSkill(actualSkillNo).ToString();
+                CharSkillVal[i].text = Skills.GetSkill(actualSkillNo).ToString();
                 return;
             }
         }
