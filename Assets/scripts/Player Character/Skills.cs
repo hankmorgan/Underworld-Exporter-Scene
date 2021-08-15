@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class Skills : UWEBase
+public class Skills : UWClass
 {
 
 
@@ -39,7 +39,7 @@ public class Skills : UWEBase
     public const int SkillSwimming = 20;
 
     //Character attributes
-    public int STR
+    public static int STR
     {
         get
         {
@@ -53,7 +53,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x1F, (byte)(value));
         }
     }
-    public int DEX
+    public static int DEX
     {
         get
         {
@@ -64,7 +64,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x20, (byte)(value));
         }
     }
-    public int INT
+    public static int INT
     {
         get
         {
@@ -77,7 +77,7 @@ public class Skills : UWEBase
     }
 
     //Character skills
-    public int Attack
+    public static int Attack
     {
         get
         {
@@ -88,7 +88,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x22, (byte)(value));
         }
     }
-    public int Defense
+    public static int Defense
     {
         get
         {
@@ -99,7 +99,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x23, (byte)(value));
         }
     }
-    public int Unarmed
+    public static int Unarmed
     {
         get
         {
@@ -110,7 +110,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x24, (byte)(value));
         }
     }
-    public int Sword
+    public static int Sword
     {
         get
         {
@@ -121,7 +121,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x25, (byte)(value));
         }
     }
-    public int Axe
+    public static int Axe
     {
         get
         {
@@ -132,7 +132,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x26, (byte)(value));
         }
     }
-    public int Mace
+    public static int Mace
     {
         get
         {
@@ -143,7 +143,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x27, (byte)(value));
         }
     }
-    public int Missile
+    public static int Missile
     {
         get
         {
@@ -154,7 +154,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x28, (byte)(value));
         }
     }
-    public int ManaSkill
+    public static int ManaSkill
     {
         get
         {
@@ -165,7 +165,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x29, (byte)(value));
         }
     }
-    public int Lore
+    public static int Lore
     {
         get
         {
@@ -176,7 +176,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2A, (byte)(value));
         }
     }
-    public int Casting
+    public static int Casting
     {
         get
         {
@@ -187,7 +187,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2B, (byte)(value));
         }
     }
-    public int Traps
+    public static int Traps
     {
         get
         {
@@ -198,7 +198,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2C, (byte)(value));
         }
     }
-    public int Search
+    public static int Search
     {
         get
         {
@@ -209,7 +209,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2D, (byte)(value));
         }
     }
-    public int Track
+    public static int Track
     {
         get
         {
@@ -220,7 +220,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2E, (byte)(value));
         }
     }
-    public int Sneak
+    public static int Sneak
     {
         get
         {
@@ -231,7 +231,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x2F, (byte)(value));
         }
     }
-    public int Repair
+    public static int Repair
     {
         get
         {
@@ -242,7 +242,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x30, (byte)(value));
         }
     }
-    public int Charm
+    public static int Charm
     {
         get
         {
@@ -253,7 +253,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x31, (byte)(value));
         }
     }
-    public int PickLock
+    public static int PickLock
     {
         get
         {
@@ -264,7 +264,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x32, (byte)(value));
         }
     }
-    public int Acrobat
+    public static int Acrobat
     {
         get
         {
@@ -275,7 +275,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x33, (byte)(value));
         }
     }
-    public int Appraise
+    public static int Appraise
     {
         get
         {
@@ -286,7 +286,7 @@ public class Skills : UWEBase
             SaveGame.SetAt(0x34, (byte)(value));
         }
     }
-    public int Swimming
+    public static int Swimming
     {
         get
         {
@@ -343,14 +343,14 @@ public class Skills : UWEBase
 
 
 
-    public bool TrySkill(int SkillToUse, int CheckValue)
+    public static bool TrySkill(int SkillToUse, int CheckValue)
     {//Prototype skill check code
      //Debug.Log ("Skill check Skill :" + Skillnames[SkillToUse] + " (" +GetSkill(SkillToUse) +") vs " + CheckValue);
         return (CheckValue < GetSkill(SkillToUse));
     }
 
 
-    public int GetSkill(int SkillNo)
+    public static int GetSkill(int SkillNo)
     {//Gets the value for the requested skill
 
         switch (SkillNo)
@@ -379,7 +379,7 @@ public class Skills : UWEBase
         }
     }
 
-    public void InitSkills()
+    public static void InitSkills()
     {
         STR = 0;
         INT = 0;
@@ -406,7 +406,7 @@ public class Skills : UWEBase
         Swimming = 0;
     }
 
-    public void AdvanceSkill(int SkillNo, int SkillPoints, int SkillPointCost)
+    public static void AdvanceSkill(int SkillNo, int SkillPoints, int SkillPointCost)
     {//Increase a players skill by the specificed skill let
         if (UWCharacter.Instance.TrainingPoints >= SkillPointCost)
         {
@@ -419,7 +419,7 @@ public class Skills : UWEBase
     }
 
 
-    public void AdvanceSkill(int SkillNo, int SkillPoints)
+    public static void AdvanceSkill(int SkillNo, int SkillPoints)
     {//Increase a players skill by the specificed skill let
         switch (SkillNo)
         {
@@ -450,7 +450,7 @@ public class Skills : UWEBase
         StatsDisplay.UpdateNow = true;
     }
 
-    public void SetSkill(int SkillNo, int SkillPoints)
+    public static void SetSkill(int SkillNo, int SkillPoints)
     {//Set a players skill by the specificed skill value
         switch (SkillNo)
         {
@@ -484,10 +484,9 @@ public class Skills : UWEBase
     /// </summary>
     /// <param name="skillNo"></param>
     /// <returns></returns>
-	public string GetSkillName(int skillNo)
+	public static string GetSkillName(int skillNo)
     {
         return StringController.instance.GetString(2, 31 + skillNo);
-        //return Skillnames[skillNo];
     }
 
     /// <summary>
@@ -587,7 +586,7 @@ public class Skills : UWEBase
 	public static int getSkillAttributeBonus(int skillNo)
     {
         int GoverningSkill = 0;
-        int currentSkillScore = UWCharacter.Instance.PlayerSkills.GetSkill(skillNo);
+        int currentSkillScore = Skills.GetSkill(skillNo);
 
         switch (skillNo)
         {
@@ -598,7 +597,7 @@ public class Skills : UWEBase
             case SkillAxe:
             case SkillMace:
             case SkillSwimming:
-                GoverningSkill = UWCharacter.Instance.PlayerSkills.STR;
+                GoverningSkill = Skills.STR;
                 break;
             case SkillMissile:
             case SkillMana:
@@ -606,7 +605,7 @@ public class Skills : UWEBase
             case SkillCasting:
             case SkillCharm:
             case SkillTrack:
-                GoverningSkill = UWCharacter.Instance.PlayerSkills.INT;
+                GoverningSkill = Skills.INT;
                 break;
 
             case SkillTraps:
@@ -616,7 +615,7 @@ public class Skills : UWEBase
             case SkillPicklock:
             case SkillAcrobat:
             case SkillAppraise:
-                GoverningSkill = UWCharacter.Instance.PlayerSkills.DEX;
+                GoverningSkill = Skills.DEX;
                 break;
         }
 

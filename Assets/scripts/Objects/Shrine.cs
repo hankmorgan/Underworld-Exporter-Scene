@@ -120,7 +120,7 @@ public class Shrine : Model3D
         }
 
         int SkillPointsToAdd = Random.Range(1, 4);
-        Skills playerSkills = UWCharacter.Instance.PlayerSkills;
+       // Skills playerSkills = UWCharacter.Instance.PlayerSkills;
         if (UWCharacter.Instance.TrainingPoints == 0)
         {
             //000~001~024~You are not ready to advance. \n
@@ -131,100 +131,100 @@ public class Shrine : Model3D
         switch (Mantra.ToUpper())
         {
             case Mantra_FAL://Acrobat 
-                playerSkills.AdvanceSkill(Skills.SkillAcrobat, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAcrobat));
+                Skills.AdvanceSkill(Skills.SkillAcrobat, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAcrobat));
                 answer = "Acrobat"; break;
             case Mantra_HUNN://Appraise 
-                playerSkills.AdvanceSkill(Skills.SkillAppraise, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAppraise));
+                Skills.AdvanceSkill(Skills.SkillAppraise, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAppraise));
                 answer = "Appraise"; break;
             case Mantra_RA://Attack 
-                playerSkills.AdvanceSkill(Skills.SkillAttack, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAttack));
+                Skills.AdvanceSkill(Skills.SkillAttack, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAttack));
                 answer = "Attack"; break;
             case Mantra_SUMM_RA://Attack skills 
                 for (int i = 0; i < SkillPointsToAdd; i++)
                 {
                     int SkillAwarded = AttackSkills[Random.Range(0, AttackSkills.GetUpperBound(0) + 1)];
-                    playerSkills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
+                    Skills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
                     if (answer.Length > 0)
                     {
                         answer += " and ";
                     }
-                    answer += playerSkills.GetSkillName(SkillAwarded);
+                    answer += Skills.GetSkillName(SkillAwarded);
                 }
                 break;
             case Mantra_GAR://Axe 
-                playerSkills.AdvanceSkill(Skills.SkillAxe, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAxe));
+                Skills.AdvanceSkill(Skills.SkillAxe, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillAxe));
                 answer = "Axe"; break;
             case Mantra_SOL://Casting 
-                playerSkills.AdvanceSkill(Skills.SkillCasting, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillCasting));
+                Skills.AdvanceSkill(Skills.SkillCasting, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillCasting));
                 answer = "Casting"; break;
             case Mantra_UN://Charm 
-                playerSkills.AdvanceSkill(Skills.SkillCharm, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillCharm));
+                Skills.AdvanceSkill(Skills.SkillCharm, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillCharm));
                 answer = "Charm"; break;
             case Mantra_ANRA://Defense
-                playerSkills.AdvanceSkill(Skills.SkillDefense, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillDefense));
+                Skills.AdvanceSkill(Skills.SkillDefense, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillDefense));
                 answer = "Defense"; break;
             case Mantra_LAHN://Lore 
-                playerSkills.AdvanceSkill(Skills.SkillLore, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillLore));
+                Skills.AdvanceSkill(Skills.SkillLore, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillLore));
                 answer = "Lore"; break;
             case Mantra_KOH://Mace 
-                playerSkills.AdvanceSkill(Skills.SkillMace, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMace));
+                Skills.AdvanceSkill(Skills.SkillMace, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMace));
                 answer = "Mace"; break;
             case Mantra_IMU://Mana 
-                playerSkills.AdvanceSkill(Skills.SkillMana, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMana));
+                Skills.AdvanceSkill(Skills.SkillMana, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMana));
                 answer = "Mana"; break;
             case Mantra_MU_AHM://Magic skills 
                 for (int i = 0; i < SkillPointsToAdd; i++)
                 {
                     int SkillAwarded = MagicSkills[Random.Range(0, MagicSkills.GetUpperBound(0) + 1)];
-                    playerSkills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
+                    Skills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
                     if (answer.Length > 0)
                     {
                         answer += " and ";
                     }
-                    answer += playerSkills.GetSkillName(SkillAwarded);
+                    answer += Skills.GetSkillName(SkillAwarded);
                 }
                 break;
             case Mantra_OM_CAH://Other skills 
                 for (int i = 0; i < SkillPointsToAdd; i++)
                 {
                     int SkillAwarded = OtherSkills[Random.Range(0, OtherSkills.GetUpperBound(0) + 1)];
-                    playerSkills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
+                    Skills.AdvanceSkill(SkillAwarded, 1 + Skills.getSkillAttributeBonus(SkillAwarded));
                     if (answer.Length > 0)
                     {
                         answer += " and ";
                     }
-                    answer += playerSkills.GetSkillName(SkillAwarded);
+                    answer += Skills.GetSkillName(SkillAwarded);
                 }
                 break;
             case Mantra_AAM://Picklock 
-                playerSkills.AdvanceSkill(Skills.SkillPicklock, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillPicklock));
+                Skills.AdvanceSkill(Skills.SkillPicklock, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillPicklock));
                 answer = "Picklock"; break;
             case Mantra_FAHM://Missile 
-                playerSkills.AdvanceSkill(Skills.SkillMissile, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMissile));
+                Skills.AdvanceSkill(Skills.SkillMissile, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillMissile));
                 answer = "Missile"; break;
             case Mantra_LON://Repair 
-                playerSkills.AdvanceSkill(Skills.SkillRepair, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillRepair));
+                Skills.AdvanceSkill(Skills.SkillRepair, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillRepair));
                 answer = "Repair"; break;
             case Mantra_LU://Search 
-                playerSkills.AdvanceSkill(Skills.SkillSearch, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSearch));
+                Skills.AdvanceSkill(Skills.SkillSearch, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSearch));
                 answer = "Search"; break;
             case Mantra_MUL://Sneak 
-                playerSkills.AdvanceSkill(Skills.SkillSneak, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSneak));
+                Skills.AdvanceSkill(Skills.SkillSneak, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSneak));
                 answer = "Sneak"; break;
             case Mantra_ONO://Swimming 
-                playerSkills.AdvanceSkill(Skills.SkillSwimming, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSwimming));
+                Skills.AdvanceSkill(Skills.SkillSwimming, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSwimming));
                 answer = "Swimming"; break;
             case Mantra_AMO://Sword 
-                playerSkills.AdvanceSkill(Skills.SkillSword, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSword));
+                Skills.AdvanceSkill(Skills.SkillSword, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillSword));
                 answer = "Sword"; break;
             case Mantra_SAHF://Track 
-                playerSkills.AdvanceSkill(Skills.SkillTrack, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillTrack));
+                Skills.AdvanceSkill(Skills.SkillTrack, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillTrack));
                 answer = "Track"; break;
             case Mantra_ROMM://Traps 
-                playerSkills.AdvanceSkill(Skills.SkillTraps, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillTraps));
+                Skills.AdvanceSkill(Skills.SkillTraps, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillTraps));
                 answer = "Traps"; break;
             case Mantra_ORA://Unarmed 
-                playerSkills.AdvanceSkill(Skills.SkillAcrobat, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillUnarmed));
+                Skills.AdvanceSkill(Skills.SkillAcrobat, SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillUnarmed));
                 answer = "Unarmed"; break;
             case Mantra_INSAHN://Cup of Wonder 
                 TrackCupOfWonder();

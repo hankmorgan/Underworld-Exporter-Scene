@@ -69,7 +69,7 @@ public class Drink : Food
             }
 
             //Do a skill check for drunkeness vs strength.
-            Skills.SkillRollResult result = Skills.SkillRoll(UWCharacter.Instance.PlayerSkills.STR, UWCharacter.Instance.Intoxication);
+            Skills.SkillRollResult result = Skills.SkillRoll(Skills.STR, UWCharacter.Instance.Intoxication);
             switch (result)
             {
                 case Skills.SkillRollResult.CriticalFailure:

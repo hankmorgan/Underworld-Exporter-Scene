@@ -628,8 +628,8 @@ public class WindowDetectUW : WindowDetect
     /// </summary>
     void TryTracking()
     {
-        bool SkillSucess = UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillTrack, Skills.DiceRoll(0, 30));
-        int skillLevel = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillTrack);
+        bool SkillSucess = Skills.TrySkill(Skills.SkillTrack, Skills.DiceRoll(0, 30));
+        int skillLevel = Skills.GetSkill(Skills.SkillTrack);
         Debug.Log("Track test = " + SkillSucess);
         Skills.TrackMonsters(this.gameObject, (float)skillLevel / 3, SkillSucess);
     }

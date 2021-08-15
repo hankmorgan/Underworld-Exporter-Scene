@@ -2618,16 +2618,16 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             switch (mode)
             {
                 case 10001:
-                    Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange + 1));
-                    return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+                    Debug.Log("Returning skill " + Skills.GetSkillName(skillToChange + 1));
+                    return Skills.GetSkill(skillToChange);
                 case 10000:
-                    Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange + 1) + " " + 6);
-                    UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange, 6);
-                    return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+                    Debug.Log("Possibly setting skill to " + Skills.GetSkillName(skillToChange + 1) + " " + 6);
+                    Skills.AdvanceSkill(skillToChange, 6);
+                    return Skills.GetSkill(skillToChange);
                 default:
-                    Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange + 1) + " " + mode);
-                    UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange, mode);
-                    return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+                    Debug.Log("Possibly setting skill to " + Skills.GetSkillName(skillToChange + 1) + " " + mode);
+                    Skills.AdvanceSkill(skillToChange, mode);
+                    return Skills.GetSkill(skillToChange);
             }
         }
         else
@@ -2636,11 +2636,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             switch (mode)
             {
                 case 9999://Return the skill value
-                    return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+                    return Skills.GetSkill(skillToChange);
                 case 10001: //Increase the skill if points are available. Returns 1 if sucess 0 if fail
                     if (UWCharacter.Instance.TrainingPoints > 0)
                     {
-                        UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange, 1);
+                        Skills.AdvanceSkill(skillToChange, 1);
                         UWCharacter.Instance.TrainingPoints--;
                         return 1;
                     }
@@ -2649,8 +2649,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         return 0;
                     }
                 default://Set the skill to the specified value.
-                    UWCharacter.Instance.PlayerSkills.SetSkill(skillToChange, mode);
-                    return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+                    Skills.SetSkill(skillToChange, mode);
+                    return Skills.GetSkill(skillToChange);
             }
         }
     }

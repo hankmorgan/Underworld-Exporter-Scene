@@ -244,7 +244,6 @@ public class UWCharacter : Character
     /// </summary>
     public bool Death;
 
-
     [Header("Save game")]
     /// <summary>
     /// The xor encryption key for the save file
@@ -440,7 +439,7 @@ public class UWCharacter : Character
 
     [Header("Character Modules")]
     //Character skills
-    public Skills PlayerSkills;
+    //public Skills PlayerSkills;
     //Magic system
     public Magic PlayerMagic;
     //Inventory System
@@ -471,8 +470,6 @@ public class UWCharacter : Character
     }
     public Vector3 ResurrectPosition = Vector3.zero;//TODO change this to a search.
     public Vector3 MoonGatePosition = Vector3.zero;
-
-
     public short MoonGateLevel //= 2//Domain of the mountainmen
     {
         get
@@ -856,10 +853,10 @@ public class UWCharacter : Character
             InteractionMode = InteractionModeWalk;
         }
 
-        swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
+        swimSpeedMultiplier = Mathf.Max((float)(Skills.Swimming / 30.0f), 0.3f);//TODO:redo me
         SwimTimer += Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
-        if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f)
+        if (SwimTimer >= 05.0f + Skills.Swimming * 15.0f)
         {
             SwimDamageTimer += Time.deltaTime;
             if (SwimDamageTimer >= 10.0f)//Take Damage every 10 seconds.
@@ -1593,7 +1590,7 @@ public class UWCharacter : Character
     {
         if (isSwimming == false)
         {
-            float fallspeedAdjusted = fallSpeed - (PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
+            float fallspeedAdjusted = fallSpeed - (Skills.GetSkill(Skills.SkillAcrobat) * 0.13f);
             //Do stuff with acrobat here. In the mean time a flat skill check.
             if (fallspeedAdjusted >= 5f)
             {
@@ -1728,8 +1725,8 @@ public class UWCharacter : Character
             //000~001~147~You have attained experience level
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_attained_experience_level_));
             TrainingPoints += 3;
-            Instance.MaxVIT = 30 + ((Instance.PlayerSkills.STR * CharLevel) / 5);
-            int defaultMaxMana = (Instance.PlayerSkills.INT * Instance.PlayerSkills.ManaSkill) >> 3;
+            Instance.MaxVIT = 30 + ((Skills.STR * CharLevel) / 5);
+            int defaultMaxMana = (Skills.INT * Skills.ManaSkill) >> 3;
             switch (_RES)
             {//TODO:max these properties?
                 case GAME_UW1:
@@ -1919,7 +1916,7 @@ public class UWCharacter : Character
 
     public int GetBaseStealthLevel()
     {
-        return PlayerSkills.GetSkill(Skills.SkillSneak);
+        return Skills.GetSkill(Skills.SkillSneak);
     }
 
 

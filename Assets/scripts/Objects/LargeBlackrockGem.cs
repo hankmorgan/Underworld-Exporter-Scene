@@ -52,8 +52,8 @@ public class LargeBlackrockGem : Model3D
                     int bitField = (1 << thisGemIndex);
                     Quest.instance.x_clocks[2]++;
                     //Quest.instance.QuestVariablesOBSOLETE[130] |= bitField;
-                    //int newvalue = Quest.GetQuestVariable(130) | bitField;
-                    Quest.SetQuestVariable(130, Quest.GetQuestVariable(130) | bitField);
+                    int existingvalue = Quest.GetQuestVariable(130) | bitField;
+                    Quest.SetQuestVariable(130, existingvalue);
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 338));
                     UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 338 + Quest.instance.x_clocks[2]));
                     CameraShake.instance.ShakeEarthQuake(Quest.instance.x_clocks[2] * 0.2f);

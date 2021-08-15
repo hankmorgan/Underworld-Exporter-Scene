@@ -462,7 +462,7 @@ public class SaveGame : Loader
                     }
                 case 0x4D: ///   weight in 0.1 stones
                     //Or STR * 2; 
-                    DataLoader.WriteInt16(writer, UWCharacter.Instance.PlayerSkills.STR * 2 * 10);
+                    DataLoader.WriteInt16(writer, Skills.STR * 2 * 10);
                     break;
                 case 0x4D + 1://2nd Byte of weight. Ignore
                     break;
@@ -844,7 +844,7 @@ public class SaveGame : Loader
                     }
                 case 0x4D: ///   weight in 0.1 stones
                     //Or STR * 2; 
-                    DataLoader.WriteInt16(writer, UWCharacter.Instance.PlayerSkills.STR * 2 * 10);
+                    DataLoader.WriteInt16(writer, Skills.STR * 2 * 10);
                     break;
                 case 0x4D + 1:
                     break;
@@ -1726,7 +1726,7 @@ public class SaveGame : Loader
                     case 0x4D: ///   weight in 0.1 stones
                         //Or STR * 2; safe to ignore?
                         //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-                        //Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
+                        //Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + Skills.STR);
                         break;
                     case 0x4F: ///   experience in 0.1 points
                        // UWCharacter.Instance.EXP = (int)(getValAtAddress(buffer, i, 32) * 0.1f); break;
@@ -2368,53 +2368,53 @@ public class SaveGame : Loader
     //        switch (i)
     //        {
     //            case 0x1F://Strength
-    //               // UWCharacter.Instance.PlayerSkills.STR = buffer[i];
-    //               // GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
+    //               // Skills.STR = buffer[i];
+    //               // GameWorldController.instance.objDat.critterStats[63].Strength = Skills.STR;
     //                break;
     //            case 0x20://Dex
-    //                UWCharacter.Instance.PlayerSkills.DEX = buffer[i]; break;
+    //                Skills.DEX = buffer[i]; break;
     //            case 0x21: ///    Intelligence
-    //                UWCharacter.Instance.PlayerSkills.INT = buffer[i]; break;
+    //                Skills.INT = buffer[i]; break;
     //            case 0x22: ///    Attack
-    //                UWCharacter.Instance.PlayerSkills.Attack = buffer[i]; break;
+    //                Skills.Attack = buffer[i]; break;
     //            case 0x23: ///    Defense
-    //                UWCharacter.Instance.PlayerSkills.Defense = buffer[i]; break;
+    //                Skills.Defense = buffer[i]; break;
     //            case 0x24: ///    Unarmed
-    //                UWCharacter.Instance.PlayerSkills.Unarmed = buffer[i]; break;
+    //                Skills.Unarmed = buffer[i]; break;
     //            case 0x25: ///    Sword
-    //                UWCharacter.Instance.PlayerSkills.Sword = buffer[i]; break;
+    //                Skills.Sword = buffer[i]; break;
     //            case 0x26: ///    Axe
-    //                UWCharacter.Instance.PlayerSkills.Axe = buffer[i]; break;
+    //                Skills.Axe = buffer[i]; break;
     //            case 0x27: ///    Mace
-    //                UWCharacter.Instance.PlayerSkills.Mace = buffer[i]; break;
+    //                Skills.Mace = buffer[i]; break;
     //            case 0x28: ///    Missile
-    //                UWCharacter.Instance.PlayerSkills.Missile = buffer[i]; break;
+    //                Skills.Missile = buffer[i]; break;
     //            case 0x29: ///    Mana
-    //                UWCharacter.Instance.PlayerSkills.ManaSkill = buffer[i]; break;
+    //                Skills.ManaSkill = buffer[i]; break;
     //            case 0x2A: ///    Lore
-    //                UWCharacter.Instance.PlayerSkills.Lore = buffer[i]; break;
+    //                Skills.Lore = buffer[i]; break;
     //            case 0x2B: ///    Casting
-    //                UWCharacter.Instance.PlayerSkills.Casting = buffer[i]; break;
+    //                Skills.Casting = buffer[i]; break;
     //            case 0x2C: ///    Traps
-    //                UWCharacter.Instance.PlayerSkills.Traps = buffer[i]; break;
+    //                Skills.Traps = buffer[i]; break;
     //            case 0x2D: ///    Search
-    //                UWCharacter.Instance.PlayerSkills.Search = buffer[i]; break;
+    //                Skills.Search = buffer[i]; break;
     //            case 0x2E: ///    Track
-    //                UWCharacter.Instance.PlayerSkills.Track = buffer[i]; break;
+    //                Skills.Track = buffer[i]; break;
     //            case 0x2F: ///    Sneak
-    //                UWCharacter.Instance.PlayerSkills.Sneak = buffer[i]; break;
+    //                Skills.Sneak = buffer[i]; break;
     //            case 0x30: ///    Repair
-    //                UWCharacter.Instance.PlayerSkills.Repair = buffer[i]; break;
+    //                Skills.Repair = buffer[i]; break;
     //            case 0x31: ///    Charm
-    //                UWCharacter.Instance.PlayerSkills.Charm = buffer[i]; break;
+    //                Skills.Charm = buffer[i]; break;
     //            case 0x32: ///    Picklock
-    //                UWCharacter.Instance.PlayerSkills.PickLock = buffer[i]; break;
+    //                Skills.PickLock = buffer[i]; break;
     //            case 0x33: ///    Acrobat
-    //                UWCharacter.Instance.PlayerSkills.Acrobat = buffer[i]; break;
+    //                Skills.Acrobat = buffer[i]; break;
     //            case 0x34: ///    Appraise
-    //                UWCharacter.Instance.PlayerSkills.Appraise = buffer[i]; break;
+    //                Skills.Appraise = buffer[i]; break;
     //            case 0x35: ///    Swimming
-    //                UWCharacter.Instance.PlayerSkills.Swimming = buffer[i]; break;
+    //                Skills.Swimming = buffer[i]; break;
     //            case 0x36://Curvit
     //                UWCharacter.Instance.CurVIT = buffer[i]; break;
     //            case 0x37: ///    max. vitality
@@ -2926,51 +2926,51 @@ public class SaveGame : Loader
             switch (i)
             {
                 case 0x1F://Strength
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.STR); break;
+                    DataLoader.WriteInt8(writer, Skills.STR); break;
                 case 0x20://Dex
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.DEX); break;
+                    DataLoader.WriteInt8(writer, Skills.DEX); break;
                 case 0x21: ///    Intelligence
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.INT); break;
+                    DataLoader.WriteInt8(writer, Skills.INT); break;
                 case 0x22: ///    Attack
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Attack); break;
+                    DataLoader.WriteInt8(writer, Skills.Attack); break;
                 case 0x23: ///    Defense
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Defense); break;
+                    DataLoader.WriteInt8(writer, Skills.Defense); break;
                 case 0x24: ///    Unarmed
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Unarmed); break;
+                    DataLoader.WriteInt8(writer, Skills.Unarmed); break;
                 case 0x25: ///    Sword
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sword); break;
+                    DataLoader.WriteInt8(writer, Skills.Sword); break;
                 case 0x26: ///    Axe
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Axe); break;
+                    DataLoader.WriteInt8(writer, Skills.Axe); break;
                 case 0x27: ///    Mace
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Mace); break;
+                    DataLoader.WriteInt8(writer, Skills.Mace); break;
                 case 0x28: ///    Missile
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Missile); break;
+                    DataLoader.WriteInt8(writer, Skills.Missile); break;
                 case 0x29: ///    Mana
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.ManaSkill); break;
+                    DataLoader.WriteInt8(writer, Skills.ManaSkill); break;
                 case 0x2A: ///    Lore
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Lore); break;
+                    DataLoader.WriteInt8(writer, Skills.Lore); break;
                 case 0x2B: ///    Casting
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Casting); break;
+                    DataLoader.WriteInt8(writer, Skills.Casting); break;
                 case 0x2C: ///    Traps
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Traps); break;
+                    DataLoader.WriteInt8(writer, Skills.Traps); break;
                 case 0x2D: ///    Search
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Search); break;
+                    DataLoader.WriteInt8(writer, Skills.Search); break;
                 case 0x2E: ///    Track
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Track); break;
+                    DataLoader.WriteInt8(writer, Skills.Track); break;
                 case 0x2F: ///    Sneak
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sneak); break;
+                    DataLoader.WriteInt8(writer, Skills.Sneak); break;
                 case 0x30: ///    Repair
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Repair); break;
+                    DataLoader.WriteInt8(writer, Skills.Repair); break;
                 case 0x31: ///    Charm
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Charm); break;
+                    DataLoader.WriteInt8(writer, Skills.Charm); break;
                 case 0x32: ///    Picklock
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.PickLock); break;
+                    DataLoader.WriteInt8(writer, Skills.PickLock); break;
                 case 0x33: ///    Acrobat
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Acrobat); break;
+                    DataLoader.WriteInt8(writer, Skills.Acrobat); break;
                 case 0x34: ///    Appraise
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Appraise); break;
+                    DataLoader.WriteInt8(writer, Skills.Appraise); break;
                 case 0x35: ///    Swimming
-                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Swimming); break;
+                    DataLoader.WriteInt8(writer, Skills.Swimming); break;
                 case 0x36://Curvit
                     DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
                 case 0x37: ///    max. vitality
@@ -3244,51 +3244,51 @@ public class SaveGame : Loader
     //            switch (i)
     //            {
     //                case 0x1F://Strength
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.STR); break;
+    //                    DataLoader.WriteInt8(writer, Skills.STR); break;
     //                case 0x20://Dex
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.DEX); break;
+    //                    DataLoader.WriteInt8(writer, Skills.DEX); break;
     //                case 0x21: ///    Intelligence
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.INT); break;
+    //                    DataLoader.WriteInt8(writer, Skills.INT); break;
     //                case 0x22: ///    Attack
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Attack); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Attack); break;
     //                case 0x23: ///    Defense
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Defense); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Defense); break;
     //                case 0x24: ///    Unarmed
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Unarmed); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Unarmed); break;
     //                case 0x25: ///    Sword
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sword); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Sword); break;
     //                case 0x26: ///    Axe
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Axe); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Axe); break;
     //                case 0x27: ///    Mace
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Mace); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Mace); break;
     //                case 0x28: ///    Missile
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Missile); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Missile); break;
     //                case 0x29: ///    Mana
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.ManaSkill); break;
+    //                    DataLoader.WriteInt8(writer, Skills.ManaSkill); break;
     //                case 0x2A: ///    Lore
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Lore); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Lore); break;
     //                case 0x2B: ///    Casting
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Casting); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Casting); break;
     //                case 0x2C: ///    Traps
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Traps); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Traps); break;
     //                case 0x2D: ///    Search
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Search); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Search); break;
     //                case 0x2E: ///    Track
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Track); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Track); break;
     //                case 0x2F: ///    Sneak
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Sneak); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Sneak); break;
     //                case 0x30: ///    Repair
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Repair); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Repair); break;
     //                case 0x31: ///    Charm
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Charm); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Charm); break;
     //                case 0x32: ///    Picklock
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.PickLock); break;
+    //                    DataLoader.WriteInt8(writer, Skills.PickLock); break;
     //                case 0x33: ///    Acrobat
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Acrobat); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Acrobat); break;
     //                case 0x34: ///    Appraise
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Appraise); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Appraise); break;
     //                case 0x35: ///    Swimming
-    //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.PlayerSkills.Swimming); break;
+    //                    DataLoader.WriteInt8(writer, Skills.Swimming); break;
     //                case 0x36://Curvit
     //                    DataLoader.WriteInt8(writer, UWCharacter.Instance.CurVIT); break;
     //                case 0x37: ///    max. vitality
@@ -3404,7 +3404,7 @@ public class SaveGame : Loader
 
     //                case 0x4D: ///   weight in 0.1 stones
     //                    //Or STR * 2; 
-    //                    DataLoader.WriteInt16(writer, UWCharacter.Instance.PlayerSkills.STR * 2 * 10);
+    //                    DataLoader.WriteInt16(writer, Skills.STR * 2 * 10);
     //                    break;
     //                case 0x4D + 1://2nd Byte of weight. Ignore
     //                    break;

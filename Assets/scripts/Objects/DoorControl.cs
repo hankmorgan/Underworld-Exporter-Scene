@@ -284,7 +284,7 @@ public class DoorControl : object_base
                         ObjectInteraction LockObject = getLockObjInt();
                         if (LockObject != null)
                         {
-                            int skillvalue = UWCharacter.Instance.PlayerSkills.PickLock + 1;
+                            int skillvalue = Skills.PickLock + 1;
                             int targetvalue = LockObject.zpos * 3;
                             Skills.SkillRollResult skillroll = Skills.SkillRoll(skillvalue, targetvalue);
 
@@ -332,7 +332,7 @@ public class DoorControl : object_base
                 //{
                 //if (Pickable==true)
                 //	{
-                //		if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Skills.DiceRoll(1,25)))
+                //		if (Skills.TrySkill(Skills.SkillPicklock, Skills.DiceRoll(1,25)))
                 //		{
                 //		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
                 //		UnlockDoor(true);

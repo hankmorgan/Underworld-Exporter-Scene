@@ -64,9 +64,9 @@ public class StatsDisplay : GuiBase_Draggable
                 CharClass.text = StringController.instance.GetString(2, 23 + UWCharacter.Instance.CharClass);
 
                 CharClassLevel.text = UWCharacter.Instance.CharLevel.ToString();
-                CharStr.text = UWCharacter.Instance.PlayerSkills.STR.ToString();
-                CharDex.text = UWCharacter.Instance.PlayerSkills.DEX.ToString();
-                CharInt.text = UWCharacter.Instance.PlayerSkills.INT.ToString();
+                CharStr.text = Skills.STR.ToString();
+                CharDex.text = Skills.DEX.ToString();
+                CharInt.text = Skills.INT.ToString();
                 CharVIT.text = UWCharacter.Instance.CurVIT + "/" + UWCharacter.Instance.MaxVIT;
                 CharMana.text = UWCharacter.Instance.PlayerMagic.CurMana + "/" + UWCharacter.Instance.PlayerMagic.MaxMana;
                 CharEXP.text = UWCharacter.Instance.EXP.ToString();
@@ -83,7 +83,7 @@ public class StatsDisplay : GuiBase_Draggable
                 for (int i = 0; i <= 5; i++)
                 {
                     tmpSkillNames += Skillnames[i + Offset];
-                    tmpSkillValues += UWCharacter.Instance.PlayerSkills.GetSkill(i + Offset + 1);
+                    tmpSkillValues += Skills.GetSkill(i + Offset + 1);
                     if (i != 5)
                     {
                         tmpSkillNames += "\n";

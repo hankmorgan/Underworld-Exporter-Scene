@@ -128,7 +128,7 @@ public class enchantment_base : object_base
                         break;
                     case ObjectInteraction.IdentificationFlags.Unidentified:
                     case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
-                        if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+                        if (Skills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
                         {
                             heading = 7;
                             if (enchantmentname != "")

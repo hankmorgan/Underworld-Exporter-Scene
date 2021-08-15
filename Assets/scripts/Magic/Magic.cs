@@ -329,9 +329,9 @@ public class Magic : UWEBase
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_do_not_have_enough_mana_to_cast_the_spell_));
             return false;
         }
-        else //if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
+        else //if( ! casterUW.Skills.TrySkill(Skills.SkillCasting, TestSpellLevel))
         {//Skill test. Random chance to backfire
-            int toCast = Mathf.Max((TestSpellLevel * 3) - casterUW.PlayerSkills.GetSkill(Skills.SkillCasting), 1);
+            int toCast = Mathf.Max((TestSpellLevel * 3) - Skills.Casting, 1);
             int roll = Random.Range(0, 31);
             if (roll < toCast)
             {
