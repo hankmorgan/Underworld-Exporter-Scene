@@ -580,17 +580,17 @@ public class NPC : MobileObject
         }
         if (_RES == GAME_UW2)
         {//Improve players Win loss record in the arena
-            if (Quest.instance.FightingInArena)
+            if (Quest.FightingInArena)
             {
-                for (int i = 0; i <= Quest.instance.ArenaOpponents.GetUpperBound(0); i++)
+                for (int i = 0; i <= Quest.ArenaOpponents.GetUpperBound(0); i++)
                 {
-                    if (Quest.instance.ArenaOpponents[i] == objInt().BaseObjectData.index)
+                    if (Quest.ArenaOpponents[i] == objInt().BaseObjectData.index)
                     {//Update the players win-loss records.
-                        Quest.instance.ArenaOpponents[i] = 0;
-                        //Quest.instance.QuestVariablesOBSOLETE[129] = Mathf.Min(255, Quest.instance.QuestVariablesOBSOLETE[129] + 1);
+                        Quest.ArenaOpponents[i] = 0;
+                        //Quest.QuestVariablesOBSOLETE[129] = Mathf.Min(255, Quest.QuestVariablesOBSOLETE[129] + 1);
                         Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));
-                        Quest.instance.x_clocks[14] = Mathf.Min(255, Quest.instance.x_clocks[14] + 1);
-                        //Quest.instance.QuestVariablesOBSOLETE[24] = 1;//You have won a fight.
+                        Quest.x_clocks[14] = Mathf.Min(255, Quest.x_clocks[14] + 1);
+                        //Quest.QuestVariablesOBSOLETE[24] = 1;//You have won a fight.
                         Quest.SetQuestVariable(24, 1);
                     }
                 }
@@ -694,22 +694,22 @@ public class NPC : MobileObject
                             }
                         case 110://The Gazer on level 2
                             {
-                                //Quest.instance.QuestVariablesOBSOLETE[4] = 1;
+                                //Quest.QuestVariablesOBSOLETE[4] = 1;
                                 Quest.SetQuestVariable(4, 1);
                                 return false;
                             }
                         case 142://Rodrick
                             {
-                                //Quest.instance.QuestVariablesOBSOLETE[11] = 1;
+                                //Quest.QuestVariablesOBSOLETE[11] = 1;
                                 Quest.SetQuestVariable(11, 1);
                                 return false;
                             }
                         case 231:   //Tybal
                             {
                                 //Play the tybal death cutscene.
-                                //Quest.instance.isTybalDead=true;
-                                Quest.instance.GaramonDream = 7;//Advance to Tybal is dead range of dreams
-                                Quest.instance.DayGaramonDream = GameClock.day();//Ensure dream triggers on next sleep
+                                //Quest.isTybalDead=true;
+                                Quest.GaramonDream = 7;//Advance to Tybal is dead range of dreams
+                                Quest.DayGaramonDream = GameClock.day();//Ensure dream triggers on next sleep
                                 UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject, null, 226, Magic.SpellRule_TargetSelf, -1);
                                 return false;
                             }
@@ -725,7 +725,7 @@ public class NPC : MobileObject
                     {
                         if (item_id == 78)//Blood worms on level 3 of britannia. This is a quest for the friendly goblins
                         {
-                           // Quest.instance.QuestVariablesOBSOLETE[135]++;
+                           // Quest.QuestVariablesOBSOLETE[135]++;
                             Quest.SetQuestVariable(135, Quest.GetQuestVariable(135) + 1);
                         }
                     }
@@ -735,7 +735,7 @@ public class NPC : MobileObject
                             //This variable is normally set by his final conversation but will also happen when you murder him.
                             //Also used to trigger earthquake effect.
                             {
-                                //Quest.instance.QuestVariablesOBSOLETE[7] = 1;
+                                //Quest.QuestVariablesOBSOLETE[7] = 1;
                                 Quest.SetQuestVariable(7, 1);
                                 ObjectInteraction trigObj = CurrentObjectList().objInfo[961].instance;
                                 if (trigObj != null)
@@ -750,7 +750,7 @@ public class NPC : MobileObject
                         case 47://Mors gothri in Kilhorn
                             if (Quest.GetQuestVariable(117) == 0)
                             {
-                                //Quest.instance.QuestVariablesOBSOLETE[117] = 1;
+                                //Quest.QuestVariablesOBSOLETE[117] = 1;
                                 Quest.SetQuestVariable(117, 1);
                                 npc_hp = 50;//restore health.
                                 npc_goal = (short)npc_goals.npc_goal_stand_still_0;
@@ -762,7 +762,7 @@ public class NPC : MobileObject
                             break;
 
                         case 58://Brain creatures in Kilhorn
-                           // Quest.instance.QuestVariablesOBSOLETE[50] = 1;
+                           // Quest.QuestVariablesOBSOLETE[50] = 1;
                             Quest.SetQuestVariable(50, 1);
                             return false;
                         case 75: //Demon guard in Kilhorn.
@@ -784,21 +784,21 @@ public class NPC : MobileObject
                                 return false;
                             }
                         case 98://Zaria
-                            //Quest.instance.QuestVariablesOBSOLETE[25] = 1;
+                            //Quest.QuestVariablesOBSOLETE[25] = 1;
                             Quest.SetQuestVariable(25, 1);
                             return false;
                         case 99://Dorstag
-                            //Quest.instance.QuestVariablesOBSOLETE[121] = 1;
+                            //Quest.QuestVariablesOBSOLETE[121] = 1;
                             Quest.SetQuestVariable(121, 1);
                             return false;
                         case 145://The listener under the castle
-                            //Quest.instance.QuestVariablesOBSOLETE[11] = 1;
+                            //Quest.QuestVariablesOBSOLETE[11] = 1;
                             Quest.SetQuestVariable(11, 1);
-                            Quest.instance.x_clocks[1]++;//Confirm this behaviour!
+                            Quest.x_clocks[1]++;//Confirm this behaviour!
                             return false;
                         case 152://Bliy Scup Ductosnore
                             {
-                                // Quest.instance.QuestVariablesOBSOLETE[122] = 1;
+                                // Quest.QuestVariablesOBSOLETE[122] = 1;
                                 Quest.SetQuestVariable(122, 1);
                                 //Fires off move trigger at 638 to delete the walls
                                 ObjectInteraction obj = ObjectLoader.getObjectIntAt(638);

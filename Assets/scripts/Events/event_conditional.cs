@@ -21,7 +21,7 @@
         }
         else
         {//TODO:verify if variable tests require at least zero and up to target value or just an exact target value match
-            variableTest = (Quest.instance.variables[variable] == targetValue);
+            variableTest = (Quest.variables[variable] == targetValue);
         }
         return ((variableTest) && (xclocktest()) && (LevelTest()));
     }

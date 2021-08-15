@@ -24,7 +24,7 @@ public class InventorySlot : GuiBase
 
     public void BeginDrag()
     {
-        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
+        if ((UWCharacter.Instance.isRoaming == true) || (Quest.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
         {//No inventory use
             return;
         }
@@ -94,7 +94,7 @@ public class InventorySlot : GuiBase
     /// <param name="pointerID"></param>
     void ClickEvent(int pointerID)
     {
-        if ((UWCharacter.Instance.isRoaming == true) || (Quest.instance.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
+        if ((UWCharacter.Instance.isRoaming == true) || (Quest.InDreamWorld) || (Character.InteractionMode == Character.InteractionModeOptions))
         {//No inventory use while using wizard eye.
             return;
         }

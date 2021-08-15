@@ -28,9 +28,9 @@ public class TileContactMud : TileContactWater
     /// <param name="obj"></param>
     void BasiliskOilOnMud(ObjectInteraction obj)
     {
-        if (Quest.instance.x_clocks[3] < 2)
+        if (Quest.x_clocks[3] < 2)
         {//Advance the xclock tracking quest progress.
-            Quest.instance.x_clocks[3] = 2;
+            Quest.x_clocks[3] = 2;
             //000~001~332~The thick oil permeates the mud. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 332));
         }

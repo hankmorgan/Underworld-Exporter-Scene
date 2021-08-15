@@ -34,19 +34,19 @@ public class a_hack_trap_gemrotate : a_hack_trap
     /// In the future change the lighting on the gem.
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        Quest.instance.variables[6]++;
-        if (Quest.instance.variables[6] > a_hack_trap_teleport.NoOfWorlds)
+        Quest.variables[6]++;
+        if (Quest.variables[6] > a_hack_trap_teleport.NoOfWorlds)
         {
-            Quest.instance.variables[6] = 0;
+            Quest.variables[6] = 0;
         }
 
-        //if (prevWorld != Quest.instance.variables[6])
+        //if (prevWorld != Quest.variables[6])
         //{
-        //    Debug.Log("Now serving world " + Quest.instance.variables[6]);
+        //    Debug.Log("Now serving world " + Quest.variables[6]);
         //}
         UpdateGemFace();
 
-        //prevWorld = Quest.instance.variables[6];
+        //prevWorld = Quest.variables[6];
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class a_hack_trap_gemrotate : a_hack_trap
             {
                 for (int i = 0; i <= 7; i++)
                 {
-                    if (i == Quest.instance.variables[6])
+                    if (i == Quest.variables[6])
                     {
                         gem.GetComponent<MeshRenderer>().materials[i].SetColor("_Color", Color.white);
                     }

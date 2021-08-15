@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 /// <summary>
 /// Quest variables.
 /// </summary>
@@ -113,9 +113,9 @@
 /// 134: The password for the prison tower (random value)
 /// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
-public class Quest : UWEBase
+public class Quest : UWClass
 {//TODO Change this to a class rather than a monobehaviour
-    
+
     /// <summary>
     /// Returns the quest variable at the specified index
     /// </summary>
@@ -127,33 +127,33 @@ public class Quest : UWEBase
         switch (_RES)
         {
             case GAME_UW2:
-            {
-               if (questno<=127)
+                {
+                    if (questno <= 127)
                     {//Quests are every 4 bytes. The first 4 bits are the four quests in that block of 4 bytes.
                         int offset = 0x66 + ((questno / 4) * 4);
                         int bit = questno % 4;
-                        _returnvalue=(SaveGame.GetAt(offset) >> bit) & 0x1;
+                        _returnvalue = (SaveGame.GetAt(offset) >> bit) & 0x1;
                     }
-               else
+                    else
                     {
                         _returnvalue = SaveGame.GetAt(0xE7 + (questno - 128));
                     }
-                break;
-            }
+                    break;
+                }
             default:
-            {
-                if (questno<=31)
+                {
+                    if (questno <= 31)
                     {//read the quest from the bit field quests.
                         int offset = 0x66 + (questno / 8);
                         int bit = questno % 8;
                         _returnvalue = (SaveGame.GetAt(offset) >> bit) & 0x1;
                     }
-                else
+                    else
                     {
-                        _returnvalue = SaveGame.GetAt(0x6a + (questno - 32)); 
+                        _returnvalue = SaveGame.GetAt(0x6a + (questno - 32));
                     }
-                break;
-            }
+                    break;
+                }
         }
         Debug.Log("Getting Quest #" + questno + " It's value is " + _returnvalue);
         return _returnvalue;
@@ -176,7 +176,7 @@ public class Quest : UWEBase
                         int bit = questno % 4;
                         byte existingValue = SaveGame.GetAt(offset);
                         byte mask = (byte)(bit << 1);
-                        if (value>=1)
+                        if (value >= 1)
                         {//set
                             existingValue |= mask;
                         }
@@ -213,14 +213,15 @@ public class Quest : UWEBase
                     }
                     else
                     {
-                        SaveGame.SetAt(0x6a + (questno - 32),(byte)value);
+                        SaveGame.SetAt(0x6a + (questno - 32), (byte)value);
                     }
                     break;
                 }
         }
     }
-    
-    
+
+
+
     /// <summary>
     /// The quest variable integers
     /// </summary>
@@ -231,12 +232,12 @@ public class Quest : UWEBase
     /// The game Variables for the check/set variable traps
     /// </summary>
     /// Typically these are used for traps/triggers/switches.
-    public int[] variables = new int[128];
+    public static int[] variables = new int[128];
 
     /// <summary>
     /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
     /// </summary>
-    public int[] BitVariables = new int[128];
+    public static int[] BitVariables = new int[128];
 
     /// <summary>
     /// The x clocks tracks progress during the game and is used in firing events.
@@ -267,7 +268,7 @@ public class Quest : UWEBase
     ///     6 = djinn captured in body
     /// 14=Tracks no of enemies killed in pits. Does things like update graffiti.
     /// 15=Used in multiple convos. Possibly tells the game to process a change when updated?
-    public int[] x_clocks = new int[16];
+    public static int[] x_clocks = new int[16];
 
 
     /// <summary>
@@ -307,64 +308,64 @@ public class Quest : UWEBase
     /// <summary>
     /// The no of talismans to still be cast into abyss in order to complete the game.
     /// </summary>
-    public int TalismansRemaining; //= new bool[8];
+    public static int TalismansRemaining; //= new bool[8];
 
     /// <summary>
     /// Tracks which garamon dream we are at.
     /// </summary>
-    public int GaramonDream;//The next dream to play
+    public static int GaramonDream;//The next dream to play
 
     /// <summary>
     /// Tracks which incense dream we are at
     /// </summary>
-    public int IncenseDream;
+    public static int IncenseDream;
 
     /// <summary>
     /// Tracks the last day that there was a garamon dream.
     /// </summary>
-    public int DayGaramonDream = -1;
+    public static int DayGaramonDream = -1;
 
     /// <summary>
     /// Is the orb on tybals level destroyed.
     /// </summary>
-    public bool isOrbDestroyed;
+    public static bool isOrbDestroyed;
 
     /// <summary>
     /// Has Garamon been buried. If so talismans can now be sacrificed.
     /// </summary>
-    public bool isGaramonBuried;
+    public static bool isGaramonBuried;
 
     /// <summary>
     /// Is the cup of wonder found.
     /// </summary>
-    public bool isCupFound;
+    public static bool isCupFound;
 
     /// <summary>
     /// Is the player fighting in arena.
     /// </summary>
-    public bool FightingInArena = false;
+    public static bool FightingInArena = false;
 
     /// <summary>
     /// The arena opponents item ids
     /// </summary>
-    public int[] ArenaOpponents = new int[5];
+    public static int[] ArenaOpponents = new int[5];
 
     /// <summary>
     /// Has the player eaten a dream plant.
     /// </summary>
-    public bool DreamPlantEaten = false;
+    public static bool DreamPlantEaten = false;
 
     /// <summary>
     /// Is the player in the dream world
     /// </summary>
-    public bool InDreamWorld = false;
+    public static bool InDreamWorld = false;
 
-    public static Quest instance;
+    //public static Quest instance;
 
-    void Awake()
-    {
-        instance = this;
-    }
+    //void Awake()
+    //{
+    //    instance = this;
+    //}
 
     //void Start()
     //{
@@ -384,7 +385,7 @@ public class Quest : UWEBase
     /// Gets the next incense dream
     /// </summary>
     /// <returns>The incense dream.</returns>
-    public int getIncenseDream()
+    public static int getIncenseDream()
     {
         if (IncenseDream >= 3)
         {//Loop around

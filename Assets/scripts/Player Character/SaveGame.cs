@@ -174,27 +174,27 @@ public class SaveGame : Loader
                         //UWCharacter.Instance.MoonGateLevel = (short)((buffer[i]) & 0xf);
                         break;
                     case 0x60: ///    bits 2..5: play_poison and no of active effects
-                        Quest.instance.IncenseDream = buffer[i] & 0x3;
+                        Quest.IncenseDream = buffer[i] & 0x3;
                         UWCharacter.Instance.play_poison = (short)((buffer[i] >> 2) & 0xf);
                         UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x61:
                         {
-                            Quest.instance.isOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
-                            Quest.instance.isCupFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
+                            Quest.isOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
+                            Quest.isCupFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
                             break;
                         }
                     case 0x62://intoxication and is garamon buried.
                         {
                             int val = ((int)getValAtAddress(buffer, i, 16));
                             UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
-                            Quest.instance.isGaramonBuried = ((val >> 10) & 0x3) == 3;
+                            Quest.isGaramonBuried = ((val >> 10) & 0x3) == 3;
                             break;
                         }
                     //case 0x63:
                     //    {
-                    //      //  Quest.instance.isGaramonBuried = ((buffer[i] >> 2) & 0x3) == 3 ; break;
+                    //      //  Quest.isGaramonBuried = ((buffer[i] >> 2) & 0x3) == 3 ; break;
                     //    }
 
                     case 0x65: // hand, Gender & body, and class
@@ -206,29 +206,29 @@ public class SaveGame : Loader
                             //{//Check order here
                             //    if (((val >> (b)) & 0x1) == 1)
                             //    {
-                            //        //Quest.instance.QuestVariablesOBSOLETE[b] = 1;
+                            //        //Quest.QuestVariablesOBSOLETE[b] = 1;
                             //    }
                             //    else
                             //    {
-                            //        //Quest.instance.QuestVariablesOBSOLETE[b] = 0;
+                            //        //Quest.QuestVariablesOBSOLETE[b] = 0;
                             //    }
                             //}
                             break;
                         }
                     case 0x6A:
-                        //Quest.instance.QuestVariablesOBSOLETE[32] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.QuestVariablesOBSOLETE[32] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6B:
-                        //Quest.instance.QuestVariablesOBSOLETE[33] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.QuestVariablesOBSOLETE[33] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6C:
-                        //Quest.instance.QuestVariablesOBSOLETE[34] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.QuestVariablesOBSOLETE[34] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6D:
-                        //Quest.instance.QuestVariablesOBSOLETE[35] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.QuestVariablesOBSOLETE[35] = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0x6E://No of talismans still to destory
-                        Quest.instance.TalismansRemaining = (int)getValAtAddress(buffer, i, 8); break;
+                        Quest.TalismansRemaining = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0x6F://Garamon dream related?
-                        Quest.instance.GaramonDream = (int)getValAtAddress(buffer, i, 8); break;
+                        Quest.GaramonDream = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x71://Game variables
                     case 0x72:
                     case 0x73:
@@ -294,7 +294,7 @@ public class SaveGame : Loader
                     case 0xAF:
                     case 0xB0:  //quest vars											
                         {
-                            Quest.instance.variables[i - 0x71] = (int)getValAtAddress(buffer, i, 8); break;
+                            Quest.variables[i - 0x71] = (int)getValAtAddress(buffer, i, 8); break;
                         }
                     case 0xB1:  //The true max mana of the character. Used with the orb on level 7
                         UWCharacter.Instance.PlayerMagic.TrueMaxMana = (int)getValAtAddress(buffer, i, 8);
@@ -317,9 +317,9 @@ public class SaveGame : Loader
 
 
             //Check quest variable code
-            //for (int i=0; i<=Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0);i++)
+            //for (int i=0; i<=Quest.QuestVariablesOBSOLETE.GetUpperBound(0);i++)
             //{
-            //    if (Quest.instance.QuestVariablesOBSOLETE[i]!=Quest.GetQuestVariable(i))
+            //    if (Quest.QuestVariablesOBSOLETE[i]!=Quest.GetQuestVariable(i))
             //    {
             //        Debug.Log("Quest " + i + " does not agree");
             //    }
@@ -493,16 +493,16 @@ public class SaveGame : Loader
                 //        break;
                 //    }
                 case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
-                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.instance.IncenseDream & 0x3));
+                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.IncenseDream & 0x3));
                     break;
                 case 0x61:
                     {
                         int val = 0;
-                        if (Quest.instance.isOrbDestroyed)
+                        if (Quest.isOrbDestroyed)
                         {
                             val = 32;//bit 5
                         }
-                        if (Quest.instance.isCupFound)
+                        if (Quest.isCupFound)
                         {
                             val |= 64;     // bit 6 is the cup found.
                         }
@@ -515,14 +515,14 @@ public class SaveGame : Loader
                         //player intoxication
                         val |= (UWCharacter.Instance.Intoxication << 4);
                         DataLoader.WriteInt16(writer, val);
-                        if (Quest.instance.isGaramonBuried)
+                        if (Quest.isGaramonBuried)
                         {
                         }
                         break;
                     }
                 case 0x63: //Is garamon buried
                     {
-                        if (Quest.instance.isGaramonBuried)
+                        if (Quest.isGaramonBuried)
                         {
                             DataLoader.WriteInt8(writer, 28);
                         }
@@ -548,17 +548,17 @@ public class SaveGame : Loader
                 case 0x66 + 3://Quest flags ignore
                     break;
                 //case 0x6A:
-                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[32]); break;
+                //    //DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[32]); break;
                 //case 0x6B:
-                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[33]); break;
+                //    //DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[33]); break;
                 //case 0x6C:
-                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[34]); break;
+                //    //DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[34]); break;
                 //case 0x6D:
-                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[35]); break;
+                //    //DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[35]); break;
                 //case 0x6E://No of talismans still to destory
-                //   // DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
+                //   // DataLoader.WriteInt8(writer, Quest.TalismansRemaining); break;
                 //case 0x6F://Garamon dream related?
-                //    //DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
+                //    //DataLoader.WriteInt8(writer, Quest.GaramonDream); break;
                 case 0x71://Game variables
                 case 0x72:
                 case 0x73:
@@ -624,7 +624,7 @@ public class SaveGame : Loader
                 case 0xAF:
                 case 0xB0:
                     {
-                        DataLoader.WriteInt8(writer, Quest.instance.variables[i - 0x71]);
+                        DataLoader.WriteInt8(writer, Quest.variables[i - 0x71]);
                         break;
                     }
                 case 0xB1://The max mana the player has when their mana is drained by the magic orb.
@@ -884,15 +884,15 @@ public class SaveGame : Loader
                 case 0x64:
                     {
                         int val = 0;
-                        if (Quest.instance.DreamPlantEaten)
+                        if (Quest.DreamPlantEaten)
                         {
                             val |= 1;
                         }
-                        if (Quest.instance.InDreamWorld)
+                        if (Quest.InDreamWorld)
                         {
                             val |= 2;
                         }
-                        if (Quest.instance.FightingInArena)
+                        if (Quest.FightingInArena)
                         {
                             val |= 4;
                         }
@@ -941,7 +941,7 @@ public class SaveGame : Loader
                         int val = 0;
                         for (int q = 0; q < 4; q++)
                         {
-                         //   val |= (Quest.instance.QuestVariablesOBSOLETE[QuestCounter + q] & 0x1) << q;
+                         //   val |= (Quest.QuestVariablesOBSOLETE[QuestCounter + q] & 0x1) << q;
                         }
                         QuestCounter += 4;
                         DataLoader.WriteInt8(writer, val);
@@ -969,7 +969,7 @@ public class SaveGame : Loader
                 //case 0xF9:  //Quest 146
 
                 //    {//TODO:These quests are not tested.
-                //        DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[128 + (i - 0xE7)]);
+                //        DataLoader.WriteInt8(writer, Quest.QuestVariablesOBSOLETE[128 + (i - 0xE7)]);
                 //        break;
                 //    }
                 case 0xFA:  //Variable0
@@ -1081,7 +1081,7 @@ public class SaveGame : Loader
                 case 0x1CE:  //106
                 case 0x1D0:  //107
                     {//Split here due to qbert variable
-                        DataLoader.WriteInt8(writer, Quest.instance.variables[variableCounter++]);
+                        DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
                         break;
                     }
                 case 0x1D4:  //109
@@ -1104,12 +1104,12 @@ public class SaveGame : Loader
                 case 0x1F6:  //126
                 case 0x1F8:  //Variable 127
                     {
-                        DataLoader.WriteInt8(writer, Quest.instance.variables[variableCounter++]);
+                        DataLoader.WriteInt8(writer, Quest.variables[variableCounter++]);
                         break;
                     }
                 case 0x1D2:  //Variable 108 //Int 16 used in qbert
                     {
-                        DataLoader.WriteInt16(writer, Quest.instance.variables[variableCounter++]);
+                        DataLoader.WriteInt16(writer, Quest.variables[variableCounter++]);
                         break;
                     }
                 case 0x1D2 + 1:
@@ -1244,7 +1244,7 @@ public class SaveGame : Loader
                 case 0x2F6:
                 case 0x2F8://end bit variables
 
-                    DataLoader.WriteInt8(writer, Quest.instance.BitVariables[bitVariableCounter++]);
+                    DataLoader.WriteInt8(writer, Quest.BitVariables[bitVariableCounter++]);
                     break;
                 //Skip over for bit vars
                 case 0x1FA + 1:
@@ -1405,7 +1405,7 @@ public class SaveGame : Loader
                 case 0x364:
                 case 0x365:
                     {
-                        DataLoader.WriteInt8(writer, Quest.instance.ArenaOpponents[i - 0x361]);
+                        DataLoader.WriteInt8(writer, Quest.ArenaOpponents[i - 0x361]);
                         break;
                     }
                 case 0x36a: ///   game time
@@ -1432,7 +1432,7 @@ public class SaveGame : Loader
                 case 0x37c://14
                            //case 0x37d://15 -- This could be wrong.
                     {//The mysterious x_clocks
-                        DataLoader.WriteInt8(writer, Quest.instance.x_clocks[1 + i - 0x36f]); break;
+                        DataLoader.WriteInt8(writer, Quest.x_clocks[1 + i - 0x36f]); break;
                     }
                 case 0x3A3: // Helm (all of these subsequent values are indices into the object list 
                     WriteInventoryIndex(writer, inventoryObjects, 0); break;
@@ -1750,9 +1750,9 @@ public class SaveGame : Loader
                         UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
                         break;
                     case 0x64:
-                        Quest.instance.DreamPlantEaten = (1 == (buffer[i] & 0x1));
-                        Quest.instance.InDreamWorld = (1 == ((buffer[i] >> 1) & 0x1));
-                        Quest.instance.FightingInArena = (1 == ((buffer[i] >> 2) & 0x1));
+                        Quest.DreamPlantEaten = (1 == (buffer[i] & 0x1));
+                        Quest.InDreamWorld = (1 == ((buffer[i] >> 1) & 0x1));
+                        Quest.FightingInArena = (1 == ((buffer[i] >> 2) & 0x1));
                         UWCharacter.Instance.DreamWorldTimer = 30f;
                         break;
                     case 0x66: // hand, Gender & body, and class
@@ -1796,7 +1796,7 @@ public class SaveGame : Loader
                     //        //int val = (int)getValAtAddress(buffer, i, 8);
                     //        //for (int q = 0; q < 4; q++)
                     //        //{
-                    //        //    //Quest.instance.QuestVariablesOBSOLETE[QuestCounter++] = (val >> q) & 0x1;
+                    //        //    //Quest.QuestVariablesOBSOLETE[QuestCounter++] = (val >> q) & 0x1;
                     //        //}
                     //        break;
                     //    }
@@ -1821,7 +1821,7 @@ public class SaveGame : Loader
                     //case 0xF8:  //Quest 145
                     //case 0xF9:  //Quest 146
                     //    {//TODO:These quests are not tested.
-                    //        //Quest.instance.QuestVariablesOBSOLETE[i - 103] = (int)getValAtAddress(buffer, i, 8);
+                    //        //Quest.QuestVariablesOBSOLETE[i - 103] = (int)getValAtAddress(buffer, i, 8);
                     //        break;
                     //    }
                     case 0xFA:  //Variable0
@@ -1953,12 +1953,12 @@ public class SaveGame : Loader
                     case 0x1F6:  //126
                     case 0x1F8:  //Variable 127
                         {
-                            Quest.instance.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 8);
+                            Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                     case 0x1D2:  //Variable 108 //Int 16 used in qbert
                         {
-                            Quest.instance.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 16);
+                            Quest.variables[VariableCounter++] = (int)getValAtAddress(buffer, i, 16);
                             break;
                         }
 
@@ -2093,7 +2093,7 @@ public class SaveGame : Loader
                     case 0x2F6:
                     case 0x2F8://end bit variables
                         {
-                            Quest.instance.BitVariables[BitVariableCounter++] = (int)getValAtAddress(buffer, i, 16);
+                            Quest.BitVariables[BitVariableCounter++] = (int)getValAtAddress(buffer, i, 16);
                             break;
                         }
                     //Skip for bit variables
@@ -2252,7 +2252,7 @@ public class SaveGame : Loader
                     case 0x364:
                     case 0x365:
                         {
-                            Quest.instance.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
+                            Quest.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                     //x_clocks
@@ -2280,16 +2280,16 @@ public class SaveGame : Loader
                     case 0x37c://14
                                //case 0x37d://15 -- This could be wrong.
                         {//The mysterious x_clocks
-                            Quest.instance.x_clocks[x_clock++] = (int)getValAtAddress(buffer, i, 8);
+                            Quest.x_clocks[x_clock++] = (int)getValAtAddress(buffer, i, 8);
                             break;
                         }
                 }
             }
 
             ////Check quest variable code
-            //for (int i = 0; i <= Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
+            //for (int i = 0; i <= Quest.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
             //{
-            //    if (Quest.instance.QuestVariablesOBSOLETE[i] != Quest.GetQuestVariable(i))
+            //    if (Quest.QuestVariablesOBSOLETE[i] != Quest.GetQuestVariable(i))
             //    {
             //        Debug.Log("Quest " + i + " does not agree");
             //    }
@@ -3120,7 +3120,7 @@ public class SaveGame : Loader
         //int val = 0;
         //for (int b = 0; b < 32; b++)
         //{
-        //    val |= (Quest.instance.QuestVariablesOBSOLETE[b] & 0x1) << b;
+        //    val |= (Quest.QuestVariablesOBSOLETE[b] & 0x1) << b;
         //}
         //DataLoader.WriteInt32(writer, val);
     }
@@ -3448,17 +3448,17 @@ public class SaveGame : Loader
     //                        break;
     //                    }
     //                case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
-    //                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.instance.IncenseDream & 0x3));
+    //                    DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.IncenseDream & 0x3));
 
     //                    break;
     //                case 0x61:
     //                    {
     //                        int val = 0;
-    //                        if (Quest.instance.isOrbDestroyed)
+    //                        if (Quest.isOrbDestroyed)
     //                        {
     //                            val = 32;//bit 5
     //                        }
-    //                        if (Quest.instance.isCupFound)
+    //                        if (Quest.isCupFound)
     //                        {
     //                            val |= 64;     // bit 6 is the cup found.
     //                        }
@@ -3468,7 +3468,7 @@ public class SaveGame : Loader
     //                    }
     //                case 0x63: //Is garamon buried
     //                    {
-    //                        if (Quest.instance.isGaramonBuried)
+    //                        if (Quest.isGaramonBuried)
     //                        {
     //                            DataLoader.WriteInt8(writer, 28);
     //                        }
@@ -3505,7 +3505,7 @@ public class SaveGame : Loader
     //                        int val = 0;
     //                        for (int b = 0; b < 32; b++)
     //                        {
-    //                            val |= (Quest.instance.QuestVariables[b] & 0x1) << b;
+    //                            val |= (Quest.QuestVariables[b] & 0x1) << b;
     //                        }
     //                        DataLoader.WriteInt32(writer, val);
     //                        break;
@@ -3517,17 +3517,17 @@ public class SaveGame : Loader
     //                    break;
 
     //                case 0x6A:
-    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[32]); break;
+    //                    DataLoader.WriteInt8(writer, Quest.QuestVariables[32]); break;
     //                case 0x6B:
-    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[33]); break;
+    //                    DataLoader.WriteInt8(writer, Quest.QuestVariables[33]); break;
     //                case 0x6C:
-    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[34]); break;
+    //                    DataLoader.WriteInt8(writer, Quest.QuestVariables[34]); break;
     //                case 0x6D:
-    //                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[35]); break;
+    //                    DataLoader.WriteInt8(writer, Quest.QuestVariables[35]); break;
     //                case 0x6E://No of talismans still to destory
-    //                    DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
+    //                    DataLoader.WriteInt8(writer, Quest.TalismansRemaining); break;
     //                case 0x6F://Garamon dream related?
-    //                    DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
+    //                    DataLoader.WriteInt8(writer, Quest.GaramonDream); break;
     //                case 0x71://Game variables
     //                case 0x72:
     //                case 0x73:
@@ -3596,7 +3596,7 @@ public class SaveGame : Loader
 
 
     //                    {
-    //                        DataLoader.WriteInt8(writer, Quest.instance.variables[i - 0x71]);
+    //                        DataLoader.WriteInt8(writer, Quest.variables[i - 0x71]);
     //                        break;
     //                    }
     //                case 0xB1://The max mana the player has when their mana is drained by the magic orb.

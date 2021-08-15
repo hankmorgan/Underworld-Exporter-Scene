@@ -27,7 +27,7 @@ public class DjinnBottle : object_base
         ///     4 = baked in lava
         ///     5 = iron flesh cast (does not need to be still on when you break the bottle)
         ///     6 = djinn captured in body
-        switch (Quest.instance.x_clocks[3])
+        switch (Quest.x_clocks[3])
         {
             case 0:
             case 1:
@@ -57,7 +57,7 @@ public class DjinnBottle : object_base
     {
         //000~001~336~The air-daemon is absorbed into your body, and remains there, a faint but detectable presence awaiting release. \n
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 336));
-        Quest.instance.x_clocks[3] = 6;
+        Quest.x_clocks[3] = 6;
     }
 
     private void DjinnKillsPlayer()

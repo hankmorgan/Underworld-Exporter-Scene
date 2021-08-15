@@ -11,7 +11,7 @@ public class a_hack_trap_vendingsign : a_hack_trap
 
         int ItemStringIndex;
         int Price;
-        switch (Quest.instance.variables[owner])
+        switch (Quest.variables[owner])
         {
             case 0://fish
                 ItemStringIndex = 182;

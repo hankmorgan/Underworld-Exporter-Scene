@@ -15,7 +15,7 @@ public class ShrineLava : UWEBase
     {
         if (other.gameObject.GetComponent<ObjectInteraction>() != null)
         {
-            if (Quest.instance.isGaramonBuried == false)
+            if (Quest.isGaramonBuried == false)
             {
                 return;
             }
@@ -31,7 +31,7 @@ public class ShrineLava : UWEBase
                 case Quest.TalismanTaper:
                 case Quest.TalismanTaperLit:
                 case Quest.TalismanWine:
-                    Quest.instance.TalismansRemaining--;
+                    Quest.TalismansRemaining--;
                     break;
                 default:
                     return;
@@ -43,7 +43,7 @@ public class ShrineLava : UWEBase
             objInt.consumeObject();
 
             //Suck the avatar into the ethereal void.
-            if (Quest.instance.TalismansRemaining <= 0)
+            if (Quest.TalismansRemaining <= 0)
             {
                 StartCoroutine(SuckItAvatar());
             }

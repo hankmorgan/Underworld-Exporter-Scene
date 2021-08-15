@@ -5,7 +5,7 @@
     {
         base.Awake();
         noOfImages = 2;
-        switch (Quest.instance.getIncenseDream())
+        switch (Quest.getIncenseDream())
         {
             case 0:
                 ImageFrames[0] = "cs013_n01";

@@ -1196,7 +1196,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             if (currConv == 5)
             {
                 Debug.Log("GARG CONVERSATION HACK");
-                //Quest.instance.QuestVariablesOBSOLETE[0] = stack.at(31);
+                //Quest.QuestVariablesOBSOLETE[0] = stack.at(31);
                 Quest.SetQuestVariable(0, stack.at(31));
             }
         }
@@ -1282,7 +1282,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         if (SettingUpFight == false)
         {
-            Quest.instance.FightingInArena = false;//Clear the arena flag
+            Quest.FightingInArena = false;//Clear the arena flag
         }
         if (Teleport)
         {
@@ -2235,13 +2235,13 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         case 0://Challenge a fighter
                             {
                                 SettingUpFight = true;
-                                Quest.instance.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
-                                Quest.instance.FightingInArena = true;
+                                Quest.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
+                                Quest.FightingInArena = true;
                                 break;
                             }
                         case 1://Are you in a fight
                             {
-                                if (Quest.instance.FightingInArena)
+                                if (Quest.FightingInArena)
                                 {
                                     stack.result_register = 1;
                                 }
@@ -2576,12 +2576,12 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         //{
         //    Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.GetQuestVariable(QuestNo));
         //}
-        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //if (QuestNo > Quest.QuestVariablesOBSOLETE.GetUpperBound(0))
         //{
         //    Debug.Log("invalid quest no " + QuestNo);
         //    return 0;
         //}
-        //return Quest.instance.QuestVariablesOBSOLETE[QuestNo];
+        //return Quest.QuestVariablesOBSOLETE[QuestNo];
     }
 
     /// <summary>
@@ -2595,12 +2595,12 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         //{
         //    Debug.Log("Setting Quest no " + QuestNo + " to " + value);
         //}
-        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //if (QuestNo > Quest.QuestVariablesOBSOLETE.GetUpperBound(0))
         //{
         //    Debug.Log("Setting invalid quest no " + QuestNo);
         //    return;
         //}
-        //Quest.instance.QuestVariablesOBSOLETE[QuestNo] = value;
+        //Quest.QuestVariablesOBSOLETE[QuestNo] = value;
         Quest.SetQuestVariable(QuestNo, value);
     }
 
@@ -4210,11 +4210,11 @@ description:  places a generated object in underworld
     public int x_traps(int VariableValue, int VariableIndex)
     {
         Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
-        if (VariableValue <= Quest.instance.variables.GetUpperBound(0))
+        if (VariableValue <= Quest.variables.GetUpperBound(0))
         {
-            Quest.instance.variables[VariableIndex] = VariableValue;
+            Quest.variables[VariableIndex] = VariableValue;
         }
-        return Quest.instance.variables[VariableIndex];
+        return Quest.variables[VariableIndex];
     }
 
 
@@ -4247,13 +4247,13 @@ description:  places a generated object in underworld
         //Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
         if (unk1 == 10001)
         {
-            Debug.Log("x_clock returning: " + Quest.instance.x_clocks[unk2] + " from " + unk2);
-            stack.result_register = Quest.instance.x_clocks[unk2];
+            Debug.Log("x_clock returning: " + Quest.x_clocks[unk2] + " from " + unk2);
+            stack.result_register = Quest.x_clocks[unk2];
         }
         else
         {//Should this be an increment???
             Debug.Log("x_clock setting: " + (unk2) + " to " + unk1);
-            Quest.instance.x_clocks[unk2] = unk1;
+            Quest.x_clocks[unk2] = unk1;
         }
     }
 
@@ -4348,9 +4348,9 @@ description:  places a generated object in underworld
     {
         Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena);
         SettingUpFight = true;
-        //Quest.instance.QuestVariablesOBSOLETE[133] = NoOfFighters * 5;
+        //Quest.QuestVariablesOBSOLETE[133] = NoOfFighters * 5;
         Quest.SetQuestVariable(133, NoOfFighters * 5);
-        Quest.instance.FightingInArena = true;
+        Quest.FightingInArena = true;
         int[] tileX = new int[5];
         int[] tileY = new int[5];
         switch (arena)
@@ -4417,7 +4417,7 @@ description:  places a generated object in underworld
             objI.GetComponent<NPC>().npc_xhome = (short)tileX[i];
             objI.GetComponent<NPC>().npc_yhome = (short)tileY[i];
             objI.GetComponent<NPC>().npc_whoami = 102;
-            Quest.instance.ArenaOpponents[i] = objNew.index;
+            Quest.ArenaOpponents[i] = objNew.index;
         }
     }
 

@@ -25,7 +25,7 @@
         else
         {
             UWCharacter.Instance.FoodLevel = 23 + UWCharacter.Instance.FoodLevel;
-            Quest.instance.DreamPlantEaten = true;
+            Quest.DreamPlantEaten = true;
             //000~001~248~The plant is plain tasting but nourishing. \n
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 248));
             objInt().consumeObject();

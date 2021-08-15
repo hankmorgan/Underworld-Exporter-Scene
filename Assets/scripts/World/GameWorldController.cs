@@ -821,7 +821,7 @@ public class GameWorldController : UWEBase
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
-                //Quest.instance.QuestVariablesOBSOLETE = new int[250];//UW has a lot more quests. This value needs to be confirmed.
+                //Quest.QuestVariablesOBSOLETE = new int[250];//UW has a lot more quests. This value needs to be confirmed.
                 StringController.instance.LoadStringsPak(Path.Combine(Loader.BasePath, "DATA", "STRINGS.PAK"));
                 break;
             default:

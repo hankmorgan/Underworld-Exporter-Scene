@@ -193,7 +193,7 @@ public class event_base : UWClass
         }
         else
         {
-            return (Quest.instance.x_clocks[BlockNo] == x_clock);
+            return (Quest.x_clocks[BlockNo] == x_clock);
         }
     }
 

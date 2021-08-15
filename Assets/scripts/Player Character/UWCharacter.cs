@@ -628,7 +628,7 @@ public class UWCharacter : Character
                 {
                     if (WasIKilledByAFriend())
                     {
-                        //Quest.instance.QuestVariablesOBSOLETE[112] = 1;
+                        //Quest.QuestVariablesOBSOLETE[112] = 1;
                         Quest.SetQuestVariable(112, 1);
                     }
                     if (Quest.GetQuestVariable(112) == 1)
@@ -1181,9 +1181,9 @@ public class UWCharacter : Character
         }
         if (_RES == GAME_UW2)
         {//Stepped in Lava after covering in basilisk oil.
-            if (Quest.instance.x_clocks[3] == 3)
+            if (Quest.x_clocks[3] == 3)
             {
-                Quest.instance.x_clocks[3] = 4;
+                Quest.x_clocks[3] = 4;
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 334));
             }
         }
@@ -1193,7 +1193,7 @@ public class UWCharacter : Character
     //Update the player when dreaming of the etheral void.
     private void DreamWorldUpdate()
     {
-        if (Quest.instance.InDreamWorld)
+        if (Quest.InDreamWorld)
         {
             isFlying = true;
             DreamWorldTimer -= Time.deltaTime;
@@ -1581,10 +1581,10 @@ public class UWCharacter : Character
         }
     }
 
-    public Quest quest()
-    {
-        return this.GetComponent<Quest>();
-    }
+    //public Quest quest()
+    //{
+    //    return this.GetComponent<Quest>();
+    //}
 
     public void onLanding(float fallSpeed)
     {
@@ -1730,7 +1730,7 @@ public class UWCharacter : Character
             switch (_RES)
             {//TODO:max these properties?
                 case GAME_UW1:
-                    if ((GameWorldController.instance.dungeon_level == 6) && (!Quest.instance.isOrbDestroyed))
+                    if ((GameWorldController.instance.dungeon_level == 6) && (!Quest.isOrbDestroyed))
                     {
                         Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
                     }
@@ -1940,7 +1940,7 @@ public class UWCharacter : Character
         if (!CheckForMonsters())
         {
 
-            if (Quest.instance.DreamPlantEaten)
+            if (Quest.DreamPlantEaten)
             {
                 DreamTravelToVoid();
             }
@@ -2007,7 +2007,7 @@ public class UWCharacter : Character
                 {
                     if (IsGaramonTime())
                     {//PLay a garamon dream
-                        PlayGaramonDream(Quest.instance.GaramonDream++);
+                        PlayGaramonDream(Quest.GaramonDream++);
                     }
                     else
                     {//Regular sleep with a fade to black
@@ -2044,15 +2044,15 @@ public class UWCharacter : Character
     void DreamTravelToVoid()
     {
         //Record the players position.	
-        Quest.instance.DreamPlantEaten = false;
+        Quest.DreamPlantEaten = false;
         DreamReturnTileX = TileMap.visitTileX;
         DreamReturnTileY = TileMap.visitTileY;
         DreamReturnLevel = GameWorldController.instance.dungeon_level;
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 24));
         GameWorldController.instance.SwitchLevel(68, 32, 27);//TODO:implement other destinations.
-        Quest.instance.InDreamWorld = true;
+        Quest.InDreamWorld = true;
         DreamWorldTimer = 30f;
-        //Quest.instance.QuestVariablesOBSOLETE[48] = 1;
+        //Quest.QuestVariablesOBSOLETE[48] = 1;
         Quest.SetQuestVariable(48, 1);
     }
 
@@ -2061,7 +2061,7 @@ public class UWCharacter : Character
     /// </summary>
     void DreamTravelFromVoid()
     {
-        Quest.instance.InDreamWorld = false;
+        Quest.InDreamWorld = false;
         isFlying = false;
         GameWorldController.instance.SwitchLevel(DreamReturnLevel, DreamReturnTileX, DreamReturnTileY);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 25));
@@ -2132,16 +2132,16 @@ public class UWCharacter : Character
     /// <returns></returns>
     private bool IsGaramonTime()
     {
-        if (Quest.instance.GaramonDream == 6)
+        if (Quest.GaramonDream == 6)
         {
             return true;//All done.
         }
-        if (Quest.instance.GaramonDream == 7)
+        if (Quest.GaramonDream == 7)
         {
             return true;//Tybal is dead. Time to play a special dream to refflect that.
         }
 
-        if (GameClock.day() >= Quest.instance.DayGaramonDream)
+        if (GameClock.day() >= Quest.DayGaramonDream)
         {
             return true;
         }
@@ -2206,7 +2206,7 @@ public class UWCharacter : Character
                 Cutscene_Dream_7 d8 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_7>();
                 UWHUD.instance.CutScenesFull.cs = d8;
                 UWHUD.instance.CutScenesFull.Begin();
-                Quest.instance.GaramonDream = 3;//Move back in the sequence
+                Quest.GaramonDream = 3;//Move back in the sequence
                 DaysToWait = 1;
                 break;
             case 8:
@@ -2223,7 +2223,7 @@ public class UWCharacter : Character
                 break;
         }
 
-        Quest.instance.DayGaramonDream = GameClock.day() + DaysToWait;
+        Quest.DayGaramonDream = GameClock.day() + DaysToWait;
     }
 
     /// <summary>

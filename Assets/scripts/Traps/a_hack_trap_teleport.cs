@@ -29,19 +29,19 @@
     {
         base.Start();
         instance = this;
-        if (Quest.instance.x_clocks[1] < 4)
+        if (Quest.x_clocks[1] < 4)
         {
             availableWorlds[PrisonTower] = true;
             NoOfWorlds = 0;
         }
-        else if (Quest.instance.x_clocks[1] < 8)
+        else if (Quest.x_clocks[1] < 8)
         {
             availableWorlds[PrisonTower] = true;
             availableWorlds[Killorn] = true;
             availableWorlds[IceCaverns] = true;
             NoOfWorlds = 2;
         }
-        else if (Quest.instance.x_clocks[1] < 13)
+        else if (Quest.x_clocks[1] < 13)
         {
             availableWorlds[PrisonTower] = true;
             availableWorlds[Killorn] = true;
@@ -73,7 +73,7 @@
 
         //////////int OxPos = src.xpos;
         //////////int OyPos = src.ypos;
-        //////////int variable = Quest.instance.variables[6];
+        //////////int variable = Quest.variables[6];
 
         //////////		//x and y positions are as follows.
         //////////		//2,7
