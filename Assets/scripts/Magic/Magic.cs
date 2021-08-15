@@ -132,8 +132,12 @@ public class Magic : UWEBase
             UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
         }
     }
-    ///The true max mana the character has when their mana is drained.
-    public int TrueMaxMana;
+    ///The true max mana the character had when their mana is drained by the orb
+    public int TrueMaxMana
+    {
+        get { return SaveGame.GetAt(0xB1); }
+        set { SaveGame.SetAt(0xB1, (byte)value); }
+    }
 
     ///The mana cost of the next spell the player will cast
     public int SpellCost;

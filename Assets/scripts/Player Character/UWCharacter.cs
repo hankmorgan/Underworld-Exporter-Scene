@@ -200,8 +200,6 @@ public class UWCharacter : Character
     [Header("Player Health Status")]
     public int Intoxication; //0-63 range
 
-    [SerializeField]
-    private short _play_poison;
     /// <summary>
     /// How badly poisoned is the player. The higher the value the longer poison ticks down for.
     /// </summary>
@@ -209,19 +207,44 @@ public class UWCharacter : Character
     {
         get
         {
-            return _play_poison;
+            switch(_RES)
+            {
+                case GAME_UW2:
+                    return (short)((SaveGame.GetAt(0x61)>>1) & 0xf);
+                default:
+                    return (short)((SaveGame.GetAt(0x60)>>2) & 0xf);
+            }            
         }
         set
         {
-            if (_play_poison == 0 && value != 0)
+            short currentVal = play_poison;
+            if (value < 0) { value = 0; }
+            if (currentVal == 0 && value != 0)
             {//Clears poisoning on the flask.
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(true);
             }
-            else if (_play_poison != 0 && value == 0)
+            else if (currentVal != 0 && value == 0)
             {//Sets poisoning on the flask
+                UWCharacter.Instance.poison_timer = 30f;//Starts the timer for poison
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
             }
-            _play_poison = value;
+            switch(_RES)
+            {
+                case GAME_UW2:
+                    {
+                        int existingval = SaveGame.GetAt(0x61) & 0xE1;
+                        existingval |= (value << 1);
+                        SaveGame.SetAt(0x61, (byte)existingval);
+                        break;
+                    }                    
+                default:
+                    {
+                        int existingval = SaveGame.GetAt(0x60) & 0xC3;
+                        existingval |= (value << 2);
+                        SaveGame.SetAt(0x61, (byte)existingval);
+                        break;
+                    }
+            }
             UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
         }
     }

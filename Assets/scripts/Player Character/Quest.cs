@@ -352,12 +352,20 @@ public class Quest : UWClass
     /// <summary>
     /// The no of talismans to still be cast into abyss in order to complete the game.
     /// </summary>
-    public static int TalismansRemaining; //= new bool[8];
+    public static int TalismansRemaining
+    {
+        get { return GetQuestVariable(36); }
+        set { SetQuestVariable(36, value); }
+    }
 
     /// <summary>
     /// Tracks which garamon dream we are at.
     /// </summary>
-    public static int GaramonDream;//The next dream to play
+    public static int GaramonDream//The next dream to play
+    {
+        get { return GetQuestVariable(37); }
+        set { SetQuestVariable(37, value); }
+    }
 
     /// <summary>
     /// Tracks which incense dream we are at

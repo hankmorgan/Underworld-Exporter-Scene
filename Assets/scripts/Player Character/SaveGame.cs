@@ -151,6 +151,11 @@ public class SaveGame : Loader
             LoadPosition();
             ActiveRuneSlot.UpdateRuneSlots();
 
+            if (UWCharacter.Instance.play_poison>0)
+            {
+                UWCharacter.Instance.poison_timer = 30f;
+            }
+
             Debug.Log("Moongate is on " + UWCharacter.Instance.MoonGateLevel);
             Debug.Log("Silver Tree is on " + UWCharacter.Instance.ResurrectLevel);
 
@@ -166,8 +171,8 @@ public class SaveGame : Loader
                         break;
                     case 0x60: ///    bits 2..5: play_poison and no of active effects
                         //Quest.IncenseDream = buffer[i] & 0x3;
-                        UWCharacter.Instance.play_poison = (short)((buffer[i] >> 2) & 0xf);
-                        UWCharacter.Instance.poison_timer = 30f;
+                        //UWCharacter.Instance.play_poison = (short)((buffer[i] >> 2) & 0xf);
+                        //UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x61:
@@ -183,14 +188,6 @@ public class SaveGame : Loader
                             Quest.isGaramonBuried = ((val >> 10) & 0x3) == 3;
                             break;
                         }
-                    case 0x6E://No of talismans still to destory
-                        Quest.TalismansRemaining = (int)getValAtAddress(buffer, i, 8); break;
-
-                    case 0x6F://Garamon dream related?
-                        Quest.GaramonDream = (int)getValAtAddress(buffer, i, 8); break;
-                     case 0xB1:  //The true max mana of the character. Used with the orb on level 7
-                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = (int)getValAtAddress(buffer, i, 8);
-                        break;
                     case 0xCF: ///   game time
                         GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
                     case 0xD0:
@@ -1525,29 +1522,30 @@ public class SaveGame : Loader
                 output.Close();
                 File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "decode_" + slotNo + ".dat"), dataToWrite);
             }
-            if (UWCharacter.Instance.recode)
-            {
-                if (UWCharacter.Instance.recode_cheat)
-                {
-                    for (int r = 31; r <= 53; r++)
-                    {
-                        buffer[r] = 0;
-                    }
-                }
-                else
-                {
-                    buffer[UWCharacter.Instance.IndexToRecode] = (byte)UWCharacter.Instance.ValueToRecode;
-                }
 
-                byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
+            //if (UWCharacter.Instance.recode)
+            //{
+            //    if (UWCharacter.Instance.recode_cheat)
+            //    {
+            //        for (int r = 31; r <= 53; r++)
+            //        {
+            //            buffer[r] = 0;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        buffer[UWCharacter.Instance.IndexToRecode] = (byte)UWCharacter.Instance.ValueToRecode;
+            //    }
 
-                byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
-                for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
-                {
-                    dataToWrite[i] = recodetest[i];
-                }
-                File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
-            }
+            //    byte[] recodetest = DecodeEncodeUW2PlayerDat(buffer, MS);
+
+            //    byte[] dataToWrite = new byte[recodetest.GetUpperBound(0) + 1];
+            //    for (long i = 0; i <= recodetest.GetUpperBound(0); i++)
+            //    {
+            //        dataToWrite[i] = recodetest[i];
+            //    }
+            //    File.WriteAllBytes(Path.Combine(BasePath, "SAVE" + slotNo, "playerrecoded.dat"), dataToWrite);
+            //}
 
 
 
@@ -1563,6 +1561,11 @@ public class SaveGame : Loader
             LoadPosition();
             ActiveRuneSlot.UpdateRuneSlots();
 
+            if (UWCharacter.Instance.play_poison > 0)
+            {
+                UWCharacter.Instance.poison_timer = 30f;
+            }
+
             for (int i = 0x4D; i <= 930; i++)
             {
                 switch (i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
@@ -1573,8 +1576,8 @@ public class SaveGame : Loader
                         //Debug.Log("Weight value is " + (int)getValAtAddress(buffer, i, 16) + " str = " + Skills.STR);
                         break;
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
-                        UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);
-                        UWCharacter.Instance.poison_timer = 30f;
+                       // UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);
+                       // UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x62://alco
