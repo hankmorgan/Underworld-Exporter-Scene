@@ -710,7 +710,7 @@ public class NPC : MobileObject
                                 //Play the tybal death cutscene.
                                 //Quest.isTybalDead=true;
                                 Quest.GaramonDream = 7;//Advance to Tybal is dead range of dreams
-                                Quest.DayGaramonDream = GameClock.day();//Ensure dream triggers on next sleep
+                                Quest.DayGaramonDream = GameClock.Day;//Ensure dream triggers on next sleep
                                 UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject, null, 226, Magic.SpellRule_TargetSelf, -1);
                                 return false;
                             }

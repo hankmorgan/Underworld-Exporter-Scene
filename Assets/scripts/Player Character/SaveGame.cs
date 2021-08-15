@@ -151,11 +151,6 @@ public class SaveGame : Loader
             LoadPosition();
             ActiveRuneSlot.UpdateRuneSlots();
 
-            if (UWCharacter.Instance.play_poison>0)
-            {
-                UWCharacter.Instance.poison_timer = 30f;
-            }
-
             Debug.Log("Moongate is on " + UWCharacter.Instance.MoonGateLevel);
             Debug.Log("Silver Tree is on " + UWCharacter.Instance.ResurrectLevel);
 
@@ -175,33 +170,33 @@ public class SaveGame : Loader
                         //UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
-                    case 0x61:
-                        {
-                            Quest.isOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
-                            Quest.isCupFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
-                            break;
-                        }
-                    case 0x62://intoxication and is garamon buried.
-                        {
-                            int val = ((int)getValAtAddress(buffer, i, 16));
-                            UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
-                            Quest.isGaramonBuried = ((val >> 10) & 0x3) == 3;
-                            break;
-                        }
-                    case 0xCF: ///   game time
-                        GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
-                    case 0xD0:
-                        GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0xD1:
-                        GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0xD2:
-                        GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0x61:
+                    //    {
+                    //        //Quest.IsTybalsOrbDestroyed = ((((int)getValAtAddress(buffer, i, 8) >> 5) & 0x1) == 1);
+                    //        //Quest.IsCUpOfWonderFound = ((((int)getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
+                    //        break;
+                    //    }
+                    //case 0x62://intoxication and is garamon buried.
+                    //    {
+                    //        //int val = ((int)getValAtAddress(buffer, i, 16));
+                    //        //UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
+                    //        //Quest.IsGaramonBuried = ((val >> 10) & 0x3) == 3;
+                    //        break;
+                    //    }
+                    //case 0xCF: ///   game time
+                    //    GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
+                    //case 0xD0:
+                    //    GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0xD1:
+                    //    GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0xD2:
+                    //    GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
                 }
             }
 
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
 
-            GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
+            //GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
 
             ResetInventory();
             LoadInventory(buffer, 312, 248, 286);
@@ -327,30 +322,30 @@ public class SaveGame : Loader
                 case 0x59 + 1: ///   z-position	
                 case 0x5B:
                 case 0x5C: ///   heading								
-                case 0x5D: ///   dungeon level										
-                    break;//Skip over int 16s for position
+               // case 0x5D: ///   dungeon level										
+                //    break;//Skip over int 16s for position
                 //case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
                 //    {
                 //        //int val = (UWCharacter.Instance.ResurrectLevel & 0xf) << 4 | (UWCharacter.Instance.MoonGateLevel & 0xf);
                 //        //DataLoader.WriteInt8(writer, val);
                 //        break;
                 //    }
-                case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
+              //  case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
                    // DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.IncenseDream & 0x3));
-                    break;
+               //     break;
                 case 0x61:
                     {
-                        int val = 0;
-                        if (Quest.isOrbDestroyed)
-                        {
-                            val = 32;//bit 5
-                        }
-                        if (Quest.isCupFound)
-                        {
-                            val |= 64;     // bit 6 is the cup found.
-                        }
-                        DataLoader.WriteInt8(writer, val);
-                        break;
+                        //int val = 0;
+                        //if (Quest.IsTybalsOrbDestroyed)
+                        //{
+                        //    val = 32;//bit 5
+                        //}
+                        //if (Quest.IsCUpOfWonderFound)
+                        //{
+                        //    val |= 64;     // bit 6 is the cup found.
+                        //}
+                        //DataLoader.WriteInt8(writer, val);
+                        //break;
                     }
                 case 0x64://intoxication and is garamon buried.
                     {
@@ -358,14 +353,14 @@ public class SaveGame : Loader
                         //player intoxication
                         val |= (UWCharacter.Instance.Intoxication << 4);
                         DataLoader.WriteInt16(writer, val);
-                        if (Quest.isGaramonBuried)
+                        if (Quest.IsGaramonBuried)
                         {
                         }
                         break;
                     }
                 case 0x63: //Is garamon buried
                     {
-                        if (Quest.isGaramonBuried)
+                        if (Quest.IsGaramonBuried)
                         {
                             DataLoader.WriteInt8(writer, 28);
                         }
@@ -493,15 +488,15 @@ public class SaveGame : Loader
                 case 0xB7://Unknown. Always 8
                     DataLoader.WriteInt8(writer, 0x8);
                     break;
-                case 0xCF: ///   game time
-                    DataLoader.WriteInt8(writer, 0); break;//Write zero since I don't track milliseconds
-                                                           //break;
-                case 0xD0:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
-                case 0xD1:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
-                case 0xD2:
-                    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
+                //case 0xCF: ///   game time
+                //    DataLoader.WriteInt8(writer, 0); break;//Write zero since I don't track milliseconds
+                //                                           //break;
+                //case 0xD0:
+                //    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[0]); break;
+                //case 0xD1:
+                //    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[1]); break;
+                //case 0xD2:
+                //    DataLoader.WriteInt8(writer, GameClock.instance.gametimevals[2]); break;
                 case 0xD3://No of inventory items + 1.
                     DataLoader.WriteInt16(writer, inventoryObjects.GetUpperBound(0) + 1 + 1);
                     break;
@@ -1561,11 +1556,6 @@ public class SaveGame : Loader
             LoadPosition();
             ActiveRuneSlot.UpdateRuneSlots();
 
-            if (UWCharacter.Instance.play_poison > 0)
-            {
-                UWCharacter.Instance.poison_timer = 30f;
-            }
-
             for (int i = 0x4D; i <= 930; i++)
             {
                 switch (i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
@@ -1581,7 +1571,7 @@ public class SaveGame : Loader
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
                     case 0x62://alco
-                        UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
+                       // UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
                         break;
                     case 0x64:
                         Quest.DreamPlantEaten = (1 == (buffer[i] & 0x1));
@@ -1875,21 +1865,21 @@ public class SaveGame : Loader
                             break;
                         }
                     //x_clocks
-                    case 0x36a: ///   game time
-                        GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
-                    case 0x36b:
-                        GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0x36c:
-                        GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
-                    case 0x36d:
-                        GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0x36a: ///   game time
+                    //    GameClock.instance.game_time = (int)getValAtAddress(buffer, i, 32); break;
+                    //case 0x36b:
+                    //    GameClock.instance.gametimevals[0] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0x36c:
+                    //    GameClock.instance.gametimevals[1] = (int)getValAtAddress(buffer, i, 8); break;
+                    //case 0x36d:
+                    //    GameClock.instance.gametimevals[2] = (int)getValAtAddress(buffer, i, 8); break;
                  }
             }
 
 
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
 
-            GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
+            //GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
 
             ResetInventory();
 

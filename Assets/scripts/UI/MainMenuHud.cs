@@ -259,9 +259,10 @@ public class MainMenuHud : GuiBase
             GameWorldController.instance.Lev_Ark_File_Selected = Path.Combine("DATA", "LEV.ARK");
             GameWorldController.instance.SCD_Ark_File_Selected = Path.Combine("DATA", "SCD.ARK");
             GameWorldController.instance.InitBGlobals(0);
-            GameClock.instance._day = 0;
-            GameClock.instance._minute = 51;
-            GameClock.instance._second = 15;
+            //GameClock.instance._day = 0;
+            //GameClock.instance._minute = 51;
+            //GameClock.instance._second = 15;
+            GameClock.Clock1 = 3; GameClock.Clock2 = 12; //To Confirm;
             UWCharacter.Instance.MaxVIT = 255;
             UWCharacter.Instance.CurVIT = 255;
             Skills.STR = 30;
@@ -472,9 +473,9 @@ public class MainMenuHud : GuiBase
                             Quest.DayGaramonDream = 0;
                             Quest.GaramonDream = 0;
                             Quest.IncenseDream = 0;
-                            Quest.isGaramonBuried = false;
-                            Quest.isOrbDestroyed = false;
-                            Quest.isCupFound = false;
+                            Quest.IsGaramonBuried = false;
+                            Quest.IsTybalsOrbDestroyed = false;
+                            Quest.IsCupOfWonderFound = false;
                             break;
                         case GAME_UW2:
                             //Why am I setting these!!!
@@ -492,9 +493,10 @@ public class MainMenuHud : GuiBase
                             Quest.SetVariable(106, 255);
                             break;
                     }
-                    GameClock.instance._day = 0;
-                    GameClock.instance._minute = 51;
-                    GameClock.instance._second = 15;
+                    //GameClock.instance._day = 0;
+                    //GameClock.instance._minute = 51;
+                    //GameClock.instance._second = 15;
+                    GameClock.Clock1 = 3; GameClock.Clock2 = 12;
                     UWCharacter.Instance.Fatigue = 20;
                     UWCharacter.Instance.FoodLevel = 192;
                     JourneyOnwards();

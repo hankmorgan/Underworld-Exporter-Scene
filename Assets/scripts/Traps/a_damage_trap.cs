@@ -38,10 +38,6 @@ owner != 0 poison trap
                 {
                     //UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
                     UWCharacter.Instance.play_poison = (short)Random.Range(1, 6);
-                    if (UWCharacter.Instance.poison_timer == 0)
-                    {
-                        UWCharacter.Instance.poison_timer = 30f;
-                    }
                 }
             }
         }
