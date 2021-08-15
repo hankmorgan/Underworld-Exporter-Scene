@@ -26,8 +26,10 @@ public class a_hack_trap_skup : a_hack_trap
                 if (obj.GetComponent<trigger_base>() != null)
                 {
                     skupSpawned = true;
-                    Quest.instance.QuestVariables[38] = 1;
-                    Quest.instance.QuestVariables[122] = 0;
+                    //Quest.instance.QuestVariablesOBSOLETE[38] = 1;
+                    Quest.SetQuestVariable(38, 1);
+                    //Quest.instance.QuestVariablesOBSOLETE[122] = 0;
+                    Quest.SetQuestVariable(122, 0);
                     obj.GetComponent<trigger_base>().Activate(this.gameObject);
                     int ObjToDestroy = TestObjectAtTile(59, 4, 161, 2);
                     if (ObjToDestroy != -1)

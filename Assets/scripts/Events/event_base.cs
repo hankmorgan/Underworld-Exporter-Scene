@@ -200,7 +200,7 @@ public class event_base : UWClass
 
     public bool LevelTest()
     {
-        return IsLevel(GameWorldController.instance.LevelNo);
+        return IsLevel(GameWorldController.instance.dungeon_level);
     }
 
     /// <summary>

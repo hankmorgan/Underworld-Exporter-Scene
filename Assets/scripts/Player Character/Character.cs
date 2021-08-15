@@ -115,11 +115,11 @@ public class Character : UWEBase
 
     [Header("Character")]
     //The player's name
-    public string CharName;
+   // public string CharName;
 
     //Heading values for compass displays
     [Header("Compass and Position")]
-    public int currentHeading;
+    public int HeadingForCompass;//TODO Remove this and use heading instead.
     protected int[] CompassHeadings = { 0, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
     //Camera direction for billboarding
     public Vector3 dir;
@@ -198,7 +198,7 @@ public class Character : UWEBase
     public virtual void Update()
     {
         //Get the current compass heading
-        currentHeading = CompassHeadings[(int)Mathf.Round(((this.gameObject.transform.eulerAngles.y % 360) / 22.5f))];
+        HeadingForCompass = CompassHeadings[(int)Mathf.Round(((this.gameObject.transform.eulerAngles.y % 360) / 22.5f))];
         dir = Camera.main.transform.forward;//Billboarding
         dirForNPC = dir;
         dirForNPC.y = 0.0f;

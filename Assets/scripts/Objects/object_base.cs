@@ -677,7 +677,7 @@ public class object_base : UWEBase
             {
                 if (_RES == GAME_UW1)
                 {
-                    if ((owner == 13) && (Quest.instance.QuestVariables[32] == 4))
+                    if ((owner == 13) && (Quest.GetQuestVariable(32) == 4))
                     {//Do not signal theft if the item belongs to a knight and the player is now a knight
                         owner = 0;
                         return false;

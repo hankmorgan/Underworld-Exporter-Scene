@@ -79,7 +79,8 @@ the left, right, center button combination on Level3.
                             result = Check_Variables(Quest.instance.BitVariables, zpos, heading, this, "bitvars");
                             break;
                         case 6://A quest flag list
-                            result = Check_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
+                            //result = Check_Variables(Quest.instance.QuestVariablesOBSOLETE, zpos, heading, this, "questvars");
+                            result = Check_Variables(Quest.GetQuestVariable(zpos), heading, this, "questvars");
                             break;
                         default:
                             Debug.Log("unknown usage of check trap " + xpos + " " + this.name);
@@ -163,6 +164,25 @@ the left, right, center button combination on Level3.
     static bool Check_Variables(int[] vars, int index, int operation, a_check_variable_trap trap, string debugname)
     {//Based on what uw-formats says. Seems to work okay.
         if (operation != 0)
+        {//This is against a variable?
+            int cmp = trap.ComparisonValue();
+            if (cmp == trap.VariableValue())
+            {
+                Debug.Log(debugname + " cmp = " + cmp + " value=" + trap.VariableValue());
+            }
+            return cmp == trap.VariableValue();
+        }
+        else
+        {//Is this right?
+            Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " " + index + " which is currently =" + vars[index]);
+            return trap.VariableValue() == vars[index];
+        }
+    }
+
+
+    static bool Check_Variables(int variable, int operation, a_check_variable_trap trap, string debugname)
+    {//Based on what uw-formats says. Seems to work okay.
+        if (operation != 0)
         {
             int cmp = trap.ComparisonValue();
             if (cmp == trap.VariableValue())
@@ -173,10 +193,11 @@ the left, right, center button combination on Level3.
         }
         else
         {//Is this right?
-            Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " to variable " + index + " which is currently =" + vars[index]);
-            return trap.VariableValue() == vars[index];
+            Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " to variable " + variable);
+            return trap.VariableValue() == variable;
         }
     }
+
 
     public override bool WillFireRepeatedly()
     {

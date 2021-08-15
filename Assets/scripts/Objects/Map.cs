@@ -18,7 +18,7 @@ public class Map : object_base
         {
             if (CurrentObjectInHand == null)
             {
-                return OpenMap(GameWorldController.instance.LevelNo);
+                return OpenMap(GameWorldController.instance.dungeon_level);
             }
             else
             {

@@ -66,7 +66,7 @@ public class ObjectLoaderInfo : UWClass
             DataBuffer[PTR + 1] = (byte)((val >> 8) & 0xFF);
             if ((origItemID != item_id) &&  (item_id !=0))
             {
-               Debug.Log("ItemID + for " + index + " has changed from " + origItemID + " to " + item_id);
+               Debug.Log("ItemID + for " + index + " has changed from " + StringController.instance.GetSimpleObjectNameUW(origItemID) + " to " + StringController.instance.GetSimpleObjectNameUW(item_id));
             }
         }
     }

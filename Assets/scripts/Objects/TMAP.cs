@@ -19,7 +19,7 @@ public class TMAP : object_base
         UWHUD.instance.MessageScroll.Add(StringController.instance.TextureDescription(TextureIndex));
         if ((TextureIndex == 142) && ((_RES == GAME_UW1) || (_RES == GAME_UWDEMO)))
         {//This is a window into the abyss.
-            UWHUD.instance.CutScenesSmall.anim.SetAnimation = "VolcanoWindow_" + GameWorldController.instance.LevelNo;
+            UWHUD.instance.CutScenesSmall.anim.SetAnimation = "VolcanoWindow_" + GameWorldController.instance.dungeon_level;
             UWHUD.instance.CutScenesSmall.anim.looping = true;
         }
         if (link != 0)

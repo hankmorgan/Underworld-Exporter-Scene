@@ -1304,7 +1304,7 @@ public class TileMapRenderer : Loader
                             //Set the verts	
                             MatsToUse[FaceCounter] = GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
                             if (_RES == GAME_UW1)
-                                if (GameWorldController.instance.LevelNo == 6)
+                                if (GameWorldController.instance.dungeon_level == 6)
                                 {
                                     if (t.floorTexture == 4)
                                     {//Special case for tybals floor

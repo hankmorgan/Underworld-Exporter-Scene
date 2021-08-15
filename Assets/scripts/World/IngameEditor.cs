@@ -91,7 +91,7 @@ public class IngameEditor : GuiBase_Draggable
     {
         base.Start();
         seed.text = UnderworldGenerator.instance.Seed.ToString();
-        if (GameWorldController.instance.LevelNo != -1)
+        if (GameWorldController.instance.dungeon_level != -1)
         {
             SwitchPanel(0);//Tilemap
             UpdateFloorTexturesDropDown();
@@ -359,7 +359,7 @@ public class IngameEditor : GuiBase_Draggable
             }
         }
         TileMapView.texture = CurrentAutoMap().TileMapImage();
-        LevelDetails.text = "Level + " + GameWorldController.instance.LevelNo;
+        LevelDetails.text = "Level + " + GameWorldController.instance.dungeon_level;
     }
 
 

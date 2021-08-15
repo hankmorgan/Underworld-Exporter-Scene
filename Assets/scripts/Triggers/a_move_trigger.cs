@@ -99,7 +99,7 @@ public class a_move_trigger : trigger_base
         }
         if (_RES == GAME_UW2)
         {//Check for moongates in this tile to support qbert in UW2.
-            if (GameWorldController.instance.LevelNo == 68)
+            if (GameWorldController.instance.dungeon_level == 68)
             {
                 ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
                 for (int i = 0; i < 1024; i++)

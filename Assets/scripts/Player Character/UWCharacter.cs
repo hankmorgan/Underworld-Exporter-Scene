@@ -39,16 +39,16 @@ public class UWCharacter : Character
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
 
-    /// <summary>
-    ///  Conversion of player transform into UW heading value for the save file.
-    /// </summary>
-    public int HeadingFull
-    {
-        get
-        {
-            return (int)(this.transform.eulerAngles.y * (255f / 360f));
-        }
-    }
+    ///// <summary>
+    /////  Conversion of player transform into UW heading value for the save file.
+    ///// </summary>
+    //public int HeadingFull
+    //{
+    //    get
+    //    {
+    //        return (int)(this.transform.eulerAngles.y * (255f / 360f));
+    //    }
+    //}
 
 
     [Header("Player Movement Status")]
@@ -166,15 +166,15 @@ public class UWCharacter : Character
         }
         set
         {
-            if (value>255)
+            if (value > 255)
             {
                 value = 255;
             }
-            if (value<0)
+            if (value < 0)
             {
                 value = 0;
             }
-            SaveGame.SetAt(0x3a,(byte)value);
+            SaveGame.SetAt(0x3a, (byte)value);
         }
     }
     public int Fatigue   //0-29 range
@@ -256,18 +256,46 @@ public class UWCharacter : Character
     public int IndexToRecode = 0;
     public int ValueToRecode = 0;
 
-
-
-  
     //Character related info
-    //Character Details
+    public string CharName
+    {
+        get
+        {
+            var _charname = "";
+            for (int i = 1; i < 14; i++)
+            {
+                var alpha = SaveGame.GetAt(i);
+                if (alpha.ToString() != "\0")
+                {
+                    _charname += (char)alpha;
+                }
+            }
+            return _charname;
+        }
+        set
+        {
+            var _chararray = value.ToCharArray();
+            for (int i = 1; i < 14; i++)
+            {
+                if (i - 1 < value.Length)
+                {
+                    SaveGame.SetAt(i, (byte)_chararray[i - 1]);
+                }
+                else
+                {
+                    SaveGame.SetAt(i, (byte)0);
+                }
+            }
+        }
+    }
+
     public int Body//Which body/portrait this character has 
     {
         get
         {
             int offset = 0x65;
             if (_RES == GAME_UW2) { offset = 0x66; }
-            return (SaveGame.GetAt(offset) >> 2) & 0x7 ;
+            return (SaveGame.GetAt(offset) >> 2) & 0x7;
         }
         set
         {
@@ -306,30 +334,32 @@ public class UWCharacter : Character
         get { return SaveGame.GetAt(0x3E); }
         set { SaveGame.SetAt(0x3E, (byte)value); }
     }
- 
+
     public int EXP
     {
         get
         {
-            return (int)SaveGame.GetAt32(0x4F)/10;
+            return (int)SaveGame.GetAt32(0x4F) / 10;
         }
         set
         {
-            SaveGame.SetAt32(0x4F, value*10);
+            SaveGame.SetAt32(0x4F, value * 10);
         }
     }
+
     public int TrainingPoints
     {
         get { return SaveGame.GetAt(0x53); }
         set { SaveGame.SetAt(0x53, (byte)value); }
     }
+
     public bool isFemale
     {
         get
         {
             int offset = 0x65;
             if (_RES == GAME_UW2) { offset = 0x66; }
-            return ((int)(SaveGame.GetAt(offset) >> 1 ) & 0x1) == 0x1;
+            return ((int)(SaveGame.GetAt(offset) >> 1) & 0x1) == 0x1;
         }
         set
         {
@@ -348,6 +378,7 @@ public class UWCharacter : Character
             SaveGame.SetAt(offset, existingValue);
         }
     }
+
     public bool isLefty
     {
         get
@@ -374,6 +405,29 @@ public class UWCharacter : Character
         }
     }
 
+    //Player save game co-ordinates
+    public int x_position
+    {
+        get { return (int)SaveGame.GetAt16(0x55); }
+        set { SaveGame.SetAt16(0x55, value); }
+    }
+
+    public int y_position
+    {
+        get { return (int)SaveGame.GetAt16(0x57); }
+        set { SaveGame.SetAt16(0x57, value); }
+    }
+
+    public int z_position
+    {
+        get { return (int)SaveGame.GetAt16(0x59); }
+        set { SaveGame.SetAt16(0x59, value); }
+    }
+    public int heading
+    {
+        get { return (int)SaveGame.GetAt(0x5c); }
+        set { SaveGame.SetAt(0x5c, (byte)value); }
+    }
 
     [Header("Speeds")]
     public float flySpeed;
@@ -396,11 +450,49 @@ public class UWCharacter : Character
 
     //public Feet playerFeet;
 
-    [Header("Teleportation")]
-    public short ResurrectLevel;
+    /// <summary>
+    /// In UW1 this is where the Silver tree has been planted
+    /// </summary>
+    /// If 0 it has not being planted.
+    /// This value -1 gives the level where the player will resurrect to.
+    public short ResurrectLevel
+    {
+        get
+        {
+            return (short)(SaveGame.GetAt(0x5F) >> 4);
+        }
+        set
+        {
+            int existingValue = SaveGame.GetAt(0x5F);
+            existingValue = existingValue & 0x0F;//Preserve low nibble containing moonstone.
+            existingValue = existingValue | ((value & 0xF) << 4); //Set high nibble to value
+            SaveGame.SetAt(0x5F, (byte)existingValue);
+        }
+    }
     public Vector3 ResurrectPosition = Vector3.zero;//TODO change this to a search.
     public Vector3 MoonGatePosition = Vector3.zero;
-    public short MoonGateLevel = 2;//Domain of the mountainmen
+
+
+    public short MoonGateLevel //= 2//Domain of the mountainmen
+    {
+        get
+        {
+            if (_RES == GAME_UW2)
+            { Debug.Log("moonstone usage in UW2. Confirm this is correct"); }
+            return (short)(SaveGame.GetAt(0x5F) & 0xF);
+        }
+        set
+        {
+            if (_RES == GAME_UW2)
+            { Debug.Log("moonstone usage in UW2. Confirm this is correct"); }
+            int existingValue = SaveGame.GetAt(0x5F);
+            existingValue = existingValue & 0xF0;//Preserve high nibble containing silver tree.
+            existingValue = existingValue | (value & 0xF); //Set high nibble to value
+            SaveGame.SetAt(0x5F, (byte)existingValue);
+        }
+    }
+
+    [Header("Teleportation")]
     public float teleportedTimer = 0f;
     public bool JustTeleported = false;
     /// <summary>
@@ -510,7 +602,7 @@ public class UWCharacter : Character
                             (
                                     (_RES == GAME_UW1)
                                     &&
-                                    (GameWorldController.instance.LevelNo == 8) //No resurrect in the ethereal void.
+                                    (GameWorldController.instance.dungeon_level == 8) //No resurrect in the ethereal void.
                             )
                     )
             )
@@ -533,15 +625,16 @@ public class UWCharacter : Character
         //If you are killed by an enemy npc in castle british you will die.
         //If you die while in an alternate dimension you will spawn in the gem chamber.
 
-        switch (GameWorldController.instance.LevelNo)
+        switch (GameWorldController.instance.dungeon_level)
         {
             case 0://Britannia castle
                 {
                     if (WasIKilledByAFriend())
                     {
-                        Quest.instance.QuestVariables[112] = 1;
+                        //Quest.instance.QuestVariablesOBSOLETE[112] = 1;
+                        Quest.SetQuestVariable(112, 1);
                     }
-                    if (Quest.instance.QuestVariables[112] == 1)
+                    if (Quest.GetQuestVariable(112) == 1)
                     {//You have been fighting your allies. You will awake in jail
                         UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                         return;
@@ -608,7 +701,7 @@ public class UWCharacter : Character
     {
         ResurrectCommon();
 
-        if (GameWorldController.instance.LevelNo != Instance.ResurrectLevel - 1)
+        if (GameWorldController.instance.dungeon_level != Instance.ResurrectLevel - 1)
         {
             if (_RES == GAME_UW1)
             {
@@ -646,7 +739,7 @@ public class UWCharacter : Character
         //If you are killed by an enemy npc in castle british you will die.
         //If you die while in an alternate dimension you will spawn in the gem chamber.
         ResurrectCommon();
-        switch (GameWorldController.instance.LevelNo)
+        switch (GameWorldController.instance.dungeon_level)
         {
             case 0://resurrect in jail
                 float targetX = 42 * 1.2f + 0.6f;
@@ -1395,7 +1488,7 @@ public class UWCharacter : Character
                                     //GetMessageLog ().text =
                                     if ((textureIndex == 142) && (_RES != GAME_UW2))
                                     {//This is a window into the abyss.
-                                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "VolcanoWindow_" + GameWorldController.instance.LevelNo;
+                                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "VolcanoWindow_" + GameWorldController.instance.dungeon_level;
                                     }
                                     UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
                                 }
@@ -1640,7 +1733,7 @@ public class UWCharacter : Character
             switch (_RES)
             {//TODO:max these properties?
                 case GAME_UW1:
-                    if ((GameWorldController.instance.LevelNo == 6) && (!Quest.instance.isOrbDestroyed))
+                    if ((GameWorldController.instance.dungeon_level == 6) && (!Quest.instance.isOrbDestroyed))
                     {
                         Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
                     }
@@ -1957,12 +2050,13 @@ public class UWCharacter : Character
         Quest.instance.DreamPlantEaten = false;
         DreamReturnTileX = TileMap.visitTileX;
         DreamReturnTileY = TileMap.visitTileY;
-        DreamReturnLevel = GameWorldController.instance.LevelNo;
+        DreamReturnLevel = GameWorldController.instance.dungeon_level;
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 24));
         GameWorldController.instance.SwitchLevel(68, 32, 27);//TODO:implement other destinations.
         Quest.instance.InDreamWorld = true;
         DreamWorldTimer = 30f;
-        Quest.instance.QuestVariables[48] = 1;
+        //Quest.instance.QuestVariablesOBSOLETE[48] = 1;
+        Quest.SetQuestVariable(48, 1);
     }
 
     /// <summary>

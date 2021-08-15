@@ -10,7 +10,11 @@ public class ReadableTrap : object_base
         {
             UWHUD.instance.MessageScroll.Add("The book explodes in your face!");
             UWCharacter.Instance.ApplyDamage(Random.Range(1, 20));
-            Quest.instance.QuestVariables[8] = 1;//For Bronus/Morlock quest.
+            //Quest.instance.QuestVariablesOBSOLETE[8] = 1;
+            if (_RES==GAME_UW1)
+            {//For Bronus/Morlock quest.
+                Quest.SetQuestVariable(8, 1);
+            }
             objInt().consumeObject();
             return true;
         }

@@ -519,7 +519,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             UWHUD.instance.NPCName.text = npcname;
         }
 
-        UWHUD.instance.PCName.text = SaveGame.CharName; ;
+        UWHUD.instance.PCName.text = UWCharacter.Instance.CharName; ;
 
 
 
@@ -1195,7 +1195,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {//Hack to fix quest flag settings for garg
             if (currConv == 5)
             {
-                Quest.instance.QuestVariables[0] = stack.at(31);
+                Debug.Log("GARG CONVERSATION HACK");
+                //Quest.instance.QuestVariablesOBSOLETE[0] = stack.at(31);
+                Quest.SetQuestVariable(0, stack.at(31));
             }
         }
 
@@ -1284,7 +1286,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         if (Teleport)
         {
-            if (TeleportLevel == GameWorldController.instance.LevelNo)
+            if (TeleportLevel == GameWorldController.instance.dungeon_level)
             {//stay on this level
                 float targetX = TeleportTileX * 1.2f + 0.6f;
                 float targetY = TeleportTileY * 1.2f + 0.6f;
@@ -1340,7 +1342,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "riddlecounter":
                         stack.Set(address, 0); break;
                     case "dungeon_level":
-                        stack.Set(address, GameWorldController.instance.LevelNo + 1); break;
+                        stack.Set(address, GameWorldController.instance.dungeon_level + 1); break;
                     case "npc_name":
                         stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, StringController.instance.GetString(7, npc.npc_whoami + 16))); break;
                     case "npc_level":
@@ -1387,7 +1389,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "play_poison":
                         stack.Set(address, UWCharacter.Instance.play_poison); break;
                     case "play_name":
-                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, SaveGame.CharName)); break;
+                        stack.Set(address, StringController.instance.AddString(conv[currConv].StringBlock, UWCharacter.Instance.CharName)); break;
                     //case "new_player_exp":
                     case "play_level":
                         stack.Set(address, UWCharacter.Instance.CharLevel); break;
@@ -2568,16 +2570,18 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="QuestNo">Quest no to lookup</param>
     public int get_quest(int QuestNo)
     {
-        if (_RES == GAME_UW2)
-        {
-            Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.instance.QuestVariables[QuestNo]);
-        }
-        if (QuestNo > Quest.instance.QuestVariables.GetUpperBound(0))
-        {
-            Debug.Log("invalid quest no " + QuestNo);
-            return 0;
-        }
-        return Quest.instance.QuestVariables[QuestNo];
+
+        return (Quest.GetQuestVariable(QuestNo));
+        //if (_RES == GAME_UW2)
+        //{
+        //    Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.GetQuestVariable(QuestNo));
+        //}
+        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //{
+        //    Debug.Log("invalid quest no " + QuestNo);
+        //    return 0;
+        //}
+        //return Quest.instance.QuestVariablesOBSOLETE[QuestNo];
     }
 
     /// <summary>
@@ -2587,16 +2591,17 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="QuestNo">Quest no to change</param>
     public void set_quest(int value, int QuestNo)
     {
-        if (_RES == GAME_UW2)
-        {
-            Debug.Log("Setting Quest no " + QuestNo + " to " + value);
-        }
-        if (QuestNo > Quest.instance.QuestVariables.GetUpperBound(0))
-        {
-            Debug.Log("Setting invalid quest no " + QuestNo);
-            return;
-        }
-        Quest.instance.QuestVariables[QuestNo] = value;
+        //if (_RES == GAME_UW2)
+        //{
+        //    Debug.Log("Setting Quest no " + QuestNo + " to " + value);
+        //}
+        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //{
+        //    Debug.Log("Setting invalid quest no " + QuestNo);
+        //    return;
+        //}
+        //Quest.instance.QuestVariablesOBSOLETE[QuestNo] = value;
+        Quest.SetQuestVariable(QuestNo, value);
     }
 
     /// <summary>
@@ -4329,7 +4334,7 @@ description:  places a generated object in underworld
     void babl_hackJospurDebt(int arg)
     {
         //Arena debt
-        stack.result_register = Quest.instance.QuestVariables[133];
+        stack.result_register = Quest.GetQuestVariable(133);
     }
 
     /// <summary>
@@ -4343,7 +4348,8 @@ description:  places a generated object in underworld
     {
         Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena);
         SettingUpFight = true;
-        Quest.instance.QuestVariables[133] = NoOfFighters * 5;
+        //Quest.instance.QuestVariablesOBSOLETE[133] = NoOfFighters * 5;
+        Quest.SetQuestVariable(133, NoOfFighters * 5);
         Quest.instance.FightingInArena = true;
         int[] tileX = new int[5];
         int[] tileY = new int[5];

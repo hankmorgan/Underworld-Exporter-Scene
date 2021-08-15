@@ -1868,7 +1868,7 @@ public class Magic : UWEBase
     {//Gate Travel
         if (UWCharacter.Instance.MoonGateLevel != 0)
         {
-            if (UWCharacter.Instance.MoonGateLevel != GameWorldController.instance.LevelNo + 1)
+            if (UWCharacter.Instance.MoonGateLevel != GameWorldController.instance.dungeon_level + 1)
             {//Teleport to level
                 if (_RES == GAME_UW1)
                 {//Special case for the magic drain effect in UW1
@@ -2981,7 +2981,7 @@ public class Magic : UWEBase
         int y0 = 0; int y1 = 0;
         int WorldBit = -1;
         //Check if player is in a certain location.
-        switch (GameWorldController.instance.LevelNo)
+        switch (GameWorldController.instance.dungeon_level)
         {
             case (short)GameWorldController.UW2_LevelNos.Prison7:
                 x0 = 27; y0 = 31;
@@ -3032,8 +3032,8 @@ public class Magic : UWEBase
         //Has the line of power been cut.
         int BitState = 1;
         if (WorldBit != -1)
-        {
-            BitState = (Quest.instance.QuestVariables[128] >> WorldBit) & 0x1;
+        {            
+            BitState = (Quest.GetQuestVariable(128) >> WorldBit) & 0x1;
         }
         //Cut the power and set the quest.
         if (BitState == 0)
@@ -3049,12 +3049,13 @@ public class Magic : UWEBase
             {
                 UWHUD.instance.MessageScroll.Add("Imagine the screen is shaking now");
                 BitState = 1 << WorldBit;//Get the bit that needs to be set.
-                Quest.instance.QuestVariables[128] |= BitState;//Set the bit
+                //Quest.instance.QuestVariablesOBSOLETE[128] |= BitState;//Set the bit
+                BitState = Quest.GetQuestVariable(128) | BitState;
+                Quest.SetQuestVariable(128, BitState);
                 return;
             }
         }
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 322));//Spell has no effect	
-
     }
 
 

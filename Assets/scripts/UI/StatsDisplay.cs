@@ -58,7 +58,7 @@ public class StatsDisplay : GuiBase_Draggable
             if (UpdateNow == true)
             {
                 UpdateNow = false;
-                CharName.text = SaveGame.CharName;
+                CharName.text = UWCharacter.Instance.CharName;
                 //CharClass.text=UWCharacter.Instance.CharClass;
 
                 CharClass.text = StringController.instance.GetString(2, 23 + UWCharacter.Instance.CharClass);

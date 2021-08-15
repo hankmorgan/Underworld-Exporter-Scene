@@ -148,7 +148,7 @@ public class Wand : enchantment_base
         base.InventoryEventOnLevelExit();
         if (_RES == GAME_UW2)
         {
-            if (GameWorldController.instance.LevelNo == 42)
+            if (GameWorldController.instance.dungeon_level == 42)
             {
                 //make sure the wand of telekinesis is removed from the player as long as the player is not holding it in there hand
                 if ((SpellIndex == 295) && (linkedspell == null))

@@ -1,4 +1,5 @@
-﻿public class SilverSeed : object_base
+﻿using UnityEngine;
+public class SilverSeed : object_base
 {
 
     public override bool use()
@@ -18,11 +19,11 @@
                     CurrentTileMap().getTileVector(TileMap.visitTileX, TileMap.visitTileY)
                     );
 
+                //Plant the seed message
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 12));
-
-                //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                Debug.Log("Silver seed has been planted but there is no check for valid soil made");
                 UWCharacter.Instance.ResurrectPosition = UWCharacter.Instance.transform.position;
-                UWCharacter.Instance.ResurrectLevel = (short)(GameWorldController.instance.LevelNo + 1);
+                UWCharacter.Instance.ResurrectLevel = (short)(GameWorldController.instance.dungeon_level + 1);
                 objInt().consumeObject();
                 return true;
             }

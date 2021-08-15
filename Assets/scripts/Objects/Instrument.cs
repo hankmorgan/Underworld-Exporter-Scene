@@ -95,7 +95,7 @@ public class Instrument : object_base
                 if ((NoteRecord == "354237875") && (item_id == 292))//Flute only
                 {
                     //UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-                    if ((GameWorldController.instance.LevelNo == 2) && (Quest.instance.isCupFound == false) && (item_id == 292))
+                    if ((GameWorldController.instance.dungeon_level == 2) && (Quest.instance.isCupFound == false) && (item_id == 292))
                     {
                         int tileX = TileMap.visitTileX;
                         int tileY = TileMap.visitTileY;

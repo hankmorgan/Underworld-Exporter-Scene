@@ -74,7 +74,7 @@ public class DjinnBottle : object_base
     /// <returns></returns>
     bool IsAtSigil()
     {
-        if (GameWorldController.instance.LevelNo == 68)
+        if (GameWorldController.instance.dungeon_level == 68)
         {
             int tileX = TileMap.visitTileX; int tileY = TileMap.visitTileY;
             if ((tileX >= 18) && (tileX <= 25) && (tileY >= 49) && (tileY <= 56))

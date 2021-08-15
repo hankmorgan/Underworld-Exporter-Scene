@@ -48,7 +48,7 @@ public class a_hack_trap : trap_base
     protected override void Start()
     {
         if (
-            ((GameWorldController.instance.LevelNo != 0) && (GameWorldController.instance.LevelNo != 16))
+            ((GameWorldController.instance.dungeon_level != 0) && (GameWorldController.instance.dungeon_level != 16))
             && (quality == 62)
             )
         {
