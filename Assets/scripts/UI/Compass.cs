@@ -267,7 +267,7 @@ public class Compass : GuiBase_Draggable
     */
     public static void GetWorldKnowledgeString(int index, int stringNo)
     {
-        int questval = Quest.instance.QuestVariables[131];
+        int questval = Quest.GetQuestVariable(131);
         questval = (questval >> index) & 0x1;
         if (questval == 1)
         {

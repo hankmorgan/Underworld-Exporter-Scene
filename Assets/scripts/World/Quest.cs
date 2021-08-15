@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// Quest variables.
 /// </summary>
 /// 	 * per uw-specs.txt
@@ -26,7 +27,8 @@
 /// 3: found writ
 /// 4: door to armoury opened
 /// 
-/// 
+/// 36: No of talismans still to destroy.
+/// 37: Garamon dream stages
 /// 
 /// UW2 Quest flags
 /// 0: PT related - The troll is released
@@ -112,12 +114,118 @@
 /// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWEBase
-{
+{//TODO Change this to a class rather than a monobehaviour
+    
+    /// <summary>
+    /// Returns the quest variable at the specified index
+    /// </summary>
+    /// <param name="questno"></param>
+    /// <returns></returns>
+    public static int GetQuestVariable(int questno)
+    {
+        int _returnvalue;
+        switch (_RES)
+        {
+            case GAME_UW2:
+            {
+               if (questno<=127)
+                    {//Quests are every 4 bytes. The first 4 bits are the four quests in that block of 4 bytes.
+                        int offset = 0x66 + ((questno / 4) * 4);
+                        int bit = questno % 4;
+                        _returnvalue=(SaveGame.GetAt(offset) >> bit) & 0x1;
+                    }
+               else
+                    {
+                        _returnvalue = SaveGame.GetAt(0xE7 + (questno - 128));
+                    }
+                break;
+            }
+            default:
+            {
+                if (questno<=31)
+                    {//read the quest from the bit field quests.
+                        int offset = 0x66 + (questno / 8);
+                        int bit = questno % 8;
+                        _returnvalue = (SaveGame.GetAt(offset) >> bit) & 0x1;
+                    }
+                else
+                    {
+                        _returnvalue = SaveGame.GetAt(0x6a + (questno - 32)); 
+                    }
+                break;
+            }
+        }
+        Debug.Log("Getting Quest #" + questno + " It's value is " + _returnvalue);
+        return _returnvalue;
+    }
+    /// <summary>
+    /// Setting quest value
+    /// </summary>
+    /// <param name="questno"></param>
+    /// <param name="value"></param>
+    public static void SetQuestVariable(int questno, int value)
+    {
+        Debug.Log("Setting Quest #" + questno + " to " + value);
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    if (questno <= 127)
+                    {//Quests are every 4 bytes. The first 4 bits are the four quests in that block of 4 bytes.
+                        int offset = 0x66 + (questno / 4) * 4;
+                        int bit = questno % 4;
+                        byte existingValue = SaveGame.GetAt(offset);
+                        byte mask = (byte)(bit << 1);
+                        if (value>=1)
+                        {//set
+                            existingValue |= mask;
+                        }
+                        else
+                        {//unset
+                            existingValue = (byte)(existingValue & (~mask));
+                        }
+                        SaveGame.SetAt(offset, existingValue);
+                    }
+                    else
+                    {
+                        SaveGame.SetAt(0xE7 + (questno - 128), (byte)value);
+                    }
+                    break;
+                }
+            default:
+                {
+                    if (questno <= 31)
+                    {//read the quest from the bit field quests.
+                        int offset = questno / 8;
+                        int bit = questno % 8;
+
+                        byte existingValue = SaveGame.GetAt(offset);
+                        byte mask = (byte)(bit << 1);
+                        if (value >= 1)
+                        {//set
+                            existingValue |= mask;
+                        }
+                        else
+                        {//unset
+                            existingValue = (byte)(existingValue & (~mask));
+                        }
+                        SaveGame.SetAt(offset, existingValue);
+                    }
+                    else
+                    {
+                        SaveGame.SetAt(0x6a + (questno - 32),(byte)value);
+                    }
+                    break;
+                }
+        }
+    }
+    
+    
     /// <summary>
     /// The quest variable integers
     /// </summary>
     /// Typically these are for story advancement and conversations.
-    public int[] QuestVariables = new int[256];
+    ///public int[] QuestVariablesOBSOLETE = new int[256];
 
     /// <summary>
     /// The game Variables for the check/set variable traps
@@ -258,18 +366,18 @@ public class Quest : UWEBase
         instance = this;
     }
 
-    void Start()
-    {
-        switch (_RES)
-        {
-            case GAME_UW2:
-                QuestVariables = new int[147];
-                break;
-            default:
-                QuestVariables = new int[36];
-                break;
-        }
-    }
+    //void Start()
+    //{
+    //    switch (_RES)
+    //    {
+    //        case GAME_UW2:
+    //            QuestVariablesOBSOLETE = new int[147];
+    //            break;
+    //        default:
+    //            QuestVariablesOBSOLETE = new int[36];
+    //            break;
+    //    }
+    //}
 
 
     /// <summary>

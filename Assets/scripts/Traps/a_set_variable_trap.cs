@@ -57,7 +57,8 @@ public class a_set_variable_trap : a_variable_trap
                     Set_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
                     break;
                 case 2://quest vars
-                    Set_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
+                    //Set_Variables(Quest.instance.QuestVariablesOBSOLETE, zpos, heading, this, "questvars");
+                    Set_VariablesQuest(zpos, heading, this, "questvars");
                     break;
                 case 3://xclock  
                     if (zpos - 16 >= 0)
@@ -157,6 +158,97 @@ public class a_set_variable_trap : a_variable_trap
             }
         }
     }
+
+
+
+
+    /// <summary>
+    /// Version of Set_Variables for use with new quest variables get and set function
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="operation"></param>
+    /// <param name="trap"></param>
+    /// <param name="debugname"></param>
+    static void Set_VariablesQuest(int index, int operation, a_set_variable_trap trap, string debugname)
+    {
+        string op = "";
+        if (index != 0)
+        {//Variable Operations
+            int OrigValue = Quest.GetQuestVariable(index);//vars[index];
+            switch (operation)
+            {
+                case 0://Add
+                    //vars[index] += trap.VariableValue();
+                    Quest.SetQuestVariable(index, trap.VariableValue());
+                    op = "add";
+                    break;
+                case 1://Sub
+                    //vars[index] -= trap.VariableValue();
+                    Quest.SetQuestVariable(index, OrigValue - trap.VariableValue());
+                    op = "Sub";
+                    break;
+                case 2://Set
+                    //vars[index] = trap.VariableValue();
+                    Quest.SetQuestVariable(index, trap.VariableValue());
+                    op = "Set";
+                    break;
+                case 3://AND
+                    //vars[index] &= trap.VariableValue();
+                    Quest.SetQuestVariable(index, OrigValue & trap.VariableValue());
+                    op = "And";
+                    break;
+                case 4://OR
+                    //vars[index] |= trap.VariableValue();
+                    Quest.SetQuestVariable(index, OrigValue | trap.VariableValue());
+                    op = "or";
+                    break;
+                case 5://XOR
+                       // vars[index] ^= trap.VariableValue();
+                    Quest.SetQuestVariable(index, OrigValue ^ trap.VariableValue());
+                    op = "xor";
+                    break;
+                case 6://Shift left
+                    //vars[index] = vars[index] * (2 * trap.VariableValue()) & 63;
+                    Quest.SetQuestVariable(index, OrigValue << trap.VariableValue());
+                    op = "shl";
+                    break;
+            }
+
+            Debug.Log(debugname + ": Operation + " + op + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetQuestVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+        }
+        else
+        {//Bitwise operations on bitfield
+            Debug.Log("Bitwise set variable. Not implemented yet");
+            switch (operation)
+            {
+                case 0://Set
+
+                    break;
+                case 1://Clear
+
+                    break;
+                case 2://Set
+
+                    break;
+                case 3://Set
+
+                    break;
+                case 4://Set
+
+                    break;
+                case 5://Flip
+
+                    break;
+                case 6://Set
+
+                    break;
+            }
+        }
+    }
+
+
+
+
 
     public override int VariableValue()
     {//UW2 does this differently.

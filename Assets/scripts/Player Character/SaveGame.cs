@@ -198,28 +198,28 @@ public class SaveGame : Loader
                         break;
                     case 0x66://Quest flags
                         {
-                            int val = (int)getValAtAddress(buffer, i, 32);
-                            for (int b = 0; b <= 31; b++)
-                            {//Check order here
-                                if (((val >> (b)) & 0x1) == 1)
-                                {
-                                    Quest.instance.QuestVariables[b] = 1;
-                                }
-                                else
-                                {
-                                    Quest.instance.QuestVariables[b] = 0;
-                                }
-                            }
+                            //int val = (int)getValAtAddress(buffer, i, 32);
+                            //for (int b = 0; b <= 31; b++)
+                            //{//Check order here
+                            //    if (((val >> (b)) & 0x1) == 1)
+                            //    {
+                            //        //Quest.instance.QuestVariablesOBSOLETE[b] = 1;
+                            //    }
+                            //    else
+                            //    {
+                            //        //Quest.instance.QuestVariablesOBSOLETE[b] = 0;
+                            //    }
+                            //}
                             break;
                         }
                     case 0x6A:
-                        Quest.instance.QuestVariables[32] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.instance.QuestVariablesOBSOLETE[32] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6B:
-                        Quest.instance.QuestVariables[33] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.instance.QuestVariablesOBSOLETE[33] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6C:
-                        Quest.instance.QuestVariables[34] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.instance.QuestVariablesOBSOLETE[34] = (int)getValAtAddress(buffer, i, 8); break;
                     case 0x6D:
-                        Quest.instance.QuestVariables[35] = (int)getValAtAddress(buffer, i, 8); break;
+                        //Quest.instance.QuestVariablesOBSOLETE[35] = (int)getValAtAddress(buffer, i, 8); break;
 
                     case 0x6E://No of talismans still to destory
                         Quest.instance.TalismansRemaining = (int)getValAtAddress(buffer, i, 8); break;
@@ -311,6 +311,18 @@ public class SaveGame : Loader
                         UWCharacter.Instance.CurVIT = buffer[i]; break;
                 }
             }
+
+
+            //Check quest variable code
+            //for (int i=0; i<=Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0);i++)
+            //{
+            //    if (Quest.instance.QuestVariablesOBSOLETE[i]!=Quest.GetQuestVariable(i))
+            //    {
+            //        Debug.Log("Quest " + i + " does not agree");
+            //    }
+            //}
+
+
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
 
             GameClock.setUWTime(GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255) + (GameClock.instance.gametimevals[2] * 255 * 255));
@@ -532,18 +544,18 @@ public class SaveGame : Loader
                 case 0x66 + 2://Quest flags ignore
                 case 0x66 + 3://Quest flags ignore
                     break;
-                case 0x6A:
-                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[32]); break;
-                case 0x6B:
-                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[33]); break;
-                case 0x6C:
-                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[34]); break;
-                case 0x6D:
-                    DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[35]); break;
-                case 0x6E://No of talismans still to destory
-                    DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
-                case 0x6F://Garamon dream related?
-                    DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
+                //case 0x6A:
+                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[32]); break;
+                //case 0x6B:
+                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[33]); break;
+                //case 0x6C:
+                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[34]); break;
+                //case 0x6D:
+                //    //DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[35]); break;
+                //case 0x6E://No of talismans still to destory
+                //   // DataLoader.WriteInt8(writer, Quest.instance.TalismansRemaining); break;
+                //case 0x6F://Garamon dream related?
+                //    //DataLoader.WriteInt8(writer, Quest.instance.GaramonDream); break;
                 case 0x71://Game variables
                 case 0x72:
                 case 0x73:
@@ -926,7 +938,7 @@ public class SaveGame : Loader
                         int val = 0;
                         for (int q = 0; q < 4; q++)
                         {
-                            val |= (Quest.instance.QuestVariables[QuestCounter + q] & 0x1) << q;
+                         //   val |= (Quest.instance.QuestVariablesOBSOLETE[QuestCounter + q] & 0x1) << q;
                         }
                         QuestCounter += 4;
                         DataLoader.WriteInt8(writer, val);
@@ -951,12 +963,12 @@ public class SaveGame : Loader
                 case 0xF6:  //Quest 143
                 case 0xF7:  //Quest 144
                 case 0xF8:  //Quest 145
-                case 0xF9:  //Quest 146
+                //case 0xF9:  //Quest 146
 
-                    {//TODO:These quests are not tested.
-                        DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[128 + (i - 0xE7)]);
-                        break;
-                    }
+                //    {//TODO:These quests are not tested.
+                //        DataLoader.WriteInt8(writer, Quest.instance.QuestVariablesOBSOLETE[128 + (i - 0xE7)]);
+                //        break;
+                //    }
                 case 0xFA:  //Variable0
                 case 0xFC:  //Variable1
                 case 0xFE:  //Variable2
@@ -1743,70 +1755,70 @@ public class SaveGame : Loader
                             break;
                         }
 
-                    case 0x67:  //Quests 0 to 3
-                    case 0x6B:  //Quests 4 to 7
-                    case 0x6F:  //Quests 8 to 11
-                    case 0x73:  //Quests 12 to 15
-                    case 0x77:  //Quests 16 to 19
-                    case 0x7B:  //Quests 20 to 23
-                    case 0x7F:  //Quests 24 to 27
-                    case 0x83:  //Quests 28 to 31
-                    case 0x87:  //Quests 32 to 35
-                    case 0x8B:  //Quests 36 to 39
-                    case 0x8F:  //Quests 40 to 43
-                    case 0x93:  //Quests 44 to 47
-                    case 0x97:  //Quests 48 to 51
-                    case 0x9B:  //Quests 52 to 55
-                    case 0x9F:  //Quests 56 to 59
-                    case 0xA3:  //Quests 60 to 63
-                    case 0xA7:  //Quests 64 to 67
-                    case 0xAB:  //Quests 68 to 71
-                    case 0xAF:  //Quests 72 to 75
-                    case 0xB3:  //Quests 76 to 79
-                    case 0xB7:  //Quests 80 to 83
-                    case 0xBB:  //Quests 84 to 87
-                    case 0xBF:  //Quests 88 to 91
-                    case 0xC3:  //Quests 92 to 95
-                    case 0xC7:  //Quests 96 to 99
-                    case 0xCB:  //Quests 100 to 103
-                    case 0xCF:  //Quests 104 to 107
-                    case 0xD3:  //Quests 108 to 111
-                    case 0xD7:  //Quests 112 to 115
-                    case 0xDB:  //Quests 116 to 119
-                    case 0xDF:  //Quests 120 to 123
-                    case 0xE3:  //Quests 124 to 127
-                        {//The first 4 bits of each of these is the quest flags.
-                            int val = (int)getValAtAddress(buffer, i, 8);
-                            for (int q = 0; q < 4; q++)
-                            {
-                                Quest.instance.QuestVariables[QuestCounter++] = (val >> q) & 0x1;
-                            }
-                            break;
-                        }
-                    case 0xE7:  //Quest 128 - Where the lines of power have been cut
-                    case 0xE8:  //Quest 129
-                    case 0xE9:  //Quest 130
-                    case 0xEA:  //Quest 131
-                    case 0xEB:  //Quest 132
-                    case 0xEC:  //Quest 133
-                    case 0xED:  //Quest 134
-                    case 0xEE:  //Quest 135
-                    case 0xEF:  //Quest 136
-                    case 0xF0:  //Quest 137
-                    case 0xF1:  //Quest 138
-                                //Additional quests
-                    case 0xF2:  //Quest 139
-                    case 0xF3:  //Quest 140
-                    case 0xF4:  //Quest 141
-                    case 0xF5:  //Quest 142
-                    case 0xF6:  //Quest 143
-                    case 0xF7:  //Quest 144
-                    case 0xF8:  //Quest 145
-                    case 0xF9:  //Quest 146
-                        {//TODO:These quests are not tested.
-                            Quest.instance.QuestVariables[i - 103] = (int)getValAtAddress(buffer, i, 8);
-                            break;
-                        }
+                    //case 0x67:  //Quests 0 to 3
+                    //case 0x6B:  //Quests 4 to 7
+                    //case 0x6F:  //Quests 8 to 11
+                    //case 0x73:  //Quests 12 to 15
+                    //case 0x77:  //Quests 16 to 19
+                    //case 0x7B:  //Quests 20 to 23
+                    //case 0x7F:  //Quests 24 to 27
+                    //case 0x83:  //Quests 28 to 31
+                    //case 0x87:  //Quests 32 to 35
+                    //case 0x8B:  //Quests 36 to 39
+                    //case 0x8F:  //Quests 40 to 43
+                    //case 0x93:  //Quests 44 to 47
+                    //case 0x97:  //Quests 48 to 51
+                    //case 0x9B:  //Quests 52 to 55
+                    //case 0x9F:  //Quests 56 to 59
+                    //case 0xA3:  //Quests 60 to 63
+                    //case 0xA7:  //Quests 64 to 67
+                    //case 0xAB:  //Quests 68 to 71
+                    //case 0xAF:  //Quests 72 to 75
+                    //case 0xB3:  //Quests 76 to 79
+                    //case 0xB7:  //Quests 80 to 83
+                    //case 0xBB:  //Quests 84 to 87
+                    //case 0xBF:  //Quests 88 to 91
+                    //case 0xC3:  //Quests 92 to 95
+                    //case 0xC7:  //Quests 96 to 99
+                    //case 0xCB:  //Quests 100 to 103
+                    //case 0xCF:  //Quests 104 to 107
+                    //case 0xD3:  //Quests 108 to 111
+                    //case 0xD7:  //Quests 112 to 115
+                    //case 0xDB:  //Quests 116 to 119
+                    //case 0xDF:  //Quests 120 to 123
+                    //case 0xE3:  //Quests 124 to 127
+                    //    {//The first 4 bits of each of these is the quest flags.
+                    //        //int val = (int)getValAtAddress(buffer, i, 8);
+                    //        //for (int q = 0; q < 4; q++)
+                    //        //{
+                    //        //    //Quest.instance.QuestVariablesOBSOLETE[QuestCounter++] = (val >> q) & 0x1;
+                    //        //}
+                    //        break;
+                    //    }
+                    //case 0xE7:  //Quest 128 - Where the lines of power have been cut
+                    //case 0xE8:  //Quest 129
+                    //case 0xE9:  //Quest 130
+                    //case 0xEA:  //Quest 131
+                    //case 0xEB:  //Quest 132
+                    //case 0xEC:  //Quest 133
+                    //case 0xED:  //Quest 134
+                    //case 0xEE:  //Quest 135
+                    //case 0xEF:  //Quest 136
+                    //case 0xF0:  //Quest 137
+                    //case 0xF1:  //Quest 138
+                    //            //Additional quests
+                    //case 0xF2:  //Quest 139
+                    //case 0xF3:  //Quest 140
+                    //case 0xF4:  //Quest 141
+                    //case 0xF5:  //Quest 142
+                    //case 0xF6:  //Quest 143
+                    //case 0xF7:  //Quest 144
+                    //case 0xF8:  //Quest 145
+                    //case 0xF9:  //Quest 146
+                    //    {//TODO:These quests are not tested.
+                    //        //Quest.instance.QuestVariablesOBSOLETE[i - 103] = (int)getValAtAddress(buffer, i, 8);
+                    //        break;
+                    //    }
                     case 0xFA:  //Variable0
                     case 0xFC:  //Variable1
                     case 0xFE:  //Variable2
@@ -2268,6 +2280,16 @@ public class SaveGame : Loader
                         }
                 }
             }
+
+            ////Check quest variable code
+            //for (int i = 0; i <= Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0); i++)
+            //{
+            //    if (Quest.instance.QuestVariablesOBSOLETE[i] != Quest.GetQuestVariable(i))
+            //    {
+            //        Debug.Log("Quest " + i + " does not agree");
+            //    }
+            //}
+
 
             ApplySpellEffects(ActiveEffectIds, ActiveEffectStability, effectCounter);
 
@@ -3090,12 +3112,12 @@ public class SaveGame : Loader
     /// <param name="writer">Writer.</param>
     static void WriteUW1QuestFlags(BinaryWriter writer)
     {
-        int val = 0;
-        for (int b = 0; b < 32; b++)
-        {
-            val |= (Quest.instance.QuestVariables[b] & 0x1) << b;
-        }
-        DataLoader.WriteInt32(writer, val);
+        //int val = 0;
+        //for (int b = 0; b < 32; b++)
+        //{
+        //    val |= (Quest.instance.QuestVariablesOBSOLETE[b] & 0x1) << b;
+        //}
+        //DataLoader.WriteInt32(writer, val);
     }
 
     /// <summary>

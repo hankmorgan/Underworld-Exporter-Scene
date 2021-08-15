@@ -593,9 +593,10 @@ public class UWCharacter : Character
                 {
                     if (WasIKilledByAFriend())
                     {
-                        Quest.instance.QuestVariables[112] = 1;
+                        //Quest.instance.QuestVariablesOBSOLETE[112] = 1;
+                        Quest.SetQuestVariable(112, 1);
                     }
-                    if (Quest.instance.QuestVariables[112] == 1)
+                    if (Quest.GetQuestVariable(112) == 1)
                     {//You have been fighting your allies. You will awake in jail
                         UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
                         return;
@@ -2016,7 +2017,8 @@ public class UWCharacter : Character
         GameWorldController.instance.SwitchLevel(68, 32, 27);//TODO:implement other destinations.
         Quest.instance.InDreamWorld = true;
         DreamWorldTimer = 30f;
-        Quest.instance.QuestVariables[48] = 1;
+        //Quest.instance.QuestVariablesOBSOLETE[48] = 1;
+        Quest.SetQuestVariable(48, 1);
     }
 
     /// <summary>

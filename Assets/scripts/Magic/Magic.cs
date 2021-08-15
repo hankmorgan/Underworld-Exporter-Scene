@@ -3032,8 +3032,8 @@ public class Magic : UWEBase
         //Has the line of power been cut.
         int BitState = 1;
         if (WorldBit != -1)
-        {
-            BitState = (Quest.instance.QuestVariables[128] >> WorldBit) & 0x1;
+        {            
+            BitState = (Quest.GetQuestVariable(128) >> WorldBit) & 0x1;
         }
         //Cut the power and set the quest.
         if (BitState == 0)
@@ -3049,12 +3049,13 @@ public class Magic : UWEBase
             {
                 UWHUD.instance.MessageScroll.Add("Imagine the screen is shaking now");
                 BitState = 1 << WorldBit;//Get the bit that needs to be set.
-                Quest.instance.QuestVariables[128] |= BitState;//Set the bit
+                //Quest.instance.QuestVariablesOBSOLETE[128] |= BitState;//Set the bit
+                BitState = Quest.GetQuestVariable(128) | BitState;
+                Quest.SetQuestVariable(128, BitState);
                 return;
             }
         }
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 322));//Spell has no effect	
-
     }
 
 

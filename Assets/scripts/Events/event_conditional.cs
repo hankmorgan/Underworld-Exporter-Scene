@@ -17,7 +17,7 @@
         bool variableTest;
         if (isQuest)
         {
-            variableTest = (Quest.instance.QuestVariables[variable] == targetValue);
+            variableTest = (Quest.GetQuestVariable(variable) == targetValue);
         }
         else
         {//TODO:verify if variable tests require at least zero and up to target value or just an exact target value match

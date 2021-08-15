@@ -1195,7 +1195,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {//Hack to fix quest flag settings for garg
             if (currConv == 5)
             {
-                Quest.instance.QuestVariables[0] = stack.at(31);
+                Debug.Log("GARG CONVERSATION HACK");
+                //Quest.instance.QuestVariablesOBSOLETE[0] = stack.at(31);
+                Quest.SetQuestVariable(0, stack.at(31));
             }
         }
 
@@ -2568,16 +2570,18 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="QuestNo">Quest no to lookup</param>
     public int get_quest(int QuestNo)
     {
-        if (_RES == GAME_UW2)
-        {
-            Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.instance.QuestVariables[QuestNo]);
-        }
-        if (QuestNo > Quest.instance.QuestVariables.GetUpperBound(0))
-        {
-            Debug.Log("invalid quest no " + QuestNo);
-            return 0;
-        }
-        return Quest.instance.QuestVariables[QuestNo];
+
+        return (Quest.GetQuestVariable(QuestNo));
+        //if (_RES == GAME_UW2)
+        //{
+        //    Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.GetQuestVariable(QuestNo));
+        //}
+        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //{
+        //    Debug.Log("invalid quest no " + QuestNo);
+        //    return 0;
+        //}
+        //return Quest.instance.QuestVariablesOBSOLETE[QuestNo];
     }
 
     /// <summary>
@@ -2587,16 +2591,17 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="QuestNo">Quest no to change</param>
     public void set_quest(int value, int QuestNo)
     {
-        if (_RES == GAME_UW2)
-        {
-            Debug.Log("Setting Quest no " + QuestNo + " to " + value);
-        }
-        if (QuestNo > Quest.instance.QuestVariables.GetUpperBound(0))
-        {
-            Debug.Log("Setting invalid quest no " + QuestNo);
-            return;
-        }
-        Quest.instance.QuestVariables[QuestNo] = value;
+        //if (_RES == GAME_UW2)
+        //{
+        //    Debug.Log("Setting Quest no " + QuestNo + " to " + value);
+        //}
+        //if (QuestNo > Quest.instance.QuestVariablesOBSOLETE.GetUpperBound(0))
+        //{
+        //    Debug.Log("Setting invalid quest no " + QuestNo);
+        //    return;
+        //}
+        //Quest.instance.QuestVariablesOBSOLETE[QuestNo] = value;
+        Quest.SetQuestVariable(QuestNo, value);
     }
 
     /// <summary>
@@ -4329,7 +4334,7 @@ description:  places a generated object in underworld
     void babl_hackJospurDebt(int arg)
     {
         //Arena debt
-        stack.result_register = Quest.instance.QuestVariables[133];
+        stack.result_register = Quest.GetQuestVariable(133);
     }
 
     /// <summary>
@@ -4343,7 +4348,8 @@ description:  places a generated object in underworld
     {
         Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena);
         SettingUpFight = true;
-        Quest.instance.QuestVariables[133] = NoOfFighters * 5;
+        //Quest.instance.QuestVariablesOBSOLETE[133] = NoOfFighters * 5;
+        Quest.SetQuestVariable(133, NoOfFighters * 5);
         Quest.instance.FightingInArena = true;
         int[] tileX = new int[5];
         int[] tileY = new int[5];
