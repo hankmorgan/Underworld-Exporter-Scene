@@ -49,8 +49,8 @@ public class SilverTree : object_base
             CurrentTileMap().getTileVector(TileMap.ObjectStorageTile, TileMap.ObjectStorageTile)
             );
         GameWorldController.MoveToInventory(newseedobj.gameObject);
-        UWCharacter.Instance.ResurrectPosition = Vector3.zero;
-        UWCharacter.Instance.ResurrectLevel = 0;
+        UWCharacter.Instance.ResurrectPosition = Vector3.zero; //Clear resurrection position.
+        UWCharacter.Instance.ResurrectLevel = 0; //Clear the level so the player will not respawn.
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 9));
         CurrentObjectInHand = newseedobj;
         //newseedobj.UpdateAnimation();

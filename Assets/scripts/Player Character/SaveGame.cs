@@ -149,6 +149,9 @@ public class SaveGame : Loader
             LoadPlayerBody(buffer, 0x65);
             //LoadGameOptions(buffer, 0xB6);
 
+            Debug.Log("Moongate is on " + UWCharacter.Instance.MoonGateLevel);
+            Debug.Log("Silver Tree is on " + UWCharacter.Instance.ResurrectLevel);
+
             for (int i = 0x4B; i <= 221; i++)
             {
                 switch (i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
@@ -167,8 +170,8 @@ public class SaveGame : Loader
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
                         //Low nibble is moongate level + 1
-                        UWCharacter.Instance.ResurrectLevel = (short)((buffer[i] >> 4) & 0xf);
-                        UWCharacter.Instance.MoonGateLevel = (short)((buffer[i]) & 0xf);
+                        //UWCharacter.Instance.ResurrectLevel = (short)((buffer[i] >> 4) & 0xf);
+                        //UWCharacter.Instance.MoonGateLevel = (short)((buffer[i]) & 0xf);
                         break;
                     case 0x60: ///    bits 2..5: play_poison and no of active effects
                         Quest.instance.IncenseDream = buffer[i] & 0x3;
@@ -483,12 +486,12 @@ public class SaveGame : Loader
                 case 0x5C: ///   heading								
                 case 0x5D: ///   dungeon level										
                     break;//Skip over int 16s for position
-                case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
-                    {
-                        int val = (UWCharacter.Instance.ResurrectLevel & 0xf) << 4 | (UWCharacter.Instance.MoonGateLevel & 0xf);
-                        DataLoader.WriteInt8(writer, val);
-                        break;
-                    }
+                //case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
+                //    {
+                //        //int val = (UWCharacter.Instance.ResurrectLevel & 0xf) << 4 | (UWCharacter.Instance.MoonGateLevel & 0xf);
+                //        //DataLoader.WriteInt8(writer, val);
+                //        break;
+                //    }
                 case 0x60: ///    bits 2..5: play_poison.  no of active spell effects
                     DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 6)) | (UWCharacter.Instance.play_poison << 2) | (Quest.instance.IncenseDream & 0x3));
                     break;
@@ -865,13 +868,13 @@ public class SaveGame : Loader
                 case 0x5C: ///   heading								
                 case 0x5D: ///   dungeon level										
                     break;//Skip over int 16s for position
-                case 0x5F:///
-                    {
-                        //Low nibble is moongate level + 1
-                        int val = (UWCharacter.Instance.MoonGateLevel & 0xf);
-                        DataLoader.WriteInt8(writer, val);
-                        break;
-                    }
+                //case 0x5F:///
+                //    {
+                //        //Low nibble is moongate level + 1
+                //        //int val = (UWCharacter.Instance.MoonGateLevel & 0xf);
+                //        //DataLoader.WriteInt8(writer, val);
+                //        //break;
+                //    }
                 case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)//This differs from uw1 so it needs to be tested properly
                     DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 5)) | (UWCharacter.Instance.play_poison << 1));
                     break;
@@ -1733,8 +1736,10 @@ public class SaveGame : Loader
                         LoadPosition(buffer); break;
                     case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
                         //Low nibble is moongate level + 1
-                        UWCharacter.Instance.ResurrectLevel = (short)((buffer[i] >> 4) & 0xf);
-                        UWCharacter.Instance.MoonGateLevel = (short)(buffer[i] & 0xf);
+
+                        //These are not right for uw2??
+                        //UWCharacter.Instance.ResurrectLevel = (short)((buffer[i] >> 4) & 0xf);
+                       // UWCharacter.Instance.MoonGateLevel = (short)(buffer[i] & 0xf);
                         break;
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
                         UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);

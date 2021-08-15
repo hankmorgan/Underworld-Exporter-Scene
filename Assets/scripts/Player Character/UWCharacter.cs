@@ -166,15 +166,15 @@ public class UWCharacter : Character
         }
         set
         {
-            if (value>255)
+            if (value > 255)
             {
                 value = 255;
             }
-            if (value<0)
+            if (value < 0)
             {
                 value = 0;
             }
-            SaveGame.SetAt(0x3a,(byte)value);
+            SaveGame.SetAt(0x3a, (byte)value);
         }
     }
     public int Fatigue   //0-29 range
@@ -295,7 +295,7 @@ public class UWCharacter : Character
         {
             int offset = 0x65;
             if (_RES == GAME_UW2) { offset = 0x66; }
-            return (SaveGame.GetAt(offset) >> 2) & 0x7 ;
+            return (SaveGame.GetAt(offset) >> 2) & 0x7;
         }
         set
         {
@@ -308,7 +308,7 @@ public class UWCharacter : Character
             SaveGame.SetAt(offset, existingValue);
         }
     }
-   
+
     public int CharClass
     {
         get
@@ -328,38 +328,38 @@ public class UWCharacter : Character
             SaveGame.SetAt(offset, existingValue);
         }
     }
-   
+
     public int CharLevel
     {
         get { return SaveGame.GetAt(0x3E); }
         set { SaveGame.SetAt(0x3E, (byte)value); }
     }
-    
+
     public int EXP
     {
         get
         {
-            return (int)SaveGame.GetAt32(0x4F)/10;
+            return (int)SaveGame.GetAt32(0x4F) / 10;
         }
         set
         {
-            SaveGame.SetAt32(0x4F, value*10);
+            SaveGame.SetAt32(0x4F, value * 10);
         }
     }
-    
+
     public int TrainingPoints
     {
         get { return SaveGame.GetAt(0x53); }
         set { SaveGame.SetAt(0x53, (byte)value); }
     }
-    
+
     public bool isFemale
     {
         get
         {
             int offset = 0x65;
             if (_RES == GAME_UW2) { offset = 0x66; }
-            return ((int)(SaveGame.GetAt(offset) >> 1 ) & 0x1) == 0x1;
+            return ((int)(SaveGame.GetAt(offset) >> 1) & 0x1) == 0x1;
         }
         set
         {
@@ -378,7 +378,7 @@ public class UWCharacter : Character
             SaveGame.SetAt(offset, existingValue);
         }
     }
-   
+
     public bool isLefty
     {
         get
@@ -426,7 +426,7 @@ public class UWCharacter : Character
     public int heading
     {
         get { return (int)SaveGame.GetAt(0x5c); }
-        set { SaveGame.SetAt(0x5c,(byte)value); }
+        set { SaveGame.SetAt(0x5c, (byte)value); }
     }
 
     [Header("Speeds")]
@@ -450,11 +450,49 @@ public class UWCharacter : Character
 
     //public Feet playerFeet;
 
-    [Header("Teleportation")]
-    public short ResurrectLevel;
+    /// <summary>
+    /// In UW1 this is where the Silver tree has been planted
+    /// </summary>
+    /// If 0 it has not being planted.
+    /// This value -1 gives the level where the player will resurrect to.
+    public short ResurrectLevel
+    {
+        get
+        {
+            return (short)(SaveGame.GetAt(0x5F) >> 4);
+        }
+        set
+        {
+            int existingValue = SaveGame.GetAt(0x5F);
+            existingValue = existingValue & 0x0F;//Preserve low nibble containing moonstone.
+            existingValue = existingValue | ((value & 0xF) << 4); //Set high nibble to value
+            SaveGame.SetAt(0x5F, (byte)existingValue);
+        }
+    }
     public Vector3 ResurrectPosition = Vector3.zero;//TODO change this to a search.
     public Vector3 MoonGatePosition = Vector3.zero;
-    public short MoonGateLevel = 2;//Domain of the mountainmen
+
+
+    public short MoonGateLevel //= 2//Domain of the mountainmen
+    {
+        get
+        {
+            if (_RES == GAME_UW2)
+            { Debug.Log("moonstone usage in UW2. Confirm this is correct"); }
+            return (short)(SaveGame.GetAt(0x5F) & 0xF);
+        }
+        set
+        {
+            if (_RES == GAME_UW2)
+            { Debug.Log("moonstone usage in UW2. Confirm this is correct"); }
+            int existingValue = SaveGame.GetAt(0x5F);
+            existingValue = existingValue & 0xF0;//Preserve high nibble containing silver tree.
+            existingValue = existingValue | (value & 0xF); //Set high nibble to value
+            SaveGame.SetAt(0x5F, (byte)existingValue);
+        }
+    }
+
+    [Header("Teleportation")]
     public float teleportedTimer = 0f;
     public bool JustTeleported = false;
     /// <summary>
