@@ -1502,11 +1502,11 @@ public class SaveGame : Loader
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
-                    case 0x306:
-                        {//Timer for paralyzed effect
-                            UWCharacter.Instance.ParalyzeTimer = (short)(getValAtAddress(buffer, i, 8));
-                            break;
-                        }
+                    //case 0x306:
+                    //    {//Timer for paralyzed effect
+                    //      //  UWCharacter.Instance.ParalyzeTimer = (short)(getValAtAddress(buffer, i, 8));
+                    //      //  break;
+                    //    }
                     //case 0x361://Item Ids of arena warriors.
                     //case 0x362:
                     //case 0x363:
