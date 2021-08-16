@@ -18,7 +18,8 @@ public class SpellEffectParalyze : SpellEffect
          //{
          //		UWCharacter.Instance= this.GetComponent<UWCharacter>();
          //}
-            UWCharacter.Instance.Paralyzed = true;
+           // UWCharacter.Instance.Paralyzed = true;
+            UWCharacter.Instance.ParalyzeTimer = Random.Range(4, 30);//4-30 seconds of paralysation?
         }
         else
         {
@@ -46,19 +47,13 @@ public class SpellEffectParalyze : SpellEffect
     {
         if (isNPC == false)
         {
-            UWCharacter.Instance.Paralyzed = false;
+            //UWCharacter.Instance.Paralyzed = false;
+            UWCharacter.Instance.ParalyzeTimer = 0;
             UWCharacter.Instance.walkSpeed = 3.0f;
         }
         else
         {
             npc.Paralyzed = false;
-            //npc.CurrentAnim="";
-            //npc.currentState=-1;
-            //npc.state=state;
-            //if (anim!=null)
-            //{
-            //	anim.enabled=true;
-            //}
         }
         base.CancelEffect();
     }
@@ -79,7 +74,7 @@ public class SpellEffectParalyze : SpellEffect
         }
         else
         {
-            UWCharacter.Instance.Paralyzed = true;
+            //UWCharacter.Instance.Paralyzed = true;
         }
     }
 

@@ -78,8 +78,31 @@ public class UWCharacter : Character
     }
     public int StealthLevel; //The level of stealth the character has.
     public int Resistance; //DR from spells.
-    public bool Paralyzed;
-    public float ParalyzeTimer = 0f;
+    public bool Paralyzed
+    {
+        get { return ParalyzeTimer > 0; }
+    }
+    public int ParalyzeTimer
+    {//0x306
+        get
+        {
+            if(_RES==GAME_UW2)
+            {
+                return SaveGame.GetAt(0x306);
+            }
+           else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            if (_RES == GAME_UW2)
+            {
+                SaveGame.SetAt(0x306, (byte)value);
+            }
+        }
+    }
     public float currYVelocity;
     public float fallSpeed;
     public float braking;
@@ -1054,10 +1077,10 @@ public class UWCharacter : Character
             //Still processing death.
             return;
         }
-        if (_RES == GAME_UW2)
-        {
-            ParalyzeUpdate();
-        }
+        //if (_RES == GAME_UW2)
+        //{
+        //    ParalyzeUpdate();
+        //}
         if (playerCam.enabled == true)
         {
             SwimUpdate();
@@ -1333,18 +1356,18 @@ public class UWCharacter : Character
         }
     }
 
-    private void ParalyzeUpdate()
-    {
-        if (ParalyzeTimer > 0)
-        {
-            ParalyzeTimer -= Time.deltaTime;
-        }
-        if (ParalyzeTimer < 0)
-        {
-            ParalyzeTimer = 0;
-        }
-        Paralyzed = (ParalyzeTimer != 0);
-    }
+    //private void ParalyzeUpdate()
+    //{
+    //    if (ParalyzeTimer > 0)
+    //    {
+    //        ParalyzeTimer -= Time.deltaTime;
+    //    }
+    //    if (ParalyzeTimer < 0)
+    //    {
+    //        ParalyzeTimer = 0;
+    //    }
+    //    Paralyzed = (ParalyzeTimer != 0);
+    //}
 
     private void InventoryUpdate()
     {
