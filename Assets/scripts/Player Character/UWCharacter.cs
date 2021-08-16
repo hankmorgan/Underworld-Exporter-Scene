@@ -467,6 +467,37 @@ public class UWCharacter : Character
         set { SaveGame.SetAt(0x5c, (byte)value); }
     }
 
+    /// <summary>
+    /// X Co-ordinate for the player when they return from a plant induced dream in the void
+    /// </summary>
+    public int x_position_dream
+    {//0x2fb
+        get
+        {
+            return SaveGame.GetAt16(0x2fb);
+        }
+        set
+        {
+            SaveGame.SetAt16(0x2fb, value);
+        }
+    }
+
+    /// <summary>
+    /// Y Co-ordinate for the player when they return from a plant induced dream in the void
+    /// </summary>
+    public int y_position_dream
+    {//0x2fd
+        get
+        {
+            return SaveGame.GetAt16(0x2fd);
+        }
+        set
+        {
+            SaveGame.SetAt16(0x2fd, value);
+        }
+    }
+
+
     [Header("Speeds")]
     public float flySpeed;
     public float walkSpeed;
@@ -534,8 +565,32 @@ public class UWCharacter : Character
     /// <summary>
     /// The dream return position when you are dreaming in the void.
     /// </summary>
-    public short DreamReturnTileX = 0;
-    public short DreamReturnTileY = 0;
+    public short DreamReturnTileX
+    {
+        get
+        {
+            Vector3 DreamReturn = new Vector3(x_position_dream / SaveGame.Ratio, 0f, y_position_dream / SaveGame.Ratio);
+            return (short)(DreamReturn.x / 1.2f);
+        }
+        set
+        {
+            Vector3 dreamReturn = CurrentTileMap().getTileVector(value, DreamReturnTileY);
+            x_position_dream = (int)(dreamReturn.x * SaveGame.Ratio);
+        }
+    }
+    public short DreamReturnTileY
+    {
+        get
+        {
+            Vector3 DreamReturn = new Vector3(x_position_dream / SaveGame.Ratio, 0f, y_position_dream / SaveGame.Ratio);
+            return (short)(DreamReturn.z / 1.2f);
+        }
+        set
+        {
+            Vector3 dreamReturn = CurrentTileMap().getTileVector(DreamReturnTileX, value);
+            y_position_dream = (int)(dreamReturn.x * SaveGame.Ratio);
+        }
+    }
     /// <summary>
     /// The dream return level when you are dreaming in the void.
     /// </summary>

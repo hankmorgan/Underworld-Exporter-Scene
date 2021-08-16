@@ -138,9 +138,9 @@ public class SaveGame : Loader
                 incrnum += 3;
             }
 
-            //Copy decoded data to main buffer.
+            
             for (int i=0;i<=PlayerDat.GetUpperBound(0);i++)
-            {
+            {//Copy decoded data to main buffer.
                 PlayerDat[i] = buffer[i];
             }
 
@@ -157,7 +157,7 @@ public class SaveGame : Loader
                     case 0x4B://No of items. used here just to initialise a value.
                               //UWCharacter.Instance.playerInventory.ItemCounter= (int)buffer[i]>>2;
                         break;
-                    case 0x4D: ///   weight in 0.1 stones
+                    case 0x4D: ///   encumberance? in 0.1 stones
                         //Or STR * 2; safe to ignore?
                         break;
                     case 0x60: ///    bits 2..5: play_poison and no of active effects
@@ -1450,9 +1450,6 @@ public class SaveGame : Loader
     /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW2(int slotNo)
     {
-        int x_position_dream = 0;
-        int y_position_dream = 0;
-
         int[] ActiveEffectIds = new int[3];
         short[] ActiveEffectStability = new short[3];
 
@@ -1462,6 +1459,7 @@ public class SaveGame : Loader
 
         UWCharacter.Instance.JustTeleported = true;
         UWCharacter.Instance.teleportedTimer = 0f;
+        UWCharacter.Instance.DreamWorldTimer = 30f;
 
         if (ReadStreamFile(Path.Combine(BasePath, "SAVE" + slotNo, "PLAYER.DAT"), out byte[] pDat))
         {
@@ -1504,35 +1502,20 @@ public class SaveGame : Loader
                     case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)
                         effectCounter = (buffer[i] >> 6) & 0x3;
                         break;
-                    case 0x62://alco
-                       // UWCharacter.Instance.Intoxication = ((int)getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
-                        break;
-                    case 0x64:
-                        Quest.DreamPlantEaten = (1 == (buffer[i] & 0x1));
-                        Quest.InDreamWorld = (1 == ((buffer[i] >> 1) & 0x1));
-                        Quest.FightingInArena = (1 == ((buffer[i] >> 2) & 0x1));
-                        UWCharacter.Instance.DreamWorldTimer = 30f;
-                        break;
-                    case 0x2fb: ///   x-position in level
-                        x_position_dream = (int)getValAtAddress(buffer, i, 16); break;
-                    case 0x2fd: ///   y-position
-                        y_position_dream = (int)getValAtAddress(buffer, i, 16); break;
-                    //case 0x301:
-                       // UWCharacter.Instance.DreamReturnLevel = (short)(getValAtAddress(buffer, i, 8) - 1); break;
                     case 0x306:
                         {//Timer for paralyzed effect
                             UWCharacter.Instance.ParalyzeTimer = (short)(getValAtAddress(buffer, i, 8));
                             break;
                         }
-                    case 0x361://Item Ids of arena warriors.
-                    case 0x362:
-                    case 0x363:
-                    case 0x364:
-                    case 0x365:
-                        {
-                            Quest.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
-                            break;
-                        }
+                    //case 0x361://Item Ids of arena warriors.
+                    //case 0x362:
+                    //case 0x363:
+                 //   case 0x364:
+                 //   case 0x365:
+                 //       {
+                 //          // Quest.ArenaOpponents[arena++] = (int)getValAtAddress(buffer, i, 8);
+                 //           break;
+                 //       }
                  }
             }
 
@@ -1543,9 +1526,9 @@ public class SaveGame : Loader
 
             LoadInventory(buffer, 995, 931, 969);
 
-            Vector3 DreamReturn = new Vector3(x_position_dream / Ratio, 0f, y_position_dream / Ratio);
-            UWCharacter.Instance.DreamReturnTileX = (short)(DreamReturn.x / 1.2f);
-            UWCharacter.Instance.DreamReturnTileY = (short)(DreamReturn.z / 1.2f);
+            //Vector3 DreamReturn = new Vector3(x_position_dream / Ratio, 0f, y_position_dream / Ratio);
+            //UWCharacter.Instance.DreamReturnTileX = (short)(DreamReturn.x / 1.2f);
+            //UWCharacter.Instance.DreamReturnTileY = (short)(DreamReturn.z / 1.2f);
             UWCharacter.Instance.TeleportPosition = GameWorldController.instance.StartPos;
             return;
         }

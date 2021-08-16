@@ -318,6 +318,10 @@ public class Quest : UWClass
     /// <param name="x_clock"></param>
     public static void IncrementXClock(int x_clock)
     {
+       if (GetX_Clock(x_clock)==255)
+            {//max out
+                return;
+            }
        SetX_Clock(x_clock, SaveGame.GetAt(0x36E)+1);
     }
 
@@ -468,28 +472,96 @@ public class Quest : UWClass
             }
             SaveGame.SetAt(0x61, existingValue);
         }
-
     }
 
     /// <summary>
-    /// Is the player fighting in arena.
+    /// Is the player fighting in the arena on the pits of carnage level
     /// </summary>
-    public static bool FightingInArena = false;
+    public static bool FightingInArena
+    {
+        get
+        {
+            return ((SaveGame.GetAt(0x64)>>2) & 0x1) == 1;
+        }
+        set
+        {
+            byte existingValue = SaveGame.GetAt(0x64);
+            byte mask = (1<<2);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(0x64, existingValue);
+        }
+    }
 
     /// <summary>
     /// The arena opponents item ids
     /// </summary>
-    public static int[] ArenaOpponents = new int[5];
+   // public static int[] ArenaOpponents = new int[5];
+    
+    
+    public static int GetArenaOpponent(int index)
+    {
+        return SaveGame.GetAt(0x361 + index);
+    }
 
-    /// <summary>
+    public static void SetArenaOpponent(int index, int characterindex)
+    {
+        SaveGame.SetAt(0x361 + index,(byte)characterindex);
+    }
     /// Has the player eaten a dream plant.
     /// </summary>
-    public static bool DreamPlantEaten = false;
+    public static bool DreamPlantEaten
+    {
+        get
+        {
+            return (SaveGame.GetAt(0x64) & 0x1) == 1;
+        }
+        set
+        {
+            byte existingValue = SaveGame.GetAt(0x64);
+            byte mask = (1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(0x64, existingValue);
+        }
+    }
 
     /// <summary>
     /// Is the player in the dream world
     /// </summary>
-    public static bool InDreamWorld = false;
+    public static bool InDreamWorld
+    {
+        get
+        {
+            return ((SaveGame.GetAt(0x64)>>1) & 0x1) == 1;
+        }
+        set
+        {
+            byte existingValue = SaveGame.GetAt(0x64);
+            byte mask = (1<<1);
+            if (value)
+            {//set
+                existingValue |= mask;
+            }
+            else
+            {//unset
+                existingValue = (byte)(existingValue & (~mask));
+            }
+            SaveGame.SetAt(0x64, existingValue);
+        }
+    }
 
     //public static Quest instance;
 
@@ -512,16 +584,16 @@ public class Quest : UWClass
     //}
 
 
-//    /// <summary>
-//    /// Gets the next incense dream
-//    /// </summary>
-//    /// <returns>The incense dream.</returns>
-//    public static int getIncenseDream()
-//    {
-//        if (IncenseDream >= 3)
-//        {//Loop around
-//            IncenseDream = 0;
-//        }
-//        return IncenseDream++;
-//    }
+    //    /// <summary>
+    //    /// Gets the next incense dream
+    //    /// </summary>
+    //    /// <returns>The incense dream.</returns>
+    //    public static int getIncenseDream()
+    //    {
+    //        if (IncenseDream >= 3)
+    //        {//Loop around
+    //            IncenseDream = 0;
+    //        }
+    //        return IncenseDream++;
+    //    }
 }

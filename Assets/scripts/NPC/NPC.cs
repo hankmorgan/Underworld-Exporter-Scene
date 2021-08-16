@@ -582,16 +582,16 @@ public class NPC : MobileObject
         {//Improve players Win loss record in the arena
             if (Quest.FightingInArena)
             {
-                for (int i = 0; i <= Quest.ArenaOpponents.GetUpperBound(0); i++)
+                for (int i = 0; i <= 4; i++)
                 {
-                    if (Quest.ArenaOpponents[i] == objInt().BaseObjectData.index)
-                    {//Update the players win-loss records.
-                        Quest.ArenaOpponents[i] = 0;
-                        //Quest.QuestVariablesOBSOLETE[129] = Mathf.Min(255, Quest.QuestVariablesOBSOLETE[129] + 1);
-                        Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));
+                    if (Quest.GetArenaOpponent(i) == objInt().BaseObjectData.index)
+                    {//Update the players win-loss records and clear the fighter off the fight billing.
+                        Quest.SetArenaOpponent(i,0);
+                        
+                        Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));//Total no of kills
                         //Quest.x_clocks[14] = Mathf.Min(255, Quest.x_clocks[14] + 1);
-                        Quest.IncrementXClock(14);        
-                        //Quest.QuestVariablesOBSOLETE[24] = 1;//You have won a fight.
+                        Quest.IncrementXClock(14); //Also Total no of kills in the area.
+                        //You have won the fight.
                         Quest.SetQuestVariable(24, 1);
                     }
                 }
