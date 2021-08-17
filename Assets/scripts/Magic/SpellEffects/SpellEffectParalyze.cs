@@ -19,7 +19,7 @@ public class SpellEffectParalyze : SpellEffect
          //		UWCharacter.Instance= this.GetComponent<UWCharacter>();
          //}
            // UWCharacter.Instance.Paralyzed = true;
-            UWCharacter.Instance.ParalyzeTimer = = 4 + Random.Range(0, 16);
+            UWCharacter.Instance.ParalyzeTimer = 4 + Random.Range(0, 16);
         }
         else
         {
