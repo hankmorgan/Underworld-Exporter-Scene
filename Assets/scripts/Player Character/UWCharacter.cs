@@ -16,7 +16,7 @@ public class UWCharacter : Character
     public Vector3 Rayposition;//= //transform.position;
     public Vector3 Raydirection = Vector3.down;
     public float Raydistance = 1.0f;
-    int mask; //= LayerMask.GetMask(LayersForRay);
+    int RayMask; //= LayerMask.GetMask(LayersForRay);
 
     public const int CharClassFighter = 0;
     public const int CharClassMage = 1;
@@ -642,7 +642,7 @@ public class UWCharacter : Character
         XAxis.enabled = false;
         YAxis.enabled = false;
         MouseLookEnabled = false;
-        mask = LayerMask.GetMask(LayersForRay);
+        RayMask = LayerMask.GetMask(LayersForRay);
         StartCoroutine(playfootsteps());
     }
 
@@ -2545,7 +2545,7 @@ public class UWCharacter : Character
         onBridge = false;
         Rayposition = transform.position;
 
-        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, mask);
+        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, RayMask);
 
         if (hit.collider != null)
         {

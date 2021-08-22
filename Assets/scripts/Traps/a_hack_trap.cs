@@ -34,6 +34,8 @@ public class a_hack_trap : trap_base
     //qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
     //qual=50 is to trigger the conversation with the troll #251 in tybals lair after you are imprisoned.
     //qual=62 is used in Britannia, prison tower and Kilorn 1 for an unknown purpose .  Also appears in UW1 Level 3
+	//		Update aug 2021 seems to set a goal for the npc linked to by the trap using the owner value of the trap.
+	//				LBs trap has owner=12 which is stand still. Does this goal have another meaning?
     //      In Britannia where is is triggered by quest variables 109 and 112
     //      which are have you talked to british and have you been arrested
     //      possibly this trap is related to these events. 

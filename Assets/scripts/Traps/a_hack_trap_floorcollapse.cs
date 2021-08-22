@@ -3,7 +3,8 @@
 
 /// <summary>
 /// Collapses the ground underneath the player if it is of a certain height.
-/// Works based on proximetry to the trap
+/// Works based on player being ont the trap
+/// A skill check of the player acrobats vs their encumbrance is made in order to trigger the change.
 /// </summary>
 /// Example in Ice caverns is there is several of these connected to timer triggers.
 /// Each covers a range of tiles.

@@ -48,6 +48,13 @@ public class CritterInfo : Loader
 
     public CritterAnimInfo AnimInfo;
 
+
+    /// <summary>
+    /// Critter animations for UW1
+    /// </summary>
+    /// <param name="critter_id"></param>
+    /// <param name="paletteToUse"></param>
+    /// <param name="AuxPalNo"></param>
     public CritterInfo(int critter_id, Palette paletteToUse, int AuxPalNo)
     {
         //string fileO = DecimalToOct(file.ToString());
@@ -65,19 +72,27 @@ public class CritterInfo : Loader
                 var toLoad = Path.Combine(BasePath, "CRIT", "CR" + critterIDO + "PAGE.N0" + pass);
                 ReadStreamFile(toLoad, out FilePage0);
                 bool LoadMod = Directory.Exists(toLoad);  //TODO: Does this load mods here.
-                spriteIndex = ReadPageFile(FilePage0, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
+                spriteIndex = ReadPageFileUW1(FilePage0, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
             }
             else
             {
                 var toLoad = Path.Combine(BasePath, "CRIT", "CR" + critterIDO + "PAGE.N0" + pass);
                 ReadStreamFile(toLoad, out FilePage1);
                 bool LoadMod = Directory.Exists(toLoad);
-                ReadPageFile(FilePage1, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
+                ReadPageFileUW1(FilePage1, critter_id, pass, spriteIndex, AuxPalNo, LoadMod, toLoad);
             }
         }
     }
 
-
+    /// <summary>
+    /// Criter animations for UW2
+    /// </summary>
+    /// <param name="critter_id"></param>
+    /// <param name="paletteToUse"></param>
+    /// <param name="palno"></param>
+    /// <param name="assocData"></param>
+    /// <param name="PGMP"></param>
+    /// <param name="cran"></param>
     public CritterInfo(int critter_id, Palette paletteToUse, int palno, byte[] assocData, byte[] PGMP, byte[] cran)
     {
         int ExtractPageNo = 0;
@@ -105,7 +120,7 @@ public class CritterInfo : Loader
                 if ((NoAngle == false) || (Angle == 4))
                 {
                     int UW2animIndex = GetUW2Anim(Animation, Angle);
-                    int animIndex = TranslateAnimToIndex(UW2animIndex);
+                    int animIndex = TranslateAnimToIndex(UW2animIndex);//Maybe remove this?
                     AnimInfo.animName[animIndex] = PrintAnimName(UW2animIndex);
                     int ValidEntries = (int)getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
                     for (int FrameNo = 0; FrameNo < 8; FrameNo++)
@@ -127,7 +142,7 @@ public class CritterInfo : Loader
 
 
 
-    private int ReadPageFile(byte[] PageFile, int XX, int YY, int spriteIndex, int AuxPalNo, bool LoadMod, string ModPath)
+    private int ReadPageFileUW1(byte[] PageFile, int XX, int YY, int spriteIndex, int AuxPalNo, bool LoadMod, string ModPath)
     {
         int addptr = 0;
         int slotbase = (int)getValAtAddress(PageFile, addptr++, 8);
@@ -690,7 +705,16 @@ public class CritterInfo : Loader
 		} */
 
 
-
+    /// <summary>
+    /// Read critter animation page files for UW2
+    /// </summary>
+    /// <param name="assocFile"></param>
+    /// <param name="AuxPalNo"></param>
+    /// <param name="fileCrit"></param>
+    /// <param name="critanim"></param>
+    /// <param name="spriteIndex"></param>
+    /// <param name="paletteToUse"></param>
+    /// <returns></returns>
     int ReadUW2PageFileData(byte[] assocFile, int AuxPalNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
     {
         //Debug.Log(fileCrit + " starting at  "  + spriteIndex);
@@ -834,7 +858,7 @@ public class CritterInfo : Loader
 
 
     /// <summary>
-    /// Ises the animation unangled.
+    /// Is the animation unangled.
     /// </summary>
     /// <returns><c>true</c>, if animation unangled was ised, <c>false</c> otherwise.</returns>
     /// <param name="animationNo">Animation no.</param>

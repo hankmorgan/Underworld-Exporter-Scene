@@ -908,6 +908,10 @@ public class NPC : MobileObject
 
     }
 
+
+    /// <summary>
+    /// Hacks to control certain characters for special events.
+    /// </summary>
     void UpdateSpecialNPCBehaviours()
     {
         if (_RES == GAME_UW2)
@@ -915,8 +919,9 @@ public class NPC : MobileObject
             if (npc_whoami == 142) //Lord British
                 if (GameWorldController.instance.dungeon_level == 0)
                 {
-                    if (Quest.GetQuestVariable(112) == 1)//Avatar has been fighting
+                    if (Quest.GetQuestVariable(112,true) == 1)//Avatar has been fighting
                     {//Make sure I move to the correct location to talk to the avatar.
+                        //THis is probably handled by a hack trap!
                         npc_xhome = 40;
                         npc_yhome = 38;
                     }

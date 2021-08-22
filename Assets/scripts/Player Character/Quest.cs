@@ -120,7 +120,7 @@ public class Quest : UWClass
     /// </summary>
     /// <param name="questno"></param>
     /// <returns></returns>
-    public static int GetQuestVariable(int questno)
+    public static int GetQuestVariable(int questno, bool supressConsole = false)
     {
         int _returnvalue;
         switch (_RES)
@@ -154,7 +154,7 @@ public class Quest : UWClass
                     break;
                 }
         }
-        Debug.Log("Getting Quest #" + questno + " It's value is " + _returnvalue);
+        if (!supressConsole) { Debug.Log("Getting Quest #" + questno + " It's value is " + _returnvalue); }
         return _returnvalue;
     }
     /// <summary>

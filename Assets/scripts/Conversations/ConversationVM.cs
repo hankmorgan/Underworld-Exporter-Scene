@@ -1438,6 +1438,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             text = TextSubstitute(text);
         }
+        text=text.Replace('\0'.ToString(), "");
         string[] Lines = text.Split(new string[] { "\n" }, System.StringSplitOptions.None);
 
         for (int s = 0; s <= Lines.GetUpperBound(0); s++)
@@ -1458,7 +1459,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         default:
                             Markup = "<color=black>"; break;//[00FF00]
                     }
-                    // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
                     UWHUD.instance.Conversation_tl.Add(Paragraphs[i], Markup); //\n	
                     if (i < Paragraphs.GetUpperBound(0))
                     {
