@@ -2074,7 +2074,7 @@ public class GameWorldController : UWEBase
         writer.WriteLine("\t\t\t<DoorDir>" + objList[o].doordir + "</DoorDir>");
         writer.WriteLine("\t\t\t<Invis>" + objList[o].invis + "</Invis>");
         writer.WriteLine("\t\t\t<IsQuant>" + objList[o].is_quant + "</IsQuant>");
-        writer.WriteLine("\t\t\t<Texture>" + objList[o].texture + "</Texture>");
+        writer.WriteLine("\t\t\t<Texture>" + objList[o].Obsolete_texture + "</Texture>");
         writer.WriteLine("\t\t\t<Position>");
         writer.WriteLine("\t\t\t\t<ObjectTileX>" + objList[o].ObjectTileX + "</ObjectTileX>");
         writer.WriteLine("\t\t\t\t<ObjectTileY>" + objList[o].ObjectTileY + "</ObjectTileY>");
@@ -2097,8 +2097,8 @@ public class GameWorldController : UWEBase
 
             writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
             writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
-            writer.WriteLine("\t\t\t<MobileUnk_0xB_12_F>" + objList[o].MobileUnk_0xB_12_F + "</MobileUnk_0xB_12_F>");
-            int OriginX = (objList[o].MobileUnk_0xB_12_F << 12) | (objList[o].npc_gtarg << 4) | objList[o].npc_goal & 0xF;
+            writer.WriteLine("\t\t\t<AnimationFrame>" + objList[o].AnimationFrame + "</AnimationFrame>");
+            int OriginX = (objList[o].AnimationFrame << 12) | (objList[o].npc_gtarg << 4) | objList[o].npc_goal & 0xF;
             writer.WriteLine("\t\t\t<CoOrdinateX>" + objList[o].CoordinateX + "</CoOrdinateX>");
             writer.WriteLine("\t\t\t<CoOrdinateY>" + OriginX + "</CoOrdinateY>");
             writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");
@@ -2119,8 +2119,8 @@ public class GameWorldController : UWEBase
             writer.WriteLine("\t\t\t<Projectile_Speed>" + objList[o].Projectile_Speed + "</Projectile_Speed>");
             writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
             //writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
-            writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
-            writer.WriteLine("\t\t\t<MobileUnk_0x15_4_1F>" + objList[o].MobileUnk_0x15_4_1F + "</MobileUnk_0x15_4_1F>");
+            writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_animation + "</npc_voidanim>");
+           // writer.WriteLine("\t\t\t<MobileUnk_0x15_4_1F>" + objList[o].MobileUnk_0x15_4_1F + "</MobileUnk_0x15_4_1F>");
             writer.WriteLine("\t\t\t<MobileUnk_0x16_0_F>" + objList[o].MobileUnk_0x16_0_F + "</MobileUnk_0x16_0_F>");
             writer.WriteLine("\t\t\t<npc_yhome>" + objList[o].npc_yhome + "</npc_yhome>");
             writer.WriteLine("\t\t\t<npc_xhome>" + objList[o].npc_xhome + "</npc_xhome>");

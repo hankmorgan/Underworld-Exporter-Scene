@@ -582,16 +582,16 @@ public class NPC : MobileObject
         {//Improve players Win loss record in the arena
             if (Quest.FightingInArena)
             {
-                for (int i = 0; i <= Quest.ArenaOpponents.GetUpperBound(0); i++)
+                for (int i = 0; i <= 4; i++)
                 {
-                    if (Quest.ArenaOpponents[i] == objInt().BaseObjectData.index)
-                    {//Update the players win-loss records.
-                        Quest.ArenaOpponents[i] = 0;
-                        //Quest.QuestVariablesOBSOLETE[129] = Mathf.Min(255, Quest.QuestVariablesOBSOLETE[129] + 1);
-                        Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));
+                    if (Quest.GetArenaOpponent(i) == objInt().BaseObjectData.index)
+                    {//Update the players win-loss records and clear the fighter off the fight billing.
+                        Quest.SetArenaOpponent(i,0);
+                        
+                        Quest.SetQuestVariable(129, Mathf.Min(255, Quest.GetQuestVariable(129) + 1));//Total no of kills
                         //Quest.x_clocks[14] = Mathf.Min(255, Quest.x_clocks[14] + 1);
-                        Quest.IncrementXClock(14);        
-                        //Quest.QuestVariablesOBSOLETE[24] = 1;//You have won a fight.
+                        Quest.IncrementXClock(14); //Also Total no of kills in the area.
+                        //You have won the fight.
                         Quest.SetQuestVariable(24, 1);
                     }
                 }
@@ -908,6 +908,10 @@ public class NPC : MobileObject
 
     }
 
+
+    /// <summary>
+    /// Hacks to control certain characters for special events.
+    /// </summary>
     void UpdateSpecialNPCBehaviours()
     {
         if (_RES == GAME_UW2)
@@ -915,8 +919,9 @@ public class NPC : MobileObject
             if (npc_whoami == 142) //Lord British
                 if (GameWorldController.instance.dungeon_level == 0)
                 {
-                    if (Quest.GetQuestVariable(112) == 1)//Avatar has been fighting
+                    if (Quest.GetQuestVariable(112,true) == 1)//Avatar has been fighting
                     {//Make sure I move to the correct location to talk to the avatar.
+                        //THis is probably handled by a hack trap!
                         npc_xhome = 40;
                         npc_yhome = 38;
                     }

@@ -904,7 +904,7 @@ public class ObjectLoader : DataLoader
     {
         if ((objList[x].GetItemType() == ObjectInteraction.TMAP_SOLID) || (objList[x].GetItemType() == ObjectInteraction.TMAP_CLIP))
         {
-            objList[x].texture = texture_map[objList[x].owner]; //Sets the texture for tmap objects. 
+            objList[x].Obsolete_texture = texture_map[objList[x].owner]; //Sets the texture for tmap objects. 
         }
 
         //Some of this stuff should move to obj_base
@@ -915,28 +915,28 @@ public class ObjectLoader : DataLoader
                 //267 + textureIndex;
                 if (_RES == GAME_UW2)
                 {
-                    objList[x].texture = texture_map[objList[x].flags - 2];
+                    objList[x].Obsolete_texture = texture_map[objList[x].flags - 2];
                     //Sets the texture for bridge
                 }
                 else
                 {
-                    objList[x].texture = texture_map[objList[x].flags - 2 + 48];
+                    objList[x].Obsolete_texture = texture_map[objList[x].flags - 2 + 48];
                     //Sets the texture for bridge
                 }
             }
             else
             {
-                objList[x].texture = 267 + (objList[x].flags & 0x3F);
+                objList[x].Obsolete_texture = 267 + (objList[x].flags & 0x3F);
                 //267 is an offset into my own textures config file.
             }
         }
         if (objList[x].GetItemType() == ObjectInteraction.BUTTON)
         {
-            objList[x].texture = objList[x].flags;
+            objList[x].Obsolete_texture = objList[x].flags;
         }
         if (objList[x].GetItemType() == ObjectInteraction.GRAVE)
         {
-            objList[x].texture = objList[x].flags + 28;
+            objList[x].Obsolete_texture = objList[x].flags + 28;
         }
         if (objList[x].GetItemType() == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
         {
@@ -954,19 +954,19 @@ public class ObjectLoader : DataLoader
                     //Weird glitch texture
                     //textureQuality=-1;
                     //textureQuality = textureQuality - 10;
-                    objList[x].texture = -1;
+                    objList[x].Obsolete_texture = -1;
                 }
                 else
                     if (textureQuality > 10)
                 {
                     //textureQuality=8;//Always seems to be this texture.
                     //textureQuality = -1;//use the texture already there?
-                    objList[x].texture = -1;
+                    objList[x].Obsolete_texture = -1;
                     //texture_map[(textureQuality)+48];//-1 to reuse the existing texture
                 }
                 else
                 {
-                    objList[x].texture = texture_map[(textureQuality) + 48];
+                    objList[x].Obsolete_texture = texture_map[(textureQuality) + 48];
                 }
                 if (objList[x].zpos > 96)
                 {

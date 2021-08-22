@@ -156,6 +156,7 @@ public class GameClock : UWEBase
         {
             Clock1++;
             clockTime = 0.0f;
+            SecondUpdate();
             if (Second % 60 == 0)
             {
                 EveryMinuteUpdate();//Move minute forward
@@ -163,6 +164,20 @@ public class GameClock : UWEBase
             if (Second % 30 == 0)
             {
                 EveryHalfMinuteUpdate();//Move minute forward
+            }
+        }
+    }
+
+    /// <summary>
+    /// Updates that happen every second.
+    /// </summary>
+    public static void SecondUpdate()
+    {
+        if(_RES==GAME_UW2)
+        {//Paralysed player only happens in UW2 (as far as I know)
+            if (UWCharacter.Instance.ParalyzeTimer > 0)
+            {
+                UWCharacter.Instance.ParalyzeTimer--;
             }
         }
     }

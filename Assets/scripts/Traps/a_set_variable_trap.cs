@@ -51,7 +51,7 @@ public class a_set_variable_trap : a_variable_trap
             switch (xpos)
             {
                 case 1://Bit Variables
-                    Set_Variables(Quest.BitVariables, zpos, heading, this, "bitvars");
+                    Set_VariablesBitVars(zpos, heading, this, "bitvars");
                     break;
                 case 0://game variables 
                     Set_VariablesVarList(zpos, heading, this, "gamevars");
@@ -160,8 +160,45 @@ public class a_set_variable_trap : a_variable_trap
         }
     }
 
+    static void Set_VariablesBitVars(int index, int operation, a_set_variable_trap trap, string debugname)
+    {
+        string op_text = "";
+        if (index != 0)
+        {//Variable Operations
+            int OrigValue = Quest.GetBitVariable(index);
+            var newvalue = VariableOperation(OrigValue, trap.VariableValue(), operation, out op_text);
+            Quest.SetBitVariable(index, newvalue);
+            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetBitVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+        }
+        else
+        {//Bitwise operations on bitfield
+            Debug.Log("Bitwise set variable. Not implemented yet");
+            switch (operation)
+            {
+                case 0://Set
 
+                    break;
+                case 1://Clear
 
+                    break;
+                case 2://Set
+
+                    break;
+                case 3://Set
+
+                    break;
+                case 4://Set
+
+                    break;
+                case 5://Flip
+
+                    break;
+                case 6://Set
+
+                    break;
+            }
+        }
+    }
 
     /// <summary>
     /// Version of Set_Variables for use with new quest variables get and set function

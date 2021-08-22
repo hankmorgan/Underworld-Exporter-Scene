@@ -16,7 +16,7 @@ public class UWCharacter : Character
     public Vector3 Rayposition;//= //transform.position;
     public Vector3 Raydirection = Vector3.down;
     public float Raydistance = 1.0f;
-    int mask; //= LayerMask.GetMask(LayersForRay);
+    int RayMask; //= LayerMask.GetMask(LayersForRay);
 
     public const int CharClassFighter = 0;
     public const int CharClassMage = 1;
@@ -78,8 +78,31 @@ public class UWCharacter : Character
     }
     public int StealthLevel; //The level of stealth the character has.
     public int Resistance; //DR from spells.
-    public bool Paralyzed;
-    public float ParalyzeTimer = 0f;
+    public bool Paralyzed
+    {
+        get { return ParalyzeTimer > 0; }
+    }
+    public int ParalyzeTimer
+    {//0x306
+        get
+        {
+            if(_RES==GAME_UW2)
+            {
+                return SaveGame.GetAt(0x306);
+            }
+           else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            if (_RES == GAME_UW2)
+            {
+                SaveGame.SetAt(0x306, (byte)value);
+            }
+        }
+    }
     public float currYVelocity;
     public float fallSpeed;
     public float braking;
@@ -467,6 +490,37 @@ public class UWCharacter : Character
         set { SaveGame.SetAt(0x5c, (byte)value); }
     }
 
+    /// <summary>
+    /// X Co-ordinate for the player when they return from a plant induced dream in the void
+    /// </summary>
+    public int x_position_dream
+    {//0x2fb
+        get
+        {
+            return SaveGame.GetAt16(0x2fb);
+        }
+        set
+        {
+            SaveGame.SetAt16(0x2fb, value);
+        }
+    }
+
+    /// <summary>
+    /// Y Co-ordinate for the player when they return from a plant induced dream in the void
+    /// </summary>
+    public int y_position_dream
+    {//0x2fd
+        get
+        {
+            return SaveGame.GetAt16(0x2fd);
+        }
+        set
+        {
+            SaveGame.SetAt16(0x2fd, value);
+        }
+    }
+
+
     [Header("Speeds")]
     public float flySpeed;
     public float walkSpeed;
@@ -534,12 +588,47 @@ public class UWCharacter : Character
     /// <summary>
     /// The dream return position when you are dreaming in the void.
     /// </summary>
-    public short DreamReturnTileX = 0;
-    public short DreamReturnTileY = 0;
+    public short DreamReturnTileX
+    {
+        get
+        {
+            Vector3 DreamReturn = new Vector3(x_position_dream / SaveGame.Ratio, 0f, y_position_dream / SaveGame.Ratio);
+            return (short)(DreamReturn.x / 1.2f);
+        }
+        set
+        {
+            Vector3 dreamReturn = CurrentTileMap().getTileVector(value, DreamReturnTileY);
+            x_position_dream = (int)(dreamReturn.x * SaveGame.Ratio);
+        }
+    }
+    public short DreamReturnTileY
+    {
+        get
+        {
+            Vector3 DreamReturn = new Vector3(x_position_dream / SaveGame.Ratio, 0f, y_position_dream / SaveGame.Ratio);
+            return (short)(DreamReturn.z / 1.2f);
+        }
+        set
+        {
+            Vector3 dreamReturn = CurrentTileMap().getTileVector(DreamReturnTileX, value);
+            y_position_dream = (int)(dreamReturn.x * SaveGame.Ratio);
+        }
+    }
     /// <summary>
     /// The dream return level when you are dreaming in the void.
     /// </summary>
-    public short DreamReturnLevel = 0;
+    /// Offset by -1 for actual level. 0 is no valid return level
+    public short DreamReturnLevel
+    {//0x301:
+        get
+        {
+            return SaveGame.GetAt(0x301);
+        }
+        set
+        {
+            SaveGame.SetAt(0x301, (byte)value);
+        }
+    }
     public float DreamWorldTimer = 30f;//Not sure what values controls the time spent in dream world
     public Vector3 TeleportPosition;
 
@@ -553,7 +642,7 @@ public class UWCharacter : Character
         XAxis.enabled = false;
         YAxis.enabled = false;
         MouseLookEnabled = false;
-        mask = LayerMask.GetMask(LayersForRay);
+        RayMask = LayerMask.GetMask(LayersForRay);
         StartCoroutine(playfootsteps());
     }
 
@@ -988,10 +1077,10 @@ public class UWCharacter : Character
             //Still processing death.
             return;
         }
-        if (_RES == GAME_UW2)
-        {
-            ParalyzeUpdate();
-        }
+        //if (_RES == GAME_UW2)
+        //{
+        //    ParalyzeUpdate();
+        //}
         if (playerCam.enabled == true)
         {
             SwimUpdate();
@@ -1267,18 +1356,18 @@ public class UWCharacter : Character
         }
     }
 
-    private void ParalyzeUpdate()
-    {
-        if (ParalyzeTimer > 0)
-        {
-            ParalyzeTimer -= Time.deltaTime;
-        }
-        if (ParalyzeTimer < 0)
-        {
-            ParalyzeTimer = 0;
-        }
-        Paralyzed = (ParalyzeTimer != 0);
-    }
+    //private void ParalyzeUpdate()
+    //{
+    //    if (ParalyzeTimer > 0)
+    //    {
+    //        ParalyzeTimer -= Time.deltaTime;
+    //    }
+    //    if (ParalyzeTimer < 0)
+    //    {
+    //        ParalyzeTimer = 0;
+    //    }
+    //    Paralyzed = (ParalyzeTimer != 0);
+    //}
 
     private void InventoryUpdate()
     {
@@ -2070,7 +2159,7 @@ public class UWCharacter : Character
         Quest.DreamPlantEaten = false;
         DreamReturnTileX = TileMap.visitTileX;
         DreamReturnTileY = TileMap.visitTileY;
-        DreamReturnLevel = GameWorldController.instance.dungeon_level;
+        DreamReturnLevel = (short)(GameWorldController.instance.dungeon_level+1);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 24));
         GameWorldController.instance.SwitchLevel(68, 32, 27);//TODO:implement other destinations.
         Quest.InDreamWorld = true;
@@ -2086,7 +2175,7 @@ public class UWCharacter : Character
     {
         Quest.InDreamWorld = false;
         isFlying = false;
-        GameWorldController.instance.SwitchLevel(DreamReturnLevel, DreamReturnTileX, DreamReturnTileY);
+        GameWorldController.instance.SwitchLevel((short)(DreamReturnLevel-1), DreamReturnTileX, DreamReturnTileY);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 25));
     }
 
@@ -2456,7 +2545,7 @@ public class UWCharacter : Character
         onBridge = false;
         Rayposition = transform.position;
 
-        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, mask);
+        Physics.Raycast(Rayposition, Raydirection, out RaycastHit hit, Raydistance, RayMask);
 
         if (hit.collider != null)
         {

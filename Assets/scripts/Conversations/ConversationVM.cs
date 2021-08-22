@@ -1438,6 +1438,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             text = TextSubstitute(text);
         }
+        text=text.Replace('\0'.ToString(), "");
         string[] Lines = text.Split(new string[] { "\n" }, System.StringSplitOptions.None);
 
         for (int s = 0; s <= Lines.GetUpperBound(0); s++)
@@ -1458,7 +1459,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         default:
                             Markup = "<color=black>"; break;//[00FF00]
                     }
-                    // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
                     UWHUD.instance.Conversation_tl.Add(Paragraphs[i], Markup); //\n	
                     if (i < Paragraphs.GetUpperBound(0))
                     {
@@ -2234,7 +2234,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         case 0://Challenge a fighter
                             {
                                 SettingUpFight = true;
-                                Quest.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
+                                //Quest.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
+                                Quest.SetArenaOpponent(0, npc.objInt().BaseObjectData.index);
                                 Quest.FightingInArena = true;
                                 break;
                             }
@@ -4420,7 +4421,8 @@ description:  places a generated object in underworld
             objI.GetComponent<NPC>().npc_xhome = (short)tileX[i];
             objI.GetComponent<NPC>().npc_yhome = (short)tileY[i];
             objI.GetComponent<NPC>().npc_whoami = 102;
-            Quest.ArenaOpponents[i] = objNew.index;
+            //Quest.ArenaOpponents[i] = objNew.index;
+            Quest.SetArenaOpponent(i, objNew.index);
         }
     }
 

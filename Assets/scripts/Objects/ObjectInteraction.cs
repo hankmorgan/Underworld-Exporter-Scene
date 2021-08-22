@@ -341,8 +341,8 @@ public class ObjectInteraction : UWEBase
 
     public short npc_voidanim
     {
-        get { return BaseObjectData.npc_voidanim; }
-        set { BaseObjectData.npc_voidanim = value; }
+        get { return BaseObjectData.npc_animation; }
+        set { BaseObjectData.npc_animation = value; }
     }
     public short npc_xhome        //  x coord of home tile
     {
@@ -414,8 +414,8 @@ public class ObjectInteraction : UWEBase
 
     public short MobileUnk_0xB_12_F
     {
-        get { return BaseObjectData.MobileUnk_0xB_12_F; }
-        set { BaseObjectData.MobileUnk_0xB_12_F = value; }
+        get { return BaseObjectData.AnimationFrame; }
+        set { BaseObjectData.AnimationFrame = value; }
     }
 
     public short MobileUnk_0xD_4_FF
@@ -461,11 +461,11 @@ public class ObjectInteraction : UWEBase
         get { return BaseObjectData.MobileUnk_0x13; }
         set { BaseObjectData.MobileUnk_0x13 = value; }
     }
-    public short MobileUnk_0x15_4_1F
-    {
-        get { return BaseObjectData.MobileUnk_0x15_4_1F; }
-        set { BaseObjectData.MobileUnk_0x15_4_1F = value; }
-    }
+    //public short MobileUnk_0x15_4_1F
+    //{
+    //    get { return BaseObjectData.MobileUnk_0x15_4_1F; }
+    //    set { BaseObjectData.MobileUnk_0x15_4_1F = value; }
+    //}
 
     public short MobileUnk_0x16_0_F
     {

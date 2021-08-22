@@ -46,8 +46,8 @@ public class BytLoader : ArtLoader
             6,
             15,
             15,
-            0,
-            22,
+            21,
+            21,
             0
         };
 

@@ -11,7 +11,7 @@
         "PATH_TNOVA": "C:\\Games\\Terra Nova\\CD\\Terra_Nova\\"
     },
     "camera": {
-        "DefaultLightLevel": 8.0,
+        "DefaultLightLevel": 3.0,
         "FOV": 75.0
     },
     "cheats": {

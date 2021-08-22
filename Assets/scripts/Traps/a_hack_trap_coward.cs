@@ -10,12 +10,12 @@ public class a_hack_trap_coward : a_hack_trap
     {
         int OpponentsFound = 0;
         int OpponentIndex = 0;
-        for (int i = 0; i <= Quest.ArenaOpponents.GetUpperBound(0); i++)
+        for (int i = 0; i <= 4; i++)//Up to five max opponents
         {
-            if (Quest.ArenaOpponents[i] != 0)
+            if (Quest.GetArenaOpponent(i) != 0)
             {
                 OpponentsFound++;
-                OpponentIndex = Quest.ArenaOpponents[i];
+                OpponentIndex = Quest.GetArenaOpponent(i);
                 ObjectInteraction objI = ObjectLoader.getObjectIntAt(OpponentIndex);
                 if (objI != null)
                 {
@@ -26,7 +26,8 @@ public class a_hack_trap_coward : a_hack_trap
                     }
                 }
             }
-            Quest.ArenaOpponents[i] = 0;
+            //Clearn list of opponents
+            Quest.SetArenaOpponent(i,0);
         }
         //Reduce player reputation.
         if (OpponentsFound > 0)
@@ -42,6 +43,7 @@ public class a_hack_trap_coward : a_hack_trap
                 if (objI != null)
                 {
                     objI.TalkTo();
+                    Debug.Log("Quest.FightingInArena=" + Quest.FightingInArena + " You are being taunted by someone in the arena. Are you going to let this stand. (please check if Quest.fighting in arena is at the correct value)");
                 }
             }
             else
