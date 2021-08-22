@@ -3,10 +3,13 @@
 public class a_hack_trap : trap_base
 {
     //Hack trap is the term for a do_trap in UW2
+	//qual=2 Not found in the wild yet. Uses player search skill, calls into a combat function? equipment damage??
+	//qual=3 Not found in the wild yet. Looks like it will change a tile
     //qual=5 is a trespass trap.
-    //qual=10 is the awarding of class specific items at the start fof the game
-    //qual=12 is an oscillator row of tiles (i think)  -unimplemented
-    //qual=14 cycles wall/floor colours in a room in talorus
+    //qual=10 is the awarding of class specific items at the start of the game
+	//qual=11 Not found in the wild yet. Related to fraznium gloves
+    //qual=12 is an oscillator row of tiles (i think). Owner of the trap increments on each call. -unimplemented
+    //qual=14 cycles wall/floor colours in a room in talorus, owner to/from zpos the textures, runs along the x axis for y tiles
     //qual=17 is used to collapse cracked ice floors (linked to timer triggers)
     //qual=18 Scintillus 5 switch puzzle reset
     //qual=19 scintullus 7 platform puzzle reset

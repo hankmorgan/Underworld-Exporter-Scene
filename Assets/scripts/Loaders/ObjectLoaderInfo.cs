@@ -255,7 +255,6 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-
     public short quality
     { // (short)(ExtractBits(Vals[2], 0, 0x3f))
         get
@@ -285,7 +284,6 @@ public class ObjectLoaderInfo : UWClass
             SetAt16(PTR + 4, existingValue | ((value & 0x3FF) << 6));
         }
     }
-
 
     public short owner
     { // (short)(ExtractBits(Vals[2], 0, 0x3f))
@@ -350,7 +348,6 @@ public class ObjectLoaderInfo : UWClass
             }
         }
     }
-
 
     //public short ProjectileHeadingMinor//defection to the right of the missile from the major heading.
     //{
@@ -625,7 +622,6 @@ public class ObjectLoaderInfo : UWClass
             }
         }
     }
-
 
     public short MobileUnk_0x11
     {
@@ -964,15 +960,11 @@ public class ObjectLoaderInfo : UWClass
     public int[] conditions = new int[4];
     public int TriggerAction;//Needs to be split into a property.
     public int TriggerOnce;
-
-    //public short[] NPC_DATA=new short[19];
-
-
+     
     /// <summary>
     /// The GUID of this object instance. To guarantee unique object names.
     /// </summary>
     public System.Guid guid;
-
 
 
     /// <summary>
@@ -1058,7 +1050,6 @@ public class ObjectLoaderInfo : UWClass
         obj.owner = 0;
         obj.link = 0;
     }
-
 
 
     public void Set()
