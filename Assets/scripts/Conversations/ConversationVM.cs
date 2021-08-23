@@ -1176,7 +1176,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "npc_arms":
                         npc.npc_arms = (short)stack.at(address); break;
                     case "npc_hp":
-                        npc.npc_hp = (short)stack.at(address); break;
+                        npc.npc_hp = (byte)stack.at(address); break;
                     case "npc_health":
                         npc.npc_health = (short)stack.at(address); break;
                     case "npc_hunger":
@@ -2074,7 +2074,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     int[] args = new int[2];
                     args[0] = stack.at(stack.stackptr - 2);//ptr to value
                     args[1] = stack.at(stack.stackptr - 3);//ptr to value
-                    give_ptr_npc(npc, stack.at(args[0]), args[1]);
+                    give_ptr_npc(npc, (short)stack.at(args[0]), args[1]);
                     break;
                 }
             case "take_from_npc_inv":
@@ -3396,11 +3396,11 @@ obj = CurrentObjectList().objInfo[pos].instance;
             //obj.link=locals[link]+512;
             if (obj.isQuantityBln)
             {
-                obj.link = stack.at(link);
+                obj.link = (short)stack.at(link);
             }
             else
             {
-                obj.link = stack.at(link) + 512;
+                obj.link = (short)(stack.at(link) + 512);
             }
 
         }
@@ -3771,7 +3771,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
     /// <param name="unk1">Unk1.</param>
     /// <param name="Quantity">Quantity.</param>
     /// <param name="slotNo">Slot no.</param>
-    public void give_ptr_npc(NPC npc, int Quantity, int ptrSlotNo)
+    public void give_ptr_npc(NPC npc, short Quantity, int ptrSlotNo)
     {
         /*
 id=0014 name="give_ptr_npc" ret_type=int
@@ -3830,7 +3830,7 @@ return value: none
                         GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
                         Split.GetComponent<ObjectInteraction>().link = Quantity;
 
-                        objGiven.GetComponent<ObjectInteraction>().link = objGiven.GetComponent<ObjectInteraction>().link - Quantity;
+                        objGiven.link = (short)(objGiven.link - Quantity);
 
                         GameWorldController.MoveToWorld(objGiven);
                         //Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;

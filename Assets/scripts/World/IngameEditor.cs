@@ -1034,7 +1034,7 @@ public class IngameEditor : GuiBase_Draggable
             }
             if (int.TryParse(npc_hp.text, out val))
             {
-                currObj.npc_hp = (short)(val);
+                currObj.npc_hp = (byte)(val);
                 npc_hp.text = currObj.npc_hp.ToString();
             }
 

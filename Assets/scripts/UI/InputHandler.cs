@@ -37,10 +37,10 @@ public class InputHandler : GuiBase
         switch (currentInputMode)
         {
             case InputCharacterQty:
-                target.gameObject.GetComponent<UWCharacter>().OnSubmitPickup(valueInt);
+                target.gameObject.GetComponent<UWCharacter>().OnSubmitPickup((short)valueInt);
                 break;
             case InputInventoryQty:
-                target.gameObject.GetComponent<InventorySlot>().OnSubmitPickup(valueInt);
+                target.gameObject.GetComponent<InventorySlot>().OnSubmitPickup((short)valueInt);
                 break;
             case InputConversationWords:
                 //target.gameObject.GetComponent<Conversation>().OnSubmitPickup(valueStr);

@@ -643,13 +643,13 @@ public class NPC : MobileObject
                         if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                         {
                             int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
-                            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(itemid, Random.Range(1, 41), 0, 0, 256);
+                            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(itemid, (short)Random.Range(1, 41), 0, 0, 256);
                             if (newobjt != null)
                             {
                                 if (itemid == 16)//Sling stone.
                                 {
                                     newobjt.is_quant = 1;
-                                    newobjt.link = Random.Range(1, 10);
+                                    newobjt.link = (short)Random.Range(1, 10);
                                     newobjt.quality = 40;
                                 }
                                 else
@@ -1514,7 +1514,7 @@ public class NPC : MobileObject
         {//Do not apply damage if attaching the slasher of veils.
             short NewHP = (short)(npc_hp - damage);
             if (NewHP < 0) { NewHP = 0; }
-            npc_hp = NewHP;
+            npc_hp = (byte)NewHP;
             UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP);
         }
         return true;

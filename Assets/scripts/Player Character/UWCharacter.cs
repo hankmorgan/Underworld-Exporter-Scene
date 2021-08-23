@@ -1440,7 +1440,7 @@ public class UWCharacter : Character
     /// Processes a pickup of quantity event
     /// </summary>
     /// <param name="quant">Quant.</param>
-    public void OnSubmitPickup(int quant)
+    public void OnSubmitPickup(short quant)
     {
 
         InputField inputctrl = UWHUD.instance.InputControl;

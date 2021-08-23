@@ -193,7 +193,7 @@ public class object_base : UWEBase
         }
     }
 
-    public int next
+    public short next
     {
         get
         {
@@ -217,7 +217,7 @@ public class object_base : UWEBase
         }
     }
 
-    public int link
+    public short link
     {
         get
         {
@@ -298,7 +298,7 @@ public class object_base : UWEBase
             objInt().npc_health = value;
         }
     }
-    public short npc_hp
+    public byte npc_hp
     {
         get
         {

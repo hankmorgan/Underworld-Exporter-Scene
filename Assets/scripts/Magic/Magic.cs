@@ -2232,7 +2232,7 @@ public class Magic : UWEBase
         }
         else
         {
-            obj.link = enchant;
+            obj.link = (short)enchant;
             obj.enchantment = 1;
             if (obj.GetComponent<Equipment>() != null)
             {
@@ -3797,7 +3797,7 @@ public class Magic : UWEBase
     {//Creates the projectile.
         //Create an object info
         //CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
-        if (CurrentObjectList().GetFreeMobileObject(out int index))
+        if (CurrentObjectList().GetFreeMobileObject(out short index))
         {
             ObjectLoaderInfo oli = CurrentObjectList().objInfo[index];
             //oli.guid = System.Guid.NewGuid();

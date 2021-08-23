@@ -51,21 +51,21 @@ public class Loader : UWClass
     }
 
 
-    public static long ConvertInt16(byte Byte1, byte Byte2)
+    public static uint ConvertInt16(byte Byte1, byte Byte2)
     {
         // int b1 = (int)Byte1;
         //int b2 = (int)Byte2;
-        return Byte2 << 8 | Byte1;
+        return (uint)(Byte2 << 8 | Byte1);
     }
 
-    public static long ConvertInt24(byte Byte1, byte Byte2, byte Byte3)
+    public static uint ConvertInt24(byte Byte1, byte Byte2, byte Byte3)
     {
-        return Byte3 << 16 | Byte2 << 8 | Byte1;
+        return (uint)(Byte3 << 16 | Byte2 << 8 | Byte1);
     }
 
-    public static long ConvertInt32(byte Byte1, byte Byte2, byte Byte3, byte Byte4)
+    public static uint ConvertInt32(byte Byte1, byte Byte2, byte Byte3, byte Byte4)
     {
-        return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;      //24 was 32
+        return (uint)(Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1);      //24 was 32
     }
 
 
@@ -77,7 +77,7 @@ public class Loader : UWClass
     /// <param name="buffer">Buffer.</param>
     /// <param name="Address">Address.</param>
     /// <param name="size">Size of the data in bits</param>
-    public static long getValAtAddress(byte[] buffer, long Address, int size)
+    public static uint getValAtAddress(byte[] buffer, long Address, int size)
     {//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
         switch (size)
         {
@@ -92,7 +92,7 @@ public class Loader : UWClass
             default:
                 {
                     Debug.Log("Invalid data size in getValAtAddress");
-                    return -1;
+                    return 0;
                 }
         }
     }

@@ -1340,7 +1340,7 @@ public class GameWorldController : UWEBase
 
         obj.transform.parent = instance.DynamicObjectMarker();
         //Find an index for the object.
-        int NewIndex;
+        short NewIndex;
         if (staticObject)
         {
             if (!CurrentObjectList().GetFreeStaticObject(out NewIndex))

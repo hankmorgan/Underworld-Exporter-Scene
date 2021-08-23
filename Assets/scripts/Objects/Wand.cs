@@ -179,7 +179,7 @@ public class Wand : enchantment_base
                 //Try and find a spell already in the level that matches the characteristics of this spell
                 //If so point to that instead. This avoids filling up the gameworld with stale spells everytime the wand is dropped.
                 ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
-                for (int i = 0; i <= objList.GetUpperBound(0); i++)
+                for (short i = 0; i <= objList.GetUpperBound(0); i++)
                 {
                     if (objList[i].GetItemType() == ObjectInteraction.SPELL)
                     {

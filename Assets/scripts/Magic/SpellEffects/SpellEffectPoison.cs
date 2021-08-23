@@ -71,7 +71,15 @@ public class SpellEffectPoison : SpellEffect
         {
             if (npc.Poisoned == true)
             {
-                npc.npc_hp = (short)(npc.npc_hp - DOT);
+                if(DOT>npc.npc_hp)
+                {
+                    npc.npc_hp = 0;
+                }
+                else
+                {
+                    npc.npc_hp = (byte)(npc.npc_hp - DOT);
+                }
+                
             }
         }
 

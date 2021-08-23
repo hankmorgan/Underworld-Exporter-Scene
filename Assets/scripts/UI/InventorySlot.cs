@@ -445,7 +445,7 @@ public class InventorySlot : GuiBase
     /// Handle player choosing how many items to pick up in a stack
     /// </summary>
     /// <param name="quant"></param>
-    public void OnSubmitPickup(int quant)
+    public void OnSubmitPickup(short quant)
     {
 
         InputField inputctrl = UWHUD.instance.InputControl;

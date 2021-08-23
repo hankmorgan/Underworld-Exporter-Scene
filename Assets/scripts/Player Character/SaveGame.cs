@@ -1686,8 +1686,8 @@ public class SaveGame : Loader
         ///Initialise as many inventory objects as needed
         if (buffer.GetUpperBound(0) >= StartOffset)
         {
-            int x;
-            for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0); x++)
+            //int x;
+            for (short x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0); x++)
             {
                 GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, UWEBase.CurrentTileMap(), false)
                 {
@@ -1882,11 +1882,11 @@ public class SaveGame : Loader
                             //This is a wand with a linked spell object.
                             string link = currobj.GetComponent<Wand>().linkedspell.name;
                             //For the index of the linked object in the list
-                            for (int z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
+                            for (short z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
                             {
                                 if (link == inventoryObjects[z])
                                 {
-                                    currobj.link = z + 1;
+                                    currobj.link = (short)(z + 1);
                                     break;
                                 }
                             }
@@ -1899,11 +1899,11 @@ public class SaveGame : Loader
                             //This is a potion with a linked spell object.
                             string link = currobj.GetComponent<Potion>().linked.name;
                             //For the index of the linked object in the list
-                            for (int z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
+                            for (short z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
                             {
                                 if (link == inventoryObjects[z])
                                 {
-                                    currobj.link = z + 1;
+                                    currobj.link = (short)(z + 1);
                                     break;
                                 }
                             }

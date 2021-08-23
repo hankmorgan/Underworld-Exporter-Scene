@@ -100,7 +100,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 2Fh 	1 	uint8 	 ?? 	Always 73.
 */
         public int Level;
-        public short AvgHit;//Is this defence?????
+        public byte AvgHit;//Is this defence?????
         public int Strength;
         public int Dexterity;
         public int Intelligence;
@@ -239,7 +239,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             for (int i = 0; i < 64; i++)
             {//Critters
                 critterStats[j].Level = (int)getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
-                critterStats[j].AvgHit = (short)getValAtAddress(obj_dat, add_ptr + 4, 8);//Average Hitpoints - changed from uint16 to uint8
+                critterStats[j].AvgHit = (byte)getValAtAddress(obj_dat, add_ptr + 4, 8);//Average Hitpoints - changed from uint16 to uint8
 
                 critterStats[j].Strength = (int)getValAtAddress(obj_dat, add_ptr + 5, 8); //Base damage calculations
                 critterStats[j].Dexterity = (int)getValAtAddress(obj_dat, add_ptr + 6, 8);// attackscore calculations

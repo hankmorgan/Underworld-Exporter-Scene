@@ -21,7 +21,7 @@
         {
             for (int i = 0; i <= npcs.GetUpperBound(0); i++)
             {
-                npcs[i].npc_hp = -1;
+                npcs[i].npc_hp = 0;
             }
         }
     }
