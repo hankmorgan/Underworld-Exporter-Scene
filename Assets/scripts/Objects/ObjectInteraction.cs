@@ -6,7 +6,9 @@
 /// </summary>
 public class ObjectInteraction : UWEBase
 {
-
+    /// <summary>
+    /// Variable to test for and stop infinite object list loops
+    /// </summary>
     public static long LinkEventCtr = 0;
 
     public static bool PlaySoundEffects
@@ -243,7 +245,6 @@ public class ObjectInteraction : UWEBase
         get { return BaseObjectData.item_id; }
         set { BaseObjectData.item_id = value; }
     }
-
 
     public short flags//; //9-11
     {
@@ -627,6 +628,15 @@ public class ObjectInteraction : UWEBase
         }
     }
 
+
+    public static void SetPosition(ObjectInteraction toChange, Vector3 newPosition, bool callUpdatePosition = true)
+    {
+        toChange.transform.position = newPosition;
+        if (callUpdatePosition)
+        {
+            toChange.UpdatePosition();
+        }
+    }
 
     //public static void MoveToLinkedListChain(ObjectInteraction obj, TileInfo tNew)
     //{
@@ -2648,7 +2658,7 @@ public class ObjectInteraction : UWEBase
                 myObj.AddComponent<a_door_trap>();
                 CreateSprite = false;
                 break;
-            case A_WARD_TRAP:
+            case A_WARD_TRAP:            
                 myObj.AddComponent<a_ward_trap>();
                 if (_RES != GAME_UW2) { CreateSprite = false; }
                 break;

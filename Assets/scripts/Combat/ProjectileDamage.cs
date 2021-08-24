@@ -14,7 +14,7 @@ public class ProjectileDamage : UWEBase
     ///What was last hit by the projectile
     public string LastTarget;
 
-
+    //These should be tracked by the projectile src id from the projectile object and calced from game data.
     public int AttackScore;
     public float AttackCharge;
     public int ArmourDamage;

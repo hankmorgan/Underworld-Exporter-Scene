@@ -2406,7 +2406,6 @@ public class ObjectLoader : DataLoader
                 CurrentObjectList().objInfo[index].enchantment = 0;
                 CurrentObjectList().objInfo[index].ObjectTileX = TileMap.ObjectStorageTile;
                 CurrentObjectList().objInfo[index].ObjectTileY = TileMap.ObjectStorageTile;
-                //CurrentObjectList().objInfo[index].InUseFlag = 1;
                 CurrentObjectList().objInfo[index].index = index;
                 return CurrentObjectList().objInfo[index];
             }
@@ -3750,4 +3749,15 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
         return -1;
     }
 
+    /// <summary>
+    /// Clones an object an places it in the world list.
+    /// </summary>
+    /// <param name="toClone"></param>
+    /// <returns></returns>
+    public static ObjectInteraction Clone(ObjectInteraction toClone)
+    {
+        var newobjt = ObjectLoaderInfo.Clone(toClone.BaseObjectData);
+        return ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+
+    }
 }

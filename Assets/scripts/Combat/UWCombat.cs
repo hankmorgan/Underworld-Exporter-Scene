@@ -298,6 +298,10 @@ public class UWCombat : Combat
         }
     }
 
+    /// <summary>
+    /// Offset into animation frams for the weapon type
+    /// </summary>
+    /// <returns></returns>
     public short GetWeaponOffset()
     {
         if (currWeapon != null)
@@ -324,40 +328,6 @@ public class UWCombat : Combat
             {
                 return 21;
             }
-        }
-    }
-
-    /// <summary>
-    /// Gets the race of the charcter for displaying their skin colour based on the Body variable of UWCharacter
-    /// </summary>
-    /// <returns>The race.</returns>
-    public string GetRace()
-    {
-        switch (UWCharacter.Instance.Body)
-        {
-            case 0:
-            case 2:
-            case 3:
-            case 4:
-                return "White";
-            default:
-                return "Black";
-        }
-    }
-
-    /// <summary>
-    /// Gets the handedness of the character
-    /// </summary>
-    /// <returns>The hand.</returns>
-    public string GetHand()
-    {
-        if (UWCharacter.Instance.isLefty)
-        {
-            return "Left";
-        }
-        else
-        {
-            return "Right";
         }
     }
 
@@ -793,62 +763,6 @@ public class UWCombat : Combat
                 //a miss.
                 break;
         }
-
-
-        ////////    int PlayerDefence = 0;
-        ////////    if (playerUW.PlayerCombat.currWeapon != null)
-        ////////    {
-        ////////        PlayerDefence = Skills.GetSkill(Skills.SkillDefense) + (Skills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill() + 1) / 2);
-        ////////    }
-        ////////    else
-        ////////    {
-        ////////        PlayerDefence = Skills.GetSkill(Skills.SkillDefense) + (Skills.GetSkill(Skills.SkillUnarmed) / 2);
-        ////////    }
-        ////////    int toHit = Mathf.Max(PlayerDefence - npc.Dexterity, 0);
-        ////////    int roll = Random.Range(-1, 31);
-        ////////    if ((_RES == GAME_UW1) && (npc.item_id == 124))
-        ////////    {
-        ////////        roll = 30;//Slasher will always hit.
-        ////////    }
-        ////////    int BaseDamage = npc.CurrentAttackDamage;//get the damage of the current attack
-        ////////    if (((roll >= toHit) || (roll >= 30)) && (roll > -1))
-        ////////    {
-        ////////        int PlayerArmourScore = playerUW.playerInventory.getArmourScore();
-        ////////        int ReducedDamage = Mathf.Max(1, BaseDamage - PlayerArmourScore);
-        ////////        //Hit
-        ////////        playerUW.ApplyDamage(Random.Range(1, ReducedDamage + 1), npc.gameObject);
-        ////////        //reduce damage by protection
-        ////////        if (BaseDamage > PlayerArmourScore)
-        ////////        {
-        ////////            //apply equipment damage to a random piece of armour
-        ////////            playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, npc.ArmourDamage + 1));
-        ////////        }
-        ////////        if (npc.PoisonLevel() > 0)
-        ////////        {//roll for poisoning.
-        ////////            if (!UWCharacter.Instance.isPoisonResistant())
-        ////////            {//Player has resistence against poisoning
-        ////////                int PoisonRoll = Random.Range(1, 30);
-        ////////                if (PoisonRoll < npc.PoisonLevel())
-        ////////                {
-        ////////                    int PoisonToAdd = Random.Range(1, npc.PoisonLevel() + 1);
-        ////////                    int newPlayPoison = (short)Mathf.Min(playerUW.play_poison + PoisonToAdd, 15);
-        ////////                    UWCharacter.Instance.play_poison = (short)newPlayPoison;
-        ////////                    if (UWCharacter.Instance.poison_timer == 0)
-        ////////                    {
-        ////////                        UWCharacter.Instance.poison_timer = 30f;
-        ////////                    }
-        ////////                }
-        ////////            }
-
-        ////////        }
-
-        ////////        MusicController.LastAttackCounter = 10.0f; //Ten more seconds of combat music
-        ////////        if (ObjectInteraction.PlaySoundEffects)
-        ////////        {
-        ////////            UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
-        ////////            UWCharacter.Instance.aud.Play();
-        ////////        }
-        ////////    }
     }
 
     /// <summary>

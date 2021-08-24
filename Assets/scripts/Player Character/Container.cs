@@ -192,33 +192,6 @@ public class Container : UWEBase
         return false;
     }
 
-    //public static bool RemoveItemFromSubContainers(Container cn, string objectName)
-    //{
-    //	for (int i =0; i<=cn.MaxCapacity ();i++)
-    //	{
-    //		if (cn.items[i] == objectName)
-    //		{
-    //			cn.RemoveItemFromContainer(i);
-    //			return true;
-    //		}
-    //		else
-    //		{
-    //			if (cn.items[i] !="")
-    //			{
-    //				GameObject obj = GameObject.Find (cn.items[i]);
-    //				if (obj!=null)
-    //				{
-    //					if (obj.GetComponent<Container>()!=null)
-    //					{
-    //						return RemoveItemFromSubContainers(obj.GetComponent<Container>(),objectName);
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
-    //	return false;
-    //}
-
     public void OpenContainer()
     {
         UWCharacter.Instance.playerInventory.ContainerOffset = 0;
@@ -310,66 +283,13 @@ public class Container : UWEBase
                             break;
                     }
                     objSpilled.zpos = (short)(tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].floorHeight * 4);
-                    //objSpilled.BaseObjectData.xpos = objSpilled.xpos;
-                    //objSpilled.BaseObjectData.ypos = objSpilled.ypos;
-                    //objSpilled.BaseObjectData.zpos = objSpilled.zpos;
                     objSpilled.transform.position = ObjectLoader.CalcObjectXYZ(objSpilled.ObjectIndex, 0);
                     RemoveItemFromContainer(i);
-                    //FIELD PICKUP Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
                     UnFreezeMovement(objSpilled);
                 }
             }
         }
     }
-
-    public void SpillContentsX()
-    {//Removes the contents of a container out in the real world.
-        int counter;
-        TileMap tm = CurrentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
-        FreezeMovement(this.gameObject);
-        ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-        objInt.SetWorldDisplay(objInt.GetEquipDisplay());
-        for (short i = 0; i <= MaxCapacity(); i++)
-        {
-            ObjectInteraction Spilled = GetItemAt(i);//GameObject.Find (GetItemAt (i));
-            if (Spilled != null)
-            {
-                if (Spilled.GetComponent<trigger_base>() != null)
-                {
-                    Spilled.GetComponent<trigger_base>().Activate(this.gameObject);
-                }
-                bool flag = false;
-                Vector3 randomPoint = this.transform.position;
-                counter = 0;
-                while ((flag == false) && (counter < 25))
-                {
-                    randomPoint = this.transform.position + Random.insideUnitSphere;
-                    if (randomPoint.y < this.transform.position.y)
-                    {
-                        randomPoint.y = this.transform.position.y + 0.1f;
-                    }
-                    flag = ((!Physics.CheckSphere(randomPoint, 0.5f)) && (tm.ValidTile(randomPoint)));
-                    counter++;
-                }
-                if (flag == true)
-                {//No object interferes with the spill
-                    RemoveItemFromContainer(i);
-                    Spilled.transform.position = randomPoint;
-                    //FIELD PICKUP Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-                    UnFreezeMovement(Spilled);
-                }
-                else
-                {//No where to put the item. Put it at the containers position.
-                    RemoveItemFromContainer(i);
-                    Spilled.transform.position = this.transform.position;
-                    //FIELD PICKUP Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-                    UnFreezeMovement(Spilled);
-                }
-            }
-        }
-        UnFreezeMovement(this.gameObject);
-    }
-
 
     public static void SetPickedUpFlag(Container cn, bool NewValue)
     {//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
@@ -378,7 +298,6 @@ public class Container : UWEBase
             ObjectInteraction item = cn.GetItemAt(i);
             if (item != null)
             {
-                //FIELD PICKUP item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
                 if (item.GetItemType() == ObjectInteraction.A_PICK_UP_TRIGGER)
                 {//Special case
                     item.GetComponent<a_pick_up_trigger>().Activate(cn.gameObject);
@@ -452,7 +371,6 @@ public class Container : UWEBase
         return -1;
     }
 
-
     public static void SortContainer(Container cn)
     {
         //Debug.Log ("Sorting container");
@@ -489,7 +407,6 @@ public class Container : UWEBase
             }
         }
     }
-
 
     public bool use()
     {

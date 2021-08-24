@@ -1095,6 +1095,31 @@ public class ObjectLoaderInfo : UWClass
     {
         return GameWorldController.instance.objectMaster.objProp[item_id].startFrame;
     }
-
+        public static ObjectLoaderInfo Clone(ObjectLoaderInfo toClone)
+    {
+        int startindex=2;
+        if (toClone.index >= 256)
+        {
+            startindex = 256;
+        }
+        var newobj=ObjectLoader.newWorldObject(toClone.item_id, toClone.quality, toClone.owner, toClone.link, startindex);
+        if (newobj!=null)
+        {
+            short origNext = newobj.next;
+            for (int i=0; i<=7;i++)
+            {
+                newobj.SetAt(newobj.PTR + i, newobj.GetAt(toClone.PTR + i));
+            }
+            //Restore the original next value of the object.
+            newobj.next = origNext;
+            if (newobj.index<256)
+            {
+                for (int i = 8; i <= 0x1A; i++)
+                {
+                    newobj.SetAt(newobj.PTR + i, newobj.GetAt(toClone.PTR + i));
+                }
+            }  
+        }
+        return newobj;
+    }
 }
-

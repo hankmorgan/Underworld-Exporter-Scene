@@ -1414,13 +1414,11 @@ public class GameWorldController : UWEBase
             }
         }
 
-        //ObjectLoader.AssignObjectToList(ref obj);
-
         obj.GetComponent<object_base>().MoveToWorldEvent();
         if (ConversationVM.InConversation)
         {
             Debug.Log("Use of MoveToWorld in conversation. Review usage to avoid object list corruption! " + obj.name);
-            ConversationVM.BuildObjectList();//Reflect changes to object lists
+            //ConversationVM.BuildObjectList();//Reflect changes to object lists
         }
 
         return obj;
@@ -1493,7 +1491,8 @@ public class GameWorldController : UWEBase
         obj.GetComponent<object_base>().MoveToInventoryEvent();
         if (ConversationVM.InConversation)
         {
-            ConversationVM.BuildObjectList();//Reflect changes to object lists
+            Debug.Log("MoveToInventory in converstion. Check that it works");
+         //   ConversationVM.BuildObjectList();//Reflect changes to object lists
         }
         return obj;
     }
