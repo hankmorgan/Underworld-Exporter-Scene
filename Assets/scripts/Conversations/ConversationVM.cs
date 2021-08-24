@@ -80,7 +80,7 @@ public class ConversationVM : UWEBase
 
     //const int TradeAreaOffset=0;//This hack is a bad hack...
 
-    private static string[] ObjectMasterList;
+   // private static string[] ObjectMasterList;
 
     //The input and output controls
     //private static Text Output;
@@ -619,7 +619,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         //lastObjectTraded=null;
 
-        BuildObjectList();
+        //BuildObjectList();
 
         DisplayInstructionSet();
         ///Slows the world down so no other npc will attack or interupt the conversation
@@ -1209,38 +1209,28 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         Container cn = UWCharacter.Instance.playerInventory.currentContainer;
 
         ///Return any items in the trade area to their owner
-        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
+        for (int i = 0; i <= UWHUD.instance.playerTrade.GetUpperBound(0); i++)
         {
-            TradeSlot npcSlot = UWHUD.instance.playerTrade[i];
-            if (npcSlot.objectInSlot != null)
+            TradeSlot SlotToClear = UWHUD.instance.playerTrade[i];
+            if (SlotToClear.objectInSlot != null)
             {///Moves the object to the players container or to the ground
                 if (Container.GetFreeSlot(cn) != -1)//Is there space in the container.
-                {
-                    npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-                    cn.AddItemToContainer(npcSlot.objectInSlot);
-                    GameObject itemAtSlot = npcSlot.GetGameObjectInteraction().gameObject;
-                    itemAtSlot.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                    GameWorldController.MoveToInventory(itemAtSlot);
-                    npcSlot.clear();
-
+                {                    
+                    var moved=GameWorldController.MoveToInventory(SlotToClear.objectInSlot);
+                    cn.AddItemToContainer(moved);
+                    moved.transform.parent = GameWorldController.instance.InventoryMarker.transform;                    
                     UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh();
                 }
                 else
                 {
-                    //GameObject demanded = GameObject.Find(npcSlot.objectInSlot);
-                    npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-                    npcSlot.clear();
-                    if (npcSlot.objectInSlot.transform.parent != GameWorldController.instance.DynamicObjectMarker())
-                    {
-                        //demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                        GameWorldController.MoveToWorld(npcSlot.objectInSlot);
-                    }
-                    npcSlot.objectInSlot.transform.position = npc.NPC_Launcher.transform.position;
-                }
+                    //Move to the players positon where they can pick it up.
+                    ObjectInteraction.SetPosition(SlotToClear.objectInSlot, UWCharacter.Instance.transform.position);
+                 }
             }
+            SlotToClear.clear();//clear any graphics still there.
         }
 
-        ///Return any items in the trade area to their owner
+        ///Return any items in the trade area to their npc owner.
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             UWHUD.instance.npcTrade[i].clear();
@@ -1249,7 +1239,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         ///Puts the time scales back to normal
         Time.timeScale = 1.0f;
-        //yield return new WaitForSeconds(8f);
         yield return StartCoroutine(WaitForMore());
         yield return new WaitForSeconds(0.5f);
         InConversation = false;
@@ -2681,14 +2670,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];
             if (pcSlot.isSelected())
             {
-                stack.Set(startObjectPos + j, FindObjectIndexInObjectList(pcSlot.objectInSlot.name));
-                //stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
-
-                stack.Set(startObjectIDs + j, pcSlot.GetObjectID());
+                stack.Set(startObjectPos + j, pcSlot.objectInSlot.ObjectIndex);  // FindObjectIndexInObjectList(pcSlot.objectInSlot.name));
+                stack.Set(startObjectIDs + j, pcSlot.objectInSlot.item_id);
                 j++;
             }
         }
-        //Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
         return j;
     }
 
@@ -2704,32 +2690,21 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     {
         Container cn = npc.gameObject.GetComponent<Container>();
         bool SomethingGiven = false;
-        ObjectInteraction[] objsGiven = new ObjectInteraction[4];
         for (int i = 0; i < NoOfItems; i++)
         {
-
-            //int slotNo = stack.at(start+i)-1  - TradeAreaOffset ;//locals[start+i] ;
-
             int slotNo = stack.at(start + i);
 
-            //if (slotNo<=3)
-            //{
-            //TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
-            //GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-            ObjectInteraction demanded = FindGameObjectInObjectList(slotNo);
+            ObjectInteraction demanded = UWHUD.instance.playerTrade[slotNo].objectInSlot;  // FindGameObjectInObjectList(slotNo);
+
             //Give the item to the npc
             if (Container.GetFreeSlot(cn) != -1)
             {
                 if (demanded != null)
                 {
                     ClearTradeSlotWithObject(slotNo);
-                    //demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    //GameWorldController.MoveToWorld(demanded);//ok
-                    objsGiven[i] = demanded;//These have to be moved to world after this function ends or else the master list will get messed up
-                    demanded.transform.position = GameWorldController.instance.InventoryMarker.transform.position;
                     cn.AddItemToContainer(demanded);
-                    //pcSlot.clear ();
-                }
+                    ObjectInteraction.SetPosition(demanded, GameWorldController.instance.InventoryMarker.transform.position,false);
+                 }
                 SomethingGiven = true;
             }
             else
@@ -2737,25 +2712,12 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 if (demanded != null)
                 {
                     ClearTradeSlotWithObject(slotNo);
-                    //demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    //GameWorldController.MoveToWorld(demanded);//ok
-                    objsGiven[i] = demanded;//These have to be moved to world after this function ends or else the master list will get messed up
-                    demanded.transform.position = npc.NPC_Launcher.transform.position;
+                    ObjectInteraction.SetPosition(demanded, npc.NPC_Launcher.transform.position);
                     SomethingGiven = false;
                 }
-                //pcSlot.clear();
             }
-            //}
         }
 
-        for (int i = 0; i <= objsGiven.GetUpperBound(0); i++)
-        {
-            if (objsGiven[i] != null)
-            {
-                GameWorldController.MoveToWorld(objsGiven[i]);
-                stack.Set(start + i, objsGiven[i].ObjectIndex);//Update the object index in the stack so I keep track of it.
-            }
-        }
         if (SomethingGiven == true)
         {
             return 1;
@@ -2765,9 +2727,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             return 0;
         }
     }
-
-
-
 
     /// <summary>
     /// transfers an item from npc inventory to player inventory,based on an item id. 
@@ -2858,12 +2817,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         else
         {
             npc.GetComponent<Container>().RemoveItemFromContainer(demanded);
-            if (demanded.transform.parent != GameWorldController.instance.DynamicObjectMarker())
-            {//Items needs to be moved to world
-             //demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
-                GameWorldController.MoveToWorld(demanded);//ok	
-            }
-            demanded.transform.position = npc.NPC_Launcher.transform.position;
+            ObjectInteraction.SetPosition(demanded, npc.NPC_Launcher.transform.position);
             if (demanded.GetComponent<Container>())
             {
                 Container cn = demanded.GetComponent<Container>();
@@ -2878,8 +2832,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             }
             CurrentObjectInHand = demanded;
             GameWorldController.MoveToInventory(demanded);
-
-
             return 2;
         }
     }
@@ -2999,24 +2951,21 @@ description:  declines trade offer (?)
         Container cn = UWCharacter.Instance.playerInventory.currentContainer;
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
-            TradeSlot pcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+            TradeSlot pcSlot = UWHUD.instance.playerTrade[i];
             if (pcSlot.objectInSlot != null)
             {//Move the object to the players container or to the ground
                 if (Container.GetFreeSlot(cn) != -1)//Is there space in the container.
                 {
-                    //UWCharacter.Instance.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
-                    cn.AddItemToContainer(pcSlot.objectInSlot);
-                    pcSlot.clear();
+                    var moved = GameWorldController.MoveToInventory(pcSlot.objectInSlot);
+                    cn.AddItemToContainer(moved);                    
                     UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh();
                 }
                 else
                 {
-                    //GameObject demanded = GameObject.Find(pcSlot.objectInSlot);
-                    //demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    GameWorldController.MoveToWorld(pcSlot.objectInSlot);//ok
-                    pcSlot.objectInSlot.transform.position = npc.NPC_Launcher.transform.position;
-                    pcSlot.clear();
+                    var moved = GameWorldController.MoveToWorld(pcSlot.objectInSlot);//ok
+                    ObjectInteraction.SetPosition(moved, UWCharacter.Instance.transform.position, true);
                 }
+                pcSlot.clear();
             }
         }
 
@@ -3168,59 +3117,46 @@ return value: returns 1 when player persuaded the NPC, 0 else
         //GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
         if (npcSlot.isSelected())
         {
+            npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
             //Move the object to the container or to the ground
             if (Container.GetFreeSlot(cn) != -1)//Is there space in the container.
-            {
-                npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-                cn.AddItemToContainer(npcSlot.objectInSlot);
-                //GameObject demanded = GameObject.Find(npcSlot.objectInSlot);
-                npcSlot.objectInSlot.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                GameWorldController.MoveToInventory(npcSlot.objectInSlot);
-                npcSlot.objectInSlot.transform.position = Vector3.zero;
+            {                
+                var movedObj=GameWorldController.MoveToInventory(npcSlot.objectInSlot);
+                cn.AddItemToContainer(movedObj);
                 npcSlot.clear();
                 UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh();
-                //FIELD PICKUP demanded.GetComponent<ObjectInteraction>().PickedUp = true;
             }
             else
-            {
-                //GameObject demanded = GameObject.Find(npcSlot.objectInSlot);
-                //demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
-                npcSlot.objectInSlot.transform.position = npc.NPC_Launcher.transform.position;
+            {                
                 npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+                ObjectInteraction.SetPosition(npcSlot.objectInSlot, npc.NPC_Launcher.transform.position,true);
                 npcSlot.clear();
-                GameWorldController.MoveToWorld(npcSlot.objectInSlot);//ok
             }
         }
         return;
     }
     /// <summary>
-    /// Takes from PCs selected items  ang gives them to the NPC.
+    /// Takes from PCs selected items and gives them to the NPC.
     /// </summary>
     /// <param name="slotNo">Slot no.</param>
     void TakeFromPC(NPC npc, int slotNo)
     {
         Container cn = npc.GetComponent<Container>();
-        TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
-        if (pcSlot.isSelected())
+        TradeSlot TradeSlotToUse = UWHUD.instance.playerTrade[slotNo];
+        if (TradeSlotToUse.isSelected())
         {
             //Move the object to the container or to the ground
             if (Container.GetFreeSlot(cn) != -1)//Is there space in the container.
             {
-                //Move to the inventory room
-                //GameObject demanded = GameObject.Find(pcSlot.objectInSlot);
-                //demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
-                GameWorldController.MoveToWorld(pcSlot.objectInSlot);//ok
-                cn.AddItemToContainer(pcSlot.objectInSlot);
-                pcSlot.objectInSlot.transform.position = new Vector3(119f, 2.1f, 119f);
-                pcSlot.clear();
+                cn.AddItemToContainer(TradeSlotToUse.objectInSlot);
+                ObjectInteraction.SetPosition(TradeSlotToUse.objectInSlot, GameWorldController.instance.InventoryMarker.transform.position);
+                //TradeSlotToUse.objectInSlot.transform.position = new Vector3(119f, 2.1f, 119f);
+                TradeSlotToUse.clear();
             }
             else
             {
-                // GameObject demanded = GameObject.Find(pcSlot.objectInSlot);
-                //demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
-                pcSlot.objectInSlot.transform.position = npc.NPC_Launcher.transform.position;
-                GameWorldController.MoveToWorld(pcSlot.objectInSlot);//ok
-                pcSlot.clear();
+                ObjectInteraction.SetPosition(TradeSlotToUse.objectInSlot, npc.NPC_Launcher.transform.position, true);
+                TradeSlotToUse.clear();
             }
         }
     }
@@ -3239,19 +3175,16 @@ return value: returns 1 when player persuaded the NPC, 0 else
                 //Move the object to the players container or to the ground
                 if (Container.GetFreeSlot(cn) != -1)//Is there space in the container.
                 {
-                    //npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
-                    cn.AddItemToContainer(pcSlot.objectInSlot);
+                    var moved = GameWorldController.MoveToInventory(pcSlot.objectInSlot);
+                    cn.AddItemToContainer(moved);
                     pcSlot.clear();
                     UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh();
                 }
                 else
                 {
-                    //GameObject demanded = GameObject.Find(pcSlot.objectInSlot);
-                    //npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
                     pcSlot.clear();
                     //demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
-                    pcSlot.objectInSlot.transform.position = npc.NPC_Launcher.transform.position;
-                    GameWorldController.MoveToWorld(pcSlot.objectInSlot);//ok
+                    ObjectInteraction.SetPosition(pcSlot.objectInSlot, npc.NPC_Launcher.transform.position);        
                 }
             }
         }
@@ -3366,7 +3299,7 @@ else
 obj = CurrentObjectList().objInfo[pos].instance;
 }	*/
 
-        ObjectInteraction obj = FindObjectInteractionInObjectList(pos);
+        ObjectInteraction obj = ObjectLoader.getObjectIntAt(pos);// FindObjectInteractionInObjectList(pos);
 
         if (obj == null)
         {
@@ -3393,8 +3326,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
         }
         else
         {
-            //obj.link=locals[link]+512;
-            if (obj.isQuantityBln)
+             if (obj.isQuantityBln)
             {
                 obj.link = (short)stack.at(link);
             }
@@ -3417,16 +3349,15 @@ obj = CurrentObjectList().objInfo[pos].instance;
 
         if (stack.at(quality) <= 0)
         {
-            //locals[quality]=obj.quality; 
             stack.Set(quality, obj.quality);
         }
         else
         {
             obj.quality = (short)stack.at(quality);
         }
+
         if (stack.at(item_id) <= 0)
         {
-            //locals[id]=obj.item_id; 
             stack.Set(item_id, obj.item_id);
         }
         //else
@@ -3467,9 +3398,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
                         {
                             if (obj.item_id == item_id)
                             {
-                                //return 1;//Found object
-                                //return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-                                return FindObjectIndexInObjectList(obj.name);
+                                return obj.ObjectIndex;
                             }
                         }
                     }
@@ -3480,14 +3409,11 @@ obj = CurrentObjectList().objInfo[pos].instance;
                 {
                     int rangeS = (item_id - 1000) * 16;
                     int rangeE = rangeS + 16;
-                    //GameObject obj=null;
                     ObjectInteraction obj = null;
                     if (item_id >= 1000)
                     {
                         for (int i = rangeS; i <= rangeE; i++)
                         {
-                            //string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(i);
-                            //obj= GameObject.Find(itemname);	
                             obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(i);
                             if (obj != null)
                             {
@@ -3497,20 +3423,14 @@ obj = CurrentObjectList().objInfo[pos].instance;
                     }
                     else
                     {
-                        //string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(item_id);
                         obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
-                        //obj= GameObject.Find(itemname);	
                     }
 
                     Debug.Log("PC version of find_inv."); //will happen in judy's conversation
 
-
                     if (obj != null)
                     {
-                        //return 1;
-                        //return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-                        //return FindObjectIndexInObjectList(obj.name);
-                        return 1;
+                        return obj.ObjectIndex;
                     }
                     else
                     {
@@ -3543,7 +3463,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
 
         int ItemPos = stack.at(pTradeSlot);
 
-        ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos);
+        ObjectInteraction objInt = ObjectLoader.getObjectIntAt(ItemPos);//  FindObjectInteractionInObjectList(ItemPos);
 
         if (objInt != null)
         {
@@ -3553,9 +3473,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
             {
                 string objName;
                 if (objInt.GetComponent<enchantment_base>())
-                {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for deadly seeker
-                    //string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
-                    //objName= StringController.instance.GetSimpleObjectNameUW(objInt) + " of " + DisplayEnchantment;
+                {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for the word deadly seeker
                     objName = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
                 }
                 else
@@ -3725,19 +3643,8 @@ obj = CurrentObjectList().objInfo[pos].instance;
         //description:  counts number of items in inventory
         //return value: item number
         //int total =0;
-        /*	if (ItemPos>=TradeAreaOffset)
-        {
-            ItemPos = ItemPos - TradeAreaOffset -1;	
-        }
 
-        if (ItemPos<0){return 0;}*/
-
-
-        //GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
-        //GameObject objInslot = FindGameObjectInObjectList(ItemPos);
-        //if (objInslot!=null)
-        //{
-        ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos); // objInslot.GetComponent<ObjectInteraction>();
+        ObjectInteraction objInt = ObjectLoader.getObjectIntAt(ItemPos); //FindObjectInteractionInObjectList(ItemPos); // objInslot.GetComponent<ObjectInteraction>();
         if (objInt != null)
         {
             return objInt.GetQty();
@@ -3760,8 +3667,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
         {
             npc.Agent.enabled = false;
         }
-        npc.gameObject.transform.position = UWCharacter.Instance.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
-                                                                                                                    //npc.objInt().objectloaderinfo.InUseFlag=0;
+        ObjectInteraction.SetPosition(npc.objInt(), GameWorldController.instance.InventoryMarker.transform.position, false);
     }
 
 
@@ -3781,37 +3687,17 @@ description:  copies item from player inventory to npc inventory
 return value: none
 */
 
-
-        //bool ObjectMoved=false;
         int slotNo = stack.at(ptrSlotNo);
-
-        int[] NearbyRefs = new int[4];
-        for (int i = 1; i <= NearbyRefs.GetUpperBound(0); i++)
-        {
-            if (stack.at(ptrSlotNo + i) >= 1024)
-            {//Check for inventory objects in the nearby stack memory.
-             //This is because the object list is rebuilt if an object moves from the player inventory to the npc
-                NearbyRefs[i] = ptrSlotNo + i;
-            }
-        }
         Container cn = npc.gameObject.GetComponent<Container>();
-        ObjectInteraction objGiven = FindGameObjectInObjectList(slotNo);
+        ObjectInteraction objGiven = UWHUD.instance.playerTrade[slotNo].objectInSlot;  //FindGameObjectInObjectList(slotNo);
 
-        //if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
         if (objGiven != null)
         {
-            //GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
             if ((Quantity == -1))
             {
                 ClearTradeSlotWithObject(slotNo);
                 objGiven.transform.parent = GameWorldController.instance.DynamicObjectMarker().transform;
-                //cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
                 cn.AddItemToContainer(objGiven);
-                GameWorldController.MoveToWorld(objGiven);
-                //ObjectMoved=true;
-                //UWHUD.instance.playerTrade[slotNo].clear ();
-
-                UWCharacter.Instance.playerInventory.Refresh();
             }
             else
             {//Clone the object and give the clone to the npc
@@ -3827,45 +3713,21 @@ return value: none
                             (objGiven.link != Quantity)
                     )
                     {//Object is a quantity or is a quantity less than the number already there.
-                        GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
-                        Split.GetComponent<ObjectInteraction>().link = Quantity;
-
+                        var Split = ObjectLoader.Clone(objGiven);
+                        Split.link = Quantity;
                         objGiven.link = (short)(objGiven.link - Quantity);
-
-                        GameWorldController.MoveToWorld(objGiven);
-                        //Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
-                        Split.name = ObjectInteraction.UniqueObjectName(Split.GetComponent<ObjectInteraction>());//(objGiven.GetComponent<ObjectInteraction>()
-                        cn.AddItemToContainer(objGiven);
+                        cn.AddItemToContainer(Split);
                     }
                     else
                     {//Object is not a quantity or is the full amount.
                         ClearTradeSlotWithObject(slotNo);
-                        //cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
                         cn.AddItemToContainer(objGiven);
-                        objGiven.transform.parent = GameWorldController.instance.DynamicObjectMarker().transform;
-                        GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-                        //ObjectMoved=true;
-                        UWCharacter.Instance.playerInventory.Refresh();
-                        //UWHUD.instance.playerTrade[slotNo].clear ();
                     }
                 }
             }
         }
-        //After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
-        stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
-        /*if (ObjectMoved)
-        {
-                Debug.Log("Moving object references");
-                for (int i=1; i<=NearbyRefs.GetUpperBound(0);i++)
-                {
-                        if (NearbyRefs[i]!=0)
-                        {
-                                stack.Set(NearbyRefs[i], stack.at(NearbyRefs[i])-1);			
-                        }
-
-                }
-        }*/
-
+        //After moving update my ptr to reflect the new object index assuming it's had to change for some reason.
+        stack.Set(ptrSlotNo, objGiven.ObjectIndex);//  FindObjectIndexInObjectList(objGiven.name));
     }
 
 
@@ -3888,9 +3750,6 @@ return value: none
         }
         ObjectInteraction objInt = CurrentObjectList().objInfo[index].instance;
         Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
-        //Container npcContainer = npc.GetComponent<Container>();
-
-        //GameObject obj = GameObject.Find(ItemName);
         if (objInt == null) { return 1; }
 
         int playerHasSpace;
@@ -3898,53 +3757,17 @@ return value: none
         if (Container.GetFreeSlot(playerContainer) != -1)//Is there space in the container.
         {
             npc.GetComponent<Container>().RemoveItemFromContainer(objInt);
-            playerContainer.AddItemToContainer(objInt);
-            GameWorldController.MoveToInventory(objInt);
-            objInt.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-            //If the NPC is handing over an container item.
-            if (objInt.GetComponent<Container>())
-            {
-                Container cn = objInt.GetComponent<Container>();
-                for (short i = 0; i <= cn.MaxCapacity(); i++)
-                {
-                    ObjectInteraction containerItem = cn.GetItemAt(i);
-                    if (containerItem != null)
-                    {
-                        npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
-                        containerItem.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
-                        GameWorldController.MoveToInventory(containerItem);
-                        //FIELD PICKUP containerItem.GetComponent<ObjectInteraction>().PickedUp = true;
-                    }
-                }
-            }
-            //FIELD PICKUP obj.GetComponent<ObjectInteraction>().PickedUp = true;
+
+            var tomove = GameWorldController.MoveToInventory(objInt);
+            playerContainer.AddItemToContainer(tomove);
             UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh();
             playerHasSpace = 1;
         }
         else
         {
             playerHasSpace = 2;
-            objInt.transform.parent = GameWorldController.instance.DynamicObjectMarker();
-
-            objInt.transform.position = npc.NPC_Launcher.transform.position;
             npc.GetComponent<Container>().RemoveItemFromContainer(objInt);
-            //GameWorldController.MoveToWorld(obj); object is already in the world.
-            if (objInt.GetComponent<Container>() != null)
-            {
-                Container cn = objInt.GetComponent<Container>();
-                for (short i = 0; i <= cn.MaxCapacity(); i++)
-                {
-                    ObjectInteraction containerItem = cn.GetItemAt(i);
-                    if (containerItem != null)
-                    {
-                        if (containerItem != null)
-                        {
-                            npc.GetComponent<Container>().RemoveItemFromContainer(containerItem);
-                        }
-                    }
-                }
-            }
-
+            ObjectInteraction.SetPosition(objInt, UWCharacter.Instance.transform.position);  
         }
         return playerHasSpace;
     }
@@ -3984,27 +3807,21 @@ return value: none
         {
             if (UWHUD.instance.playerTrade[i].isSelected())
             {
-                ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+                ObjectInteraction objInt = UWHUD.instance.playerTrade[i].objectInSlot;
                 if (objInt != null)
                 {
                     if (itemID < 1000)
                     {
                         if (objInt.item_id == itemID)
                         {
-                            //return i+1;
-
-                            return FindObjectIndexInObjectList(objInt.name);
-
+                            return objInt.ObjectIndex;
                         }
                     }
                     else
                     {
                         if ((objInt.item_id >= (itemID - 1000) * 16) && (objInt.item_id < ((itemID + 1) - 1000) * 16))
                         {
-                            //return i+1;
-
-                            return FindObjectIndexInObjectList(objInt.name);
-
+                            return objInt.ObjectIndex;
                         }
                     }
                 }
@@ -4086,8 +3903,6 @@ return value: none
 
         */
 
-
-
                 ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 
                 if (objInt != null)
@@ -4098,10 +3913,8 @@ return value: none
                     if (item_id == founditem_id)
                     {
                         stack.Set(ptrCount, stack.at(ptrCount) + itemqt);
-                        //stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
-                        stack.Set(ptrSlot + slotFoundCounter++, FindObjectIndexInObjectList(objInt.name));
+                        stack.Set(ptrSlot + slotFoundCounter++, objInt.ObjectIndex);
                         stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
-
                     }
                 }
             }
@@ -4126,13 +3939,10 @@ return value: none
         //return value: inventory object list position
 
         ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(item_id, 0, 0, 1, 256);
-        newobjt.is_quant = 1;
+        newobjt.is_quant = 1;      
         ObjectInteraction myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
-        //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
-        BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj);
         return myObj.ObjectIndex;
-
     }
 
 
@@ -4160,12 +3970,7 @@ description:  places a generated object in underworld
         {
             //string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
             GameObject obj = objInt.gameObject;
-
             obj.transform.position = CurrentTileMap().getTileVector(tileX, tileY);
-            //obj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-            //GameWorldController.MoveToWorld(obj);
-            //npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
-            //UWHUD.instance.npcTrade[invSlot].clear();
         }
         return;
     }
@@ -4297,10 +4102,8 @@ description:  places a generated object in underworld
         //parameters:   arg1: inventory item position
         //description:  returns "quality" field of npc? inventory item
         //return value: "quality" field
-        //itemPos -=TradeAreaOffset;
-        //itemPos--;
-        //GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
-        ObjectInteraction objInslot = FindObjectInteractionInObjectList(itemPos);
+
+        ObjectInteraction objInslot = ObjectLoader.getObjectIntAt(itemPos);
         if (objInslot != null)
         {
             return objInslot.quality;
@@ -4470,57 +4273,57 @@ description:  places a generated object in underworld
 
 
 
-    public static void BuildObjectList()
-    {
-        ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
-        int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
-        ObjectMasterList = new string[1024 + noOfInventoryItems + 1];
-        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
-        for (int i = 0; i < 1024; i++)
-        {
-            if (objList[i].instance != null)
-            {
-                ObjectMasterList[i] = objList[i].instance.name;
-            }
-            else
-            {
-                ObjectMasterList[i] = "";
-            }
-        }
-        for (int i = 1024; i < 1024 + noOfInventoryItems; i++)
-        {
-            ObjectMasterList[i] = GameWorldController.instance.InventoryMarker.transform.GetChild(i - 1024).gameObject.name;
-        }
-    }
+    //public static void BuildObjectList()
+    //{
+    //    ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
+    //    int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
+    //    ObjectMasterList = new string[1024 + noOfInventoryItems + 1];
+    //    ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
+    //    for (int i = 0; i < 1024; i++)
+    //    {
+    //        if (objList[i].instance != null)
+    //        {
+    //            ObjectMasterList[i] = objList[i].instance.name;
+    //        }
+    //        else
+    //        {
+    //            ObjectMasterList[i] = "";
+    //        }
+    //    }
+    //    for (int i = 1024; i < 1024 + noOfInventoryItems; i++)
+    //    {
+    //        ObjectMasterList[i] = GameWorldController.instance.InventoryMarker.transform.GetChild(i - 1024).gameObject.name;
+    //    }
+    //}
 
-    static int FindObjectIndexInObjectList(string objectName)
-    {
-        for (int i = 0; i <= ObjectMasterList.GetUpperBound(0); i++)
-        {
-            if (ObjectMasterList[i] == objectName)
-            {
-                return i;
-            }
-        }
-        return 0;
-    }
+    //static int FindObjectIndexInObjectList(string objectName)
+    //{
+    //    for (int i = 0; i <= ObjectMasterList.GetUpperBound(0); i++)
+    //    {
+    //        if (ObjectMasterList[i] == objectName)
+    //        {
+    //            return i;
+    //        }
+    //    }
+    //    return 0;
+    //}
 
-    static ObjectInteraction FindObjectInteractionInObjectList(int index)
-    {
-        ObjectInteraction obj = FindGameObjectInObjectList(index);
-        return obj;
-    }
+    //static ObjectInteraction FindObjectInteractionInObjectList(int index)
+    //{
+    //    ObjectInteraction obj = FindGameObjectInObjectList(index);
+    //    return obj;
+    //}
 
-    static ObjectInteraction FindGameObjectInObjectList(int index)
-    {
-        string objName = ObjectMasterList[index];
-        if (objName != "")
-        {
-            GameObject obj = GameObject.Find(objName);
-            return obj.GetComponent<ObjectInteraction>(); ;
-        }
-        return null;
-    }
+    //static ObjectInteraction FindGameObjectInObjectList(int index)
+    //{
+    //    string objName = ObjectMasterList[index];
+    //    if (objName != "")
+    //    {
+    //        GameObject obj = GameObject.Find(objName);
+    //        return obj.GetComponent<ObjectInteraction>(); ;
+    //    }
+    //    return null;
+    //}
 
     static void ClearTradeSlotWithObject(int index)
     {
@@ -4533,13 +4336,13 @@ description:  places a generated object in underworld
 
     static TradeSlot FindTradeSlotWithItem(int index)
     {
-        string objName = ObjectMasterList[index];
-        if (objName == "") { return null; }
+       // string objName = ObjectMasterList[index];
+        //if (objName == "") { return null; }
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             if (UWHUD.instance.playerTrade[i].objectInSlot != null)
             {
-                if (UWHUD.instance.playerTrade[i].objectInSlot.name == objName)
+                if (UWHUD.instance.playerTrade[i].objectInSlot.ObjectIndex == index)
                 {
                     return UWHUD.instance.playerTrade[i];
                 }
@@ -4549,7 +4352,7 @@ description:  places a generated object in underworld
         {
             if (UWHUD.instance.npcTrade[i].objectInSlot != null)
             {
-                if (UWHUD.instance.npcTrade[i].objectInSlot.name == objName)
+                if (UWHUD.instance.npcTrade[i].objectInSlot.ObjectIndex == index)
                 {
                     return UWHUD.instance.npcTrade[i];
                 }

@@ -249,13 +249,10 @@ public class Wand : enchantment_base
                 {
                     Debug.Log("Copying a spell. Check this works.");
                     //Create a copy in the inventory list instead.
-                    GameObject clonelinkedspell = Instantiate(linkedspell.gameObject);
-                    clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
-                    clonelinkedspell.gameObject.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                    linkedspell = clonelinkedspell.GetComponent<a_spell>();
-
-                    //Copy data from original to new spell
-                    ObjectInteraction.CopyStaticProperties(linkedspell.objInt(), clonelinkedspell.GetComponent<ObjectInteraction>());
+                    var cloneLinkedSpell = ObjectLoader.Clone(linkedspell.objInt());
+                    // clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
+                    linkedspell = cloneLinkedSpell.GetComponent<a_spell>();
+                    GameWorldController.MoveToInventory(cloneLinkedSpell);
                 }
             }
         }

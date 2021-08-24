@@ -159,13 +159,10 @@ public class Potion : enchantment_base
             {
                 Debug.Log("Copying a spell. Check this works.");
                 //Create a copy in the inventory list instead.
-                GameObject clonelinkedspell = Instantiate(linkedspell.gameObject);
-                clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
-                clonelinkedspell.gameObject.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                linkedspell = clonelinkedspell.GetComponent<ObjectInteraction>();
-
-                //Copy data from original to new spell
-                ObjectInteraction.CopyStaticProperties(linkedspell, clonelinkedspell.GetComponent<ObjectInteraction>());
+                var cloneLinkedSpell = ObjectLoader.Clone(linkedspell);
+               // clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
+                linkedspell = cloneLinkedSpell;
+                GameWorldController.MoveToInventory(cloneLinkedSpell);
             }
         }
     }

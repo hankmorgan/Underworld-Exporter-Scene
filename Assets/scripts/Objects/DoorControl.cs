@@ -957,9 +957,6 @@ public class DoorControl : object_base
                     {
                         textureIndex = 0;
                     }
-
-                    //textureIndex = CurrentTileMap().texture_map[CurrentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
-                    //DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
                     break;
                 }
             case ObjectInteraction.DOOR:
@@ -1006,7 +1003,6 @@ public class DoorControl : object_base
                 break;
 
             case ObjectInteraction.DOOR:
-            //case ObjectInteraction.HIDDENDOOR:
             default:
                 {
 
@@ -1016,7 +1012,6 @@ public class DoorControl : object_base
                     newObj.transform.parent = myObj.transform;
                     newObj.transform.position = myObj.transform.position;
                     newObj.GetComponent<Renderer>().material = GameWorldController.instance.MaterialDoors[textureIndex];
-                    //
                     newObj.GetComponent<MeshCollider>().enabled = false;
                     MeshCollider mc = myObj.AddComponent<MeshCollider>();
                     mc.isTrigger = false;

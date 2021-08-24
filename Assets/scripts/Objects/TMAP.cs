@@ -86,7 +86,6 @@ public class TMAP : object_base
                             )
                         {
                             objIntTrigger.GetComponent<trigger_base>().Activate(this.gameObject);
-                            //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
                             CurrentObjectInHand = null;
                             return true;
                         }
@@ -142,9 +141,9 @@ public class TMAP : object_base
             Destroy(myObj.transform.GetChild(0).gameObject);
         }
         ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
-        // TileMap tm = CurrentTileMap();
         float doorFrameOffsetX = 0f; float doorFrameOffsetY = 0f;
         //TODO:This should only apply when the door occupies the same space as the tmap.
+        //EG banner on lvl 4 outside the trolls area.
         //if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
         //{
         //    switch (objInt.heading * 45)
@@ -175,7 +174,6 @@ public class TMAP : object_base
         SpriteController.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         SpriteController.transform.localPosition = new Vector3(doorFrameOffsetX, 0.6f, doorFrameOffsetY);
         MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
-        //mr.material= (Material)Resources.Load (_RES+ "/Materials/tmap/" + _RES + "_" + textureIndex.ToString("d3"));
         mr.material = GameWorldController.instance.MaterialMasterList[textureIndex];//Assumes it is already loaded...
 
         BoxCollider bx = myObj.GetComponent<BoxCollider>();

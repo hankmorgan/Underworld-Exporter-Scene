@@ -47,45 +47,21 @@ public class a_create_object_trap : trap_base
 
     public GameObject CloneObject(ObjectInteraction objToClone, int triggerX, int triggerY, bool MoveItem)
     {
-        GameObject cloneObj = Instantiate(objToClone.gameObject);
-
-        ObjectLoaderInfo objI;
-        if (objToClone.GetComponent<NPC>() != null)
-        {
-            objI = ObjectLoader.newWorldObject(objToClone.item_id, objToClone.quality, objToClone.quality, objToClone.link, 2);
-        }
-        else
-        {
-            objI = ObjectLoader.newWorldObject(objToClone.item_id, objToClone.quality, objToClone.quality, objToClone.link, 256);
-        }
-
-        objI.instance = cloneObj.GetComponent<ObjectInteraction>();
-        cloneObj.GetComponent<ObjectInteraction>().BaseObjectData = objI;
-        //objI.InUseFlag = 1;
+        var cloneObj = ObjectLoader.Clone(objToClone);
 
         if (MoveItem)
         {
             if (this.gameObject.transform.position.x >= 100.0f)
-            {//If the object is off map use the triggerX and Y to calculate a suitable spawning point.
-                /*cloneObj.transform.position = new Vector3( 
-                        (((float)triggerX) *1.2f + 0.6f), 
-                        (float)CurrentTileMap().GetFloorHeight(triggerX,triggerY)/6.666f,
-                        (((float)triggerY) *1.2f  + 0.6f) */
-                cloneObj.transform.position = CurrentTileMap().getTileVector(triggerX, triggerY);
-                // );
+            {
+                ObjectInteraction.SetPosition(cloneObj, CurrentTileMap().getTileVector(triggerX, triggerY), true);
             }
             else
             {
                 Vector3 newpos = CurrentTileMap().getTileVector(triggerX, triggerY);
-                cloneObj.transform.position = new Vector3(newpos.x, this.gameObject.transform.position.y, newpos.z);// this.gameObject.transform.position;
+                ObjectInteraction.SetPosition(cloneObj, new Vector3(newpos.x, this.gameObject.transform.position.y, newpos.z), true);
             }
         }
-
-
-        cloneObj.transform.parent = objToClone.transform.parent;
-        objI.instance.UpdatePosition();
-        cloneObj.name = ObjectLoader.UniqueObjectName(objI);
-        return cloneObj;
+        return cloneObj.gameObject;
     }
 
 

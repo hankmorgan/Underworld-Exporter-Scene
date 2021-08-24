@@ -62,6 +62,9 @@ public class a_ward_trap : trap_base
 
     void OnTriggerEnter(Collider other)
     {
+        if (objInt().ObjectTileX == TileMap.ObjectStorageTile)
+        { return; }
+
         //Get the NPC that hit the ward
         NPC npc = other.gameObject.GetComponent<NPC>();
 

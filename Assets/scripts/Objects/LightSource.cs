@@ -178,7 +178,7 @@ public class LightSource : object_base
 
     void SplitLightSourceIntoSlot()
     {
-        GameObject split = Instantiate(this.gameObject);
+        GameObject split = Instantiate(this.gameObject);//No need to use clone as this is happening in inventory list
         split.name = ObjectInteraction.UniqueObjectName(split.GetComponent<ObjectInteraction>());  //split.name + "_" + UWCharacter.Instance.summonCount++;
         split.GetComponent<ObjectInteraction>().link = 1;
         //Increment and decrement the object count as appropiate;

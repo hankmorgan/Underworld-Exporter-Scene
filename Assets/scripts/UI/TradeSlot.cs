@@ -23,6 +23,7 @@ public class TradeSlot : GuiBase
     public static bool LookingAt;
     public static string TempLookAt;
 
+
     /// <summary>
     /// Stop the player from taking items out of the tradeslots
     /// </summary>
@@ -115,9 +116,8 @@ public class TradeSlot : GuiBase
                 if (CurrentObjectInHand != null)
                 {
                     if (CurrentObjectInHand.transform.parent != GameWorldController.instance.DynamicObjectMarker())
-                    {//Object needs to be moved to world
+                    {//Object needs to be moved to world so it can be referenced on the stack.
                         GameWorldController.MoveToWorld(CurrentObjectInHand);
-                        ConversationVM.BuildObjectList();
                     }
                     objectInSlot = CurrentObjectInHand;
                     SlotImage.texture = UWHUD.instance.CursorIcon;
@@ -130,7 +130,7 @@ public class TradeSlot : GuiBase
                 if (objIntAtSlot != null)
                 {
                     objIntAtSlot.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                    GameWorldController.MoveToInventory(objIntAtSlot);//This will call rebuild list
+                    GameWorldController.MoveToInventory(objIntAtSlot);//Object is now on the players list.
                 }
                 if (CurrentObjectInHand != null)
                 {
@@ -142,7 +142,7 @@ public class TradeSlot : GuiBase
                 objectInSlot = CurrentObjectInHand;
                 SlotImage.texture = CurrentObjectInHand.GetInventoryDisplay().texture;
                 CurrentObjectInHand = objIntAtSlot;
-                ConversationVM.BuildObjectList();
+                
                 Selected = true;
             }
         }
