@@ -27,7 +27,7 @@
         {
             for (int i = 0; i <= npcs.GetUpperBound(0); i++)
             {
-                npcs[i].npc_goal = (short)newGoal;
+                npcs[i].npc_goal = (byte)newGoal;
                 npcs[i].npc_gtarg = (short)gtarg;
             }
         }

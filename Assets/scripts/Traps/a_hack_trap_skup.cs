@@ -71,7 +71,7 @@ public class a_hack_trap_skup : a_hack_trap
                     {
                         if (colliders[i].gameObject.GetComponent<ObjectInteraction>().quality == QualityToFind)
                         {
-                            return colliders[i].gameObject.GetComponent<ObjectInteraction>().BaseObjectData.index;
+                            return colliders[i].gameObject.GetComponent<ObjectInteraction>().ObjectIndex;
                         }
                         else
                         {

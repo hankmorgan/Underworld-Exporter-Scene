@@ -18,7 +18,7 @@ public class a_hack_trap_spoil_potion : a_hack_trap
                 ObjectInteraction obj = child.gameObject.GetComponent<ObjectInteraction>();
                 if (obj.GetItemType() == ObjectInteraction.POTIONS)
                 {
-                    if ((obj.link == 529) && (obj.enchantment == 1) && (obj.GetComponent<Potion>().linked == null))
+                    if ((obj.link == 529) && (obj.enchantment == 1) && (obj.GetComponent<Potion>().linkedspell == null))
                     {
                         SpoilPotion(obj);
                     }
@@ -33,11 +33,11 @@ public class a_hack_trap_spoil_potion : a_hack_trap
         obj.isquant = 0;
 
         ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(384, 40, 1, 0, 256);
-        newobjt.InUseFlag = 1;
+        //newobjt.InUseFlag = 1;
         ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         GameWorldController.MoveToInventory(created);
         created.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-        obj.GetComponent<Potion>().linked = created;
+        obj.GetComponent<Potion>().linkedspell = created;
         obj.GetComponent<Potion>().SetDisplayEnchantment();
     }
 }

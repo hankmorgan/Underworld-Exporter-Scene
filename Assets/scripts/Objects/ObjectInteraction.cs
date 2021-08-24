@@ -367,7 +367,7 @@ public class ObjectInteraction : UWEBase
     }
     public short npc_arms;          // (not used in uw1)
     public short npc_power;
-    public short npc_goal          // goal that NPC has; 5:kill player 6:? 9:?
+    public byte npc_goal          // goal that NPC has; 5:kill player 6:? 9:?
     {
         get { return BaseObjectData.npc_goal; }
         set { BaseObjectData.npc_goal = value; }
@@ -379,7 +379,7 @@ public class ObjectInteraction : UWEBase
         set { BaseObjectData.npc_attitude = value; }
     }
 
-    public short npc_gtarg         //goal target; 1:player
+    public byte npc_gtarg         //goal target; 1:player
     {
         get { return BaseObjectData.npc_gtarg; }
         set { BaseObjectData.npc_gtarg = value; }
@@ -397,7 +397,7 @@ public class ObjectInteraction : UWEBase
         set { BaseObjectData.npc_talkedto = value; }
     }
 
-    public short npc_level
+    public byte npc_level
     {
         get { return BaseObjectData.npc_level; }
         set { BaseObjectData.npc_level = value; }
@@ -406,13 +406,13 @@ public class ObjectInteraction : UWEBase
     public short npc_height;
 
     //Unknown/research
-    public short MobileUnk_0xA
+    public byte MobileUnk_0xA
     {
         get { return BaseObjectData.MobileUnk_0xA; }
         set { BaseObjectData.MobileUnk_0xA = value; }
     }
 
-    public short MobileUnk_0xB_12_F
+    public byte AnimationFrame
     {
         get { return BaseObjectData.AnimationFrame; }
         set { BaseObjectData.AnimationFrame = value; }
@@ -579,7 +579,22 @@ public class ObjectInteraction : UWEBase
     /// TODO: Make this private.
     public ObjectLoaderInfo BaseObjectData;
 
+    public ObjectLoader parentList
+    {
+        get
+        {
+            return BaseObjectData.parentList;
+        }
+    }
+
     public long FileDataAddress;
+
+
+    public void AssignBaseObjectData(ObjectLoaderInfo data, int index)
+    {
+        BaseObjectData = data;
+    }
+
 
     void Start()
     {
@@ -606,7 +621,7 @@ public class ObjectInteraction : UWEBase
             UpdateAnimation();
         }
 
-        if (!BaseObjectData.IsInventory)
+        if ((!BaseObjectData.IsInventory) && (ObjectIndex<256))
         {
             UpdatePosition();
         }
@@ -747,10 +762,10 @@ public class ObjectInteraction : UWEBase
         return this.GetComponent<object_base>().GetEquipDisplay();
     }
 
-    public Sprite GetWorldDisplay()
-    {
-        return ObjectSprite.sprite;
-    }
+    //public Sprite GetWorldDisplay()
+    //{
+    //    return ObjectSprite.sprite;
+    //}
 
     public void SetWorldDisplay(Sprite NewSprite)
     {
@@ -1163,7 +1178,7 @@ public class ObjectInteraction : UWEBase
                 CurrentObjectInHand = null;//Make sure there is not instance of this object in the players hand	
             }
             UWCharacter.Instance.playerInventory.Refresh();
-            BaseObjectData.InUseFlag = 0;//Free up the slot
+           // BaseObjectData.InUseFlag = 0;//Free up the slot
 
             // Destroy(this.gameObject);
             DestroyObjectFromUW(this);
@@ -1444,7 +1459,7 @@ public class ObjectInteraction : UWEBase
         mergingInto.link += mergingFrom.link;
         mergingInto.isquant = 1;
         mergingInto.GetComponent<object_base>().MergeEvent();
-        mergingFrom.BaseObjectData.InUseFlag = 0;
+        //mergingFrom.BaseObjectData.InUseFlag = 0;
         Destroy(mergingFrom.gameObject);
     }
 
@@ -2963,7 +2978,7 @@ public class ObjectInteraction : UWEBase
             {
                 if (currObj.link <= objList.GetUpperBound(0))
                 {
-                    if ((objList[currObj.link].GetItemType() == SPELL) && (objList[currObj.link].InUseFlag == 1))
+                    if ((objList[currObj.link].GetItemType() == SPELL))  //&& (objList[currObj.link].InUseFlag == 1))
                     {
                         return true;
                     }
@@ -3070,15 +3085,18 @@ public class ObjectInteraction : UWEBase
     public static string UniqueObjectName(ObjectInteraction currObj)
     {//returns a unique name for the object
      //"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
-        switch (currObj.GetItemType())
-        {
-            case DOOR:
-            case HIDDENDOOR:
-            case PORTCULLIS:
-                return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
-            default:
-                return currObj.getDesc() + System.Guid.NewGuid();
-        }
+
+
+        return ObjectLoader.UniqueObjectName(currObj.BaseObjectData);
+        //switch (currObj.GetItemType())
+        //{
+        //    case DOOR:
+        //    case HIDDENDOOR:
+        //    case PORTCULLIS:
+        //        return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
+        //    default:
+        //        return currObj.getDesc() + System.Guid.NewGuid();
+        //}
     }
 
     /// <summary>
@@ -3156,12 +3174,12 @@ public class ObjectInteraction : UWEBase
         {
             if (objToDestroy.BaseObjectData.IsStatic)
             {
-               // Debug.Log("Releasing Static Object " + objToDestroy.name);
+                Debug.Log("Releasing Static Object " + objToDestroy.name);
                 CurrentObjectList().ReleaseFreeStaticObject(objToDestroy.BaseObjectData.index);
             }
             else
             {
-               // Debug.Log("Releasing Mobile Object " + objToDestroy.name);
+                Debug.Log("Releasing Mobile Object " + objToDestroy.name);
                 CurrentObjectList().ReleaseFreeMobileObject(objToDestroy.BaseObjectData.index);
             }
         }

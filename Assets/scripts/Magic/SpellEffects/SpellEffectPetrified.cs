@@ -11,7 +11,7 @@ public class SpellEffectPetrified : SpellEffect
         base.ApplyEffect();
         npc = this.GetComponent<NPC>();
         TickTime = 1;//Realtime counter
-        npc.npc_goal = (short)NPC.npc_goals.npc_goal_petrified;
+        npc.npc_goal = (byte)NPC.npc_goals.npc_goal_petrified;
         npc.npc_gtarg = counter;
         npc.newAnim.FreezeAnimFrame = true;
         npc.newAnim.output.color = Color.gray;
@@ -25,7 +25,7 @@ public class SpellEffectPetrified : SpellEffect
 
     public override void CancelEffect()
     {
-        npc.npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
+        npc.npc_goal = (byte)NPC.npc_goals.npc_goal_attack_5;
         npc.npc_gtarg = 0;
         npc.newAnim.FreezeAnimFrame = false;
         npc.newAnim.output.color = Color.white;

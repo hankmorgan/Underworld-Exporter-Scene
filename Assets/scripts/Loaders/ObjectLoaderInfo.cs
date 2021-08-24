@@ -402,12 +402,12 @@ public class ObjectLoaderInfo : UWClass
     //    }
     //}
 
-    public short MobileUnk_0xA
+    public byte MobileUnk_0xA
     {
         get
         {
             if (IsStatic) { return 0; }
-            return (short)GetAt(PTR + 0xa);
+            return GetAt(PTR + 0xa);
         }
         set
         {
@@ -418,13 +418,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_goal
+    public byte npc_goal
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 0, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
         {
@@ -437,13 +437,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_gtarg
+    public byte npc_gtarg
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 4, 0xFF));
+            return (byte)(DataLoader.ExtractBits(val, 4, 0xFF));
         }
         set
         {
@@ -456,13 +456,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short AnimationFrame
+    public byte AnimationFrame
     {//formerly MobileUnk_0xB_12_F
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 12, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 12, 0xF));
         }
         set
         {
@@ -475,13 +475,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_level
+    public byte npc_level
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xd);
-            return (short)(DataLoader.ExtractBits(val, 0, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
         {
@@ -926,11 +926,11 @@ public class ObjectLoaderInfo : UWClass
 
 
     //My additions
-    public short InUseFlag//Based on values and no of values in the mobile and static free lists.
-    {
-        get { return 1; }
-        set { }
-    }
+    //public short InUseFlag//Based on values and no of values in the mobile and static free lists.
+    //{
+    //    get { return 1; }
+    //    set { }
+    //}
 
 
     public short levelno
@@ -1066,20 +1066,20 @@ public class ObjectLoaderInfo : UWClass
     }
 
 
-    public void Set()
-    {
-        InUseFlag = 1;
-    }
+    //public void Set()
+    //{
+    //    InUseFlag = 1;
+    //}
 
-    public void Unset()
-    {
-        InUseFlag = 0;
-    }
+    //public void Unset()
+    //{
+    //    InUseFlag = 0;
+    //}
 
-    public bool isInUse()
-    {
-        return (InUseFlag == 1);
-    }
+    //public bool isInUse()
+    //{
+    //    return (InUseFlag == 1);
+    //}
 
     public string getDesc()
     {

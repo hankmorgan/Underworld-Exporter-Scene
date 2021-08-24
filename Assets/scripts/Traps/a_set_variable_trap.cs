@@ -68,7 +68,7 @@ public class a_set_variable_trap : a_variable_trap
                     }
                     else
                     {
-                        Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().BaseObjectData.index);
+                        Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().ObjectIndex);
                     }
                     break;
                 default:
@@ -128,7 +128,7 @@ public class a_set_variable_trap : a_variable_trap
                     break;
             }
 
-            Debug.Log(debugname + ": Operation + " + op + " Variable " + index + " was " + OrigValue + " now =" + vars[index] + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+            Debug.Log(debugname + ": Operation + " + op + " Variable " + index + " was " + OrigValue + " now =" + vars[index] + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().ObjectIndex);
         }
         else
         {//Bitwise operations on bitfield
@@ -168,7 +168,7 @@ public class a_set_variable_trap : a_variable_trap
             int OrigValue = Quest.GetBitVariable(index);
             var newvalue = VariableOperation(OrigValue, trap.VariableValue(), operation, out op_text);
             Quest.SetBitVariable(index, newvalue);
-            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetBitVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetBitVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().ObjectIndex);
         }
         else
         {//Bitwise operations on bitfield
@@ -215,7 +215,7 @@ public class a_set_variable_trap : a_variable_trap
             int OrigValue = Quest.GetQuestVariable(index);//vars[index];
             var newvalue = VariableOperation(OrigValue,trap.VariableValue(), operation, out op_text);
             Quest.SetQuestVariable(index, newvalue);
-            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetQuestVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetQuestVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().ObjectIndex);
         }
         else
         {//Bitwise operations on bitfield
@@ -308,7 +308,7 @@ public class a_set_variable_trap : a_variable_trap
             int OrigValue = Quest.GetVariable(index);//vars[index];
             var newvalue = VariableOperation(OrigValue, trap.VariableValue(), operation, out op_text);
             Quest.SetVariable(index, newvalue);
-            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetVariable(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().ObjectIndex);
         }
         else
         {//Bitwise operations on bitfield
@@ -348,7 +348,7 @@ public class a_set_variable_trap : a_variable_trap
             int OrigValue = Quest.GetX_Clock(index);
             var newvalue = VariableOperation(OrigValue, trap.VariableValue(), operation, out op_text);
             Quest.SetX_Clock(index, newvalue);
-            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetX_Clock(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
+            Debug.Log(debugname + ": Operation + " + op_text + " Variable " + index + " was " + OrigValue + " now =" + Quest.GetX_Clock(index) + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().ObjectIndex);
         }
         else
         {//Bitwise operations on bitfield

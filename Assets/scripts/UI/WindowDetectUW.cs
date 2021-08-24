@@ -338,7 +338,7 @@ public class WindowDetectUW : WindowDetect
                     //FIELD PICKUP droppedItem.GetComponent<ObjectInteraction>().PickedUp = false; //Back in the real world
                     droppedItem.GetComponent<ObjectInteraction>().Drop();
                     droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
-                    GameWorldController.MoveToWorld(droppedItem);
+                    GameWorldController.MoveToWorld(droppedItem.GetComponent<ObjectInteraction>());
                     droppedItem.transform.parent = GameWorldController.instance.DynamicObjectMarker();
 
                     if (droppedItem.GetComponent<Container>() != null)

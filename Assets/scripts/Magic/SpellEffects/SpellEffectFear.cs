@@ -38,7 +38,7 @@ public class SpellEffectFear : SpellEffect
                 npc.npc_attitude = NPC.AI_ATTITUDE_UPSET;
 
                 //Makes the NPC Run away
-                npc.npc_goal = (short)NPC.npc_goals.npc_goal_flee;
+                npc.npc_goal = (byte)NPC.npc_goals.npc_goal_flee;
                 npc.WaitTimer = 0f;
                 npc.npc_gtarg = 1;
 
@@ -54,7 +54,7 @@ public class SpellEffectFear : SpellEffect
         {
             //npc.state=OriginalState;
             npc.npc_attitude = OriginalAttitude;
-            npc.npc_goal = OriginalGoal;
+            npc.npc_goal = (byte)OriginalGoal;
             npc.npc_gtarg = OriginalGtarg;
         }
         base.CancelEffect();

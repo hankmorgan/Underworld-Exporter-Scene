@@ -53,7 +53,7 @@ public class a_hack_trap_vending : a_hack_trap
         if (CheckPrice(Price, ObjectTileX, ObjectTileY))
         {//price check
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(ItemStringIndex, 40, 0, 0, 256);
-            newobjt.InUseFlag = 1;
+            //newobjt.InUseFlag = 1;
             UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, spawn)).gameObject);
         }
     }

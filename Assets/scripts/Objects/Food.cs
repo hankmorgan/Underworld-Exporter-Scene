@@ -207,7 +207,7 @@ public class Food : object_base
         if (LeftOverToCreate != -1)
         {
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(LeftOverToCreate, 40, 0, 0, 256);
-            newobjt.InUseFlag = 1;
+            //newobjt.InUseFlag = 1;
             ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
             GameWorldController.MoveToInventory(created.gameObject);
             CurrentObjectInHand = created;
@@ -339,7 +339,7 @@ public class Food : object_base
         {
             ChangeType(213);//Change to debris.
             this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-            objInt().BaseObjectData.InUseFlag = 0;
+            //objInt().BaseObjectData.InUseFlag = 0;
             ObjectInteraction.DestroyObjectFromUW(this.objInt());
         }
         return true;

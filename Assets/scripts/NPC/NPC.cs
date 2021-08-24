@@ -584,7 +584,7 @@ public class NPC : MobileObject
             {
                 for (int i = 0; i <= 4; i++)
                 {
-                    if (Quest.GetArenaOpponent(i) == objInt().BaseObjectData.index)
+                    if (Quest.GetArenaOpponent(i) == objInt().ObjectIndex)
                     {//Update the players win-loss records and clear the fighter off the fight billing.
                         Quest.SetArenaOpponent(i,0);
                         
@@ -599,8 +599,8 @@ public class NPC : MobileObject
         }
         if ((objInt().ObjectTileX <= 63) || (objInt().ObjectTileY <= 63))
         {//Only dump container if on map
-            objInt().BaseObjectData.InUseFlag = 0;
-            objInt().BaseObjectData.npc_hp = 0;
+            //objInt().InUseFlag = 0;
+            objInt().npc_hp = 0;
             NPC_DEAD = true;//Tells the update to execute the NPC death animation
             PerformDeathAnim();
             //Dump npc inventory on the floor.
@@ -751,10 +751,9 @@ public class NPC : MobileObject
                         case 47://Mors gothri in Kilhorn
                             if (Quest.GetQuestVariable(117) == 0)
                             {
-                                //Quest.QuestVariablesOBSOLETE[117] = 1;
                                 Quest.SetQuestVariable(117, 1);
                                 npc_hp = 50;//restore health.
-                                npc_goal = (short)npc_goals.npc_goal_stand_still_0;
+                                npc_goal = (byte)npc_goals.npc_goal_stand_still_0;
                                 npc_attitude = AI_ATTITUDE_UPSET;
                                 TalkTo();
                                 return true;
@@ -763,7 +762,6 @@ public class NPC : MobileObject
                             break;
 
                         case 58://Brain creatures in Kilhorn
-                           // Quest.QuestVariablesOBSOLETE[50] = 1;
                             Quest.SetQuestVariable(50, 1);
                             return false;
                         case 75: //Demon guard in Kilhorn.
@@ -970,8 +968,8 @@ public class NPC : MobileObject
                     if (UWCharacter.Instance.LastEnemyToHitMe != null)
                     {
                         //XG gtarg = UWCharacter.Instance.LastEnemyToHitMe;
-                        npc_goal = (short)npc_goals.npc_goal_attack_5;
-                        npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().BaseObjectData.index;
+                        npc_goal = (byte)npc_goals.npc_goal_attack_5;
+                        npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().ObjectIndex;
                         //gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
                     }
                 }
@@ -980,7 +978,7 @@ public class NPC : MobileObject
                     //slasher of veils in the void needs to get rowdy. Otherwise he is passive when this level loas
                     if (item_id == 124)
                     {
-                        npc_goal = (short)npc_goals.npc_goal_attack_5;
+                        npc_goal = (byte)npc_goals.npc_goal_attack_5;
                         npc_gtarg = 1;
                         //XG gtarg = UWCharacter.Instance.gameObject;
                     }
@@ -1046,7 +1044,7 @@ public class NPC : MobileObject
                 (npc_gtarg <= 3)
             )
         {
-            npc_goal = (short)npc_goals.npc_goal_attack_5;
+            npc_goal = (byte)npc_goals.npc_goal_attack_5;
             //Attack player
             npc_gtarg = 1;
         }
@@ -1321,7 +1319,7 @@ public class NPC : MobileObject
                             }
                             else
                             {
-                                npc_goal = (short)(npc_goals.npc_goal_wander_8);
+                                npc_goal = (byte)(npc_goals.npc_goal_wander_8);
                                 AgentStand();
                             }
                         }
@@ -1474,14 +1472,14 @@ public class NPC : MobileObject
                 if ((npc_attitude > 0) && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
                 {
                     //NPC Follower who has killed their target->Follow player.
-                    npc_goal = (short)npc_goals.npc_goal_follow;
+                    npc_goal = (byte)npc_goals.npc_goal_follow;
                     npc_gtarg = 1;
                     //XG gtarg = UWCharacter.Instance.transform.gameObject;
                 }
                 if ((npc_attitude == 0) && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
                 {
                     //NPC Enemy who has defeated their attacker->Focus on player.
-                    npc_goal = (short)npc_goals.npc_goal_attack_5;
+                    npc_goal = (byte)npc_goals.npc_goal_attack_5;
                     npc_gtarg = 1;
                     //XG gtarg = UWCharacter.Instance.transform.gameObject;
                 }
@@ -1540,7 +1538,7 @@ public class NPC : MobileObject
                     npc_gtarg = 1;
                     //XG gtarg = UWCharacter.Instance.gameObject;
                     //gtargName = gtarg.name;
-                    npc_goal = (short)npc_goals.npc_goal_attack_5;
+                    npc_goal = (byte)npc_goals.npc_goal_attack_5;
                 }
                 if (npc_hp < 5)//Low health. 20% Chance for morale break
                 {
@@ -1564,7 +1562,7 @@ public class NPC : MobileObject
                                 Col.gameObject.GetComponent<NPC>().npc_gtarg = 1;
                                 //Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
                                 //Col.gameObject.GetComponent<NPC>().gtargName = gtarg.name;
-                                Col.gameObject.GetComponent<NPC>().npc_goal = (short)npc_goals.npc_goal_attack_5;
+                                Col.gameObject.GetComponent<NPC>().npc_goal = (byte)npc_goals.npc_goal_attack_5;
                             }
                         }
                     }
@@ -2532,7 +2530,7 @@ public class NPC : MobileObject
                 npc.npc_yhome = (short)yhome;
                 if ((short)NewGoal >= 0)
                 {
-                    npc.npc_goal = (short)NewGoal;
+                    npc.npc_goal = (byte)NewGoal;
                 }
             }
         }
@@ -2549,7 +2547,7 @@ public class NPC : MobileObject
             {
                 if ((short)NewGoal >= 0)
                 {
-                    npc.npc_goal = (short)NewGoal;
+                    npc.npc_goal = (byte)NewGoal;
                 }
                 npc.npc_attitude = NewAttitude;
             }

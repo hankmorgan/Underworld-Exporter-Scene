@@ -22,7 +22,7 @@ public class a_hack_trap_coward : a_hack_trap
                     if (objI.GetComponent<NPC>() != null)
                     {//Make NPC calmer.
                         objI.GetComponent<NPC>().npc_attitude = 1;
-                        objI.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_wander_8;
+                        objI.GetComponent<NPC>().npc_goal = (byte)NPC.npc_goals.npc_goal_wander_8;
                     }
                 }
             }

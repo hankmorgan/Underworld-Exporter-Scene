@@ -14,14 +14,12 @@ public class a_hack_trap_forcefield : a_hack_trap
             if (forcefieldtoMove.zpos == 127)
             {
                 forcefieldtoMove.zpos = 0;
-                forcefieldtoMove.BaseObjectData.zpos = 0;
             }
             else
             {
                 forcefieldtoMove.zpos = 127;
-                forcefieldtoMove.BaseObjectData.zpos = 127;
             }
-            forcefieldtoMove.transform.position = ObjectLoader.CalcObjectXYZ(forcefieldtoMove.BaseObjectData.index, 1);
+            forcefieldtoMove.transform.position = ObjectLoader.CalcObjectXYZ(forcefieldtoMove.ObjectIndex, 1);
         }
     }
 
@@ -36,7 +34,8 @@ public class a_hack_trap_forcefield : a_hack_trap
         ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         for (int i = 256; i <= objList.GetUpperBound(0); i++)
         {
-            if ((objList[i].InUseFlag == 1) && (objList[i].instance != null) && objList[i].item_id == 365)
+            // if ((objList[i].InUseFlag == 1) && (objList[i].instance != null) && objList[i].item_id == 365)
+            if ((objList[i].instance != null) && objList[i].item_id == 365)
             {
                 if (
                         (objList[i].instance.ObjectTileX == ObjectTileX)

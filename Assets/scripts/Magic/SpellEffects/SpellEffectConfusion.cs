@@ -34,7 +34,7 @@ public class SpellEffectConfusion : SpellEffect
                 //npc.state=NPC.AI_STATE_IDLERANDOM;	//Temporarily just wander around
                 npc.npc_attitude = NPC.AI_ATTITUDE_UPSET;
                 //Makes the NPC wander around
-                npc.npc_goal = (short)NPC.npc_goals.npc_goal_wander_8;
+                npc.npc_goal = (byte)NPC.npc_goals.npc_goal_wander_8;
 
                 WasActive = true;
             }
@@ -48,7 +48,7 @@ public class SpellEffectConfusion : SpellEffect
         {
             //npc.state=OriginalState;
             npc.npc_attitude = OriginalAttitude;
-            npc.npc_goal = OriginalGoal;
+            npc.npc_goal = (byte)OriginalGoal;
             npc.npc_gtarg = OriginalGtarg;
         }
         base.CancelEffect();

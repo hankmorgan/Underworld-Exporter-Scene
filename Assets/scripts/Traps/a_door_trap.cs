@@ -33,7 +33,7 @@ public class a_door_trap : trap_base
                             newobjt.xpos = lockToCopy.xpos;
                             newobjt.ypos = lockToCopy.ypos;
                             newobjt.next = DC.link;//To allow proper triggering of traps
-                            newobjt.InUseFlag = 1;
+                            //newobjt.InUseFlag = 1;
                             GameObject Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
                             DC.link = newobjt.index;    //Point the lock at this new lock							
                         }
@@ -44,7 +44,7 @@ public class a_door_trap : trap_base
                         if (linkedObj != null)
                         {
                             DC.link = linkedObj.next;
-                            linkedObj.BaseObjectData.InUseFlag = 0;
+                            //linkedObj.BaseObjectData.InUseFlag = 0;
                             //Destroy(linkedObj);
                             ObjectInteraction.DestroyObjectFromUW(linkedObj);
                         }

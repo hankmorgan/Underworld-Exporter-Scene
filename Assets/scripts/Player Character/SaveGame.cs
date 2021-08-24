@@ -1694,7 +1694,7 @@ public class SaveGame : Loader
                     parentList = GameWorldController.instance.inventoryLoader,
                     ObjectTileX = TileMap.ObjectStorageTile,
                     ObjectTileY = TileMap.ObjectStorageTile,
-                    InUseFlag = 1,
+                    //InUseFlag = 1,
 
                     InventoryData = new byte[8]
                 };//Inventory indices start at 1
@@ -1894,10 +1894,10 @@ public class SaveGame : Loader
                     }
                     if (currobj.GetComponent<Potion>() != null)
                     {
-                        if (currobj.GetComponent<Potion>().linked != null)
+                        if (currobj.GetComponent<Potion>().linkedspell != null)
                         {
                             //This is a potion with a linked spell object.
-                            string link = currobj.GetComponent<Potion>().linked.name;
+                            string link = currobj.GetComponent<Potion>().linkedspell.name;
                             //For the index of the linked object in the list
                             for (short z = 0; z <= inventoryObjects.GetUpperBound(0); z++)
                             {

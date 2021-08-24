@@ -1472,7 +1472,7 @@ public class UWCharacter : Character
                 newobjt.doordir = QuantityObj.doordir;
                 newobjt.invis = QuantityObj.invis;
                 ObjectInteraction Split = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, QuantityObj.transform.position);
-                newobjt.InUseFlag = 1;
+                //newobjt.InUseFlag = 1;
                 QuantityObj.link -= quant;
 
                 Pickup(Split, playerInventory);
@@ -1530,7 +1530,7 @@ public class UWCharacter : Character
             {
                 if (EditorMode)
                 {//Select this object in the editor pane
-                    IngameEditor.instance.ObjectSelect.value = objInt.BaseObjectData.index;
+                    IngameEditor.instance.ObjectSelect.value = objInt.ObjectIndex;
                 }
                 objInt.LookDescription();
                 return;

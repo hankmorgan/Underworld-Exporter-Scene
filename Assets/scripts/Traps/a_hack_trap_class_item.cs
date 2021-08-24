@@ -112,7 +112,7 @@ public class a_hack_trap_class_item : a_hack_trap
             }
         }
 
-        obj.gameObject.name = ObjectLoader.UniqueObjectName(obj.BaseObjectData);
+        obj.gameObject.name =ObjectInteraction.UniqueObjectName(obj);
         obj.UpdateAnimation();
 
         //switch (UWCharacter.Instance.CharClass)

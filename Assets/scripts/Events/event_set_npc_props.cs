@@ -37,7 +37,7 @@ public class event_set_npc_props : event_base
                 npc[i].transform.position = pos;
                 npc[i].npc_xhome = (short)homeX;
                 npc[i].npc_yhome = (short)homeY;
-                npc[i].npc_goal = (short)newGoal;
+                npc[i].npc_goal = (byte)newGoal;
             }
         }
     }
