@@ -1056,14 +1056,6 @@ public class GameWorldController : UWEBase
                 }
             }
 
-            //if (dungeon_level != -1)
-            //{//When changing from a level that has already loaded
-            //    if (EditorMode == false)
-            //    {
-            //        //ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
-            //    }
-            //}
-
             //Tell the game we are now using the new level no.
             dungeon_level = newLevelNo;
 
@@ -1082,6 +1074,13 @@ public class GameWorldController : UWEBase
                                 if (t.gameObject.GetComponent<object_base>() != null)
                                 {
                                     t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+                                }
+                            }
+                            foreach (Transform t in instance.DynamicObjectMarker())
+                            {
+                                if (t.gameObject.GetComponent<Container>() != null)
+                                {
+                                    t.gameObject.GetComponent<Container>().UpdateContainerLinks();
                                 }
                             }
                         }
@@ -1390,28 +1389,7 @@ public class GameWorldController : UWEBase
                 }
             }
 
-            //Relink container contents
-            bool isNext = false;//What property should be updated.
-            ObjectInteraction parentItem = cnt.objInt();
-            parentItem.link = 0; //Assume no object in container.
-            for (int i = 0; i < cnt.items.GetUpperBound(0); i++)
-            {
-                if (cnt.items[i] != null)
-                {
-                    //linked or next item found.
-                    if (isNext)
-                    {
-                        parentItem.next = cnt.items[i].ObjectIndex;
-                    }
-                    else
-                    {
-                        parentItem.link = cnt.items[i].ObjectIndex;
-                        isNext = true; //any item after the first linked item must be a next.
-                    }
-                    parentItem = cnt.items[i];//Move to next item.
-                    parentItem.next = 0;//Assume next is going to be no object.                    
-                }
-            }
+            UpdateContainerLinkedChain(cnt);
         }
 
         obj.GetComponent<object_base>().MoveToWorldEvent();
@@ -1422,6 +1400,32 @@ public class GameWorldController : UWEBase
         }
 
         return obj;
+    }
+
+    public static void UpdateContainerLinkedChain(Container cnt)
+    {
+        //Relink container contents
+        bool isNext = false;//What property should be updated.
+        ObjectInteraction parentItem = cnt.objInt();
+        parentItem.link = 0; //Assume no object in container.
+        for (int i = 0; i < cnt.items.GetUpperBound(0); i++)
+        {
+            if (cnt.items[i] != null)
+            {
+                //linked or next item found.
+                if (isNext)
+                {
+                    parentItem.next = cnt.items[i].ObjectIndex;
+                }
+                else
+                {
+                    parentItem.link = cnt.items[i].ObjectIndex;
+                    isNext = true; //any item after the first linked item must be a next.
+                }
+                parentItem = cnt.items[i];//Move to next item.
+                parentItem.next = 0;//Assume next is going to be no object.                    
+            }
+        }
     }
 
     /// <summary>

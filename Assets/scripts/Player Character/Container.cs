@@ -13,16 +13,6 @@ public class Container : UWEBase
     public int LockObject;
 
     /// <summary>
-    /// The capacity of the container
-    /// </summary>
-    //public int Capacity;
-
-    // <summary>
-    // What objects the container accepts
-    // </summary>
-    //public int ObjectsAccepted;//TODO:Make this work off of common obj
-
-    /// <summary>
     /// Is the container open on the players inventory.
     /// </summary>
     public bool isOpenOnPanel;//
@@ -32,8 +22,6 @@ public class Container : UWEBase
     /// </summary>
     public Container ContainerParent;
 
-    // public ObjectLoader objList;
-
     void Start()
     {
         if (objInt() != null)
@@ -41,8 +29,6 @@ public class Container : UWEBase
             PopulateContainer(this, objInt(), objInt().parentList);
         }
     }
-
-
 
     /// <summary>
     /// Gets the max capacity of the container.
@@ -70,42 +56,7 @@ public class Container : UWEBase
         }
     }
 
-    /// <summary>
-    /// Gets the game object at index.
-    /// </summary>
-    /// <returns>The <see cref="UnityEngine.GameObject"/>.</returns>
-    /// <param name="index">Index.</param>
-    /*	public GameObject GetGameObjectAt(short index)
-        {
-            Debug.Log("REMOVE2");
-            if (GetItemAt(index)!="")
-            {
-                return GameObject.Find (GetItemAt (index));
-            }
-            else
-            {
-                return null;
-            }
-        }*/
-
-
-    /* public ObjectInteraction GetObjectIntAt(short index)
-     {
-         if (index<=items.GetUpperBound(0))
-         {
-             return items[index];
-         }
-         return null;
-
-         //GameObject obj = GetGameObjectAt(index);
-         //if (obj!=null)
-         //{
-         //    return obj.GetComponent<ObjectInteraction>();
-         //}
-         //return null;
-     }*/
-
-    public bool AddItemMergedItemToContainer(ObjectInteraction itemToAdd)
+     public bool AddItemMergedItemToContainer(ObjectInteraction itemToAdd)
     {
         for (int i = 0; i <= MaxCapacity(); i++)
         {
@@ -838,5 +789,18 @@ public class Container : UWEBase
         }
         return _objInt; //this.gameObject.GetComponent<ObjectInteraction>();
     }
+
+
+
+    /// <summary>
+    /// Updates links and next values for all items in this container.
+    /// </summary>
+    public void UpdateContainerLinks()
+    {
+        //fix next and links for the container
+        GameWorldController.UpdateContainerLinkedChain(this);
+    }
+
+
 
 }

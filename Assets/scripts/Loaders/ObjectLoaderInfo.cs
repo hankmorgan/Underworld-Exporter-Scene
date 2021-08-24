@@ -235,9 +235,9 @@ public class ObjectLoaderInfo : UWClass
         {
             if (index > 256)
             {
-                if (value != xpos)
+                if (value != ypos)
                 {
-                    Debug.Log("Changing ypos for static object +" + index);
+                    Debug.Log("Changing ypos for static object " +  instance.name);
                 }
             }
             int existingValue = GetAt16(PTR+2);
@@ -260,7 +260,7 @@ public class ObjectLoaderInfo : UWClass
             {
                 if(value!=xpos)
                 {
-                    Debug.Log("Changing xpos for static object " + index);
+                    Debug.Log("Changing xpos for static object  " + instance.name);
                 }                
             }
             int existingValue = GetAt16(PTR+2);

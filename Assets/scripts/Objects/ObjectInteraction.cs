@@ -10,7 +10,6 @@ public class ObjectInteraction : UWEBase
     /// Variable to test for and stop infinite object list loops
     /// </summary>
     public static long LinkEventCtr = 0;
-
     public static bool PlaySoundEffects
     {
         get
@@ -622,10 +621,14 @@ public class ObjectInteraction : UWEBase
             UpdateAnimation();
         }
 
-        if ((!BaseObjectData.IsInventory) && (ObjectIndex<256))
+        if ((!BaseObjectData.IsInventory))
         {
-            UpdatePosition();
+            if (startPos!=transform.position)
+            {
+                UpdatePosition();
+            }            
         }
+        startPos = transform.position;
     }
 
 
@@ -1469,8 +1472,8 @@ public class ObjectInteraction : UWEBase
         mergingInto.link += mergingFrom.link;
         mergingInto.isquant = 1;
         mergingInto.GetComponent<object_base>().MergeEvent();
-        //mergingFrom.BaseObjectData.InUseFlag = 0;
-        Destroy(mergingFrom.gameObject);
+        DestroyObjectFromUW(mergingFrom);
+        //Destroy(mergingFrom.gameObject);
     }
 
     /// <summary>
@@ -1750,114 +1753,6 @@ public class ObjectInteraction : UWEBase
         NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.2f);
     }
 
-    //private static void SetRangeAttackNPCs(ObjectInteraction objInt, NPC npc)
-    //{
-
-    //}
-
-    //    /// <summary>
-    //    /// Sets which enemies can cast magic attacks
-    //    /// </summary>
-    //    /// <param name="objInt"></param>
-    //    /// <param name="npc"></param>
-    //    private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
-    //{
-    //    //Set enemies who can cast spells.
-    //    //TODO: update for UW2
-
-    //}
-
-    ///// <summary>
-    ///// Checks and set if the NPC is one of the undead types.
-    ///// </summary>
-    ///// <param name="objInt"></param>
-    ///// <param name="npc"></param>
-    //private static void SetUndeadNPCS(ObjectInteraction objInt, NPC npc)
-    //{
-
-
-    //}
-
-    /*	public static void SetNPCProps(GameObject myObj, 
-				int npc_whoami, int npc_xhome, int npc_yhome,
-				int npc_hunger, int npc_health,
-				int npc_hp, int npc_arms, int npc_power ,
-				int npc_goal, int npc_attitude, int npc_gtarg,
-				int npc_talkedto, int npc_level,int npc_name,
-				string NavMeshRegion
-		)
-		{
-				SetNPCProps(myObj, 
-						npc_whoami, npc_xhome, npc_yhome,
-						npc_hunger, npc_health,
-						npc_hp, npc_arms, npc_power ,
-						npc_goal, npc_attitude, npc_gtarg,
-						npc_talkedto, npc_level,npc_name,
-						"",
-						NavMeshRegion
-				)	;
-		}*/
-
-
-    /*public static void SetNPCProps(GameObject myObj, 
-            int npc_whoami, int npc_xhome, int npc_yhome,
-            int npc_hunger, int npc_health,
-            int npc_hp, int npc_arms, int npc_power ,
-            int npc_goal, int npc_attitude, int npc_gtarg,
-            int npc_talkedto, int npc_level,int npc_name,
-            string gtargName,
-            string NavMeshRegion
-    )*/
-
-    /// <summary>
-    /// Sets the NPC properties.
-    /// </summary>
-    /// <param name="myObj">My object.</param>
-    /// <param name="objInt">Object int.</param>
-    /// <param name="objI">Object i.</param>
-    public static void SetMobileProps(GameObject myObj, ObjectInteraction objInt, ObjectLoaderInfo objI)
-    {
-        return;
-        ////////objInt.npc_whoami = objI.npc_whoami;
-        ////////objInt.npc_voidanim = objI.npc_voidanim;
-        ////////objInt.npc_xhome = objI.npc_xhome;        //  x coord of home tile
-        ////////objInt.npc_yhome = objI.npc_yhome;        //  y coord of home tile
-        ////////objInt.npc_hunger = objI.npc_hunger;
-        ////////objInt.npc_health = objI.npc_health;
-        ////////objInt.npc_hp = objI.npc_hp;
-        ////////objInt.npc_arms = objI.npc_arms;          // (not used in uw1)
-        ////////objInt.npc_power = objI.npc_power;
-        ////////objInt.npc_goal = objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-        ////////objInt.npc_attitude = objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-        ////////objInt.npc_gtarg = objI.npc_gtarg;         //goal target; 1:player
-        ////////objInt.npc_talkedto = objI.npc_talkedto;      // is 1 when player already talked to npc
-        ////////objInt.npc_level = objI.npc_level;
-        ////////objInt.npc_name = objI.npc_name;       //    (not used in uw1)
-        ////////objInt.npc_heading = objI.npc_heading;
-        ////////objInt.Projectile_Speed = objI.Projectile_Speed;
-        ////////objInt.Projectile_Pitch = objI.Projectile_Pitch;
-        ////////objInt.ProjectileHeadingMinor = objI.ProjectileHeadingMinor;
-        ////////objInt.npc_height = objI.npc_height;
-
-        ////////objInt.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
-        ////////objInt.MobileUnk_0xA = objI.MobileUnk_0xA;
-        ////////objInt.MobileUnk_0xB_12_F = objI.MobileUnk_0xB_12_F;
-        ////////objInt.MobileUnk_0xD_4_FF = objI.MobileUnk_0xD_4_FF;
-        ////////objInt.MobileUnk_0xD_12_1 = objI.MobileUnk_0xD_12_1;
-        ////////objInt.MobileUnk_0xF_0_3F = objI.MobileUnk_0xF_0_3F;
-        ////////objInt.MobileUnk_0xF_C_F = objI.MobileUnk_0xF_C_F;
-        ////////objInt.MobileUnk_0x11 = objI.MobileUnk_0x11;
-        ////////objInt.ProjectileSourceID = objI.ProjectileSourceID;
-        ////////objInt.MobileUnk_0x13 = objI.MobileUnk_0x13;
-        //////////objInt.Projectile_Sign = objI.Projectile_Sign;
-        ////////objInt.MobileUnk_0x15_4_1F = objI.MobileUnk_0x15_4_1F;
-        ////////objInt.MobileUnk_0x16_0_F = objI.MobileUnk_0x16_0_F;
-        ////////objInt.MobileUnk_0x18_5_7 = objI.MobileUnk_0x18_5_7;
-        ////////objInt.MobileUnk_0x19_6_3 = objI.MobileUnk_0x19_6_3;
-
-    }
-
-
 
     /// <summary>
     /// Bouncing sound when object is thrown.
@@ -1919,10 +1814,6 @@ public class ObjectInteraction : UWEBase
             //do not update position of traps and triggers.
             return;
         }
-        //if (ObjectLoader.isStatic(objectloaderinfo))
-        //{
-        //    return;
-        //}
 
         ObjectTileX = (short)Mathf.FloorToInt(this.transform.localPosition.x / 1.2f);
         ObjectTileY = (short)Mathf.FloorToInt(this.transform.localPosition.z / 1.2f);
@@ -1946,9 +1837,9 @@ public class ObjectInteraction : UWEBase
             //updates the x,y and zpos
             switch (GetItemType())
             {
-                case DOOR://DO not update heights of doors.
+                case DOOR://Do not update position of doors.
                 case HIDDENDOOR:
-                    break;
+                    return;
                 default:
                     short newzpos = (short)((((this.transform.localPosition.y * 100f) / 15f) / ceil) * 128f);
                     newzpos = (short)Mathf.Min(Mathf.Ceil(newzpos), 128f);
@@ -2146,8 +2037,6 @@ public class ObjectInteraction : UWEBase
                 myObj.AddComponent<DoorControl>();
                 DoorControl.CreateDoor(myObj, objInt);
                 myObj.transform.Rotate(-90f, (objInt.heading * 45f) - 180f, 0f, Space.World);//I rotate here since my modelling is crap!
-
-                //UnityRotation(game, -90, currobj.heading - 180 + OpenAdju, 0);
                 skipRotate = true;
                 CreateSprite = false;
                 break;
@@ -2885,7 +2774,7 @@ public class ObjectInteraction : UWEBase
                 {
                     skipRotate = true;
                 }
-                SetMobileProps(myObj, objInt, currObj);
+                //SetMobileProps(myObj, objInt, currObj);
                 if (myObj.GetComponent<Rigidbody>() != null)
                 {
                     switch (currObj.GetItemType())
