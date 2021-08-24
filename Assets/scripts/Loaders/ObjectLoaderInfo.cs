@@ -10,7 +10,7 @@ public class ObjectLoaderInfo : UWClass
     /// <summary>
     /// it's own index for look ups into the data to extract it's properties
     /// </summary>
-    public int index;
+    public short index;
 
     //Inventory Data. inventory data is not stored in a block of memory until write back so temp data is used here.
     public byte[] InventoryData;
@@ -233,6 +233,13 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            if (index > 256)
+            {
+                if (value != xpos)
+                {
+                    Debug.Log("Changing ypos for static object +" + index);
+                }
+            }
             int existingValue = GetAt16(PTR+2);
             existingValue &= 0xE3FF; //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7) << 10));
@@ -249,6 +256,13 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            if (index>256)
+            {
+                if(value!=xpos)
+                {
+                    Debug.Log("Changing xpos for static object " + index);
+                }                
+            }
             int existingValue = GetAt16(PTR+2);
             existingValue &= 0x1FFF; //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7) << 13));
@@ -270,7 +284,7 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public int next
+    public short next
     {//(short)(ExtractBits(Vals[2], 6, 0x3ff));
         get
         {
@@ -300,7 +314,7 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public int link
+    public short link
     {//(short)(ExtractBits(Vals[2], 6, 0x3ff));
         get
         {
@@ -317,18 +331,18 @@ public class ObjectLoaderInfo : UWClass
 
     //Mobile Properties. Only available on objects with indices <256
 
-    public short npc_hp
+    public byte npc_hp
     {//
         get
         {
             if (IsStatic) { return 0; }
-            return (short)GetAt(PTR + 0x8);
+            return GetAt(PTR + 0x8);
         }
         set
         {
             if (!IsStatic)
             {
-                SetAt(PTR + 0x8, (byte)value);
+                SetAt(PTR + 0x8, value);
             }
         }
     }
@@ -388,12 +402,12 @@ public class ObjectLoaderInfo : UWClass
     //    }
     //}
 
-    public short MobileUnk_0xA
+    public byte MobileUnk_0xA
     {
         get
         {
             if (IsStatic) { return 0; }
-            return (short)GetAt(PTR + 0xa);
+            return GetAt(PTR + 0xa);
         }
         set
         {
@@ -404,13 +418,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_goal
+    public byte npc_goal
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 0, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
         {
@@ -423,13 +437,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_gtarg
+    public byte npc_gtarg
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 4, 0xFF));
+            return (byte)(DataLoader.ExtractBits(val, 4, 0xFF));
         }
         set
         {
@@ -442,13 +456,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short AnimationFrame
+    public byte AnimationFrame
     {//formerly MobileUnk_0xB_12_F
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xb);
-            return (short)(DataLoader.ExtractBits(val, 12, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 12, 0xF));
         }
         set
         {
@@ -461,13 +475,13 @@ public class ObjectLoaderInfo : UWClass
         }
     }
 
-    public short npc_level
+    public byte npc_level
     {
         get
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt16(PTR + 0xd);
-            return (short)(DataLoader.ExtractBits(val, 0, 0xF));
+            return (byte)(DataLoader.ExtractBits(val, 0, 0xF));
         }
         set
         {
@@ -912,11 +926,11 @@ public class ObjectLoaderInfo : UWClass
 
 
     //My additions
-    public short InUseFlag//Based on values and no of values in the mobile and static free lists.
-    {
-        get { return 1; }
-        set { }
-    }
+    //public short InUseFlag//Based on values and no of values in the mobile and static free lists.
+    //{
+    //    get { return 1; }
+    //    set { }
+    //}
 
 
     public short levelno
@@ -998,7 +1012,7 @@ public class ObjectLoaderInfo : UWClass
     /// </summary>
     /// <param name="index"></param>
     /// <param name="map"></param>
-    public ObjectLoaderInfo(int _index, TileMap _map, bool isWorldObject)
+    public ObjectLoaderInfo(short _index, TileMap _map, bool isWorldObject)
     {
         index = _index;
         map = _map;
@@ -1052,20 +1066,20 @@ public class ObjectLoaderInfo : UWClass
     }
 
 
-    public void Set()
-    {
-        InUseFlag = 1;
-    }
+    //public void Set()
+    //{
+    //    InUseFlag = 1;
+    //}
 
-    public void Unset()
-    {
-        InUseFlag = 0;
-    }
+    //public void Unset()
+    //{
+    //    InUseFlag = 0;
+    //}
 
-    public bool isInUse()
-    {
-        return (InUseFlag == 1);
-    }
+    //public bool isInUse()
+    //{
+    //    return (InUseFlag == 1);
+    //}
 
     public string getDesc()
     {

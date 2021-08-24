@@ -193,7 +193,7 @@ public class object_base : UWEBase
         }
     }
 
-    public int next
+    public short next
     {
         get
         {
@@ -217,7 +217,7 @@ public class object_base : UWEBase
         }
     }
 
-    public int link
+    public short link
     {
         get
         {
@@ -298,7 +298,7 @@ public class object_base : UWEBase
             objInt().npc_health = value;
         }
     }
-    public short npc_hp
+    public byte npc_hp
     {
         get
         {
@@ -331,7 +331,7 @@ public class object_base : UWEBase
             objInt().npc_power = value;
         }
     }
-    public short npc_goal
+    public byte npc_goal
     {
         get
         {
@@ -361,7 +361,7 @@ public class object_base : UWEBase
         }
         set
         {
-            objInt().npc_gtarg = value;
+            objInt().npc_gtarg = (byte)value;
         }
     }
     public short npc_heading
@@ -394,7 +394,7 @@ public class object_base : UWEBase
         }
         set
         {
-            objInt().npc_level = value;
+            objInt().npc_level = (byte)value;
         }
     }
     public short npc_name
@@ -1144,7 +1144,7 @@ return false;*/
                         Col.gameObject.GetComponent<NPC>().npc_gtarg = 1;
                         //XG  Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
                         //Col.gameObject.GetComponent<NPC>().gtargName = UWCharacter.Instance.gameObject.name;
-                        Col.gameObject.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
+                        Col.gameObject.GetComponent<NPC>().npc_goal = (byte)NPC.npc_goals.npc_goal_attack_5;
                         reaction = StringController.instance.GetString(1, StringController.str__is_angered_by_your_action_);
                     }
                     else

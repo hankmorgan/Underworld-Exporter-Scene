@@ -76,7 +76,7 @@ public class Impact : object_base
     {
         try
         {
-            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(Item_ID, 40, StartFrame, 1, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(Item_ID, 40, (short)StartFrame, 1, 256);
             if (newobjt != null)
             {
                 ObjectInteraction objInt = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ImpactPosition);

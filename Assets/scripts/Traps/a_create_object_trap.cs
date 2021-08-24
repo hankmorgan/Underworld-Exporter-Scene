@@ -61,7 +61,7 @@ public class a_create_object_trap : trap_base
 
         objI.instance = cloneObj.GetComponent<ObjectInteraction>();
         cloneObj.GetComponent<ObjectInteraction>().BaseObjectData = objI;
-        objI.InUseFlag = 1;
+        //objI.InUseFlag = 1;
 
         if (MoveItem)
         {

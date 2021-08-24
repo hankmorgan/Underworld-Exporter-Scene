@@ -1170,13 +1170,13 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     case "npc_attitude":
                         npc.npc_attitude = (short)stack.at(address); break;
                     case "npc_goal":
-                        npc.npc_goal = (short)stack.at(address); break;
+                        npc.npc_goal = (byte)stack.at(address); break;
                     case "npc_power":
                         npc.npc_power = (short)stack.at(address); break;
                     case "npc_arms":
                         npc.npc_arms = (short)stack.at(address); break;
                     case "npc_hp":
-                        npc.npc_hp = (short)stack.at(address); break;
+                        npc.npc_hp = (byte)stack.at(address); break;
                     case "npc_health":
                         npc.npc_health = (short)stack.at(address); break;
                     case "npc_hunger":
@@ -2074,7 +2074,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     int[] args = new int[2];
                     args[0] = stack.at(stack.stackptr - 2);//ptr to value
                     args[1] = stack.at(stack.stackptr - 3);//ptr to value
-                    give_ptr_npc(npc, stack.at(args[0]), args[1]);
+                    give_ptr_npc(npc, (short)stack.at(args[0]), args[1]);
                     break;
                 }
             case "take_from_npc_inv":
@@ -2235,7 +2235,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                             {
                                 SettingUpFight = true;
                                 //Quest.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
-                                Quest.SetArenaOpponent(0, npc.objInt().BaseObjectData.index);
+                                Quest.SetArenaOpponent(0, npc.ObjectIndex);
                                 Quest.FightingInArena = true;
                                 break;
                             }
@@ -2753,7 +2753,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             if (objsGiven[i] != null)
             {
                 GameWorldController.MoveToWorld(objsGiven[i]);
-                stack.Set(start + i, objsGiven[i].GetComponent<ObjectInteraction>().BaseObjectData.index);//Update the object index in the stack so I keep track of it.
+                stack.Set(start + i, objsGiven[i].ObjectIndex);//Update the object index in the stack so I keep track of it.
             }
         }
         if (SomethingGiven == true)
@@ -3396,11 +3396,11 @@ obj = CurrentObjectList().objInfo[pos].instance;
             //obj.link=locals[link]+512;
             if (obj.isQuantityBln)
             {
-                obj.link = stack.at(link);
+                obj.link = (short)stack.at(link);
             }
             else
             {
-                obj.link = stack.at(link) + 512;
+                obj.link = (short)(stack.at(link) + 512);
             }
 
         }
@@ -3657,7 +3657,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
                         Col.gameObject.GetComponent<NPC>().npc_gtarg = 5;
                         //XG  Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
                         //Col.gameObject.GetComponent<NPC>().gtargName = UWCharacter.Instance.gameObject.name;
-                        Col.gameObject.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
+                        Col.gameObject.GetComponent<NPC>().npc_goal = (byte)NPC.npc_goals.npc_goal_attack_5;
                     }
                 }
             }
@@ -3771,7 +3771,7 @@ obj = CurrentObjectList().objInfo[pos].instance;
     /// <param name="unk1">Unk1.</param>
     /// <param name="Quantity">Quantity.</param>
     /// <param name="slotNo">Slot no.</param>
-    public void give_ptr_npc(NPC npc, int Quantity, int ptrSlotNo)
+    public void give_ptr_npc(NPC npc, short Quantity, int ptrSlotNo)
     {
         /*
 id=0014 name="give_ptr_npc" ret_type=int
@@ -3830,11 +3830,11 @@ return value: none
                         GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
                         Split.GetComponent<ObjectInteraction>().link = Quantity;
 
-                        objGiven.GetComponent<ObjectInteraction>().link = objGiven.GetComponent<ObjectInteraction>().link - Quantity;
+                        objGiven.link = (short)(objGiven.link - Quantity);
 
                         GameWorldController.MoveToWorld(objGiven);
                         //Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
-                        Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().BaseObjectData);//(objGiven.GetComponent<ObjectInteraction>()
+                        Split.name = ObjectInteraction.UniqueObjectName(Split.GetComponent<ObjectInteraction>());//(objGiven.GetComponent<ObjectInteraction>()
                         cn.AddItemToContainer(objGiven);
                     }
                     else
@@ -4131,7 +4131,7 @@ return value: none
         //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
         BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj);
-        return myObj.GetComponent<ObjectInteraction>().BaseObjectData.index;
+        return myObj.ObjectIndex;
 
     }
 
@@ -4416,7 +4416,7 @@ description:  places a generated object in underworld
             Vector3 pos = CurrentTileMap().getTileVector(tileX[i], tileY[i]);
             ObjectInteraction objI = ObjectInteraction.CreateNewObject(CurrentTileMap(), objNew, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
             objI.GetComponent<NPC>().npc_attitude = 0;
-            objI.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
+            objI.GetComponent<NPC>().npc_goal = (byte)NPC.npc_goals.npc_goal_attack_5;
             objI.GetComponent<NPC>().npc_hp = 49;
             objI.GetComponent<NPC>().npc_xhome = (short)tileX[i];
             objI.GetComponent<NPC>().npc_yhome = (short)tileY[i];

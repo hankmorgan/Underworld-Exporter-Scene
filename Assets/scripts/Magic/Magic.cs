@@ -1483,7 +1483,7 @@ public class Magic : UWEBase
         {//No object interferes with the spellcast
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(176 + Random.Range(0, 7), 40, 0, 1, 256);
             newobjt.is_quant = 1;
-            newobjt.InUseFlag = 1;
+            //newobjt.InUseFlag = 1;
             UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
         }
     }
@@ -1514,7 +1514,7 @@ public class Magic : UWEBase
                 if (target.npc_attitude == 0)
                 {
                     //targetName=target.name;
-                    gtarg = target.GetComponent<ObjectInteraction>().BaseObjectData.index;
+                    gtarg = target.ObjectIndex;
                 }
             }
 
@@ -1530,11 +1530,11 @@ public class Magic : UWEBase
             spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster, caster);
 
             ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(spKM.RndNPC, 0, 0, 0, 2);
-            GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
-            myObj.GetComponent<NPC>().npc_gtarg = (short)gtarg;
-            myObj.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_follow;
-            myObj.GetComponent<NPC>().npc_hp = GameWorldController.instance.objDat.critterStats[spKM.RndNPC - 64].AvgHit;
-            newobjt.InUseFlag = 1;
+            var myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange));
+            myObj.npc_gtarg = (byte)gtarg;
+            myObj.npc_goal = (byte)NPC.npc_goals.npc_goal_follow;
+            myObj.npc_hp = GameWorldController.instance.objDat.critterStats[spKM.RndNPC - 64].AvgHit;
+            //newobjt.InUseFlag = 1;
             /*
             ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, spKM.RndNPC, spKM.RndNPC, spKM.RndNPC, 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
@@ -2232,7 +2232,7 @@ public class Magic : UWEBase
         }
         else
         {
-            obj.link = enchant;
+            obj.link = (short)enchant;
             obj.enchantment = 1;
             if (obj.GetComponent<Equipment>() != null)
             {
@@ -2321,7 +2321,7 @@ public class Magic : UWEBase
                 ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(386, 40, 0, 0, 256);
                 GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
                 myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(), 0, 0, 0);
-                newobjt.InUseFlag = 1;
+               // newobjt.InUseFlag = 1;
                 //TODO: Fix this
                 //arrow.item_index=339+boulderTypeOffset;
                 //arrow.objInt().o
@@ -2688,7 +2688,7 @@ public class Magic : UWEBase
 */
         ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(393, 40, 0, 0, 256);
         ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
-        newobjt.InUseFlag = 1;
+        //newobjt.InUseFlag = 1;
 
         //000~001~276~The Rune of Warding is placed. \n
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 276));
@@ -3797,7 +3797,7 @@ public class Magic : UWEBase
     {//Creates the projectile.
         //Create an object info
         //CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
-        if (CurrentObjectList().GetFreeMobileObject(out int index))
+        if (CurrentObjectList().GetFreeMobileObject(out short index))
         {
             ObjectLoaderInfo oli = CurrentObjectList().objInfo[index];
             //oli.guid = System.Guid.NewGuid();
@@ -3808,7 +3808,7 @@ public class Magic : UWEBase
             oli.is_quant = 1;
             oli.flags = 3;
             oli.quality = 60;
-            oli.InUseFlag = 1;
+            //oli.InUseFlag = 1;
             GameObject projectile = ObjectInteraction.CreateNewObject(CurrentTileMap(), oli, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, Location).gameObject;
             projectile.layer = LayerMask.NameToLayer("MagicProjectile");
             //projectile.name = "MagicProjectile_" + SummonCount++;

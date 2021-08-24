@@ -15,7 +15,7 @@ public class Zanium : object_base
         ObjectInteraction someZanium = UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
         if (someZanium != null)
         {//Add the zanium to the pile
-            someZanium.link += link;
+            someZanium.link = (short)(someZanium.link + link);
             someZanium.isquant = 1;
             objInt().consumeObject();
             UWCharacter.Instance.playerInventory.Refresh();//Update the display

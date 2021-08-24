@@ -491,7 +491,7 @@ public class UWCombat : Combat
                     launchedItem = currentAmmo.gameObject;
                     UWCharacter.Instance.playerInventory.RemoveItem(currentAmmo);
                     //launchedItem.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    GameWorldController.MoveToWorld(launchedItem);
+                    GameWorldController.MoveToWorld(currentAmmo,false);
                     launchedItem.transform.position = ray.GetPoint(dropRange - 0.1f);
                 }
                 else

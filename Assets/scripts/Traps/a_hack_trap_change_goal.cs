@@ -13,7 +13,7 @@ public class a_hack_trap_change_goal : a_hack_trap
         {
             if (foundNPCs[i].npc_whoami == zpos)
             {
-                foundNPCs[i].npc_goal = owner;
+                foundNPCs[i].npc_goal = (byte)owner;
             }
         }
     }

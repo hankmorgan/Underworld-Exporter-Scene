@@ -176,7 +176,8 @@ public class TileMapRenderer : Loader
         {
             if (objList.objInfo[i] != null)
             {
-                if (((objList.objInfo[i].item_id >= 320) && (objList.objInfo[i].item_id <= 335)) && (objList.objInfo[i].InUseFlag == 1))
+                // if (((objList.objInfo[i].item_id >= 320) && (objList.objInfo[i].item_id <= 335)) && (objList.objInfo[i].InUseFlag == 1))
+                if (((objList.objInfo[i].item_id >= 320) && (objList.objInfo[i].item_id <= 335)))
                 {
                     RenderDoor(Parent, level, objList, i);
                 }
@@ -605,7 +606,8 @@ public class TileMapRenderer : Loader
         {
             if (objList.objInfo[i] != null)
             {
-                if ((objList.objInfo[i].GetItemType() == ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag == 1))
+                //  if ((objList.objInfo[i].GetItemType() == ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag == 1))
+                if ((objList.objInfo[i].GetItemType() == ObjectInteraction.PILLAR))
                 {
                     Vector3 position = ObjectLoader.CalcObjectXYZ(i, 0);
                     //position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
@@ -701,7 +703,9 @@ public class TileMapRenderer : Loader
             if (objList.objInfo[i] != null)
             {
 
-                if ((objList.objInfo[i].GetItemType() == ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag == 1) && (objList.objInfo[i].invis == 0))
+                //  if ((objList.objInfo[i].GetItemType() == ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag == 1) && (objList.objInfo[i].invis == 0))
+                if ((objList.objInfo[i].GetItemType() == ObjectInteraction.BRIDGE) && (objList.objInfo[i].invis == 0))
+
                 {
                     RenderBridge(Parent, level, objList, i);
                 }

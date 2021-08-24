@@ -26,6 +26,7 @@ public class LevArk : Loader
     /// 80 map notes - top copy for the moment
     public static void WriteBackLevArkUW2(int slotNo)
     {
+        return;
         int NoOfBlocks = 320;
         DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
 
@@ -284,6 +285,7 @@ public class LevArk : Loader
     /// 
     public static void WriteBackLevArkUW1(int slotNo)
     {
+        return;
         DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[45];
 
         //First update the object list so as to match indices properly

@@ -187,14 +187,14 @@ public class GameClock : UWEBase
     /// </summary>
     static void EveryMinuteUpdate()
     {//Advance the time.
-        Debug.Log("Minute update");
+       // Debug.Log("Minute update");
         UWCharacter.Instance.RegenMana();
         UWCharacter.Instance.UpdateHungerAndFatigue();
     }
     
     static void EveryHalfMinuteUpdate()
     {
-        Debug.Log("HalfMinute update");
+        //Debug.Log("HalfMinute update");
         //Poison updates every 30 seconds.
         UWCharacter.Instance.PoisonUpdate();
     }

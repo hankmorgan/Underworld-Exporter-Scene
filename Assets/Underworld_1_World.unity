@@ -8893,12 +8893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gametimevals: 000000000000000000000000
-  game_time: 0
   clockTime: 0
   clockRate: 1
-  _second: 20
-  _minute: 50
-  _day: 0
 --- !u!114 &236517054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41948,8 +41944,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.299805, y: 12.510002}
-  m_SizeDelta: {x: -156.3, y: -119.18}
+  m_AnchoredPosition: {x: -20.299805, y: 13.900001}
+  m_SizeDelta: {x: -156.3, y: -116.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162165752
 MonoBehaviour:

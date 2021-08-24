@@ -81,7 +81,7 @@ public class AnimationOverlay : UWEBase
     void Start()
     {
         TileMap.Overlay[] overlays = CurrentTileMap().Overlays;
-        int thislink = this.GetComponent<ObjectInteraction>().BaseObjectData.index;
+        int thislink = this.GetComponent<ObjectInteraction>().ObjectIndex;
         for (int i = 0; i <= overlays.GetUpperBound(0); i++)
         {
             if (overlays[i].link == thislink)
@@ -174,7 +174,7 @@ public class AnimationOverlay : UWEBase
         CurrentTileMap().Overlays[OverlayIndex] = new TileMap.Overlay();//Clear the overlay from the list.
         if (this.GetComponent<ObjectInteraction>() != null)
         {
-            this.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag = 0;//Free up the slot
+           // this.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag = 0;//Free up the slot
             //Destroy(this.gameObject);
             ObjectInteraction.DestroyObjectFromUW(this.GetComponent<ObjectInteraction>());
         }

@@ -128,11 +128,11 @@ public class ObjectLoader : DataLoader
     /// <summary>
     /// The no of in use mobile objects in the object list.
     /// </summary>
-    public int NoOfFreeMobile
+    public short NoOfFreeMobile
     {
         get
         {
-            return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
+            return (short)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
         }
         set
         {
@@ -144,11 +144,11 @@ public class ObjectLoader : DataLoader
     /// <summary>
     /// The no of in use static objects in the object list.
     /// </summary>
-    public int NoOfFreeStatic
+    public short NoOfFreeStatic
     {
         get
         {
-            return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c04, 16);//7c04
+            return (short)getValAtAddress(map.lev_ark_block.Data, 0x7c04, 16);//7c04
         }
         set
         {
@@ -157,11 +157,11 @@ public class ObjectLoader : DataLoader
         }
     }
 
-    /// <summary>
-    /// Free lists are used to allocate available object slots.
-    /// </summary>
-    public int[] FreeMobileList = new int[254];
-    public int[] FreeStaticList = new int[768];
+    ///// <summary>
+    ///// Free lists are used to allocate available object slots.
+    ///// </summary>
+    //public short[] FreeMobileList = new short[254];
+    //public short[] FreeStaticList = new short[768];
 
     struct xrefTable
     {
@@ -245,7 +245,7 @@ public class ObjectLoader : DataLoader
         xrefTable[] xref;
         xref = new xrefTable[xref_ark.chunkUnpackedLength / 10];
         int xref_ptr = 0;
-        int i;
+        short i;
         //int xRefLength = (xref_ark.chunkUnpackedLength/10);
 
 
@@ -298,7 +298,7 @@ public class ObjectLoader : DataLoader
             //To stop later crashes in ascii dumps I set some inital values.
             objList[i] = new ObjectLoaderInfo(i, UWEBase.CurrentTileMap(), true)
             {
-                index = i,
+                index = (short)i,
                 next = 0,
                 item_id = 0,
                 link = 0,
@@ -313,7 +313,7 @@ public class ObjectLoader : DataLoader
 
             xref_ptr = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 5, 16);
             int MasterIndex = xref[xref_ptr].MstIndex;
-            objList[MasterIndex].index = MasterIndex;
+            objList[MasterIndex].index = (short)MasterIndex;
             objList[MasterIndex].link = 0;
             //objList[MasterIndex].joint=0;
             objList[MasterIndex].heading = 0;
@@ -324,12 +324,12 @@ public class ObjectLoader : DataLoader
             objList[MasterIndex].zpos = 0;
             objList[MasterIndex].address = mstaddress_pointer;
             InUseFlag = (short)getValAtAddress(mst_ark.data, mstaddress_pointer, 8);
-            objList[MasterIndex].InUseFlag = InUseFlag;
+           // objList[MasterIndex].InUseFlag = InUseFlag;
 
             //objList[MasterIndex].levelno = (short)LevelNo;
             objList[MasterIndex].ObjectTileX = xref[xref_ptr].tileX;
             objList[MasterIndex].ObjectTileY = xref[xref_ptr].tileY;
-            objList[MasterIndex].next = xref[xref[xref_ptr].next].MstIndex;
+            objList[MasterIndex].next = (short)xref[xref[xref_ptr].next].MstIndex;
             objList[MasterIndex].parentList = this;
 
             ObjectClass = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 1, 8);
@@ -435,11 +435,11 @@ public class ObjectLoader : DataLoader
                 }
                 UniqueObjectName(objList[MasterIndex]);
             }
-            else
-            {
-                objList[MasterIndex].InUseFlag = 0;
-                //fprintf(LOGFILE,"\n\nInvalid item id!!\n");
-            }
+            //else
+            //{
+            //   // objList[MasterIndex].InUseFlag = 0;
+            //    //fprintf(LOGFILE,"\n\nInvalid item id!!\n");
+            //}
 
 
             mstaddress_pointer += 27;
@@ -471,15 +471,15 @@ public class ObjectLoader : DataLoader
     {
         long address_pointer = 0;
         long objectsAddress = (64 * 64 * 4);
-        for (int x = 0; x < 1024; x++)
+        for (short x = 0; x < 1024; x++)
         {   //read in master object list
-            int[] Vals = new int[4];
+           // uint[] Vals = new uint[4];
 
-            //Read in the 4 x int 16s that comprise the static object
-            for (int i = 0; i <= Vals.GetUpperBound(0); i++)
-            {
-                Vals[i] = (int)getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
-            }
+            ////Read in the 4 x int 16s that comprise the static object
+            //for (int i = 0; i <= Vals.GetUpperBound(0); i++)
+            //{
+            //    Vals[i] = getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
+            //}
             objList[x] = new ObjectLoaderInfo(x, map, true)
             {
                 map = map,
@@ -607,13 +607,12 @@ public class ObjectLoader : DataLoader
     /// </summary>
     /// <param name="AvailableSlot"></param>
     /// <returns>False if no slot is available</returns>
-    public bool GetFreeMobileObject(out int AvailableSlot)
+    public bool GetFreeMobileObject(out short AvailableSlot)
     {
         AvailableSlot = NoOfFreeMobile;
         if (AvailableSlot >= 2)
         {
             NoOfFreeMobile--;
-            //Debug.Log("Allocating Static Slot " + AvailableSlot);
             return true;
         }
         else
@@ -626,11 +625,11 @@ public class ObjectLoader : DataLoader
     /// Gets the item index at the specified slot
     /// </summary>
     /// <returns></returns>
-    public int GetMobileAtSlot(int slot)
+    public short GetMobileAtSlot(short slot)
     {
         ////   7300    01fc   free list for mobile objects (objects 0002-00ff, 254 x 2 bytes)
         int offset = slot * 2;
-        int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x7300 + offset, 16);
+        short val = (short)getValAtAddress(map.lev_ark_block.Data, 0x7300 + offset, 16);
 
         //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
         return val;
@@ -642,13 +641,13 @@ public class ObjectLoader : DataLoader
     /// </summary>
     /// <param name="AvailableSlot"></param>
     /// <returns>False if no slot is available</returns>
-    public bool GetFreeStaticObject(out int AvailableSlot)
+    public bool GetFreeStaticObject(out short AvailableSlot)
     {
         AvailableSlot = NoOfFreeStatic;
         if (AvailableSlot >= 2)
         {
             NoOfFreeStatic--;
-            //Debug.Log("Allocating Static Slot " + AvailableSlot);
+            Debug.Log("Allocating Static Slot " + AvailableSlot + " which is item index " + GetStaticAtSlot(AvailableSlot)) ;
             return true;
         }
         else
@@ -679,23 +678,21 @@ public class ObjectLoader : DataLoader
         if (Slot > 0)
         {//Found
 
-            //Shift all values between start of used to object up by one in the list.
-            for (int i = Slot; i >= NoOfFreeStatic; i--)
-            {
-                int ValueToShift = GetStaticAtSlot(i - 1);
-                SetStaticAtSlot(i, ValueToShift);
-            }
-
+            ////Shift all values between start of used to object up by one in the list.
+            //for (int i = Slot; i >= NoOfFreeStatic; i--)
+            //{
+            //    int ValueToShift = GetStaticAtSlot(i - 1);
+            //    SetStaticAtSlot(i, ValueToShift);
+            //}
+            NoOfFreeStatic++;
             //Insert object at top of available list
             SetStaticAtSlot(NoOfFreeStatic, index);
             //Increment free object counter.
-            NoOfFreeStatic++;
+            
         }
 
         objInfo[index].next = 0;
     }
-
-
 
 
     /// <summary>
@@ -706,9 +703,9 @@ public class ObjectLoader : DataLoader
     /// <returns></returns>
     public void ReleaseFreeMobileObject(int index)
     {
-        int Slot = -1;
+        short Slot = -1;
         //Find the slot it is currently in.
-        for (int i = 0; i < 254; i++)
+        for (short i = 0; i < 254; i++)
         {
             if (index == GetMobileAtSlot(i))
             {
@@ -721,9 +718,9 @@ public class ObjectLoader : DataLoader
         {//Found
 
             //Shift all values between start of used to object up by one in the list.
-            for (int i = Slot; i >= NoOfFreeMobile; i--)
+            for (short i = Slot; i >= NoOfFreeMobile; i--)
             {
-                int ValueToShift = GetMobileAtSlot(i - 1);
+                int ValueToShift = GetMobileAtSlot((short)(i - 1));
                 SetMobileAtSlot(i, ValueToShift);
             }
 
@@ -739,13 +736,11 @@ public class ObjectLoader : DataLoader
     /// Gets the item index at the specified slot
     /// </summary>
     /// <returns></returns>
-    public int GetStaticAtSlot(int slot)
+    public short GetStaticAtSlot(int slot)
     {
         ////74fc    0600   free list for static objects (objects 0100 - 03ff, 768 x 2 bytes)
         int offset = slot * 2;
-        int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
-        //Debug.Log("Allocating Static Slot " + val);
-        //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+        var val = (short)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
         return val;
     }
 
@@ -775,71 +770,68 @@ public class ObjectLoader : DataLoader
     }
 
 
-
-
-
-    /// <summary>
-    /// Builds the free object lists in order to identify which objects need to be created
-    /// </summary>
-    /// <param name="objList">Object list.</param>
-    /// <param name="lev_ark">Lev ark.</param>
-    /// <param name="address_pointer">Address pointer.</param>
-    /// <param name="objectsAddress">Objects address.</param>
-    void BuildFreeObjectLists(ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
-    {
-        Debug.Log("BuildFreeObjectLists");
-        return;
-        //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
-        ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
-        //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
-        //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
-        //////////////// {
-        ////////////////     if (i > 2)
-        ////////////////     {
-        ////////////////         objList[i].InUseFlag = 1;
-        ////////////////         //Assume in use unless informed otherwise in the next loop.			
-        ////////////////     }
-        //////////////// }
-        //////////////// objectsAddress = 0x7300;
-        //////////////// //location of the mobile object free list
-        //////////////// address_pointer = 0;
-        //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
-        //////////////// string output = "Mobile List\n";
-        //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
-        //////////////// {
-        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-        ////////////////     objList[freed].InUseFlag = 0;
-        ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
-        ////////////////     address_pointer += 2;
-        //////////////// }
-        //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
-        //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
-        //////////////// {
-        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-        ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
-        ////////////////     address_pointer += 2;
-        //////////////// }
-        //////////////// output = output + "Static List\n";
-        //////////////// objectsAddress = 0x74fc;
-        //////////////// //location of the static object free list
-        //////////////// address_pointer = 0;
-        //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
-        //////////////// {
-        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-        ////////////////     objList[freed].InUseFlag = 0;
-        ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
-        ////////////////     address_pointer += 2;
-        //////////////// }
-        //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
-        //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
-        //////////////// {
-        ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
-        ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
-        ////////////////     address_pointer += 2;
-        //////////////// }
-        //////////////// writer.Write(output);
-        //////////////// writer.Close();
-    }
+    ///// <summary>
+    ///// Builds the free object lists in order to identify which objects need to be created
+    ///// </summary>
+    ///// <param name="objList">Object list.</param>
+    ///// <param name="lev_ark">Lev ark.</param>
+    ///// <param name="address_pointer">Address pointer.</param>
+    ///// <param name="objectsAddress">Objects address.</param>
+    //void BuildFreeObjectLists(ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
+    //{
+    //    Debug.Log("BuildFreeObjectLists");
+    //    return;
+    //    //////////////// //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
+    //    ////////////////// NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
+    //    //////////////// //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
+    //    //////////////// for (int i = 0; i <= objList.GetUpperBound(0); i++)
+    //    //////////////// {
+    //    ////////////////     if (i > 2)
+    //    ////////////////     {
+    //    ////////////////         objList[i].InUseFlag = 1;
+    //    ////////////////         //Assume in use unless informed otherwise in the next loop.			
+    //    ////////////////     }
+    //    //////////////// }
+    //    //////////////// objectsAddress = 0x7300;
+    //    //////////////// //location of the mobile object free list
+    //    //////////////// address_pointer = 0;
+    //    //////////////// StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
+    //    //////////////// string output = "Mobile List\n";
+    //    //////////////// for (int i = 0; i <= NoOfFreeMobile; i++)
+    //    //////////////// {
+    //    ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+    //    ////////////////     objList[freed].InUseFlag = 0;
+    //    ////////////////     output = output + "Mobile Free:" + i + " = " + freed + "\n";
+    //    ////////////////     address_pointer += 2;
+    //    //////////////// }
+    //    //////////////// output = output + "Count:" + NoOfFreeMobile + "\n";
+    //    //////////////// for (int i = NoOfFreeMobile + 1; i < 254; i++)
+    //    //////////////// {
+    //    ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+    //    ////////////////     output = output + "Mobile Junk:" + i + " = " + freed + "\n";
+    //    ////////////////     address_pointer += 2;
+    //    //////////////// }
+    //    //////////////// output = output + "Static List\n";
+    //    //////////////// objectsAddress = 0x74fc;
+    //    //////////////// //location of the static object free list
+    //    //////////////// address_pointer = 0;
+    //    //////////////// for (int i = 0; i <= NoOfFreeStatic; i++)
+    //    //////////////// {
+    //    ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+    //    ////////////////     objList[freed].InUseFlag = 0;
+    //    ////////////////     output = output + "Static Free:" + i + " = " + freed + "\n";
+    //    ////////////////     address_pointer += 2;
+    //    //////////////// }
+    //    //////////////// output = output + "Count (static):" + NoOfFreeStatic + "\n";
+    //    //////////////// for (int i = NoOfFreeStatic + 1; i < 768; i++)
+    //    //////////////// {
+    //    ////////////////     int freed = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer, 16);
+    //    ////////////////     output = output + "Static Junk:" + i + " = " + freed + "\n";
+    //    ////////////////     address_pointer += 2;
+    //    //////////////// }
+    //    //////////////// writer.Write(output);
+    //    //////////////// writer.Close();
+    //}
 
     static void HandleMovingDoors(ObjectLoaderInfo[] objList, int x)
     {
@@ -1762,7 +1754,8 @@ public class ObjectLoader : DataLoader
         {
             if (instance.objInfo[i] != null)
             {
-                if ((instance.objInfo[i].InUseFlag == 1))   //|| (UWEBase.EditorMode)
+                //if ((instance.objInfo[i].InUseFlag == 1))   //|| (UWEBase.EditorMode)
+                if (true)
                 {
                     Vector3 position;
                     if (tilemap == null)
@@ -1775,10 +1768,6 @@ public class ObjectLoader : DataLoader
                     }
 
                     instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i], instance.objInfo, parent, position);
-                    //FIELD PICKUP if (parent == GameWorldController.instance.InventoryMarker)
-                    //FIELD PICKUP {//FOr inventory objects spawned
-                    //FIELD PICKUP  instance.objInfo[i].instance.PickedUp = true;
-                    //FIELD PICKUP }
                 }
             }
         }
@@ -2084,7 +2073,7 @@ public class ObjectLoader : DataLoader
                 }
                 if (Prev != null)
                 {
-                    Prev.GetComponent<ObjectInteraction>().next = System.Array.IndexOf(InventoryObjects, obj.name) + 1;
+                    Prev.GetComponent<ObjectInteraction>().next = (short)(System.Array.IndexOf(InventoryObjects, obj.name) + 1);
                 }
                 Prev = obj;
             }
@@ -2119,14 +2108,14 @@ public class ObjectLoader : DataLoader
                 index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
                 if (cnLinked == false)
                 {//The container is first linked to this object							
-                    cn.gameObject.GetComponent<ObjectInteraction>().link = index;
+                    cn.gameObject.GetComponent<ObjectInteraction>().link = (short)index;
                     cnLinked = true;
                     prev = item;
                 }
                 else
                 {//The object needs to be a next of the previous object
                  //index= System.Array.IndexOf(InventoryObjects,obj.name);
-                    prev.GetComponent<ObjectInteraction>().next = index;
+                    prev.GetComponent<ObjectInteraction>().next = (short)index;
                     prev = item;
                 }
                 if (item.GetComponent<Container>() != null)
@@ -2152,7 +2141,7 @@ public class ObjectLoader : DataLoader
         }
         int itemCounter = 0;
         ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
-        int PrevIndex = cnObjInt.BaseObjectData.index;
+        int PrevIndex = cnObjInt.ObjectIndex;
         if (cn.LockObject != 0)
         {
             ObjectInteraction lockObj = getObjectIntAt(cn.LockObject);
@@ -2161,9 +2150,9 @@ public class ObjectLoader : DataLoader
                 if (lockObj.GetItemType() == ObjectInteraction.LOCK)
                 {
                     itemCounter++;
-                    cnObjInt.link = lockObj.BaseObjectData.index;
-                    cnObjInt.BaseObjectData.link = lockObj.BaseObjectData.index;
-                    PrevIndex = lockObj.BaseObjectData.index;
+                    cnObjInt.link = lockObj.ObjectIndex;
+                    cnObjInt.link = lockObj.ObjectIndex;
+                    PrevIndex = lockObj.ObjectIndex;
                 }
             }
         }
@@ -2176,9 +2165,9 @@ public class ObjectLoader : DataLoader
                 //ObjectInteraction itemObjInt = obj.GetComponent<ObjectInteraction>();
                 if (itemCounter == 0)
                 {//First item link to it from the container
-                    cnObjInt.link = itemObjInt.BaseObjectData.index;
-                    cnObjInt.BaseObjectData.link = itemObjInt.BaseObjectData.index;
-                    PrevIndex = itemObjInt.BaseObjectData.index;
+                    cnObjInt.link = itemObjInt.ObjectIndex;
+                    cnObjInt.link = itemObjInt.ObjectIndex;
+                    PrevIndex = itemObjInt.ObjectIndex;
                 }
                 else
                 {//the previous items next becomes this.
@@ -2186,11 +2175,11 @@ public class ObjectLoader : DataLoader
                     {
                         Debug.Log("null object on " + i + " for container " + cn.name);
                     }
-                    getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
-                    getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
+                    getObjectIntAt(PrevIndex).next = itemObjInt.ObjectIndex;
+                    getObjectIntAt(PrevIndex).next = itemObjInt.ObjectIndex;
                     itemObjInt.next = 0;//end for now.
-                    itemObjInt.BaseObjectData.next = 0;
-                    PrevIndex = itemObjInt.BaseObjectData.index;
+                    itemObjInt.next = 0;
+                    PrevIndex = itemObjInt.ObjectIndex;
                 }
                 itemCounter++;
 
@@ -2224,23 +2213,25 @@ public class ObjectLoader : DataLoader
     /// </summary>
     /// <returns>The object to list.</returns>
     /// <param name="objInt">Object int.</param>
-    public static int AssignObjectToList(ref ObjectInteraction objInt)
+    public static int AssignObjectToStaticList(ref ObjectInteraction objInt)
     {
-        int startindex = 1;
-        //Check if objINt is an npc
-        if ((objInt.GetComponent<NPC>() == null))
-        {
-            startindex = 256;//start of static list
-                             //	startindex=979;
-        }
+        //int startindex = 1;
+        ////Check if objINt is an npc
+        //if ((objInt.GetComponent<NPC>() == null))
+        //{
+        //    startindex = 256;//start of static list
+        //                     //	startindex=979;
+        //}
         //find a free slot in the list.
-        if (CurrentObjectList().getFreeSlot(startindex, out int index))
+        if (CurrentObjectList().GetFreeStaticObject(out short index))
+        //if (CurrentObjectList().getFreeSlot(startindex, out int index))
         {
             //Assign and return the reference
-            objInt.BaseObjectData = CurrentObjectList().objInfo[index];
-            objInt.BaseObjectData.InUseFlag = 1;
-            objInt.BaseObjectData.index = index;
-            //Debug.Log("Assigning "+ objInt.name + " to index " + index);
+            //objInt.BaseObjectData = CurrentObjectList().objInfo[index];
+            objInt.AssignBaseObjectData(CurrentObjectList().objInfo[index], index);
+            //objInt.BaseObjectData.InUseFlag = 1;
+           // objInt.BaseObjectData.index = (short)index;
+
             if ((objInt.GetComponent<Container>()) || (objInt.GetComponent<NPC>()))
             {//Put the container items back into the list as well
                 Container cn = objInt.GetComponent<Container>();
@@ -2251,23 +2242,20 @@ public class ObjectLoader : DataLoader
                     ObjectInteraction objI = cn.GetItemAt(i);
                     if (objI != null)
                     {
-                        //ObjectInteraction objI = obj.GetComponent<ObjectInteraction>();
-                        int newlink = AssignObjectToList(ref objI);
+                        
+                        int newlink = AssignObjectToStaticList(ref objI);
                         if (itemCounter == 0)
                         {//First object											
-                            objInt.link = newlink;
-                            objInt.BaseObjectData.link = newlink;
+                            objInt.link = (short)newlink;
                             prevLink = newlink;
                         }
                         else
                         {
-                            CurrentObjectList().objInfo[prevLink].next = newlink;
-                            CurrentObjectList().objInfo[prevLink].instance.next = newlink;
+                            CurrentObjectList().objInfo[prevLink].next = (short)newlink;
                             prevLink = newlink;
 
                         }
-                        objI.BaseObjectData.next = 0;//init
-                        objI.next = 0;
+                        objI.next = 0;//init
                         itemCounter++;
                     }
                 }
@@ -2276,7 +2264,7 @@ public class ObjectLoader : DataLoader
                     objInt.link = 0;//No contents
                 }
             }
-            CurrentObjectList().CopyDataToList(objInt, ref objInt.BaseObjectData);
+            //CurrentObjectList().CopyDataToList(objInt, ref objInt.BaseObjectData);
         }
         else
         {
@@ -2285,27 +2273,28 @@ public class ObjectLoader : DataLoader
         return index;
     }
 
-    /// <summary>
-    /// Gets the free slot available to use starting from the specified index.
-    /// </summary>
-    /// <returns>The free slot.</returns>
-    public bool getFreeSlot(int startIndex, out int index)
-    {
-        if (startIndex < 2)
-        {
-            startIndex = 2;
-        }
-        for (int i = startIndex; i <= objInfo.GetUpperBound(0); i++)
-        {
-            if (objInfo[i].InUseFlag == 0)
-            {
-                index = i;
-                return true;
-            }
-        }
-        index = -1;
-        return false;
-    }
+    ///// <summary>
+    ///// Gets the free slot available to use starting from the specified index.
+    ///// </summary>
+    ///// <returns>The free slot.</returns>
+    //public bool getFreeSlot(int startIndex, out int index)
+    //{
+       
+    //    if (startIndex < 2)
+    //    {
+    //        startIndex = 2;
+    //    }
+    //    for (int i = startIndex; i <= objInfo.GetUpperBound(0); i++)
+    //    {
+    //        //if (objInfo[i].InUseFlag == 0)
+    //       // {
+    //            index = i;
+    //            return true;
+    //       // }
+    //    }
+    //    index = -1;
+    //    return false;
+    //}
 
 
     void CopyDataToList(ObjectInteraction objInt, ref ObjectLoaderInfo info)
@@ -2382,9 +2371,9 @@ public class ObjectLoader : DataLoader
     /// Finds and returns the next available free slot for a new object and returns the objectloaderinfo for the found object with initial properties.
     /// </summary>
     /// <returns>The object.</returns>
-    public static ObjectLoaderInfo newWorldObject(int item_id, int quality, int owner, int link, int startIndex)
+    public static ObjectLoaderInfo newWorldObject(int item_id, short quality, short owner, short link, int startIndex)
     {
-        int index = 0;
+        short index = 0;
         if (startIndex >= 0)
         {
             bool SlotAvailable;
@@ -2402,9 +2391,9 @@ public class ObjectLoader : DataLoader
             if (SlotAvailable)
             {
                 CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();
-                CurrentObjectList().objInfo[index].quality = (short)quality;
+                CurrentObjectList().objInfo[index].quality = quality;
                 CurrentObjectList().objInfo[index].flags = 0;
-                CurrentObjectList().objInfo[index].owner = (short)owner;
+                CurrentObjectList().objInfo[index].owner = owner;
                 CurrentObjectList().objInfo[index].item_id = item_id;
                 CurrentObjectList().objInfo[index].next = 0;
                 CurrentObjectList().objInfo[index].link = link;
@@ -2417,7 +2406,7 @@ public class ObjectLoader : DataLoader
                 CurrentObjectList().objInfo[index].enchantment = 0;
                 CurrentObjectList().objInfo[index].ObjectTileX = TileMap.ObjectStorageTile;
                 CurrentObjectList().objInfo[index].ObjectTileY = TileMap.ObjectStorageTile;
-                CurrentObjectList().objInfo[index].InUseFlag = 1;
+                //CurrentObjectList().objInfo[index].InUseFlag = 1;
                 CurrentObjectList().objInfo[index].index = index;
                 return CurrentObjectList().objInfo[index];
             }
@@ -2443,7 +2432,7 @@ public class ObjectLoader : DataLoader
                 enchantment = 0,
                 ObjectTileX = TileMap.ObjectStorageTile,
                 ObjectTileY = TileMap.ObjectStorageTile,
-                InUseFlag = 1,
+                //InUseFlag = 1,
                 index = index
             };
             return objI;
@@ -3726,7 +3715,7 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
                                     {
                                         if (objLoader.objInfo[l].instance != null)
                                         {
-                                            objLoader.objInfo[o].instance.GetComponent<Potion>().linked = objLoader.objInfo[l].instance;
+                                            objLoader.objInfo[o].instance.GetComponent<Potion>().linkedspell = objLoader.objInfo[l].instance;
                                         }
                                     }
                                 }
@@ -3743,9 +3732,11 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
     {
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
+            //(objList[i].InUseFlag != 0)
+            //&&
+
             if (
-                    (objList[i].InUseFlag != 0)
-                    &&
+
                     (objList[i].ObjectTileX == tileX)
                     &&
                     (objList[i].ObjectTileY == tileY)

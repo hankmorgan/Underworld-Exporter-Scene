@@ -120,20 +120,22 @@ public class MagicProjectile : MobileObject
 
     protected virtual void Detonate(Collision collision)
     {
+        //if (objInt().ObjectTileX==TileMap.ObjectStorageTile)
+        //{ return; }
         HasHit = true;
         //Code to execute when a projectile hits a spot (for launching AOE effects)
         spellprop.onImpact(this.transform);
-        ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
-        if (objInt != null)//Has the projectile hit anything
+        ObjectInteraction objecthit = collision.gameObject.GetComponent<ObjectInteraction>();
+        if (objecthit != null)//Has the projectile hit anything
         {
             //Special code for magic spell direct hits.
-            spellprop.onHit(objInt);
+            spellprop.onHit(objecthit);
             //Applies damage
-            objInt.Attack(spellprop.BaseDamage, caster);
+            objecthit.Attack(spellprop.BaseDamage, caster);
             //Create a impact animation to illustrate the collision
-            if (objInt.GetHitFrameStart() >= 0)
+            if (objecthit.GetHitFrameStart() >= 0)
             {
-                Impact.SpawnHitImpact(Impact.ImpactMagic(), objInt.GetImpactPoint(), objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());
+                Impact.SpawnHitImpact(Impact.ImpactMagic(), objecthit.GetImpactPoint(), objecthit.GetHitFrameStart(), objecthit.GetHitFrameEnd());
             }
         }
         else

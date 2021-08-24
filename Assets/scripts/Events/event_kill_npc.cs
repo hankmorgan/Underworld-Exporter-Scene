@@ -12,7 +12,7 @@
         {
             for (int i = 0; i <= npc.GetUpperBound(0); i++)
             {
-                npc[i].npc_hp = -1;//Force death in next frame					
+                npc[i].npc_hp = 0;//Force death in next frame					
             }
         }
     }

@@ -1034,15 +1034,15 @@ public class IngameEditor : GuiBase_Draggable
             }
             if (int.TryParse(npc_hp.text, out val))
             {
-                currObj.npc_hp = (short)(val);
+                currObj.npc_hp = (byte)(val);
                 npc_hp.text = currObj.npc_hp.ToString();
             }
 
-            currObj.npc_goal = (short)npc_goal.value;
+            currObj.npc_goal = (byte)npc_goal.value;
 
             if (int.TryParse(npc_goaltarget.text, out val))
             {
-                currObj.npc_gtarg = (short)(val);
+                currObj.npc_gtarg = (byte)(val);
                 npc_goaltarget.text = currObj.npc_gtarg.ToString();
             }
 
@@ -1123,7 +1123,7 @@ public class IngameEditor : GuiBase_Draggable
         {
             if (currObj.ObjectTileX <= TileMap.TileMapSizeX)//A object is brought from off map.
             {
-                currObj.InUseFlag = 1;
+               // currObj.InUseFlag = 1;
                 Vector3 pos = ObjectLoader.CalcObjectXYZ(currObj.index, 0);
                 ObjectInteraction.CreateNewObject(CurrentTileMap(),
                         currObj, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,

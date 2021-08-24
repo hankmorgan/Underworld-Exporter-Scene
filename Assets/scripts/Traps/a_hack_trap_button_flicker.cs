@@ -16,7 +16,8 @@ public class a_hack_trap_button_flicker : a_hack_trap
         if (objList == null) { return; }
         for (int i = 256; i <= objList.GetUpperBound(0); i++)
         {
-            if ((objList[i].InUseFlag != 0))
+           // if ((objList[i].InUseFlag != 0))
+           if(true)
             {
                 if (
                         (

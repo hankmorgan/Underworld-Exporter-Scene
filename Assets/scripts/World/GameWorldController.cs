@@ -1015,15 +1015,15 @@ public class GameWorldController : UWEBase
 
                         if (CreateReports)
                         {
-                            CreateObjectReport(objectList[newLevelNo].objInfo, newLevelNo);
+                            CreateObjectReport(objectList[newLevelNo].objInfo, newLevelNo, objectList[newLevelNo]);
                         }
                         if (EnableUnderworldGenerator)
                         {
                             //Clear all objects for the random generator
-                            for (int i = 0; i <= objectList[newLevelNo].objInfo.GetUpperBound(0); i++)
-                            {
-                                objectList[newLevelNo].objInfo[i].InUseFlag = 0;
-                            }
+                            //for (int i = 0; i <= objectList[newLevelNo].objInfo.GetUpperBound(0); i++)
+                            //{
+                            //    objectList[newLevelNo].objInfo[i].InUseFlag = 0;
+                            //}
                         }
                     }
                     else
@@ -1056,13 +1056,13 @@ public class GameWorldController : UWEBase
                 }
             }
 
-            if (dungeon_level != -1)
-            {//When changing from a level that has already loaded
-                if (EditorMode == false)
-                {
-                    ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
-                }
-            }
+            //if (dungeon_level != -1)
+            //{//When changing from a level that has already loaded
+            //    if (EditorMode == false)
+            //    {
+            //        //ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
+            //    }
+            //}
 
             //Tell the game we are now using the new level no.
             dungeon_level = newLevelNo;
@@ -1101,6 +1101,8 @@ public class GameWorldController : UWEBase
                 //break;
                 default:
                     ObjectLoader.RenderObjectList(objectList[newLevelNo], Tilemaps[newLevelNo], DynamicObjectMarker().gameObject);
+                    Debug.Log("Free Static Object Pointer is " + objectList[newLevelNo].NoOfFreeStatic);
+                    Debug.Log("Free Mobile Object Pointer is " + objectList[newLevelNo].NoOfFreeMobile);
                     break;
             }
 
@@ -1319,14 +1321,14 @@ public class GameWorldController : UWEBase
     }
 
 
-    /// <summary>
-    /// Moves the object to the game world where it will be managed by the objectloader list
-    /// </summary>
-    /// <param name="obj">Object.</param>
-    public static void MoveToWorld(GameObject obj)
-    {
-        MoveToWorld(obj.GetComponent<ObjectInteraction>());
-    }
+    ///// <summary>
+    ///// Moves the object to the game world where it will be managed by the objectloader list
+    ///// </summary>
+    ///// <param name="obj">Object.</param>
+    //public static void MoveToWorld(GameObject obj)
+    //{
+    //    MoveToWorld(obj.GetComponent<ObjectInteraction>());
+    //}
 
     /// <summary>
     /// Moves to world (from inventory) and assigns it to the world object list.
@@ -1340,7 +1342,7 @@ public class GameWorldController : UWEBase
 
         obj.transform.parent = instance.DynamicObjectMarker();
         //Find an index for the object.
-        int NewIndex;
+        short NewIndex;
         if (staticObject)
         {
             if (!CurrentObjectList().GetFreeStaticObject(out NewIndex))
@@ -1375,7 +1377,7 @@ public class GameWorldController : UWEBase
         obj.BaseObjectData = CurrentObjectList().objInfo[NewIndex];
 
         //Rename the instance
-        obj.transform.name = ObjectLoader.UniqueObjectName(obj.BaseObjectData);
+        obj.transform.name =ObjectInteraction.UniqueObjectName(obj);
 
         Container cnt = obj.GetComponent<Container>();
         if (cnt != null)
@@ -1428,9 +1430,9 @@ public class GameWorldController : UWEBase
     /// Moves to inventory where it will no longer be managed by the objectloader list.
     /// </summary>
     /// <param name="obj">Object.</param>
-    public static void MoveToInventory(GameObject obj)
+    public static ObjectInteraction MoveToInventory(GameObject obj)
     {
-        MoveToInventory(obj.GetComponent<ObjectInteraction>());
+        return MoveToInventory(obj.GetComponent<ObjectInteraction>());
     }
 
 
@@ -1438,7 +1440,7 @@ public class GameWorldController : UWEBase
     /// Moves an object to inventory and removes it from the world map
     /// </summary>
     /// <param name="obj">Object.</param>
-    public static void MoveToInventory(ObjectInteraction obj)
+    public static ObjectInteraction MoveToInventory(ObjectInteraction obj)
     {//Break the instance back to the object list
         ObjectInteraction.UnlinkItemFromTileMapChain(obj, obj.ObjectTileX, obj.ObjectTileY);
 
@@ -1455,7 +1457,7 @@ public class GameWorldController : UWEBase
             InventoryData = NewinventoryData
         };
 
-        obj.BaseObjectData.InUseFlag = 0;//This frees up the slot to be replaced with another item.	
+       // obj.BaseObjectData.InUseFlag = 0;//This frees up the slot to be replaced with another item.	
         obj.BaseObjectData.instance = null;
         if (_RES == GAME_UW2)//Does this need to be done for uw1 as well.
         {
@@ -1493,6 +1495,7 @@ public class GameWorldController : UWEBase
         {
             ConversationVM.BuildObjectList();//Reflect changes to object lists
         }
+        return obj;
     }
 
 
@@ -2039,14 +2042,15 @@ public class GameWorldController : UWEBase
     /// Creates a report of the objects in the level in an xml format
     /// </summary>
     /// <param name="objList"></param>
-    void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo)
+    void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo, ObjectLoader list)
     {
         StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");// true);
         writer.WriteLine("<ObjectReport level =" + ReportLevelNo + "> ");
         //writer.WriteLine("\t<level>" + ReportLevelNo + "</level>");
         for (int o = 0; o <= objList.GetUpperBound(0); o++)
         {
-            if (((objList[o].InUseFlag == 0) && (!ShowOnlyInUse)) || (objList[o].InUseFlag == 1))
+            //if (((objList[o].InUseFlag == 0) && (!ShowOnlyInUse)) || (objList[o].InUseFlag == 1))
+            if (true)
             {
                 //if
                 //((objList[o].GetItemType() == ObjectInteraction.A_CHECK_VARIABLE_TRAP)||(objList[o].GetItemType() == ObjectInteraction.A_SET_VARIABLE_TRAP))
@@ -2054,9 +2058,26 @@ public class GameWorldController : UWEBase
                 WriteObjectXML(objList, writer, o);
                 //}               
             }
-        }
-
+        }        
         writer.WriteLine("</ObjectReport>");
+
+       
+        writer.WriteLine("<freeobjectreport>");
+        writer.WriteLine("<mobile Size=" + list.NoOfFreeMobile +">");
+        for (short i=0; i<=254;i++)
+        {
+            writer.WriteLine("\t<mobile index=" + i + ">" + list.GetMobileAtSlot(i) + "</mobile>");
+        }
+        writer.WriteLine("</mobile>");
+        writer.WriteLine("<static Size=" + list.NoOfFreeStatic + ">");
+        for (short i = 0; i <= 768; i++)
+        {
+            writer.WriteLine("\t<static index=" + i + ">" + list.GetStaticAtSlot(i) + "</static>");
+        }
+        writer.WriteLine("</static>");
+
+        writer.WriteLine("</freeobjectreport>");
+
         writer.Close();
     }
 
@@ -2068,7 +2089,7 @@ public class GameWorldController : UWEBase
         writer.WriteLine("\t\t<Address>" + objList[o].address + "</Address>");
         writer.WriteLine("\t\t<StaticProperties>");
         writer.WriteLine("\t\t\t<ItemID>" + objList[o].item_id + "</ItemID>");
-        writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag + "</InUse>");
+        //writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag + "</InUse>");
         writer.WriteLine("\t\t\t<Flags>" + objList[o].flags + "</Flags>");
         writer.WriteLine("\t\t\t<Enchant>" + objList[o].enchantment + "</Enchant>");
         writer.WriteLine("\t\t\t<DoorDir>" + objList[o].doordir + "</DoorDir>");

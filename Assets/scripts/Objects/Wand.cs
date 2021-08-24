@@ -179,7 +179,7 @@ public class Wand : enchantment_base
                 //Try and find a spell already in the level that matches the characteristics of this spell
                 //If so point to that instead. This avoids filling up the gameworld with stale spells everytime the wand is dropped.
                 ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
-                for (int i = 0; i <= objList.GetUpperBound(0); i++)
+                for (short i = 0; i <= objList.GetUpperBound(0); i++)
                 {
                     if (objList[i].GetItemType() == ObjectInteraction.SPELL)
                     {
@@ -187,9 +187,9 @@ public class Wand : enchantment_base
                         {
                             if (objList[i].link == linkedspell.link)
                             {
-                                Destroy(linkedspell.gameObject);
+                                Destroy(linkedspell.gameObject);//Destroy the copy in the inventory.
                                 linkedspell = objList[i].instance.GetComponent<a_spell>();
-                                link = i; //Point the spell.
+                                link = linkedspell.ObjectIndex; //Point the spell.
                                 match = true;
                                 break;
                             }
@@ -200,7 +200,7 @@ public class Wand : enchantment_base
                 if (!match)
                 {//If no spell is found move the spell to the gameworld.  Q? Where does the object appear on map??
                  //linkedspell.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    GameWorldController.MoveToWorld(linkedspell.gameObject);
+                    GameWorldController.MoveToWorld(linkedspell.objInt(),true);
                     Debug.Log("Spell" + linkedspell.name + " moved from inventory to world. Check to see where it landed!");
                 }
             }
@@ -213,15 +213,50 @@ public class Wand : enchantment_base
         {//Object links to a spell object
             if (linkedspell != null)
             {
-                GameObject clonelinkedspell = Instantiate(linkedspell.gameObject);
-                clonelinkedspell.name = ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
-                clonelinkedspell.gameObject.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-                linkedspell = clonelinkedspell.GetComponent<a_spell>();
-                //COpy data from original to new
-                ObjectInteraction.CopyStaticProperties(linkedspell.objInt(), clonelinkedspell.GetComponent<ObjectInteraction>());
+                bool DoNotDestroy = false;
+                var objList = CurrentObjectList();
+                //Try and find another object that links to the original spell.
+                for (int i= 2; i<1024;i++ )
+                {
+                    if (DoNotDestroy) { break; }
+                    if (objList.objInfo[i].instance!=null)
+                    {
+                        var linked = objList.objInfo[i].instance.link;
+                        var linkedtype = ObjectLoader.GetItemTypeAt(linked);
+                        switch (linkedtype)
+                        {
+                            case ObjectInteraction.POTIONS:
+                            case ObjectInteraction.WAND:
+                            case ObjectInteraction.A_DAMAGE_TRAP:
+                                if (linked == this.linkedspell.ObjectIndex)
+                                {
+                                    DoNotDestroy = true;
+                                }
+                                break; 
+                            default:
+                                break;
+                        }
+                    }
+                 }
 
+                if (!DoNotDestroy)
+                {//Move the existing spell over.
+                    Debug.Log("Moving a spell. Check this works.");
+                    var spell=GameWorldController.MoveToInventory(linkedspell.gameObject);
+                    linkedspell = spell.GetComponent<a_spell>();
+                }
+                else
+                {
+                    Debug.Log("Copying a spell. Check this works.");
+                    //Create a copy in the inventory list instead.
+                    GameObject clonelinkedspell = Instantiate(linkedspell.gameObject);
+                    clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
+                    clonelinkedspell.gameObject.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+                    linkedspell = clonelinkedspell.GetComponent<a_spell>();
 
-
+                    //Copy data from original to new spell
+                    ObjectInteraction.CopyStaticProperties(linkedspell.objInt(), clonelinkedspell.GetComponent<ObjectInteraction>());
+                }
             }
         }
     }

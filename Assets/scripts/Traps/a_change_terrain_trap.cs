@@ -86,7 +86,7 @@ public class a_change_terrain_trap : trap_base
                         GameObject door = DoorControl.findDoor(tileToChange.tileX, tileToChange.tileY);
                         if (door != null)
                         {
-                            string doorname = ObjectLoader.UniqueObjectName(door.GetComponent<ObjectInteraction>().BaseObjectData);
+                            string doorname = ObjectInteraction.UniqueObjectName(door.GetComponent<ObjectInteraction>());
                             DestroyDoorPortion("front_leftside_" + doorname);
                             DestroyDoorPortion("front_over_" + doorname);
                             DestroyDoorPortion("front_rightside_" + doorname);
@@ -102,19 +102,8 @@ public class a_change_terrain_trap : trap_base
                                     GameWorldController.instance.SceneryModel.gameObject,
                                     CurrentTileMap(),
                                     CurrentObjectList(),
-                                    door.GetComponent<ObjectInteraction>().BaseObjectData.index);
-                            /*								TileMapRenderer.RenderDoorwayFront(
-                                                            GameWorldController.instance.LevelModel,
-                                                                                CurrentTileMap(),
-                                                                                CurrentObjectList(),
-                                                                                door.GetComponent<ObjectInteraction>().objectloaderinfo
-                                                                                );
-                                                            TileMapRenderer.RenderDoorwayRear(
-                                                                            GameWorldController.instance.LevelModel,
-                                                                            CurrentTileMap(),
-                                                                            CurrentObjectList(),
-                                                                            door.GetComponent<ObjectInteraction>().objectloaderinfo
-                                                                                );*/
+                                    door.GetComponent<ObjectInteraction>().ObjectIndex);
+
                             Vector3 objPos = door.transform.position;
                             ObjectInteraction.CreateNewObject(CurrentTileMap(),
                                                             door.GetComponent<ObjectInteraction>().BaseObjectData,
