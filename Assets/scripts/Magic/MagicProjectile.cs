@@ -120,8 +120,8 @@ public class MagicProjectile : MobileObject
 
     protected virtual void Detonate(Collision collision)
     {
-        //if (objInt().ObjectTileX==TileMap.ObjectStorageTile)
-        //{ return; }
+        if (objInt().ObjectTileX == TileMap.ObjectStorageTile)
+        { return; }
         HasHit = true;
         //Code to execute when a projectile hits a spot (for launching AOE effects)
         spellprop.onImpact(this.transform);

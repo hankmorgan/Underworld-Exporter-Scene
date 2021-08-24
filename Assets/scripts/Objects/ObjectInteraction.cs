@@ -35,7 +35,6 @@ public class ObjectInteraction : UWEBase
             SaveGame.SetAt(offset, existingValue);
         }
     }
-
     public const int NPC_TYPE = 0;
     public const int WEAPON = 1;
     public const int ARMOUR = 2;
@@ -620,13 +619,34 @@ public class ObjectInteraction : UWEBase
         {
             UpdateAnimation();
         }
-
-        if ((!BaseObjectData.IsInventory))
+        if (!BaseObjectData.IsInventory)
         {
-            if (startPos!=transform.position)
+            if (startPos != transform.position)
             {
                 UpdatePosition();
-            }            
+            }     
+            else
+            {
+                if (ObjectIndex<256)
+                {
+                    if(this.GetItemType()!=NPC_TYPE)
+                    {
+                        
+                        if (this.rg != null)
+                        {
+                            if(this.rg.IsSleeping())
+                            {//This once mobile object is now at rest. It can become a static.
+                                //Move this object to the static items list.
+                                var beforename = this.name;
+                                //Moving from inventory and back to world will trigger the correct list management functions.
+                                var moved=GameWorldController.MoveToInventory(this);
+                                GameWorldController.MoveToWorld(moved);
+                                Debug.Log("Moving " + beforename + " from mobile to static list. It is now " + this.name);
+                            }
+                        }
+                    }
+                }
+            }
         }
         startPos = transform.position;
     }
@@ -2785,9 +2805,7 @@ public class ObjectInteraction : UWEBase
                             break;
                         default:
                             UnFreezeMovement(myObj);
-
                             myObj.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-                            // myObj.GetComponent<Rigidbody>().AddForce(150f * object_base.ProjectilePropsToVector(myObj.GetComponent<object_base>()));
                             break;
                     }
                 }

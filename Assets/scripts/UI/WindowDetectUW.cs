@@ -308,8 +308,6 @@ public class WindowDetectUW : WindowDetect
             {
                 //Determine what is directly in front of the player via a raycast
                 //If something is in the way then cancel the drop
-                //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
                 Ray ray;
                 if (UWCharacter.Instance.MouseLookEnabled == true)
                 {
@@ -320,52 +318,37 @@ public class WindowDetectUW : WindowDetect
                     ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 }
 
-
                 RaycastHit hit = new RaycastHit();
                 float dropRange = 0.5f;
                 if (!Physics.Raycast(ray, out hit, dropRange))
                 {//No object interferes with the drop
                  //Calculate the force based on how high the mouse is
                     float force = Input.mousePosition.y / Camera.main.pixelHeight * 200;
-                    //float force = Camera.main.ViewportToWorldPoint(Input.mousePosition).y/Camera.main.pixelHeight *200;
-
-
-                    //Get the object being dropped and moved towards the end of the ray
-
-                    GameObject droppedItem = CurrentObjectInHand.gameObject; //GameObject.Find(CurrentObjectInHand);
-
-
-                    //FIELD PICKUP droppedItem.GetComponent<ObjectInteraction>().PickedUp = false; //Back in the real world
-                    droppedItem.GetComponent<ObjectInteraction>().Drop();
-                    droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
-                    GameWorldController.MoveToWorld(droppedItem.GetComponent<ObjectInteraction>());
-                    droppedItem.transform.parent = GameWorldController.instance.DynamicObjectMarker();
-
-                    if (droppedItem.GetComponent<Container>() != null)
+                    CurrentObjectInHand.Drop();
+                    CurrentObjectInHand.UpdateAnimation();
+                    GameWorldController.MoveToWorld(CurrentObjectInHand, false);
+                    CurrentObjectInHand.transform.parent = GameWorldController.instance.DynamicObjectMarker();
+                    var cnt = CurrentObjectInHand.GetComponent<Container>();
+                    if (cnt != null)
                     {//Set the picked up flag recursively for container items.
-                        Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(), false);
-                        Container.SetItemsParent(droppedItem.GetComponent<Container>(), GameWorldController.instance.DynamicObjectMarker());
-                        Container.SetItemsPosition(droppedItem.GetComponent<Container>(), UWCharacter.Instance.playerInventory.InventoryMarker.transform.position);
+                        Container.SetPickedUpFlag(cnt, false);
+                        //Container.SetItemsParent(cnt, GameWorldController.instance.DynamicObjectMarker());
+                        //Container.SetItemsPosition(droppedItem.GetComponent<Container>(), UWCharacter.Instance.playerInventory.InventoryMarker.transform.position);
                     }
-                    droppedItem.transform.position = ray.GetPoint(dropRange - 0.1f);//UWCharacter.Instance.transform.position;
+                    CurrentObjectInHand.transform.position = ray.GetPoint(dropRange - 0.1f);
 
-                    UnFreezeMovement(droppedItem);
+                    UnFreezeMovement(CurrentObjectInHand);
                     if (Camera.main.ScreenToViewportPoint(Input.mousePosition).y > 0.4f)
                     {//throw if above a certain point in the view port.
                         Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
                         //Apply the force along the direction.
-                        if (droppedItem.GetComponent<Rigidbody>() != null)
+                        if (CurrentObjectInHand.gameObject.GetComponent<Rigidbody>() != null)
                         {
-                            droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir * force);
+                            CurrentObjectInHand.gameObject.GetComponent<Rigidbody>().AddForce(ThrowDir * force);
                         }
                     }
-
-                    //Clear the object and reset the cursor
-                    //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                    //UWCharacter.Instance.playerInventory.SetObjectInHand("");
                     CurrentObjectInHand = null;
                 }
-
             }
             else
             {
