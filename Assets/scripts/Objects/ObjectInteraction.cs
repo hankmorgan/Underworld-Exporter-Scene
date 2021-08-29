@@ -630,18 +630,16 @@ public class ObjectInteraction : UWEBase
                 if (ObjectIndex<256)
                 {
                     if(this.GetItemType()!=NPC_TYPE)
-                    {
-                        
+                    {                        
                         if (this.rg != null)
                         {
                             if(this.rg.IsSleeping())
                             {//This once mobile object is now at rest. It can become a static.
                                 //Move this object to the static items list.
-                                var beforename = this.name;
-                                //Moving from inventory and back to world will trigger the correct list management functions.
-                                var moved=GameWorldController.MoveToInventory(this);
-                                GameWorldController.MoveToWorld(moved);
-                                Debug.Log("Moving " + beforename + " from mobile to static list. It is now " + this.name);
+                                if (this.ObjectTileX < 64)
+                                {//only do this to mobile objects on the map
+                                    GameWorldController.MoveFromMobileToStatic(this);
+                                }
                             }
                         }
                     }
