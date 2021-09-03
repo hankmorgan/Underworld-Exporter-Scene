@@ -244,7 +244,6 @@ public class GameSelect : GuiBase
         "DATA\\CONVERSE.GR",
         "DATA\\CURSORS.GR",
         "DATA\\DL.DAT",
-        "DATA\\DL.DAT.bak",
         "DATA\\DOORS.GR",
         "DATA\\DRAGONS.GR",
         "DATA\\EYES.GR",
@@ -496,7 +495,7 @@ public class GameSelect : GuiBase
             if (!File.Exists(test))
             {
                 PathStatus.text += "\n" + test + " not found!";
-                return false;
+                return true;
             }
         }
         PathStatus.text += "\nKnown required files found";

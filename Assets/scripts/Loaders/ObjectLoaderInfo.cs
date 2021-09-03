@@ -237,7 +237,7 @@ public class ObjectLoaderInfo : UWClass
             {
                 if (value != ypos)
                 {
-                    Debug.Log("Changing ypos for static object " +  instance.name);
+                    Debug.Log("Changing ypos for static object " +  index);
                 }
             }
             int existingValue = GetAt16(PTR+2);
@@ -260,7 +260,7 @@ public class ObjectLoaderInfo : UWClass
             {
                 if(value!=xpos)
                 {
-                    Debug.Log("Changing xpos for static object  " + instance.name);
+                    Debug.Log("Changing xpos for static object  " + index);
                 }                
             }
             int existingValue = GetAt16(PTR+2);
@@ -1048,7 +1048,7 @@ public class ObjectLoaderInfo : UWClass
     public static void CleanUp(ObjectLoaderInfo obj)
     {
         //TODO:test if this is needed for mobile objects as well.
-
+        
         obj.item_id = 0;
         obj.flags = 0;
         obj.enchantment = 0;

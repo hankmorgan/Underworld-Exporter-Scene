@@ -102,6 +102,7 @@ using UnityEngine;
 /// 121: You have defeated Dorstag
 /// 122: You have killed the bly scup ductosnore
 /// 123: Relk is dead
+/// 124 & 126 are referenced in teleport_trap
 /// 128: 0-128 bit field of where the lines of power have been broken.
 /// 129: How many enemies killed in the pits (also xclock 14)
 /// 131: You are told that you are in the prison tower =1  
@@ -285,7 +286,7 @@ public class Quest : UWClass
     ///     8 - tori is murdered
     ///     9 - Charles finds a key
     ///     11 - Go see Nelson
-    ///     12 - Patterson goes postal
+    ///     12 - Patterson kills Nelson
     ///     13 - Patterson is dead
     ///     14 - Gem is weak/Mors is in killorn(?)
     ///     15 - Nystrul wants to see you again re endgame

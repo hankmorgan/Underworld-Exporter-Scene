@@ -3,6 +3,7 @@
 /// </summary>
 /// zpos seems to be the controlling param here for what npcs are affected. Matches against WhoAmI
 /// Owner is the attitude to change to
+/// TODO: check if xpos and ypos have an effect. They seem to be part of the whoami calculation
 public class a_hack_trap_change_goal : a_hack_trap
 {
 

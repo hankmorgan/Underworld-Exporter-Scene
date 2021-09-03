@@ -3,6 +3,8 @@
 /// <summary>
 /// Used to control what is displayed on the sign at vending machines
 /// </summary>
+/// Todo. Price is based on the monetary value in the common object data
+/// ((monetary value+1) >> 1)+1
 public class a_hack_trap_vendingsign : a_hack_trap
 {
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
