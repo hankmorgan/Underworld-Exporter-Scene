@@ -915,7 +915,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         {
                             if ((conv[currConv].functions[i].ID_or_Address == arg1) && (conv[currConv].functions[i].import_type == import_function))
                             {
-                                //Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
+                                Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
                                 yield return StartCoroutine(run_imported_function(conv[currConv].functions[i], npc));
                                 break;
                             }

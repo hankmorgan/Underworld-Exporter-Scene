@@ -1361,6 +1361,7 @@ public class GameWorldController : UWEBase
         //Destroy the existing object instance at the new slot.
         if (CurrentObjectList().objInfo[NewIndex].instance != null)
         {
+            Debug.Log("MoveToWorld:Destroying " + CurrentObjectList().objInfo[NewIndex].instance.name);
             Destroy(CurrentObjectList().objInfo[NewIndex].instance.gameObject);
         }
 
@@ -1501,6 +1502,57 @@ public class GameWorldController : UWEBase
         return obj;
     }
 
+
+    public static void MoveFromMobileToStatic(ObjectInteraction obj)
+    {
+        var beforename = obj.name;
+        var oldindex = obj.BaseObjectData.index;
+        //Find a slot in the static list.
+        short NewIndex;
+        if (!CurrentObjectList().GetFreeStaticObject(out NewIndex))
+        {
+            Debug.Log("Unable to find a free static slot for this object"); return;
+        }
+
+        NewIndex = CurrentObjectList().GetStaticAtSlot(NewIndex);
+
+        //release from mobile ist
+        CurrentObjectList().ReleaseFreeMobileObject(obj.BaseObjectData.index);
+
+        //Destroy the existing object instance at the new slot.
+        if (CurrentObjectList().objInfo[NewIndex].instance != null)
+        {
+            Destroy(CurrentObjectList().objInfo[NewIndex].instance.gameObject);
+        }
+        //CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex, CurrentTileMap(), true);
+        //Copy existing static info from inventory to objectdata
+        var dstObjectData = CurrentObjectList().objInfo[NewIndex];
+        var srcObjectData = CurrentObjectList().objInfo[obj.BaseObjectData.index];
+
+        for (int i = 0; i < 8; i++)
+        {
+            dstObjectData.DataBuffer[dstObjectData.PTR + i] = srcObjectData.DataBuffer[srcObjectData.PTR + i];
+           // dstObjectData.DataBuffer[dstObjectData.PTR+i] = obj.BaseObjectData.DataBuffer[obj.i];
+            //  CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR + i] = obj.BaseObjectData.DataBuffer[i];
+        }
+
+        //Clear the data in the mobile slot
+        for (int i = 0; i <= 0x1a; i++)
+        {
+           obj.BaseObjectData.DataBuffer[i]=0;
+        }
+        //ReLink the instances
+        obj.BaseObjectData.instance = null;
+        CurrentObjectList().objInfo[NewIndex].instance = obj;
+        obj.BaseObjectData = CurrentObjectList().objInfo[NewIndex];
+
+        //Rename the instance
+        obj.transform.name = ObjectInteraction.UniqueObjectName(obj);
+
+
+        Debug.Log("Moving " + beforename + " from mobile #" + oldindex + " to static #" + NewIndex + ". It is now " + obj.name);
+
+    }
 
     /// <summary>
     /// Updates the positions of all game objects

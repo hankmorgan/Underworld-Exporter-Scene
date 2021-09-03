@@ -28243,6 +28243,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114081618986766586, guid: 5483325e623a90b4c8906f6e4277c300,
+        type: 3}
+      propertyPath: m_VerticalFit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 114220715560869378, guid: 5483325e623a90b4c8906f6e4277c300,
         type: 3}
       propertyPath: m_fontColor.b
@@ -28362,6 +28367,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114590121769949670, guid: 5483325e623a90b4c8906f6e4277c300,
+        type: 3}
+      propertyPath: m_Spacing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114839477161876224, guid: 5483325e623a90b4c8906f6e4277c300,
         type: 3}

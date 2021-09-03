@@ -3,6 +3,7 @@
 /// <summary>
 /// Changes the variable controlling the vending machine selection
 /// </summary>
+/// TODO looks like this trap actually sets the value to that of the trigger flags. Need to find out how that affects things.
 public class a_hack_trap_vendingselect : a_hack_trap
 {
 
