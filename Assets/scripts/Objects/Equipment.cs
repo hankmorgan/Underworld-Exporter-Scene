@@ -139,7 +139,7 @@ public class Equipment : object_base
             switch (_RES)
             {
                 case GAME_UW2:
-                    //todo
+                    //no applicable
                     break;
                 default:
                     UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs404.n01";

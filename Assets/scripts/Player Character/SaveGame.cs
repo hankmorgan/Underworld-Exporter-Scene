@@ -1689,7 +1689,7 @@ public class SaveGame : Loader
             //int x;
             for (short x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0); x++)
             {
-                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, UWEBase.CurrentTileMap(), false)
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, null, false)
                 {
                     parentList = GameWorldController.instance.inventoryLoader,
                     ObjectTileX = TileMap.ObjectStorageTile,
@@ -1706,7 +1706,7 @@ public class SaveGame : Loader
             }
 
             //Create the inventory objects
-            ObjectLoader.RenderObjectList(GameWorldController.instance.inventoryLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
+            ObjectLoader.RenderObjectList(GameWorldController.instance.inventoryLoader, null, GameWorldController.instance.InventoryMarker);
             ObjectLoader.LinkObjectListWands(GameWorldController.instance.inventoryLoader);
             ObjectLoader.LinkObjectListPotions(GameWorldController.instance.inventoryLoader);
             for (int j = lBoundSlots; j < uBoundSlots; j += 2)

@@ -224,7 +224,7 @@ public class UWCharacter : Character
         {
             if (_RES==GAME_UW2)
             {
-                Debug.Log("Intoxication in UW2");
+                //Debug.Log("Intoxication in UW2");
             }
             return (SaveGame.GetAt16(0x62) >> 4) & 0x3f;
         }
@@ -232,7 +232,7 @@ public class UWCharacter : Character
         {
             if (_RES == GAME_UW2)
             {
-                Debug.Log("Intoxication in UW2");
+               // Debug.Log("Intoxication in UW2");
             }
             int ExistingVal = SaveGame.GetAt16(0x62);
             ExistingVal &= 0xFC0F;

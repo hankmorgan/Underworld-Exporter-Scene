@@ -194,9 +194,16 @@ public class GameClock : UWEBase
     
     static void EveryHalfMinuteUpdate()
     {
-        //Debug.Log("HalfMinute update");
         //Poison updates every 30 seconds.
         UWCharacter.Instance.PoisonUpdate();
+        if(UWCharacter.Instance.Intoxication>=3)
+        {//Sober up over time.
+            UWCharacter.Instance.Intoxication -= 3;
+        }
+        else 
+        { 
+            UWCharacter.Instance.Intoxication = 0; 
+        }
     }
 
     /// <summary>

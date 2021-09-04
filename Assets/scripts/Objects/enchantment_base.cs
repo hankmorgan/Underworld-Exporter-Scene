@@ -46,6 +46,10 @@ public class enchantment_base : object_base
         {
             DisplayEnchantment = "NONE";
         }
+        else
+        {
+            Debug.Log(this.name + " has enchantment " + DisplayEnchantment);
+        }
     }
 
     public override bool use()
