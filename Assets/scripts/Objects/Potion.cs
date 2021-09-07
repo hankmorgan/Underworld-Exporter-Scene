@@ -3,7 +3,7 @@
 public class Potion : enchantment_base
 {
 
-    public ObjectInteraction linkedspell;
+    public object_base linkedspell;
 
     public override bool Eat()
     {
@@ -95,14 +95,14 @@ public class Potion : enchantment_base
                 ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
                 for (short i = 0; i <= objList.GetUpperBound(0); i++)
                 {
-                    if (objList[i].GetItemType() == linkedspell.GetItemType())//Find a matching item type
+                    if (objList[i].GetItemType() == linkedspell.objInt().GetItemType())//Find a matching item type
                     {
                         if (objList[i].instance != null)
                         {
                             if ((objList[i].link == linkedspell.link) && (objList[i].owner == linkedspell.owner) && (objList[i].quality == linkedspell.quality))
                             {//Point to that instance if found instead.
                                 Destroy(linkedspell.gameObject);
-                                linkedspell = objList[i].instance;
+                                linkedspell = objList[i].instance.GetComponent<object_base>();
                                 link = i;
                                 match = true;
                                 break;
@@ -113,7 +113,7 @@ public class Potion : enchantment_base
 
                 if (!match)
                 {
-                    GameWorldController.MoveToWorld(linkedspell,true);
+                    GameWorldController.MoveToWorld(linkedspell.objInt(),true);
                 }
             }
         }
@@ -153,15 +153,15 @@ public class Potion : enchantment_base
             {//Move the existing spell over.
                 Debug.Log("Moving a spell. Check this works.");
                 var spell = GameWorldController.MoveToInventory(linkedspell.gameObject);
-                linkedspell = spell;
+                linkedspell = spell.GetComponent<object_base>();
             }
             else
             {
                 Debug.Log("Copying a spell. Check this works.");
                 //Create a copy in the inventory list instead.
-                var cloneLinkedSpell = ObjectLoader.Clone(linkedspell);
+                var cloneLinkedSpell = ObjectLoader.Clone(linkedspell.objInt()) ;
                // clonelinkedspell.name = "a_spell_for_" + this.name; // ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
-                linkedspell = cloneLinkedSpell;
+                linkedspell = cloneLinkedSpell.GetComponent<object_base>();
                 GameWorldController.MoveToInventory(cloneLinkedSpell);
             }
         }

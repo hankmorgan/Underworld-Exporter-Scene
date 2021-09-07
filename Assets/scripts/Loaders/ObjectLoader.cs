@@ -3607,7 +3607,7 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
                                     {
                                         if (objLoader.objInfo[l].instance != null)
                                         {
-                                            objLoader.objInfo[o].instance.GetComponent<Potion>().linkedspell = objLoader.objInfo[l].instance;
+                                            objLoader.objInfo[o].instance.GetComponent<Potion>().linkedspell = objLoader.objInfo[l].instance.GetComponent<object_base>();
                                         }
                                     }
                                 }

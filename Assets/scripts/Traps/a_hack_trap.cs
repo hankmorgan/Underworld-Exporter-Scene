@@ -3,8 +3,8 @@
 public class a_hack_trap : trap_base
 {
     //Hack trap is the term for a do_trap in UW2
-	//qual=2 Not found in the wild yet. Uses player search skill, calls into a combat function? equipment damage??
-	//qual=3 Not found in the wild yet. Looks like it will change a tile
+	//qual=2 a_do_trap camera
+	//qual=3 a_do_trap_platform
     //qual=5 is a trespass trap.
     //qual=10 is the awarding of class specific items at the start of the game
 	//qual=11 Not found in the wild yet. Related to fraznium gloves so probably those forcefields
@@ -27,7 +27,7 @@ public class a_hack_trap : trap_base
     //qual=31 something in the arena of fire? unimplemented
     //qual=32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
     //qual=33 is used to recycle empty bottles! 
-	//qual=34 Not seen in the wild yet. Something with plants and mushrooms????
+	//qual=34 Probably the castle water runs out. Affects plants, mushrooms and fountains.
     //qual=35 is recharge light crystals	
     //qual=36 Called after first LB conversation. Moves all NPCs to their proper locations. Possibly used to manage schedules. Only implemented for the first xclock 
     //qual=37 Not seen in the wild yet. Seems to involve scd.ark
@@ -56,13 +56,14 @@ public class a_hack_trap : trap_base
 
     protected override void Start()
     {
-        if (
-            ((GameWorldController.instance.dungeon_level != 0) && (GameWorldController.instance.dungeon_level != 16))
-            && (quality == 62)
-            )
-        {
-            Debug.Log(this.name+ "oh hey another instance of that hack trap I'm trying to figure out");
-        }
+        Debug.Log("Default Hack Trap: Quality=" + quality + " " + this.name);
+        //if (
+        //    ((GameWorldController.instance.dungeon_level != 0) && (GameWorldController.instance.dungeon_level != 16))
+        //    && (quality == 62)
+        //    )
+        //{
+        //    Debug.Log(this.name+ "oh hey another instance of that hack trap I'm trying to figure out");
+        //}
 
     }
 }

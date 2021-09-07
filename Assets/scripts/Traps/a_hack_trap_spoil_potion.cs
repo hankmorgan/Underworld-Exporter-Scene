@@ -37,7 +37,7 @@ public class a_hack_trap_spoil_potion : a_hack_trap
         ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         GameWorldController.MoveToInventory(created);
         created.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-        obj.GetComponent<Potion>().linkedspell = created;
+        obj.GetComponent<Potion>().linkedspell = created.GetComponent<object_base>();
         obj.GetComponent<Potion>().SetDisplayEnchantment();
     }
 }

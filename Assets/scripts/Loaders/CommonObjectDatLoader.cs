@@ -23,7 +23,7 @@ public class CommonObjectDatLoader : Loader
              bits 1..4: type? a=talisman, 9=magic, 3..5=ammunition
 0008  Int8    scale value (?)
 0009  Int8    unknown2
-             bits 0-1: ??
+             bits 0-1: Can the object be identified, (matches heading bytes used on object to signify id level)
 000A  Int8    bits 0-3: quality type 0-f
              bit 4: printable "look at" description when 1		  
 
