@@ -980,12 +980,15 @@ public class GameWorldController : UWEBase
 
                 if (_RES != GAME_SHOCK)
                 {
-                    // DataLoader.UWBlock lev_ark_block = new DataLoader.UWBlock();//Data containing tilemap.
-                    //DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();//Data containing texture map
-                    //DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();//Data containing animation overlays
-
                     //Load Lev.ark data for the objects and tile map
                     Tilemaps[newLevelNo].lev_ark_block = LoadLevArkBlock(newLevelNo);
+
+                    if (GameWorldController.instance.config.dev.GenerateReports)
+                    {
+                        //Write the unpacked buffer to file.
+                        File.WriteAllBytes(Path.Combine(Loader.BasePath , "unpacked_" + newLevelNo + ".ark"),Tilemaps[newLevelNo].lev_ark_block.Data);
+                    }
+
 
                     if (_RES == GAME_UW1)
                     {//Load the overlays.
@@ -1226,7 +1229,9 @@ public class GameWorldController : UWEBase
         else
         {
             //Load the tile and object blocks
-            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c08, out lev_ark_block);
+            //Trim to the correct size for lev ark blocks.
+            Array.Resize(ref lev_ark_block.Data, 0x7c08);
         }
 
         return lev_ark_block;

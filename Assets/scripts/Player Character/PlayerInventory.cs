@@ -405,7 +405,7 @@ public class PlayerInventory : UWEBase
                 }
             }
         }
-        lt.range = LightSource.BaseBrightness + MaxBrightness;
+        lt.range = LightSource.BaseBrightness + MaxBrightness; 
         if (MaxBrightness > 0)
         {
             playerUW.LightActive = true;

@@ -47,11 +47,10 @@ public class WhatTheHellIsSCD_ARK : UWEBase
 
             long address_pointer = 6;
             int compressionFlag = (int)Loader.getValAtAddress(scd_ark_file_data, address_pointer + (NoOfBlocks * 4) + (LevelNo * 4), 32);
-            long datalen = Loader.getValAtAddress(scd_ark_file_data, address_pointer + (NoOfBlocks * 4 * 2) + (LevelNo * 4), 32);
+            int datalen = (int)Loader.getValAtAddress(scd_ark_file_data, address_pointer + (NoOfBlocks * 4 * 2) + (LevelNo * 4), 32);
             int isCompressed = (compressionFlag >> 1) & 0x01;
             long AddressOfBlockStart;
             address_pointer = (LevelNo * 4) + 6;
-            //Debug.Log("Block " + LevelNo + " Datalen is " + datalen + " at address " + ( (int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32) ));
             if ((int)Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32) == 0)
             {
                 Debug.Log("No Scd.ark data for this level");
@@ -60,7 +59,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase
             if (isCompressed == 1)
             {//should not happen in scd.ark
                 datalen = 0;
-                scd_ark = DataLoader.unpackUW2(scd_ark_file_data, Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32), ref datalen);
+                scd_ark = DataLoader.unpackUW2(scd_ark_file_data, (int)Loader.getValAtAddress(scd_ark_file_data, address_pointer, 32), ref datalen);
                 AddressOfBlockStart = 0;
             }
             else

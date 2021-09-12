@@ -48,7 +48,7 @@ public class enchantment_base : object_base
         }
         else
         {
-            Debug.Log(this.name + " has enchantment " + DisplayEnchantment);
+           // Debug.Log(this.name + " has enchantment " + DisplayEnchantment);
         }
     }
 

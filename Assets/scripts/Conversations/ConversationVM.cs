@@ -276,12 +276,12 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             int compressionFlag = (int)Loader.getValAtAddress(tmp_ark, address_pointer + (NoOfConversations * 4), 32);
             int isCompressed = (compressionFlag >> 1) & 0x01;
-            long add_ptr = Loader.getValAtAddress(tmp_ark, address_pointer, 32);
+            int add_ptr = (int)Loader.getValAtAddress(tmp_ark, address_pointer, 32);
             if (add_ptr != 0)
             {
                 if (isCompressed == 1)
                 {
-                    long datalen = 0;
+                    int datalen = 0;
                     byte[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
                     add_ptr = 0;
                     /*

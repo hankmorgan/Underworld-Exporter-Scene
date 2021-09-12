@@ -572,7 +572,7 @@ public class object_base : UWEBase
                     }
 
                     TrueEnchantment = StringController.instance.GetString(6, finalEffectId);
-                    Debug.Log(this.name + " has true enchantment "  + TrueEnchantment);
+                    //Debug.Log(this.name + " has true enchantment "  + TrueEnchantment);
                 }
             }
         }
