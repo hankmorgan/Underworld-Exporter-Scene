@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerInventory : UWEBase
 {
+    public enum BodySlots {
+        Helm, Chest, Gloves, Leggings, Boots, ShoulderRight, ShoulderLeft, HandRight, HandLeft, RingRight, RingLeft
+    };
+    
     /// <summary>
     /// What is the current active object held by the player
     /// </summary>
@@ -589,27 +593,27 @@ public class PlayerInventory : UWEBase
     {
         switch (slotIndex)
         {
-            case 0://Helm
+            case (int)BodySlots.Helm:
                 return sHelm;
-            case 1://Chest
+            case (int)BodySlots.Chest:
                 return sChest;
-            case 2://Leggings
+            case (int)BodySlots.Leggings:
                 return sLegs;
-            case 3://Boots
+            case (int)BodySlots.Boots:
                 return sBoots;
-            case 4://Gloves
+            case (int)BodySlots.Gloves:
                 return sGloves;
-            case 5://ShoulderRight
+            case (int)BodySlots.ShoulderRight:
                 return sRightShoulder;
-            case 6://ShoulderLeft
+            case (int)BodySlots.ShoulderLeft:
                 return sLeftShoulder;
-            case 7://HandRight
+            case (int)BodySlots.HandRight:
                 return sRightHand;
-            case 8://HandLeft
+            case (int)BodySlots.HandLeft:
                 return sLeftHand;
-            case 9://RingRight
+            case (int)BodySlots.RingRight:
                 return sRightRing;
-            case 10://RingLeft
+            case (int)BodySlots.RingLeft:
                 return sLeftRing;
             default://Inventory Slots 0-7		
                 if ((slotIndex >= 11) && (slotIndex <= 18))
@@ -629,55 +633,55 @@ public class PlayerInventory : UWEBase
         //if (oObject != null) { sObject = oObject.name; };
         switch (slotIndex)
         {
-            case 0://Helm
+            case (int)BodySlots.Helm:
                 sHelm = sObject;
                 //bHelm = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 1://Chest
+            case (int)BodySlots.Chest:
                 sChest = sObject;
                 //bChest = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 2://Leggings
+            case (int)BodySlots.Leggings:
                 sLegs = sObject;
                 //bLegs = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 3://Boots
+            case (int)BodySlots.Boots:
                 sBoots = sObject;
                 //bBoots = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 4://Gloves
+            case (int)BodySlots.Gloves:
                 sGloves = sObject;
                 // bGloves = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 5://ShoulderRight
+            case (int)BodySlots.ShoulderRight:
                 sRightShoulder = sObject;
                 //bRightShoulder = true;
                 break;
-            case 6://ShoulderLeft
+            case (int)BodySlots.ShoulderLeft:
                 sLeftShoulder = sObject;
                 //bLeftShoulder = true;
                 break;
-            case 7://HandRight
+            case (int)BodySlots.HandRight:
                 sRightHand = sObject;
                 //bRightHand = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 8://HandLeft
+            case (int)BodySlots.HandLeft:
                 sLeftHand = sObject;
                 //bLeftHand = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 9://RingRight
+            case (int)BodySlots.RingRight:
                 sRightRing = sObject;
                 //bRightRing = true;
                 EquipItemEvent(slotIndex);
                 break;
-            case 10://RingLeft
+            case (int)BodySlots.RingLeft:
                 sLeftRing = sObject;
                 //bLeftRing = true;
                 EquipItemEvent(slotIndex);
@@ -706,55 +710,55 @@ public class PlayerInventory : UWEBase
     {
         switch (slotIndex)
         {
-            case 0://Helm
+            case (int)BodySlots.Helm:
                 UnEquipItemEvent(slotIndex);
                 sHelm = null;
                 // bHelm = true;
                 break;
-            case 1://Chest
+            case (int)BodySlots.Chest:
                 UnEquipItemEvent(slotIndex);
                 sChest = null;
                 // bChest = true;
                 break;
-            case 2://Leggings
+            case (int)BodySlots.Leggings:
                 UnEquipItemEvent(slotIndex);
                 sLegs = null;
                 //bLegs = true;
                 break;
-            case 3://Boots
+            case (int)BodySlots.Boots:
                 UnEquipItemEvent(slotIndex);
                 sBoots = null;
                 //bBoots = true;
                 break;
-            case 4://Gloves
+            case (int)BodySlots.Gloves:
                 UnEquipItemEvent(slotIndex);
                 sGloves = null;
                 // bGloves = true;
                 break;
-            case 5://ShoulderRight
+            case (int)BodySlots.ShoulderRight:
                 sRightShoulder = null;
                 //bRightShoulder = true;
                 break;
-            case 6://ShoulderLeft
+            case (int)BodySlots.ShoulderLeft:
                 sLeftShoulder = null;
                 // bLeftShoulder = true;
                 break;
-            case 7://HandRight
+            case (int)BodySlots.HandRight:
                 UnEquipItemEvent(slotIndex);
                 sRightHand = null;
                 //bRightHand = true;
                 break;
-            case 8://HandLeft
+            case (int)BodySlots.HandLeft:
                 UnEquipItemEvent(slotIndex);
                 sLeftHand = null;
                 // bLeftHand = true;
                 break;
-            case 9://RingRight
+            case (int)BodySlots.RingRight:
                 UnEquipItemEvent(slotIndex);
                 sRightRing = null;
                 //bRightRing = true;
                 break;
-            case 10://RingLeft
+            case (int)BodySlots.RingLeft:
                 UnEquipItemEvent(slotIndex);
                 sLeftRing = null;
                 //bLeftRing = true;
@@ -827,34 +831,34 @@ public class PlayerInventory : UWEBase
     {
         if (sHelm == ObjectToRemove)
         {
-            UnEquipItemEvent(0);
+            UnEquipItemEvent((int)BodySlots.Helm);
             sHelm = null;
             return true;
         }
         if (sChest == ObjectToRemove)
         {
-            UnEquipItemEvent(1);
+            UnEquipItemEvent((int)BodySlots.Chest);
             sChest = null;
             return true;
         }
 
         if (sLegs == ObjectToRemove)
         {
-            UnEquipItemEvent(2);
+            UnEquipItemEvent((int)BodySlots.Leggings);
             sLegs = null;
             return true;
         }
 
         if (sBoots == ObjectToRemove)
         {
-            UnEquipItemEvent(3);
+            UnEquipItemEvent((int)BodySlots.Boots);
             sBoots = null;
             return true;
         }
 
         if (sGloves == ObjectToRemove)
         {
-            UnEquipItemEvent(4);
+            UnEquipItemEvent((int)BodySlots.Gloves);
             sGloves = null;
             return true;
         }
@@ -873,28 +877,28 @@ public class PlayerInventory : UWEBase
 
         if (sRightHand == ObjectToRemove)
         {
-            UnEquipItemEvent(7);
+            UnEquipItemEvent((int)BodySlots.HandRight);
             sRightHand = null;
             return true;
         }
 
         if (sLeftHand == ObjectToRemove)
         {
-            UnEquipItemEvent(8);
+            UnEquipItemEvent((int)BodySlots.HandLeft);
             sLeftHand = null;
             return true;
         }
 
         if (sRightRing == ObjectToRemove)
         {
-            UnEquipItemEvent(9);
+            UnEquipItemEvent((int)BodySlots.RingRight);
             sRightRing = null;
             return true;
         }
 
         if (sLeftRing == ObjectToRemove)
         {
-            UnEquipItemEvent(10);
+            UnEquipItemEvent((int)BodySlots.RingLeft);
             sLeftRing = null;
             return true;
         }
@@ -940,14 +944,14 @@ public class PlayerInventory : UWEBase
     {//Remove the object from wherever it is on the characters paperdoll.
         if (sHelm == ObjectToRemove)
         {
-            UnEquipItemEvent(0);
+            UnEquipItemEvent((int)BodySlots.Helm);
             sHelm = null;
             //bHelm = true;
             return true;
         }
         if (sChest == ObjectToRemove)
         {
-            UnEquipItemEvent(1);
+            UnEquipItemEvent((int)BodySlots.Chest);
             sChest = null;
             //bChest = true;
             return true;
@@ -955,7 +959,7 @@ public class PlayerInventory : UWEBase
 
         if (sLegs == ObjectToRemove)
         {
-            UnEquipItemEvent(2);
+            UnEquipItemEvent((int)BodySlots.Leggings);
             sLegs = null;
             //bLegs = true;
             return true;
@@ -963,7 +967,7 @@ public class PlayerInventory : UWEBase
 
         if (sBoots == ObjectToRemove)
         {
-            UnEquipItemEvent(3);
+            UnEquipItemEvent((int)BodySlots.Boots);
             sBoots = null;
             //bBoots = true;
             return true;
@@ -971,7 +975,7 @@ public class PlayerInventory : UWEBase
 
         if (sGloves == ObjectToRemove)
         {
-            UnEquipItemEvent(4);
+            UnEquipItemEvent((int)BodySlots.Gloves);
             sGloves = null;
             //bGloves = true;
             return true;
@@ -993,7 +997,7 @@ public class PlayerInventory : UWEBase
 
         if (sRightHand == ObjectToRemove)
         {
-            UnEquipItemEvent(7);
+            UnEquipItemEvent((int)BodySlots.HandRight);
             sRightHand = null;
             //bRightHand = true;
             return true;
@@ -1001,7 +1005,7 @@ public class PlayerInventory : UWEBase
 
         if (sLeftHand == ObjectToRemove)
         {
-            UnEquipItemEvent(8);
+            UnEquipItemEvent((int)BodySlots.HandLeft);
             sLeftHand = null;
             // bLeftHand = true;
             return true;
@@ -1009,7 +1013,7 @@ public class PlayerInventory : UWEBase
 
         if (sRightRing == ObjectToRemove)
         {
-            UnEquipItemEvent(9);
+            UnEquipItemEvent((int)BodySlots.RingRight);
             sRightRing = null;
             //bRightRing = true;
             return true;
@@ -1017,7 +1021,7 @@ public class PlayerInventory : UWEBase
 
         if (sLeftRing == ObjectToRemove)
         {
-            UnEquipItemEvent(10);
+            UnEquipItemEvent((int)BodySlots.RingLeft);
             sLeftRing = null;
             //bLeftRing = true;
             return true;
@@ -1265,11 +1269,11 @@ public class PlayerInventory : UWEBase
         {
             switch (PieceToDamage)
             {
-                case 0://Helm								
-                case 1://Chest								
-                case 2://Leggings								
-                case 3://Boots								
-                case 4://Gloves	
+                case (int)BodySlots.Helm:
+                case (int)BodySlots.Chest:
+                case (int)BodySlots.Leggings:
+                case (int)BodySlots.Boots:
+                case (int)BodySlots.Gloves:
                     if (obj.GetComponent<Armour>() != null)
                     {
                         short durability = obj.GetComponent<Armour>().getDurability();
@@ -1288,7 +1292,7 @@ public class PlayerInventory : UWEBase
                         }
                     }
                     break;
-                case 7://HandRight
+                case (int)BodySlots.HandRight:
                     if (!UWCharacter.Instance.isLefty)
                     {
                         if (obj.gameObject.GetComponent<Shield>() != null)
@@ -1305,7 +1309,7 @@ public class PlayerInventory : UWEBase
                         }
                     }
                     break;
-                case 8://HandLeft
+                case (int)BodySlots.HandLeft:
                     if (UWCharacter.Instance.isLefty)
                     {
                         if (obj.gameObject.GetComponent<Shield>() != null)
@@ -1334,17 +1338,18 @@ public class PlayerInventory : UWEBase
         {
             switch (slot)
             {
-                case 0://Helm								
-                case 1://Chest								
-                case 2://Leggings								
-                case 3://Boots								
-                case 4://Gloves		
+                case (int)BodySlots.Helm:
+                case (int)BodySlots.Chest:
+                case (int)BodySlots.Leggings:
+                case (int)BodySlots.Boots:
+                case (int)BodySlots.Gloves:
                     if (obj.GetComponent<Armour>() != null)
                     {
                         return obj.GetComponent<Armour>().Protection();
                     }
                     break;
-                case 5://rings
+                case (int)BodySlots.RingRight:
+                case (int)BodySlots.RingLeft:
                     {
                         if (obj.GetComponent<Ring>() != null)
                         {
@@ -1352,7 +1357,7 @@ public class PlayerInventory : UWEBase
                         }
                         break;
                     }
-                case 7://HandRight
+                case (int)BodySlots.HandRight:
                     if (UWCharacter.Instance.isLefty)
                     {
                         return 0;
@@ -1365,7 +1370,7 @@ public class PlayerInventory : UWEBase
                         }
                     }
                     break;
-                case 8://HandLeft
+                case (int)BodySlots.HandLeft:
                     if (!UWCharacter.Instance.isLefty)
                     {
                         return 0;

@@ -102,7 +102,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0xFE00; //Mask out current val
+            existingValue &= ~(0x1FF << 0); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x1FF) << 0) );
         }
     }
@@ -120,7 +120,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0xF1FF; //Mask out current val
+            existingValue &= ~(0x7 << 9); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x7) << 9));
         }
     }
@@ -138,7 +138,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0xEFFF; //Mask out current val
+            existingValue &= ~(0x1 << 12); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x1) << 12));
         }
     }
@@ -153,7 +153,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0xDFFF; //Mask out current val
+            existingValue &= ~(0x1 << 13); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x1) << 13));
         }
     }
@@ -168,7 +168,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0xBFFF; //Mask out current val
+            existingValue &= ~(0x1 << 14); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x1) << 14));
         }
     }
@@ -183,7 +183,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR);
-            existingValue &= 0x7FFF; //Mask out current val
+            existingValue &= ~(0x1 << 15); //Mask out current val
             SetAt16(PTR, existingValue | ((value & 0x1) << 15));
         }
     }
@@ -203,7 +203,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR+2);
-            existingValue &= 0xFF80; //Mask out current val
+            existingValue &= ~(0x7F << 0); //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7F) << 0));
         }
     }
@@ -218,7 +218,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR+2);
-            existingValue &= 0xFC7F; //Mask out current val
+            existingValue &= ~(0x7 << 7); //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7) << 7));
         }
     }
@@ -241,7 +241,7 @@ public class ObjectLoaderInfo : UWClass
                 }
             }
             int existingValue = GetAt16(PTR+2);
-            existingValue &= 0xE3FF; //Mask out current val
+            existingValue &= ~(0x7 << 10); //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7) << 10));
         }
     }
@@ -264,7 +264,7 @@ public class ObjectLoaderInfo : UWClass
                 }                
             }
             int existingValue = GetAt16(PTR+2);
-            existingValue &= 0x1FFF; //Mask out current val
+            existingValue &= ~(0x7 << 13); //Mask out current val
             SetAt16(PTR+2, existingValue | ((value & 0x7) << 13));
         }
     }
@@ -279,7 +279,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR + 4);
-            existingValue &= 0xE3FF; //Mask out current val
+            existingValue &= ~(0x3F << 0); //Mask out current val
             SetAt16(PTR + 4, existingValue | ((value & 0x3f) << 0));
         }
     }
@@ -294,7 +294,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR + 4);
-            existingValue &= 0x003F; //Mask out current val
+            existingValue &= ~(0x3FF << 6); //Mask out current val
             SetAt16(PTR + 4, existingValue | ((value & 0x3FF) << 6));
         }
     }
@@ -309,7 +309,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR + 6);
-            existingValue &= 0xE3FF; //Mask out current val
+            existingValue &= ~(0x3F << 0); //Mask out current val
             SetAt16(PTR + 6, existingValue | ((value & 0x3f) << 0));
         }
     }
@@ -324,7 +324,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             int existingValue = GetAt16(PTR + 6);
-            existingValue &= 0x003F; //Mask out current val
+            existingValue &= ~(0x3FF << 6); //Mask out current val
             SetAt16(PTR + 6, existingValue | ((value & 0x3FF) << 6));
         }
     }
@@ -431,7 +431,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xB);
-                existingValue &= 0xFFF0; //Mask out current val
+                existingValue &= ~(0xF << 0); //Mask out current val
                 SetAt16(PTR + 0xB, existingValue | ((value & 0xF) << 0));
             }
         }
@@ -450,7 +450,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xB);
-                existingValue &= 0xF00F; //Mask out current val
+                existingValue &= ~(0xFF << 4); //Mask out current val
                 SetAt16(PTR + 0xB, existingValue | ((value & 0xFF) << 4));
             }
         }
@@ -469,7 +469,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xB);
-                existingValue &= 0x0FFF; //Mask out current val
+                existingValue &= ~(0xF << 12); //Mask out current val
                 SetAt16(PTR + 0xB, existingValue | ((value & 0xF) << 12));
             }
         }
@@ -488,7 +488,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xD);
-                existingValue &= 0xFFF0; //Mask out current val
+                existingValue &= ~(0xF << 0); //Mask out current val
                 SetAt16(PTR + 0xD, existingValue | ((value & 0xF) << 0));
             }
         }
@@ -507,7 +507,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xD);
-                existingValue &= 0xF00F; //Mask out current val
+                existingValue &= ~(0xFF << 4); //Mask out current val
                 SetAt16(PTR + 0xD, existingValue | ((value & 0xFF) << 4));
             }
         }
@@ -536,7 +536,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xD);
-                existingValue &= 0xEFFF; //Mask out current val
+                existingValue &= ~(0x1 << 12); //Mask out current val
                 SetAt16(PTR + 0xD, existingValue | ((value & 0x1) << 12));
             }
         }
@@ -555,7 +555,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xD);
-                existingValue &= 0xDFFF; //Mask out current val
+                existingValue &= ~(0x1 << 13); //Mask out current val
                 SetAt16(PTR + 0xD, existingValue | ((value & 0x1) << 13));
             }
         }
@@ -574,7 +574,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xD);
-                existingValue &= 0x3FFF; //Mask out current val
+                existingValue &= ~(0x3 << 14); //Mask out current val
                 SetAt16(PTR + 0xD, existingValue | ((value & 0x3) << 14));
             }
         }
@@ -593,7 +593,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xF);
-                existingValue &= 0xFFC0; //Mask out current val
+                existingValue &= ~(0x3F << 0); //Mask out current val
                 SetAt16(PTR + 0xF, existingValue | ((value & 0x3F) << 0));
             }
         }
@@ -612,7 +612,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xF);
-                existingValue &= 0xF03F; //Mask out current val
+                existingValue &= ~(0x3F << 6); //Mask out current val
                 SetAt16(PTR + 0xF, existingValue | ((value & 0x3F) << 6));
             }
         }
@@ -631,7 +631,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0xF);
-                existingValue &= 0x0FFF; //Mask out current val
+                existingValue &= ~(0xF << 0xC); //Mask out current val
                 SetAt16(PTR + 0xF, existingValue | ((value & 0xF) << 0xC));
             }
         }
@@ -691,12 +691,12 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsStatic) { return 0; }
             int val = (int)GetAt(PTR + 0x14);
-            return (short)(DataLoader.ExtractBits(val, 0, 0x8));
+            return (short)(DataLoader.ExtractBits(val, 0, 0x7));
         }
         set
         {
             byte existingValue = (byte)GetAt16(PTR + 0x14);
-            existingValue &= 0xF7; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x7 << 0)); //Mask out current val
             SetAt(PTR + 0x14,(byte)( existingValue | ((value & 0x7) << 0)));
         }
     }
@@ -712,7 +712,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt16(PTR + 0x14);
-            existingValue &= 0x7; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x1F << 3)); //Mask out current val
             SetAt(PTR + 0x14, (byte)(existingValue | ((value & 0x1F) << 3)));
         }
     }
@@ -728,7 +728,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt(PTR + 0x15);
-            existingValue &= 0x80; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x7F << 0)); //Mask out current val
             SetAt(PTR + 0xF, (byte)(existingValue | ((value & 0x7F) << 0x0)));
         }
     }
@@ -762,7 +762,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0x16);
-                existingValue &= 0xFFF0; //Mask out current val
+                existingValue &= ~(0xF << 0); //Mask out current val
                 SetAt16(PTR + 0x16, (existingValue | ((value & 0xF) << 0x0)));
             }
         }
@@ -781,7 +781,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0x16);
-                existingValue &= 0xFC0F; //Mask out current val
+                existingValue &= ~(0x3F << 4); //Mask out current val
                 SetAt16(PTR + 0x16, (existingValue | ((value & 0x3F) << 0x4)));
             }
         }
@@ -800,7 +800,7 @@ public class ObjectLoaderInfo : UWClass
             if (!IsStatic)
             {
                 int existingValue = GetAt16(PTR + 0x16);
-                existingValue &= 0x3FF; //Mask out current val
+                existingValue &= ~(0x3F << 10); //Mask out current val
                 SetAt16(PTR + 0x16, (existingValue | ((value & 0x3F) << 10)));
             }
         }
@@ -816,7 +816,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt(PTR + 0x18);
-            existingValue &= 0xE0; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x1F << 0)); //Mask out current val
             SetAt(PTR + 0x18, (byte)(existingValue | ((value & 0x1F) << 0x0)));
         }
     }
@@ -832,7 +832,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt(PTR + 0x18);
-            existingValue &= 0x1F; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x7 << 5)); //Mask out current val
             SetAt(PTR + 0x18, (byte)(existingValue | ((value & 0x7) << 0x5)));
         }
     }
@@ -848,7 +848,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt(PTR + 0x19);
-            existingValue &= 0xC0; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x3F << 0)); //Mask out current val
             SetAt(PTR + 0x19, (byte)(existingValue | ((value & 0x3f) << 0x0)));
         }
     }
@@ -864,7 +864,7 @@ public class ObjectLoaderInfo : UWClass
         set
         {
             byte existingValue = (byte)GetAt(PTR + 0x19);
-            existingValue &= 0x3F; //Mask out current val
+            existingValue = (byte)(existingValue & ~(0x3 << 6)); //Mask out current val
             SetAt(PTR + 0x19, (byte)(existingValue | ((value & 0x3) << 6)));
         }
     }

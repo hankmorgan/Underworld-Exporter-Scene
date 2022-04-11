@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ObjectLoader : DataLoader
 {
@@ -1902,20 +1903,17 @@ public class ObjectLoader : DataLoader
     public static string[] UpdateInventoryObjectList(out int NoOfInventoryItems)
     {
         PlayerInventory pInv = UWCharacter.Instance.playerInventory;
-        NoOfInventoryItems = 0;
         ObjectInteraction Prev = null;
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
             if (child != null)
             {
-                NoOfInventoryItems++;
                 //Initialise the next value to zero.
                 child.gameObject.GetComponent<ObjectInteraction>().next = 0;
             }
         }
         //Store the objects in an array to give them indices
-        string[] InventoryObjects = new string[NoOfInventoryItems];
-        int i = 0;
+        var InventoryObjectsList = new List<string>();
         //First add the objects on the paperdoll to the so that they are first.
         for (short s = 0; s <= 18; s++)
         {
@@ -1930,19 +1928,21 @@ public class ObjectLoader : DataLoader
             }
             if (obj != null)
             {
-                InventoryObjects[i++] = obj.name;
+                InventoryObjectsList.Add(obj.name);
             }
         }
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
             if (child != null)
             {
-                if (System.Array.IndexOf(InventoryObjects, child.name) < 0)//No match.
+                if (!InventoryObjectsList.Contains(child.name))
                 {
-                    InventoryObjects[i++] = child.name;
+                    InventoryObjectsList.Add(child.name);
                 }
             }
         }
+        var InventoryObjects = InventoryObjectsList.ToArray();
+        NoOfInventoryItems = InventoryObjects.Length;
 
         //int itemIndex=0;
         //Go through each slot

@@ -175,7 +175,7 @@ public class Quest : UWClass
                         int offset = 0x66 + (questno / 4) * 4;
                         int bit = questno % 4;
                         byte existingValue = SaveGame.GetAt(offset);
-                        byte mask = (byte)(bit << 1);
+                        byte mask = (byte)(1 << bit);
                         if (value >= 1)
                         {//set
                             existingValue |= mask;
@@ -196,11 +196,11 @@ public class Quest : UWClass
                 {
                     if (questno <= 31)
                     {//read the quest from the bit field quests.
-                        int offset = questno / 8;
+                        int offset = 0x66 + questno / 8;
                         int bit = questno % 8;
 
                         byte existingValue = SaveGame.GetAt(offset);
-                        byte mask = (byte)(bit << 1);
+                        byte mask = (byte)(1 << bit);
                         if (value >= 1)
                         {//set
                             existingValue |= mask;
