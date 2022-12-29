@@ -1453,7 +1453,7 @@ public class SaveGame : Loader
         int[] ActiveEffectIds = new int[3];
         short[] ActiveEffectStability = new short[3];
 
-        int arena = 0;
+        //int arena = 0;
 
         ResetUI();
 
@@ -1525,6 +1525,8 @@ public class SaveGame : Loader
             ResetInventory();
 
             LoadInventory(buffer, 995, 931, 969);
+
+            Debug.Log("The Clock Reads " + GetAt32(0x36A));
 
             //Vector3 DreamReturn = new Vector3(x_position_dream / Ratio, 0f, y_position_dream / Ratio);
             //UWCharacter.Instance.DreamReturnTileX = (short)(DreamReturn.x / 1.2f);

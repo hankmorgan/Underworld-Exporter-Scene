@@ -278,6 +278,16 @@ public class TileInfo : Loader
         }
     }
 
+
+    public short DungeonLight
+    {
+        get
+        {
+            return (short)((map.lev_ark_block.Data[Ptr + 1]) & 0x01);
+        }
+    }
+
+
     //Shock Specific Stuff
     public short shockSlopeFlag = TileMap.SLOPE_FLOOR_ONLY;    //For controlling ceiling slopes for shock.
     public short shockCeilingTexture;

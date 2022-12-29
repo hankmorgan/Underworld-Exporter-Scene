@@ -94,6 +94,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 12h 	1 	 ?? 	 ?? 	 ??
 13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
 1Ch 	12 	 ?? 	 ?? 	 ??
+1Eh  - maybe  detection range. Used in makin npcs hostile due to last attacked character variable
 0x20  Loot list for the npc
 28h 	2 	uint16 	Experience 	Experience provided when killed.
 2Ah 	5 	 ?? 	 ?? 	 ?? list of speels. Looks like 3 values?

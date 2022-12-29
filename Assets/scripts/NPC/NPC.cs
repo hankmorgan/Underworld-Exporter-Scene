@@ -49,21 +49,21 @@ public class NPC : MobileObject
     public enum npc_goals
     {
         npc_goal_stand_still_0 = 0,
+		npc_goal_goto_1 = 1,
+		npc_goal_wander_2 = 2,
+		npc_goal_follow = 3,
+		npc_goal_wander_4 = 4,
+		npc_goal_attack_5 = 5,
+		npc_goal_flee = 6,
         npc_goal_stand_still_7 = 7,
+		npc_goal_wander_8 = 8,        
+        npc_goal_attack_9 = 9,
+		npc_goal_want_to_talk = 10,
         npc_goal_stand_still_11 = 11,
         npc_goal_stand_still_12 = 12,
-        npc_goal_want_to_talk = 10,
-        npc_goal_goto_1 = 1,
-        npc_goal_wander_2 = 2,
-        npc_goal_wander_4 = 4,
-        npc_goal_wander_8 = 8,
-        npc_goal_attack_5 = 5,
-        npc_goal_attack_9 = 9,
-        npc_goal_flee = 6,
-        npc_goal_follow = 3,
-        npc_goal_petrified = 15,
-        npc_goal_unk13 = 13,
-        npc_goal_unk14 = 14
+		npc_goal_unk13 = 13,
+        npc_goal_unk14 = 14,
+        npc_goal_petrified = 15
     };
 
     public enum AttackStages

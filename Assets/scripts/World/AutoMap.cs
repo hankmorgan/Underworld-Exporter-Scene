@@ -395,12 +395,7 @@ public class AutoMap : Loader
         {
             for (int x = 0; x < TileMap.TileMapSizeX; x++)
             {
-                //float angle = Mathf.Atan2(y - 31, x - 31) * 180.0f / Mathf.PI;
-                //if (angle < 0) { angle += 360f; }
-                //output += angle + ",";
-                // output += Tiles[x, y].tileType + ",";
                 output += Tiles[x, y].DisplayType + ",";
-                //output += CurrentTileMap().Tiles[x, y].terrain + ",";
             }
             output += "\n";
         }
