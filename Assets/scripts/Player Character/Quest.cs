@@ -37,10 +37,10 @@ using UnityEngine;
 /// 3: PT related - Bishop is dead
 /// 
 /// 6: Helena asks you to speak to praetor loth
-/// 7: Loth is dead. Impacts create_object traps
+/// 7: Loth is dead
 /// 8:  Kintara tells you about Javra
 /// 9:  Lobar tells you about the "virtues"
-/// 10: Freemis has been killed
+/// 10: PT related
 /// 11: Listener under the castle is dead.
 /// 12: used in Ice caverns to say the avatar can banish the guardians presence. Wand of altara?
 /// 13: Mystral wants you to spy on altara
@@ -111,7 +111,7 @@ using UnityEngine;
 /// 	(this is probably a bit field.)
 /// 132: Set to 2 during Kintara conversation
 /// 133: How much Jospur owes you for fighting in the pits
-/// 134: The password for the prison tower (random value)/No of brain creatures killed in the keep
+/// 134: The password for the prison tower (random value)
 /// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWClass
@@ -457,12 +457,12 @@ public class Quest : UWClass
     {
         get
         {
-            return (int)((SaveGame.GetAt(0x61) >> 7) & 0x1) == 1;
+            return (int)((SaveGame.GetAt(0x61) >> 6) & 0x1) == 1;
         }
         set
         {
             byte existingValue = SaveGame.GetAt(0x61);
-            byte mask = (1 << 7);
+            byte mask = (1 << 6);
             if (value)
             {//set
                 existingValue |= mask;

@@ -1019,7 +1019,6 @@ public class GameWorldController : UWEBase
                         if (CreateReports)
                         {
                             CreateObjectReport(objectList[newLevelNo].objInfo, newLevelNo, objectList[newLevelNo]);
-                            CreateMapReport(Tilemaps[newLevelNo]);
                         }
                         if (EnableUnderworldGenerator)
                         {
@@ -2098,74 +2097,12 @@ public class GameWorldController : UWEBase
         //}
     }
 
-    void CreateMapReport(TileMap tm)
-    {
-        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_map_" + tm.thisLevelNo + ".txt", false);
-        string output = "";
-        output += "Tile Type\n";
-        for (int y = TileMap.TileMapSizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < TileMap.TileMapSizeX; x++)
-            {
-                output += tm.Tiles[x, y].tileType + ",";
-            }
-            output += "\n";
-        }
-        output += "\n";
-        output += "Floor Texture\n";
-        for (int y = TileMap.TileMapSizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < TileMap.TileMapSizeX; x++)
-            {
-                output += tm.Tiles[x, y].floorTexture + ",";
-            }
-            output += "\n";
-        }
 
-        output += "\n";
-        output += "Flags\n";
-        for (int y = TileMap.TileMapSizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < TileMap.TileMapSizeX; x++)
-            {
-                output += tm.Tiles[x, y].flags + ",";
-            }
-            output += "\n";
-        }
-
-        output += "\n";
-        output += "No Magic Bit\n";
-        for (int y = TileMap.TileMapSizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < TileMap.TileMapSizeX; x++)
-            {
-                output += tm.Tiles[x, y].noMagic + ",";
-            }
-            output += "\n";
-        }
-
-
-        output += "\n";
-        output += "Dungeon Light\n";
-        for (int y = TileMap.TileMapSizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < TileMap.TileMapSizeX; x++)
-            {
-                output += tm.Tiles[x, y].DungeonLight + ",";
-            }
-            output += "\n";
-        }
-
-        writer.Write(output);
-        writer.Close();
-    }
-
-
-        /// <summary>
-        /// Creates a report of the objects in the level in an xml format
-        /// </summary>
-        /// <param name="objList"></param>
-        void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo, ObjectLoader list)
+    /// <summary>
+    /// Creates a report of the objects in the level in an xml format
+    /// </summary>
+    /// <param name="objList"></param>
+    void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo, ObjectLoader list)
     {
         StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");// true);
         writer.WriteLine("<ObjectReport level =" + ReportLevelNo + "> ");
