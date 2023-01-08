@@ -44,7 +44,7 @@ using UnityEngine;
 /// 11: Listener under the castle is dead.
 /// 12: used in Ice caverns to say the avatar can banish the guardians presence. Wand of altara?
 /// 13: Mystral wants you to spy on altara
-/// 
+/// 14: Likely all lines of power have been cut.
 /// 15: Altara tells you about the listener
 /// 
 /// 18: You learn that the Trikili can talk.
@@ -76,6 +76,7 @@ using UnityEngine;
 /// 49: Bishop tells you about the gem.
 /// 50: The keep is going to crash.
 /// 51: You have visited the ice caves (britannia becomes icy)
+/// 52: Have you cut the line of power in the ice caverns
 /// 54: Checked by Mors Gotha? related to keep crashing
 /// 55: Banner of Killorn returned (based on Scd.ark research)
 /// 58: Set when meeting bishop. Bishop tells you about altara
@@ -274,7 +275,7 @@ public class Quest : UWClass
     /// <summary>
     /// The x clocks tracks progress during the game and is used in firing events.
     /// </summary>
-    /// The xclock is a range of 16 variables. When references by traps they index is -16 to get the below values.
+    /// The xclock is a range of 16 variables. When references by traps the index is -16 to get the below values.
     /// The X Clock is tied closely to SCD.ark and the scheduled events within that file.
     /// 1=Miranda conversations & related events in the castle
     ///     1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)

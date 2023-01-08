@@ -85,6 +85,8 @@ Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
 09h 	1 	uint8 	GeneralType 	An index into the strings on page 8, offset 370. This string is the generic name for the creature, like "a creature" for "a goblin" or "a rat" for "a giant rat".
 0Ah 	1 	uint8 	Passiveness 	Relative passiveness. 255 will never take a swing at you, even if you kill them.
+			In Code these appear to be threasholds at different bit significance?
+			Bits 2,3 & 4 seem to be relevant when creatures die in the pits of carnage.
 0Bh 	1 	magic related to the critter having extra/specific spells.   ?? 	 ?? 	 ??
 0Ch 	1 	uint8 	MovementSpeed 	Speed of movement; 0 is immobile, maxes out at 12 for vampire bat.
 0Dh 	2 	 ?? 	 ?? 	 ??
@@ -93,9 +95,13 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 11h 	1 	uint8 	EquipmentDamage 	Amount of equipment damage this is capable of on attack.
 12h 	1 	 ?? 	 ?? 	 ??
 13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
+(seems to be used as the factor in an RNG dice roll. Maybe controls if npc rolls 1 to 10 or 1 to 5 etc
 1Ch 	12 	 ?? 	 ?? 	 ??
+used in relation to npc_hp and critter hitpoints?
+1F   UNK  (possibly accuracy for projectiles)
 0x20  Loot list for the npc
 28h 	2 	uint16 	Experience 	Experience provided when killed.
+maybe this is not of length 2
 2Ah 	5 	 ?? 	 ?? 	 ?? list of speels. Looks like 3 values?
 2Dh     Some sort of value (magic users related)
 2Fh 	1 	uint8 	 ?? 	Always 73.
