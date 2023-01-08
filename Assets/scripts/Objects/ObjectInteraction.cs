@@ -227,6 +227,34 @@ public class ObjectInteraction : UWEBase
     public const int HEADINGNORTHWEST = 135;
     public const int HEADINGSOUTHWEST = 45;
 
+
+    public int itemtype;
+
+    public int MajorClass
+    {
+        get
+        {
+            return (item_id & 0x1C0) >> 6;
+        }
+    }
+
+    public int MinorClass
+    {
+        get
+        {
+            return (item_id >> 4) & 0xF;
+        }
+    }
+
+    public int ClassIndex
+    {
+        get
+        {
+            return (item_id & 0xF);
+        }
+    }
+
+
     public short ObjectIndex
     {
         get
@@ -609,7 +637,7 @@ public class ObjectInteraction : UWEBase
         {
             FreezeMovement(this.gameObject);
         }
-
+        itemtype = GetItemType();
         FileDataAddress = BaseObjectData.address;
     }
 
@@ -817,7 +845,8 @@ public class ObjectInteraction : UWEBase
     /// <returns>The item type.</returns>
     public int GetItemType()
     {
-        return GameWorldController.instance.objectMaster.objProp[item_id].type;
+        itemtype = GameWorldController.instance.objectMaster.objProp[item_id].type;
+        return itemtype;
     }
 
     /// <summary>
@@ -1841,9 +1870,6 @@ public class ObjectInteraction : UWEBase
             )
         {
             float ceil = CurrentTileMap().CEILING_HEIGHT;
-            //Updates the tilex & tileY,
-            //tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
-            //tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
             if ((ObjectTileX > TileMap.TileMapSizeX) | (ObjectTileX < 0))
             {//Object is off map.
                 ObjectTileX = TileMap.ObjectStorageTile;
@@ -1853,10 +1879,15 @@ public class ObjectInteraction : UWEBase
                 ObjectTileY = TileMap.ObjectStorageTile;
             }
             //updates the x,y and zpos
-            switch (GetItemType())
+            switch (itemtype)
             {
-                case DOOR://Do not update position of doors.
+                case DOOR://Do not update position of doors and these
                 case HIDDENDOOR:
+                case PORTCULLIS:
+                case TMAP_CLIP:
+                case TMAP_SOLID:
+                case SIGN:
+                case BUTTON:
                     return;
                 default:
                     short newzpos = (short)((((this.transform.localPosition.y * 100f) / 15f) / ceil) * 128f);

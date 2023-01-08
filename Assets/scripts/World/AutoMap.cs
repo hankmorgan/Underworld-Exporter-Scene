@@ -222,34 +222,57 @@ public class AutoMap : Loader
     /// stop reading in data.
     static void ProcessAutoMapNotes(int LevelNo, byte[] lev_ark, long automapNotesAddress, long AUTOMAP_EOF_ADDRESS)
     {
-        while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
+        int NoOfNotes;
+
+        if (_RES == GAME_UW2)
         {
+           NoOfNotes = lev_ark.GetUpperBound(0) / 54;
+        }
+        else
+        {
+            NoOfNotes = (int)((AUTOMAP_EOF_ADDRESS - automapNotesAddress)/54);
+            NoOfNotes--;
+        }
+
+        int NoteNo = 0;
+        //while (automapNotesAddress < AUTOMAP_EOF_ADDRESS) 
+        while (NoteNo<=NoOfNotes)
+        {
+            NoteNo++;
+            //if(automapNotesAddress>lev_ark.GetUpperBound(0))
+            //{
+            //    Debug.Log("Out of bounds on automap");
+            //    return;
+            //}
             string NoteText = "";
             bool terminated = false;
-            int PosX = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
-            int PosY = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
-            for (int c = 0; c <= 0x31; c++)
+            if (automapNotesAddress+54<=lev_ark.GetUpperBound(0))
             {
-                if ((lev_ark[automapNotesAddress + c].ToString() != "\0") && (!terminated))
+                int PosX = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x32, 16);
+                int PosY = (int)getValAtAddress(lev_ark, automapNotesAddress + 0x34, 16);
+                for (int c = 0; c <= 0x31; c++)
                 {
-                    NoteText += (char)lev_ark[automapNotesAddress + c];
+                    if ((lev_ark[automapNotesAddress + c].ToString() != "\0") && (!terminated))
+                    {
+                        NoteText += (char)lev_ark[automapNotesAddress + c];
+                    }
+                    else
+                    {
+                        terminated = true;
+                    }
+                }
+                if (NoteText == "")
+                {
+                    break;
+                }
+                if ((PosY <= 200) && (PosX <= 320))
+                {//Add a new note on the map notes list.
+                    GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(new MapNote(PosX, PosY, NoteText));
                 }
                 else
                 {
-                    terminated = true;
+                    break;
                 }
-            }
-            if (NoteText == "")
-            {
-                break;
-            }
-            if ((PosY <= 200) && (PosX <= 320))
-            {//Add a new note on the map notes list.
-                GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(new MapNote(PosX, PosY, NoteText));
-            }
-            else
-            {
-                break;
             }
             automapNotesAddress += 54;//Each note is this long in data.
         }
@@ -271,16 +294,13 @@ public class AutoMap : Loader
     /// <param name="lev_ark"></param>
     public void InitAutoMapUW2(int LevelNo, byte[] lev_ark)
     {
-        //AutomapNoteAddresses=new long[72];
         MapNotes = new List<MapNote>();
         thisLevelNo = LevelNo;
 
-        long datalen = 0;
-        //long AUTOMAP_EOF_ADDRESS=0;
-
+        int datalen = 0;
         int NoOfBlocks = (int)getValAtAddress(lev_ark, 0, 32);
 
-        long automapAddress = getValAtAddress(lev_ark, LevelNo * 4 + 6 + 160 * 4, 32);
+        int automapAddress = (int)getValAtAddress(lev_ark, LevelNo * 4 + 6 + 160 * 4, 32);
         //Load Automap info
         if (automapAddress != 0)
         {
@@ -302,7 +322,14 @@ public class AutoMap : Loader
             DataLoader.LoadUWBlock(lev_ark, LevelNo + 240, 0, out DataLoader.UWBlock noteblock);
             if (noteblock.Data != null)
             {
-                ProcessAutoMapNotes(LevelNo, noteblock.Data, 0, noteblock.DataLen);
+                try
+                {
+                    ProcessAutoMapNotes(LevelNo, noteblock.Data, 0, noteblock.DataLen);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError("Error in ProcessAutomapsNotes" + ex.Message);
+                }                
             }
         }
 
@@ -346,7 +373,14 @@ public class AutoMap : Loader
 
         if ((automapNotesAddress != 0) && (AUTOMAP_EOF_ADDRESS <= lev_ark.GetUpperBound(0)))
         {
-            ProcessAutoMapNotes(LevelNo, lev_ark, automapNotesAddress, AUTOMAP_EOF_ADDRESS);
+            try
+            {
+                ProcessAutoMapNotes(LevelNo, lev_ark, automapNotesAddress, AUTOMAP_EOF_ADDRESS+1);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error in ProcessAutomapsNotes" + ex.Message);
+            }
         }
     }
 

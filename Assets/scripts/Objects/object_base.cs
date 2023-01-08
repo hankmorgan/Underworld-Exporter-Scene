@@ -7,7 +7,7 @@ public class object_base : UWEBase
 {
     public bool testUse = false;
 
-
+    public string TrueEnchantment;
     //The Object interaction that is on this object.
     protected ObjectInteraction _objInt;
 
@@ -487,6 +487,95 @@ public class object_base : UWEBase
     protected virtual void Start()
     {
         InitSound();
+        if(objInt()!=null)
+        {
+            if (ObjectIndex==5)
+            {
+                Debug.Log("ERE");
+            }
+            if ((objInt().MajorClass!=6)&&(objInt().MajorClass!=5))
+            {
+                // int foundlink=-1;
+                object_base magicitem=null;
+                if (isquant == 1)
+                {//Item itself
+                    if (enchantment == 1)
+                    {
+                        //foundlink = ObjectIndex;
+                        magicitem = this;
+                    }
+                }
+                else
+                {//item is linked to a spell
+                    if (link>0)
+                    {
+                        if (this.GetComponent<Wand>()!=null)
+                        {
+                            magicitem = this.GetComponent<Wand>().linkedspell;                            
+                        }
+                        else if(this.GetComponent<Potion>()!=null)
+                        {
+                            magicitem = this.GetComponent<Potion>().linkedspell;
+                        }
+                    }
+                }
+                if (magicitem!=null)
+                {
+                    int MajorSpellClass=-1;
+                    int MinorSpellClass=0;
+                    int finalEffectId;
+                    //var found = ObjectLoader.getObjectIntAt(foundlink);
+                    if (magicitem != null)
+                    {
+                        int flagbit = (magicitem.flags >> 2) & 0x1;
+                        if (flagbit == 1)
+                        {
+                            MajorSpellClass = (magicitem.link & 0x1FF) >>6;
+                            if (MajorSpellClass==0)
+                            {
+                                MajorSpellClass = -1;
+                            }
+                            else
+                            {
+                                MajorSpellClass = MajorSpellClass + 0xC;
+                            }
+                            MinorSpellClass = magicitem.link & 0x3F;
+                        }
+                        else
+                        {
+                            MajorSpellClass = (magicitem.link & 0x1FF) >> 4;
+                            MinorSpellClass = (magicitem.link & 0xF);
+                        }
+                    }
+
+
+                    if (MajorSpellClass == 0xC)
+                    {
+                        MajorSpellClass = 0x1C0;
+                        var index = (magicitem.item_id & 0x30) >> 4;
+                        if (index > 1)//Split between weapons and armour
+                        {
+                            MinorSpellClass = MinorSpellClass + 16;
+                        }
+                        finalEffectId = MajorSpellClass + MinorSpellClass;                  
+                    }
+                    else
+                    {
+                        if(MajorSpellClass<=0)
+                        {
+                            finalEffectId = MinorSpellClass + 256;
+                        }
+                        else
+                        {
+                            finalEffectId = (MajorSpellClass << 4) + MinorSpellClass;
+                        }
+                    }
+
+                    TrueEnchantment = StringController.instance.GetString(6, finalEffectId);
+                    //Debug.Log(this.name + " has true enchantment "  + TrueEnchantment);
+                }
+            }
+        }
     }
 
     /// <summary>

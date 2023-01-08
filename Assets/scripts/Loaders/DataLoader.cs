@@ -27,12 +27,12 @@ public class DataLoader : Loader
     public struct UWBlock
     {
         public byte[] Data;
-        public long Address; //The file address of the block
+        public int Address; //The file address of the block
 
-        public long DataLen;
+        public int DataLen;
         //UW2 specific
         public int CompressionFlag;
-        public long ReservedSpace;
+        public int ReservedSpace;
     };
 
     //Compression flags for UW2
@@ -65,14 +65,14 @@ public class DataLoader : Loader
     /// <param name="datalen">Datalen.</param>
     /// Robbed and changed slightly from the Labyrinth of Worlds implementation project.
     ///This decompresses UW2 blocks.
-    public static byte[] unpackUW2(byte[] tmp, long address_pointer, ref long datalen)
+    public static byte[] unpackUW2(byte[] tmp, int address_pointer, ref int datalen)
     {
-        long BlockLen = (int)getValAtAddress(tmp, address_pointer, 32); //lword(base);
-        long NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
+        int BlockLen = (int)getValAtAddress(tmp, address_pointer, 32); //lword(base);
+        int NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
         //byte[] buf = new byte[BlockLen+100];
         byte[] buf = new byte[Math.Max(NoOfSegs, BlockLen + 100)];
 
-        long upPtr = 0;
+        int upPtr = 0;
         datalen = 0;
         address_pointer += 4;
 
@@ -702,7 +702,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
     /// <param name="blockNo">Block no.</param>
     /// <param name="targetDataLen">Target data length.</param>
     /// <param name="uwb">Uwb.</param>
-    public static bool LoadUWBlock(byte[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
+    public static bool LoadUWBlock(byte[] arkData, int blockNo, int targetDataLen, out UWBlock uwb)
     {
         uwb = new UWBlock();
         int NoOfBlocks = (int)getValAtAddress(arkData, 0, 32);
@@ -712,23 +712,34 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
                 {//6 + block *4 + (noOfBlocks*type)
                     uwb.Address = (int)getValAtAddress(arkData, 6 + (blockNo * 4), 32);
                     uwb.CompressionFlag = (int)getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 4), 32);
-                    uwb.DataLen = getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 8), 32);
-                    uwb.ReservedSpace = getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 12), 32);
+                    uwb.DataLen = (int)getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 8), 32);
+                    uwb.ReservedSpace = (int)getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 12), 32);
                     if (uwb.Address != 0)
                     {
                         if (((uwb.CompressionFlag >> 1) & 0x01) == 1)
                         {//data is compressed;
                             uwb.Data = unpackUW2(arkData, uwb.Address, ref uwb.DataLen);
+                            if (uwb.DataLen>0)
+                            {
+                                Array.Resize(ref uwb.Data, uwb.DataLen);
+                            }
                             return true;
                         }
                         else
                         {
                             uwb.Data = new byte[uwb.DataLen];
-                            int b = 0;
-                            for (long i = uwb.Address; i < uwb.Address + uwb.DataLen; i++)
-                            {//Copy the data to the block.
-                                uwb.Data[b++] = arkData[i];
-                            }
+                            //int b = 0;
+                            //if(targetDataLen!=0)
+                            //{
+                                Buffer.BlockCopy(arkData, uwb.Address, uwb.Data, 0, uwb.DataLen);
+                            //}
+                            //else
+                            //{
+                            //    //for (long i = uwb.Address; i < uwb.Address + uwb.DataLen; i++)
+                            //    //{//Copy the data to the block.
+                            //    //    uwb.Data[b++] = arkData[i];
+                            //    //}
+                            //}
                             return true;
                         }
                     }
@@ -740,7 +751,7 @@ http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
                 }
             default:
                 {
-                    uwb.Address = getValAtAddress(arkData, (blockNo * 4) + 2, 32);
+                    uwb.Address = (int)getValAtAddress(arkData, (blockNo * 4) + 2, 32);
                     if (uwb.Address != 0)
                     {
                         uwb.Data = new byte[targetDataLen];

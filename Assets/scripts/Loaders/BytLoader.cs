@@ -126,14 +126,14 @@ public class BytLoader : ArtLoader
         // Get the size of the file in bytes
 
         NoOfTextures = getValAtAddress(textureFile, 0, 8);
-        long textureOffset = (int)getValAtAddress(textureFile, (index * 4) + 6, 32);
+        int textureOffset = (int)getValAtAddress(textureFile, (index * 4) + 6, 32);
         if (textureOffset != 0)
         {
             int compressionFlag = (int)getValAtAddress(textureFile, ((index * 4) + 6) + (NoOfTextures * 4), 32);
             int isCompressed = (compressionFlag >> 1) & 0x01;
             if (isCompressed == 1)
             {
-                long datalen = 0;
+                int datalen = 0;
                 return Image(DataLoader.unpackUW2(textureFile, textureOffset, ref datalen), 0, 320, 200, "namehere", GameWorldController.instance.palLoader.Palettes[PaletteIndicesUW2[index]], Alpha);
             }
             else
