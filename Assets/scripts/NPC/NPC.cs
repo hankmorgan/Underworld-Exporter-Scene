@@ -47,23 +47,23 @@ public class NPC : MobileObject
     };
 
     public enum npc_goals
-    {
-        npc_goal_stand_still_0 = 0,
-        npc_goal_stand_still_7 = 7,
-        npc_goal_stand_still_11 = 11,
-        npc_goal_stand_still_12 = 12,
-        npc_goal_want_to_talk = 10,
+    {        
+		npc_goal_stand_still_0 = 0,
         npc_goal_goto_1 = 1,
         npc_goal_wander_2 = 2,
-        npc_goal_wander_4 = 4,
+		npc_goal_follow = 3,
+		npc_goal_wander_4 = 4, //possibly this should be another standstill goal
+		npc_goal_attack_5 = 5,
+		npc_goal_attack_6 = 6,  //goal appears to be attack at a distance using ranged weapons
+		npc_goal_stand_still_7 = 7, //same hehaviour as 0
         npc_goal_wander_8 = 8,
-        npc_goal_attack_5 = 5,
-        npc_goal_attack_9 = 9,
-        npc_goal_flee = 6,
-        npc_goal_follow = 3,
-        npc_goal_petrified = 15,
-        npc_goal_unk13 = 13,
-        npc_goal_unk14 = 14
+        npc_goal_attack_9 = 9, //goal appears to also be attack at a distance, possibly using magic attacks
+        npc_goal_want_to_talk = 10,
+        npc_goal_stand_still_11 = 11, //This goal is only seen in ethereal void creatures. 0xB
+        npc_goal_stand_still_12 = 12,
+		npc_goal_unk13 = 13,
+        npc_goal_unk14 = 14,
+        npc_goal_petrified = 15
     };
 
     public enum AttackStages
@@ -1093,12 +1093,13 @@ public class NPC : MobileObject
             case npc_goals.npc_goal_wander_2://Wander randomly	
             case npc_goals.npc_goal_wander_4:
             case npc_goals.npc_goal_wander_8:
-            case npc_goals.npc_goal_flee://Morale failure. NPC flees in a random direction
+           // case npc_goals.npc_goal_flee://Morale failure. NPC flees in a random direction
                 {
                     NPCWanderUpdate();
                     break;
                 }
-            case npc_goals.npc_goal_attack_5://Attack target		
+            case npc_goals.npc_goal_attack_5://Attack target	
+            case npc_goals.npc_goal_attack_6: //attack at a range with magic?
             case npc_goals.npc_goal_attack_9:
                 {
                     NPCCombatUpdate();
@@ -1238,20 +1239,13 @@ public class NPC : MobileObject
         }
         else
         {       //I am at this tile. Stand idle for a random period of time
-            if (npc_goal == (short)npc_goals.npc_goal_flee)
+            AnimRange = AI_RANGE_IDLE;
+            if (ArrivedAtDestination == false)
             {
-                SetRandomDestination();
-            }
-            else
-            {
-                AnimRange = AI_RANGE_IDLE;
-                if (ArrivedAtDestination == false)
+                ArrivedAtDestination = true;
+                if (WaitTimer == 0)
                 {
-                    ArrivedAtDestination = true;
-                    if (WaitTimer == 0)
-                    {
-                        WaitTimer = Random.Range(1f, 10f);
-                    }
+                    WaitTimer = Random.Range(1f, 10f);
                 }
             }
         }
