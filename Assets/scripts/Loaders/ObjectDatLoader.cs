@@ -91,18 +91,30 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 0Ch 	1 	uint8 	MovementSpeed 	Speed of movement; 0 is immobile, maxes out at 12 for vampire bat.
 0Dh 	2 	 ?? 	 ?? 	 ??
 0Fh 	1 	uint8 	PoisonDamage 	Amount of poison damage this is capable of on attack.
-10h 	1 	uint8 	Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages), Flying = 0x02 (Flying critters like bats and imps), Swimming = 0x03 (Swimming critters like lurkers), Creeping = 0x04 (Creeping critters like rats and spiders), Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)), EarthGolem = 0x11 (Only used for the earth golem), Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
+10h 	1 	uint8 	Lower nibble  Category 	
+					Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
+					Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages), 
+					Flying = 0x02 (Flying critters like bats and imps), 
+					Swimming = 0x03 (Swimming critters like lurkers), 
+					Creeping = 0x04 (Creeping critters like rats and spiders), 
+					Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)), EarthGolem = 0x11 (Only used for the earth golem), 
+					Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
 11h 	1 	uint8 	EquipmentDamage 	Amount of equipment damage this is capable of on attack.
 12h 	1 	 ?? 	 ?? 	 ??
 13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
 (seems to be used as the factor in an RNG dice roll. Maybe controls if npc rolls 1 to 10 or 1 to 5 etc
 1Ch 	12 	 ?? 	 ?? 	 ??
-used in relation to npc_hp and critter hitpoints?
-1F   UNK  (possibly accuracy for projectiles)
+used in relation to npc_hp and critter hitpoints? Possibly a damage threshold before fleeing
+1D     UNK?  bits 4-7 uses in relation to finding goal targets (possibly stealth score for critter ->used by avatar in their critter data)
+1E 		UNK Used in relation to finding goal targets (possible stealth skill for critter)
+      calculation in SearchForGoalTarget is (1E[current critter]*1D[Gtarg])/10h)      note: 1E and 1D are the lower nibble	 of the bytes
+
+1F    UNK  (possibly accuracy for projectiles (missile skill for critter?)
+	bits 4-7  (used in relation to npc_hunger and compared to a random 0-9 dice roll to see if bit 1 of npc_hunger gets cleared)
 0x20  Loot list for the npc
 28h 	2 	uint16 	Experience 	Experience provided when killed.
 maybe this is not of length 2
-2Ah 	5 	 ?? 	 ?? 	 ?? list of speels. Looks like 3 values?
+2Ah 	5 	 ?? 	 ?? 	 ?? list of spells. Looks like 3 values?
 2Dh     Some sort of value (magic users related)
 2Fh 	1 	uint8 	 ?? 	Always 73.
 */
@@ -280,7 +292,7 @@ maybe this is not of length 2
                 critterStats[j].AttackDamage[2] = (int)getValAtAddress(obj_dat, add_ptr + 0x1A, 8);
                 critterStats[j].AttackProbability[2] = (int)getValAtAddress(obj_dat, add_ptr + 0x1B, 8);
 
-                critterStats[j].Exp = (int)getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp
+                critterStats[j].Exp = (int)getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp (is this wrong and should it just be 1 byte in length? 0x29 is a magic spell effect id)
 
                 critterStats[j].Loot = new int[4];
                 critterStats[j].Loot[0] = -1; critterStats[j].Loot[1] = -1; critterStats[j].Loot[2] = -1; critterStats[j].Loot[3] = -1;

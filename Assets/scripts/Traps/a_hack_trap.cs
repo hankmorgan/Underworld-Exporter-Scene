@@ -24,7 +24,7 @@ public class a_hack_trap : trap_base
     //qual=28 is change tmap objects to use a different texture
     //Qual=29 is randomly flick buttons. (talorus 1)
     //qual=30 if the avatar is a coward trap in the pits
-    //qual=31 something in the arena of fire? unimplemented
+    //qual=31 something in the arena of fire? Possibly unused. linked to a timer trigger and appears to involve teleporting warriers around the arena.
     //qual=32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
     //qual=33 is used to recycle empty bottles! 
 	//qual=34 Probably the castle water runs out. Affects plants, mushrooms and fountains.
@@ -40,6 +40,8 @@ public class a_hack_trap : trap_base
     //qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
 	//qual=45 not seen in the wild yet. refers to automap data??
     //qual=50 is to trigger the conversation with the troll #251 in tybals lair after you are imprisoned.
+	//qual=54 is to rotate the gem faces
+	//qual=55 is used to teleport to other worlds
     //qual=62 is used in Britannia, prison tower and Kilorn 1 for an unknown purpose .  Also appears in UW1 Level 3
 	//		Update aug 2021 seems to set a goal for the npc linked to by the trap using the owner value of the trap.
 	//				LBs trap has owner=12 which is stand still. Does this goal have another meaning?

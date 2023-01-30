@@ -292,7 +292,7 @@ public class Quest : UWClass
     ///     14 - Gem is weak/Mors is in killorn(?)
     ///     15 - Nystrul wants to see you again re endgame
     ///     16 - Nystrul questions have been answered Mars Gotha comes
-    /// 2=Nystrul and blackrock gems treated
+    /// 2=Nystrul conversations and no of blackrock gems treated
     /// 3=Djinn Capture
     ///     2 = balisk oil is in the mud
     ///     3 = bathed in oil
