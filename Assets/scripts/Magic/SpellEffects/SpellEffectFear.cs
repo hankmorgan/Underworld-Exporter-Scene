@@ -38,7 +38,7 @@ public class SpellEffectFear : SpellEffect
                 npc.npc_attitude = NPC.AI_ATTITUDE_UPSET;
 
                 //Makes the NPC Run away
-                npc.npc_goal = (byte)NPC.npc_goals.npc_goal_flee;
+                npc.npc_goal = (byte)NPC.npc_goals.npc_goal_attack_6;
                 npc.WaitTimer = 0f;
                 npc.npc_gtarg = 1;
 

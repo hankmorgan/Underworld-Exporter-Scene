@@ -88,7 +88,8 @@ using UnityEngine;
 /// 65: Pits related (checked by dorstag)
 /// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
 /// 104: Set when you enter scintilus level 5 (set by variable trap)
-/// 106: Meet mors gothi and got the book
+/// 105: Set when the air daemon is absorbed. (see also xclock1 and xclock3 changes)
+/// 106: Got or read mors spellbook
 /// 107: Set after freeing praetor loth and you/others now know about the horn.
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
 /// 110: Checked when talking to LB and Dupre. The guardians forces are attacking

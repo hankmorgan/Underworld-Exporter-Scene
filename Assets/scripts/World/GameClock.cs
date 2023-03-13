@@ -103,8 +103,17 @@ public class GameClock : UWEBase
     {
         get
         {
-            System.TimeSpan t = System.TimeSpan.FromSeconds(TotalSeconds);
-            return t.Hours;
+            int ClockValue;
+            if (_RES == GAME_UW2)
+            {
+                ClockValue = SaveGame.GetAt32(0x36A);
+            }
+            else
+            {
+                ClockValue = SaveGame.GetAt32(0xCF);
+            }
+
+            return (ClockValue / 0xE1000) % 12;
         }
     }
 
@@ -120,8 +129,16 @@ public class GameClock : UWEBase
     {
         get
         {
-            System.TimeSpan t = System.TimeSpan.FromSeconds(TotalSeconds);
-            return t.Minutes;
+            int ClockValue;
+            if (_RES == GAME_UW2)
+            {
+                ClockValue = SaveGame.GetAt32(0x36A);
+            }
+            else
+            {
+                ClockValue = SaveGame.GetAt32(0xCF);
+            }
+            return (ClockValue / 0x3C00) % 60;
         }
     }
     public static int Day
@@ -213,7 +230,7 @@ public class GameClock : UWEBase
     {
         for (int i = 0; i < minutestoadvance; i++)
         {
-            Clock1 += 60;//Move forward 60 seconds
+            Clock1 += 60;//Move forward 60 seconds???
             EveryMinuteUpdate();//Do the once a minute update
             //Do two 30 seconds updates
             EveryHalfMinuteUpdate();

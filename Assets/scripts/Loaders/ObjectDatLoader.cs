@@ -81,8 +81,9 @@ public class ObjectDatLoader : Loader
 06h 	1 	uint8 	Dexterity
 07h 	1 	 uint8	 Intelligence)
 08h 	1 	uint8 	FluidAndRemains 	A combination of remains after death and the type of blood splatters this produces.
-Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. 
-Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
+	Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. 
+	Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
+	Value>>3 & 0x3 identifies if the critter can be affected by the bleed spell
 09h 	1 	uint8 	GeneralType 	An index into the strings on page 8, offset 370. This string is the generic name for the creature, like "a creature" for "a goblin" or "a rat" for "a giant rat".
 0Ah 	1 	uint8 	Passiveness 	Relative passiveness. 255 will never take a swing at you, even if you kill them.
 			In Code these appear to be threasholds at different bit significance?
@@ -104,7 +105,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
 (seems to be used as the factor in an RNG dice roll. Maybe controls if npc rolls 1 to 10 or 1 to 5 etc
 1Ch 	12 	 ?? 	 ?? 	 ??
-used in relation to npc_hp and critter hitpoints? Possibly a damage threshold before fleeing
+used in relation to npc_hp and critter hitpoints? Possibly a damage threshold
 1D     UNK?  bits 4-7 uses in relation to finding goal targets (possibly stealth score for critter ->used by avatar in their critter data)
 1E 		UNK Used in relation to finding goal targets (possible stealth skill for critter)
       calculation in SearchForGoalTarget is (1E[current critter]*1D[Gtarg])/10h)      note: 1E and 1D are the lower nibble	 of the bytes

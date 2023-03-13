@@ -54,9 +54,9 @@ public class NPC : MobileObject
 		npc_goal_follow = 3,
 		npc_goal_wander_4 = 4, //possibly this should be another standstill goal
 		npc_goal_attack_5 = 5,
-		npc_goal_attack_6 = 6,  //goal appears to be attack at a distance using ranged weapons
+		npc_goal_attack_6 = 6,  //goal appears to be attack at a distance using ranged weapons, but also fear??
 		npc_goal_stand_still_7 = 7, //same hehaviour as 0
-        npc_goal_wander_8 = 8,
+        npc_goal_wander_8 = 8, //8 is the goal the npc gets when charmed, castle npcs have this too.
         npc_goal_attack_9 = 9, //goal appears to also be attack at a distance, possibly using magic attacks
         npc_goal_want_to_talk = 10,
         npc_goal_stand_still_11 = 11, //This goal is only seen in ethereal void creatures. 0xB
@@ -790,7 +790,8 @@ public class NPC : MobileObject
                             //Quest.QuestVariablesOBSOLETE[121] = 1;
                             Quest.SetQuestVariable(121, 1);
                             return false;
-                        case 145://The listener under the castle
+                        case 145://The listener under the castle.
+                                 //Need to confirm that a jeweled dagger is used and that the correct xclock is set
                             //Quest.QuestVariablesOBSOLETE[11] = 1;
                             Quest.SetQuestVariable(11, 1);
                             //Quest.x_clocks[1]++;//Confirm this behaviour!

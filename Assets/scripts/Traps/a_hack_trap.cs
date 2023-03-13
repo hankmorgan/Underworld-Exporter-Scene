@@ -7,7 +7,7 @@ public class a_hack_trap : trap_base
 	//qual=3 a_do_trap_platform
     //qual=5 is a trespass trap.
     //qual=10 is the awarding of class specific items at the start of the game
-	//qual=11 Not found in the wild yet. Related to fraznium gloves so probably those forcefields
+	//qual=11 Probably the forcefield that only allows passage when fraznium gloves are equipped (somewhere in the academy/tower?)
     //qual=12 is an oscillator row of tiles (i think). Owner of the trap increments on each call. -unimplemented
     //qual=14 cycles wall/floor colours in a room in talorus, owner to/from zpos the textures, runs along the x axis for y tiles
     //qual=17 is used to collapse cracked ice floors (linked to timer triggers)
@@ -20,8 +20,9 @@ public class a_hack_trap : trap_base
     //qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti.			
     //qual=25 is the bly scup chamber puzzle
     //qual=26 is the force field on scint level 5
-    //qual=27 Removes the link from the target object   
-    //qual=28 is change tmap objects to use a different texture
+    //qual=27 Changes the quality of the linked object to the trap owner value
+    //qual=28 is change tmap objects to use a different texture, 
+	//         in practice this is a change to the owner value so this is probably more likely a trap that changes owner rather than just change TMAP
     //Qual=29 is randomly flick buttons. (talorus 1)
     //qual=30 if the avatar is a coward trap in the pits
     //qual=31 something in the arena of fire? Possibly unused. linked to a timer trigger and appears to involve teleporting warriers around the arena.
