@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -262,7 +263,8 @@ public class MainMenuHud : GuiBase
             //GameClock.instance._day = 0;
             //GameClock.instance._minute = 51;
             //GameClock.instance._second = 15;
-            GameClock.Clock1 = 3; GameClock.Clock2 = 12; //To Confirm;
+            //GameClock.Clock1 = 3; GameClock.Clock2 = 12; //To Confirm;
+            GameClock.ClockSet(3075);
             UWCharacter.Instance.MaxVIT = 255;
             UWCharacter.Instance.CurVIT = 255;
             Skills.STR = 30;
@@ -496,7 +498,8 @@ public class MainMenuHud : GuiBase
                     //GameClock.instance._day = 0;
                     //GameClock.instance._minute = 51;
                     //GameClock.instance._second = 15;
-                    GameClock.Clock1 = 3; GameClock.Clock2 = 12;
+                    //GameClock.Clock1 = 3; GameClock.Clock2 = 12;
+                    GameClock.ClockSet(3075);
                     UWCharacter.Instance.Fatigue = 20;
                     UWCharacter.Instance.FoodLevel = 192;
                     JourneyOnwards();

@@ -39,17 +39,6 @@ public class UWCharacter : Character
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
 
-    ///// <summary>
-    /////  Conversion of player transform into UW heading value for the save file.
-    ///// </summary>
-    //public int HeadingFull
-    //{
-    //    get
-    //    {
-    //        return (int)(this.transform.eulerAngles.y * (255f / 360f));
-    //    }
-    //}
-
     [Header("Player Movement Status")]
     public SpellEffect[] ActiveSpell = new SpellEffect[3];      //What effects and enchantments (eg from items are equipped on the player)
     public SpellEffect[] PassiveSpell = new SpellEffect[10];
@@ -676,8 +665,6 @@ public class UWCharacter : Character
             default:
                 GameWorldController.instance.weapongr = new WeaponsLoader(1); break;
         }
-
-
     }
 
     void PlayerDeath()
@@ -1557,6 +1544,12 @@ public class UWCharacter : Character
                     case "WALL":
                     case "TILE":
                     default:
+                        //var p = hit.point;
+                        //Debug.Log(p);
+                        //int hitTileX = (short)(p.x / 1.2f);
+                        //int hitTileY = (short)(p.z / 1.2f);
+                        
+
                         if (hit.transform.GetComponent<PortcullisInteraction>() != null)
                         {
                             ObjectInteraction objPicked = hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction();
@@ -1604,17 +1597,28 @@ public class UWCharacter : Character
                             {
                                 if (int.TryParse(rend.materials[materialIndex].name.Substring(4, 3), out int textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
                                 {
-                                    //GetMessageLog ().text =
                                     if ((textureIndex == 142) && (_RES != GAME_UW2))
                                     {//This is a window into the abyss.
                                         UWHUD.instance.CutScenesSmall.anim.SetAnimation = "VolcanoWindow_" + GameWorldController.instance.dungeon_level;
                                     }
-                                    UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
+                                    if (_RES==GAME_UW2)
+                                    {
+                                        Debug.Log(hit.normal);
+                                        Vector3 normhit = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y));                                      
+                                        if ((normhit == Vector3.up))
+                                        {
+                                            //this is a floor. Get the floor texture by subtracting from 510d
+                                            textureIndex = 510 - textureIndex;
+                                        }
+                                        UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
+                                        
+                                    }
+                                    else
+                                    {
+                                        UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
+                                    }
                                 }
                             }
-                            //	GetMessageLog().text=rend.materials[materialIndex].name;
-
-                            //Debug.Log (rend.materials[materialIndex].name.Substring(4,3));
                         }
                         break;
 
@@ -2252,7 +2256,7 @@ public class UWCharacter : Character
             return true;//Tybal is dead. Time to play a special dream to refflect that.
         }
 
-        if (GameClock.Day >= Quest.DayGaramonDream)
+        if (GameClock.game_days >= Quest.DayGaramonDream)
         {
             return true;
         }
@@ -2334,7 +2338,7 @@ public class UWCharacter : Character
                 break;
         }
 
-        Quest.DayGaramonDream = GameClock.Day + DaysToWait;
+        Quest.DayGaramonDream = GameClock.game_days + DaysToWait;
     }
 
     /// <summary>

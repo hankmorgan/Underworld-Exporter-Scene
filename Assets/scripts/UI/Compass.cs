@@ -293,10 +293,10 @@ public class Compass : GuiBase_Draggable
 
     private static void GetDurationOfQuest()
     {
-        if (GameClock.Day < 10)
+        if (GameClock.game_days < 10)
         {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_it_is_the_)
-                    + StringController.instance.GetString(1, 411 + GameClock.Day)
+                    + StringController.instance.GetString(1, 411 + GameClock.game_days)
                     + StringController.instance.GetString(1, StringController.str__day_of_your_imprisonment_));
         }
         else
@@ -308,7 +308,7 @@ public class Compass : GuiBase_Draggable
     private static void GuessTimeOfDay()
     {
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_guess_that_it_is_currently_)
-                        + StringController.instance.GetString(1, StringController.str_night_1 + ((GameClock.Hour) / 2)));
+                        + StringController.instance.GetString(1, StringController.str_night_1 + ((GameClock.TwelveHourClock) / 2)));
     }
 
 }

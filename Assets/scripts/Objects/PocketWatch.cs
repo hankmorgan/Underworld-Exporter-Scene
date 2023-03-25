@@ -6,7 +6,7 @@
     public override bool use()
     {//000~001~039~The watch reads
      // UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 39) + GameClock.hour() + ":" + GameClock.minute().ToString("d2"));
-        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 39) + GameClock.Hour + ":" + GameClock.Minute.ToString("d2"));
+        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 39) + GameClock.TwelveHourClock + ":" + GameClock.Minute.ToString("d2"));
         return true;
     }
 

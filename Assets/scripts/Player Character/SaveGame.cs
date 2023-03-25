@@ -105,7 +105,7 @@ public class SaveGame : Loader
     /// <summary>
     /// Ratio of UNITY co-ordinates to Tile co-ordinates
     /// </summary>
-    public const float Ratio = 213f;
+    public const float Ratio = 213f; //Why 213?? What is the justication for this value when uw uses tileX<<3+xpos for the coordinate
 
     //Adjustment of players vertial postion in Unity to UW co-ordinates
     public const float VertAdjust = 0.3543672f;

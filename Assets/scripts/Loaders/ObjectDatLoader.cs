@@ -227,8 +227,8 @@ maybe this is not of length 2
             for (int i = 0; i < 16; i++)
             {
                 containerStats[i].capacity = (int)getValAtAddress(obj_dat, add_ptr, 8);
-                containerStats[i].objectsMask = (int)getValAtAddress(obj_dat, add_ptr + 1, 8);
-                containerStats[i].slots = (int)getValAtAddress(obj_dat, add_ptr + 2, 8);
+                containerStats[i].objectsMask = (int)getValAtAddress(obj_dat, add_ptr + 1, 16);//if -1 universal, if >=512 value-512 is a category, if <512 then a specific item id is accepted (not used in game)
+                //containerStats[i].slots = (int)getValAtAddress(obj_dat, add_ptr + 2, 8);//THIS IS WRONG. Mask is actually a 16 bit value
                 add_ptr += 3;
                 j++;
             }

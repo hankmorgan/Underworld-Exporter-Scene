@@ -1322,11 +1322,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 switch (conv[currConv].functions[i].functionName.ToLower())
                 {
                     case "game_mins":
-                        stack.Set(address, GameClock.Minute); break;
+                        stack.Set(address, GameClock.game_mins); break;
                     case "game_days":
-                        stack.Set(address, GameClock.Day); break;
+                        stack.Set(address, GameClock.game_days); break;
                     case "game_time"://What should be set here? Seconds?
-                         stack.Set(address, GameClock.Second); break;
+                         stack.Set(address, GameClock.game_time); break;
                     case "riddlecounter":
                         stack.Set(address, 0); break;
                     case "dungeon_level":
