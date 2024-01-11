@@ -1,3 +1,27 @@
+## January 2024 Status Update
+* Primary focus areas are on Reverse Engineering of UW2 and I have moved code development away from Unity to Godot to ensure the engine and software is more fully open source as well as avoiding risks due to Unity licencing changes. The repository of the Godot version will be made public this Spring. Obviously this version is currently less functiontal but will have benefited for the work on reverse engineering and hopefully be a better vanilla+ experience for Underworld.
+
+### Godot Version Features
+Current implemented features in the Godot Version
+* Level Geometry and textures
+* Paperdoll, runebag, stats display and health displays.
+* Object use and look interactions including door locks, signs and food consumption
+* Several traps/triggers
+* NPC and Object sprites loading
+* Basic conversation logic
+* Vanilla light shading effect
+* Palette cycling effects
+* Supports UW1 and UW2 levels and save files.
+* Better access to object, player and tile data structures.
+
+Currently working on.
+* Smoothing out conversations for Level 1 of UW1 as part of a vertical slice.
+
+Code will be in C# and where possible Unity implementations of features will be migrated and updated.
+
+>>  As such no future updates or supports is planned for this Unity version.
+
+
 UnderworldExporter
 ==================
  
