@@ -209,7 +209,7 @@ public class GameClock : UWEBase
     /// <summary>
     /// Move the clock by specified no of minutes
     /// </summary>
-    public static void Advance(int minutestoadvance=60)
+    public static void Advance(int minutestoadvance=1)
     {
         for (int i = 0; i < minutestoadvance; i++)
         {
